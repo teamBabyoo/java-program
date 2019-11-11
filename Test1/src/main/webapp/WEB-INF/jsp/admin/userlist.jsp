@@ -9,6 +9,6 @@
 </head>
 <body>
 	<h2>admin-user list page</h2>
-	<a href="<c:url value="/adminindex.jsp"/>">인덱스페이지로 이동</a>
+	<a href="<c:url value="/adminmain.do"/>">관리자 메인페이지로 이동</a>
 </body>
 </html>
