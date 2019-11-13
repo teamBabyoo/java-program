@@ -1,12 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>kr.co.nff</groupId>
-  <artifactId>Test1</artifactId>
+  <artifactId>nightfoodfinder</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
-  <name>Test1</name>
-  <description>Test1</description>
+  <name>nightfoodfinder</name>
+  <description>nightfoodfinder</description>
   
+
   	<properties>
 		<spring-framework.version>5.2.1.RELEASE</spring-framework.version>
 		<java.version>1.8</java.version>
