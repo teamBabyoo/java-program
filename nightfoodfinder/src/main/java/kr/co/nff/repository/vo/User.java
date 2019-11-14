@@ -1,5 +1,8 @@
 package kr.co.nff.repository.vo;
 
-public class User {
+import lombok.Data;
 
+@Data
+public class User {
+	private String nickName;
 }
