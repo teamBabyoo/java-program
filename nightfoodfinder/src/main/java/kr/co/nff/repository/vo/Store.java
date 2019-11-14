@@ -24,4 +24,7 @@ public class Store {
 	private int businessNum;
 	private String storeOwner;
 	private int storeOwnerPh;
+	
+
+	
 }
