@@ -11,8 +11,7 @@ public class ServiceImpl implements Service{
 	private userDAO dao;
 	
 	@Override
-	public User selectUser() {
-		return dao.selectUser();
+	public void selectUser() {
 		
 	}
 
