@@ -16,6 +16,6 @@ public class FrontMainController {
 	@RequestMapping("/main.do")
 	public void main() {
 		System.out.println("와써");
-		System.out.println(service.selectUser());
+//		System.out.println(service.selectUser());
 	}
 }
