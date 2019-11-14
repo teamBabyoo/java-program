@@ -25,7 +25,7 @@
 		<!-- container관련 추가부분 -->
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:config/spring/servlet-context.xml</param-value>
+			<param-value>classpath:config/spring/*-context.xml</param-value>
 		</init-param>
 		<!-- container관련 추가부분 -->
 		<load-on-startup>1</load-on-startup>

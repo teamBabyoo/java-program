@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2>메인페이지 테스트</h2>
+	<h2>안녕</h2>
+
 </body>
 </html>
