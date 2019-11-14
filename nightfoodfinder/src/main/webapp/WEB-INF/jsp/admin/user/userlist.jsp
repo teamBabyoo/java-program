@@ -44,10 +44,10 @@
           <h2>Table</h2>
           <table>
             <tr>
-              <th>Username</th>
-              <th>Posts</th>
-              <th>comments</th>
-              <th>date</th>
+              <th>아이디</th>
+              <th>닉네임</th>
+              <th>가입날짜</th>
+              <th>리뷰수</th>
             </tr>
             <tr>
               <td>Pete</td>
