@@ -1,7 +1,9 @@
 package kr.co.nff.repository.vo;
 
 import java.util.Date;
+import lombok.Data;
 
+@Data
 public class Store {
 	private int storeNo;
 	private String storeName;
@@ -18,6 +20,8 @@ public class Store {
 	private String menu;
 	private int price;
 	private String weekName;
-	
-
+	private int status;
+	private int businessNum;
+	private String storeOwner;
+	private int storeOwnerPh;
 }
