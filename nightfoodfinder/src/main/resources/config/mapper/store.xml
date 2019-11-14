@@ -22,5 +22,13 @@
         on h.week_no = w.week_name
         where store_no = 1 
    </select>
+   
+   <select id="storeList" resultType="Store">
+   		select distinct s.*, 
+       		   ifnull(round(avg(r.store_scope) over (partition by s.store_no), 1), 0) scope 
+  		  from tb_store s
+	left outer join tb_review r
+    	    on s.store_no = r.store_no;
+   </select>
 
 </mapper>

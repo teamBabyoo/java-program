@@ -24,4 +24,7 @@ public class Store {
 	private int businessNum;
 	private String storeOwner;
 	private int storeOwnerPh;
+	
+	// 리뷰테이블에서 가져온 평점!
+	private double scope;
 }
