@@ -13,7 +13,7 @@ body {
   background-color: #f9f9f9;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-ul { list-style: none; }
+ul, dl { list-style: none; }
 li { color: #7f7f7f; }
 a { text-decoration: none; color: #7f7f7f; }
 i { font-style: normal; font-weight: normal; font-size: 1.4rem; }
@@ -70,8 +70,62 @@ header .search.focusIn .optionBox.active .userselect { float: none;}
 /* 컨텐트영역 */
 .content { width: 100%; position: absolute; top: 60px; background: #fff; }
 /* 푸터영역 */
-footer { position: absolute; width: 100%; line-height: 40px; text-align: center; background: #251e4a; color: yellow; border-top: 1px solid #d4d4d4; box-shadow: 0px -2px 5px #e8e8e8; }
+footer { position: absolute; width: 100%; line-height: 40px; text-align: center; background: #251e4a; color: yellow; /*border-top: 1px solid #d4d4d4; box-shadow: 0px -2px 5px #e8e8e8;*/ }
 .bgbox.active { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; opacity: .9;}
+
+/* 메인 */
+.main_wrap .content .store { position: relative; float: left; width: 25%; background-repeat: no-repeat !important; background-size: cover !important; background-position: center center !important; border-right: 1px solid #d4d4d4; }
+.main_wrap .content .store:nth-child(2), 
+.main_wrap .content .store:nth-child(3) { border-bottom: 1px solid #d4d4d4; }
+.main_wrap .content .store:nth-child(3), 
+.main_wrap .content .store:nth-child(5) { border-right: none; }
+.main_wrap .content .store:nth-child(1) {width: 50%; } 
+.main_wrap .content .store:before { 
+  overflow: hidden;
+  content: "";
+  display: block;
+  padding-top: 92%;
+}
+.main_wrap .content .store_1st { 
+    background: #fbb0a4;
+    background-image: url("https://mp-seoul-image-production-s3.mangoplate.com/added_restaurants/27907_1458188159981819.jpg?fit=around|512:512&crop=512:512;*,*&output-format=jpg&output-quality=80");
+} 
+.main_wrap .content .store_2nd {
+    background: #577fc7;
+    background-image: url("https://mp-seoul-image-production-s3.mangoplate.com/585671_1563368297300678.jpg");
+}
+.main_wrap .content .store_3rd {
+    background: #fba4bc;
+    background-image: url("https://mp-seoul-image-production-s3.mangoplate.com/351785/1049698_1550665955711_24338");
+}
+.main_wrap .content .store_4th {
+    background: #a4fbb3;
+    background-image: url("https://mp-seoul-image-production-s3.mangoplate.com/197645/570821_1514026738846_856");
+}
+.main_wrap .content .store_5th {
+    background: #fbe8a4;
+    background-image: url("https://mp-seoul-image-production-s3.mangoplate.com/217746/tvxqag51xhxrbj.jpg");
+}
+
+.main_wrap .content .store .square_box { display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; transition: all 3s; }
+.main_wrap .content .store .square_box:before {
+  overflow: hidden;
+  content: "";
+  display: block;
+  padding-top: 80%;
+  background: #fff; opacity: .6; 
+} 
+.main_wrap .content .store .desc{ display: none; position: absolute; top: 30px; left: 50%; transform: translateX(-50%); transition: all 3s; }
+.main_wrap .content .store .desc dl * { display: inline; }
+.main_wrap .content .store p { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); }
+.main_wrap .content .store p a { display: block; padding: 10px 60px; color: #9c9c9c; font-size: 0.8rem; background: #ffe378; }
+
+.main_wrap .content .store_1st .desc { top: 50px; }
+.main_wrap .content .store_1st p { bottom: 50px; }
+.main_wrap .content .store_1st p a { font-size: 1.2rem; }
+
+.main_wrap .content .store:hover .square_box,
+.main_wrap .content .store:hover .desc { display: block; }
 /** 지인  끝 **/
 
 
