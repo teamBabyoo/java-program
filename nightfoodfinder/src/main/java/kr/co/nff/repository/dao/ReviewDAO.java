@@ -1,5 +1,9 @@
 package kr.co.nff.repository.dao;
 
-public interface ReviewDAO {
+import java.util.List;
 
+import kr.co.nff.repository.vo.Review;
+
+public interface ReviewDAO {
+	List<Review> selectReview();
 }
