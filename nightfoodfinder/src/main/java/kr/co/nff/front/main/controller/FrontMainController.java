@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kr.co.nff.front.main.service.Service;
 
 @Controller
-@RequestMapping("/front")
+@RequestMapping("/front/main")
 public class FrontMainController {
 	@Autowired
 	private Service service;
