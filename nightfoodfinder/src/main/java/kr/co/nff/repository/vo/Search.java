@@ -96,7 +96,7 @@ public class Search extends Page {
 		List<String[]> list = new ArrayList<>();
 		for(String filter : strings) {			
 			switch (filter) {
-			case "일자": case "개설날짜":
+			case "일자": 
 				list.add(new String [] {"regDate",filter});
 				break;
 			case "조회수":
@@ -104,9 +104,6 @@ public class Search extends Page {
 				break;
 			case "별점":
 				list.add(new String [] {"score",filter});
-				break;
-			case "신청일":
-				list.add(new String [] {"partDate",filter});
 				break;
 			case "신고사유":
 				list.add(new String [] {"reseaon",filter});

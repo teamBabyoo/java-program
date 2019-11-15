@@ -1,8 +1,10 @@
 package kr.co.nff.front.store.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.nff.front.store.service.StoreService;
 
@@ -10,32 +12,35 @@ import kr.co.nff.front.store.service.StoreService;
 @RequestMapping("/front/store")
 public class FrontStoreController {
 	
+	@Autowired
 	private StoreService service;
 	
 	/* 가게 목록 */
-	@RequestMapping("/storelist.do")
-	public void storeList() {}
+	@RequestMapping("/list.do")
+	public void storeList(@RequestParam(value="pageNo", defaultValue="1") int pageNo, Model model) {
+		model.addAttribute("sList", service.storeList());
+	}
 	
 	/* 가게 상세 */
-	@RequestMapping("/storedetail.do")
+	@RequestMapping("/detail.do")
 	public void storeDetail(int no, Model model) {
-		model.addAttribute("store", service);
+//		model.addAttribute("store", service);
 	}
 	
 	/* 가게 정보 수정*/
-	@RequestMapping("/storeinfoupdate.do")
+	@RequestMapping("/infoupdate.do")
 	public void storeInfoUpdate() {}
 	
 	/* 가게 소개글 수정*/
-	@RequestMapping("/storecontentupdate.do")
+	@RequestMapping("/contentupdate.do")
 	public void storeContentUpdate() {}
 
 	/* 단골 등록 */
-	@RequestMapping("/storeregular.do")
+	@RequestMapping("/regular.do")
 	public void storeRegular() {}
 	
 	/* 단골 취소 */
-	@RequestMapping("/storeirregular.do")
+	@RequestMapping("/irregular.do")
 	public void storeIrregular() {}
 	
 	
