@@ -1,0 +1,81 @@
+/* https://fontawesome.com/v4.7.0/icons/ */
+
+
+/** 지인 **/
+@charset "utf-8";
+@import url('http://fonts.googleapis.com/css?family=Roboto');
+@import url('http://fonts.googleapis.com/earlyaccess/notosanskr.css');
+
+/* reset */
+body {
+  font : 14px/1.6em 'Noto Sans KR', sans-serif;
+  color: #444;
+  background-color: #f9f9f9;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+ul { list-style: none; }
+li { color: #7f7f7f; }
+a { text-decoration: none; color: #7f7f7f; }
+i { font-style: normal; font-weight: normal; font-size: 1.4rem; }
+
+/* modules */
+.mt0a { margin: 0 auto; }
+.hidden { display: none; }
+.red { color : red; }
+.float_l { float: left; }
+.float_r { float: right; }
+.clearboth:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* 헤더 컨텐트 푸터 공통 */
+/* header */
+body { width: 100%; }
+header { position: fixed; width: 100%; min-width: 960px; padding: 0 0 0 20px; height: 60px; border-bottom: 1px solid #d4d4d4; box-shadow: 0px 5px 5px #e8e8e8; background-color: #fff; z-index: 999;}
+header > * { float: left;  }
+header > div > * > * { display: inline-block; }
+header .logo { margin: 10px; }
+header .search { border-top: none; }
+header .search { border: 1px solid #d4d4d4; line-height: 58px; box-sizing: border-box; }
+header .search input,
+header .search i { padding: 10px 20px; font-size: 1.6rem; color: #5a5a5a; border: none; background: inherit; }
+header .search div { border-left: 1px solid #d4d4d4; }
+
+header div:nth-child(3) li { padding: 0 20px;  border-left: 1px solid #d4d4d4; line-height: 60px; }
+header div:nth-child(3) li i { font-size: 1.4rem; }
+header div:nth-child(3) ul li:nth-child(4) i { padding: 10px;  color: #fff; background: #d2d2d2; border-radius: 30px; }
+
+/* 검색바 활성화 */
+header .search.focusIn form { position: relative; }
+header .search.focusIn { height: 59px; border: 2px solid #f4a460; }
+header .search.focusIn .optionBox.active { margin: -2px; display: block; position: absolute; top: 60px; left: 0; width: 101%; border: 2px solid #f4a460; background: #fff; }
+header .search.focusIn .optionBox.active { border-top: none; }
+header .search.focusIn .optionBox.active div,
+header .search.focusIn .optionBox.active .optionTab li:first-child { border-left: none; }
+header .search.focusIn .optionBox.active .optionTab li { float: left; width: calc(100% / 3); height: 40px; line-height: 40px; text-align: center; border-bottom: 1px solid #d4d4d4; }
+header .search.focusIn .optionBox.active .optionTab .on { border-bottom: 2px solid #f4a460; }
+header .search.focusIn .optionBox.active .select { border-bottom: 1px solid #d4d4d4; }
+header .search.focusIn .optionBox.active .select div,
+header .search.focusIn .optionBox.active .userselect div { float: left; width: calc(100% / 3); }
+header .search.focusIn .optionBox.active label { padding: 0 10px; border: 1px solid #d4d4d4; border-radius: 15px; background:#fff; }
+header .search.focusIn .optionBox.active i { padding: 0; font-size: 1rem; color: #8a8a8a; }
+header .search.focusIn .optionBox.active .userselect { float: none;}
+
+/* 컨텐트영역 */
+.content { width: 100%; position: absolute; top: 60px; background: #fff; }
+/* 푸터영역 */
+footer { position: absolute; width: 100%; line-height: 40px; text-align: center; background: #251e4a; color: yellow; border-top: 1px solid #d4d4d4; box-shadow: 0px -2px 5px #e8e8e8; }
+.bgbox.active { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; opacity: .9;}
+/** 지인  끝 **/
+
+
+/** 승경 **/
+
+
+/** 승경 끝 **/
