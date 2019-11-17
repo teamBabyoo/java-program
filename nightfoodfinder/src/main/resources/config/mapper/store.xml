@@ -24,11 +24,17 @@
    </select>
    
    <select id="storeList" resultType="Store">
-   		select distinct s.*, 
-       		   ifnull(round(avg(r.store_scope) over (partition by s.store_no), 1), 0) scope 
+   		select distinct s.*,
+				c.category_name as category,
+       		   ifnull(round(r.scope, 1), 0) scope,
+               ifnull(r.count, 0) rcount
   		  from tb_store s
-	left outer join tb_review r
+	left outer join (select store_no, COUNT(*) count, avg(store_scope) scope
+                       from tb_review
+				      group by store_no) r
     	    on s.store_no = r.store_no
+		 inner join tb_category c
+            on s.store_category = c.category_no
    </select>
 
 </mapper>

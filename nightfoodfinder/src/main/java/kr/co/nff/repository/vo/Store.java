@@ -9,7 +9,7 @@ public class Store {
 	private String storeName;
 	private String storeEmail;
 	private int storeTell;
-	private String storeCategory;
+	private int storeCategory;
 	private String openTime;
 	private String closeTime;
 	private int areaCode;
@@ -25,6 +25,10 @@ public class Store {
 	private String storeOwner;
 	private int storeOwnerPh;
 	
-	// 리뷰테이블에서 가져온 평점!
+	// 리뷰테이블에서 가져온 평점!(소수점 첫째 자리)
 	private double scope;
+	// 리뷰 갯수
+	private int rcount;
+	// 스토어 카테고리
+	private String category;
 }

@@ -11,6 +11,7 @@ import kr.co.nff.repository.vo.Store;
 @Service
 public class StoreServiceImpl implements StoreService {
 	
+	@Autowired
 	private StoreDAO dao;
 	
 	// 가게 전체 리스트

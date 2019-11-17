@@ -18,32 +18,75 @@ public class Search extends Page {
 		super(pageNo, listSize);
 	}
 
-	private String type;
-	private String keyword;
-	private int categoryCode;
+	private String name;
+	private String email;
+	private int category;
+	private String openTime;
+	private String closeTime;
+	private int[] areaCode;
+	private String areaCodes;
+	private int price;
+	
 	private String filter;
 	private List<String[]> types;
 	private List<String[]> filters;
-	private int[] addrCode;
-	private String addrCodes;
 	
 	
-	public String getAddrCodes() {
-		return addrCodes;
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public int getCategory() {
+		return category;
+	}
+	
+	public void setCategory(int category) {
+		this.category = category;
+	}
+	
+	public String getOpenTime() {
+		return openTime;
+	}
+	
+	public void setOpenTime(String openTime) {
+		this.openTime = openTime;
+	}
+	
+	public String getCloseTime() {
+		return closeTime;
+	}
+	
+	public void setCloseTime(String closeTime) {
+		this.closeTime = closeTime;
 	}
 
-	public void setAddrCodes(String addrCodes) {
-		this.addrCodes = addrCodes;
+	public int[] getAreaCode() {
+		return areaCode;
 	}
 
-	public int[] getAddrCode() {
-		return addrCode;
+	public void setAreaCode(int[] areaCode) {
+		this.areaCode = areaCode;
 	}
 
-	public void setAddrCode(int[] addrCode) {
-		this.addrCode = addrCode;
+	public String getAreaCodes() {
+		return areaCodes;
 	}
 
+	public void setAreaCodes(String areaCodes) {
+		this.areaCodes = areaCodes;
+	}
 
 	public void setTypes(List<String[]> types) {
 		this.types = types;
@@ -61,29 +104,16 @@ public class Search extends Page {
 		return filters;
 	}
 
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
-	public String getKeyword() {
-		return keyword;
-	}
-	public void setKeyword(String keyword) {
-		this.keyword = keyword;
-	}
-	public int getCategoryCode() {
-		return categoryCode;
+	
+
+	public int getPrice() {
+		return price;
 	}
 
-	public void setCategoryCode(int categoryCode) {
-		this.categoryCode = categoryCode;
+	public void setPrice(int price) {
+		this.price = price;
 	}
 
-	
-	
-	
 	public String getFilter() {
 		return filter;
 	}

@@ -16,31 +16,31 @@ public class FrontStoreController {
 	private StoreService service;
 	
 	/* 가게 목록 */
-	@RequestMapping("/list.do")
+	@RequestMapping("/storelist.do")
 	public void storeList(@RequestParam(value="pageNo", defaultValue="1") int pageNo, Model model) {
 		model.addAttribute("sList", service.storeList());
 	}
 	
 	/* 가게 상세 */
-	@RequestMapping("/detail.do")
+	@RequestMapping("/storedetail.do")
 	public void storeDetail(int no, Model model) {
 //		model.addAttribute("store", service);
 	}
 	
 	/* 가게 정보 수정*/
-	@RequestMapping("/infoupdate.do")
+	@RequestMapping("/storeinfoupdate.do")
 	public void storeInfoUpdate() {}
 	
 	/* 가게 소개글 수정*/
-	@RequestMapping("/contentupdate.do")
+	@RequestMapping("/storecontentupdate.do")
 	public void storeContentUpdate() {}
 
 	/* 단골 등록 */
-	@RequestMapping("/regular.do")
+	@RequestMapping("/storeregular.do")
 	public void storeRegular() {}
 	
 	/* 단골 취소 */
-	@RequestMapping("/irregular.do")
+	@RequestMapping("/storeirregular.do")
 	public void storeIrregular() {}
 	
 	
