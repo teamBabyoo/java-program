@@ -15,104 +15,67 @@
     <!-- // 헤더 -->
     
     <!-- 컨텐트  -->
-    <div class="content">
-    	컨텐트영역
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		
-		
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, fuga ducimus nam ullam enim, officiis quo perspiciatis nulla magni possimus iusto, explicabo impedit est saepe mollitia. Temporibus quod nesciunt nam?
-    	
+	<div class="content clearboth">
 	    <div class="store store_1st">
-	      <div class="desc">
-	
-	      </div>
+	        <div class="square_box">
+	            <div class="desc">
+	                <dl>
+	                    <dt>이치에</dt>
+	                    <dd>4.7</dd>
+	                </dl>
+	                <table>
+	                    <tr>
+	                        <th>주소</th>
+	                        <td>서울시 강남구 신사동 656-7</td >
+	                    </tr>
+	                    <tr>
+	                        <th rowspan="3">영업시간</th>
+	                        <td>월</td>
+	                        <td>10:30~00:00</td>
+	                    </tr>
+	                    <tr>
+	                        <td>화~토</td>
+	                        <td>00:00~24:00</td>
+	                    </tr>
+	                    <tr>
+	                        <td>일</td>
+	                        <td>00:00~22:00</td>
+	                    </tr>
+	                </table>
+	            </div>
+	            <p><a href="#">자세히 보기</a></p>
+	        </div>
 	    </div>
 	
 	    <div class="store store_2nd">
-	      <div class="desc">
-	        
-	      </div>
+	        <div class="square_box">
+	            <div class="desc">
+	                <dl>
+	                    <dt>이치에</dt>
+	                    <dd>4.7</dd>
+	                </dl>
+	                <i>서울시 강남구 신사동 640-13</i>
+	            </div>
+	            <p><a href="#">자세히 보기</a></p>
+	        </div>
 	    </div>
 	
 	    <div class="store store_3rd">
-	      <div class="desc">
+	        <div class="desc">
 	    
-	      </div>
+	        </div>
 	    </div>
 	
 	    <div class="store store_4th">
-	      <div class="desc">
-	      </div>
+	        <div class="desc">
+	        </div>
 	    </div>      
-    </div>
+	
+	    <div class="store store_5th">
+	        <div class="desc">
+	        </div>
+	    </div>
+	</div>
     <!-- // 컨텐트  -->
     
     <!-- 푸터 -->

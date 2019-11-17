@@ -3,22 +3,39 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.nff.repository.dao.ReviewDAO">
 
-<select id="selectReview" resultType="Review">
-	select u.nick_name, s.store_name, r.review_content, r.reg_date, 
-    (select count(*) from tb_like l where l.store_review_no = r.review_no) 
-		from tb_user u, tb_review r, tb_store s
-	where r.user_no = u.user_no
-	and r.store_no = s.store_no
-	order by r.review_no desc;
-</select>
+	<!-- 전체리뷰 리스트, 좋아요 횟수 불러오기 -->
+	<select id="selectReview" resultType="Review">
+		select u.nick_name nickName, s.store_name storeName, r.review_content reviewContent, r.reg_date regDate,
+			(select count(*) from tb_like l where l.store_review_no = r.review_no) as likeCount, r.recomment reComment
+		from tb_review r left join tb_user u on r.user_no = u.user_no
+					     left join tb_store s on r.store_no = s.store_no
+		
+	
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if
+				test="type=='nickName' and keyword != null and keyword != '' ">
+				AND u.nick_name like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if
+				test="type=='storeName' and keyword != null and keyword != '' ">
+				AND s.store_name like CONCAT('%', #{keyword}, '%')
+			</if>
+		</trim>
+		order by r.review_no desc
+	</select>
 
-<!-- 
-<select id="countLike" parameterType="int" resultType="int">
-	select count(*) as likeCount
-		from tb_like l
-		left join tb_review r 
-		on l.store_review_no = r.review_no
-	where l.store_review_no = #{reviewNo}
-</select>
--->
+	<!-- 좋아요 횟수
+	 <select id="countLike" parameterType="int" resultType="int"> 
+		select count(*) as likeCount from tb_like l left join tb_review r on l.store_review_no 
+		= r.review_no where l.store_review_no = #{reviewNo} </select> -->
+		
+		
+<!-- 	where 쓰면 조건 사용할 때 에러나서 inner join으로
+
+select u.nick_name nickName, s.store_name storeName, r.review_content reviewContent, r.reg_date regDate,
+		(select count(*) from tb_like l where l.store_review_no = r.review_no) as likeCount, r.recomment reComment
+		from tb_user u, tb_review r, tb_store s
+		where r.user_no = u.user_no
+		and r.store_no = s.store_no -->
+		
 </mapper>

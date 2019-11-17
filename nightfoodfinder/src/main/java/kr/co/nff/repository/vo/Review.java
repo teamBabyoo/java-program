@@ -1,6 +1,5 @@
 package kr.co.nff.repository.vo;
 
-import java.util.Date;
 
 import lombok.Data;
 
@@ -10,8 +9,8 @@ import lombok.Data;
 		private String storeName;
 		private String reviewContent;
 		private int likeCount;
-		private Date regDate;
-		private String recomment;
+		private String regDate;
+		private String reComment;
 	}
 
 
