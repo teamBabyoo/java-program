@@ -18,94 +18,41 @@ public class Search extends Page {
 		super(pageNo, listSize);
 	}
 
-	private String name;
-	private String email;
-	private int category;
-	private String openTime;
-	private String closeTime;
-	private int[] areaCode;
-	private String areaCodes;
-	private int price;
-	
-	private String type;
-	private String keyword;
-	
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getKeyword() {
-		return keyword;
-	}
-
-	public void setKeyword(String keyword) {
-		this.keyword = keyword;
-	}
-
+	private String type;  // 어떤 컬럼을 검색할지 타입선택 예) 스토어이름, 이메일, 닉네임 
+	private String keyword;  // 검색어
+	private int storeNo;
+	private int[] categoryCode;
 	private String filter;
+	private String email;
 	private List<String[]> types;
 	private List<String[]> filters;
+	private int[] addrCode;
+	private String addrCodes;
 	
 	
-	public String getName() {
-		return name;
+	public String getAddrCodes() {
+		return addrCodes;
 	}
-	
-	public void setName(String name) {
-		this.name = name;
+
+	public void setAddrCodes(String addrCodes) {
+		this.addrCodes = addrCodes;
 	}
-	
+
+	public int[] getAddrCode() {
+		return addrCode;
+	}
+
+	public void setAddrCode(int[] addrCode) {
+		this.addrCode = addrCode;
+	}
 	public String getEmail() {
 		return email;
 	}
-	
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	public int getCategory() {
-		return category;
-	}
-	
-	public void setCategory(int category) {
-		this.category = category;
-	}
-	
-	public String getOpenTime() {
-		return openTime;
-	}
-	
-	public void setOpenTime(String openTime) {
-		this.openTime = openTime;
-	}
-	
-	public String getCloseTime() {
-		return closeTime;
-	}
-	
-	public void setCloseTime(String closeTime) {
-		this.closeTime = closeTime;
-	}
 
-	public int[] getAreaCode() {
-		return areaCode;
-	}
-
-	public void setAreaCode(int[] areaCode) {
-		this.areaCode = areaCode;
-	}
-
-	public String getAreaCodes() {
-		return areaCodes;
-	}
-
-	public void setAreaCodes(String areaCodes) {
-		this.areaCodes = areaCodes;
-	}
 
 	public void setTypes(List<String[]> types) {
 		this.types = types;
@@ -123,14 +70,33 @@ public class Search extends Page {
 		return filters;
 	}
 
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 	
-
-	public int getPrice() {
-		return price;
+	public int[] getCategoryCode() {
+		return categoryCode;
 	}
 
-	public void setPrice(int price) {
-		this.price = price;
+	public void setCategoryCode(int[] categoryCode) {
+		this.categoryCode = categoryCode;
+	}
+
+	public int getStoreNo() {
+		return storeNo;
+	}
+
+	public void setStoreNo(int storeNo) {
+		this.storeNo = storeNo;
 	}
 
 	public String getFilter() {
@@ -145,7 +111,7 @@ public class Search extends Page {
 		List<String[]> list = new ArrayList<>();
 		for(String filter : strings) {			
 			switch (filter) {
-			case "일자": 
+			case "일자": case "개설날짜":
 				list.add(new String [] {"regDate",filter});
 				break;
 			case "조회수":
@@ -154,17 +120,14 @@ public class Search extends Page {
 			case "별점":
 				list.add(new String [] {"score",filter});
 				break;
+			case "신청일":
+				list.add(new String [] {"partDate",filter});
+				break;
 			case "신고사유":
 				list.add(new String [] {"reseaon",filter});
 				break;
 			case "신고된 횟수":
 				list.add(new String [] {"rpcount",filter});
-				break;
-			case "팀원수":
-				list.add(new String [] {"member",filter});
-				break;
-			case "답변 상태":
-				list.add(new String [] {"Qcondition",filter});
 				break;
 			}
 		}
@@ -177,26 +140,20 @@ public class Search extends Page {
 		List<String[]> list = new ArrayList<>();
 		for(String type : strings) {			
 			switch (type) {
-			case "제목":
-				list.add(new String [] {"title",type});
-				break;
-			case "내용":
-				list.add(new String [] {"content",type});
+			case "스토어이름":
+				list.add(new String [] {"name",type});
 				break;
 			case "글쓴이": case "이메일":
 				list.add(new String [] {"email",type});
+				break; 
+			case "내용":
+				list.add(new String [] {"content",type});
 				break;
 			case "신고사유":
 				list.add(new String [] {"reseaon",type});
 				break;
 			case "신고된 사람":
 				list.add(new String [] {"reportTarget",type});
-				break;
-			case "시/도":
-				list.add(new String [] {"addressDetail",type});
-				break;
-			case "구/군/시":
-				list.add(new String [] {"addressDetail2",type});
 				break;
 			}
 		}

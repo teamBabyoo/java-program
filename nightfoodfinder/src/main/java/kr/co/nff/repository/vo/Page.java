@@ -1,8 +1,8 @@
 package kr.co.nff.repository.vo;
 
 public class Page {
-	private int pageNo;
-	private int listSize;
+	private int pageNo;  // 현재 페이지 번호
+	private int listSize;  // 한 페이지당 보여줄 게시글의 갯수
 
 	public Page() {
 		this(1,10);
@@ -36,7 +36,7 @@ public class Page {
 
 
 	public int getBegin() {
-		return (pageNo - 1) * listSize + 1;
+		return (pageNo - 1) * listSize;
 	}
 	
 	public int getEnd() {
