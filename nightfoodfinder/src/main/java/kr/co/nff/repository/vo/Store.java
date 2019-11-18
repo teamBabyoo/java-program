@@ -8,7 +8,9 @@ public class Store {
 	private int storeNo;
 	private String storeName;
 	private String storeEmail;
+	private String storePass;
 	private int storeTell;
+	private String categoryName;
 	private int storeCategory;
 	private String openTime;
 	private String closeTime;
@@ -19,7 +21,6 @@ public class Store {
 	private Date regDate;
 	private String menu;
 	private int price;
-	private String weekName;
 	private int status;
 	private int businessNum;
 	private String storeOwner;

@@ -2,30 +2,41 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.nff.repository.dao.StoreDAO">
-   <select id="selectOneStore" resultType="Store">
-      select s.store_no, 
-      		 s.store_name,
-      		 s.store_tell,
-      		 s.open_time,
-      		 s.close_time,
-             a.city,
-             a.street_load,
-             c.category_name,
-             sc.store_content
-        from tb_store as s
-        inner join tb_area as a 
-        on s.area_code = a.area_code
-        inner join tb_category as c
-        on s.store_category = c.category_no
-        inner join tb_store_content as sc
-        on s.store_no = sc.store_no
-        where s.store_no = 1
-        
-   </select>
-   
-   <select id="storeList" resultType="Store">
+	<select id="selectOneStore" resultType="Store" parameterType="int">
+		select s.store_no,
+		s.store_name,
+		s.store_tell,
+		s.open_time,
+		s.close_time,
+		a.city,
+		a.street_load,
+		c.category_name,
+		sc.store_content,
+		ifnull(truncate(sum(r.store_scope) / count(r.user_no), 1), 0) as scope
+		from tb_store as s
+		inner join tb_area as a
+		on s.area_code = a.area_code
+		inner join tb_category as c
+		on s.store_category = c.category_no
+		inner join tb_store_content as sc
+		on s.store_no = sc.store_no
+		inner join tb_review as r 
+		on s.store_no = r.store_no
+		where s.store_no = #{storeNo}
+
+	</select>
+
+	<!-- 별점 평균 -->
+	<select id="storeScope" resultType="Store" parameterType="int">
+		select ifnull(truncate(sum(store_scope) / count(user_no), 1), 0) as scope
+		from tb_review
+		where store_no = #{storeNo}
+	</select>
+	
+	   
+   <select id="storeList" resultType="Store" parameterType="Search">
    		select distinct s.*,
-				c.category_name as category,
+			   c.category_name as category,
        		   ifnull(round(r.scope, 1), 0) scope,
                ifnull(r.count, 0) rcount
   		  from tb_store s
@@ -35,24 +46,89 @@
     	    on s.store_no = r.store_no
 		 inner join tb_category c
             on s.store_category = c.category_no
+           <!--  where str_to_date(s.open_time, '%h:%i %p') < now()
+              and str_to_date(s.close_time, '%h:%i %p') > now() -->
    </select>
-   
-   <select id="storeMenuList" resultType="Store">
-	select menu, price
-	  from tb_store_menu
-	 where store_no = 1;
-   </select>
-   
-   <select id="storeHoliday" resultType="Store">
-   	select w.week_name
-   	  from tb_holiday as h
-   	  inner join tb_week as w
-   	     on h.week_no = w.week_no
-   	  where store_no = 1 
-   </select>
+
+	
+	<select id="storeMenuList" resultType="Store" parameterType="int">
+		select menu, price
+		from tb_store_menu
+		where store_no = #{storeNo}
+	</select>
+
+	<select id="storeHoliday" resultType="Holiday" parameterType="int">
+		select w.week_name
+		from tb_holiday as h
+		inner join tb_week as w
+		on h.week_no = w.week_no
+		where store_no = #{storeNo}
+	</select>
+	
+	<update id="">
+	</update>
+	<!-- -->
+
+
    <!-- 
     -->
- 
-   
+	
+	<!-- admin storelist -->
+	<select id="adminSelectStore" resultType="Store">
+		 select s.store_no, 
+      		 s.store_name,     		 
+      		 s.store_owner,
+      		 s.business_num,
+      		 s.status,
+      		 s.store_email,
+      		 s.store_tell,
+      		 (select a.street_load 
+      		  from tb_area as a
+      		  where s.area_code = a.area_code) as street_load,
+      		 s.open_time,
+      		 s.close_time,
+      		 s.store_owner_ph,
+      		 (select c.category_name
+      		 from tb_category as c
+      		 where s.store_category = c.category_no) as category_name
+      		from tb_store as s
+	</select>
+	
+	<!-- admin storedetail 
+	 <select id="adminSelectOneStore" resultType="Store">
+      select s.store_no, 
+      		 s.store_name,
+      		 s.store_tell,
+      		 s.open_time,
+      		 s.close_time,
+      		 a.city, a.street_load,
+      		 m.menu, m.price,
+      		 w.week_name
+        from tb_store as s
+        inner join tb_store_menu as m
+        on s.store_no = m.store_no
+        inner join tb_area as a
+        on s.area_code = a.area_code
+                inner join tb_category as c
+        on s.store_category = c.category_no
+        inner join tb_store_content as sc
+        on s.store_no = sc.store_no
+        where s.store_no = 1
+        
+   </select> -->
+	
+	<!-- admin storedelete -->
+	<update id="adminDeleteStore" parameterType="int">
+		update tb_store
+		  set status = 2
+		 where store_no = #{no}
+	</update>
+	
+	<!-- admin storestatus (가게 승인) -->
+	<update id="adminStatusStore" parameterType="int">
+		update tb_store
+		  set status = 1
+		 where store_no = #{no}
+	</update>
 
 </mapper>
