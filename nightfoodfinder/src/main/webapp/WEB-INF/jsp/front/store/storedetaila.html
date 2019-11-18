@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+<style type="text/css">
+
+/* reset */
+body {
+  font : 'Noto Sans KR', sans-serif;
+  color: #444;
+  background-color: #f9f9f9;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+ul { list-style: none; }
+li { color: #7f7f7f; }
+a { text-decoration: none; color: #7f7f7f; }
+i { font-style: normal; font-weight: normal; font-size: 1.4rem; }
+
+/* modules */
+.mt0a { margin: 0 auto; }
+.hidden { display: none; }
+.red { color : red; }
+.float_l { float: left; }
+.float_r { float: right; }
+.clearboth:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+ #storedetail {
+ 	display: grid;
+ 	grid-template-rows: 400px 1fr;
+ 	margin: 0 auto;
+ 	width: 960px;
+	border: 1px solid red;
+ }
+
+
+ #storeinfo {
+    width: 640px;
+    border: 2px solid #c1c1c1;
+    padding: 60px 20px;
+    margin: 0 auto;
+ }
+
+ #stinfo {
+	 display: grid;
+	 grid-template-rows: 1fr 1fr;
+	align-items: center;
+   
+ }
+
+ #stTitle {
+	border-bottom: 2px solid #c1c1c1;
+    padding-bottom: 20px;
+    text-align: center;
+    margin: 0 auto;
+    width: 80%;
+ }
+
+ #stTitle > h3{
+	 font-size: 50px;
+ }
+
+</style>
+</head>
+<body>
+	<div id="storedetail">
+		<div id="pictureplace"></div>
+		<div id="detaillistjs">
+			<div id="storeinfo">
+				<div id="stinfo">
+					<div id="stTitle">
+						<h3>맛나요카페</h3>
+					</div>
+					<i class="fa fa-phone" aria-hidden="true"></i>
+					<i class="fa fa-map-marker" aria-hidden="true"></i>
+					<i class="fa fa-calendar-minus-o" aria-hidden="true"></i>
+
+
+					<i class="fa fa-clock-o" aria-hidden="true"></i>
+
+
+				</div>
+				<div id="commentplace"></div>
+
+			
+				
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

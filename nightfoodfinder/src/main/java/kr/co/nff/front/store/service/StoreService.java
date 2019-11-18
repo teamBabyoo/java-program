@@ -4,7 +4,14 @@ import java.util.List;
 
 import kr.co.nff.repository.vo.Store;
 
+import kr.co.nff.repository.vo.Holiday;
+import kr.co.nff.repository.vo.Store;
+
 public interface StoreService {
-	// 전체 리스트
+	//전체리스트
 	List<Store> storeList();
+	public Store storeDetail(); //추후 int no 넣어주기
+	public List<Menu> storeMenu();
+	public List<Holiday> storeHoliday();
 }
+

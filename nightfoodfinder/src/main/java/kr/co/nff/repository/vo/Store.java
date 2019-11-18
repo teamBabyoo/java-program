@@ -32,3 +32,4 @@ public class Store {
 	// 스토어 카테고리
 	private String category;
 }
+	

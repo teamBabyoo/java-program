@@ -11,7 +11,6 @@ import kr.co.nff.front.store.service.StoreService;
 @Controller("kr.co.nff.front.store.controller.FrontStoreController")
 @RequestMapping("/front/store")
 public class FrontStoreController {
-	
 	@Autowired
 	private StoreService service;
 	
@@ -23,8 +22,10 @@ public class FrontStoreController {
 	
 	/* 가게 상세 */
 	@RequestMapping("/storedetail.do")
-	public void storeDetail(int no, Model model) {
-//		model.addAttribute("store", service);
+	public void storeDetail(Model model) {
+		model.addAttribute("store", service.storeDetail());
+		model.addAttribute("menu", service.storeMenu());
+		model.addAttribute("holidaylist", service.storeHoliday());
 	}
 	
 	/* 가게 정보 수정*/
