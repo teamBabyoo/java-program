@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header class="clearboth">
     <div class="logo">
         <img src="${pageContext.request.contextPath}/resources/images/mangoplate-logo-horizontal.svg" alt="anff 로고" />
     </div>
     <div class="search">
       <form action="">
-        <input type="text" />
+        <input type="text" id="keyword"/>
         <div class="icon_w"><i class="fa fa-search" aria-hidden="true"></i></div>
         <div class="optionBox hidden">
           <ul class="optionTab clearboth">
@@ -15,6 +16,9 @@
             <li>가격대</li>
           </ul>
           <div class="select clearboth tab_1">
+         	<c:forEach items="${cateList}" var="t">
+         		<c:out value="cc" /> ${t.no}
+         	</c:forEach>
             <div>
               <label for="foodtype_1">한식</label>
               <input id="foodtype_1" type="checkbox" class="hidden" />
