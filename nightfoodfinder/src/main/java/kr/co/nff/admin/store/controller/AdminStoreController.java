@@ -23,11 +23,11 @@ public class AdminStoreController {
 		model.addAttribute("slist", service.listStore());
 	}
 	
-	//가게 상세 
-	@RequestMapping("/storedetail.do")
-	public void storeDetail(int no, Model model) {
-		model.addAttribute("user", service.detailStore(no));
-	}
+//	//가게 상세 
+//	@RequestMapping("/storedetail.do")
+//	public void storeDetail(int no, Model model) {
+//		model.addAttribute("user", service.detailStore(no));
+//	}
 	
 	//가게 삭제
 	@RequestMapping("/storedelete.do")

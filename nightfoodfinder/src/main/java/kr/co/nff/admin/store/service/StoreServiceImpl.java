@@ -18,9 +18,9 @@ public class StoreServiceImpl implements StoreService{
 		return dao.adminSelectStore();
 	}
 
-	public Store detailStore(int no) {
-		return dao.adminSelectOneStore(no);
-	}
+//	public Store detailStore(int no) {
+//		return dao.adminSelectOneStore(no);
+//	}
 
 	public void deleteStore(int no) {
 		dao.adminDeleteStore(no);
