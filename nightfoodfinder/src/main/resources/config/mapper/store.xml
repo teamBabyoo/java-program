@@ -22,11 +22,9 @@
        where s.store_no = 1
    </select>
    
-	
-   
-   <select id="storeList" resultType="Store">
+   <select id="storeList" resultType="Store" parameterType="Search">
    		select distinct s.*,
-				c.category_name as category,
+			   c.category_name as category,
        		   ifnull(round(r.scope, 1), 0) scope,
                ifnull(r.count, 0) rcount
   		  from tb_store s
@@ -36,6 +34,8 @@
     	    on s.store_no = r.store_no
 		 inner join tb_category c
             on s.store_category = c.category_no
+           <!--  where str_to_date(s.open_time, '%h:%i %p') < now()
+              and str_to_date(s.close_time, '%h:%i %p') > now() -->
    </select>
    
    <select id="storeMenuList" resultType="Store">
@@ -61,13 +61,21 @@
       		 s.store_owner,
       		 s.business_num,
       		 s.status,
+      		 s.store_email,
+      		 s.store_tell,
+      		 (select a.street_load 
+      		  from tb_area as a
+      		  where s.area_code = a.area_code) as street_load,
+      		 s.open_time,
+      		 s.close_time,
+      		 s.store_owner_ph,
       		 (select c.category_name
       		 from tb_category as c
       		 where s.store_category = c.category_no) as category_name
       		from tb_store as s
 	</select>
 	
-	<!-- admin storedetail -->
+	<!-- admin storedetail 
 	 <select id="adminSelectOneStore" resultType="Store">
       select s.store_no, 
       		 s.store_name,
@@ -88,7 +96,7 @@
         on s.store_no = sc.store_no
         where s.store_no = 1
         
-   </select>
+   </select> -->
 	
 	<!-- admin storedelete -->
 	<update id="adminDeleteStore" parameterType="int">
