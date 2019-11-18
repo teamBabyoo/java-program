@@ -133,3 +133,48 @@ footer { position: absolute; width: 100%; line-height: 40px; text-align: center;
 
 
 /** 승경 끝 **/
+
+
+/** 진실 **/
+
+ .detail_wrap #storedetail {
+ 	display: grid;
+ 	grid-template-rows: 300px 1fr;
+ 	margin: 0 auto;
+ 	width: 960px;
+	border: 1px solid red;
+ }
+
+
+.detail_wrap #storeinfo {
+    width: 640px;
+    border: 2px solid #c1c1c1;
+    padding: 60px 20px;
+    margin: 0 auto;
+ }
+
+.detail_wrap #stinfo {
+	 display: grid;
+	 grid-template-rows: 1fr 1fr;
+	align-items: center;
+   
+ }
+
+.detail_wrap #stTitle {
+	border-bottom: 2px solid #c1c1c1;
+    padding-bottom: 20px;
+    text-align: center;
+    margin: 0 auto;
+    width: 80%;
+ }
+
+.detail_wrap #stTitle > h3{
+	 font-size: 50px;
+ }
+ 
+#stTitle i {
+	font-size: 30px;
+}
+
+/** 진실 끝 **/
+

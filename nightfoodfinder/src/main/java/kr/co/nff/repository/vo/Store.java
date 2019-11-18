@@ -8,7 +8,9 @@ public class Store {
 	private int storeNo;
 	private String storeName;
 	private String storeEmail;
+	private String storePass;
 	private int storeTell;
+	private String categoryName;
 	private int storeCategory;
 	private String openTime;
 	private String closeTime;
@@ -32,3 +34,4 @@ public class Store {
 	// 스토어 카테고리
 	private String category;
 }
+	
