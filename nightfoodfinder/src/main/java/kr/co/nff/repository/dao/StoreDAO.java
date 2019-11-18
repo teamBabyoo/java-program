@@ -11,4 +11,5 @@ public interface StoreDAO {
 	Store selectOneStore();
 	List<Menu> storeMenuList(); 
 	List<Holiday> storeHoliday();
+	
 }

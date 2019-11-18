@@ -2,57 +2,66 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.nff.repository.dao.StoreDAO">
-   <select id="selectOneStore" resultType="Store">
-      select s.store_no, 
-      		 s.store_name,
-      		 s.store_tell,
-      		 s.open_time,
-      		 s.close_time,
-             a.city,
-             a.street_load,
-             c.category_name,
-             sc.store_content
-        from tb_store as s
-        inner join tb_area as a 
-        on s.area_code = a.area_code
-        inner join tb_category as c
-        on s.store_category = c.category_no
-        inner join tb_store_content as sc
-        on s.store_no = sc.store_no
-        where s.store_no = 1
-        
-   </select>
-   
-   <select id="storeList" resultType="Store">
-   		select distinct s.*,
-				c.category_name as category,
-       		   ifnull(round(r.scope, 1), 0) scope,
-               ifnull(r.count, 0) rcount
-  		  from tb_store s
-	left outer join (select store_no, COUNT(*) count, avg(store_scope) scope
-                       from tb_review
-				      group by store_no) r
-    	    on s.store_no = r.store_no
-		 inner join tb_category c
-            on s.store_category = c.category_no
-   </select>
-   
-   <select id="storeMenuList" resultType="Store">
-	select menu, price
-	  from tb_store_menu
-	 where store_no = 1;
-   </select>
-   
-   <select id="storeHoliday" resultType="Store">
-   	select w.week_name
-   	  from tb_holiday as h
-   	  inner join tb_week as w
-   	     on h.week_no = w.week_no
-   	  where store_no = 1 
-   </select>
-   <!-- 
-    -->
- 
-   
+	<select id="selectOneStore" resultType="Store">
+		select s.store_no,
+		s.store_name,
+		s.store_tell,
+		s.open_time,
+		s.close_time,
+		a.city,
+		a.street_load,
+		c.category_name,
+		sc.store_content,
+		ifnull(truncate(sum(r.store_scope) / count(r.user_no), 1), 0) as scope
+		from tb_store as s
+		inner join tb_area as a
+		on s.area_code = a.area_code
+		inner join tb_category as c
+		on s.store_category = c.category_no
+		inner join tb_store_content as sc
+		on s.store_no = sc.store_no
+		inner join tb_review as r 
+		on s.store_no = r.store_no
+		where s.store_no = 1
+
+	</select>
+
+	<!-- 별점 평균 -->
+	<select id="storeScope" resultType="Store">
+		select ifnull(truncate(sum(store_scope) / count(user_no), 1), 0) as scope
+		from tb_review
+		where store_no = 1
+	</select>
+
+	<select id="storeList" resultType="Store">
+		select distinct s.*,
+		c.category_name as category,
+		ifnull(round(r.scope, 1), 0) scope,
+		ifnull(r.count, 0) rcount
+		from tb_store s
+		left outer join (select store_no, COUNT(*) count, avg(store_scope) scope
+		from tb_review
+		group by store_no) r
+		on s.store_no = r.store_no
+		inner join tb_category c
+		on s.store_category = c.category_no
+	</select>
+
+	<select id="storeMenuList" resultType="Store">
+		select menu, price
+		from tb_store_menu
+		where store_no = 1;
+	</select>
+
+	<select id="storeHoliday" resultType="Store">
+		select w.week_name
+		from tb_holiday as h
+		inner join tb_week as w
+		on h.week_no = w.week_no
+		where store_no = 1
+	</select>
+	<!-- -->
+
+
 
 </mapper>
