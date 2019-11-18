@@ -12,5 +12,6 @@ public interface StoreService {
 	public Store storeDetail(); //추후 int no 넣어주기
 	public List<Menu> storeMenu();
 	public List<Holiday> storeHoliday();
+	
 }
 

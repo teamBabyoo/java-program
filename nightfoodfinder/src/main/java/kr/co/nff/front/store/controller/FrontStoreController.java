@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.nff.front.store.service.StoreService;
 
+
 @Controller("kr.co.nff.front.store.controller.FrontStoreController")
 @RequestMapping("/front/store")
 public class FrontStoreController {
+
 	@Autowired
 	private StoreService service;
 	
