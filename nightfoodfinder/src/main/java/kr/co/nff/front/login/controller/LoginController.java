@@ -1,7 +1,14 @@
 package kr.co.nff.front.login.controller;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import kr.co.nff.front.login.service.LoginService;
 
 
 @Controller("kr.co.nff.front.login.LoginController")
@@ -30,6 +37,9 @@ public class LoginController {
 	
 	
 //---------------------------------------------	
+	@Autowired
+	private LoginService loginservice;
+	
 	
 	//스토어 가입
 	@RequestMapping("/storejoin.do")
@@ -39,6 +49,13 @@ public class LoginController {
 	
 	@RequestMapping("/front/login/storeJoinForm.do")
 	public void storeJoinForm() {}
+	
+	//스토어 중복이메일 체크
+	@RequestMapping(value="/front/login/storeEmailChk", method = RequestMethod.GET )
+	@ResponseBody
+	public int storeEmailChk(@RequestParam("storeEmail") String storeEmail) {
+		return loginservice.storeEmailChk(storeEmail);
+	}
 	
 	
 	//스토어 로그인

@@ -28,7 +28,8 @@
 				</tr>
 				<tr>
 					<th>이메일</th>
-					<td><input type="text" name="storeEmail" /></td>
+					<td><input type="text" id="storeEmail" name="storeEmail" placeholder="이메일을 입력해주세요"/></td>
+					<td><div id="emailChk"></div></td>
 				</tr>
 				<tr>
 					<th>비밀번호</th>
@@ -40,13 +41,13 @@
 				</tr>
 				<tr><th rowspan="4">주소</th></tr>
 					<tr>
-						<td><input type="text" id="zipNo" name="zipNo" />
+						<td><input type="text" id="zipNo" name="zipNo" readOnly/>
 							<input type="hidden" id="sggNm" name="sggNm"/>
 							<input type="button" onClick="goPopup();" value="주소찾기"/>
 						</td>
 					</tr>
-					<tr><td><input type="text" style="width:300px;" id="roadFullAddr"  name="roadFullAddr" /></td></tr>
-					<tr><td><input type="text" style="width:300px;" id="addrDetail"  name="addrDetail" /></td></tr>
+					<tr><td><input type="text" style="width:300px;" id="roadFullAddr"  name="roadFullAddr" readOnly/></td></tr>
+					<tr><td><input type="text" style="width:300px;" id="addrDetail"  name="addrDetail" readOnly/></td></tr>
 				
 				<tr>
 					<th>영업 시간</th>
@@ -74,13 +75,13 @@
 				<tr>
 					<th>휴무일</th>
 					<td>
-						<input type="checkbox" name="day[]" value="1"/>월
-						<input type="checkbox" name="day[]" value="2"/>화
-						<input type="checkbox" name="day[]" value="3"/>수
-						<input type="checkbox" name="day[]" value="4"/>목
-						<input type="checkbox" name="day[]" value="5"/>금
-						<input type="checkbox" name="day[]" value="6"/>토
-						<input type="checkbox" name="day[]" value="7"/>일
+						<input type="checkbox" name="day[]" value="월"/>월
+						<input type="checkbox" name="day[]" value="화"/>화
+						<input type="checkbox" name="day[]" value="수"/>수
+						<input type="checkbox" name="day[]" value="목"/>목
+						<input type="checkbox" name="day[]" value="금"/>금
+						<input type="checkbox" name="day[]" value="토"/>토
+						<input type="checkbox" name="day[]" value="일"/>일
 						
 					</td>
 				</tr>
@@ -88,12 +89,12 @@
 					<th>가게 분류</th>
 					<td>
 						<select>
-							<option name="category1">한식</option>
-							<option name="category2">양식</option>
-							<option name="category3">중식</option>
-							<option name="category4">세계음식</option>
-							<option name="category5">카페</option>
-							<option name="category6">주점</option>
+							<option name="category1" value="한식" >한식</option>
+							<option name="category2" value="양식" >양식</option>
+							<option name="category3" value="중식" >중식</option>
+							<option name="category4" value="세계음식" >세계음식</option>
+							<option name="category5" value="카페" >카페</option>
+							<option name="category6" value="주점" >주점</option>
 						</select>
 					</td>
 				</tr>
@@ -106,12 +107,11 @@
 					<td><input type="text" name="storeOwnerPh" /></td>
 				</tr>
 			</table>
+			<button id="reg_submit">가입하기</button>
 			</form>	
 		</div>
 	</div>
 <script>
-// opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("팝업API 호출 소스"도 동일하게 적용시켜야 합니다.)
-//document.domain = "abc.go.kr";
 
 function goPopup(){
 	var pop = window.open("/nightfoodfinder/api/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
@@ -125,7 +125,51 @@ function jusoCallBack(roadFullAddr,zipNo,addrDetail,sggNm){
 		document.form.sggNm.value = sggNm;
 	
 }
-console.log(sggNm.value);
+
+//이메일 중복체크
+$("#storeEmail").blur(function() {
+		var storeEmail = $('#storeEmail').val();
+		$.ajax({
+			url : '${pageContext.request.contextPath}/front/login/storeEmailChk?storeEmail='+ storeEmail,
+			type : 'get',
+			success : function(data) {
+				console.log("1 = 중복o / 0 = 중복x : "+ data);							
+				
+				if (data == 1) {
+						// 1 : 아이디가 중복되는 문구
+						$("#emailChk").text("사용중인 이메일입니다");
+						$("#emailChk").css("color", "red");
+						$("#reg_submit").attr("disabled", true);
+					} else {
+						
+						if(idJ.test(storeEmail)){
+							// 0 : 아이디 길이 / 문자열 검사
+							$("#emailChk").text("");
+							$("#reg_submit").attr("disabled", false);
+				
+						} else if(storeEmail == ""){
+							
+							$('#emailChk').text('이메일을 입력해주세요');
+							$('#emailChk').css('color', 'red');
+							$("#reg_submit").attr("disabled", true);				
+							
+						} else {
+							
+							$('#emailChk').text("올바른 형식의 이메일을 입력해주세요.");
+							$('#emailChk').css('color', 'red');
+							$("#reg_submit").attr("disabled", true);
+						}
+						
+					}
+				}, error : function() {
+						console.log("실패");
+				}
+			});
+		});
+
+
+
+
 </script>	
 </body>
 </html>

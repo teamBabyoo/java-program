@@ -9,7 +9,7 @@
 </head>
 <body>
 	<script>
-		location.href="${pageContext.request.contextPath}/front/main/main.do";
+		location.href="${pageContext.request.contextPath}/front/login/storeJoinForm.do";
 	</script>
 </body>
 </html>

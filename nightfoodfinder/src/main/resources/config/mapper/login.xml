@@ -5,4 +5,8 @@
 	<insert id="insertStore" parameterType="Store">
 	
 	</insert>
+	
+	<select id="storeEmailChk" parameterType="String" resultType="int">
+		select count(*) from tb_store where store_email like #{storeEmail} 
+	</select>
 </mapper>  
