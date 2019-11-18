@@ -5,14 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.co.nff.repository.dao.storeDAO;
+import kr.co.nff.repository.dao.StoreDAO;
 import kr.co.nff.repository.vo.Store;
 
 @Service
 public class StoreServiceImpl implements StoreService{
 
 	@Autowired
-	private storeDAO dao;
+	private StoreDAO dao;
 	
 	public List<Store> listStore() {
 		return dao.adminSelectStore();
