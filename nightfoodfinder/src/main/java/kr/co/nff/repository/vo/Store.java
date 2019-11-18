@@ -8,6 +8,7 @@ public class Store {
 	private int storeNo;
 	private String storeName;
 	private String storeEmail;
+	private String storePass;
 	private int storeTell;
 	private int storeCategory;
 	private String openTime;
