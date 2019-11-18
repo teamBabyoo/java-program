@@ -44,28 +44,41 @@
           <h2>Table</h2>
           <table>
             <tr>
-              <th>Username</th>
-              <th>Posts</th>
-              <th>comments</th>
-              <th>date</th>
+              <th>가게이름</th>
+              <th>가게분류</th>
+              <th>대표자이름</th>
+              <th>사업자번호</th>
+              <th>상태</th>
             </tr>
-            <tr>
-              <td>Pete</td>
-              <td>4</td>
-              <td>7</td>
-              <td>Oct 10, 2015</td>
-      
-            </tr>
-            <tr>
-              <td>Mary</td>
-              <td>5769</td>
-              <td>2517</td>
-              <td>Jan 1, 2014</td>
-            </tr>
+            <c:if test="${empty slist}">
+            	<tr>
+					<td colspan="5">게시물이 없습니다.</td>
+				</tr>				
+			</c:if>
+			<c:forEach var="b" items="${slist}">
+				<tr>				
+					<td><a href="storedetail.do?no=${b.storeNo}">${b.storeName}</a></td>
+					<td><a href="storedetail.do?no=${b.storeNo}">${b.storeCategory}</a></td>
+					<td><a href="storedetail.do?no=${b.storeNo}">${b.storeOwner}</a></td>
+					<td><a href="storedetail.do?no=${b.storeNo}">${b.businessNum}</a></td>
+					<td>
+					<c:choose>
+					 <c:when test="${b.status == 0}">
+					<span class="statusbutton"><a href="storestatus.do?no=${b.storeNo}">승인 대기</a></span>
+					 </c:when>
+					 <c:when test="${b.status == 1}">
+	 				<span class="statusbutton"><a href="">승인 완료</a></span>
+					 </c:when>
+					 <c:otherwise>
+					 <span class="statusbutton"><a href="">활동 정지</a></span>
+					 </c:otherwise>
+					 </c:choose>
+	 				</td>
+					</tr>
+				</c:forEach>
           </table>
-        </section>
-      
+        </section>    
       </main>
-      <footer role="contentinfo">Easy Admin Style by Melissa Cabral</footer>
+      <footer role="contentinfo"></footer>
 </body>
 </html>

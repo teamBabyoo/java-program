@@ -10,6 +10,7 @@ public class Store {
 	private String storeEmail;
 	private String storePass;
 	private int storeTell;
+	private String categoryName;
 	private int storeCategory;
 	private String openTime;
 	private String closeTime;
