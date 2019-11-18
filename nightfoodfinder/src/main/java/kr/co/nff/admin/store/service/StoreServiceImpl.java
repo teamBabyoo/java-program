@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import kr.co.nff.repository.dao.StoreDAO;
 import kr.co.nff.repository.vo.Store;
 
-@Service
+@Service("kr.co.nff.admin.store.service.StoreServiceImpl")
 public class StoreServiceImpl implements StoreService{
 
 	@Autowired

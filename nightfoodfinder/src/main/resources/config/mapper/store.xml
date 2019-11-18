@@ -60,10 +60,11 @@
       		 s.store_name,     		 
       		 s.store_owner,
       		 s.business_num,
+      		 s.status,
       		 (select c.category_name
       		 from tb_category as c
       		 where s.store_category = c.category_no) as category_name
-      		from tb_store as s;
+      		from tb_store as s
 	</select>
 	
 	<!-- admin storedetail -->
