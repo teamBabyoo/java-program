@@ -4,7 +4,7 @@ import java.util.List;
 
 import kr.co.nff.repository.vo.User;
 
-public interface userDAO {
+public interface UserDAO {
 
 	List<User> adminSelectUser();
 	User adminSelectOneUser(int no);

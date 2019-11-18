@@ -25,4 +25,12 @@ public class Store {
 	private int businessNum;
 	private String storeOwner;
 	private int storeOwnerPh;
+	
+	// 리뷰테이블에서 가져온 평점!(소수점 첫째 자리)
+	private double scope;
+	// 리뷰 갯수
+	private int rcount;
+	// 스토어 카테고리
+	private String category;
 }
+	
