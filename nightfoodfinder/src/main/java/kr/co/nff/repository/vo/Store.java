@@ -21,7 +21,6 @@ public class Store {
 	private Date regDate;
 	private String menu;
 	private int price;
-	private String weekName;
 	private int status;
 	private int businessNum;
 	private String storeOwner;

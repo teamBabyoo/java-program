@@ -51,9 +51,10 @@ public class LoginController {
 	public void storeJoinForm() {}
 	
 	//스토어 중복이메일 체크
-	@RequestMapping(value="/front/login/storeEmailChk", method = RequestMethod.GET )
+	@RequestMapping(value="/front/login/storeEmailChk")
 	@ResponseBody
-	public int storeEmailChk(@RequestParam("storeEmail") String storeEmail) {
+	public int storeEmailChk(String storeEmail) {
+		System.out.println("email중복체크 컨트롤러 ");
 		return loginservice.storeEmailChk(storeEmail);
 	}
 	
