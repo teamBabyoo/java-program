@@ -23,9 +23,9 @@
         where store_no = 1 
    </select>
    
-   <select id="storeList" resultType="Store">
+   <select id="storeList" resultType="Store" parameterType="Search">
    		select distinct s.*,
-				c.category_name as category,
+			   c.category_name as category,
        		   ifnull(round(r.scope, 1), 0) scope,
                ifnull(r.count, 0) rcount
   		  from tb_store s
@@ -35,6 +35,8 @@
     	    on s.store_no = r.store_no
 		 inner join tb_category c
             on s.store_category = c.category_no
+           <!--  where str_to_date(s.open_time, '%h:%i %p') < now()
+              and str_to_date(s.close_time, '%h:%i %p') > now() -->
    </select>
 
 </mapper>
