@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.nff.repository.dao.StoreDAO">
-	<select id="selectOneStore" resultType="Store">
+	<select id="selectOneStore" resultType="Store" parameterType="int">
 		select s.store_no,
 		s.store_name,
 		s.store_tell,
@@ -22,15 +22,15 @@
 		on s.store_no = sc.store_no
 		inner join tb_review as r 
 		on s.store_no = r.store_no
-		where s.store_no = 1
+		where s.store_no = #{storeNo}
 
 	</select>
 
 	<!-- 별점 평균 -->
-	<select id="storeScope" resultType="Store">
+	<select id="storeScope" resultType="Store" parameterType="int">
 		select ifnull(truncate(sum(store_scope) / count(user_no), 1), 0) as scope
 		from tb_review
-		where store_no = 1
+		where store_no = #{storeNo}
 	</select>
 	
 	   
@@ -51,19 +51,22 @@
    </select>
 
 	
-	<select id="storeMenuList" resultType="Store">
+	<select id="storeMenuList" resultType="Store" parameterType="int">
 		select menu, price
 		from tb_store_menu
-		where store_no = 1;
+		where store_no = #{storeNo}
 	</select>
 
-	<select id="storeHoliday" resultType="Store">
+	<select id="storeHoliday" resultType="Holiday" parameterType="int">
 		select w.week_name
 		from tb_holiday as h
 		inner join tb_week as w
 		on h.week_no = w.week_no
-		where store_no = 1
+		where store_no = #{storeNo}
 	</select>
+	
+	<update id="">
+	</update>
 	<!-- -->
 
 

@@ -101,7 +101,8 @@
 						</table>
 						<div class="menulist">${store.storeContent}</div>
 						<div id="btdiv">
-							<button id="updatebutton">수정하기</button>
+							<span id="updatebutton" onclick="location.href='${pageContext.request.contextPath}/front/store/storecontentupdateForm.do?no=${store.storeNo}'">수정하기</span>
+							
 						</div>
 
 

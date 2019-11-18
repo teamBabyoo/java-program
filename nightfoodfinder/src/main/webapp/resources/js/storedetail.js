@@ -15,3 +15,9 @@ function animateValue(id, start, end, duration) {
     }, stepTime);
 }
 animateValue("scopescore", 0, scope, 100);
+
+
+
+
+
+

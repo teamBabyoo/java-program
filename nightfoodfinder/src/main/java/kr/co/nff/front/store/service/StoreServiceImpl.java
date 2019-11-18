@@ -23,17 +23,23 @@ public class StoreServiceImpl implements StoreService {
 
 
 	@Override
-	public Store storeDetail() {
-		return dao.selectOneStore();
+	public Store storeDetail(int no) {
+		return dao.selectOneStore(no);
 	}
 
 	@Override
-	public List<Menu> storeMenu() {
-		return dao.storeMenuList();
+	public List<Menu> storeMenu(int no) {
+		return dao.storeMenuList(no);
 	}
 
 	@Override
-	public List<Holiday> storeHoliday() {
-		return dao.storeHoliday();
+	public List<Holiday> storeHoliday(int no) {
+		return dao.storeHoliday(no);
+	}
+
+
+	@Override
+	public Store storeupdateForm(int no) {
+		return dao.selectOneStore(no);
 	}
 }
