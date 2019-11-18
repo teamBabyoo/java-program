@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>      
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>       
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -24,12 +25,12 @@
       
       <nav role="navigation">
         <ul class="main">
-          <li class="member"><a href="#">회원관리</a></li>
-          <li class="store"><a href="#">가게관리</a></li>
-          <li class="review"><a href="#">리뷰관리</a>
+          <li class="member"><a href="userlist.do">회원관리</a></li>
+          <li class="store"><a href="storelist.do">가게관리</a></li>
+          <li class="review"><a>리뷰관리</a>
             <ul>
-                <li><a class="review_all" href="#">전체리뷰</a></li>
-                <li><a class="review_report" href="#">신고리뷰</a></li>
+                <li><a class="review_all" href="reviewlist.do">전체리뷰</a></li>
+                <li><a class="review_report" href="reviewlist.do">신고리뷰</a></li>
             </ul>
         </li>
           <!-- <li class="comments"><a href="#">Comments</a></li>
@@ -49,23 +50,23 @@
               <th>가입날짜</th>
               <th>리뷰수</th>
             </tr>
-            <tr>
-              <td>Pete</td>
-              <td>4</td>
-              <td>7</td>
-              <td>Oct 10, 2015</td>
-      
-            </tr>
-            <tr>
-              <td>Mary</td>
-              <td>5769</td>
-              <td>2517</td>
-              <td>Jan 1, 2014</td>
-            </tr>
+            <c:if test="${empty list}">
+            	<tr>
+					<td colspan="5">게시물이 없습니다.</td>
+				</tr>				
+			</c:if>
+			<c:forEach var="b" items="${list}">
+				<tr>
+					<td><a href="userdetail.do?no=${b.userNo}">${b.userEmail}</a></td>
+					<td><a href="userdetail.do?no=${b.userNo}">${b.nickName}</a></td>
+					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${b.joinDate}"  /></td>
+					<td>${b.reviewCnt}개</td>
+				</tr>
+				</c:forEach>
           </table>
         </section>
       
       </main>
-      <footer role="contentinfo">Easy Admin Style by Melissa Cabral</footer>
+      <footer role="contentinfo"></footer>
 </body>
 </html>

@@ -16,15 +16,15 @@ public class UserServiceImpl implements UserService{
 	
 	
 	public List<User> listUser() {
-		return dao.selectUser();
+		return dao.adminSelectUser();
 	}
 
 	public User detailUser(int no) {
-		return dao.selectOneUser(no);
+		return dao.adminSelectOneUser(no);
 	}
 
 	public void deleteUser(int no) {
-		dao.deleteUser(no);
+		dao.adminDeleteUser(no);
 	}
 
 }

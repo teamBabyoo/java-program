@@ -6,7 +6,7 @@ import kr.co.nff.repository.vo.User;
 
 public interface userDAO {
 
-	List<User> selectUser();
-	User selectOneUser(int no);
-	void deleteUser(int no);
+	List<User> adminSelectUser();
+	User adminSelectOneUser(int no);
+	void adminDeleteUser(int no);
 }

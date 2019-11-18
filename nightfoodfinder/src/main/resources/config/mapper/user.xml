@@ -4,22 +4,29 @@
 <mapper namespace="kr.co.nff.repository.dao.userDAO">
 	
 	<!-- admin userlist -->
-	<select id="selectUser" resultType="User">
-		select *
-		  from tb_user
-		 order by no desc  
+	<select id="adminSelectUser" resultType="User">
+		select u.user_no,
+		u.user_email,
+		u.nick_name,
+		u.join_date,
+		(select count(*) 
+		from tb_review as r
+		where u.user_no = r.user_no) as review_cnt
+		from tb_user u
+		 order by user_no desc;
 	</select>
-	<!-- admin userdetail -->
-	<select id="selectOneUser" parameterType="int" resultType="User">
+	<!-- admin userdetail 
+	<select id="adminSelectOneUser" parameterType="int" resultType="User">
 		select *
 		  from tb_user
-		 where no = #{no} 
+		 where user_no = #{no} 
 	</select>	
+	-->
 	<!-- admin userdelete -->
-	<update id="deleteUser" parameterType="int">
+	<update id="adminDeleteUser" parameterType="int">
 		update tb_user
 		  set user_type = 2
-		 where no = #{no}
+		 where user_no = #{no}
 	</update>
 	
 </mapper>

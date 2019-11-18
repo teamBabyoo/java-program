@@ -1,4 +1,4 @@
-package kr.co.nff.front.store.service;
+package kr.co.nff.admin.store.service;
 
 import java.util.List;
 
@@ -8,4 +8,5 @@ public interface StoreService {
 	List<Store> listStore();
 	Store detailStore(int no);
 	void deleteStore(int no);
+	void statusStore(int no);
 }

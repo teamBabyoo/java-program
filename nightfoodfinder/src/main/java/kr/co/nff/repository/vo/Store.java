@@ -9,7 +9,8 @@ public class Store {
 	private String storeName;
 	private String storeEmail;
 	private int storeTell;
-	private String storeCategory;
+	private String categoryName;
+	private int storeCategory;
 	private String openTime;
 	private String closeTime;
 	private int areaCode;
