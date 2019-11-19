@@ -24,19 +24,21 @@ public class FrontStoreController {
 	
 	/* 가게 상세 */
 	@RequestMapping("/storedetail.do")
-	public void storeDetail(Model model) {
-		model.addAttribute("store", service.storeDetail());
-		model.addAttribute("menu", service.storeMenu());
-		model.addAttribute("holidaylist", service.storeHoliday());
+	public void storeDetail(Model model, int no) {
+		model.addAttribute("store", service.storeDetail(no));
+		model.addAttribute("menu", service.storeMenu(no));
+		model.addAttribute("holidaylist", service.storeHoliday(no));
 	}
 	
 	/* 가게 정보 수정*/
 	@RequestMapping("/storeinfoupdate.do")
 	public void storeInfoUpdate() {}
 	
-	/* 가게 소개글 수정*/
-	@RequestMapping("/storecontentupdate.do")
-	public void storeContentUpdate() {}
+	/* 가게 소개글 수정폼*/
+	@RequestMapping("/storecontentupdateForm.do")
+	public void storeContentUpdate(int no, Model model) {
+		model.addAttribute("store", service.storeupdateForm(no));
+	}
 
 	/* 단골 등록 */
 	@RequestMapping("/storeregular.do")

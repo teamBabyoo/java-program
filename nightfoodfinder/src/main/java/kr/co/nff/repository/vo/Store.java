@@ -21,6 +21,8 @@ public class Store {
 	private Date regDate;
 	private String menu;
 	private int price;
+	private int price_type; // 가격대
+	private int seeCnt;
 	private String weekName;
 	private int status;
 	private int businessNum;

@@ -53,13 +53,14 @@
 	cursor: pointer;
 }
 
-.reComment{
-	display:none
+.reComment {
+	display: none
 }
 </style>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
 	<header role="banner">
@@ -79,7 +80,7 @@
 					<li><a class="review_all" href="#">전체리뷰</a></li>
 					<li><a class="review_report" href="#">신고리뷰</a></li>
 				</ul></li>
-				
+
 			<!-- search -->
 			<li>
 				<div class="form-group row justify-content-center">
@@ -88,20 +89,27 @@
 
 						<select class="form-control form-control-sm" name="searchType"
 							id="searchType">
-
-							<option value="nickName">닉네임</option>
-							<option value="storeName">가게 이름</option>
+							<c:choose>
+								<c:when test="${pagination.type eq 'storeName'}">
+									<option value="nickName">닉네임</option>
+									<option value="storeName" selected disabled hidden>가게 이름</option>
+								</c:when>
+								<c:otherwise>
+									<option value="nickName" selected disabled hidden>닉네임</option>
+									<option value="storeName">가게 이름</option>
+								</c:otherwise>
+							</c:choose>
 						</select>
 					</div>
 					<div class="w300" style="padding-right: 10px">
 						<input type="text" class="form-control form-control-sm"
-							name="keyword" id="keyword">
+							name="keyword" id="keyword" value="${pagination.keyword}">
 					</div>
 					<div>
 						<button class="btn btn-sm btn-primary" name="btnSearch"
 							id="btnSearch">검색</button>
-						<button class="back" name="backList"
-							id="backList" onclick="location.href='/nightfoodfinder/admin/review/reviewlist.do'">검색취소</button>
+						<button class="back" name="backList" id="backList"
+							onclick="location.href='/nightfoodfinder/admin/review/reviewlist.do'">검색취소</button>
 					</div>
 				</div>
 			</li>
@@ -142,24 +150,61 @@
 						style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${list.reviewContent }</td>
 					<td>${list.regDate }
 					<td>${list.likeCount }</td>
-					<td class="reComment">${list.reComment}<td>
+					<td class="reComment">${list.reComment}
+					<td>
 				</tr>
 			</c:forEach>
 		</table>
 
-				<!-- The Modal -->
-				<div id="myModal" class="modal">
-					<!-- Modal content -->
-					<div class="modal-content">
-						<span class="close">&times;</span>
-						<p></p>
-						<p></p>
-					</div>
 
-				</div>
+		<!-- 페이징 -->
+
+		<div id="paginationBox">
+			<ul class="pagination">
+				<c:if test="${pagination.prev}">
+					<li class="page-item"><a class="page-link" href="#"
+						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">
+							Previous</a></li>
+				</c:if>
+
+				<c:forEach begin="${pagination.startPage}"
+					end="${pagination.endPage}" var="idx">
+					<li
+						class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
+						<a class="page-link" href="#"
+						onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')">
+							${idx} </a>
+					</li>
+
+				</c:forEach>
+
+				<c:if test="${pagination.next}">
+
+					<li class="page-item"><a class="page-link" href="#"
+						onClick="fn_next('${pagination.range}', 
+					'${pagination.range}', '${pagination.rangeSize}')">Next</a>
+					</li>
+				</c:if>
+			</ul>
+		</div>
+
+		<!-- 페이징 -->
+
+
+		<!-- The Modal -->
+		<div id="myModal" class="modal">
+			<!-- Modal content -->
+			<div class="modal-content">
+				<span class="close">&times;</span>
+				<p></p>
+				<p></p>
+			</div>
+
+		</div>
+
 
 		<script>
-		// 모달팝업
+			// 모달팝업
 			// Get the modal
 			var modal = document.getElementById('myModal');
 			// Get the button that opens the modal
@@ -167,20 +212,22 @@
 			// Get the <span> element that closes the modal
 			var span = document.getElementsByClassName("close")[0];
 			// When the user clicks on the button, open the modal 
-			for(let i = 0; i < btn.length; i++){				
+			for (let i = 0; i < btn.length; i++) {
 				btn[i].onclick = function(e) {
 					let reComment = $(e.target).siblings(".reComment").text();
-					if(reComment.length < 1){
+					if (reComment.length < 1) {
 						reComment = "사장님 리뷰가 없습니다.";
 					} else {
 						reComment = "사장님 리뷰 : " + reComment;
 					}
-					
+
 					modal.style.display = "block";
-					$(".modal-content p:eq(0)").text("리뷰 : " + $(e.target).text())
+					$(".modal-content p:eq(0)").text(
+							"리뷰 : " + $(e.target).text())
 					$(".modal-content p:eq(1)").text(reComment)
 				}
 			}
+
 			// When the user clicks on <span> (x), close the modal
 			span.onclick = function() {
 				modal.style.display = "none";
@@ -191,21 +238,55 @@
 					modal.style.display = "none";
 				}
 			}
-			
-			
-			
-		// 서치
-			$(document).on('click', '#btnSearch', function(e){
-				e.preventDefault();
+
+			// 서치
+			$(document)
+					.on(
+							'click',
+							'#btnSearch',
+							function(e) {
+								e.preventDefault();
+								var url = "${pageContext.request.contextPath}/admin/review/reviewlist.do";
+								url = url + "?searchType="
+										+ $('#searchType option:selected').val();
+								url = url + "&keyword=" + $('#keyword').val();
+								location.href = url;
+							});
+
+			// 페이징
+
+			//이전 버튼 이벤트
+			function fn_prev(page, range, rangeSize) {
+				var page = ((range - 2) * rangeSize) + 1;
+				var range = range - 1;
 				var url = "${pageContext.request.contextPath}/admin/review/reviewlist.do";
-				url = url + "?searchType=" + $('#searchType').val();
+				url = url + "?page=" + page;
+				url = url + "&range=" + range;
+				location.href = url;
+			}
+
+			//페이지 번호 클릭
+			function fn_pagination(page, range, rangeSize) {
+				var url = "${pageContext.request.contextPath}/admin/review/reviewlist.do";
+				url = url + "?page=" + page;
+				url = url + "&range=" + range;
+				url = url + "&searchType="
+						+ $('#searchType option:selected').val();
 				url = url + "&keyword=" + $('#keyword').val();
 				location.href = url;
-				console.log(url);
-			});	
+			}
 
+			//다음 버튼 이벤트
+			function fn_next(page, range, rangeSize) {
+				var page = parseInt((range * rangeSize)) + 1;
+				var range = parseInt(range) + 1;
+				var url = "${pageContext.request.contextPath}/admin/review/reviewlist.do";
+				url = url + "?page=" + page;
+				url = url + "&range=" + range;
+				location.href = url;
+			}
 		</script>
-		
+
 
 	</section>
 

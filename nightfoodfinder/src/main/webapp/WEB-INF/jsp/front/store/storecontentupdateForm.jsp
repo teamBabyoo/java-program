@@ -16,7 +16,7 @@
 	<div class="wrapper sJoin_wrap">
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 		<div id="storeJoinForm">
-			<form name="form" id="form" method="post" onsubmit="">
+			<form name="form" id="form" method="post">
 			<table>
 				<tr>
 					<th>가게 이름</th>
@@ -75,13 +75,13 @@
 				<tr>
 					<th>휴무일</th>
 					<td>
-						<input type="checkbox" name="day[]" value="1"/>월
-						<input type="checkbox" name="day[]" value="2"/>화
-						<input type="checkbox" name="day[]" value="3"/>수
-						<input type="checkbox" name="day[]" value="4"/>목
-						<input type="checkbox" name="day[]" value="5"/>금
-						<input type="checkbox" name="day[]" value="6"/>토
-						<input type="checkbox" name="day[]" value="7"/>일
+						<input type="checkbox" name="day[]" value="월"/>월
+						<input type="checkbox" name="day[]" value="화"/>화
+						<input type="checkbox" name="day[]" value="수"/>수
+						<input type="checkbox" name="day[]" value="목"/>목
+						<input type="checkbox" name="day[]" value="금"/>금
+						<input type="checkbox" name="day[]" value="토"/>토
+						<input type="checkbox" name="day[]" value="일"/>일
 						
 					</td>
 				</tr>
@@ -89,12 +89,12 @@
 					<th>가게 분류</th>
 					<td>
 						<select>
-							<option name="category1" value="1" >한식</option>
-							<option name="category2" value="2" >양식</option>
-							<option name="category3" value="3" >중식</option>
-							<option name="category4" value="4" >세계음식</option>
-							<option name="category5" value="5" >카페</option>
-							<option name="category6" value="6" >주점</option>
+							<option name="category1" value="한식" >한식</option>
+							<option name="category2" value="양식" >양식</option>
+							<option name="category3" value="중식" >중식</option>
+							<option name="category4" value="세계음식" >세계음식</option>
+							<option name="category5" value="카페" >카페</option>
+							<option name="category6" value="주점" >주점</option>
 						</select>
 					</td>
 				</tr>
@@ -129,10 +129,9 @@ function jusoCallBack(roadFullAddr,zipNo,addrDetail,sggNm){
 //이메일 중복체크
 $("#storeEmail").blur(function() {
 		var storeEmail = $('#storeEmail').val();
-		console.log('${pageContext.request.contextPath}/front/login/storeEmailChk?storeEmail='+ storeEmail);
 		$.ajax({
-			url : '${pageContext.request.contextPath}/front/login/storeEmailChk',
-			data : storeEmail,
+			url : '${pageContext.request.contextPath}/front/login/storeEmailChk?storeEmail='+ storeEmail,
+			type : 'get',
 			success : function(data) {
 				console.log("1 = 중복o / 0 = 중복x : "+ data);							
 				
@@ -141,8 +140,7 @@ $("#storeEmail").blur(function() {
 						$("#emailChk").text("사용중인 이메일입니다");
 						$("#emailChk").css("color", "red");
 						$("#reg_submit").attr("disabled", true);
-					} 
-				/* else {
+					} else {
 						
 						if(idJ.test(storeEmail)){
 							// 0 : 아이디 길이 / 문자열 검사
@@ -162,10 +160,9 @@ $("#storeEmail").blur(function() {
 							$("#reg_submit").attr("disabled", true);
 						}
 						
-					} */
+					}
 				}, error : function() {
 						console.log("실패");
-						console.log(data);
 				}
 			});
 		});

@@ -4,12 +4,13 @@
 <mapper namespace="kr.co.nff.repository.dao.ReviewDAO">
 
 	<!-- 전체리뷰 리스트, 좋아요 횟수 불러오기 -->
-	<select id="selectReview" resultType="Review">
+	<select id="selectReview" parameterType="SearchRe" resultType="Review">
 		select u.nick_name nickName, s.store_name storeName, r.review_content reviewContent, r.reg_date regDate,
 			(select count(*) from tb_like l where l.store_review_no = r.review_no) as likeCount, r.recomment reComment
 		from tb_review r left join tb_user u on r.user_no = u.user_no
 					     left join tb_store s on r.store_no = s.store_no
 		
+	<!-- 검색 -->
 	
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if
@@ -21,8 +22,42 @@
 				AND s.store_name like CONCAT('%', #{keyword}, '%')
 			</if>
 		</trim>
-		order by r.review_no desc
+		
+
+	order by r.review_no desc
+	
+		<!-- 페이징  -->
+		LIMIT #{startList}, #{listSize}
+		
+		
 	</select>
+	
+	<!-- 전체 리뷰 수 구하기 -->
+	<select id="pagingGetListCnt" parameterType="SearchRe" resultType="int">
+		select count(*) as listCnt
+			from tb_review r left join tb_user u on r.user_no = u.user_no
+					     left join tb_store s on r.store_no = s.store_no
+		<!-- 검색 -->
+	
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if
+				test="type=='nickName' and keyword != null and keyword != '' ">
+				AND u.nick_name like CONCAT('%', #{keyword}, '%') 
+			</if>
+			<if
+				test="type=='storeName' and keyword != null and keyword != '' ">
+				AND s.store_name like CONCAT('%', #{keyword}, '%')
+			</if>
+		</trim>
+		
+	
+		<!-- 페이징  -->
+		LIMIT #{startList}, #{listSize}
+	</select>
+	
+	
+	
+	
 
 	<!-- 좋아요 횟수
 	 <select id="countLike" parameterType="int" resultType="int"> 
