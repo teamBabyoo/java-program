@@ -4,7 +4,7 @@
 <mapper namespace="kr.co.nff.repository.dao.LoginDAO">
 
 	
-	<select id="storeEmailChk" parameterType="String" resultType="int">
-		select count(*) from tb_store where store_email like '#{storeEmail}'
+	<select id="storeEmailChk" parameterType="String" resultType="int" flushCache="true" useCache="true">
+		select count(*) from tb_store where store_email = #{storeEmail}
 	</select>
 </mapper>  
