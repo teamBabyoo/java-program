@@ -480,4 +480,10 @@ i.fa.fa-map-marker {
 	font-size: 25px;
 }
 
+/*가게정보수정*/
+.wrapper sInfoUpdate_wrap td {
+ padding: 8px;
+}
+
+
 /** 진실 끝 **/
