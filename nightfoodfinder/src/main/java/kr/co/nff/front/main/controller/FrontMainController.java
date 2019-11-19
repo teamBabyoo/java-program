@@ -7,21 +7,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import kr.co.nff.front.main.service.MainService;
-import kr.co.nff.repository.vo.Store;
+import kr.co.nff.front.main.service.FrontService;
+import kr.co.nff.repository.vo.Category;
 
 @Controller
 @RequestMapping("/front/main")
 public class FrontMainController {
 	@Autowired
-	private MainService service;
+	private FrontService service;
 	
 	// 최상위 5개 스토어
 	@RequestMapping("/main.do")
-	public void main(Model model) {
-//		System.out.println("컨트롤러 OK");
+	public void main(HttpSession session, Model model) {
+		List<Category> cateList = service.selectCategory();
+		System.out.println(cateList);
+		session.setAttribute("cateList", cateList);
+		
 		model.addAttribute("sList", service.storeList());
-//		List<Store> store = service.storeList();
-//		System.out.println("컨트롤러 : " + service.storeList());
-	} 
+	}
 }

@@ -124,8 +124,6 @@
     <div class="bgbox"></div>
   </div>    
   <script>
-  
-
   </script>
 </body>
 </html>

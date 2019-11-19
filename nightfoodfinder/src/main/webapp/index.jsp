@@ -12,5 +12,4 @@
 		location.href="${pageContext.request.contextPath}/front/main/main.do";
 	</script>
 </body>
-
 </html>
