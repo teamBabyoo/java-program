@@ -9,6 +9,9 @@ public interface StoreDAO {
 	// 메인 스토어 상세정보 리스트 조회
 	List<Store> mainStoreList();
 	
+	// 메인 요일 리스트 조회
+//	List<Holiday> selectHolidayListByStoreNo(int storeNo);
+	
 	// 카테고리 리스트
 	List<Category> selectCategory();
 	// 스토어 리스트

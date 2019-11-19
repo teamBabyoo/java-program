@@ -23,13 +23,19 @@ public class Store {
 	private Date regDate;
 	private String menu;
 	private int price;
-	private int price_type; // 가격대
+	private int priceType; // 가격대
 	private int seeCnt;
 	private String weekName;
 	private int status;
 	private int businessNum;
 	private String storeOwner;
 	private int storeOwnerPh;
+	
+	private String latitude;
+	private String longitude;
+	private String storeJoinDate;
+	private int storeScopeTotal;
+	private int reviewCntTotal;
 	
 	// 리뷰테이블에서 가져온 평점!(소수점 첫째 자리)
 	private double scope;
@@ -38,7 +44,7 @@ public class Store {
 	// 스토어 카테고리
 	private String category;
 	
-	// ↙ 콜렉션
+	// ↙ 콜렉션 (메인페이지 리스트에서 사용)
 	private List<Holiday> holidayList;
 }
 	
