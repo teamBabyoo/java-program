@@ -136,46 +136,115 @@ footer { position: absolute; width: 100%; line-height: 40px; text-align: center;
 
 
 /** 진실 **/
-
- .detail_wrap #storedetail {
- 	display: grid;
- 	grid-template-rows: 300px 1fr;
- 	margin: 0 auto;
- 	width: 960px;
+.detail_wrap #storedetail {
+	display: grid;
+	grid-template-rows: 300px 1fr;
+	margin: 0 auto;
+	width: 960px;
 	border: 1px solid red;
- }
-
+}
 
 .detail_wrap #storeinfo {
-    width: 640px;
-    border: 2px solid #c1c1c1;
-    padding: 60px 20px;
-    margin: 0 auto;
- }
+	width: 640px;
+	border: 2px solid #c1c1c1;
+	padding: 30px 20px;
+	margin: 0 auto;
+}
 
 .detail_wrap #stinfo {
-	 display: grid;
-	 grid-template-rows: 1fr 1fr;
+	display: grid;
+	grid-template-rows: 50px 1fr 1fr;
 	align-items: center;
-   
- }
+	width: 80%;
+	margin: 0 auto;
+}
+
+.detail_wrap #stinfo img {
+	width: 50px;
+}
+
+.detail_wrap #star {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	width: 100px;
+	text-align: right;
+	margin-left: 353px;
+}
 
 .detail_wrap #stTitle {
 	border-bottom: 2px solid #c1c1c1;
-    padding-bottom: 20px;
-    text-align: center;
-    margin: 0 auto;
-    width: 80%;
- }
+	padding-bottom: 20px;
+	text-align: center;
+	width: 80%;
+	margin: 0 auto;
+}
 
-.detail_wrap #stTitle > h3{
-	 font-size: 50px;
- }
- 
-#stTitle i {
+.detail_wrap #scopescore {
+	margin-top: 17px;
+	margin-right: 10px;
+	font-size: 22px;
+}
+
+.detail_wrap #stinfo img {
+	width: 50px;
+}
+
+.detail_wrap #stTitle>h2 {
+	font-size: 45px;
+}
+
+.detail_wrap .menulist {
+	border: 2px solid #c1c1c1;
+	border-radius: 8px;
+	width: 350px;
+	margin-left: 75px;
+	padding: 10px;
+}
+
+.detail_wrap .iicon {
+	text-align: center;
 	font-size: 30px;
 }
 
+i.fa.fa-map-marker {
+    margin-left: 8px;
+    margin-right: 3px;
+}
+
+.detail_wrap #showmap, .detail_wrap #updatebutton {
+	background: #d8d8d8;
+	border: 0;
+	width: 60px;
+	height: 25px;
+}
+.detail_wrap #btdiv{
+	text-align: center;
+	margin-top: 15px;
+}
+
+.detail_wrap table {
+	width: 100%;
+}
+
+.detail_wrap #clockicon {
+	vertical-align: top;
+}
+
+.detail_wrap .tabletdfont, .detail_wrap #menusizemin {
+	font-size: 16px;
+}
+
+.detail_wrap #sizeminn, .detail_wrap #menusizemin {
+	width: 68px;
+}
+
+.tabletitlefont {
+	font-weight: bold;
+}
+
+.detail_wrap #menusizemin {
+	font-size: 25px;
+}
 
 /*가게정보수정*/
 .wrapper sInfoUpdate_wrap td {
