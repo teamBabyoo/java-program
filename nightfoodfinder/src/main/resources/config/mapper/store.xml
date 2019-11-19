@@ -2,6 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.nff.repository.dao.StoreDAO">
+
+	<!-- 카테고리 리스트 가져오기 -->
+	<select id="selectCategory" resultType="Category">
+		select * from tb_category
+	</select>
+	
 	<select id="selectOneStore" resultType="Store" parameterType="int">
 		select s.store_no,
 		s.store_name,
@@ -33,7 +39,6 @@
 		where store_no = #{storeNo}
 	</select>
 	
-	   
    <select id="storeList" resultType="Store" parameterType="Search">
    		select distinct s.*,
 			   c.category_name as category,
