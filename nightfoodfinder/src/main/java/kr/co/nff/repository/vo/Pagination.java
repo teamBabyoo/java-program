@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class Pagination {
 	private int listSize = 10; // 초기값으로 목록개수를 10으로 셋팅
-	private int rangeSize = 10; // 초기값으로 페이지범위를 10으로 셋팅
+	private int rangeSize = 5; // 초기값으로 페이지범위를 5로 셋팅
 	private int page;
 	private int range;
 	private int listCnt;
@@ -17,7 +17,7 @@ public class Pagination {
 	private boolean next;
 	
 	// page : 현재 페이지 - 현재 목록의 페이지 번호
-	// range : 현재 페이지 범위 (각 페이지 범위 시작 번호) -- 페이지 밑 번호에서 첫번째..
+	// range : 현재 페이지 범위 (각 페이지 범위 시작 번호) -- 페이지 범위 블럭 번호 (범위 줄 번호)
 	// listCnt : 총 게시물 수 (전체 게시물 개수)
 
 	public void pageInfo(int page, int range, int listCnt) {

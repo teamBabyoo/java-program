@@ -120,6 +120,7 @@
 	</div>
 	<script type="text/javascript">
 	 let scope = ${store.scope}
+	 let djks = document.getElementsByName
 	</script>
 	<script src="<c:url value='/resources/js/storedetail.js' />">
 	</script>
