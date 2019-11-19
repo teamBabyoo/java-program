@@ -10,6 +10,9 @@
 <body>
 	<script>
 		location.href="${pageContext.request.contextPath}/front/main/main.do";
+		
+		/*진실*/
+// 		location.href="${pageContext.request.contextPath}/front/store/storedetail.do?no=1";
 	</script>
 </body>
 </html>
