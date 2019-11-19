@@ -6,6 +6,9 @@ import kr.co.nff.repository.vo.Holiday;
 import kr.co.nff.repository.vo.Menu;
 import kr.co.nff.repository.vo.Store;
 public interface StoreDAO {
+	// 메인 스토어 상세정보 리스트 조회
+	List<Store> mainStoreList();
+	
 	// 카테고리 리스트
 	List<Category> selectCategory();
 	// 스토어 리스트

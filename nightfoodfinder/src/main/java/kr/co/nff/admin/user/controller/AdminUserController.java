@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.nff.admin.user.service.UserService;
+import kr.co.nff.repository.vo.SearchRe;
 
 
 
@@ -19,8 +20,23 @@ public class AdminUserController {
 	
 	//회원 목록
 	@RequestMapping("/userlist.do")
-	public void userList(@RequestParam(value="pageNo", defaultValue="1") int pageNo, Model model) {
-		model.addAttribute("list", service.listUser());
+	public void userList(@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range,
+			@RequestParam(required = false, defaultValue = "nickName") String searchType,
+			@RequestParam(required = false) String keyword, 
+			Model model) {
+		
+		SearchRe search = new SearchRe();
+		search.setType(searchType);
+		search.setKeyword(keyword);
+		
+		// 전체 게시글 개수
+		int listCnt = service.GetListCnt(search);
+				
+		search.pageInfo(page, range, listCnt);
+	
+		model.addAttribute("pagination", search);	
+		model.addAttribute("list", service.listUser(search));
 	}
 	
 	//회원 삭제

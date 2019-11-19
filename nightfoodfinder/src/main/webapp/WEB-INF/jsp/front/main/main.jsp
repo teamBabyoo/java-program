@@ -19,8 +19,17 @@
     
     <!-- 컨텐트  -->
 	<div class="content clearboth">
-	<c:forEach var="s" items="${sList}" begin="1" end="5" varStatus="status">
-		<c:out value="">${status.begin}</c:out>
+	<c:forEach var="s" items="${sList}" varStatus="status">
+	<h3>${sList[4].storeName}</h3>	
+		<c:choose>
+		<c:when test="${sList[status.count].storeName == null}">
+			<div class="store store_${status.count}">
+		        <div class="desc">
+		        	비어있음
+		        </div>
+		    </div>
+		</c:when>
+		<c:otherwise>
 		<div class="store store_${status.count}">
 	        <div class="square_box">
 	            <div class="desc">
@@ -31,7 +40,7 @@
 	                <table>
 	                    <tr>
 	                        <th>주소</th>
-	                        <%-- <td>${s.store위치 }</td > --%>
+	                        <td>${s.city}${s.streetLoad}</td>
 	                    </tr>
 	                    <tr>
 	                        <th rowspan="3">영업시간</th>
@@ -51,9 +60,10 @@
 	            <p><a href="#">자세히 보기</a></p>
 	        </div>
 	    </div>
-	    
-	</c:forEach>
-	
+		</c:otherwise>
+		</c:choose>
+	</c:forEach> 
+<!-- 	
 	    <div class="store store_1st">
 	        <div class="square_box">
 	            <div class="desc">
@@ -113,6 +123,7 @@
 	        <div class="desc">
 	        </div>
 	    </div>
+-->
 	</div>
     <!-- // 컨텐트  -->
     

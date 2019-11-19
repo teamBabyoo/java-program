@@ -1,6 +1,8 @@
 package kr.co.nff.repository.vo;
 
 import java.util.Date;
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -35,5 +37,8 @@ public class Store {
 	private int rcount;
 	// 스토어 카테고리
 	private String category;
+	
+	// ↙ 콜렉션
+	private List<Holiday> holidayList;
 }
 	

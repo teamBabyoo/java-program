@@ -43,6 +43,7 @@
 		where store_no = #{storeNo}
 	</select>
 	
+	<!-- 스토어 리스트 -->
    <select id="storeList" resultType="Store" parameterType="Search">
    		select distinct s.*,
 			   c.category_name as category,
@@ -55,8 +56,43 @@
     	    on s.store_no = r.store_no
 		 inner join tb_category c
             on s.store_category = c.category_no
-           <!--  where str_to_date(s.open_time, '%h:%i %p') < now()
-              and str_to_date(s.close_time, '%h:%i %p') > now() -->
+    left outer join tb_store_menu m
+            on s.store_no = m.store_no
+         inner join tb_area a
+            on s.area_code = a.area_code
+         <where>
+         	<if test="includeClosed == 1">  
+         		<![CDATA[
+         		and str_to_date(s.open_time, '%h:%i %p') < now()
+            	and str_to_date(s.close_time, '%h:%i %p') > now()
+         		]]>
+         	</if>
+         	<if test="keyword != null"> <!-- 검색어가 있는 경우 -->
+	           and s.store_name like concat('%', #{keyword}, '%')
+         	    or m.menu like concat('%', #{keyword}, '%')
+         	    or a.city like concat('%', #{keyword}, '%')
+         	    or a.street_load like concat('%', #{keyword}, '%')
+         	</if>
+         	<if test="areaCodes != null">
+         		and s.area_code in
+         		<foreach collection="areaCodes" item="area" open="(" close=")" separator=",">
+         			#{area}
+         		</foreach>
+         	</if>
+         </where>     
+         <choose>
+         	<when test="filter == 'scope'">
+         		order by scope desc
+         	</when>
+         	<when test="filter == 'seeCnt'">
+         		order by s.see_cnt desc
+         	</when>
+         	<when test="filter == 'rcount'"> <!-- default는  -->
+         		order by rcount desc
+         	</when>
+         </choose>
+              
+         limit #{startList}, #{listSize} 
    </select>
 
 	

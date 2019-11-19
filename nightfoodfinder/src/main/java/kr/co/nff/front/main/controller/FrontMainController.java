@@ -22,9 +22,11 @@ public class FrontMainController {
 	@RequestMapping("/main.do")
 	public void main(HttpSession session, Model model) {
 		List<Category> cateList = service.selectCategory();
-		System.out.println(cateList);
+//		System.out.println(cateList);
 		session.setAttribute("cateList", cateList);
 		
-		model.addAttribute("sList", service.storeList());
+		model.addAttribute("sList", service.mainStoreList());
+		
+		System.out.println(service.mainStoreList());
 	}
 }

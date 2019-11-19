@@ -20,13 +20,14 @@ public class FrontServiceImpl implements FrontService {
 	// 검색 헤더 카테고리
 	@Override
 	public List<Category> selectCategory() {
-		System.out.println("serviceImpl : " + sdao.selectCategory());
+//		System.out.println("serviceImpl : " + sdao.selectCategory());
 		return sdao.selectCategory(); 
 	}
 	
 	// 메인페이지 상위 5개 스토어 조회
-	public List<Store> storeList() {
-		return sdao.storeList();
+	public List<Store> mainStoreList() {
+//		return sdao.storeList();
+		return sdao.mainStoreList();
 	}
 
 	@Override
