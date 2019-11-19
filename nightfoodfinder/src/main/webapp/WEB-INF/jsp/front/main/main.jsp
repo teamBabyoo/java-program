@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/include/taglib.jsp" %>
+<%
+	int main_no = 0;
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -16,6 +19,41 @@
     
     <!-- 컨텐트  -->
 	<div class="content clearboth">
+	<c:forEach var="s" items="${sList}" begin="1" end="5" varStatus="status">
+		<c:out value="">${status.begin}</c:out>
+		<div class="store store_${status.count}">
+	        <div class="square_box">
+	            <div class="desc">
+	                <dl>
+	                    <dt>${s.storeName}</dt>
+	                    <dd>${s.scope}</dd>
+	                </dl>
+	                <table>
+	                    <tr>
+	                        <th>주소</th>
+	                        <%-- <td>${s.store위치 }</td > --%>
+	                    </tr>
+	                    <tr>
+	                        <th rowspan="3">영업시간</th>
+	                        <td>월</td>
+	                        <td>10:30~00:00</td>
+	                    </tr>
+	                    <tr>
+	                        <td>화~토</td>
+	                        <td>00:00~24:00</td>
+	                    </tr>
+	                    <tr>
+	                        <td>일</td>
+	                        <td>00:00~22:00</td>
+	                    </tr>
+	                </table>
+	            </div>
+	            <p><a href="#">자세히 보기</a></p>
+	        </div>
+	    </div>
+	    
+	</c:forEach>
+	
 	    <div class="store store_1st">
 	        <div class="square_box">
 	            <div class="desc">
@@ -86,8 +124,6 @@
     <div class="bgbox"></div>
   </div>    
   <script>
-  
-
   </script>
 </body>
 </html>

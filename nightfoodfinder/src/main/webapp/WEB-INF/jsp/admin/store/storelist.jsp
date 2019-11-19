@@ -54,7 +54,7 @@
 
 .ahide {
 	display: none;
-	width: 0%;
+	
 }
 .tg {
 	border-collapse: collapse;
@@ -146,11 +146,11 @@
 			</c:if>
 			<c:forEach var="b" items="${slist}">
 				<tr>
-					<td class="myBtn">${b.storeName}</a></td>
-					<td id="categoryName">${b.categoryName}</a></td>
-					<td id="storeOwner">${b.storeOwner}</a></td>
-					<td id="businessNum">${b.businessNum}</a></td>
-					<td><c:choose>
+					<td class="myBtn" id="storeName">${b.storeName}</a></td>
+					<td class="myBtn" id="categoryName">${b.categoryName}</a></td>
+					<td class="myBtn" id="storeOwner">${b.storeOwner}</a></td>
+					<td class="myBtn" id="businessNum">${b.businessNum}</a></td>
+					<td class="myBtn"><c:choose>
 							<c:when test="${b.status == 0}">
 								<span class="statusbutton"><a
 									href="storestatus.do?no=${b.storeNo}">승인 대기</a></span>
@@ -222,7 +222,6 @@
 			</div>
 
 		</div>
-
 		<script>
 			// 모달팝업
 			// Get the modal
@@ -234,6 +233,7 @@
 			// When the user clicks on the button, open the modal 
 			for (let i = 0; i < btn.length; i++) {
 				btn[i].onclick = function(e) {
+					let storeName = $(e.target).siblings("#storeName").text();
 					let storeEmail = $(e.target).siblings("#storeEmail").text();
 					let storeTell = $(e.target).siblings("#storeTell").text();
 					let streetLoad = $(e.target).siblings("#streetLoad").text();
@@ -244,8 +244,7 @@
 					let storeOwnerPh = $(e.target).siblings("#storeOwnerPh").text();
 
 					modal.style.display = "block";
-					$(".tg td:eq(0)").text(
-							$(e.target).text())
+					$(".tg td:eq(0)").text(storeName)
 					$(".tg td:eq(1)").text(storeEmail)
 					$(".tg td:eq(2)").text(storeTell)
 					$(".tg td:eq(3)").text(streetLoad)
