@@ -53,9 +53,10 @@
 }
 
 .ahide {
-	display: none;
-	width: 0%;
+	display:none;
 }
+
+
 .tg {
 	border-collapse: collapse;
 	border-spacing: 0;
@@ -114,15 +115,15 @@
 
 	<nav role="navigation">
 		<ul class="main">
-			<li class="member"><a href="#">회원관리</a></li>
-			<li class="store"><a href="#">가게관리</a></li>
+			<li class="member"><a href="${pageContext.request.contextPath}/admin/user/userlist.do">회원관리</a></li>
+			<li class="store"><a href="${pageContext.request.contextPath}/admin/store/storelist.do">가게관리</a></li>
 			<li class="review"><a href="#">리뷰관리</a>
 				<ul>
-					<li><a class="review_all" href="#">전체리뷰</a></li>
+					<li><a class="review_all" href="${pageContext.request.contextPath}/admin/review/reviewlist.do">전체리뷰</a></li>
 					<li><a class="review_report" href="#">신고리뷰</a></li>
 				</ul></li>
-			<!-- <li class="comments"><a href="#">Comments</a></li>
-          <li class="users"><a href="#">Manage Users</a></li> -->
+			
+			
 		</ul>
 	</nav>
 
@@ -132,6 +133,7 @@
 	<section class="panel ">
 		<h2>Table</h2>
 		<table>
+		<div>전체 : ${pagination.listCnt}개</div>
 			<tr>
 				<th>가게이름</th>
 				<th>가게분류</th>
@@ -141,12 +143,12 @@
 			</tr>
 			<c:if test="${empty slist}">
 				<tr>
-					<td colspan="5">게시물이 없습니다.</td>
+					<td colspan="5">가입 가게가 없습니다.</td>
 				</tr>
 			</c:if>
 			<c:forEach var="b" items="${slist}">
 				<tr>
-					<td class="myBtn">${b.storeName}</a></td>
+					<td class="myBtn" id="storeName">${b.storeName}</a></td>
 					<td id="categoryName">${b.categoryName}</a></td>
 					<td id="storeOwner">${b.storeOwner}</a></td>
 					<td id="businessNum">${b.businessNum}</a></td>
@@ -162,16 +164,11 @@
 								<span class="statusbutton"><a href="">활동 정지</a></span>
 							</c:otherwise>
 						</c:choose></td>
-					<td class="ahide" id="storeEmail">${b.storeEmail}
-					<td>
-					<td class="ahide" id="storeTell">${b.storeTell}
-					<td>
-					<td class="ahide" id="streetLoad">${b.streetLoad}
-					<td>
-					<td class="ahide" id="time">${b.openTime}~${b.closeTime}
-					<td>
-					<td class="ahide" id="storeOwnerPh">${b.storeOwnerPh}
-					<td>
+					<td class="ahide" id="storeEmail">${b.storeEmail}</td>
+					<td class="ahide" id="storeTell">${b.storeTell}</td>
+					<td class="ahide" id="streetLoad">${b.streetLoad}</td>
+					<td class="ahide" id="time">${b.openTime}~${b.closeTime}</td>
+					<td class="ahide" id="storeOwnerPh">${b.storeOwnerPh}</td>
 				</tr>
 			</c:forEach>
 		</table>
@@ -222,7 +219,6 @@
 			</div>
 
 		</div>
-
 		<script>
 			// 모달팝업
 			// Get the modal
@@ -234,6 +230,7 @@
 			// When the user clicks on the button, open the modal 
 			for (let i = 0; i < btn.length; i++) {
 				btn[i].onclick = function(e) {
+					let storeName = $(e.target).text();
 					let storeEmail = $(e.target).siblings("#storeEmail").text();
 					let storeTell = $(e.target).siblings("#storeTell").text();
 					let streetLoad = $(e.target).siblings("#streetLoad").text();
@@ -244,8 +241,7 @@
 					let storeOwnerPh = $(e.target).siblings("#storeOwnerPh").text();
 
 					modal.style.display = "block";
-					$(".tg td:eq(0)").text(
-							$(e.target).text())
+					$(".tg td:eq(0)").text(storeName)
 					$(".tg td:eq(1)").text(storeEmail)
 					$(".tg td:eq(2)").text(storeTell)
 					$(".tg td:eq(3)").text(streetLoad)

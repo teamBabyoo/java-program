@@ -15,6 +15,8 @@
 <body>
 	<div class="wrapper sJoin_wrap">
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
+		<div class="content">
+		
 		<div id="storeJoinForm">
 			<form name="form" id="form" method="post" onsubmit="">
 			<table>
@@ -28,9 +30,11 @@
 				</tr>
 				<tr>
 					<th>이메일</th>
-					<td><input type="text" id="storeEmail" name="storeEmail" placeholder="이메일을 입력해주세요"/></td>
-					<td><div id="emailChk"></div></td>
+					<td><input type="text" id="storeEmail" name="storeEmail" placeholder="이메일을 입력해주세요"/>
+						<div id="emailChk"></div>
+					</td>
 				</tr>
+				
 				<tr>
 					<th>비밀번호</th>
 					<td><input type="text" name="storeEmail" /></td>
@@ -75,13 +79,13 @@
 				<tr>
 					<th>휴무일</th>
 					<td>
-						<input type="checkbox" name="day[]" value="1"/>월
-						<input type="checkbox" name="day[]" value="2"/>화
-						<input type="checkbox" name="day[]" value="3"/>수
-						<input type="checkbox" name="day[]" value="4"/>목
-						<input type="checkbox" name="day[]" value="5"/>금
-						<input type="checkbox" name="day[]" value="6"/>토
-						<input type="checkbox" name="day[]" value="7"/>일
+						<input type="checkbox" name="day1" value="1"/>월
+						<input type="checkbox" name="day2" value="2"/>화
+						<input type="checkbox" name="day3" value="3"/>수
+						<input type="checkbox" name="day4" value="4"/>목
+						<input type="checkbox" name="day5" value="5"/>금
+						<input type="checkbox" name="day6" value="6"/>토
+						<input type="checkbox" name="day7" value="7"/>일
 						
 					</td>
 				</tr>
@@ -110,6 +114,7 @@
 			<button id="reg_submit">가입하기</button>
 			</form>	
 		</div>
+		</div>
 	</div>
 <script>
 
@@ -129,10 +134,8 @@ function jusoCallBack(roadFullAddr,zipNo,addrDetail,sggNm){
 //이메일 중복체크
 $("#storeEmail").blur(function() {
 		var storeEmail = $('#storeEmail').val();
-		console.log('${pageContext.request.contextPath}/front/login/storeEmailChk?storeEmail='+ storeEmail);
 		$.ajax({
-			url : '${pageContext.request.contextPath}/front/login/storeEmailChk',
-			data : storeEmail,
+			url : '${pageContext.request.contextPath}/front/login/storeEmailChk.do?storeEmail='+ storeEmail,
 			success : function(data) {
 				console.log("1 = 중복o / 0 = 중복x : "+ data);							
 				

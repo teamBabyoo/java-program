@@ -81,18 +81,17 @@
 					<li><a class="review_report" href="#">신고리뷰</a></li>
 				</ul></li>
 
-			<!-- search -->
+			<!-------- 서치 ---------->
 			<li>
 				<div class="form-group row justify-content-center">
-
 					<div class="w100" style="padding-right: 10px">
-
 						<select class="form-control form-control-sm" name="searchType"
 							id="searchType">
 							<c:choose>
 								<c:when test="${pagination.type eq 'storeName'}">
 									<option value="nickName">닉네임</option>
-									<option value="storeName" selected disabled hidden>가게 이름</option>
+									<option value="storeName" selected disabled hidden>가게
+										이름</option>
 								</c:when>
 								<c:otherwise>
 									<option value="nickName" selected disabled hidden>닉네임</option>
@@ -108,12 +107,13 @@
 					<div>
 						<button class="btn btn-sm btn-primary" name="btnSearch"
 							id="btnSearch">검색</button>
+
 						<button class="back" name="backList" id="backList"
 							onclick="location.href='/nightfoodfinder/admin/review/reviewlist.do'">검색취소</button>
 					</div>
 				</div>
 			</li>
-			<!-- search -->
+			<!---------- 서치 끝 --------->
 
 
 
@@ -128,7 +128,7 @@
 	<section class="panel ">
 		<h2>Table</h2>
 		<table>
-			<div>전체 : ${list.size()}개</div>
+			<div>전체 : ${pagination.listCnt}개</div>
 			<tr>
 				<th>닉네임</th>
 				<th>가게 이름</th>
@@ -148,50 +148,48 @@
 					<td>${list.storeName }</td>
 					<td class="myBtn"
 						style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${list.reviewContent }</td>
-					<td>${list.regDate }
+					<td>${list.regDate }</td>
 					<td>${list.likeCount }</td>
-					<td class="reComment">${list.reComment}
-					<td>
+					<td class="reComment">${list.reComment}</td>
 				</tr>
 			</c:forEach>
 		</table>
 
 
-		<!-- 페이징 -->
+		<!------------ 페이징 ---------------->
 
 		<div id="paginationBox">
 			<ul class="pagination">
+			<!-- 이전 버튼 -->
 				<c:if test="${pagination.prev}">
 					<li class="page-item"><a class="page-link" href="#"
-						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">
-							Previous</a></li>
+						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a>
+					</li>
 				</c:if>
-
+				
+			<!-- 페이지 버튼 -->
 				<c:forEach begin="${pagination.startPage}"
 					end="${pagination.endPage}" var="idx">
 					<li
 						class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
 						<a class="page-link" href="#"
-						onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')">
-							${idx} </a>
+						onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')">${idx}</a>
 					</li>
-
 				</c:forEach>
 
+			<!-- 다음 버튼 -->
 				<c:if test="${pagination.next}">
-
 					<li class="page-item"><a class="page-link" href="#"
-						onClick="fn_next('${pagination.range}', 
-					'${pagination.range}', '${pagination.rangeSize}')">Next</a>
+						onClick="fn_next('${pagination.range}', '${pagination.range}', '${pagination.rangeSize}')">Next</a>
 					</li>
 				</c:if>
 			</ul>
 		</div>
 
-		<!-- 페이징 -->
+		<!------------ 페이징 끝----------------->
 
 
-		<!-- The Modal -->
+		<!----------- 모달팝업 ----------------->
 		<div id="myModal" class="modal">
 			<!-- Modal content -->
 			<div class="modal-content">
@@ -201,17 +199,26 @@
 			</div>
 
 		</div>
+		<!----------- 모달팝업 끝 ---------------->
+
+
 
 
 		<script>
-			// 모달팝업
-			// Get the modal
+		
+			// -------------- 모달팝업 ---------------------
+			// 모달 가져온다.
 			var modal = document.getElementById('myModal');
-			// Get the button that opens the modal
+
+			// 모달 여는 버튼을 가져온다.
 			var btn = document.getElementsByClassName("myBtn");
-			// Get the <span> element that closes the modal
+
+			// 모달을 닫는 <span>을 가져온다.
 			var span = document.getElementsByClassName("close")[0];
-			// When the user clicks on the button, open the modal 
+
+			// 버튼을 클릭했을 때, 모달을 연다.
+			// 그런데, 모달팝업이 첫 리스트 줄에만 적용되고 반복되어서 나오는 리스트들에는 적용이 안되었음..
+			// 이렇게 해야 모든 리스트에 적용된다.	(reComment의 css 수정함)
 			for (let i = 0; i < btn.length; i++) {
 				btn[i].onclick = function(e) {
 					let reComment = $(e.target).siblings(".reComment").text();
@@ -228,32 +235,33 @@
 				}
 			}
 
-			// When the user clicks on <span> (x), close the modal
+			// <span>의 x를 클릭했을 때, 모달을 닫는다.
 			span.onclick = function() {
 				modal.style.display = "none";
 			}
-			// When the user clicks anywhere outside of the modal, close it
+			// 모달 밖의 아무 곳을 클릭했을 때, 모달을 닫는다.
 			window.onclick = function(event) {
 				if (event.target == modal) {
 					modal.style.display = "none";
 				}
 			}
 
-			// 서치
+			//-------------- 서치 ----------------
 			$(document)
 					.on(
-							'click',
-							'#btnSearch',
-							function(e) {
-								e.preventDefault();
-								var url = "${pageContext.request.contextPath}/admin/review/reviewlist.do";
-								url = url + "?searchType="
-										+ $('#searchType option:selected').val();
-								url = url + "&keyword=" + $('#keyword').val();
-								location.href = url;
-							});
+						'click',
+						'#btnSearch',
+						function(e) {
+							e.preventDefault();
+							var url = "${pageContext.request.contextPath}/admin/review/reviewlist.do";
+							url = url + "?searchType=" + $('#searchType option:selected').val();
+							url = url + "&keyword=" + $('#keyword').val();
+							location.href = url;
+						});
 
-			// 페이징
+			
+			
+			//------------ 페이징 -------------
 
 			//이전 버튼 이벤트
 			function fn_prev(page, range, rangeSize) {

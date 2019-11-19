@@ -12,7 +12,7 @@ import kr.co.nff.repository.vo.SearchRe;
 
 
 
-@Service
+@Service("kr.co.nff.admin.review.service.AdminReviewServiceImpl")
 public class AdminReviewServiceImpl implements AdminReviewService {
 
 	@Autowired
