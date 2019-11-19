@@ -16,34 +16,15 @@
             <li>가격대</li>
           </ul>
           <div class="select clearboth tab_1">
-         	<c:forEach items="${cateList}" var="t">
-         		<c:out value="cc" /> ${t.no}
+          	<!-- 카테고리 별 검색-->
+         	<c:forEach items="${cateList}" var="t" >
+	            <div>
+	              <label for="foodtype_${t.categoryNo}">${t.categoryName}</label>
+	              <input id="foodtype_${t.categoryNo}" type="checkbox" class="hidden" />
+	            </div>
          	</c:forEach>
-            <div>
-              <label for="foodtype_1">한식</label>
-              <input id="foodtype_1" type="checkbox" class="hidden" />
-            </div>
-
-            <div>
-              <label for="foodtype_2">분식</label>
-              <input id="foodtype_2" type="checkbox" class="hidden" />
-            </div>
-
-            <div>
-              <label for="foodtype_3">양식</label>
-              <input id="foodtype_3" type="checkbox" class="hidden" />
-            </div>
-
-            <div>
-              <label for="foodtype_4">알식</label>
-              <input id="foodtype_4" type="checkbox" class="hidden" />
-            </div>
-
-            <div>
-              <label for="checkedtype_1">중식</label>
-              <input id="checkedtype_1" type="checkbox" class="hidden" />
-            </div>
           </div>
+          
           <!-- tab_1 -->
           <div class="select clearboth tab_2 hidden">
             <div>
@@ -74,6 +55,7 @@
           </div>
           <!-- tab_2 -->
           <div class="select clearboth tab_3 hidden">
+          	<!-- 가격별 검색 -->
             <div>
               <label for="foodtype_1">1만원 미만</label>
               <input id="foodtype_1" type="checkbox" class="hidden" />
@@ -90,13 +72,8 @@
             </div>
 
             <div>
-              <label for="foodtype_4">3만원대</label>
+              <label for="foodtype_4">3만원 이상</label>
               <input id="foodtype_4" type="checkbox" class="hidden" />
-            </div>
-
-            <div>
-              <label for="checkedtype_1">4만원 이상</label>
-              <input id="checkedtype_1" type="checkbox" class="hidden" />
             </div>
 
           </div>
