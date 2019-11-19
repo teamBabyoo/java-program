@@ -1,6 +1,8 @@
 package kr.co.nff.repository.vo;
 
 
+import java.util.List;
+
 import lombok.Data;
 
 	@Data
@@ -11,6 +13,8 @@ import lombok.Data;
 		private int likeCount;
 		private String regDate;
 		private String reComment;
+		private List<Integer> reviewNo;
+		private int status;
 	}
 
 

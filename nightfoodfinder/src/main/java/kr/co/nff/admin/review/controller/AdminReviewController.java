@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.nff.admin.review.service.AdminReviewService;
-
-import kr.co.nff.repository.vo.SearchRe;
+import kr.co.nff.repository.vo.Review;
+import kr.co.nff.repository.vo.Search;
 
 
 @Controller("kr.co.nff.admin.review.controller.AdminReviewController")
@@ -26,20 +26,27 @@ public class AdminReviewController {
 			@RequestParam(required = false, defaultValue = "nickName") String searchType,
 			@RequestParam(required = false) String keyword, 
 			Model model) 
-	{
+		{
 
 		
-		SearchRe search = new SearchRe();
+		Search search = new Search();
 		search.setType(searchType);
 		search.setKeyword(keyword);
 		
 		// 전체 게시글 개수
-		int listCnt = service.GetListCnt(search);
+		int listCnt = service.getListCnt(search);
 				
 		search.pageInfo(page, range, listCnt);
 	
 		model.addAttribute("pagination", search);
 		model.addAttribute("list", service.listReview(search));
+		
+	}
+	
+	@RequestMapping("/block.do")
+	public String block(Review review) {
+		service.blockReview(review);
+		return "redirect:reviewList.do";
 		
 	}
 

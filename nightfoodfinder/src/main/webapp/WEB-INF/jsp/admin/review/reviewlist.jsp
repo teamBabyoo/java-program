@@ -81,7 +81,7 @@
 					<li><a class="review_report" href="#">신고리뷰</a></li>
 				</ul></li>
 
-			<!-------- 서치 ---------->
+			<!---------- 서치 ---------->
 			<li>
 				<div class="form-group row justify-content-center">
 					<div class="w100" style="padding-right: 10px">
@@ -90,11 +90,10 @@
 							<c:choose>
 								<c:when test="${pagination.type eq 'storeName'}">
 									<option value="nickName">닉네임</option>
-									<option value="storeName" selected disabled hidden>가게
-										이름</option>
+									<option value="storeName" selected>가게 이름</option>
 								</c:when>
 								<c:otherwise>
-									<option value="nickName" selected disabled hidden>닉네임</option>
+									<option value="nickName" selected>닉네임</option>
 									<option value="storeName">가게 이름</option>
 								</c:otherwise>
 							</c:choose>
@@ -124,26 +123,29 @@
 
 	<main role="main">
 
-
 	<section class="panel ">
 		<h2>Table</h2>
+		<form id="chkblock">
 		<table>
 			<div>전체 : ${pagination.listCnt}개</div>
 			<tr>
+				<th>선택</th>
 				<th>닉네임</th>
 				<th>가게 이름</th>
 				<th>리뷰</th>
 				<th>댓글 단 날짜</th>
 				<th>좋아요 횟수</th>
-
+				<th>차단 여부</th>
 			</tr>
 			<c:if test="${empty list}">
 				<tr>
 					<td colspan="5">리뷰가 없습니다.</td>
 				</tr>
 			</c:if>
+			
 			<c:forEach var="list" items="${list}">
 				<tr>
+					<td><input type="checkbox" name="reviewNo" value="${list.reviewNo}"/></td>
 					<td>${list.nickName}</td>
 					<td>${list.storeName }</td>
 					<td class="myBtn"
@@ -151,10 +153,24 @@
 					<td>${list.regDate }</td>
 					<td>${list.likeCount }</td>
 					<td class="reComment">${list.reComment}</td>
+					<td class="block">
+						<c:choose>
+						<c:when test="${list.status eq 0 }">
+						정상
+						</c:when>
+						<c:otherwise>
+						차단
+						</c:otherwise>
+					</c:choose>
+					</td>
 				</tr>
 			</c:forEach>
+		<div>
+		<button type="button" onclick="block()">차단하기</button>
+ 		<button type="button" onclick="bk()">차단 풀기</button>  
+		</div>
 		</table>
-
+	</form>
 
 		<!------------ 페이징 ---------------->
 
@@ -170,10 +186,9 @@
 			<!-- 페이지 버튼 -->
 				<c:forEach begin="${pagination.startPage}"
 					end="${pagination.endPage}" var="idx">
-					<li
-						class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
+					<li class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
 						<a class="page-link" href="#"
-						onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')">${idx}</a>
+						onClick="fn_pagination('${idx}', '${pagination.range}')">${idx}</a>
 					</li>
 				</c:forEach>
 
@@ -202,9 +217,11 @@
 		<!----------- 모달팝업 끝 ---------------->
 
 
+	</section>
 
-
-		<script>
+	</main>
+	
+			<script>
 		
 			// -------------- 모달팝업 ---------------------
 			// 모달 가져온다.
@@ -270,16 +287,17 @@
 				var url = "${pageContext.request.contextPath}/admin/review/reviewlist.do";
 				url = url + "?page=" + page;
 				url = url + "&range=" + range;
+				url = url + "&searchType=" + $('#searchType option:selected').val();
+				url = url + "&keyword=" + $('#keyword').val();
 				location.href = url;
 			}
 
 			//페이지 번호 클릭
-			function fn_pagination(page, range, rangeSize) {
+			function fn_pagination(page, range) {
 				var url = "${pageContext.request.contextPath}/admin/review/reviewlist.do";
 				url = url + "?page=" + page;
 				url = url + "&range=" + range;
-				url = url + "&searchType="
-						+ $('#searchType option:selected').val();
+				url = url + "&searchType=" + $('#searchType option:selected').val();
 				url = url + "&keyword=" + $('#keyword').val();
 				location.href = url;
 			}
@@ -291,14 +309,53 @@
 				var url = "${pageContext.request.contextPath}/admin/review/reviewlist.do";
 				url = url + "?page=" + page;
 				url = url + "&range=" + range;
+				url = url + "&searchType=" + $('#searchType option:selected').val();
+				url = url + "&keyword=" + $('#keyword').val();
 				location.href = url;
 			}
+			
+			// ------------------- 체크박스 차단(업데이트) -----------------
+			
+			function block() {
+				let cnt = 0;
+				let chk = document.querySelectorAll("input[name='reviewNo']");
+				for (let i = 0; i < chk.length; i++) {
+					if (chk[i].checked) cnt++
+				}
+				if (cnt == 0) {
+					alert("차단할 리뷰를 선택하세요.");
+					return;
+				}
+				// ?????????????????????????
+				let c = document.getElementById("chkblock");			
+				c.action = "${pageContext.request.contextPath}/admin/review/block.do";
+				c.submit();
+			}
+			
+			
+			function bk() {
+				let cnt = 0;
+				let chk = document.querySelectorAll("input[name='reviewNo']");
+				for (let i = 0; i < chk.length; i++) {
+					if (chk[i].checked) cnt++
+				}
+				if (cnt == 0) {
+					alert("차단할 리뷰를 선택하세요.");
+					return;
+				}
+				
+				//????????????????????????????
+				let c = document.getElementById("chkblock");
+				var url = "${pageContext.request.contextPath}/admin/review/block.do";
+				url = url + "?page=" + page;
+				url = url + "&range=" + range;
+				url = url + "&status=" + 0;
+				url = url + "&searchType=" + $('#searchType option:selected').val();
+				c.action = url + "&keyword=" + $('#keyword').val();
+				c.submit();
+			}
+			
 		</script>
-
-
-	</section>
-
-	</main>
 	<footer role="contentinfo">Easy Admin Style by Melissa Cabral</footer>
 </body>
 </html>
