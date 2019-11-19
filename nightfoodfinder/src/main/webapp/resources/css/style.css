@@ -247,8 +247,15 @@ i.fa.fa-map-marker {
 }
 
 /*가게정보수정*/
-.wrapper sInfoUpdate_wrap td {
- padding: 8px;
+
+.sInfoUpdate_wrap #storeupdateForm {
+    width: 600px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.sInfoUpdate_wrap td {
+ padding: 5px;
 }
 
 /** 진실 끝 **/

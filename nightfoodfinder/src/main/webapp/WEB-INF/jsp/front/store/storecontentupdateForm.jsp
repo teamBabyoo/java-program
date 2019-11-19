@@ -32,18 +32,21 @@
 						</tr>
 						<tr>
 							<th>이메일</th>
-							<td><input type="text" name="storeEmail"
-								value="${store.storeEmail}" /></td>
+							<td>${store.storeEmail}</td>
 							<td><div id="emailChk"></div></td>
 						</tr>
+						<%-- 
 						<tr>
 							<th>비밀번호</th>
-							<td><input type="text" name="storeEmail" /></td>
+							<td><input type="text" id="storePw" />123</td>
 						</tr>
 						<tr>
 							<th>비밀번호 확인</th>
-							<td><input type="text" name="storeEmail" /></td>
-						</tr>
+							<c:if test="">
+							<td><input type="text" name="storeEmail" />123</td>
+							</c:if>
+						</tr> 
+						--%>
 						<tr>
 							<th>가게 전화번호</th>
 							<td><input type="text" name="storeTell"
@@ -79,23 +82,25 @@
 									</c:forEach>
 							</select>분 - <select>
 									<c:forEach begin="0" end="24" var="i">
-										<option name="closeH" value="${i}">${i}</option>
+										<option name="closeH" id="closeH${i}" value="${i}">${i}</option>
 									</c:forEach>
 							</select>시 <select>
 									<c:forEach begin="0" end="59" var="i">
-										<option name="closeM" value="${i}">${i}</option>
+										<option name="closeM" id="closeM${i}" value="${i}">${i}</option>
 									</c:forEach>
 							</select>분</td>
 						</tr>
 						<tr>
 							<th>휴무일</th>
-							<td><input type="checkbox" name="day[]" value="1" />월 <input
-								type="checkbox" name="day[]" value="2" />화 <input
-								type="checkbox" name="day[]" value="3" />수 <input
-								type="checkbox" name="day[]" value="4" />목 <input
-								type="checkbox" name="day[]" value="5" />금 <input
-								type="checkbox" name="day[]" value="6" />토 <input
-								type="checkbox" name="day[]" value="7" />일</td>
+							<td>
+							<input type="checkbox" name="day[]" value="1" />월 
+							<input type="checkbox" name="day[]" value="2" />화 
+							<input type="checkbox" name="day[]" value="3" />수
+							<input type="checkbox" name="day[]" value="4" />목 
+							<input type="checkbox" name="day[]" value="5" />금
+							<input type="checkbox" name="day[]" value="6" />토 
+							<input type="checkbox" name="day[]" value="7" />일
+							</td>
 						</tr>
 						<tr>
 							<th>가게 분류</th>
@@ -110,24 +115,35 @@
 						</tr>
 						<tr>
 							<th>대표자 이름</th>
-							<td><input type="text" name="storeOwner" /></td>
+							<td><input type="text" name="storeOwner" value="${store.storeOwner}"/></td>
 						</tr>
 						<tr>
 							<th>대표자 휴대폰 번호</th>
-							<td><input type="text" name="storeOwnerPh" /></td>
+							<td><input type="text" name="storeOwnerPh" value="${store.storeOwnerPh}" /></td>
 						</tr>
 					</table>
-					<button id="reg_submit">가입하기</button>
+					<div id="">
+						<button id="updateBtn">수정하기</button>
+					</div>
 				</form>
 			</div>
 		</div>
 	</div>
 	<script>
+	
 	$(document).ready(function() {
+		
+		let holiList = JSON.parse('${holidaylist}');
+// 		console.log(holiList);
+		//시작시간
 		let open = '${store.openTime}';
 		let time = open.split(":");
-		let openhour = time[0].substr(0, 1);
-		
+		let openhour = '';
+		if(time[0].substr(0, 1) < 1){
+			openhour = time[0].substr(1, 1);
+		} else {
+			openhour = time[0];
+		}
 		let openminuite = 0;
 		if(time[1].substr(0, 1) < 1) {
 			openminuite = time[1].substr(0, 1);
@@ -135,10 +151,18 @@
 			openminuite = time[1].substr(0, 2);
 		}
 		
+		
 		//끝나는 시간
 		let close = '${store.closeTime}';
 		let closetime = close.split(":");
-		let closehour = closetime[0].substr(1, 1);
+		
+		let closehour = '';
+		if(closetime[0].substr(0, 1) < 1){
+			closehour = closetime[0].substr(1, 1);
+		} else {
+			closehour = closetime[0];
+		}
+		
 		let closeminuite = 0;
 		if(closetime[1].substr(0, 1) < 1) {
 			closeminuite = closetime[1].substr(0, 1);
@@ -147,50 +171,33 @@
 		}
 
 		
-	
-		
-		
-		
 		//select box 디폴트값(원래의 시간)
 		$("#openH" + openhour).val(openhour).attr("selected", "selected");
 		$("#openM" + openminuite).val(openminuite).attr("selected", "selected");
 		$("#closeH" + closehour).val(closehour).attr("selected", "selected");
 		$("#closeM" + closeminuite).val(closeminuite).attr("selected", "selected");
 		
-		 
+		/*
+		console.log($('input:checkbox[name="day[]"]').val());
+		$("input:checkbox[name='day[]']").click((e) => {
+			alert($(e.target).val())
+		})
 		
+		for (let i = 0; i < holiList.length; i++) {
+			if($('input:checkbox[name="day[]"]').val() == holiList[i].weekNo){
+				console.log($('input:checkbox[name="day[]"]').val())
+				console.log(holiList[i].weekNo)
+				$("input[name='day[]']:checkbox").prop("checked", true);
 
-	});
-		function goPopup() {
-			var pop = window.open("/nightfoodfinder/api/jusoPopup.jsp", "pop",
-					"width=570,height=420, scrollbars=yes, resizable=yes");
-		}
-
-		function jusoCallBack(roadFullAddr, zipNo, addrDetail, sggNm) {
-			// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-			document.form.roadFullAddr.value = roadFullAddr;
-			document.form.addrDetail.value = addrDetail;
-			document.form.zipNo.value = zipNo;
-			document.form.sggNm.value = sggNm;
-
-		}
-		
-		/* 
-			if ($("#openH").val() < 10) {
-				$("#openH").val() = '0' + $("#openH").val();
 			}
+			*/
 
-			let open = '${store.openTime}'; 
-			let time = open.split(":");
-			let openhour = time[0].substr(1, 1);
-			$("#openH").val() = openhour;
-			console.log(openhour); */
+		 
+	 });
+	
+
 
 		
-			//     $("select option[value=`${store.openTime}`]").attr("selected", true);
-			
-
-			
 	</script>
 </body>
 </html>

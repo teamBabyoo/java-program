@@ -14,6 +14,8 @@
 		s.store_tell,
 		s.business_num,
 		s.open_time,
+		s.store_owner,
+		s.store_owner_ph,
 		s.close_time,
 		s.store_email,
 		a.city,
@@ -65,11 +67,11 @@
 	</select>
 
 	<select id="storeHoliday" resultType="Holiday" parameterType="int">
-		select w.week_name
+		select w.week_name, h.week_no
 		from tb_holiday as h
 		inner join tb_week as w
 		on h.week_no = w.week_no
-		where store_no = #{storeNo}
+		where h.store_no = #{storeNo}
 	</select>
 	
 	<update id="">
