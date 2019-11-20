@@ -4,6 +4,7 @@ import java.util.List;
 import kr.co.nff.repository.vo.Category;
 import kr.co.nff.repository.vo.Holiday;
 import kr.co.nff.repository.vo.Menu;
+import kr.co.nff.repository.vo.SearchRe;
 import kr.co.nff.repository.vo.Store;
 public interface StoreDAO {
 	// 메인 스토어 상세정보 리스트 조회
@@ -22,8 +23,9 @@ public interface StoreDAO {
     Store selectOneStore();
     List<Menu> storeMenuList();
     List<Holiday> storeHoliday();
-    List<Store> adminSelectStore();
+    List<Store> adminSelectStore(SearchRe search);
 	Store adminSelectOneStore(int no);
 	void adminDeleteStore(int no);
 	void adminStatusStore(int no);
+	int adminStorePagingListCnt(SearchRe search);
 }

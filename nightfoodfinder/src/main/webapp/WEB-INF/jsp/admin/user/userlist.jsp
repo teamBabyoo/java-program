@@ -95,8 +95,8 @@
 			</c:if>
 			<c:forEach var="b" items="${list}">
 				<tr>
-					<td><a href="userdetail.do?no=${b.userNo}">${b.userEmail}</a></td>
-					<td><a href="userdetail.do?no=${b.userNo}">${b.nickName}</a></td>
+					<td><a>${b.userEmail}</a></td>
+					<td><a>${b.nickName}</a></td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${b.joinDate}"  /></td>
 					<td>${b.reviewCnt}개</td>
 				</tr>

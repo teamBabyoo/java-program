@@ -180,7 +180,7 @@ select *
     -->
 	
 	<!-- admin storelist -->
-	<select id="adminSelectStore" resultType="Store">
+	<select id="adminSelectStore" parameterType="SearchRe" resultType="Store">
 		 select s.store_no, 
       		 s.store_name,     		 
       		 s.store_owner,
@@ -189,8 +189,8 @@ select *
       		 s.store_email,
       		 s.store_tell,
       		 (select a.street_load 
-      		  from tb_area as a
-      		  where s.area_code = a.area_code) as street_load,
+      		  from tb_address as a
+      		  where s.store_no = a.store_no) as street_load,
       		 s.open_time,
       		 s.close_time,
       		 s.store_owner_ph,
@@ -198,31 +198,27 @@ select *
       		 from tb_category as c
       		 where s.store_category = c.category_no) as category_name
       		from tb_store as s
+      			<!-- 검색 -->
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="type=='nopermit' ">
+				AND s.status = 0
+			</if>
+			<if test="type=='permit' ">
+				AND s.status = 1
+			</if>
+			<if test="type=='withdraw' ">
+				AND s.status = 2
+			</if>
+		</trim>
+		 order by s.store_no desc
+		 
+		  <!-- 페이징  -->
+		LIMIT #{startList}, #{listSize}
+		
 	</select>
 	
-	<!-- admin storedetail 
-	 <select id="adminSelectOneStore" resultType="Store">
-      select s.store_no, 
-      		 s.store_name,
-      		 s.store_tell,
-      		 s.open_time,
-      		 s.close_time,
-      		 a.city, a.street_load,
-      		 m.menu, m.price,
-      		 w.week_name
-        from tb_store as s
-        inner join tb_store_menu as m
-        on s.store_no = m.store_no
-        inner join tb_area as a
-        on s.area_code = a.area_code
-                inner join tb_category as c
-        on s.store_category = c.category_no
-        inner join tb_store_content as sc
-        on s.store_no = sc.store_no
-        where s.store_no = 1
-        
-   </select> -->
 	
+
 	<!-- admin storedelete -->
 	<update id="adminDeleteStore" parameterType="int">
 		update tb_store
@@ -236,5 +232,28 @@ select *
 		  set status = 1
 		 where store_no = #{no}
 	</update>
+
+		<select id="adminStorePagingListCnt" parameterType="SearchRe" resultType="int">
+		select count(*) as listCnt
+			from tb_store s
+		<!-- 검색 -->
+	
+		<!-- 검색 -->
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="type=='nopermit' ">
+				AND s.status = 0
+			</if>
+			<if test="type=='permit' ">
+				AND s.status = 1
+			</if>
+			<if test="type=='withdraw' ">
+				AND s.status = 2
+			</if>
+		</trim>
+		
+	
+		<!-- 페이징  -->
+		LIMIT #{startList}, #{listSize}
+	</select>
 
 </mapper>
