@@ -6,7 +6,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.google.gson.JsonArray;
+
 import kr.co.nff.front.store.service.StoreService;
+import net.sf.json.JSONArray;
+import netscape.javascript.JSObject;
 
 
 @Controller("kr.co.nff.front.store.controller.FrontStoreController")
@@ -38,6 +42,8 @@ public class FrontStoreController {
 	@RequestMapping("/storecontentupdateForm.do")
 	public void storeContentUpdate(int no, Model model) {
 		model.addAttribute("store", service.storeupdateForm(no));
+		JSONArray jsonArray = new JSONArray();
+		model.addAttribute("holidaylist", jsonArray.fromObject(service.storeHoliday(no)));
 	}
 
 	/* 단골 등록 */

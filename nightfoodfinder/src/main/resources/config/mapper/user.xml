@@ -4,7 +4,7 @@
 <mapper namespace="kr.co.nff.repository.dao.UserDAO">
 	
 	<!-- admin userlist -->
-	<select id="adminSelectUser" resultType="User">
+	<select id="adminSelectUser" parameterType="SearchRe" resultType="User">
 		select u.user_no,
 		u.user_email,
 		u.nick_name,
@@ -13,8 +13,24 @@
 		from tb_review as r
 		where u.user_no = r.user_no) as review_cnt
 		from tb_user u
-		 order by user_no desc;
+		<!-- 검색 -->
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if
+				test="type=='nickName' and keyword != null and keyword != '' ">
+				AND u.nick_name like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if
+				test="type=='userEmail' and keyword != null and keyword != '' ">
+				AND u.user_email like CONCAT('%', #{keyword}, '%')
+			</if>
+		</trim>
+		 order by u.user_no desc
+		 
+		 <!-- 페이징  -->
+		LIMIT #{startList}, #{listSize}
+		
 	</select>
+	
 	<!-- admin userdetail 
 	<select id="adminSelectOneUser" parameterType="int" resultType="User">
 		select *
@@ -22,11 +38,37 @@
 		 where user_no = #{no} 
 	</select>	
 	-->
+	
 	<!-- admin userdelete -->
 	<update id="adminDeleteUser" parameterType="int">
 		update tb_user
 		  set user_type = 2
 		 where user_no = #{no}
 	</update>
+	
+	
+	
+	<!-- admin user list에서 paging을 위한 전체 user 수 구하기 -->
+	<select id="adminUserPagingListCnt" parameterType="SearchRe" resultType="int">
+		select count(*) as listCnt
+			from tb_user u
+		<!-- 검색 -->
+	
+		<!-- 검색 -->
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if
+				test="type=='nickName' and keyword != null and keyword != '' ">
+				AND u.nick_name like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if
+				test="type=='userEmail' and keyword != null and keyword != '' ">
+				AND u.user_email like CONCAT('%', #{keyword}, '%')
+			</if>
+		</trim>
+		
+	
+		<!-- 페이징  -->
+		LIMIT #{startList}, #{listSize}
+	</select>
 	
 </mapper>

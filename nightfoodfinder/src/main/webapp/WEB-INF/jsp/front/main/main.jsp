@@ -19,41 +19,54 @@
     
     <!-- 컨텐트  -->
 	<div class="content clearboth">
-	<c:forEach var="s" items="${sList}" begin="1" end="5" varStatus="status">
-		<c:out value="">${status.begin}</c:out>
+	<c:forEach var="s" items="${sList}" varStatus="status">
+<%-- 	<h2>${s.storeName }</h2> --%>
+	
+		<%-- <h2>사이즈 : ${sList.size()}</h2> --%>
+		<c:choose>
+		<c:when test="${sList[status.count].storeName != null}">
 		<div class="store store_${status.count}">
 	        <div class="square_box">
 	            <div class="desc">
 	                <dl>
 	                    <dt>${s.storeName}</dt>
-	                    <dd>${s.scope}</dd>
+	                    <dd>
+	                    	<fmt:formatNumber value="${s.storeScopeTotal / s.reviewCntTotal}" pattern="0.0" />
+	                    </dd>
 	                </dl>
 	                <table>
 	                    <tr>
 	                        <th>주소</th>
-	                        <%-- <td>${s.store위치 }</td > --%>
+	                        <td>${s.city}</td>
 	                    </tr>
 	                    <tr>
-	                        <th rowspan="3">영업시간</th>
-	                        <td>월</td>
-	                        <td>10:30~00:00</td>
+	                        <th>영업시간</th>
+	                        <td>${s.openTime} ~ ${s.closeTime}</td>
 	                    </tr>
+	                   	<c:if test="${!empty s.holidayList.size()}">
 	                    <tr>
-	                        <td>화~토</td>
-	                        <td>00:00~24:00</td>
+	                    	<th rowspan="s.holidayList.size()">휴무일</th>
+	                    	<c:forEach var="sh" items="${s.holidayList}">
+	                    	<td>${sh.weekName}</td>
+	                    	</c:forEach>
 	                    </tr>
-	                    <tr>
-	                        <td>일</td>
-	                        <td>00:00~22:00</td>
-	                    </tr>
+                    	</c:if>
 	                </table>
 	            </div>
-	            <p><a href="#">자세히 보기</a></p>
+	            <p><a href="${pageContext.request.contextPath}/front/store/storedetail.do?no=${s.storeNo}">자세히 보기</a></p>
 	        </div>
 	    </div>
-	    
-	</c:forEach>
-	
+		</c:when>
+		<c:otherwise>
+		<%-- <div class="store store_${status.count}">
+	        <div class="desc">
+	        	비어있음
+	        </div>
+	    </div> --%>
+		</c:otherwise>
+		</c:choose>
+	</c:forEach> 
+<!-- 	
 	    <div class="store store_1st">
 	        <div class="square_box">
 	            <div class="desc">
@@ -113,6 +126,7 @@
 	        <div class="desc">
 	        </div>
 	    </div>
+-->
 	</div>
     <!-- // 컨텐트  -->
     
