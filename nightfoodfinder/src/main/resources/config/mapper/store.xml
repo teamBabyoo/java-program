@@ -35,6 +35,7 @@ select w.week_name, h.week_no
     on h.week_no = w.week_no
  where store_no = #{store_no}
 </select>
+
 <!-- 메인에 표시할 가게 상세정보 리스트 -->
 <select id="mainStoreList" resultMap="storeMap">
    		select distinct s.*,
@@ -61,9 +62,17 @@ select w.week_name, h.week_no
          limit 0, 5
 </select>
 
-	<!-- 카테고리 리스트 가져오기 -->
+	<!-- 헤더 검색바에 줄 카테고리 리스트 가져오기 -->
 	<select id="selectCategory" resultType="Category">
 		select * from tb_category
+	</select>
+	
+	<!-- 헤더 검색바에 줄 지역구 리스트-->
+	<select id="cityList" resultType="String">
+		select a.city
+  		  from tb_store s
+ 	     inner join tb_address a
+    		on s.store_no = a.store_no
 	</select>
 	
 	<select id="selectOneStore" resultType="Store" parameterType="int">

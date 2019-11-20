@@ -14,6 +14,8 @@ public interface StoreDAO {
 	
 	// 카테고리 리스트
 	List<Category> selectCategory();
+	// 지역구 리스트
+	List<String> cityList();
 	// 스토어 리스트
     List<Store> storeList();
     Store selectOneStore(int no);
