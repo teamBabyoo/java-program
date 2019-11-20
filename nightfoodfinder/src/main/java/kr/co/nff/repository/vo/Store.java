@@ -16,7 +16,6 @@ public class Store {
 	private int storeCategory;
 	private String openTime;
 	private String closeTime;
-	private int areaCode;
 	private String city;
 	private String streetLoad;
 	private String storeContent;
