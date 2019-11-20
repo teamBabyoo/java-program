@@ -12,11 +12,10 @@
 	<result column="store_category" property="storeCategory" />
 	<result column="open_time" property="openTime" />
 	<result column="close_time" property="closeTime" />
-	<result column="area_code" property="areaCode" />
 	<result column="status" property="status" />
 	<result column="business_num" property="businessNum" />
 	<result column="store_owner" property="storeOwner" />
-	<result column="store_owner_ph" property="storeOwnerPh" />
+	<result column="store_owner_ph" property="storeOwnerPh" /> 
 	<result column="latitude" property="latitude" />
 	<result column="longitude" property="longitude" />
 	<result column="store_join_date" property="storeJoinDate" />
