@@ -6,9 +6,9 @@
         <img src="${pageContext.request.contextPath}/resources/images/mangoplate-logo-horizontal.svg" alt="anff 로고" />
     </div>
     <div class="search">
-      <form action="">
+      <form name="sto_search" action="#" method="post">
         <input type="text" id="keyword"/>
-        <div class="icon_w"><i class="fa fa-search" aria-hidden="true"></i></div>
+        <div class="icon_w"><i class="fa fa-search" aria-hidden="true"></i></div> <!-- 검색 버튼 부분 -->
         <div class="optionBox hidden">
           <ul class="optionTab clearboth">
             <li class="on">분류</li>
@@ -27,30 +27,13 @@
           
           <!-- tab_1 -->
           <div class="select clearboth tab_2 hidden">
-            <div>
-              <label for="foodtype_1">마포구</label>
-              <input id="foodtype_1" type="checkbox" class="hidden" />
-            </div>
-
-            <div>
-              <label for="foodtype_2">영등포구</label>
-              <input id="foodtype_2" type="checkbox" class="hidden" />
-            </div>
-
-            <div>
-              <label for="foodtype_3">용산구</label>
-              <input id="foodtype_3" type="checkbox" class="hidden" />
-            </div>
-
-            <div>
-              <label for="foodtype_4">성동구</label>
-              <input id="foodtype_4" type="checkbox" class="hidden" />
-            </div>
-
-            <div>
-              <label for="checkedtype_1">서초구</label>
-              <input id="checkedtype_1" type="checkbox" class="hidden" />
-            </div>
+          	<c:forEach items="">
+	            <div>
+	              <label for="foodtype_1">종로구</label>
+	              <input id="foodtype_1" type="checkbox" class="hidden" />
+	            </div>
+          	</c:forEach>
+          
 
           </div>
           <!-- tab_2 -->
@@ -79,7 +62,7 @@
           </div>
           <!-- tab_3 -->
 
-          <div class="userselect">
+          <div class="userselect"> <!-- 검색 조건 선택시 넘어온다 -->
               <div>
                 <label for="checkedtype_2">중식<i class="fa fa-times" aria-hidden="true"></i></label>
                 <input id="checkedtype_2" type="checkbox" checked class="hidden" />
