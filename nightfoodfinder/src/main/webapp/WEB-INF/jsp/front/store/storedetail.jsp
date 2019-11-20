@@ -51,7 +51,7 @@
 									<td class="tabletitlefont">Location</td>
 								</tr>
 								<tr>
-									<td class="tabletdfont">${store.city}${store.streetLoad} &nbsp<button id="showmap">지도보기</button></td>
+									<td class="tabletdfont">${store.streetLoad} &nbsp<button id="showmap">지도보기</button></td>
 								</tr>
 							</tbody>
 						</table>

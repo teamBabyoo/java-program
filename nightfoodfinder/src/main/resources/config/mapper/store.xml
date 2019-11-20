@@ -70,7 +70,7 @@ select *
 	</select>
 	
 	<select id="selectOneStore" resultType="Store" parameterType="int">
-				select s.store_no,
+	select s.store_no,
 		s.store_name,
 		s.store_tell,
 		s.business_num,
@@ -80,6 +80,7 @@ select *
 		s.close_time,
 		s.store_email,
 		c.category_name,
+		s.store_category,
 		sc.store_content,
         a.street_load,
 		ifnull(truncate(sum(r.store_scope) / count(r.user_no), 1), 0) as scope
@@ -101,6 +102,69 @@ select *
 		from tb_review
 		where store_no = #{storeNo}
 	</select>
+	
+	
+	<!--가게정보 수정 -->
+	<update id="storeUpdateInfo" parameterType="Store" >
+	update tb_store s
+	set 
+	<if test="storeName != null">
+		store_name = #{storeName},
+	</if>
+	<if test="storePass != null">
+			store_pass = #{storePass},
+	</if>
+	<if test="storeCategory != null">
+			 store_category = #{storeCategory},
+	</if>
+	<if test="openTime != null">
+			open_time = #{openTime}, 
+	</if>
+	<if test="closeTime != null">
+			  close_time = #{closeTime},
+	</if>
+	<if test="storeOwner != null">
+			store_owner = #{storeOwner},
+	</if>
+	<if test="storeOwnerPh != null">
+			store_owner_ph = #{storeOwnerPh},
+	</if>
+	
+	<if test="storeTell != null">
+	 store_tell = #{storeTell}
+	</if>
+		WHERE store_no = #{storeNo}
+	</update>
+	
+	<!--휴일은 업데이트X delete하고 insert하라 -->
+	<delete id="deleteHoliday" parameterType="Store">
+		delete 
+		 from tb_holiday
+		 where store_no = #{storeNo}
+	</delete>
+	
+	
+	<insert id="updateHoliday" parameterType="Store">
+	 <if test="day != null">
+	 INSERT INTO tb_holiday (week_no, store_no) VALUES 
+		 <foreach collection="day" item="weekNo" separator=",">
+			 (#{weekNo}, #{storeNo})
+		 </foreach>
+	 </if>
+	</insert>
+	
+	
+	<!-- 주소변경 -->
+	<update id="updateStoreAddr" parameterType="Store">
+	 update tb_address
+	    set
+	    <if test="city != null">
+	     city = #{city},
+	    </if>
+	    <if test="streetLoad != null">
+	     street_load = #{streetLoad}
+	    </if>
+	</update>
 	
 	<!-- 스토어 리스트 -->
    <select id="storeList" resultType="Store" parameterType="Search">

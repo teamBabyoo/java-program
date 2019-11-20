@@ -26,4 +26,13 @@ public interface StoreDAO {
 	Store adminSelectOneStore(int no);
 	void adminDeleteStore(int no);
 	void adminStatusStore(int no);
+	
+	/*가게 수정*/
+	//휴일 삭제
+	void deleteHoliday(Store store);
+	//휴일 업데이트 insert
+	void updateHoliday(Store store);
+	void storeUpdateInfo(Store store);
+	
+	
 }

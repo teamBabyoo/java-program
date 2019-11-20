@@ -42,4 +42,15 @@ public class StoreServiceImpl implements StoreService {
 	public Store storeupdateForm(int no) {
 		return dao.selectOneStore(no);
 	}
+
+
+	@Override
+	public void updateHoliday(Store store) {
+		dao.storeUpdateInfo(store);
+		dao.deleteHoliday(store);
+		dao.updateHoliday(store);
+		
+	}
+
+		
 }

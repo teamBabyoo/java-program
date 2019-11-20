@@ -6,11 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.google.gson.JsonArray;
-
 import kr.co.nff.front.store.service.StoreService;
+import kr.co.nff.repository.vo.Store;
 import net.sf.json.JSONArray;
-import netscape.javascript.JSObject;
 
 
 @Controller("kr.co.nff.front.store.controller.FrontStoreController")
@@ -30,13 +28,17 @@ public class FrontStoreController {
 	@RequestMapping("/storedetail.do")
 	public void storeDetail(Model model, int no) {
 		model.addAttribute("store", service.storeDetail(no));
+		
 		model.addAttribute("menu", service.storeMenu(no));
 		model.addAttribute("holidaylist", service.storeHoliday(no));
 	}
 	
 	/* 가게 정보 수정*/
 	@RequestMapping("/storeinfoupdate.do")
-	public void storeInfoUpdate() {}
+	public String storeInfoUpdate(Store store, @RequestParam(value="storeNo") int no) {
+		service.updateHoliday(store);
+		return "redirect:storedetail.do?no="+no;
+	}
 	
 	/* 가게 소개글 수정폼*/
 	@RequestMapping("/storecontentupdateForm.do")

@@ -202,7 +202,6 @@ footer { position: absolute; width: 100%; line-height: 40px; text-align: center;
 }
 
 .detail_wrap .iicon {
-	text-align: center;
 	font-size: 30px;
 }
 
@@ -223,7 +222,8 @@ i.fa.fa-map-marker {
 }
 
 .detail_wrap table {
-	width: 100%;
+	width: 80%;
+    margin: 0 auto;
 }
 
 .detail_wrap #clockicon {

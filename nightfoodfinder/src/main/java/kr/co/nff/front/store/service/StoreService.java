@@ -18,5 +18,10 @@ public interface StoreService {
 	//가게 정보 수정폼으로 넘기기
 	public Store storeupdateForm(int no);
 	
+	//휴일 수정하기
+	//휴일 집어넣기
+	public void updateHoliday(Store store);
+	
+	
 }
 
