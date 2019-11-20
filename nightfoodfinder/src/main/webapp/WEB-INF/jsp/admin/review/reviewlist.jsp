@@ -125,7 +125,7 @@
 
 	<section class="panel ">
 		<h2>Table</h2>
-		<form id="chkblock">
+
 		<table>
 			<div>전체 : ${pagination.listCnt}개</div>
 			<tr>
@@ -145,7 +145,7 @@
 			
 			<c:forEach var="list" items="${list}">
 				<tr>
-					<td><input type="checkbox" name="reviewNo" value="${list.reviewNo}"/></td>
+					<td><input type="checkbox" id="myCheckboxid" name="reviewNo" data-reviewNo="${list.reviewNo}"/></td>
 					<td>${list.nickName}</td>
 					<td>${list.storeName }</td>
 					<td class="myBtn"
@@ -166,12 +166,53 @@
 				</tr>
 			</c:forEach>
 		<div>
-		<button type="button" onclick="block()">차단하기</button>
+		<button type="button" id="block" onclick="block()">차단하기</button>
  		<button type="button" onclick="bk()">차단 풀기</button>  
 		</div>
 		</table>
-	</form>
+		
+		<script>
+		function block() {
+			let cnt = 0;
+			let chk = document.querySelectorAll("input[name='reviewNo']");
+			for (let i = 0; i < chk.length; i++) {
+				if (chk[i].checked) {cnt++;
+				let block = $(chk[i]).parent().parent().find(".block").text("차단");}
+			}
+			if (cnt == 0) {
+				alert("삭제할 리뷰를 선택하세요.");
+				return;
+			}
+			
+		
+			// reviewNoArr을 status=1&reviewList=1&reviewList=3 이런식으로 만들기 위해서
+			var reviewNoArr = new Array();
+			reviewNoArr.push("status=1");	// 고정된 값이어서 미리 푸쉬
+			$("input[name='reviewNo']:checked").each(function(){	// each : j쿼리의 반복문
+				reviewNoArr.push("reviewNoList=" + $(this).attr("data-reviewNo"));
+			});
+			console.log(reviewNoArr.join("&"));
+			reviewNoArr = reviewNoArr.join("&");
+			
+			$.ajax({
+				url: "${pageContext.request.contextPath}/admin/review/block.do",
+				type: "POST",
+				data: reviewNoArr,
+				dataType: "json",
+				success: function(){
+					location.href = "${pageContext.request.contextPath}/admin/review/reviewlist.do";
+				}
+			});
 
+			 for (let i = 0; i < chk.length; i++) {
+					if (chk[i].checked) 
+					$(chk[i]).prop('checked', false);
+				}	
+		}
+		
+		</script>
+		
+		
 		<!------------ 페이징 ---------------->
 
 		<div id="paginationBox">
@@ -316,44 +357,9 @@
 			
 			// ------------------- 체크박스 차단(업데이트) -----------------
 			
-			function block() {
-				let cnt = 0;
-				let chk = document.querySelectorAll("input[name='reviewNo']");
-				for (let i = 0; i < chk.length; i++) {
-					if (chk[i].checked) cnt++
-				}
-				if (cnt == 0) {
-					alert("차단할 리뷰를 선택하세요.");
-					return;
-				}
-				// ?????????????????????????
-				let c = document.getElementById("chkblock");			
-				c.action = "${pageContext.request.contextPath}/admin/review/block.do";
-				c.submit();
-			}
+
+
 			
-			
-			function bk() {
-				let cnt = 0;
-				let chk = document.querySelectorAll("input[name='reviewNo']");
-				for (let i = 0; i < chk.length; i++) {
-					if (chk[i].checked) cnt++
-				}
-				if (cnt == 0) {
-					alert("차단할 리뷰를 선택하세요.");
-					return;
-				}
-				
-				//????????????????????????????
-				let c = document.getElementById("chkblock");
-				var url = "${pageContext.request.contextPath}/admin/review/block.do";
-				url = url + "?page=" + page;
-				url = url + "&range=" + range;
-				url = url + "&status=" + 0;
-				url = url + "&searchType=" + $('#searchType option:selected').val();
-				c.action = url + "&keyword=" + $('#keyword').val();
-				c.submit();
-			}
 			
 		</script>
 	<footer role="contentinfo">Easy Admin Style by Melissa Cabral</footer>
