@@ -12,8 +12,14 @@ public class LoginServiceImpl implements LoginService {
 	private LoginDAO dao;
 	
 	public void insertStore(Store store) {
+	
 		dao.insertStore(store);
 	}
+	
+	public Store selectUserInfoByName(String storeName) {
+		 return dao.selectUserInfoByName(storeName);
+	}
+	
 	
 	public int storeEmailChk(String storeEmail) {
 		return dao.storeEmailChk(storeEmail);

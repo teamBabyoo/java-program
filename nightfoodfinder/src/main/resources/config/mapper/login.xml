@@ -7,4 +7,8 @@
 	<select id="storeEmailChk" parameterType="String" resultType="int" flushCache="true" useCache="true">
 		select count(*) from tb_store where store_email = #{storeEmail}
 	</select>
+	
+	<select id="selectUserInfoByName" parameterType="String" resultType="Store" flushCache="true" useCache="true">
+		
+	</select>
 </mapper>  

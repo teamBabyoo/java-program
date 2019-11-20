@@ -20,8 +20,8 @@ public class Search extends Pagination {
 	private String keyword;  // 검색어          (이름, 지역, 메뉴 예정 - 스토어리스트)
 	private int[] categoryCode; // 카테고리 : 중복허용
 	private int[] priceType; // 가격대 : 중복허용
-	private int[] areaCodes; // 주소 : 중복허용
-	private int includeClosed; // 영업끝난 가게 결과 포함하기 (1: 포함, 0: 포함안함 -> default가 0)
+	private String[] cities; // 주소 : 중복허용 (구단위)
+	private int includeClosed; // 영업끝난 가게 결과 포함하기 (1: 포함, 0: 포함안함 -> default가 1)
 	
 	private String filter;
 	private List<String[]> filters;

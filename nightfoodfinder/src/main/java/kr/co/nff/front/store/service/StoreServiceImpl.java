@@ -10,7 +10,7 @@ import kr.co.nff.repository.vo.Holiday;
 import kr.co.nff.repository.vo.Menu;
 import kr.co.nff.repository.vo.Store;
 
-@Service
+@Service("kr.co.nff.front.store.service.StoreServiceImpl")
 public class StoreServiceImpl implements StoreService {
 	
 	@Autowired
