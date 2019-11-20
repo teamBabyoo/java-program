@@ -20,14 +20,13 @@
     <!-- 컨텐트  -->
 	<div class="content clearboth">
 	<c:forEach var="s" items="${sList}" varStatus="status">
-	<h3>${sList[4].storeName}</h3>	
 		<c:choose>
 		<c:when test="${sList[status.count].storeName == null}">
-			<div class="store store_${status.count}">
+			<%-- <div class="store store_${status.count}">
 		        <div class="desc">
 		        	비어있음
 		        </div>
-		    </div>
+		    </div> --%>
 		</c:when>
 		<c:otherwise>
 		<div class="store store_${status.count}">
