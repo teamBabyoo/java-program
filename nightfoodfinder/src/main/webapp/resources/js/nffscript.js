@@ -51,4 +51,14 @@ $(document).ready(function() {
             $('.tab_3').removeClass('hidden');
         }
     });
+    
+    // 로그인 띄우기
+    $('#person_btn').click((e) => {
+        $('.bgbox').addClass('active');
+        $('#person_btn .pop_person.hidden').removeClass('hidden');
+        $('.bgbox.active').click((e) => {
+            $('.bgbox').removeClass('active');
+            $('#person_btn .pop_person').addClass('hidden');
+        })
+    });
 });

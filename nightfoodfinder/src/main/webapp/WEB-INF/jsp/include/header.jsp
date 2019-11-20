@@ -87,7 +87,21 @@
         <li><a href="#">내주변맛집</a></li>
         <li><a href="#">NFF Awards</a></li>
         <li><i class="fa fa-bell-o" aria-hidden="true"></i></li>
-        <li><i class="fa fa-user-o" aria-hidden="true"></i></li>
+        <li id="person_btn"><i class="fa fa-user-o" aria-hidden="true"></i>
+		<!-- 팝업 (로그인 X) -->
+		<div class="pop_person nMember hidden">
+			<div class="topshape"></div>
+			<div>
+				로그인 후<br />
+				이용 가능합니다
+			</div>
+			<div>
+				<ul>
+				<li><a href="#">로그인하기</a></li>
+				</ul>
+			</div>
+		</div>
+		</li>
 
       </ul>
     </div>
