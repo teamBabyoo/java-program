@@ -1,5 +1,7 @@
 package kr.co.nff.admin.review.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,9 +46,9 @@ public class AdminReviewController {
 	}
 	
 	@RequestMapping("/block.do")
-	public String block(Review review) {
+	public void blockAjax(Review review)
+ {
 		service.blockReview(review);
-		return "redirect:reviewList.do";
 		
 	}
 
