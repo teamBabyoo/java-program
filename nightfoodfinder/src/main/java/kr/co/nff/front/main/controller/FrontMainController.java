@@ -21,12 +21,15 @@ public class FrontMainController {
 	// 최상위 5개 스토어
 	@RequestMapping("/main.do")
 	public void main(HttpSession session, Model model) {
+		
+		// 검색 헤더에서 쓸 카테고리 리스트 세션에 올린다.
 		List<Category> cateList = service.selectCategory();
-//		System.out.println(cateList);
-		session.setAttribute("cateList", cateList);
+		session.setAttribute("cateList", cateList); 
+		// 현재 DB에 있는 스토어들의 지역구도 세션에 올린다.
+		List<String> cityList = service.cityList();
+		session.setAttribute("cityList", cityList);
 		
 		model.addAttribute("sList", service.mainStoreList());
-		
 		System.out.println(service.mainStoreList());
 	}
 }
