@@ -9,14 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import kr.co.nff.front.main.service.FrontService;
+import kr.co.nff.front.main.service.MainService;
 import kr.co.nff.repository.vo.Category;
 
 @Controller
 @RequestMapping("/front/main")
 public class FrontMainController {
 	@Autowired
-	private FrontService service;
+	private MainService service;
 	
 	// 최상위 5개 스토어
 	@RequestMapping("/main.do")
