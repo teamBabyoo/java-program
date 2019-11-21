@@ -79,9 +79,9 @@
        
       
         <section class="panel ">
-          <h2>Table</h2>
-          <table>
+          <h2>회원 관리</h2>
           <div>전체 : ${pagination.listCnt}개</div>
+          <table>
             <tr>
               <th>선택</th>
               <th>아이디</th>
@@ -167,7 +167,7 @@
 				let cancel = $(chk[i]).parent().parent().find(".usertype").text("유저");}
 			}
 			if (cnt == 0) {
-				alert("강제 탈퇴할 유저를 선택하세요.");
+				alert("탈퇴 취소할 유저를 선택하세요.");
 				return;
 			}
 			

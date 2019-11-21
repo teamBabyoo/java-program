@@ -6,6 +6,7 @@ import kr.co.nff.repository.vo.Holiday;
 import kr.co.nff.repository.vo.Menu;
 import kr.co.nff.repository.vo.SearchRe;
 import kr.co.nff.repository.vo.Store;
+import kr.co.nff.repository.vo.User;
 public interface StoreDAO {
 	// 메인 스토어 상세정보 리스트 조회
 	List<Store> mainStoreList();
@@ -29,6 +30,8 @@ public interface StoreDAO {
 	Store adminSelectOneStore(int no);
 	void adminDeleteStore(int no);
 	void adminStatusStore(int no);
+	//admin 권한으로 store 활동정지
+	void withdrawStore(Store store);
 	
 	/*가게 수정*/
 	//휴일 삭제
