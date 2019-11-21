@@ -49,5 +49,8 @@ public class Store {
 	//휴무일 받을 리스트 
 	private List<Integer> day;
 	
+	
+	//  storeNo 받을 리스트
+		private List<Integer> storeNoList;
 }
 	

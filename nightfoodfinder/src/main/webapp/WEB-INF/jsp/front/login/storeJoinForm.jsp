@@ -54,6 +54,7 @@
 </style>
 <meta charset="UTF-8">
 <title>Store Join Page</title>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js" charset="utf-8"></script>
 </head>
 <body>
   <%
@@ -102,7 +103,10 @@
 				<div class="snsBox" id="snsBox">
 					<ul>
 						<li>
-							 <a href="<%=apiURL%>" target="_blank"><img height="50" src="${pageContext.request.contextPath}/resources/images/nLoginIcon.PNG"/></a>
+							 <a href="${url}" target="_blank">
+								 <img width="223" 
+								 	src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/>
+							 </a>
 						</li>
 						<li></li>
 					</ul>
@@ -217,6 +221,8 @@
 		</div>
 	</div>
 <script>
+
+
 //로그인모달 임시
 var uType1 = document.getElementById("userType1");
 var uType2 = document.getElementById("userType2");

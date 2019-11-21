@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.nff.repository.dao.LoginDAO;
 import kr.co.nff.repository.vo.Store;
+import kr.co.nff.repository.vo.nUser;
 
 @Service
 public class LoginServiceImpl implements LoginService {
@@ -24,4 +25,11 @@ public class LoginServiceImpl implements LoginService {
 	public int storeEmailChk(String storeEmail) {
 		return dao.storeEmailChk(storeEmail);
 	}
+	
+	public void insertNaverUser(nUser user) {
+		dao.insertNaverUser(user);
+	}
+	public int selectNaver(nUser user) {
+		return dao.selectNaver(user);
+	};
 }

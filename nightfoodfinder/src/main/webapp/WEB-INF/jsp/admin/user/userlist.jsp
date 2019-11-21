@@ -35,12 +35,21 @@
             </ul>
         </li>
         
-        	<!-- search -->
-			<li>
+        
+        
+          <!-- <li class="comments"><a href="#">Comments</a></li>
+          <li class="users"><a href="#">Manage Users</a></li> -->
+        </ul>
+      </nav>
+      
+      <main role="main">
+       
+      
+        <section class="panel ">
+          <h2>회원 관리</h2>
+         
+        	<!-- search -->			
 				<div class="form-group row justify-content-center">
-
-					<div class="w100" style="padding-right: 10px">
-
 						<select class="form-control form-control-sm" name="searchType"
 							id="searchType">
 							<c:choose>
@@ -54,34 +63,16 @@
 								</c:otherwise>
 							</c:choose>
 						</select>
-					</div>
-					<div class="w300" style="padding-right: 10px">
+					
 						<input type="text" class="form-control form-control-sm"
 							name="keyword" id="keyword" value="${pagination.keyword}">
-					</div>
-					<div>
+					
 						<button class="btn btn-sm btn-primary" name="btnSearch"
-							id="btnSearch">검색</button>
-						<button class="back" name="backList" id="backList"
-							onclick="location.href='/nightfoodfinder/admin/user/userlist.do'">검색취소</button>
-					</div>
-				</div>
-			</li>
+							id="btnSearch">검색</button>					
+				</div>	
 			<!-- search -->
-        
-        
-          <!-- <li class="comments"><a href="#">Comments</a></li>
-          <li class="users"><a href="#">Manage Users</a></li> -->
-        </ul>
-      </nav>
-      
-      <main role="main">
-       
-      
-        <section class="panel ">
-          <h2>Table</h2>
+			<div class="searchcnt"> 전체 : ${pagination.listCnt}개</div>
           <table>
-          <div>전체 : ${pagination.listCnt}개</div>
             <tr>
               <th>선택</th>
               <th>아이디</th>
@@ -115,12 +106,12 @@
 						</c:choose></td>
 				</tr>
 				</c:forEach>
-         <div>
-		<button type="button" id="withdraw" onclick="withdraw()">강제 탈퇴</button>
- 		<button type="button" id="cancel" onclick="cancel()">탈퇴 취소</button>  
-		</div>
+         
 		</table>
-		
+		<div class="admbutton">
+		<button type="button"  id="withdraw" onclick="withdraw()">강제 탈퇴</button>
+ 		<button type="button"  id="cancel" onclick="cancel()">탈퇴 취소</button>  
+		</div>
 		<script>
 		function withdraw() {
 			let cnt = 0;
@@ -167,7 +158,7 @@
 				let cancel = $(chk[i]).parent().parent().find(".usertype").text("유저");}
 			}
 			if (cnt == 0) {
-				alert("강제 탈퇴할 유저를 선택하세요.");
+				alert("탈퇴 취소할 유저를 선택하세요.");
 				return;
 			}
 			
