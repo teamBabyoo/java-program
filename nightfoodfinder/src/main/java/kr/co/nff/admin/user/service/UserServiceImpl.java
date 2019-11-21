@@ -30,4 +30,8 @@ public class UserServiceImpl implements UserService{
 	public int GetListCnt(SearchRe search) {
 		return dao.adminUserPagingListCnt(search);
 	}
+	
+	public void withdrawUser(User user) {
+		dao.withdrawUser(user);
+	}
 }
