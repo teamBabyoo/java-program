@@ -15,91 +15,7 @@
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/admin/admin_style.css" />">
 
-<style type="text/css">
-/* The Modal (background) */
-.modal {
-	display: none; /* Hidden by default */
-	position: fixed; /* Stay in place */
-	z-index: 1; /* Sit on top */
-	left: 0;
-	top: 0;
-	width: 100%; /* Full width */
-	height: 100%; /* Full height */
-	overflow: auto; /* Enable scroll if needed */
-	background-color: rgb(0, 0, 0); /* Fallback color */
-	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-}
 
-/* Modal Content/Box */
-.modal-content {
-	background-color: #fefefe;
-	margin: 5% auto; /* 15% from the top and centered */
-	padding: 20px;
-	border: 1px solid #888;
-	width: 50%; /* Could be more or less, depending on screen size */
-}
-/* The Close Button */
-.close {
-	color: #aaa;
-	float: right;
-	font-size: 28px;
-	font-weight: bold;
-}
-
-.close:hover, .close:focus {
-	color: black;
-	text-decoration: none;
-	cursor: pointer;
-}
-
-.ahide {
-	display:none;
-}
-
-
-.tg {
-	border-collapse: collapse;
-	border-spacing: 0;
-	border-color: #ccc;
-}
-
-.tg td {
-	font-family: Arial, sans-serif;
-	font-size: 14px;
-	padding: 10px 5px;
-	border-style: solid;
-	border-width: 1px;
-	overflow: hidden;
-	word-break: normal;
-	border-color: #ccc;
-	color: #333;
-	background-color: #fff;
-}
-
-.tg th {
-	font-family: Arial, sans-serif;
-	font-size: 14px;
-	font-weight: normal;
-	padding: 10px 5px;
-	border-style: solid;
-	border-width: 1px;
-	overflow: hidden;
-	word-break: normal;
-	border-color: #ccc;
-	color: #333;
-	background-color: #f0f0f0;
-}
-
-.tg .tg-cly1 {
-	text-align: left;
-	vertical-align: middle
-}
-
-.tg .tg-0lax {
-	text-align: left;
-	vertical-align: top
-	}
-</style>
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -309,48 +225,48 @@
 
 		<!-- 페이징 -->
 		
-		<!-- The Modal -->
-		<div id="myModal" class="modal">
-			<!-- Modal content -->
-			<div class="modal-content">
+		<!-- The admsmodal -->
+		<div id="myadmsmodal" class="admsmodal">
+			<!-- admsmodal content -->
+			<div class="admsmodal-content">
 				<span class="close">&times;</span>
 		
-				<table class="tg">
+				<table class="admsmodalpp">
 					<tr>
-						<th class="tg-cly1">가게 이름</th>
-						<td class="tg-cly1"></td>
+						<th class="admsmodalpp-cly1">가게 이름</th>
+						<td class="admsmodalpp-cly1"></td>
 					</tr>
 					<tr>
-						<th class="tg-cly1">가게 이메일</th>
-						<td class="tg-cly1"></td>
+						<th class="admsmodalpp-cly1">가게 이메일</th>
+						<td class="admsmodalpp-cly1"></td>
 					</tr>
 					<tr>
-						<th class="tg-cly1">가게 전화번호</th>
-						<td class="tg-cly1"></td>
+						<th class="admsmodalpp-cly1">가게 전화번호</th>
+						<td class="admsmodalpp-cly1"></td>
 					</tr>
 					<tr>
-						<th class="tg-cly1">가게 주소</th>
-						<td class="tg-cly1"></td>
+						<th class="admsmodalpp-cly1">가게 주소</th>
+						<td class="admsmodalpp-cly1"></td>
 					</tr>
 					<tr>
-						<th class="tg-0lax">영업 시간</th>
-						<td class="tg-0lax"></td>
+						<th class="admsmodalpp-cly1">영업 시간</th>
+						<td class="admsmodalpp-cly1"></td>
 					</tr>
 					<tr>
-						<th class="tg-0lax">분류</th>
-						<td class="tg-0lax"></td>
+						<th class="admsmodalpp-cly1">분류</th>
+						<td class="admsmodalpp-cly1"></td>
 					</tr>
 					<tr>
-						<th class="tg-0lax">사업자 등록번호</th>
-						<td class="tg-0lax"></td>
+						<th class="admsmodalpp-cly1">사업자 등록번호</th>
+						<td class="admsmodalpp-cly1"></td>
 					</tr>
 					<tr>
-						<th class="tg-0lax">대표자 이름</th>
-						<td class="tg-0lax"></td>
+						<th class="admsmodalpp-cly1">대표자 이름</th>
+						<td class="admsmodalpp-cly1"></td>
 					</tr>
 					<tr>
-						<th class="tg-0lax">대표자 연락처</th>
-						<td class="tg-0lax"></td>
+						<th class="admsmodalpp-cly1">대표자 연락처</th>
+						<td class="admsmodalpp-cly1"></td>
 					</tr>									
 				</table>
 			</div>
@@ -358,13 +274,13 @@
 		</div>
 		<script>
 			// 모달팝업
-			// Get the modal
-			var modal = document.getElementById('myModal');
-			// Get the button that opens the modal
+			// Get the admsmodal
+			var admsmodal = document.getElementById('myadmsmodal');
+			// Get the button that opens the admsmodal
 			var btn = document.getElementsByClassName("myBtn");
-			// Get the <span> element that closes the modal
+			// Get the <span> element that closes the admsmodal
 			var span = document.getElementsByClassName("close")[0];
-			// When the store clicks on the button, open the modal 
+			// When the store clicks on the button, open the admsmodal 
 			for (let i = 0; i < btn.length; i++) {
 				btn[i].onclick = function(e) {
 					let storeName = $(e.target).text();
@@ -376,27 +292,27 @@
 					let businessNum = $(e.target).siblings("#businessNum").text();
 					let storeOwner = $(e.target).siblings("#storeOwner").text();
 					let storeOwnerPh = $(e.target).siblings("#storeOwnerPh").text();
-					modal.style.display = "block";
-					$(".tg td:eq(0)").text(storeName)
-					$(".tg td:eq(1)").text(storeEmail)
-					$(".tg td:eq(2)").text(storeTell)
-					$(".tg td:eq(3)").text(streetLoad)
-					$(".tg td:eq(4)").text(time)
-					$(".tg td:eq(5)").text(categoryName)
-					$(".tg td:eq(6)").text(businessNum)
-					$(".tg td:eq(7)").text(storeOwner)
-					$(".tg td:eq(8)").text(storeOwnerPh)
+					admsmodal.style.display = "block";
+					$(".admsmodalpp td:eq(0)").text(storeName)
+					$(".admsmodalpp td:eq(1)").text(storeEmail)
+					$(".admsmodalpp td:eq(2)").text(storeTell)
+					$(".admsmodalpp td:eq(3)").text(streetLoad)
+					$(".admsmodalpp td:eq(4)").text(time)
+					$(".admsmodalpp td:eq(5)").text(categoryName)
+					$(".admsmodalpp td:eq(6)").text(businessNum)
+					$(".admsmodalpp td:eq(7)").text(storeOwner)
+					$(".admsmodalpp td:eq(8)").text(storeOwnerPh)
 					
 				}
 			}
-			// When the user clicks on <span> (x), close the modal
+			// When the user clicks on <span> (x), close the admsmodal
 			span.onclick = function() {
-				modal.style.display = "none";
+				admsmodal.style.display = "none";
 			}
-			// When the user clicks anywhere outside of the modal, close it
+			// When the user clicks anywhere outside of the admsmodal, close it
 			window.onclick = function(event) {
-				if (event.target == modal) {
-					modal.style.display = "none";
+				if (event.target == admsmodal) {
+					admsmodal.style.display = "none";
 				}
 			}
 			
