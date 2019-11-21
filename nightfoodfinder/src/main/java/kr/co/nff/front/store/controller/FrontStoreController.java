@@ -28,15 +28,16 @@ public class FrontStoreController {
 	@RequestMapping("/storedetail.do")
 	public void storeDetail(Model model, int no) {
 		model.addAttribute("store", service.storeDetail(no));
-		
 		model.addAttribute("menu", service.storeMenu(no));
 		model.addAttribute("holidaylist", service.storeHoliday(no));
+		model.addAttribute("storeContent", service.storeContent(no));
 	}
 	
 	/* 가게 정보 수정*/
 	@RequestMapping("/storeinfoupdate.do")
 	public String storeInfoUpdate(Store store, @RequestParam(value="storeNo") int no) {
 		service.updateHoliday(store);
+		System.out.println(service.storeDetail(no));
 		return "redirect:storedetail.do?no="+no;
 	}
 	
@@ -44,6 +45,7 @@ public class FrontStoreController {
 	@RequestMapping("/storecontentupdateForm.do")
 	public void storeContentUpdate(int no, Model model) {
 		model.addAttribute("store", service.storeupdateForm(no));
+		model.addAttribute("storeContent", service.storeContentUpdateForm(no));
 		JSONArray jsonArray = new JSONArray();
 		model.addAttribute("holidaylist", jsonArray.fromObject(service.storeHoliday(no)));
 	}

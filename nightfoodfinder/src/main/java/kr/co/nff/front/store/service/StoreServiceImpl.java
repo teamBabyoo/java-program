@@ -36,19 +36,29 @@ public class StoreServiceImpl implements StoreService {
 	public List<Holiday> storeHoliday(int no) {
 		return dao.storeHoliday(no);
 	}
+	
+	public Store storeContent(int no) {
+		return dao.selectContent(no);
+	}
 
 
 	@Override
 	public Store storeupdateForm(int no) {
 		return dao.selectOneStore(no);
 	}
-
+	
+	//소개글 수정폼으로 보냄
+	public Store storeContentUpdateForm(int no) {
+		return dao.selectContent(no);
+	}
+	
 
 	@Override
 	public void updateHoliday(Store store) {
 		dao.storeUpdateInfo(store);
 		dao.deleteHoliday(store);
 		dao.updateHoliday(store);
+		dao.storeContentUpdate(store);
 		
 	}
 

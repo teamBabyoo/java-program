@@ -26,7 +26,6 @@
 						    <img src="${pageContext.request.contextPath}/resources/images/star.png" alt="별" />
 					      </div>
 					      <div id="scopescore">
-					     	 <%-- ${store.scope} --%>
 					      </div>
 					    </div>
 						<div id="stTitle">
@@ -35,7 +34,7 @@
 						<table>
 							<tbody>
 								<tr>
-									<td rowspan="2" class="iicon" id="sizeminn" ><i class="fa fa-phone" aria-hidden="true"></i></td>
+									<th rowspan="2"><i class="fa fa-phone iicon" aria-hidden="true"></i></th>
 									<td class="tabletitlefont">Tel</td>
 								</tr>
 								<tr>
@@ -46,8 +45,7 @@
 						<table>
 							<tbody>
 								<tr>
-									<td rowspan="2" class="iicon"><i class="fa fa-map-marker"
-										aria-hidden="true"></i></td>
+									<th rowspan="2" ><i class="fa fa-map-marker iicon" aria-hidden="true"></i></th>
 									<td class="tabletitlefont">Location</td>
 								</tr>
 								<tr>
@@ -58,12 +56,12 @@
 						<table>
 							<tbody>
 								<tr>
-									<td rowspan="4" class="iicon" id="clockicon"><i class="fa fa-clock-o"
-										aria-hidden="true"></i></td>
+									<th rowspan="4" id="clock"><i class="fa fa-clock-o iicon" 
+										aria-hidden="true"></i></th>
 									<td class="tabletitlefont">Time</td>
 								</tr>
 								<tr>
-									<td class="tabletdfont">${store.openTime} ~ ${store.closeTime}</td>
+									<td class="tabletdfont" id="operatingtime"></td>
 
 								</tr>
 								<tr>
@@ -82,7 +80,7 @@
 						<table>
 							<tbody>
 								<tr>
-									<td class="iicon" id="menusizemin"><i class="fa fa-file-text-o" aria-hidden="true"></i></td>
+									<th><i class="fa fa-file-text-o iicon" aria-hidden="true"></i></th>
 									<td class="tabletitlefont">Menu </td>
 								</tr>
 							</tbody>
@@ -95,11 +93,11 @@
 						<table>
 							<tbody>
 								<tr>
-									<td class="iicon" style="width: 62px;"><i class="fa fa-cutlery" aria-hidden="true"></i></td>
+									<th><i class="fa fa-cutlery iicon" aria-hidden="true"></i></th>
 									<td class="tabletitlefont">Introduce </td>
 								</tr>
 						</table>
-						<div class="menulist">${store.storeContent}</div>
+						<div class="menulist">${storeContent.storeContent}</div>
 						<div id="btdiv">
 							<span id="updatebutton" onclick="location.href='${pageContext.request.contextPath}/front/store/storecontentupdateForm.do?no=${store.storeNo}'">수정하기</span>
 							
@@ -119,8 +117,9 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-	 let scope = ${store.scope}
-	 let djks = document.getElementsByName
+	 let scope = ${store.scope};
+	 let openTime = '${store.openTime}';  
+	 let closeTime = '${store.closeTime}';
 	</script>
 	<script src="<c:url value='/resources/js/storedetail.js' />">
 	</script>

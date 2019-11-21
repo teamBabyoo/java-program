@@ -206,18 +206,21 @@ footer { position: absolute; width: 100%; line-height: 40px; text-align: center;
 	border: 2px solid #c1c1c1;
 	border-radius: 8px;
 	width: 350px;
-	margin-left: 75px;
+	margin: 0 auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
 	padding: 10px;
 }
 
 .detail_wrap .iicon {
 	font-size: 30px;
+	width: 40px;
 }
 
-i.fa.fa-map-marker {
-    margin-left: 8px;
-    margin-right: 3px;
+.detail_wrap th{
+	width: 60px;
 }
+
 
 .detail_wrap #showmap, .detail_wrap #updatebutton {
 	background: #d8d8d8;
@@ -254,6 +257,11 @@ i.fa.fa-map-marker {
 .detail_wrap #menusizemin {
 	font-size: 25px;
 }
+
+.detail_wrap #clock{
+	vertical-align: initial;
+}
+	
 
 /*가게정보수정*/
 

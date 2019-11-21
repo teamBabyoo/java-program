@@ -113,6 +113,15 @@
 							</select></td>
 						</tr>
 						<tr>
+							<th>소개글</th>
+							<td>
+								<textarea rows="10" cols="40" name="storeContent">
+								 ${storeContent.storeContent}
+								</textarea>
+							
+							</td>
+						</tr>
+						<tr>
 							<th>대표자 이름</th>
 							<td><input type="text" name="storeOwner" value="${store.storeOwner}"/></td>
 						</tr>
@@ -159,7 +168,12 @@
 		let closetime = close.split(":");
 		
 		let closehour = '';
-		if(closetime[0].substr(0, 1) < 1){
+		if(closetime[0] >= 24 && closetime[0] <= 36){
+			closehour *= 1;
+			closehour = closetime[0] - 24;
+			closehour += "";
+		}
+		else if(closetime[0].substr(0, 1) < 1){
 			closehour = closetime[0].substr(1, 1);
 		} else {
 			closehour = closetime[0];
@@ -186,12 +200,6 @@
 		
 		
 		//휴무일 받을 거...
-		/*
-		console.log($('input:checkbox[name="day"]').val());
-		$("input:checkbox[name='day[]']").click((e) => {
-			alert($(e.target).val())
-		})
-			*/
 		let holiList = JSON.parse('${holidaylist}');
 
 		for (let i = 0; i < holiList.length; i++) {
@@ -206,7 +214,6 @@
 	
 
 		function validate() {
-			alert("얍");
 			let openH = $("select[name='openH']").val();
 			let openM = $("select[name='openM']").val();
 			if (openH < 10) {
@@ -217,8 +224,12 @@
 			}
 			let closeH = $("select[name='closeH']").val();
 			let closeM = $("select[name='closeM']").val();
+
 			if (closeH < 10) {
-				closeH = '0' + closeH;
+				closeH *= 1;
+				closeH = closeH + 24;
+				closeH += "";
+			
 			}
 			if (closeM < 10) {
 				closeM = '0' + closeM;
@@ -230,12 +241,8 @@
 			$('input[name="openTime"]').val(openTime);
 			$('input[name="closeTime"]').val(closeTime);
 
-			console.log($('input[name="day"]').checked().val());
-			return false;
+// 			return false;
 		}
-		// 		alert($('input[name="closeTime"]').val();
-
-		// 		return false;
 	</script>
 </body>
 </html>

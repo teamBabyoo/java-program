@@ -82,12 +82,13 @@ select w.week_name, h.week_no
 		s.store_tell,
         s.business_num,
         s.store_category,
+        s.store_owner,
+       	s.store_owner_ph,
 		s.open_time,
 		s.close_time,
 		a.city,
 		a.street_load,
 		c.category_name,
-		sc.store_content,
 		ifnull(truncate(sum(r.store_scope) / count(r.user_no), 1), 0) as scope
 		from tb_store as s
 		inner join tb_address as a
@@ -101,6 +102,22 @@ select w.week_name, h.week_no
 	where s.store_no = #{storeNo}
 
 	</select>
+	
+	<!--가게 소개글 가져오기 -->
+	<select id="selectContent" parameterType="int" resultType="Store">
+	 select store_content
+ 		from tb_store_content
+ 	 where store_no = #{storeNo}
+ 	 order by store_content_no desc limit 1;
+	</select>
+	
+	<!-- 가게 소개글 수정(insert) -->
+	<insert id="storeContentUpdate" parameterType="Store">
+	 INSERT INTO tb_store_content (store_no, store_content) 
+	 		VALUES (#{storeNo}, #{storeContent}); 
+	 		
+	</insert>
+	
 
 	<!-- 별점 평균 -->
 	<select id="storeScope" resultType="Store" parameterType="int">
