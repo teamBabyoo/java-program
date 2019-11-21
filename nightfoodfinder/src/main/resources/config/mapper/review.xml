@@ -30,25 +30,27 @@
 		<!-- 페이징  -->
 		LIMIT #{startList}, #{listSize}
 		
-		
 	</select>
 	
-	<!-- 전체 리뷰 수 구하기, 검색 후에는 검색한 조건의 리뷰 수 구하기 -->
+	
+	
+	
+	<!-- 페이징할 때 필요한 것!! 전체 리뷰 수 구하기, 검색 후에는 검색한 조건의 리뷰 수 구하기 -->
 	<select id="pagingGetListCnt" parameterType="Search" resultType="int">
 		select count(*) as listCnt
 			from tb_review r left join tb_user u on r.user_no = u.user_no
 					     left join tb_store s on r.store_no = s.store_no
 		<!-- 검색 -->
-		<trim prefix="WHERE" prefixOverrides="AND|OR">
+		<where>
 			<if
 				test="type=='nickName' and keyword != null and keyword != '' ">
-				AND u.nick_name like CONCAT('%', #{keyword}, '%') 
+				u.nick_name like CONCAT('%', #{keyword}, '%') 
 			</if>
 			<if
 				test="type=='storeName' and keyword != null and keyword != '' ">
-				AND s.store_name like CONCAT('%', #{keyword}, '%')
+				s.store_name like CONCAT('%', #{keyword}, '%')
 			</if>
-		</trim>
+		</where>
 	
 		<!-- 페이징  -->
 		LIMIT #{startList}, #{listSize}
@@ -57,12 +59,12 @@
 	
 	
 	
-	<!-- 리뷰 선택 삭제했을 때 리뷰테이블의 상태를 바꿔주기 -->
+	<!-- 리뷰 선택 차단했을 때 리뷰테이블의 상태를 바꿔주기 -->
 	<update id="blockReview" parameterType="Review">
 		update tb_review
 			set status = #{status}
 		where review_no in 
-		  	<foreach item="no" index="index" collection="reviewNo" open="(" separator="," close=")">
+		  	<foreach item="no" index="index" collection="reviewNoList" open="(" separator="," close=")">
                 #{no}
             </foreach> 
 	</update>

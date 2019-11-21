@@ -13,7 +13,10 @@ import lombok.Data;
 		private int likeCount;
 		private String regDate;
 		private String reComment;
-		private List<Integer> reviewNo;
+		private int reviewNo;
+		
+		// 리뷰 차단, 차단 풀기
+		private List<Integer> reviewNoList;
 		private int status;
 	}
 
