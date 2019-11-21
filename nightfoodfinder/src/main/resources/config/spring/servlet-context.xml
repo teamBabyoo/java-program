@@ -55,4 +55,7 @@
 			WEB-INF는 직접 호출 불가능 ( localhost/spring/WEB-INF <- 접근 불가) -->
 		<mvc:jsp prefix="/WEB-INF/jsp/" suffix=".jsp" />
 	</mvc:view-resolvers>
+	
+   <!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
+   <bean id="naverLoginBO" class="kr.co.nff.login.naver.oauth.bo.NaverLoginBO" />
 </beans>
