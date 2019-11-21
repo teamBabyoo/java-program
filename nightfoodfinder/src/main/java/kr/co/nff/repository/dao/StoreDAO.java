@@ -21,9 +21,9 @@ public interface StoreDAO {
 	// 스토어 리스트
     List<Store> storeList();
     Store selectOneStore(int no);
+    Store selectContent(int no);
     List<Menu> storeMenuList(int no);
     List<Holiday> storeHoliday(int no);
-    Store selectOneStore();
     List<Menu> storeMenuList();
     List<Holiday> storeHoliday();
     List<Store> adminSelectStore(SearchRe search);
@@ -40,6 +40,8 @@ public interface StoreDAO {
 	void updateHoliday(Store store);
 	//가게정보수정
 	void storeUpdateInfo(Store store);
+	//가게 소개글 수정
+	void storeContentUpdate(Store store);
 	
 	
 	int adminStorePagingListCnt(SearchRe search);

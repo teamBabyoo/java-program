@@ -15,8 +15,12 @@ public interface StoreService {
 	public List<Menu> storeMenu(int no);
 	//휴일 가져오기
 	public List<Holiday> storeHoliday(int no);
+	//가게 소개글 가져오기
+	public Store storeContent(int no);
+	
 	//가게 정보 수정폼으로 넘기기
 	public Store storeupdateForm(int no);
+	public Store storeContentUpdateForm(int no);
 	
 	//휴일 수정하기
 	//휴일 집어넣기

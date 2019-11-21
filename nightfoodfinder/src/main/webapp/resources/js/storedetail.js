@@ -16,8 +16,19 @@ function animateValue(id, start, end, duration) {
 }
 animateValue("scopescore", 0, scope, 100);
 
-
-
+	let close = closeTime.split(":");
+	let closehour = '';
+	if(close[0] >= 24 && close[0] <= 36) {
+		closehour *= 1;
+		closehour = close[0] - 24;
+		closehour += "";
+		closehour = "0"+closehour;
+	}
+	closeTime = closehour+":"+close[0];
+	console.log(closeTime);
+	
+	$("#operatingtime").html(openTime +" ~ " +closeTime);
+	
 
 
 
