@@ -4,11 +4,12 @@ import java.util.List;
 
 import kr.co.nff.repository.vo.Holiday;
 import kr.co.nff.repository.vo.Menu;
+import kr.co.nff.repository.vo.Search;
 import kr.co.nff.repository.vo.Store;
 
 public interface StoreService {
 	//전체리스트
-	List<Store> storeList();
+	List<Store> storeList(Search search);
 	//추후 int no 넣어주기
 	public Store storeDetail(int no); 	
 	//메뉴 가져오기

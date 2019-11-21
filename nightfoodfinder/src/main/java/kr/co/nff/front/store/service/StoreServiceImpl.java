@@ -9,6 +9,7 @@ import kr.co.nff.repository.dao.StoreDAO;
 import kr.co.nff.repository.vo.Holiday;
 import kr.co.nff.repository.vo.Menu;
 import kr.co.nff.repository.vo.Review;
+import kr.co.nff.repository.vo.Search;
 import kr.co.nff.repository.vo.Store;
 
 @Service("kr.co.nff.front.store.service.StoreServiceImpl")
@@ -19,8 +20,8 @@ public class StoreServiceImpl implements StoreService {
 	
 	// 가게 전체 리스트
 	@Override
-	public List<Store> storeList(){
-		return dao.storeList();
+	public List<Store> storeList(Search search){
+		return dao.storeList(search);
 	}
 
 	@Override

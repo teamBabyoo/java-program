@@ -7,7 +7,7 @@
         <img src="${pageContext.request.contextPath}/resources/images/mangoplate-logo-horizontal.svg" alt="anff 로고" />
     </div>
     <div class="search">
-    <form name="sto_search" action="#" method="post">
+    <form id="sto_search" action="${pageContext.request.contextPath}/front/store/storelist.do" method="post">
     	<!-- 검색어 입력 부분 -->
 		<input type="text" name="keyword"/>
 		 <!-- 검색 버튼 부분 -->
@@ -23,8 +23,8 @@
           		<!-- 카테고리 별 검색-->
          		<c:forEach items="${cateList}" var="t" >
 	        		<div>
-	            		<label for="foodtype_${t.categoryNo}" onclick="creatediv('${t.categoryName}');">${t.categoryName}</label>
-	            		<input id="foodtype_${t.categoryNo}" value="${t.categoryNo}" type="checkbox" class="food hidden" />
+	            		<label for="foodtype_${t.categoryNo}" class="types">${t.categoryName}</label>
+	            		<input id="foodtype_${t.categoryNo}" name="categorycode" value="${t.categoryNo}" type="checkbox" class="hidden" />
 	            	</div>
          		</c:forEach>
             </div>
@@ -34,8 +34,8 @@
           		<!-- 지역구 별 검색 -->
           		<c:forEach items="${cityList}" var="ct" varStatus="status">
 	            	<div>
-	              		<label for="city_${status.count}">${ct}</label>
-	              		<input id="city_${status.count}" value="${ct}" type="checkbox" class="local hidden"  />
+	              		<label for="city_${status.count}" class="types">${ct}</label>
+	              		<input id="city_${status.count}" name="cities" value="${ct}" type="checkbox" class="hidden"  />
 	            	</div>
           		</c:forEach>
           	</div>
@@ -45,49 +45,37 @@
           	<div class="select clearboth tab_3 hidden">
           		<!-- 가격별 검색 -->
             	<div>
-              		<label for="price_1">1만원 미만</label>
-              		<input id="price_1" type="checkbox" value="1" class="price hidden" />
+              		<label for="price_1" class="types">1만원 미만</label>
+              		<input id="price_1" type="checkbox" name="pricetype" value="1" class="price hidden" />
             	</div>
 
             	<div>
-              		<label for="price_2">1만원대</label>
-              		<input id="price_2" type="checkbox" value="2" class="price hidden" />
+              		<label for="price_2" class="types">1만원대</label>
+              		<input id="price_2" type="checkbox" name="pricetype" value="2" class="price hidden" />
             	</div>
 
 	            <div>
-	              <label for="price_3">2만원대</label>
-	              <input id="price_3" type="checkbox" value="3" class="price hidden" />
+	              <label for="price_3" class="types">2만원대</label>
+	              <input id="price_3" type="checkbox" name="pricetype" value="3" class="price hidden" />
 	            </div>
 	
 	            <div>
-	              <label for="price_4">3만원 이상</label>
-	              <input id="price_4" type="checkbox" value="4" class="price hidden" />
+	              <label for="price_4" class="types">3만원 이상</label>
+	              <input id="price_4" type="checkbox" name="pricetype" value="4" class="price hidden" />
 	            </div>
           	</div>
           <!-- tab_3 -->
 
           <div class="userselect"> <!-- 검색 조건 선택시 넘어온다 -->
-	          <div>
-	             <label for="checkedtype_2">강남구<i class="fa fa-times" aria-hidden="true"></i></label>
-	             <input id="checkedtype_2" name=""  type="checkbox" checked class="hidden" />
-	           </div>
-             <!--  <div>
-                <label for="checkedtype_2">중식<i class="fa fa-times" aria-hidden="true"></i></label>
-                <input id="checkedtype_2" type="checkbox" checked class="hidden" />
-              </div>0
-  
-              <div>
-                <label for="foodtype_5">서초구<i class="fa fa-times" aria-hidden="true"></i></label>
-                <input id="foodtype_5" type="checkbox" checked class="hidden" />
-                
-              </div>
-              <div>
-                <label for="checkedtype_3">3만원대<i class="fa fa-times" aria-hidden="true"></i></label>
-                <input id="checkedtype_3" type="checkbox" checked class="hidden" />
-              </div> -->
+	          <!-- 
+		          <div>
+		             <label for="checkedtype_2">강남구<i class="fa fa-times" aria-hidden="true"></i></label>
+		             <input id="checkedtype_2" name=""  type="checkbox" checked class="hidden" />
+		           </div>
+	           -->
             </div> 
             <!-- userselect-->
-        	</div>
+            
 		</div>
 	</form>
     </div>

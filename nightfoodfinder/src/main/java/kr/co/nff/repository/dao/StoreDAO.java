@@ -5,9 +5,9 @@ import kr.co.nff.repository.vo.Category;
 import kr.co.nff.repository.vo.Holiday;
 import kr.co.nff.repository.vo.Menu;
 import kr.co.nff.repository.vo.Review;
+import kr.co.nff.repository.vo.Search;
 import kr.co.nff.repository.vo.SearchRe;
 import kr.co.nff.repository.vo.Store;
-import kr.co.nff.repository.vo.User;
 public interface StoreDAO {
 	// 메인 스토어 상세정보 리스트 조회
 	List<Store> mainStoreList();
@@ -20,7 +20,7 @@ public interface StoreDAO {
 	// 지역구 리스트
 	List<String> cityList();
 	// 스토어 리스트
-    List<Store> storeList();
+    List<Store> storeList(Search search);
     Store selectOneStore(int no);
     Store selectContent(int no);
     List<Menu> storeMenuList(int no);
