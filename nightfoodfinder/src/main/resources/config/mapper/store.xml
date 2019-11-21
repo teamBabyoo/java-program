@@ -338,4 +338,14 @@ select w.week_name, h.week_no
 		LIMIT #{startList}, #{listSize}
 	</select>
 
+<!-- 스토어 선택 강제탈퇴 했을 때 스토어테이블의 상태를 바꿔주기 -->
+	<update id="withdrawStore" parameterType="Store">
+		update tb_store
+			set status = #{status}
+		where store_no in 
+		  	<foreach item="no" index="index" collection="storeNoList" open="(" separator="," close=")">
+                #{no}
+            </foreach> 
+	</update>
+
 </mapper>

@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.nff.admin.store.service.StoreService;
 import kr.co.nff.repository.vo.SearchRe;
+import kr.co.nff.repository.vo.Store;
+import kr.co.nff.repository.vo.User;
 
 
 @Controller("kr.co.nff.admin.store.controller.AdminStoreController")
@@ -59,7 +61,11 @@ public class AdminStoreController {
 		return "redirect:storelist.do";
 	}
 
-
+	//회원 강제활동정지, 취소
+		@RequestMapping("/withdraw.do")
+		public void withdrawAjax(Store store){		
+			service.withdrawStore(store);
+	 }
 	
 	
 }

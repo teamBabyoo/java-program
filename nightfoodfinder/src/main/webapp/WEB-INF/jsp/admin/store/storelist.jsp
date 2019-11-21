@@ -157,10 +157,11 @@
 			</li>
 			<!-- search -->
 	<section class="panel ">
-		<h2>Table</h2>
-		<table>
+		<h2>가게 관리</h2>
 		<div>전체 : ${pagination.listCnt}개</div>
+		<table>
 			<tr>
+				<th>선택</th>
 				<th>가게이름</th>
 				<th>가게분류</th>
 				<th>대표자이름</th>
@@ -174,22 +175,24 @@
 			</c:if>
 			<c:forEach var="b" items="${slist}">
 				<tr>
-					<td class="myBtn" id="storeName">${b.storeName}</a></td>
-					<td id="categoryName">${b.categoryName}</a></td>
-					<td id="storeOwner">${b.storeOwner}</a></td>
-					<td id="businessNum">${b.businessNum}</a></td>
-					<td ><c:choose>
+				<td><input type="checkbox" id="myCheckboxid" name="storeNo" data-storeNo="${b.storeNo}"/></td>
+					<td class="myBtn" id="storeName">${b.storeName}</td>
+					<td id="categoryName">${b.categoryName}</td>
+					<td id="storeOwner">${b.storeOwner}</td>
+					<td id="businessNum">${b.businessNum}</td>
+					<td class="storetype"><c:choose>
 							<c:when test="${b.status == 0}">
 								<span class="statusbutton"><a
 									href="storestatus.do?no=${b.storeNo}">승인 대기</a></span>
 							</c:when>
 							<c:when test="${b.status == 1}">
-								<span class="statusbutton"><a href="">승인 완료</a></span>
+								승인 완료
 							</c:when>
 							<c:otherwise>
-								<span class="statusbutton"><a href="">활동 정지</a></span>
+								활동 정지
 							</c:otherwise>
 						</c:choose></td>
+					<td class="ahide" id="status">${b.status}</td>
 					<td class="ahide" id="storeEmail">${b.storeEmail}</td>
 					<td class="ahide" id="storeTell">${b.storeTell}</td>
 					<td class="ahide" id="streetLoad">${b.streetLoad}</td>
@@ -197,7 +200,89 @@
 					<td class="ahide" id="storeOwnerPh">${b.storeOwnerPh}</td>
 				</tr>
 			</c:forEach>
+		  <div>
+		<button type="button" id="withdraw" onclick="withdraw()">강제 활동 정지</button>
+ 		<button type="button" id="cancel" onclick="cancel()">활동 정지 취소</button>  
+		</div>
 		</table>
+		
+			<script>
+		function withdraw() {
+			let cnt = 0;
+			let chk = document.querySelectorAll("input[name='storeNo']");
+			for (let i = 0; i < chk.length; i++) {
+				if (chk[i].checked) {cnt++;
+				let withdraw = $(chk[i]).parent().parent().find(".storetype").text("활동 정지");}
+			}
+			if (cnt == 0) {
+				alert("강제 활동 정지할 가게를 선택하세요.");
+				return;
+			}
+			
+		
+			// storeNoArr을 status=2&storeList=1&storeList=3 이런식으로 만들기 위해서
+			var storeNoArr = new Array();
+			storeNoArr.push("status=2");	// 고정된 값이어서 미리 푸쉬
+			$("input[name='storeNo']:checked").each(function(){	// each : j쿼리의 반복문
+				storeNoArr.push("storeNoList=" + $(this).attr("data-storeNo"));
+			});
+			console.log(storeNoArr.join("&"));
+			storeNoArr = storeNoArr.join("&");
+			
+			$.ajax({
+				url: "${pageContext.request.contextPath}/admin/store/withdraw.do",
+				type: "POST",
+				data: storeNoArr,
+				dataType: "json",
+				success: function(){
+					location.href = "${pageContext.request.contextPath}/admin/store/storelist.do";
+				}
+			});
+
+			 for (let i = 0; i < chk.length; i++) {
+					if (chk[i].checked) 
+					$(chk[i]).prop('checked', false);
+				}	
+		}
+		function cancel() {
+			let cnt = 0;
+			let chk = document.querySelectorAll("input[name='storeNo']");
+			for (let i = 0; i < chk.length; i++) {
+				if (chk[i].checked) {cnt++;
+				let cancel = $(chk[i]).parent().parent().find(".storetype").text("승인 완료");}
+			}
+			if (cnt == 0) {
+				alert("활동 정지를 취소할 가게를 선택하세요.");
+				return;
+			}
+			
+		
+			// storeNoArr을 status=2&storeList=1&storeList=3 이런식으로 만들기 위해서
+			var storeNoArr = new Array();
+			storeNoArr.push("status=1");	// 고정된 값이어서 미리 푸쉬
+			$("input[name='storeNo']:checked").each(function(){	// each : j쿼리의 반복문
+				storeNoArr.push("storeNoList=" + $(this).attr("data-storeNo"));
+			});
+			console.log(storeNoArr.join("&"));
+			storeNoArr = storeNoArr.join("&");
+			
+			$.ajax({
+				url: "${pageContext.request.contextPath}/admin/store/withdraw.do",
+				type: "POST",
+				data: storeNoArr,
+				dataType: "json",
+				success: function(){
+					location.href = "${pageContext.request.contextPath}/admin/store/storelist.do";
+				}
+			});
+
+			 for (let i = 0; i < chk.length; i++) {
+					if (chk[i].checked) 
+					$(chk[i]).prop('checked', false);
+				}	
+		}
+		
+		</script>
 		
 		   <!-- 페이징 -->
 
@@ -274,7 +359,7 @@
 					<tr>
 						<th class="tg-0lax">대표자 연락처</th>
 						<td class="tg-0lax"></td>
-					</tr>
+					</tr>									
 				</table>
 			</div>
 
@@ -287,7 +372,7 @@
 			var btn = document.getElementsByClassName("myBtn");
 			// Get the <span> element that closes the modal
 			var span = document.getElementsByClassName("close")[0];
-			// When the user clicks on the button, open the modal 
+			// When the store clicks on the button, open the modal 
 			for (let i = 0; i < btn.length; i++) {
 				btn[i].onclick = function(e) {
 					let storeName = $(e.target).text();

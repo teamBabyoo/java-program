@@ -53,6 +53,7 @@ public class AdminUserController {
 		model.addAttribute("user", service.detailUser(no));
 	}
 	
+	//회원 강제탈퇴, 취소
 	@RequestMapping("/withdraw.do")
 	public void withdrawAjax(User user){		
 		service.withdrawUser(user);

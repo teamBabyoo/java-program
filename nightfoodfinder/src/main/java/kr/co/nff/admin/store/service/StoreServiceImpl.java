@@ -32,4 +32,10 @@ public class StoreServiceImpl implements StoreService{
 	public int GetListCnt(SearchRe search) {
 		return dao.adminStorePagingListCnt(search);
 	}
+
+	@Override
+	public void withdrawStore(Store store) {
+		dao.withdrawStore(store);
+		
+	}
 }
