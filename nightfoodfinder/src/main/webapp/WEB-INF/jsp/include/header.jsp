@@ -77,8 +77,8 @@
               <div>
                 <label for="checkedtype_3">3만원대<i class="fa fa-times" aria-hidden="true"></i></label>
                 <input id="checkedtype_3" type="checkbox" checked class="hidden" />
-              </div>
-            </div> -->
+              </div> -->
+            </div> 
             <!-- userselect-->
         </div>
       </form>
@@ -91,17 +91,17 @@
         <li id="person_btn"><i class="fa fa-user-o" aria-hidden="true"></i>
 		<!-- 팝업 (로그인 X) -->
 		<div class="pop_person nMember hidden">
-			<div class="topshape"></div>
-			<div>
+	        <div class="topshape"></div>
+	        <div>
 				로그인 후<br />
 				이용 가능합니다
-			</div>
-			<div>
-				<ul>
-				<li><a href="#">로그인하기</a></li>
-				</ul>
-			</div>
-		</div>
+	        </div>
+	        <div>
+	            <ul>
+	                <li><a href="#">로그인하기</a></li>
+	            </ul>
+	        </div>
+	    </div>
 		</li>
 
       </ul>
