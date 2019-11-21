@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import kr.co.nff.repository.dao.StoreDAO;
 import kr.co.nff.repository.vo.Holiday;
 import kr.co.nff.repository.vo.Menu;
+import kr.co.nff.repository.vo.Review;
 import kr.co.nff.repository.vo.Store;
 
 @Service("kr.co.nff.front.store.service.StoreServiceImpl")
@@ -60,6 +61,15 @@ public class StoreServiceImpl implements StoreService {
 		dao.updateHoliday(store);
 		dao.storeContentUpdate(store);
 		
+	}
+	
+	public List<Review> reviewList(int no) {
+		return dao.selectReview(no);
+	}
+	
+	public List<Review> updateReview(Review review){
+		dao.updateReview(review);
+		return dao.selectReview(review.getStoreNo());
 	}
 
 		

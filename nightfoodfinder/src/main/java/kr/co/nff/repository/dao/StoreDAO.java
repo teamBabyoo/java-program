@@ -4,6 +4,7 @@ import java.util.List;
 import kr.co.nff.repository.vo.Category;
 import kr.co.nff.repository.vo.Holiday;
 import kr.co.nff.repository.vo.Menu;
+import kr.co.nff.repository.vo.Review;
 import kr.co.nff.repository.vo.SearchRe;
 import kr.co.nff.repository.vo.Store;
 import kr.co.nff.repository.vo.User;
@@ -45,4 +46,19 @@ public interface StoreDAO {
 	
 	
 	int adminStorePagingListCnt(SearchRe search);
+	
+	
+	
+	/*가게 리뷰*/
+	//리뷰 리스트
+	List<Review> selectReview(int no);
+	//리뷰등록
+	void registReview(Review review);
+	//리뷰수정
+	void updateReview(Review review);
+	//리뷰삭제
+	void deleteReview(int no);
+	
+	
+	
 }
