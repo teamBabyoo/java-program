@@ -72,47 +72,6 @@
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 		<div class="content">
 		
-		<div><button id="lBtn" class="lBtn">login</button></div>
-		<div id="lModal" class="lModal" >
-			<div class="modal-content">
-		        <span id="close" class="close">&times;</span>
-		        <h1>NFF</h1>                                                               
-				<p class="memSel">
-					<span>
-						<input type="radio" id="userType1" name="r" checked>
-						<label for="userType1" id="userLabel1">개인회원</label>
-					</span>
-				</p>
-				<p>
-					<span>
-						<input type="radio" id="userType2" name="r">
-						<label for="userType2" id="userLabel2">점주회원</label>
-					</span>
-				</p>
-				<div class="memInput" id="memInput">
-					<form id="memForm" action="" onsubmit="return memChk()">
-						<p>
-							<input type="text" name="storeEmail" id="storeEmail" placeholder="이메일을 입력해주세요"/>
-						</p>
-						<p>
-							<input type="password" name="storePass" id="storePass" placeholder="비밀번호를 입력해주세요"/>
-						</p>
-						<p><button>로그인</button></p>
-					</form>
-				</div>
-				<div class="snsBox" id="snsBox">
-					<ul>
-						<li>
-							 <a href="${url}" target="_blank">
-								 <img width="223" 
-								 	src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/>
-							 </a>
-						</li>
-						<li></li>
-					</ul>
-				</div>
-	      	</div>
-		</div>
 		<div id="storeJoinForm">
 			<form name="form" id="form" method="post" onsubmit="">
 			<table>
@@ -159,44 +118,41 @@
 				
 				<tr>
 					<th>영업 시간</th>
-					<td><select>
-							<c:forEach begin="0" end="24" var="i">
-								<option name="openH" value="${i}">${i}</option>
-							</c:forEach>
-					</select>시 
-					<select>
-							<c:forEach begin="0" end="59" var="i">
-								<option name="openM" value="${i}">${i}</option>
-							</c:forEach>
-					</select>분 - 
-					<select>
-							<c:forEach begin="0" end="24" var="i">
-								<option name="closeH" value="${i}">${i}</option>
-							</c:forEach>
-					</select>시 
-					<select>
-							<c:forEach begin="0" end="59" var="i">
-								<option name="closeM" value="${i}">${i}</option>
-							</c:forEach>
-					</select>분</td>
+							<td><select name="openH">
+									<c:forEach begin="0" end="24" var="i">
+										<option id="openH${i}" value="${i}">${i}</option>
+									</c:forEach>
+							</select>시 <select name="openM">
+									<c:forEach begin="0" end="59" var="i">
+										<option id="openM${i}"  value="${i}">${i}</option>
+									</c:forEach>
+							</select>분 - <select name="closeH">
+									<c:forEach begin="0" end="24" var="i">
+										<option id="closeH${i}" value="${i}">${i}</option>
+									</c:forEach>
+							</select>시 <select name="closeM">
+									<c:forEach begin="0" end="59" var="i">
+										<option id="closeM${i}" value="${i}">${i}</option>
+									</c:forEach>
+							</select>분</td>
 				</tr>
 				<tr>
 					<th>휴무일</th>
 					<td>
-						<input type="checkbox" name="day1" value="1"/>월
-						<input type="checkbox" name="day2" value="2"/>화
-						<input type="checkbox" name="day3" value="3"/>수
-						<input type="checkbox" name="day4" value="4"/>목
-						<input type="checkbox" name="day5" value="5"/>금
-						<input type="checkbox" name="day6" value="6"/>토
-						<input type="checkbox" name="day7" value="7"/>일
+						<input type="checkbox" name="day" value="1"/>월
+						<input type="checkbox" name="day" value="2"/>화
+						<input type="checkbox" name="day" value="3"/>수
+						<input type="checkbox" name="day" value="4"/>목
+						<input type="checkbox" name="day" value="5"/>금
+						<input type="checkbox" name="day" value="6"/>토
+						<input type="checkbox" name="day" value="7"/>일
 						
 					</td>
 				</tr>
 				<tr>
 					<th>가게 분류</th>
 					<td>
-						<select name="category">
+						<select name="storeCategory">
 							<option value="1" >한식</option>
 							<option value="2" >양식</option>
 							<option value="3" >중식</option>

@@ -55,9 +55,9 @@
 							<th rowspan="4">주소</th>
 						</tr>
 						<tr>
-							<td><input type="text" id="zipNo" name="zipNo" readOnly /> <input
-								type="hidden" id="sggNm" name="sggNm" /> <input type="button"
-								onClick="goPopup();" value="주소찾기" /></td>
+							<td><input type="text" id="zipNo" name="zipNo" readOnly /> 
+							<input type="hidden" id="sggNm" name="sggNm" /> 
+							<input type="button" onClick="goPopup();" value="주소찾기" /></td>
 						</tr>
 						<tr>
 							<td><input type="text" style="width: 300px;"
@@ -142,6 +142,60 @@
 		</div>
 	</div>
 	<script>
+	//이메일 중복체크
+	$("#storeEmail").blur(function() {
+			var storeEmail = $('#storeEmail').val();
+			$.ajax({
+				url : '${pageContext.request.contextPath}/front/login/storeEmailChk.do?storeEmail='+ storeEmail,
+				success : function(data) {
+					console.log("1 = 중복o / 0 = 중복x : "+ data);							
+					
+					if (data == 1) {
+							// 1 : 아이디가 중복되는 문구
+							$("#emailChk").text("사용중인 이메일입니다");
+							$("#emailChk").css("color", "red");
+							$("#reg_submit").attr("disabled", true);
+						} 
+					else {
+							if(idJ.test(storeEmail)){
+								// 0 : 아이디 길이 / 문자열 검사
+								$("#emailChk").text("");
+								$("#reg_submit").attr("disabled", false);
+					
+							} else if(storeEmail == ""){
+								
+								$('#emailChk').text('이메일을 입력해주세요');
+								$('#emailChk').css('color', 'red');
+								$("#reg_submit").attr("disabled", true);				
+								
+							} else {
+								
+								$('#emailChk').text("올바른 형식의 이메일을 입력해주세요.");
+								$('#emailChk').css('color', 'red');
+								$("#reg_submit").attr("disabled", true);
+							}
+							
+						} 
+					}, error : function() {
+							console.log("실패");
+							console.log(data);
+					}
+				});
+			});
+	
+	//주소입력 팝업부분
+	function goPopup(){
+		var pop = window.open("/nightfoodfinder/api/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+	}
+
+	function jusoCallBack(roadFullAddr,zipNo,addrDetail,sggNm){
+			// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+			document.form.roadFullAddr.value = roadFullAddr;
+			document.form.addrDetail.value = addrDetail;
+			document.form.zipNo.value = zipNo;
+			document.form.sggNm.value = sggNm;
+		
+	}
 	
 	$(document).ready(function() {
 		

@@ -97,9 +97,19 @@
 				이용 가능합니다
 	        </div>
 	        <div>
+	           <c:choose>
+				<c:when test="${login != null}">
+				<ul>
+					<li><a href="${pageContext.request.contextPath}/front/login/logout.do">로그아웃</a></li>
+				</ul>
+				</c:when>
+				<c:otherwise>
 	            <ul>
-	                <li><a href="#">로그인하기</a></li>
+	           		
+	                <li><a href="${pageContext.request.contextPath}/front/login/userLoginForm.do">로그인하기</a></li>
 	            </ul>
+				</c:otherwise>
+	           </c:choose>
 	        </div>
 	    </div>
 		</li>
