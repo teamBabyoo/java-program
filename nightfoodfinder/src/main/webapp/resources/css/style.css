@@ -150,7 +150,7 @@ footer { position: absolute; width: 100%; line-height: 40px; text-align: center;
 	grid-template-rows: 300px 1fr;
 	margin: 0 auto;
 	width: 960px;
-	border: 1px solid red;
+	/* border: 1px solid red; */
 }
 
 .detail_wrap #storeinfo {

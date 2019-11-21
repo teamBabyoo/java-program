@@ -2,88 +2,91 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.nff.repository.dao.StoreDAO">
-<!-- resultMap (front-main) -->
-<resultMap type="Store" id="storeMap" >
-	<result column="store_no" property="storeNo" />
-	<result column="store_name" property="storeName" />
-	<result column="store_email" property="storeEmail" />
-	<result column="store_pass" property="storePass" />
-	<result column="store_tell" property="storeTell" />
-	<result column="store_category" property="storeCategory" />
-	<result column="open_time" property="openTime" />
-	<result column="close_time" property="closeTime" />
-	<result column="status" property="status" />
-	<result column="business_num" property="businessNum" />
-	<result column="store_owner" property="storeOwner" />
-	<result column="store_owner_ph" property="storeOwnerPh" /> 
-	<result column="latitude" property="latitude" />
-	<result column="longitude" property="longitude" />
-	<result column="store_join_date" property="storeJoinDate" />
-	<result column="price_type" property="priceType" />
-	<result column="see_cnt" property="seeCnt" />
-	<result column="store_scope_total" property="storeScopeTotal" />
-	<result column="review_cnt_total" property="reviewCntTotal" />
-	
-	<collection property="holidayList" column="store_no" select="selectHolidayListByStoreNo" />
-</resultMap>
+	<!-- resultMap (front-main) -->
+	<resultMap type="Store" id="storeMap">
+		<result column="store_no" property="storeNo" />
+		<result column="store_name" property="storeName" />
+		<result column="store_email" property="storeEmail" />
+		<result column="store_pass" property="storePass" />
+		<result column="store_tell" property="storeTell" />
+		<result column="store_category" property="storeCategory" />
+		<result column="open_time" property="openTime" />
+		<result column="close_time" property="closeTime" />
+		<result column="status" property="status" />
+		<result column="business_num" property="businessNum" />
+		<result column="store_owner" property="storeOwner" />
+		<result column="store_owner_ph" property="storeOwnerPh" />
+		<result column="latitude" property="latitude" />
+		<result column="longitude" property="longitude" />
+		<result column="store_join_date" property="storeJoinDate" />
+		<result column="price_type" property="priceType" />
+		<result column="see_cnt" property="seeCnt" />
+		<result column="store_scope_total" property="storeScopeTotal" />
+		<result column="review_cnt_total" property="reviewCntTotal" />
 
-<!-- collection이 호출하는 selet -->
-<select id="selectHolidayListByStoreNo" parameterType="int" resultType="Holiday">
-select w.week_name, h.week_no 
-  from tb_holiday as h
- inner join tb_week as w
-    on h.week_no = w.week_no
- where store_no = #{store_no}
-</select>
+		<collection property="holidayList" column="store_no"
+			select="selectHolidayListByStoreNo" />
+	</resultMap>
 
-<!-- 메인에 표시할 가게 상세정보 리스트 -->
-<select id="mainStoreList" resultMap="storeMap">
-   		select distinct s.*,
-			   c.category_name as category,
-               a.city,
-               a.street_load
-  		  from tb_store s
-		 inner join tb_category c
-            on s.store_category = c.category_no
-    left outer join tb_store_menu m
-            on s.store_no = m.store_no
-         inner join tb_address a
-            on s.store_no = a.store_no
-         <where>
-         	<if test="includeClosed == 1">  
+	<!-- collection이 호출하는 selet -->
+	<select id="selectHolidayListByStoreNo" parameterType="int"
+		resultType="Holiday">
+		select w.week_name, h.week_no
+		from tb_holiday as h
+		inner join tb_week as w
+		on h.week_no = w.week_no
+		where store_no = #{store_no}
+	</select>
+
+	<!-- 메인에 표시할 가게 상세정보 리스트 -->
+	<select id="mainStoreList" resultMap="storeMap">
+		select distinct s.*,
+		c.category_name as category,
+		a.city,
+		a.street_load
+		from tb_store s
+		inner join tb_category c
+		on s.store_category = c.category_no
+		left outer join tb_store_menu m
+		on s.store_no = m.store_no
+		inner join tb_address a
+		on s.store_no = a.store_no
+		<where>
+			<if test="includeClosed == 1">  
          		<![CDATA[
          		and str_to_date(s.open_time, '%h:%i %p') < now()
             	and str_to_date(s.close_time, '%h:%i %p') > now()
          		]]>
-         	</if>
-         </where>     
-         order by (store_scope_total/review_cnt_total) desc
-              
-         limit 0, 5
-</select>
+			</if>
+		</where>
+		order by (store_scope_total/review_cnt_total) desc
+
+		limit 0, 5
+	</select>
 
 	<!-- 헤더 검색바에 줄 카테고리 리스트 가져오기 -->
 	<select id="selectCategory" resultType="Category">
 		select * from tb_category
 	</select>
-	
-	<!-- 헤더 검색바에 줄 지역구 리스트-->
+
+	<!-- 헤더 검색바에 줄 지역구 리스트 -->
 	<select id="cityList" resultType="String">
 		select a.city
-  		  from tb_store s
- 	     inner join tb_address a
-    		on s.store_no = a.store_no
+		from tb_store s
+		inner join tb_address a
+		on s.store_no = a.store_no
 	</select>
-	
-	<select id="selectOneStore" resultType="Store" parameterType="int">
-	select s.store_no,
+
+	<select id="selectOneStore" resultType="Store"
+		parameterType="int">
+		select s.store_no,
 		s.store_name,
-        s.store_email,
+		s.store_email,
 		s.store_tell,
-        s.business_num,
-        s.store_category,
-        s.store_owner,
-       	s.store_owner_ph,
+		s.business_num,
+		s.store_category,
+		s.store_owner,
+		s.store_owner_ph,
 		s.open_time,
 		s.close_time,
 		a.city,
@@ -95,192 +98,202 @@ select w.week_name, h.week_no
 		on s.store_no = a.store_no
 		inner join tb_category as c
 		on s.store_category = c.category_no
-		inner join tb_store_content as sc
+		inner
+		join tb_store_content as sc
 		on s.store_no = sc.store_no
-		inner join tb_review as r 
+		inner join
+		tb_review as r
 		on s.store_no = r.store_no
-	where s.store_no = #{storeNo}
+		where s.store_no = #{storeNo}
 
 	</select>
-	
+
 	<!--가게 소개글 가져오기 -->
-	<select id="selectContent" parameterType="int" resultType="Store">
-	 select store_content
- 		from tb_store_content
- 	 where store_no = #{storeNo}
- 	 order by store_content_no desc limit 1;
+	<select id="selectContent" parameterType="int"
+		resultType="Store">
+		select store_content
+		from tb_store_content
+		where store_no = #{storeNo}
+		order by store_content_no desc limit 1;
 	</select>
-	
+
 	<!-- 가게 소개글 수정(insert) -->
 	<insert id="storeContentUpdate" parameterType="Store">
-	 INSERT INTO tb_store_content (store_no, store_content) 
-	 		VALUES (#{storeNo}, #{storeContent}); 
-	 		
+		INSERT INTO tb_store_content (store_no, store_content)
+		VALUES (#{storeNo}, #{storeContent});
+
 	</insert>
-	
+
 
 	<!-- 별점 평균 -->
 	<select id="storeScope" resultType="Store" parameterType="int">
-		select ifnull(truncate(sum(store_scope) / count(user_no), 1), 0) as scope
+		select
+		ifnull(truncate(sum(store_scope) / count(user_no), 1), 0) as scope
 		from tb_review
 		where store_no = #{storeNo}
 	</select>
-	
-	
+
+
 	<!--가게정보 수정 -->
-	<update id="storeUpdateInfo" parameterType="Store" >
-	update tb_store s
-	set 
-	<if test="storeName != null">
-		store_name = #{storeName},
-	</if>
-	<if test="storePass != null">
+	<update id="storeUpdateInfo" parameterType="Store">
+		update tb_store s
+		set
+		<if test="storeName != null">
+			store_name = #{storeName},
+		</if>
+		<if test="storePass != null">
 			store_pass = #{storePass},
-	</if>
-	<if test="storeCategory != null">
-			 store_category = #{storeCategory},
-	</if>
-	<if test="openTime != null">
-			open_time = #{openTime}, 
-	</if>
-	<if test="closeTime != null">
-			  close_time = #{closeTime},
-	</if>
-	<if test="storeOwner != null">
+		</if>
+		<if test="storeCategory != null">
+			store_category = #{storeCategory},
+		</if>
+		<if test="openTime != null">
+			open_time = #{openTime},
+		</if>
+		<if test="closeTime != null">
+			close_time = #{closeTime},
+		</if>
+		<if test="storeOwner != null">
 			store_owner = #{storeOwner},
-	</if>
-	<if test="storeOwnerPh != null">
+		</if>
+		<if test="storeOwnerPh != null">
 			store_owner_ph = #{storeOwnerPh},
-	</if>
-	
-	<if test="storeTell != null">
-	 store_tell = #{storeTell}
-	</if>
+		</if>
+
+		<if test="storeTell != null">
+			store_tell = #{storeTell}
+		</if>
 		WHERE store_no = #{storeNo}
 	</update>
-	
+
 	<!--휴일은 업데이트X delete하고 insert하라 -->
 	<delete id="deleteHoliday" parameterType="Store">
-		delete 
-		 from tb_holiday
-		 where store_no = #{storeNo}
+		delete
+		from tb_holiday
+		where store_no = #{storeNo}
 	</delete>
-	
-	
+
+
 	<insert id="updateHoliday" parameterType="Store">
-	 <if test="day != null">
-	 INSERT INTO tb_holiday (week_no, store_no) VALUES 
-		 <foreach collection="day" item="weekNo" separator=",">
-			 (#{weekNo}, #{storeNo})
-		 </foreach>
-	 </if>
+		<if test="day != null">
+			INSERT INTO tb_holiday (week_no, store_no) VALUES
+			<foreach collection="day" item="weekNo" separator=",">
+				(#{weekNo}, #{storeNo})
+			</foreach>
+		</if>
 	</insert>
-	
-	
+
+
 	<!-- 주소변경 -->
 	<update id="updateStoreAddr" parameterType="Store">
-	 update tb_address
-	    set
-	    <if test="city != null">
-	     city = #{city},
-	    </if>
-	    <if test="streetLoad != null">
-	     street_load = #{streetLoad}
-	    </if>
+		update tb_address
+		set
+		<if test="city != null">
+			city = #{city},
+		</if>
+		<if test="streetLoad != null">
+			street_load = #{streetLoad}
+		</if>
 	</update>
-	
-	<!-- 스토어 리스트  -->
-    <select id="storeList" resultType="Store" parameterType="Search">
-   		select distinct s.*,  
-   			   a.*,
-			   c.category_name as category,
-       		   ifnull(round(s.store_scope_total / s.review_cnt_total, 1), 0) scope
-  		  from tb_store s
-		 inner join tb_category c
-            on s.store_category = c.category_no
-    left outer join tb_store_menu m
-            on s.store_no = m.store_no
-         inner join tb_address a
-            on s.store_no = a.store_no
-         <where>
-         	<if test="includeClosed == 1"> <!-- 현재 영업중인 가게만 볼 때 (dafault : 1 , 0 : 영업끝난가게 포함)-->  
+
+	<!-- 스토어 리스트 -->
+	<select id="storeList" resultType="Store" parameterType="Search">
+		select distinct s.*,
+		a.*,
+		c.category_name as category,
+		ifnull(round(s.store_scope_total / s.review_cnt_total, 1), 0) scope
+		from tb_store s
+		inner join tb_category c
+		on s.store_category = c.category_no
+		left outer join tb_store_menu m
+		on s.store_no = m.store_no
+		inner join tb_address a
+		on s.store_no = a.store_no
+		<where>
+			<if test="includeClosed == 1"> <!-- 현재 영업중인 가게만 볼 때 (dafault : 1 , 0 : 영업끝난가게 포함) -->  
          		<![CDATA[
          		and str_to_date(s.open_time, '%h:%i') < now()
             	and str_to_date(s.close_time, '%h:%i') > now()
          		]]>
-         	</if>
-         	<if test="keyword != null"> <!-- 검색어가 있는 경우 -->
-	           and s.store_name like concat('%', #{keyword}, '%')
-         	    or m.menu like concat('%', #{keyword}, '%')
-         	    or a.city like concat('%', #{keyword}, '%')
-         	    or a.street_load like concat('%', #{keyword}, '%')
-         	</if>
-         	<if test="cities != null">
-         		and a.city in
-         		<foreach collection="cities" item="c" open="(" close=")" separator=",">
-         			'#{c}'
-         		</foreach>
-         	</if>
-         </where>     
-         <choose>
-         	<when test="filter == 'scope'">  <!-- 평점순 -->
-         		order by scope desc
-         	</when>
-         	<when test="filter == 'seeCnt'"> <!-- 조회수 -->
-         		order by s.see_cnt desc
-         	</when>
-         	<when test="filter == 'rcount'"> <!-- 리뷰수 -->
-         		order by s.review_cnt_total desc
-         	</when>
-         	<otherwise> <!-- default 평점순 -->
-         		order by scope desc
-         	</otherwise>
-         </choose>
-              
-      <!--    limit #{startList}, #{listSize}  -->
-         limit 0, 10 
-   </select>
+			</if>
+			<if test="keyword != null"> <!-- 검색어가 있는 경우 -->
+				and s.store_name like concat('%', #{keyword}, '%')
+				or m.menu like concat('%', #{keyword}, '%')
+				or a.city like concat('%', #{keyword}, '%')
+				or a.street_load like concat('%', #{keyword}, '%')
+			</if>
+			<if test="cities != null">
+				and a.city in
+				<foreach collection="cities" item="c" open="(" close=")"
+					separator=",">
+					'#{c}'
+				</foreach>
+			</if>
+		</where>
+		<choose>
+			<when test="filter == 'scope'">  <!-- 평점순 -->
+				order by scope desc
+			</when>
+			<when test="filter == 'seeCnt'"> <!-- 조회수 -->
+				order by s.see_cnt desc
+			</when>
+			<when test="filter == 'rcount'"> <!-- 리뷰수 -->
+				order by s.review_cnt_total desc
+			</when>
+			<otherwise> <!-- default 평점순 -->
+				order by scope desc
+			</otherwise>
+		</choose>
 
-	
-	<select id="storeMenuList" resultType="Store" parameterType="int">
-		select menu, price
-		from tb_store_menu
-		where store_no = #{storeNo}
+		<!-- limit #{startList}, #{listSize} -->
+		limit 0, 10
 	</select>
 
-	<select id="storeHoliday" resultType="Holiday" parameterType="int">
+
+	<select id="storeMenuList" resultType="Store"
+		parameterType="int">
+		select menu, price
+		from tb_store_menu
+		where store_no =
+		#{storeNo}
+	</select>
+
+	<select id="storeHoliday" resultType="Holiday"
+		parameterType="int">
 		select w.week_name, h.week_no
 		from tb_holiday as h
-		inner join tb_week as w
+		inner
+		join tb_week as w
 		on h.week_no = w.week_no
 		where h.store_no = #{storeNo}
 	</select>
-	
+
 	<update id="">
 	</update>
 
 
-	
+
 	<!-- admin storelist -->
-	<select id="adminSelectStore" parameterType="SearchRe" resultType="Store">
-		 select s.store_no, 
-      		 s.store_name,     		 
-      		 s.store_owner,
-      		 s.business_num,
-      		 s.status,
-      		 s.store_email,
-      		 s.store_tell,
-      		 (select a.street_load 
-      		  from tb_address as a
-      		  where s.store_no = a.store_no) as street_load,
-      		 s.open_time,
-      		 s.close_time,
-      		 s.store_owner_ph,
-      		 (select c.category_name
-      		 from tb_category as c
-      		 where s.store_category = c.category_no) as category_name
-      		from tb_store as s
-      			<!-- 검색 -->
+	<select id="adminSelectStore" parameterType="SearchRe"
+		resultType="Store">
+		select s.store_no,
+		s.store_name,
+		s.store_owner,
+		s.business_num,
+		s.status,
+		s.store_email,
+		s.store_tell,
+		(select a.street_load
+		from tb_address as a
+		where s.store_no = a.store_no) as street_load,
+		s.open_time,
+		s.close_time,
+		s.store_owner_ph,
+		(select c.category_name
+		from tb_category as c
+		where s.store_category = c.category_no) as category_name
+		from tb_store as s
+		<!-- 검색 -->
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="type=='nopermit' ">
 				AND s.status = 0
@@ -292,34 +305,35 @@ select w.week_name, h.week_no
 				AND s.status = 2
 			</if>
 		</trim>
-		 order by s.store_no desc
-		 
-		  <!-- 페이징  -->
+		order by s.store_no desc
+
+		<!-- 페이징 -->
 		LIMIT #{startList}, #{listSize}
-		
+
 	</select>
-	
-	
+
+
 
 	<!-- admin storedelete -->
 	<update id="adminDeleteStore" parameterType="int">
 		update tb_store
-		  set status = 2
-		 where store_no = #{no}
+		set status = 2
+		where store_no = #{no}
 	</update>
-	
+
 	<!-- admin storestatus (가게 승인) -->
 	<update id="adminStatusStore" parameterType="int">
 		update tb_store
-		  set status = 1
-		 where store_no = #{no}
+		set status = 1
+		where store_no = #{no}
 	</update>
 
-		<select id="adminStorePagingListCnt" parameterType="SearchRe" resultType="int">
+	<select id="adminStorePagingListCnt" parameterType="SearchRe"
+		resultType="int">
 		select count(*) as listCnt
-			from tb_store s
+		from tb_store s
 		<!-- 검색 -->
-	
+
 		<!-- 검색 -->
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="type=='nopermit' ">
@@ -332,10 +346,99 @@ select w.week_name, h.week_no
 				AND s.status = 2
 			</if>
 		</trim>
-		
-	
-		<!-- 페이징  -->
+
+
+		<!-- 페이징 -->
 		LIMIT #{startList}, #{listSize}
 	</select>
+
+
+
+	<!-- 댓글 -->
+	<!-- 댓글 리스트 -->
+	
+	<select id="selectComment" parameterType="int" resultType="Review">
+	 select '1' as type, 
+			r.review_no, 
+			r.user_no, 
+			u.nick_name,
+			r.review_content, 
+			r.reg_date, 
+			r.store_scope, 
+			ifnull(l.iloveyou, 0) as likeCount 
+	from tb_review as r 
+	inner join tb_user as u
+	   on r.user_no = u.user_no
+	inner join (
+			select store_review_no, 
+					count(user_no) as iloveyou 
+			from tb_like 
+			group by store_review_no 
+			order by iloveyou desc limit 1) l 
+	on r.review_no = l.store_review_no 
+		union all 
+		( select '2', 
+				r.review_no, 
+				r.user_no, 
+				u.nick_name,
+				r.review_content, 
+				r.reg_date, 
+				r.store_scope, 
+				ifnull(l.iloveyou, 0) as likeCount 
+		 from tb_review as r 
+		 inner join tb_user as u
+		   on r.user_no = u.user_no
+		left outer join (
+					select store_review_no, 
+							count(user_no) as iloveyou 
+					from tb_like 
+					group by store_review_no 
+		   			 order by iloveyou desc) as l 
+		   on r.review_no = l.store_review_no 
+		where r.store_no = #{storeNo}
+		  and r.review_no != (select 
+		  						store_review_no 
+		  					 from tb_like 
+							group by store_review_no 
+							order by count(user_no) desc limit 1) 
+							) 
+		order by type, reg_date desc
+
+		LIMIT #{startList}, #{listSize}
+		</select>
+		<!--
+		 -->
+
+	<!-- 댓글 등록  -->
+	<!-- 파일등록 아직X -->
+	<insert id="registCommet" parameterType="Review">
+	 INSERT INTO tb_review (store_no, 
+	 						user_no, 
+	 						review_content, 
+	 						store_scope, 
+	 						file_group_code, 
+	 						) VALUES (
+	 						#{storeNo}, 
+	 						#{userNo}, 
+	 						#{reviewContent}, 
+	 						#{storeScope}, 
+	 						#{fileGroupCode}
+	 						)
+	</insert>
+	
+	<!-- 댓글 수정 -->
+	<update id="updateComment" parameterType="Review">
+	 update tb_review
+		set review_content = #{reviewContent} ,
+			store_scope = #{storeScope}
+		where review_no = #{reviewNo}
+	</update>
+	
+	<!-- 댓글삭제 -->
+	<delete id="deleteComment" parameterType="int">
+	  delete 
+	   from tb_review
+	  where review_no = #{reviewNo}
+	</delete>
 
 </mapper>

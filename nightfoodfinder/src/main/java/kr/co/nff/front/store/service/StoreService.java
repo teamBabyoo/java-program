@@ -27,5 +27,8 @@ public interface StoreService {
 	public void updateHoliday(Store store);
 	
 	
+	
+	
+	
 }
 
