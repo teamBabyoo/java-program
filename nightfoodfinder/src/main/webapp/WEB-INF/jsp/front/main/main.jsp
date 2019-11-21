@@ -20,11 +20,8 @@
     <!-- 컨텐트  -->
 	<div class="content clearboth">
 	<c:forEach var="s" items="${sList}" varStatus="status">
-<%-- 	<h2>${s.storeName }</h2> --%>
-	
-		<%-- <h2>사이즈 : ${sList.size()}</h2> --%>
-		<c:choose>
-		<c:when test="${sList[status.count].storeName != null}">
+<!-- <h2>${s.storeName }</h2>
+	<h2>사이즈 : ${sList.size()}</h2> -->
 		<div class="store store_${status.count}">
 	        <div class="square_box">
 	            <div class="desc">
@@ -56,15 +53,6 @@
 	            <p><a href="${pageContext.request.contextPath}/front/store/storedetail.do?no=${s.storeNo}">자세히 보기</a></p>
 	        </div>
 	    </div>
-		</c:when>
-		<c:otherwise>
-		<%-- <div class="store store_${status.count}">
-	        <div class="desc">
-	        	비어있음
-	        </div>
-	    </div> --%>
-		</c:otherwise>
-		</c:choose>
 	</c:forEach> 
 <!-- 	
 	    <div class="store store_1st">
