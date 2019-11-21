@@ -44,7 +44,6 @@
 	</bean> 
 	
 	<!-- 트랜잭션 처리 -->
-	<!-- 
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
@@ -56,11 +55,12 @@
 	</tx:advice>
 	<aop:config>
 		<aop:pointcut id="tranMethod"
-		              expression="execution(public * kr.co.mlec..service.*Impl.*(..)) "/>
+		              expression="execution(public * kr.co.nff..service.*Impl.*(..)) "/>
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="tranMethod" />
 	</aop:config>
 	
 	<tx:annotation-driven transaction-manager="transactionManager" />
+	<!-- 
 	 --> 
 </beans>
 

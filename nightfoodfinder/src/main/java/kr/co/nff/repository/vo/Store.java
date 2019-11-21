@@ -24,6 +24,7 @@ public class Store {
 	private int price;
 	private int priceType; // 가격대
 	private int seeCnt;
+	
 	private String weekName;
 	private int status;
 	private int businessNum;
@@ -43,5 +44,10 @@ public class Store {
 	
 	// ↙ 콜렉션 (메인페이지 리스트에서 사용)
 	private List<Holiday> holidayList;
+	
+	
+	//휴무일 받을 리스트 
+	private List<Integer> day;
+	
 }
 	

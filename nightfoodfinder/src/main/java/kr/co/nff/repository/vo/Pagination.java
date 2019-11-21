@@ -18,7 +18,7 @@ public class Pagination {
 	
 	public Pagination() {
 		this.listSize = 10; // 초기값으로 목록개수를 10으로 셋팅
-		this.rangeSize = 5; // 초기값으로 페이지범위를 10으로 셋팅
+		this.rangeSize = 5; // 초기값으로 페이지범위를 5로 셋팅
 	}
 	
 	public Pagination(int listSize, int rangeSize) {
@@ -27,7 +27,7 @@ public class Pagination {
 	}
 	
 	// page : 현재 페이지 - 현재 목록의 페이지 번호
-	// range : 현재 페이지 범위 (각 페이지 범위 시작 번호) -- 페이지 범위 블럭 번호 (범위 줄 번호)
+	// range : 현재 페이지 범위 (각 페이지 범위 번호) -- 페이지 범위 블럭 번호 (범위 줄 번호) 예를 들면, 1~5(페이지범위)는 range가 1, 6~10은 range가 2 ...
 	// listCnt : 총 게시물 수 (전체 게시물 개수)
 
 	public void pageInfo(int page, int range, int listCnt) {

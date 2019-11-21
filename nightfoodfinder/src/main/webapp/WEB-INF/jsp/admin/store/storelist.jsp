@@ -129,7 +129,33 @@
 
 	<main role="main">
 
+<!-- search -->
+			<li>
+				<div class="form-group row justify-content-center">
 
+					<div class="w100" style="padding-right: 10px">
+
+						<select class="form-control form-control-sm" name="searchType"
+							id="searchType">						
+									<option value="total" ${pagination.type eq "total" ? "selected" :""}>전체</option>
+									<option value="permit" ${pagination.type eq "permit" ? "selected" :""}>승인 완료</option>
+									<option value="nopermit" ${pagination.type eq "nopermit" ? "selected" :""}>승인 대기</option>
+									<option value="withdraw" ${pagination.type eq "withdraw" ? "selected" :""}>활동 정지</option>								
+						</select>
+					</div>
+					<div class="w300" style="padding-right: 10px">
+						<input type="text" class="form-control form-control-sm"
+							name="keyword" id="keyword" value="${pagination.keyword}">
+					</div>
+					<div>
+						<button class="btn btn-sm btn-primary" name="btnSearch"
+							id="btnSearch">검색</button>
+						<button class="back" name="backList" id="backList"
+							onclick="location.href='/nightfoodfinder/admin/store/storelist.do'">검색취소</button>
+					</div>
+				</div>
+			</li>
+			<!-- search -->
 	<section class="panel ">
 		<h2>Table</h2>
 		<table>
@@ -152,7 +178,7 @@
 					<td id="categoryName">${b.categoryName}</a></td>
 					<td id="storeOwner">${b.storeOwner}</a></td>
 					<td id="businessNum">${b.businessNum}</a></td>
-					<td><c:choose>
+					<td ><c:choose>
 							<c:when test="${b.status == 0}">
 								<span class="statusbutton"><a
 									href="storestatus.do?no=${b.storeNo}">승인 대기</a></span>
@@ -172,6 +198,40 @@
 				</tr>
 			</c:forEach>
 		</table>
+		
+		   <!-- 페이징 -->
+
+		<div id="paginationBox">
+			<ul class="pagination">
+				<c:if test="${pagination.prev}">
+					<li class="page-item"><a class="page-link" href="#"
+						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">
+							Previous</a></li>
+				</c:if>
+
+				<c:forEach begin="${pagination.startPage}"
+					end="${pagination.endPage}" var="idx">
+					<li
+						class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
+						<a class="page-link" href="#"
+						onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')">
+							${idx} </a>
+					</li>
+
+				</c:forEach>
+
+				<c:if test="${pagination.next}">
+
+					<li class="page-item"><a class="page-link" href="#"
+						onClick="fn_next('${pagination.range}', 
+					'${pagination.range}', '${pagination.rangeSize}')">Next</a>
+					</li>
+				</c:if>
+			</ul>
+		</div>
+
+		<!-- 페이징 -->
+		
 		<!-- The Modal -->
 		<div id="myModal" class="modal">
 			<!-- Modal content -->
@@ -239,7 +299,6 @@
 					let businessNum = $(e.target).siblings("#businessNum").text();
 					let storeOwner = $(e.target).siblings("#storeOwner").text();
 					let storeOwnerPh = $(e.target).siblings("#storeOwnerPh").text();
-
 					modal.style.display = "block";
 					$(".tg td:eq(0)").text(storeName)
 					$(".tg td:eq(1)").text(storeEmail)
@@ -250,6 +309,7 @@
 					$(".tg td:eq(6)").text(businessNum)
 					$(".tg td:eq(7)").text(storeOwner)
 					$(".tg td:eq(8)").text(storeOwnerPh)
+					
 				}
 			}
 			// When the user clicks on <span> (x), close the modal
@@ -262,6 +322,54 @@
 					modal.style.display = "none";
 				}
 			}
+			
+			 // 서치
+			$(document)
+					.on(
+							'click',
+							'#btnSearch',
+							function(e) {
+								e.preventDefault();
+								var url = "${pageContext.request.contextPath}/admin/store/storelist.do";
+								url = url + "?searchType="
+										+ $('#searchType option:selected').val();
+								url = url + "&keyword=" + $('#keyword').val();
+								location.href = url;
+							});
+
+			// 페이징
+
+			//이전 버튼 이벤트
+			function fn_prev(page, range, rangeSize) {
+				var page = ((range - 2) * rangeSize) + 1;
+				var range = range - 1;
+				var url = "${pageContext.request.contextPath}/admin/store/storelist.do";
+				url = url + "?page=" + page;
+				url = url + "&range=" + range;
+				location.href = url;
+			}
+
+			//페이지 번호 클릭
+			function fn_pagination(page, range, rangeSize) {
+				var url = "${pageContext.request.contextPath}/admin/store/storelist.do";
+				url = url + "?page=" + page;
+				url = url + "&range=" + range;
+				url = url + "&searchType="
+						+ $('#searchType option:selected').val();
+				url = url + "&keyword=" + $('#keyword').val();
+				location.href = url;
+			}
+
+			//다음 버튼 이벤트
+			function fn_next(page, range, rangeSize) {
+				var page = parseInt((range * rangeSize)) + 1;
+				var range = parseInt(range) + 1;
+				var url = "${pageContext.request.contextPath}/admin/store/storelist.do";
+				url = url + "?page=" + page;
+				url = url + "&range=" + range;
+				location.href = url;
+			}
+			
 		</script>
 	</section>
 	</main>

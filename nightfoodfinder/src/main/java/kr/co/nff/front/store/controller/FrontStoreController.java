@@ -6,11 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.google.gson.JsonArray;
-
 import kr.co.nff.front.store.service.StoreService;
+import kr.co.nff.repository.vo.Store;
 import net.sf.json.JSONArray;
-import netscape.javascript.JSObject;
 
 
 @Controller("kr.co.nff.front.store.controller.FrontStoreController")
@@ -32,16 +30,22 @@ public class FrontStoreController {
 		model.addAttribute("store", service.storeDetail(no));
 		model.addAttribute("menu", service.storeMenu(no));
 		model.addAttribute("holidaylist", service.storeHoliday(no));
+		model.addAttribute("storeContent", service.storeContent(no));
 	}
 	
 	/* 가게 정보 수정*/
 	@RequestMapping("/storeinfoupdate.do")
-	public void storeInfoUpdate() {}
+	public String storeInfoUpdate(Store store, @RequestParam(value="storeNo") int no) {
+		service.updateHoliday(store);
+		System.out.println(service.storeDetail(no));
+		return "redirect:storedetail.do?no="+no;
+	}
 	
 	/* 가게 소개글 수정폼*/
 	@RequestMapping("/storecontentupdateForm.do")
 	public void storeContentUpdate(int no, Model model) {
 		model.addAttribute("store", service.storeupdateForm(no));
+		model.addAttribute("storeContent", service.storeContentUpdateForm(no));
 		JSONArray jsonArray = new JSONArray();
 		model.addAttribute("holidaylist", jsonArray.fromObject(service.storeHoliday(no)));
 	}

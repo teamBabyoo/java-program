@@ -35,6 +35,7 @@ select w.week_name, h.week_no
     on h.week_no = w.week_no
  where store_no = #{store_no}
 </select>
+
 <!-- 메인에 표시할 가게 상세정보 리스트 -->
 <select id="mainStoreList" resultMap="storeMap">
    		select distinct s.*,
@@ -61,38 +62,62 @@ select w.week_name, h.week_no
          limit 0, 5
 </select>
 
-	<!-- 카테고리 리스트 가져오기 -->
+	<!-- 헤더 검색바에 줄 카테고리 리스트 가져오기 -->
 	<select id="selectCategory" resultType="Category">
 		select * from tb_category
 	</select>
 	
+	<!-- 헤더 검색바에 줄 지역구 리스트-->
+	<select id="cityList" resultType="String">
+		select a.city
+  		  from tb_store s
+ 	     inner join tb_address a
+    		on s.store_no = a.store_no
+	</select>
+	
 	<select id="selectOneStore" resultType="Store" parameterType="int">
-		select s.store_no,
+	select s.store_no,
 		s.store_name,
+        s.store_email,
 		s.store_tell,
-		s.business_num,
+        s.business_num,
+        s.store_category,
+        s.store_owner,
+       	s.store_owner_ph,
 		s.open_time,
-		s.store_owner,
-		s.store_owner_ph,
 		s.close_time,
-		s.store_email,
 		a.city,
 		a.street_load,
 		c.category_name,
-		sc.store_content,
 		ifnull(truncate(sum(r.store_scope) / count(r.user_no), 1), 0) as scope
 		from tb_store as s
-		inner join tb_area as a
-		on s.area_code = a.area_code
+		inner join tb_address as a
+		on s.store_no = a.store_no
 		inner join tb_category as c
 		on s.store_category = c.category_no
 		inner join tb_store_content as sc
 		on s.store_no = sc.store_no
 		inner join tb_review as r 
 		on s.store_no = r.store_no
-		where s.store_no = #{storeNo}
+	where s.store_no = #{storeNo}
 
 	</select>
+	
+	<!--가게 소개글 가져오기 -->
+	<select id="selectContent" parameterType="int" resultType="Store">
+	 select store_content
+ 		from tb_store_content
+ 	 where store_no = #{storeNo}
+ 	 order by store_content_no desc limit 1;
+	</select>
+	
+	<!-- 가게 소개글 수정(insert) -->
+	<insert id="storeContentUpdate" parameterType="Store">
+	 INSERT INTO tb_store_content (store_no, store_content) 
+	 		VALUES (#{storeNo}, #{storeContent}); 
+	 		
+	</insert>
+	
 
 	<!-- 별점 평균 -->
 	<select id="storeScope" resultType="Store" parameterType="int">
@@ -100,6 +125,69 @@ select w.week_name, h.week_no
 		from tb_review
 		where store_no = #{storeNo}
 	</select>
+	
+	
+	<!--가게정보 수정 -->
+	<update id="storeUpdateInfo" parameterType="Store" >
+	update tb_store s
+	set 
+	<if test="storeName != null">
+		store_name = #{storeName},
+	</if>
+	<if test="storePass != null">
+			store_pass = #{storePass},
+	</if>
+	<if test="storeCategory != null">
+			 store_category = #{storeCategory},
+	</if>
+	<if test="openTime != null">
+			open_time = #{openTime}, 
+	</if>
+	<if test="closeTime != null">
+			  close_time = #{closeTime},
+	</if>
+	<if test="storeOwner != null">
+			store_owner = #{storeOwner},
+	</if>
+	<if test="storeOwnerPh != null">
+			store_owner_ph = #{storeOwnerPh},
+	</if>
+	
+	<if test="storeTell != null">
+	 store_tell = #{storeTell}
+	</if>
+		WHERE store_no = #{storeNo}
+	</update>
+	
+	<!--휴일은 업데이트X delete하고 insert하라 -->
+	<delete id="deleteHoliday" parameterType="Store">
+		delete 
+		 from tb_holiday
+		 where store_no = #{storeNo}
+	</delete>
+	
+	
+	<insert id="updateHoliday" parameterType="Store">
+	 <if test="day != null">
+	 INSERT INTO tb_holiday (week_no, store_no) VALUES 
+		 <foreach collection="day" item="weekNo" separator=",">
+			 (#{weekNo}, #{storeNo})
+		 </foreach>
+	 </if>
+	</insert>
+	
+	
+	<!-- 주소변경 -->
+	<update id="updateStoreAddr" parameterType="Store">
+	 update tb_address
+	    set
+	    <if test="city != null">
+	     city = #{city},
+	    </if>
+	    <if test="streetLoad != null">
+	     street_load = #{streetLoad}
+	    </if>
+	</update>
 	
 	<!-- 스토어 리스트  -->
     <select id="storeList" resultType="Store" parameterType="Search">
@@ -174,7 +262,7 @@ select w.week_name, h.week_no
 
 	
 	<!-- admin storelist -->
-	<select id="adminSelectStore" resultType="Store">
+	<select id="adminSelectStore" parameterType="SearchRe" resultType="Store">
 		 select s.store_no, 
       		 s.store_name,     		 
       		 s.store_owner,
@@ -183,8 +271,8 @@ select w.week_name, h.week_no
       		 s.store_email,
       		 s.store_tell,
       		 (select a.street_load 
-      		  from tb_area as a
-      		  where s.area_code = a.area_code) as street_load,
+      		  from tb_address as a
+      		  where s.store_no = a.store_no) as street_load,
       		 s.open_time,
       		 s.close_time,
       		 s.store_owner_ph,
@@ -192,31 +280,27 @@ select w.week_name, h.week_no
       		 from tb_category as c
       		 where s.store_category = c.category_no) as category_name
       		from tb_store as s
+      			<!-- 검색 -->
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="type=='nopermit' ">
+				AND s.status = 0
+			</if>
+			<if test="type=='permit' ">
+				AND s.status = 1
+			</if>
+			<if test="type=='withdraw' ">
+				AND s.status = 2
+			</if>
+		</trim>
+		 order by s.store_no desc
+		 
+		  <!-- 페이징  -->
+		LIMIT #{startList}, #{listSize}
+		
 	</select>
 	
-	<!-- admin storedetail 
-	 <select id="adminSelectOneStore" resultType="Store">
-      select s.store_no, 
-      		 s.store_name,
-      		 s.store_tell,
-      		 s.open_time,
-      		 s.close_time,
-      		 a.city, a.street_load,
-      		 m.menu, m.price,
-      		 w.week_name
-        from tb_store as s
-        inner join tb_store_menu as m
-        on s.store_no = m.store_no
-        inner join tb_area as a
-        on s.area_code = a.area_code
-                inner join tb_category as c
-        on s.store_category = c.category_no
-        inner join tb_store_content as sc
-        on s.store_no = sc.store_no
-        where s.store_no = 1
-        
-   </select> -->
 	
+
 	<!-- admin storedelete -->
 	<update id="adminDeleteStore" parameterType="int">
 		update tb_store
@@ -230,5 +314,28 @@ select w.week_name, h.week_no
 		  set status = 1
 		 where store_no = #{no}
 	</update>
+
+		<select id="adminStorePagingListCnt" parameterType="SearchRe" resultType="int">
+		select count(*) as listCnt
+			from tb_store s
+		<!-- 검색 -->
+	
+		<!-- 검색 -->
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="type=='nopermit' ">
+				AND s.status = 0
+			</if>
+			<if test="type=='permit' ">
+				AND s.status = 1
+			</if>
+			<if test="type=='withdraw' ">
+				AND s.status = 2
+			</if>
+		</trim>
+		
+	
+		<!-- 페이징  -->
+		LIMIT #{startList}, #{listSize}
+	</select>
 
 </mapper>

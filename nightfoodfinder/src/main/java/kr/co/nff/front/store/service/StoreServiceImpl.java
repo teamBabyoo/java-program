@@ -10,7 +10,7 @@ import kr.co.nff.repository.vo.Holiday;
 import kr.co.nff.repository.vo.Menu;
 import kr.co.nff.repository.vo.Store;
 
-@Service
+@Service("kr.co.nff.front.store.service.StoreServiceImpl")
 public class StoreServiceImpl implements StoreService {
 	
 	@Autowired
@@ -36,10 +36,31 @@ public class StoreServiceImpl implements StoreService {
 	public List<Holiday> storeHoliday(int no) {
 		return dao.storeHoliday(no);
 	}
+	
+	public Store storeContent(int no) {
+		return dao.selectContent(no);
+	}
 
 
 	@Override
 	public Store storeupdateForm(int no) {
 		return dao.selectOneStore(no);
 	}
+	
+	//소개글 수정폼으로 보냄
+	public Store storeContentUpdateForm(int no) {
+		return dao.selectContent(no);
+	}
+	
+
+	@Override
+	public void updateHoliday(Store store) {
+		dao.storeUpdateInfo(store);
+		dao.deleteHoliday(store);
+		dao.updateHoliday(store);
+		dao.storeContentUpdate(store);
+		
+	}
+
+		
 }

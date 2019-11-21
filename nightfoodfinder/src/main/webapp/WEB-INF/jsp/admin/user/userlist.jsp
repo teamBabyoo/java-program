@@ -83,25 +83,121 @@
           <table>
           <div>전체 : ${pagination.listCnt}개</div>
             <tr>
+              <th>선택</th>
               <th>아이디</th>
               <th>닉네임</th>
               <th>가입날짜</th>
               <th>리뷰수</th>
+              <th>유저 타입</th>
             </tr>
             <c:if test="${empty list}">
             	<tr>
-					<td colspan="5">가입 회원이 없습니다.</td>
+					<td colspan="6">가입 회원이 없습니다.</td>
 				</tr>				
 			</c:if>
 			<c:forEach var="b" items="${list}">
 				<tr>
-					<td><a href="userdetail.do?no=${b.userNo}">${b.userEmail}</a></td>
-					<td><a href="userdetail.do?no=${b.userNo}">${b.nickName}</a></td>
+					<td><input type="checkbox" id="myCheckboxid" name="userNo" data-userNo="${b.userNo}"/></td>
+					<td><a>${b.userEmail}</a></td>
+					<td><a>${b.nickName}</a></td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${b.joinDate}"  /></td>
 					<td>${b.reviewCnt}개</td>
+					<td class="usertype"><c:choose>
+							<c:when test="${b.userType == 0}">
+								관리자
+							</c:when>
+							<c:when test="${b.userType == 1}">
+								유저
+							</c:when>
+							<c:otherwise>
+								탈퇴
+							</c:otherwise>
+						</c:choose></td>
 				</tr>
 				</c:forEach>
-          </table>
+         <div>
+		<button type="button" id="withdraw" onclick="withdraw()">강제 탈퇴</button>
+ 		<button type="button" id="cancel" onclick="cancel()">탈퇴 취소</button>  
+		</div>
+		</table>
+		
+		<script>
+		function withdraw() {
+			let cnt = 0;
+			let chk = document.querySelectorAll("input[name='userNo']");
+			for (let i = 0; i < chk.length; i++) {
+				if (chk[i].checked) {cnt++;
+				let withdraw = $(chk[i]).parent().parent().find(".usertype").text("탈퇴");}
+			}
+			if (cnt == 0) {
+				alert("강제 탈퇴할 유저를 선택하세요.");
+				return;
+			}
+			
+		
+			// userNoArr을 userType=2&userList=1&userList=3 이런식으로 만들기 위해서
+			var userNoArr = new Array();
+			userNoArr.push("userType=2");	// 고정된 값이어서 미리 푸쉬
+			$("input[name='userNo']:checked").each(function(){	// each : j쿼리의 반복문
+				userNoArr.push("userNoList=" + $(this).attr("data-userNo"));
+			});
+			console.log(userNoArr.join("&"));
+			userNoArr = userNoArr.join("&");
+			
+			$.ajax({
+				url: "${pageContext.request.contextPath}/admin/user/withdraw.do",
+				type: "POST",
+				data: userNoArr,
+				dataType: "json",
+				success: function(){
+					location.href = "${pageContext.request.contextPath}/admin/user/userlist.do";
+				}
+			});
+
+			 for (let i = 0; i < chk.length; i++) {
+					if (chk[i].checked) 
+					$(chk[i]).prop('checked', false);
+				}	
+		}
+		function cancel() {
+			let cnt = 0;
+			let chk = document.querySelectorAll("input[name='userNo']");
+			for (let i = 0; i < chk.length; i++) {
+				if (chk[i].checked) {cnt++;
+				let cancel = $(chk[i]).parent().parent().find(".usertype").text("유저");}
+			}
+			if (cnt == 0) {
+				alert("강제 탈퇴할 유저를 선택하세요.");
+				return;
+			}
+			
+		
+			// userNoArr을 userType=2&userList=1&userList=3 이런식으로 만들기 위해서
+			var userNoArr = new Array();
+			userNoArr.push("userType=1");	// 고정된 값이어서 미리 푸쉬
+			$("input[name='userNo']:checked").each(function(){	// each : j쿼리의 반복문
+				userNoArr.push("userNoList=" + $(this).attr("data-userNo"));
+			});
+			console.log(userNoArr.join("&"));
+			userNoArr = userNoArr.join("&");
+			
+			$.ajax({
+				url: "${pageContext.request.contextPath}/admin/user/withdraw.do",
+				type: "POST",
+				data: userNoArr,
+				dataType: "json",
+				success: function(){
+					location.href = "${pageContext.request.contextPath}/admin/user/userlist.do";
+				}
+			});
+
+			 for (let i = 0; i < chk.length; i++) {
+					if (chk[i].checked) 
+					$(chk[i]).prop('checked', false);
+				}	
+		}
+		
+		</script>
           
           <!-- 페이징 -->
 

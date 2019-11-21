@@ -10,7 +10,7 @@ import kr.co.nff.repository.dao.UserDAO;
 import kr.co.nff.repository.vo.Category;
 import kr.co.nff.repository.vo.Store;
 
-@Service
+@Service("kr.co.nff.front.main.service.MainServiceImpl")
 public class MainServiceImpl implements MainService{
 	@Autowired
 	private UserDAO dao;
@@ -18,11 +18,20 @@ public class MainServiceImpl implements MainService{
 	@Autowired
 	private StoreDAO sDao;
 	
+	
+	
 	// 검색 헤더 카테고리
 	@Override
 	public List<Category> selectCategory() {
 		return sDao.selectCategory(); 
 	}
+	
+	// 검색 헤더 지역구
+	@Override
+	public List<String> cityList() {
+		return sDao.cityList();
+	}
+
 	
 	@Override
 	public void selectUser() {

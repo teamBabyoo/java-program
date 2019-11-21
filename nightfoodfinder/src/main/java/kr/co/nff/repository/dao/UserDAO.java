@@ -11,4 +11,5 @@ public interface UserDAO {
 	User adminSelectOneUser(int no);
 	void adminDeleteUser(int no);
 	int adminUserPagingListCnt(SearchRe search);
+	void withdrawUser(User user);
 }
