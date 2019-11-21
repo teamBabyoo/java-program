@@ -129,12 +129,13 @@
 
 	<main role="main">
 
-<!-- search -->
-			<li>
+
+	<section class="panel ">
+		<h2>가게 관리</h2>
+		
+		<!-- search -->
+			
 				<div class="form-group row justify-content-center">
-
-					<div class="w100" style="padding-right: 10px">
-
 						<select class="form-control form-control-sm" name="searchType"
 							id="searchType">						
 									<option value="total" ${pagination.type eq "total" ? "selected" :""}>전체</option>
@@ -142,23 +143,14 @@
 									<option value="nopermit" ${pagination.type eq "nopermit" ? "selected" :""}>승인 대기</option>
 									<option value="withdraw" ${pagination.type eq "withdraw" ? "selected" :""}>활동 정지</option>								
 						</select>
-					</div>
-					<div class="w300" style="padding-right: 10px">
 						<input type="text" class="form-control form-control-sm"
 							name="keyword" id="keyword" value="${pagination.keyword}">
-					</div>
-					<div>
 						<button class="btn btn-sm btn-primary" name="btnSearch"
 							id="btnSearch">검색</button>
-						<button class="back" name="backList" id="backList"
-							onclick="location.href='/nightfoodfinder/admin/store/storelist.do'">검색취소</button>
 					</div>
-				</div>
-			</li>
+			
 			<!-- search -->
-	<section class="panel ">
-		<h2>가게 관리</h2>
-		<div>전체 : ${pagination.listCnt}개</div>
+		<div class="searchcnt">전체 : ${pagination.listCnt}개</div>
 		<table>
 			<tr>
 				<th>선택</th>
@@ -200,11 +192,11 @@
 					<td class="ahide" id="storeOwnerPh">${b.storeOwnerPh}</td>
 				</tr>
 			</c:forEach>
+		</table>
 		  <div>
 		<button type="button" id="withdraw" onclick="withdraw()">강제 활동 정지</button>
  		<button type="button" id="cancel" onclick="cancel()">활동 정지 취소</button>  
 		</div>
-		</table>
 		
 			<script>
 		function withdraw() {
