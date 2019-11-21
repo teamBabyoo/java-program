@@ -9,6 +9,7 @@
 		u.user_email,
 		u.nick_name,
 		u.join_date,
+		u.user_type,
 		(select count(*) 
 		from tb_review as r
 		where u.user_no = r.user_no) as review_cnt
@@ -70,5 +71,17 @@
 		<!-- 페이징  -->
 		LIMIT #{startList}, #{listSize}
 	</select>
+	
+	
+	<!-- 유저 선택 강제탈퇴 했을 때 유저테이블의 상태를 바꿔주기 -->
+	<update id="withdrawUser" parameterType="User">
+		update tb_user
+			set user_type = #{userType}
+		where user_no in 
+		  	<foreach item="no" index="index" collection="userNoList" open="(" separator="," close=")">
+                #{no}
+            </foreach> 
+	</update>
+	
 	
 </mapper>

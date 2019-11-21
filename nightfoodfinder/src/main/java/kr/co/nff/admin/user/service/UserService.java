@@ -11,4 +11,5 @@ public interface UserService {
 	User detailUser(int no);
 	void deleteUser(int no);
 	int GetListCnt(SearchRe search);
+	void withdrawUser(User user);
 }

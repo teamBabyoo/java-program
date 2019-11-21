@@ -178,7 +178,7 @@
 					<td id="categoryName">${b.categoryName}</a></td>
 					<td id="storeOwner">${b.storeOwner}</a></td>
 					<td id="businessNum">${b.businessNum}</a></td>
-					<td><c:choose>
+					<td ><c:choose>
 							<c:when test="${b.status == 0}">
 								<span class="statusbutton"><a
 									href="storestatus.do?no=${b.storeNo}">승인 대기</a></span>
