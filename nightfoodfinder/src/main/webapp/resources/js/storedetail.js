@@ -153,12 +153,12 @@ function makeReviewList(list){
                         </li>
                         <li>
                             <ul>
-                                <li>${r.nickName}<span>${r.reviewContent}</span></li>
-                                <li>맛있어 죽겠어요!</li>    
+                                <li>${r.nickName}<span>${r.regDate}</span></li>
+                                <li>${r.reviewContent}</li>    
                             </ul>
                         </li>
                         <li class="clearboth">
-                            <p><img src="nightfoodfinder/resources/images/icon_hrt.png" /></p>
+                            <p><img src="` + context + `/resources/images/icon_hrt.png" /></p>
                             <p>432</p>
                         </li>
                     </ul>
@@ -179,7 +179,7 @@ function makeReviewList(list){
                         </ul>
                     </li>
                     <li class="clearboth">
-                        <p><img src='nightfoodfinder/resources/images/icon_hrt.png' /></p>
+                        <p><img src="` + context + `/resources/images/icon_hrt.png" /></p>
                         <p>${r.storeScope}</p>
                     </li>
                 </ul>
@@ -188,6 +188,8 @@ function makeReviewList(list){
 		}
 	});
 	$("#targetContainer").html($tbl);
+	console.log(location.href);
+	
 }
 
 
@@ -200,4 +202,28 @@ $(document).ready(function() {
 	$('#btn_leave_rv').click((e) => {
 		$('.leave_rv').slideToggle();
 	});
+	
+	
+	
+	
+	// 댓글 등록
+	$("#crForm").submit(() => {
+		$.post({
+			url: "review_regist.do",
+			data: {no, 
+				writer: $("#writer").val(), 
+				content: $("#content").val()},
+			dataType: "json",
+			success: (list) => makeCommentList(list)
+		});
+		$("#writer", "#content").val("");
+		return false;
+	});
+	
+	
+	
 });
+
+
+
+
