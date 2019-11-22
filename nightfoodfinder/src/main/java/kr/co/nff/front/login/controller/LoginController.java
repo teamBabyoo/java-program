@@ -1,5 +1,7 @@
 package kr.co.nff.front.login.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,7 +100,7 @@ public class LoginController {
 	}
 	
 	 //로그인 첫 화면 요청 메소드
-    @RequestMapping(value = "/front/login/storeJoinForm.do", 
+    @RequestMapping(value = "/front/login/userLoginForm.do", 
     				method = { RequestMethod.GET, RequestMethod.POST })
     public ModelAndView login(Model model, HttpSession session) {
         
@@ -111,7 +113,7 @@ public class LoginController {
         model.addAttribute("url", naverAuthUrl);
 
         /* 생성한 인증 URL을 View로 전달 */
-        return new ModelAndView("front/login/storeJoinForm","url", naverAuthUrl);
+        return new ModelAndView("front/login/userLoginForm","url", naverAuthUrl);
     }
 
     //네이버 로그인 성공시 callback호출 메소드
@@ -141,7 +143,6 @@ public class LoginController {
     	vo = json.changeJson(apiResult);
     	
     	
-    	
     	if (loginservice.selectNaver(vo) > 0) { // 세션만들기
 			session.setAttribute("login", vo);
 		} else {
@@ -149,14 +150,21 @@ public class LoginController {
 			session.setAttribute("login", vo);
 		}
     	
-    	
-
-    	
     	//"front/login/ncallback"
 		//new ModelAndView("front/login/ncallback", "naverUserVO",vo)
         return "front/login/ncallback";
     }
 	
+  //로그아웃
+    @RequestMapping(value = "/front/login/logout.do", method = { RequestMethod.GET, RequestMethod.POST })
+    public String logout(HttpSession session)throws IOException {
+    System.out.println("여기는 logout");
+    session.invalidate();
+    return "redirect:/front/main/main.do";
+    }
+
+    
+   
 //---------------------------------------------	
 	@Autowired
 	LoginService loginservice;
@@ -168,10 +176,12 @@ public class LoginController {
 		return "redirect:main.do";
 	}
 
-	/*
-	 * @RequestMapping("/front/login/storeJoinForm.do") public void storeJoinForm()
-	 * {}
-	 */
+	
+	  @RequestMapping("/front/login/storeJoinForm.do") 
+	  public void storeJoinForm(){
+		  
+	  }
+	 
 	//스토어 중복이메일 체크
 	@RequestMapping(value="/front/login/storeEmailChk.do")
 	@ResponseBody

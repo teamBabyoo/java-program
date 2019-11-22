@@ -15,7 +15,7 @@
 <body>
 	<div class="wrapper detail_wrap">
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
-		<div id="storedetail">
+		<div id="storedetail" class="content clearboth">
 			<div id="pictureplace"></div>
 			
 			<div id="detaillistjs">
@@ -112,11 +112,92 @@
 
 				</div>
 			</div>
+			
+			<!-- 댓글  -->
+			<div id="commentplace">
+			<div class="commentwrap">
+			<ul class="clearboth">
+                    <li class="float_l">Review</li>
+                    <li id="btn_leave_rv" class="float_r"><i class="fa fa-plus-circle" aria-hidden="true"></i>리뷰남기기</li>
+                </ul>
+
+                <div class="leave_rv user_rv">
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        <ul class="clearboth">
+                            <li>
+                                <ul class="clearboth">
+                                    <li class="float_l"><i class="fa fa-user-circle-o" aria-hidden="true"></i></li>
+                                    <li class="float_r">☆☆☆☆☆</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <textarea name="" placeholder="매너있는 리뷰를 남겨주세요. "></textarea>
+                            </li>
+                            <li>
+                                <ul class="clearboth">
+                                    <li class="float_l">
+                                        <input type="file" name="attach1" />
+                                    </li>
+                                    <li class="float_r"><button type="submit">등록</button></li>
+                                </ul>
+                            </li>
+                        </ul>    
+                    </form>
+                </div>
+				
+				<div id="targetContainer">
+				
+				</div>
+                <div class="user_rv best_rv">
+                    <ul class="clearboth">
+                        <li>
+                            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                            <p>★★★★</p>
+                        </li>
+                        <li>
+                            <ul>
+                                <li>사용자닉네임<span>2910.11.11</span></li>
+                                <li>맛있어 죽겠어요!</li>    
+                            </ul>
+                        </li>
+                        <li class="clearboth">
+                            <p><img src="images/icon_hrt.png" /></p>
+                            <p>432</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="user_rv">
+                    <ul class="clearboth">
+                        <li>
+                            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                            <p>★★</p>
+                        </li>
+                        <li>
+                            <ul>
+                                <li>사용자닉네임<span>2910.11.11</span></li>
+                                <li>맛있어 죽겠어요!</li>    
+                            </ul>
+                        </li>
+                        <li class="clearboth">
+                            <p><img src="images/icon_hrt.png" /></p>
+                            <p>4</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+			</div> 
+			
+			
+                
+            <!-- 댓글 끝 -->
+			</div>
 			<!-- 푸터 -->
 			<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 		</div>
 	</div>
 	<script type="text/javascript">
+	let no = ${store.storeNo};
 	 let scope = ${store.scope};
 	 let openTime = '${store.openTime}';  
 	 let closeTime = '${store.closeTime}';
