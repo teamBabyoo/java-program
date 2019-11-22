@@ -64,6 +64,7 @@ public class StoreServiceImpl implements StoreService {
 	}
 	
 	public List<Review> reviewList(int no) {
+		System.out.println("댓글 리스트 요청  OK");
 		return dao.selectReview(no);
 	}
 	
