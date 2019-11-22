@@ -106,14 +106,7 @@
 
 
 					</div>
-					<div id="commentplace"></div>
-
-
-
-				</div>
-			</div>
-			
-			<!-- 댓글  -->
+					<!-- 댓글  -->
 			<div id="commentplace">
 			<div class="commentwrap">
 			<ul class="clearboth">
@@ -161,13 +154,13 @@
                             </ul>
                         </li>
                         <li class="clearboth">
-                            <p><img src="images/icon_hrt.png" /></p>
+                            <p><img src="${pageContext.request.contextPath}/resources/images/icon_hrt.png" /></p>
                             <p>432</p>
                         </li>
                     </ul>
                 </div>
 
-                <div class="user_rv">
+<%--                 <div class="user_rv">
                     <ul class="clearboth">
                         <li>
                             <i class="fa fa-user-circle-o" aria-hidden="true"></i>
@@ -180,17 +173,24 @@
                             </ul>
                         </li>
                         <li class="clearboth">
-                            <p><img src="images/icon_hrt.png" /></p>
+                            <p><img src="${pageContext.request.contextPath}/resources/images/icon_hrt.png" /></p>
                             <p>4</p>
                         </li>
                     </ul>
-                </div>
+                </div> --%>
             </div>
 			</div> 
 			
 			
                 
             <!-- 댓글 끝 -->
+
+
+
+				</div>
+			</div>
+			
+			
 			</div>
 			<!-- 푸터 -->
 			<c:import url="/WEB-INF/jsp/include/footer.jsp" />
