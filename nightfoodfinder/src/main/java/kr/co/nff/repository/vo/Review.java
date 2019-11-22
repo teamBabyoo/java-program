@@ -14,6 +14,9 @@ import lombok.Data;
 		private String regDate;
 		private String reComment;
 		private int reviewNo;
+		private String reportNickname;
+		private int reportCount;
+		
 		
 		// 리뷰 차단, 차단 풀기
 		private List<Integer> reviewNoList;

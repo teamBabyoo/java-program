@@ -5,14 +5,14 @@
 
 	<!-- 전체리뷰 리스트, 좋아요 횟수 불러오기 -->
 	<select id="selectReview" parameterType="Search" resultType="Review">
-		select u.nick_name nickName, s.store_name storeName, r.review_content reviewContent, r.reg_date regDate,
-			(select count(*) from tb_like l where l.store_review_no = r.review_no) as likeCount, r.recomment reComment,
-			r.status status, r.review_no reviewNo
-		from tb_review r left join tb_user u on r.user_no = u.user_no
-					     left join tb_store s on r.store_no = s.store_no
-		
-	<!-- 검색 -->
 	
+		select u.nick_name nickName, s.store_name storeName, r.review_content reviewContent, r.reg_date regDate,
+			   (select count(*) from tb_like l where l.store_review_no = r.review_no) as likeCount, 
+			   r.recomment reComment, r.status status, r.review_no reviewNo
+		from tb_review r join tb_user u on r.user_no = u.user_no
+					     join tb_store s on r.store_no = s.store_no
+		
+		<!-- 검색 : 셀렉트 박스에서 nickName과 storeName 중에 하나를 선택한 후 키워드를 검색한다. -->
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if
 				test="type=='nickName' and keyword != null and keyword != '' ">
@@ -23,13 +23,10 @@
 				AND s.store_name like CONCAT('%', #{keyword}, '%')
 			</if>
 		</trim>
-		
-
-	order by r.review_no desc
+		order by r.review_no desc
 	
 		<!-- 페이징  -->
 		LIMIT #{startList}, #{listSize}
-		
 	</select>
 	
 	
@@ -38,9 +35,10 @@
 	<!-- 페이징할 때 필요한 것!! 전체 리뷰 수 구하기, 검색 후에는 검색한 조건의 리뷰 수 구하기 -->
 	<select id="pagingGetListCnt" parameterType="Search" resultType="int">
 		select count(*) as listCnt
-			from tb_review r left join tb_user u on r.user_no = u.user_no
-					     left join tb_store s on r.store_no = s.store_no
-		<!-- 검색 -->
+		from tb_review r join tb_user u on r.user_no = u.user_no
+					     join tb_store s on r.store_no = s.store_no
+		
+		<!-- 검색 (전체 리스트 불러오기의 trim, if문보다 이렇게 더 간결하게 할 수 있다.)-->
 		<where>
 			<if
 				test="type=='nickName' and keyword != null and keyword != '' ">
@@ -71,6 +69,23 @@
 	
 	
 	
+	<!-- 신고리뷰 리스트 --> <!-- nickName: 신고 당한 사람 (리뷰 작성한 사람), reportNickname: 신고한 사람  -->
+	<select id="selectReportedReview" resultType="Review">
+		select u.nick_name nickName, r.review_no reviewNo, s.store_name storeName, 
+<!-- 	select u.nick_name nickName, r.review_no reviewNo, rr.user_no userNo, s.store_name storeName,  -->
+               r.reg_date regDate, r.review_content reviewContent,
+			   (select u.nick_name from tb_user u where rr.user_no = u.user_no) as reportNickname,
+			   (select count(*) from tb_report_review rr where rr.review_no = r.review_no) as reportCount      
+	    from tb_review r join tb_report_review rr on r.review_no = rr.review_no
+			  			 join tb_user u on r.user_no = u.user_no
+			  			 join tb_store s on r.store_no = s.store_no;  
+			  			 
+		order by rr.report_no desc;
+	</select>
+	
+
+
+
 
 	<!-- 좋아요 횟수
 	 <select id="countLike" parameterType="int" resultType="int"> 
@@ -85,5 +100,7 @@ select u.nick_name nickName, s.store_name storeName, r.review_content reviewCont
 		from tb_user u, tb_review r, tb_store s
 		where r.user_no = u.user_no
 		and r.store_no = s.store_no -->
+		
+		
 		
 </mapper>
