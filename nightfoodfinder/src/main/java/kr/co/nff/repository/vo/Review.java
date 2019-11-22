@@ -14,10 +14,16 @@ import lombok.Data;
 		private String regDate;
 		private String reComment;
 		private int reviewNo;
+<<<<<<< HEAD
+		private String reportNickname;
+		private int reportCount;
+		
+=======
 		private int storeNo;
 		private int userNo;
 		private int storeScope;
 		private int fileGroupCode;
+>>>>>>> master
 		
 		// 리뷰 차단, 차단 풀기
 		private List<Integer> reviewNoList;

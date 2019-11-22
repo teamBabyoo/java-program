@@ -31,7 +31,7 @@
 	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
-/* Modal Content/Box */
+/* 모달 내용/팝업박스  */
 .modal-content {
 	background-color: #fefefe;
 	margin: 15% auto; /* 15% from the top and centered */
@@ -39,7 +39,7 @@
 	border: 1px solid #888;
 	width: 50%; /* Could be more or less, depending on screen size */
 }
-/* The Close Button */
+/* 닫기 버튼 */
 .close {
 	color: #aaa;
 	float: right;
@@ -52,10 +52,19 @@
 	text-decoration: none;
 	cursor: pointer;
 }
-
+/* 모달에 들어가는 사장님 답변 : 리스트에서는 안보이게 하고 모달팝업 띄웠을 때 보이게 하기 위해서 */
 .reComment {
 	display: none
 }
+
+
+
+/* 전체 css */
+
+.reviewsearch {
+	
+}
+
 </style>
 
 
@@ -67,26 +76,25 @@
 		<h1>Admin Panel</h1>
 		<ul class="utilities">
 			<li class="users"><a href="#">My Account</a></li>
-			<li class="logout warn"><a href="">Log Out</a></li>
+			<li class="logout warn"><a href="${pageContext.request.contextPath}/front/main/main.do">Log Out</a></li>
 		</ul>
 	</header>
 
 	<nav role="navigation">
 		<ul class="main">
-			<li class="member"><a href="#">회원관리</a></li>
-			<li class="store"><a href="#">가게관리</a></li>
+			<li class="member"><a href="${pageContext.request.contextPath}/admin/user/userlist.do">회원관리</a></li>
+			<li class="store"><a href="${pageContext.request.contextPath}/admin/store/storelist.do">가게관리</a></li>
 			<li class="review"><a href="#">리뷰관리</a>
 				<ul>
-					<li><a class="review_all" href="#">전체리뷰</a></li>
+					<li><a class="review_all" href="${pageContext.request.contextPath}/admin/review/reviewlist.do">전체리뷰</a></li>
 					<li><a class="review_report" href="#">신고리뷰</a></li>
 				</ul></li>
 
 			<!---------- 서치 ---------->
 			<li>
 				<div class="form-group row justify-content-center">
-					<div class="w100" style="padding-right: 10px">
-						<select class="form-control form-control-sm" name="searchType"
-							id="searchType">
+					<div>
+						<select class="form-control form-control-sm" name="searchType" id="searchType">
 							<c:choose>
 								<c:when test="${pagination.type eq 'storeName'}">
 									<option value="nickName">닉네임</option>
@@ -99,14 +107,12 @@
 							</c:choose>
 						</select>
 					</div>
-					<div class="w300" style="padding-right: 10px">
+					<div>
 						<input type="text" class="form-control form-control-sm"
 							name="keyword" id="keyword" value="${pagination.keyword}">
 					</div>
 					<div>
-						<button class="btn btn-sm btn-primary" name="btnSearch"
-							id="btnSearch">검색</button>
-
+						<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button>
 						<button class="back" name="backList" id="backList"
 							onclick="location.href='/nightfoodfinder/admin/review/reviewlist.do'">검색취소</button>
 					</div>
@@ -116,8 +122,7 @@
 
 
 
-			<!-- <li class="comments"><a href="#">Comments</a></li>
-          <li class="users"><a href="#">Manage Users</a></li> -->
+	
 		</ul>
 	</nav>
 
@@ -128,12 +133,21 @@
 
 		<table>
 			<div>전체 : ${pagination.listCnt}개</div>
+			
+			<li>
+				<div class="allCheck">
+				<input type="checkbox" id="allCheck" name="allCheck" />
+				<label for="allCheck">모두 선택</label>
+				</div>
+			</li>
+
+			
 			<tr>
 				<th>선택</th>
 				<th>닉네임</th>
 				<th>가게 이름</th>
 				<th>리뷰</th>
-				<th>댓글 단 날짜</th>
+				<th>리뷰 단 날짜</th>
 				<th>좋아요 횟수</th>
 				<th>차단 여부</th>
 			</tr>
@@ -143,13 +157,15 @@
 				</tr>
 			</c:if>
 			
+			
 			<c:forEach var="list" items="${list}">
 				<tr>
-					<td><input type="checkbox" id="myCheckboxid" name="reviewNo" data-reviewNo="${list.reviewNo}"/></td>
+					<td><input type="checkbox" class="checkboxid" id="checkboxid" name="reviewNo" data-reviewNo="${list.reviewNo}"/></td>
 					<td>${list.nickName}</td>
 					<td>${list.storeName }</td>
 					<td class="myBtn"
-						style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${list.reviewContent }</td>
+						style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${list.reviewContent }</td>	
+						<!-- style : 문장이 가능한 문자길이 이상 길어지면 뒷부분이 ... 으로 바뀐다. -->
 					<td>${list.regDate }</td>
 					<td>${list.likeCount }</td>
 					<td class="reComment">${list.reComment}</td>
@@ -165,53 +181,18 @@
 					</td>
 				</tr>
 			</c:forEach>
+			
+			
+			
+		<!-- 체크박스 차단, 차단 풀기 -->
 		<div>
-		<button type="button" id="block" onclick="block()">차단하기</button>
- 		<button type="button" onclick="bk()">차단 풀기</button>  
+		<button type="button" class="bbutton" id="blockbutton" onclick="block()">차단하기</button>
+  		<button type="button" class="bbutton" id="breakbutton" onclick="bk()">차단 풀기</button> 	 
 		</div>
+		
 		</table>
 		
-		<script>
-		function block() {
-			let cnt = 0;
-			let chk = document.querySelectorAll("input[name='reviewNo']");
-			for (let i = 0; i < chk.length; i++) {
-				if (chk[i].checked) {cnt++;
-				let block = $(chk[i]).parent().parent().find(".block").text("차단");}
-			}
-			if (cnt == 0) {
-				alert("삭제할 리뷰를 선택하세요.");
-				return;
-			}
-			
-		
-			// reviewNoArr을 status=1&reviewList=1&reviewList=3 이런식으로 만들기 위해서
-			var reviewNoArr = new Array();
-			reviewNoArr.push("status=1");	// 고정된 값이어서 미리 푸쉬
-			$("input[name='reviewNo']:checked").each(function(){	// each : j쿼리의 반복문
-				reviewNoArr.push("reviewNoList=" + $(this).attr("data-reviewNo"));
-			});
-			console.log(reviewNoArr.join("&"));
-			reviewNoArr = reviewNoArr.join("&");
-			
-			$.ajax({
-				url: "${pageContext.request.contextPath}/admin/review/block.do",
-				type: "POST",
-				data: reviewNoArr,
-				dataType: "json",
-				success: function(){
-					location.href = "${pageContext.request.contextPath}/admin/review/reviewlist.do";
-				}
-			});
-
-			 for (let i = 0; i < chk.length; i++) {
-					if (chk[i].checked) 
-					$(chk[i]).prop('checked', false);
-				}	
-		}
-		
-		</script>
-		
+	
 		
 		<!------------ 페이징 ---------------->
 
@@ -264,7 +245,7 @@
 	
 			<script>
 		
-			// -------------- 모달팝업 ---------------------
+			/* ----------------------- 모달팝업 -------------------------- */
 			// 모달 가져온다.
 			var modal = document.getElementById('myModal');
 
@@ -304,7 +285,7 @@
 				}
 			}
 
-			//-------------- 서치 ----------------
+			/* ------------------------ 서치 -------------------------- */
 			$(document)
 					.on(
 						'click',
@@ -319,7 +300,7 @@
 
 			
 			
-			//------------ 페이징 -------------
+			/* ----------------------- 페이징 --------------------------- */
 
 			//이전 버튼 이벤트
 			function fn_prev(page, range, rangeSize) {
@@ -355,11 +336,128 @@
 				location.href = url;
 			}
 			
-			// ------------------- 체크박스 차단(업데이트) -----------------
 			
+			
+			/* ---------------- 체크박스 차단 : ajax 사용 (db의 status를 업데이트) ----------------- */
+	
+			function block() {
+				let cnt = 0;
+				let chk = document.querySelectorAll("input[name='reviewNo']");
+				for (let i = 0; i < chk.length; i++) {	// chk.length : 한 페이지에 있는 체크박스 개수
+					if (chk[i].checked) {
+						cnt++;	// 체크박스를 선택하고 클릭하는지 확인하기 위해서
+				
+						// chk[i] : <input type="checkbox" id="myCheckboxid" name="reviewNo" data-reviewNo=..." >
+						// db에서 status를 가져오지 않고 화면 상에서 글자만 바꿔준다. - 체크선택하고 차단버튼을 누르면 글자가 차단으로 바뀐다. 
+						let block = $(chk[i]).parent().parent().find(".block").text("차단");}
+					}
+				if (cnt == 0) {
+					alert("차단할 리뷰를 선택하세요.");
+					return;
+				}
 
 
+				// reviewNoArr을 status=1&reviewList=1&reviewList=3 이런식으로 만들 것임
+				var reviewNoArr = new Array();
+				reviewNoArr.push("status=1");	// 고정된 값이어서 미리 푸쉬
+				$("input[name='reviewNo']:checked").each(function(){	// each : j쿼리의 반복문
+					reviewNoArr.push("reviewNoList=" + $(this).attr("data-reviewNo"));
+				});
+				console.log(reviewNoArr.join("&"));
+				reviewNoArr = reviewNoArr.join("&");
+				
+				$.ajax({
+					url: "${pageContext.request.contextPath}/admin/review/block.do",
+					type: "POST",
+					data: reviewNoArr,
+					dataType: "json",
+					success: function(){
+						location.href = "${pageContext.request.contextPath}/admin/review/reviewlist.do";
+					}
+				});
+				
+				// 체크되고 클릭된 것의 체크 표시를 없애준다.
+				 for (let i = 0; i < chk.length; i++) {
+						if (chk[i].checked) 
+							$(chk[i]).prop('checked', false);
+					}
+				
+				// 체크되어 있었던 모두선택의 체크 표시 없애준다.
+				$("#allCheck").prop("checked", false);
+				
+				}
+
+
+
+			/* ---------------- 체크박스 차단 풀기 : ajax 사용 (db의 status를 업데이트) ----------------- */
+
+			function bk() {
+				let cnt = 0;
+				let chk = document.querySelectorAll("input[name='reviewNo']");
+				for (let i = 0; i < chk.length; i++) {	// chk.length : 한 페이지에 있는 체크박스 개수
+					if (chk[i].checked) {
+						cnt++;	// 체크박스를 선택하고 클릭하는지 확인하기 위해서
+						
+						// chk[i] : <input type="checkbox" id="checkboxid" name="reviewNo" data-reviewNo=..." >
+						// db에서 status를 가져오지 않고 화면 상에서 글자만 바꿔준다. - 체크선택하고 체크풀기 버튼을 누르면 글자가 정상으로 바뀐다. 
+						let block = $(chk[i]).parent().parent().find(".block").text("정상");}
+					}
+				if (cnt == 0) {
+					alert("차단을 풀어줄 리뷰를 선택하세요.");
+					return;
+				}
+				
+				
+				// reviewNoArr을 status=0&reviewList=1&reviewList=3 이런식으로 만들 것임
+				var reviewNoArr = new Array();
+				reviewNoArr.push("status=0");	// 고정된 값이어서 미리 푸쉬
+				$("input[name='reviewNo']:checked").each(function(){	// each : j쿼리의 반복문
+					reviewNoArr.push("reviewNoList=" + $(this).attr("data-reviewNo"));
+				});
+				console.log(reviewNoArr.join("&"));
+				reviewNoArr = reviewNoArr.join("&");
+				
+				$.ajax({
+					url: "${pageContext.request.contextPath}/admin/review/block.do",
+					type: "POST",
+					data: reviewNoArr,
+					dataType: "json",
+					success: function(){
+						location.href = "${pageContext.request.contextPath}/admin/review/reviewlist.do";
+					}
+				});
+				
+				// 체크되고 클릭된 것의 체크 표시를 없애준다.
+				 for (let i = 0; i < chk.length; i++) {
+						if (chk[i].checked) 
+							$(chk[i]).prop('checked', false);
+				 }
+					
+				// 체크되어 있었던 모두선택의 체크 표시 없애준다.
+				$("#allCheck").prop("checked", false);
+				
+				}
+	
+				
+
+		/* ----------------- 체크박스 모두선택 ------------------------ */
+		
+			$("#allCheck").click(function(){
+ 			var chkall = $("#allCheck").prop("checked");
+ 			if(chkall) {
+  				$(".checkboxid").prop("checked", true);
+ 			} else {
+  				$(".checkboxid").prop("checked", false);
+ 				}
+			});
+		
+			// 모두선택되었을 때 체크박스를 하나라도 풀면 모두선택이 체크 표시가 없어지게 된다.
+			$(".checkboxid").click(function(){
+			$("#allCheck").prop("checked", false);
+			 });
 			
+			
+				
 			
 		</script>
 	<footer role="contentinfo">Easy Admin Style by Melissa Cabral</footer>
