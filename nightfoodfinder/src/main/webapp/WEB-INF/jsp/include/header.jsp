@@ -88,8 +88,7 @@
             </div> 
             <!-- userselect-->
         	</div>
-		</div>
-	</form>
+		</form>
     </div>
     <div class="float_r">
       <ul>
