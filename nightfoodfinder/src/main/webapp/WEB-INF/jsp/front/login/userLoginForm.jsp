@@ -1,0 +1,65 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+			<div >
+		        <span id="close" class="close">&times;</span>
+		        <h1>NFF</h1>                                                               
+				<p class="memSel">
+					<span>
+						<input type="radio" id="userType1" name="r" checked>
+						<label for="userType1" id="userLabel1">개인회원</label>
+					</span>
+				</p>
+				<p>
+					<span>
+						<input type="radio" id="userType2" name="r">
+						<label for="userType2" id="userLabel2">점주회원</label>
+					</span>
+				</p>
+				<div class="memInput" id="memInput">
+					<form id="memForm" action="" onsubmit="return memChk()">
+						<p>
+							<input type="text" name="storeEmail" id="storeEmail" placeholder="이메일을 입력해주세요"/>
+						</p>
+						<p>
+							<input type="password" name="storePass" id="storePass" placeholder="비밀번호를 입력해주세요"/>
+						</p>
+						<p><button>로그인</button></p>
+					</form>
+				</div>
+				<div class="snsBox" id="snsBox">
+					<ul>
+						<li>
+							 <a href="${url}" target="_blank">
+								 <img width="223" 
+								 	src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/>
+							 </a>
+						</li>
+						<li></li>
+					</ul>
+				</div>
+	      	</div>
+<script>
+var uType1 = document.getElementById("userType1");
+var uType2 = document.getElementById("userType2");
+var mInput = document.getElementById("memInput");
+var snsBox = document.getElementById("snsBox");
+uType1.onclick = function() {
+	mInput.style.display = "none";
+	snsBox.style.display = "block";
+}
+uType2.onclick = function() {
+	snsBox.style.display = "none";
+	mInput.style.display = "block";
+}
+
+</script>
+</body>
+</html>
