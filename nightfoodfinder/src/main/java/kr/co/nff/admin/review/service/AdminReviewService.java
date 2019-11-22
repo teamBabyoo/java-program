@@ -13,5 +13,5 @@ public interface AdminReviewService {
 	List<Review> listReview(Search search);
 	int getListCnt(Search search);
 	void blockReview(Review review);
-//	List<Review> listReportedReview();
+	List<Review> listReportedReview();
 }
