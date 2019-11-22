@@ -197,6 +197,7 @@
 		</div>
 	</div>
 	<script type="text/javascript">
+	let no = ${store.storeNo};
 	 let scope = ${store.scope};
 	 let openTime = '${store.openTime}';  
 	 let closeTime = '${store.closeTime}';
