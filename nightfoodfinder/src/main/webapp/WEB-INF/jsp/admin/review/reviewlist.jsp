@@ -100,7 +100,7 @@
 	<main role="main">
 
 	<section class="panel ">
-		<h2>Table</h2>
+		<h2>전체 리뷰</h2>
 	<!---------- 서치 ---------->
 				<div class="form-group row justify-content-center">
 						<select class="form-control form-control-sm" name="searchType" id="searchType">
