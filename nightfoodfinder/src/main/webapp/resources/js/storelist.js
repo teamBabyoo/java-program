@@ -44,6 +44,15 @@ $(document).on("click",".selected", (e) => {
 })
 
 // 검색버튼 클릭
+function beforesearch() {
+	let arr = new Array();
+	let name = '';
+	 console.log($("#sto_search").serialize());
+
+	
+}
+  			
+
 $("#search_btn").click(() => {
 	$('#sto_search').submit();
 })

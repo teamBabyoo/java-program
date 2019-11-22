@@ -7,7 +7,7 @@
         <img src="${pageContext.request.contextPath}/resources/images/mangoplate-logo-horizontal.svg" alt="anff 로고" />
     </div>
     <div class="search">
-    <form id="sto_search" action="${pageContext.request.contextPath}/front/store/storelist.do" method="post">
+    <form id="sto_search" onsubmit="return beforesearch()" action="${pageContext.request.contextPath}/front/store/storelist.do" method="post">
     	<!-- 검색어 입력 부분 -->
 		<input type="text" name="keyword"/>
 		 <!-- 검색 버튼 부분 -->
@@ -111,5 +111,16 @@
 		</li>
       </ul>
     </div>
-  </header> 
+  </header>
+  <script>
+
+  	let result = $("#keyword").val();
+  	$("input[name=categorycode]:checked").each(function() {
+  		var test = $(this).val(); 
+  		alert(test);
+  	});
+  
+
+  	
+  </script> 
   <script src='${pageContext.request.contextPath}/resources/js/storelist.js' ></script>
