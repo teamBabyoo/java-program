@@ -29,6 +29,81 @@ animateValue("scopescore", 0, scope, 100);
 	
 	$("#operatingtime").html(openTime +" ~ " +closeTime);
 	
+/***
+ * 리뷰 리스트 ajax로 조회 
+ */
+function reviewListAjax() {
+	$.getJSON({
+		url : "review_list.do",
+		data : {no},
+		success : list => makereviewlist(list) 
+	});
+	
+}
+function makereviewlist(list) {
+	let $con = $("#targetContainer")
+	let html = "";
+	$.each(list, (i, r)=> {
+		html += `
+			<div class="user_rv">
+		    <ul class="clearboth">
+		        <li>
+		            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+		            `;
+		if ('${r.storeScope}' == "1" ) {
+			html += `<p>★</p>`
+		} else if ('${r.storeScope}' == "2" ) {
+			html += `<p>★★</p>`
+		} else if ('${r.storeScope}' == "3" ) {
+			html += `<p>★★★</p>`
+		} else if ('${r.storeScope}' == "4" ) {
+			html += `<p>★★★★</p>`
+		} else {
+			html += `<p>★★★★★</p>`
+		} 
+			
+		html += 
+			`
+		        </li>
+		        <li>
+		            <ul>
+		                <li>${r.nickName}<span>${r.regDate}</span></li>
+		                <li>${r.reviewContent}</li>    
+		            </ul>
+		        </li>
+		        <li class="clearboth">
+		            <p><img src="images/icon_hrt.png" /></p>
+		            <p>4</p>
+		        </li>
+		    </ul>
+		</div>
+		`;
+	});
+	$con.html(html);
+}
+/*
+<div class="user_rv">
+    <ul class="clearboth">
+        <li>
+            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+            <p>★★</p>
+        </li>
+        <li>
+            <ul>
+                <li>사용자닉네임<span>2910.11.11</span></li>
+                <li>맛있어 죽겠어요!</li>    
+            </ul>
+        </li>
+        <li class="clearboth">
+            <p><img src="images/icon_hrt.png" /></p>
+            <p>4</p>
+        </li>
+    </ul>
+</div>  
+  
+  
+  
+  */
 
 
 
