@@ -11,6 +11,46 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/admin/font-awesome.min.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/css/admin/style.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/css/admin/admin_style.css" />">
+    
+<style type="text/css">
+/* The Modal (background) */
+.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* 모달 내용/팝업박스  */
+.modal-content {
+	background-color: #fefefe;
+	margin: 15% auto; /* 15% from the top and centered */
+	padding: 20px;
+	border: 1px solid #888;
+	width: 50%; /* Could be more or less, depending on screen size */
+}
+/* 닫기 버튼 */
+.close {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close:hover, .close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+</style>
+    
     <script src="js/jquery-3.3.1.min.js"></script>
 </head>
 <body>
@@ -76,7 +116,6 @@
 					<td>${list.storeName}</td>
 					<td class="myBtn"
 						style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${list.reviewContent }</td>	
-						<!-- style : 문장이 가능한 문자길이 이상 길어지면 뒷부분이 ... 으로 바뀐다. -->
 					<td>${list.regDate }</td>
 					<td>${list.reportCount }</td>
 					<td class="block">
@@ -95,7 +134,51 @@
       
            
           </table>
+          
+        <!----------- 모달팝업 ----------------->
+		<div id="myModal" class="modal">
+			<!-- Modal content -->
+			<div class="modal-content">
+				<span class="close">&times;</span>
+				<p></p>
+				<p></p>
+			</div>
+		</div>
+		<!----------- 모달팝업 끝 ---------------->
         </section>
+      
+      <script>
+		
+		/* ----------------------- 모달팝업 -------------------------- */
+		// 모달 가져온다.
+		var modal = document.getElementById('myModal');
+
+		// 모달 여는 버튼을 가져온다.
+		var btn = document.getElementsByClassName("myBtn");
+
+		// 모달을 닫는 <span>을 가져온다.
+		var span = document.getElementsByClassName("close")[0];
+
+		// 버튼을 클릭했을 때, 모달을 연다.
+		// 그런데, 모달팝업이 첫 리스트 줄에만 적용되고 반복되어서 나오는 리스트들에는 적용이 안되었음..
+		// 이렇게 해야 모든 리스트에 적용된다.	
+	
+
+		// <span>의 x를 클릭했을 때, 모달을 닫는다.
+		span.onclick = function() {
+			modal.style.display = "none";
+		}
+		// 모달 밖의 아무 곳을 클릭했을 때, 모달을 닫는다.
+		window.onclick = function(event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		}
+
+      
+      
+      </script>
+      
       
       </main>
       <footer role="contentinfo">Easy Admin Style by Melissa Cabral</footer>

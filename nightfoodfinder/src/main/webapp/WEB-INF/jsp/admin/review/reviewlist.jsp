@@ -58,13 +58,6 @@
 }
 
 
-
-/* 전체 css */
-
-.reviewsearch {
-	
-}
-
 </style>
 
 
