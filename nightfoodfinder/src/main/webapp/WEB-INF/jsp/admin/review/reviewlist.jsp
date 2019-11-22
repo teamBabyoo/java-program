@@ -90,10 +90,19 @@
 					<li><a class="review_report" href="#">신고리뷰</a></li>
 				</ul></li>
 
-			<!---------- 서치 ---------->
-			<li>
+		
+
+
+	
+		</ul>
+	</nav>
+
+	<main role="main">
+
+	<section class="panel ">
+		<h2>Table</h2>
+	<!---------- 서치 ---------->
 				<div class="form-group row justify-content-center">
-					<div>
 						<select class="form-control form-control-sm" name="searchType" id="searchType">
 							<c:choose>
 								<c:when test="${pagination.type eq 'storeName'}">
@@ -106,33 +115,16 @@
 								</c:otherwise>
 							</c:choose>
 						</select>
-					</div>
-					<div>
 						<input type="text" class="form-control form-control-sm"
 							name="keyword" id="keyword" value="${pagination.keyword}">
-					</div>
-					<div>
 						<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button>
 						<button class="back" name="backList" id="backList"
 							onclick="location.href='/nightfoodfinder/admin/review/reviewlist.do'">검색취소</button>
-					</div>
 				</div>
-			</li>
 			<!---------- 서치 끝 --------->
 
-
-
-	
-		</ul>
-	</nav>
-
-	<main role="main">
-
-	<section class="panel ">
-		<h2>Table</h2>
-
+			<div class="searchcnt">전체 : ${pagination.listCnt}개</div>
 		<table>
-			<div>전체 : ${pagination.listCnt}개</div>
 			
 			<li>
 				<div class="allCheck">
@@ -143,7 +135,7 @@
 
 			
 			<tr>
-				<th>선택</th>
+				<th class="choicee">선택</th>
 				<th>닉네임</th>
 				<th>가게 이름</th>
 				<th>리뷰</th>
@@ -184,14 +176,14 @@
 			
 			
 			
+		
+		</table>
+		
 		<!-- 체크박스 차단, 차단 풀기 -->
 		<div>
 		<button type="button" class="bbutton" id="blockbutton" onclick="block()">차단하기</button>
   		<button type="button" class="bbutton" id="breakbutton" onclick="bk()">차단 풀기</button> 	 
 		</div>
-		
-		</table>
-		
 	
 		
 		<!------------ 페이징 ---------------->
