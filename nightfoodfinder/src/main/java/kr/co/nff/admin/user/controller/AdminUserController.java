@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.nff.admin.user.service.UserService;
 import kr.co.nff.repository.vo.SearchRe;
+import kr.co.nff.repository.vo.User;
 
 
 
@@ -52,6 +53,11 @@ public class AdminUserController {
 		model.addAttribute("user", service.detailUser(no));
 	}
 	
+	//회원 강제탈퇴, 취소
+	@RequestMapping("/withdraw.do")
+	public void withdrawAjax(User user){		
+		service.withdrawUser(user);
+ }
 	
 }
 

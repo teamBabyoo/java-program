@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.nff.admin.store.service.StoreService;
+import kr.co.nff.repository.vo.SearchRe;
+import kr.co.nff.repository.vo.Store;
+import kr.co.nff.repository.vo.User;
 
 
 @Controller("kr.co.nff.admin.store.controller.AdminStoreController")
@@ -19,8 +22,23 @@ public class AdminStoreController {
 	
 	//가게 목록
 	@RequestMapping("/storelist.do")
-	public void storeList(@RequestParam(value="pageNo", defaultValue="1") int pageNo, Model model) {
-		model.addAttribute("slist", service.listStore());
+	public void storeList(@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range,
+			@RequestParam(required = false, defaultValue = "nickName") String searchType,
+			@RequestParam(required = false) String keyword, 
+			Model model) {
+		
+		SearchRe search = new SearchRe();
+		search.setType(searchType);
+		search.setKeyword(keyword);
+		
+		// 전체 게시글 개수
+		int listCnt = service.GetListCnt(search);
+				
+		search.pageInfo(page, range, listCnt);
+	
+		model.addAttribute("pagination", search);		
+		model.addAttribute("slist", service.listStore(search));
 	}
 	
 //	//가게 상세 
@@ -43,7 +61,11 @@ public class AdminStoreController {
 		return "redirect:storelist.do";
 	}
 
-
+	//회원 강제활동정지, 취소
+		@RequestMapping("/withdraw.do")
+		public void withdrawAjax(Store store){		
+			service.withdrawStore(store);
+	 }
 	
 	
 }

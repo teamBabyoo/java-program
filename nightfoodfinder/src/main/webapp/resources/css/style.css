@@ -50,6 +50,12 @@ header .search div { border-left: 1px solid #d4d4d4; }
 header div:nth-child(3) li { padding: 0 20px;  border-left: 1px solid #d4d4d4; line-height: 60px; }
 header div:nth-child(3) li i { font-size: 1.4rem; }
 header div:nth-child(3) ul li:nth-child(4) i { padding: 10px;  color: #fff; background: #d2d2d2; border-radius: 30px; }
+#person_btn:hover { cursor: pointer; }
+#person_btn { position: relative; text-align: center;}
+#person_btn .pop_person { position: absolute; left: -120px; width: 200px; background: #FBE8A4; }
+#person_btn .pop_person .topshape { position: absolute; top: -40px; right: 40px; width: 25px; border-width: 20px; border-style: solid; border-color: transparent transparent #FBA4BC transparent;}
+#person_btn .pop_person div:nth-child(2) { padding: 20px; }
+#person_btn .pop_person ul { border-top: 1px solid #d4d4d4; }
 
 /* 검색바 활성화 */
 header .search.focusIn form { position: relative; }
@@ -71,7 +77,10 @@ header .search.focusIn .optionBox.active .userselect { float: none;}
 .content { width: 100%; position: absolute; top: 60px; background: #fff; }
 /* 푸터영역 */
 footer { position: absolute; width: 100%; line-height: 40px; text-align: center; background: #251e4a; color: yellow; /*border-top: 1px solid #d4d4d4; box-shadow: 0px -2px 5px #e8e8e8;*/ }
+/* 팝업 */
 .bgbox.active { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; opacity: .9;}
+
+
 
 /* 메인 */
 .main_wrap .content .store { position: relative; float: left; width: 25%; background-repeat: no-repeat !important; background-size: cover !important; background-position: center center !important; border-right: 1px solid #d4d4d4; background-image: url("../images/imgReady.png"); }
@@ -126,6 +135,33 @@ footer { position: absolute; width: 100%; line-height: 40px; text-align: center;
 
 /* .main_wrap .content .store:hover .square_box,
 .main_wrap .content .store:hover .desc { display: block; } */
+
+/* 상세 리뷰(댓글) */
+.detail_wrap .content { position: relative; }
+div#commentplace > * { width: 100%; margin: 0 auto; }
+
+.detail_wrap #commentplace { border-top: 1px solid #d4d4d4; width: 67%; margin: 0 auto; margin-top: 30px; }
+.detail_wrap #commentplace > ul li { padding: 15px; }
+.detail_wrap #commentplace > ul li:nth-child(2) { cursor: pointer; }
+
+.detail_wrap .user_rv { margin-bottom: 30px; padding: 20px; background: #fff; border: 1px solid #bfbfbf; border-radius: 5px; }
+.detail_wrap .user_rv > ul > li { float: left; }
+.detail_wrap .user_rv > ul > li:nth-child(1) { width: 10%; }
+.detail_wrap .user_rv > ul > li:nth-child(1) * { display: block; text-align: center; }
+.detail_wrap .user_rv > ul > li:nth-child(1) p { color: #ff7000; }
+.detail_wrap .user_rv > ul > li:nth-child(2) { width: 75%; padding: 0 15px; border-radius: 5px; }
+.detail_wrap .user_rv > ul > li:nth-child(2) span:before { padding: 5px; content: '|'; color: #ababab; vertical-align: text-bottom}
+.detail_wrap .user_rv > ul > li:nth-child(2) li:last-child {margin-top: 10px;}
+.detail_wrap .user_rv > ul > li:nth-child(2) > ul > li:nth-child(2) { background: #f3f3f3;  padding: 5px; border-radius: 2px; }
+.detail_wrap .user_rv > ul > li:nth-child(3) { width: 15%; }
+.detail_wrap .user_rv > ul > li i { font-size: 1.4rem; padding: 5px 0;}
+.detail_wrap .user_rv > ul > li:nth-child(3) > * { text-align: center; padding: 5px; }
+
+.detail_wrap .leave_rv textarea { margin: 10px 0; padding: 10px; width: 100%; height: 100%; background: #f3f3f3; resize: none; border: none; border-radius: 2px; }
+.detail_wrap .leave_rv li:nth-child(3) button { float: right; padding: 10px 30px; border: 1px solid #d4d4d4; background: #fff; color: #8a8a8a; transition: all .3s;}
+.detail_wrap .leave_rv li:nth-child(3) button:hover { border-color: #ea9c5f; }
+
+.detail_wrap .best_rv { border: 1px solid#ea9c5f; }
 /** 지인  끝 **/
 
 
@@ -141,7 +177,7 @@ footer { position: absolute; width: 100%; line-height: 40px; text-align: center;
 	grid-template-rows: 300px 1fr;
 	margin: 0 auto;
 	width: 960px;
-	border: 1px solid red;
+	/* border: 1px solid red; */
 }
 
 .detail_wrap #storeinfo {
@@ -197,19 +233,21 @@ footer { position: absolute; width: 100%; line-height: 40px; text-align: center;
 	border: 2px solid #c1c1c1;
 	border-radius: 8px;
 	width: 350px;
-	margin-left: 75px;
+	margin: 0 auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
 	padding: 10px;
 }
 
 .detail_wrap .iicon {
-	text-align: center;
 	font-size: 30px;
+	width: 40px;
 }
 
-i.fa.fa-map-marker {
-    margin-left: 8px;
-    margin-right: 3px;
+.detail_wrap th{
+	width: 60px;
 }
+
 
 .detail_wrap #showmap, .detail_wrap #updatebutton {
 	background: #d8d8d8;
@@ -223,7 +261,8 @@ i.fa.fa-map-marker {
 }
 
 .detail_wrap table {
-	width: 100%;
+	width: 80%;
+    margin: 0 auto;
 }
 
 .detail_wrap #clockicon {
@@ -245,6 +284,11 @@ i.fa.fa-map-marker {
 .detail_wrap #menusizemin {
 	font-size: 25px;
 }
+
+.detail_wrap #clock{
+	vertical-align: initial;
+}
+	
 
 /*가게정보수정*/
 
