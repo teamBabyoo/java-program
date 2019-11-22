@@ -24,5 +24,6 @@ public class User {
 	private String userGender;
 	private String userId;
 	private String userName;
+	private String userAge;
 	
 }
