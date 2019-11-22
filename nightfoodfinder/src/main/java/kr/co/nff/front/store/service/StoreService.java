@@ -27,11 +27,8 @@ public interface StoreService {
 	//휴일 집어넣기
 	public void updateHoliday(Store store);
 	
-	/*리뷰*/
-	//리뷰 리스트
-	List<Review> reviewList(int no);
-	
-	
+	// 리뷰 리스트 조회
+	public List<Review> reviewList(int no);
 	
 	
 	

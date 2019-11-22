@@ -7,4 +7,10 @@ nightfoodfinder/.settings/
 nightfoodfinder/target/
 Test1/
 nightfoodfinder/bin/
+
+
+
+nightfoodfinder/src/main/java/kr/co/nff/login/naver/oauth/bo/
+
 nightfoodfinder/.history/
+

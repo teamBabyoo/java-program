@@ -62,15 +62,15 @@ public class FrontStoreController {
 	@RequestMapping("/storeirregular.do")
 	public void storeIrregular() {}
 	
+	
 	/*리뷰 가져오기*/
 	@RequestMapping("/review_list.do")
 	@ResponseBody
 	public List<Review> reviewListAjax(int no){
-		System.out.println("리뷰보여라");
-		System.out.println(service.reviewList(no));
 		return service.reviewList(no);
 	}
 
 	
+
 	
 }
