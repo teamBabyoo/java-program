@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.nff.front.store.service.StoreService;
 import kr.co.nff.repository.vo.Review;
+import kr.co.nff.repository.vo.Search;
 import kr.co.nff.repository.vo.Store;
 import net.sf.json.JSONArray;
 
@@ -24,9 +25,11 @@ public class FrontStoreController {
 	
 	/* 가게 목록 */
 	@RequestMapping("/storelist.do")
-	public void storeList(@RequestParam(value="pageNo", defaultValue="1") int pageNo, Model model) {
-		model.addAttribute("sList", service.storeList());
+	public void storeList(@RequestParam(value="pageNo", defaultValue="1") int pageNo, Model model, Search search) {
+		//System.out.println(model.getAttribute("keyword"));
+		model.addAttribute("sList", service.storeList(search));
 	}
+	
 	
 	/* 가게 상세 */
 	@RequestMapping("/storedetail.do")
