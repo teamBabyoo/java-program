@@ -5,17 +5,17 @@ import java.util.HashMap;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import kr.co.nff.repository.vo.nUser;
+import kr.co.nff.repository.vo.User;
 
 
 public class JsonParser {
 	JSONParser jsonParser = new JSONParser();
 
-	public nUser changeJson(String string) throws Exception {
+	public User changeJson(String string) throws Exception {
 
 		HashMap<String, Object> map = new HashMap<>();
 		JSONParser jsonParser = new JSONParser();
-		nUser vo = new nUser();
+		User vo = new User();
 
 		JSONObject jsonObject = (JSONObject) jsonParser.parse(string);
 

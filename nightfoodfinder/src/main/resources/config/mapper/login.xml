@@ -61,4 +61,10 @@
 		</if>
 	</insert>
 	
+	<select id="selectLoginOneUser" parameterType="String" resultType="User">
+	 select * 
+	  from tb_user
+	  where user_id = #{userId}
+	</select>
+	
 </mapper>  

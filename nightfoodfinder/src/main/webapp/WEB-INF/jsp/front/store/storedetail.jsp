@@ -119,7 +119,7 @@
                         <ul class="clearboth">
                             <li>
                                 <ul class="clearboth">
-                                    <li class="float_l"><i class="fa fa-user-circle-o" aria-hidden="true"></i></li>
+                                    <li class="float_l"><i class="fa fa-user-circle-o" aria-hidden="true"></i>${login.nickName}</li>
                                     <li class="float_r">☆☆☆☆☆</li>
                                 </ul>
                             </li>
@@ -162,8 +162,8 @@
 			<!-- 푸터 -->
 			<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 		</div>
-	</div>
 	<script type="text/javascript">
+	console.log(${loginUser});
 	 let no = ${store.storeNo};
 	 let scope = ${store.scope};
 	 let openTime = '${store.openTime}';  

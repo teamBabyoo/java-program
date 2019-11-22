@@ -18,7 +18,7 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 import kr.co.nff.front.login.service.LoginService;
 import kr.co.nff.login.naver.oauth.bo.NaverLoginBO;
 import kr.co.nff.login.naver.oauth.model.JsonParser;
-import kr.co.nff.repository.vo.nUser;
+import kr.co.nff.repository.vo.User;
 
 
 @Controller("kr.co.nff.front.login.LoginController")
@@ -48,46 +48,6 @@ public class LoginController {
 //----------------------------
 	
 //네이버 로그인
-	/*
-	@RequestMapping("/front/login/naverlogin.do")
-	public void isComplete(HttpSession session) {
-		
-	}
-	
-	@RequestMapping("/front/login/ncallback.do")
-	public void nLogin(HttpServletRequest request) throws Exception {
-		
-	}
-	
-	@RequestMapping("/front/login/personalInfo.do")
-	public void personalInfo(HttpServletRequest request) throws Exception{
-		String token = "AAAAN3-WeNBrJi6CxMzrAKvgYzsfpQoY4FQAuC37ODNU85aOkKqvnXUQ3_KWKLXG6qO0-BUIm7_JvilDTr2Fk8MNaVc";// 네이버 로그인 접근 토큰;
-        String header = "Bearer " + token; // Bearer 다음에 공백 추가
-        try {
-            String apiURL = "https://openapi.naver.com/v1/nid/me";
-            URL url = new URL(apiURL);
-            HttpURLConnection con = (HttpURLConnection)url.openConnection();
-            con.setRequestMethod("GET");
-            con.setRequestProperty("Authorization", header);
-            int responseCode = con.getResponseCode();
-            BufferedReader br;
-            if(responseCode==200) { // 정상 호출
-                br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            } else {  // 에러 발생
-                br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
-            }
-            String inputLine;
-            StringBuffer response = new StringBuffer();
-            while ((inputLine = br.readLine()) != null) {
-                response.append(inputLine);
-            }
-            br.close();
-            System.out.println(response.toString());
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-	}
-	 */
 
 	/* NaverLoginBO */
 	private NaverLoginBO naverLoginBO;
@@ -120,7 +80,7 @@ public class LoginController {
     @RequestMapping(value = "/front/login/ncallback.do", method = { RequestMethod.GET, RequestMethod.POST })
     public String callback(Model model, 
     				@RequestParam String code, @RequestParam String state, 
-    				HttpSession session, nUser vo)
+    				HttpSession session, User vo)
             throws Exception {
     	
     	System.out.println("여기는 callback");
@@ -145,6 +105,8 @@ public class LoginController {
     	
     	if (loginservice.selectNaver(vo) > 0) { // 세션만들기
 			session.setAttribute("login", vo);
+			session.setAttribute("loginUser", loginservice.selectLoginOneUser(vo.getUserId()));
+			System.out.println(loginservice.selectLoginOneUser(vo.getUserId()));
 		} else {
 			loginservice.insertNaverUser(vo);
 			session.setAttribute("login", vo);
