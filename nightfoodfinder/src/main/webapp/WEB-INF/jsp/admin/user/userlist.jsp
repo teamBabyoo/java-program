@@ -20,7 +20,7 @@
         <h1>Admin Panel</h1>
         <ul class="utilities">
           <li class="users"><a href="#">My Account</a></li>
-          <li class="logout warn"><a href="">Log Out</a></li>
+          <li class="logout warn"><a href="${pageContext.request.contextPath}/front/main/main.do">Log Out</a></li>
         </ul>
       </header>
       
@@ -74,7 +74,7 @@
 			<div class="searchcnt"> 전체 : ${pagination.listCnt}개</div>
           <table>
             <tr>
-              <th>선택</th>
+              <th class="choicee">선택</th>
               <th>아이디</th>
               <th>닉네임</th>
               <th>가입날짜</th>
