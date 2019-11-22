@@ -57,7 +57,7 @@
 	
 	
 	
-	<!-- 리뷰 선택 차단했을 때 리뷰테이블의 상태를 바꿔주기 -->
+	<!-- 리뷰 선택 차단이나 차단 풀기 했을 때 리뷰테이블의 상태를 바꿔주기, 체크박스로 여러개 선택 가능 -->
 	<update id="blockReview" parameterType="Review">
 		update tb_review
 			set status = #{status}
@@ -69,22 +69,70 @@
 	
 	
 	
-	<!-- 신고리뷰 리스트 --> <!-- nickName: 신고 당한 사람 (리뷰 작성한 사람), reportNickname: 신고한 사람  -->
-	<select id="selectReportedReview" resultType="Review">
-		select u.nick_name nickName, r.review_no reviewNo, s.store_name storeName, 
-<!-- 	select u.nick_name nickName, r.review_no reviewNo, rr.user_no userNo, s.store_name storeName,  -->
+	
+	<!-- 신고 리뷰 리스트  -->
+	<!-- 신고당한 리뷰의 사람(리뷰 쓴 사람), 하나의 리뷰가 신고당한 횟수, 신고당한 리뷰의 가게, 신고당한 리뷰, 신고 당한 리뷰 작성날짜, 신고당한 리뷰 내용, 차단 상태 -->
+	<select id="selectReportReview" resultType="Review">
+<!-- 		select rr.review_no reviewNo, rr.user_no userNo, s.store_name storeName, r.reg_date regDate,
+			   r.review_content reviewContent, r.status status, u.nick_name nickName,
+     		   (select count(*) from tb_report_review rr where rr.review_no = r.review_no) as reportCount
+     	from tb_review r join tb_report_review rr on r.review_no = rr.review_no
+					     join tb_user u on r.user_no = u.user_no
+					     join tb_store s on r.store_no = s.store_no
+		group by rr.review_no order by rr.report_no desc  -->
+		
+		<!-- 같은 신고당한 리뷰 중에서도 최신으로 -->
+		select * from (
+    	select rr.report_no reportNo, rr.review_no reviewNo, rr.user_no userNo, s.store_name storeName,
+    		   r.reg_date regDate, r.review_content reviewContent, r.status status, u.nick_name nickName,
+     		   (select count(*) from tb_report_review rr where rr.review_no = r.review_no) as reportCount
+     	from tb_review r join tb_report_review rr on r.review_no = rr.review_no
+					     join tb_user u on r.user_no = u.user_no
+					     join tb_store s on r.store_no = s.store_no 
+		order by reportNo  desc) as list
+	  	group by reviewNo
+	  	
+	</select>
+	
+	<!-- 신고한 사람, 신고 사유  -->
+ 	<select id="selectReportDetail" resultType="ReportReview">
+		select u.nick_name nickName, rr.report_why reason, rr.report_no reportNo 
+			from tb_user u, tb_report_review rr 
+		where u.user_no = rr.user_no 
+		and rr.report_no = #{reportNo}
+		order by rr.report_no desc
+		
+		
+
+	</select>  
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 신고리뷰 리스트 처음에 실수로 모든 내용 다 뽑았을 때 --> <!-- nickName: 신고 당한 사람 (리뷰 작성한 사람), reportNickname: 신고한 사람  -->
+<!-- 	<select id="selectReportedReview" resultType="Review">
+		select u.nick_name nickName, r.review_no reviewNo, rr.user_no userNo, s.store_name storeName, 
                r.reg_date regDate, r.review_content reviewContent,
 			   (select u.nick_name from tb_user u where rr.user_no = u.user_no) as reportNickname,
 			   (select count(*) from tb_report_review rr where rr.review_no = r.review_no) as reportCount      
 	    from tb_review r join tb_report_review rr on r.review_no = rr.review_no
 			  			 join tb_user u on r.user_no = u.user_no
-			  			 join tb_store s on r.store_no = s.store_no;  
-			  			 
+			  			 join tb_store s on r.store_no = s.store_no;    			 
 		order by rr.report_no desc;
 	</select>
 	
-
-
+-->
+	
 
 
 	<!-- 좋아요 횟수

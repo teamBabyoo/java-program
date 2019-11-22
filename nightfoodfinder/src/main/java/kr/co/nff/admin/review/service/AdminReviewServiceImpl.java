@@ -29,4 +29,8 @@ public class AdminReviewServiceImpl implements AdminReviewService {
 	public void blockReview(Review review) {
 		dao.blockReview(review);	
 	}
+	
+	public List<Review> listReportedReview() {
+		return dao.selectReportReview();
+	}
 }

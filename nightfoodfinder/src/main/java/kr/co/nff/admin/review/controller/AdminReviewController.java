@@ -48,8 +48,8 @@ public class AdminReviewController {
 	}
 
 	// 신고리뷰 목록 불러오기
-//	@RequestMapping("/reportedreviewlist.do")
-//	public void reportedreviewlist(Model model) {
-//		model.addAttribute("list", service.listReportedReview());
-//	}
+	@RequestMapping("/reportedreviewlist.do")
+	public void reportedreviewlist(Model model) {
+		model.addAttribute("list", service.listReportedReview());
+	}
 }
