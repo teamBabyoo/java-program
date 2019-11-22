@@ -4,6 +4,7 @@ import java.util.List;
 
 import kr.co.nff.repository.vo.Holiday;
 import kr.co.nff.repository.vo.Menu;
+import kr.co.nff.repository.vo.Review;
 import kr.co.nff.repository.vo.Store;
 
 public interface StoreService {
@@ -25,6 +26,10 @@ public interface StoreService {
 	//휴일 수정하기
 	//휴일 집어넣기
 	public void updateHoliday(Store store);
+	
+	/*리뷰*/
+	//리뷰 리스트
+	List<Review> reviewList(int no);
 	
 	
 	

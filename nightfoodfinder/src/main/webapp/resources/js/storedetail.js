@@ -28,7 +28,63 @@ animateValue("scopescore", 0, scope, 100);
 	console.log(closeTime);
 	
 	$("#operatingtime").html(openTime +" ~ " +closeTime);
+
 	
+//리뷰 리스트 가져오는 에이작스 	
+	function reviewListAjax() {
+		alert("가져와라");
+		$.getJSON({
+			url: "review_list.do",
+			data: {no},
+			success: list => makeReviewList(list)
+		});
+	}
+
+	function toPad(val) {
+		return val < 10 ? "0" + val : val;
+	}	
+	
+//#commentplace 안에 넣어주기 
+function makeReviewList(list){
+	alert("성공");
+	$tbl = $("<table></table>");
+	$.each(list, (i, r) => {
+		var date = new Date(r.regDate);
+		var time = date.getFullYear() + "-" 
+		         + (date.getMonth() + 1) + "-" 
+		         + date.getDate() + " "
+		         + toPad(date.getHours()) + ":"
+		         + toPad(date.getMinutes()) + ":"
+		         + toPad(date.getSeconds());
+		if(i == 1){
+			$tbl.append(
+					`<tr style="border: 1px solid coral;" id="row${r.reviewNo}">
+				    <td>${r.nickName}</td>
+				    <td>${r.reviewContent}</td>
+				    <td>${time}</td>
+				    <td><a href="#" data-no="${r.reviewNo}" class="del">삭제</a>	
+				  	    <a href="#" data-no="${r.reviewNo}" class="mod">수정</a>	
+				    </td>
+			    </tr>`		
+					);
+		}
+		else {
+		$tbl.append(
+			`<tr id="row${r.reviewNo}">
+		    <td>${r.nickName}</td>
+		    <td>${r.reviewContent}</td>
+		    <td>${time}</td>
+		    <td><a href="#" data-no="${r.reviewNo}" class="del">삭제</a>	
+		  	    <a href="#" data-no="${r.reviewNo}" class="mod">수정</a>	
+		    </td>
+	    </tr>`
+			);
+		}
+	});
+	$("#commentplace").html($tbl);
+}
 
 
-
+$(document).ready(function() {
+		reviewListAjax();
+	});

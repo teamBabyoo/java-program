@@ -355,7 +355,7 @@ select w.week_name, h.week_no
 	<!-- 댓글 -->
 	<!-- 댓글 리스트 -->
 	
-	<select id="selectComment" parameterType="int" resultType="Review">
+	<select id="selectReview" parameterType="int" resultType="Review">
 	 select '1' as type, 
 			r.review_no, 
 			r.user_no, 
@@ -402,7 +402,7 @@ select w.week_name, h.week_no
 							) 
 		order by type, reg_date desc
 
-		LIMIT #{startList}, #{listSize}
+		<!-- LIMIT #{startList}, #{listSize} -->
 		</select>
 		<!--
 		 -->
