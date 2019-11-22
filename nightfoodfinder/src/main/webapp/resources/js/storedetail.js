@@ -128,7 +128,21 @@ function makeReviewList(list){
 		         + toPad(date.getHours()) + ":"
 		         + toPad(date.getMinutes()) + ":"
 		         + toPad(date.getSeconds());
-		if(i == 1){
+		let st = '';
+		if(`${r.storeScope}` == '1'){
+			st = "★";
+		} else if (`${r.storeScope}` == '2'){
+			st = "★★";
+		} else if (`${r.storeScope}` == '3'){
+			st = "★★★";
+		} else if(`${r.storeScope}` == '4'){
+			st = "★★★★";
+		} else {
+			st = "★★★★★";
+		}
+			
+		
+		if(i == 0){
 			$tbl.append(
 					`<tr style="border: 1px solid coral;" id="row${r.reviewNo}">
 				    <td>${r.nickName}</td>
