@@ -118,9 +118,23 @@ function makereviewlist(list) {
 	
 //#commentplace 안에 넣어주기 
 function makeReviewList(list){
-	alert("성공");
-	$tbl = $("<table></table>");
+//	alert("성공");
+//	$tbl = $("<table></table>");
+	let $tbl = $("<div class='user_rv'></div>");
 	$.each(list, (i, r) => {
+		console.log(`${r.storeScope}`);
+		let scopeCnt = "";
+			if ('${r.storeScope}' == "1" ) {
+				scopeCnt = "★";
+			} else if ('${r.storeScope}' == "2" ) {
+				scopeCnt = "★★";
+			} else if ('${r.storeScope}' == "3" ) {
+				scopeCnt = "★★★";
+			} else if ('${r.storeScope}' == "4" ) {
+				scopeCnt = "★★★★";
+			} else {
+				scopeCnt = "★★★★★";
+			} 
 		var date = new Date(r.regDate);
 		var time = date.getFullYear() + "-" 
 		         + (date.getMonth() + 1) + "-" 
@@ -128,35 +142,61 @@ function makeReviewList(list){
 		         + toPad(date.getHours()) + ":"
 		         + toPad(date.getMinutes()) + ":"
 		         + toPad(date.getSeconds());
-		if(i == 1){
+		if(i == 0){
 			$tbl.append(
-					`<tr style="border: 1px solid coral;" id="row${r.reviewNo}">
-				    <td>${r.nickName}</td>
-				    <td>${r.reviewContent}</td>
-				    <td>${time}</td>
-				    <td><a href="#" data-no="${r.reviewNo}" class="del">삭제</a>	
-				  	    <a href="#" data-no="${r.reviewNo}" class="mod">수정</a>	
-				    </td>
-			    </tr>`		
-					);
+					`<div class="user_rv best_rv">
+                    <ul class="clearboth">
+                        <li>
+                            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                            <p>★★★★</p>
+                        </li>
+                        <li>
+                            <ul>
+                                <li>${r.nickName}<span>${r.reviewContent}</span></li>
+                                <li>맛있어 죽겠어요!</li>    
+                            </ul>
+                        </li>
+                        <li class="clearboth">
+                            <p><img src="nightfoodfinder/resources/images/icon_hrt.png" /></p>
+                            <p>432</p>
+                        </li>
+                    </ul>
+                </div>`);
 		}
 		else {
 		$tbl.append(
-			`<tr id="row${r.reviewNo}">
-		    <td>${r.nickName}</td>
-		    <td>${r.reviewContent}</td>
-		    <td>${time}</td>
-		    <td><a href="#" data-no="${r.reviewNo}" class="del">삭제</a>	
-		  	    <a href="#" data-no="${r.reviewNo}" class="mod">수정</a>	
-		    </td>
-	    </tr>`
+			`<div class="user_rv">
+                <ul class="clearboth">
+                    <li>
+                        <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                        <p>` + scopeCnt + `</p>
+                    </li>
+                    <li>
+                        <ul>
+                            <li>${r.nickName}<span>${time}</span></li>
+                            <li>${r.reviewContent}</li>    
+                        </ul>
+                    </li>
+                    <li class="clearboth">
+                        <p><img src='nightfoodfinder/resources/images/icon_hrt.png' /></p>
+                        <p>${r.storeScope}</p>
+                    </li>
+                </ul>
+            </div>`
 			);
 		}
 	});
-	$("#commentplace").html($tbl);
+	$("#targetContainer").html($tbl);
 }
 
 
 $(document).ready(function() {
-		reviewListAjax();
+	let $wrapperH = $('wrapper').height();
+	$('footer').css('top', $wrapperH);
+	reviewListAjax();
+	// 상세페이지 (리뷰)
+	$('.leave_rv').hide();
+	$('#btn_leave_rv').click((e) => {
+		$('.leave_rv').slideToggle();
 	});
+});

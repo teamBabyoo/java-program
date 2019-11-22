@@ -10,6 +10,7 @@ $(document).ready(function() {
     $('footer').css('top', $height_header + $height_content);
 
 
+
     // 옵션탭이 활성화되면 .search의 height값을 동적으로 처리
     $('.search *').click((e) => function() {
         $height1 = $('.optionBox.active').height();
@@ -61,4 +62,5 @@ $(document).ready(function() {
             $('#person_btn .pop_person').addClass('hidden');
         })
     });
+    
 });
