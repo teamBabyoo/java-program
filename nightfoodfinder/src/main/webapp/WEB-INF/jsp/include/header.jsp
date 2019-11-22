@@ -112,13 +112,13 @@
     </div>
   </header>
   <script>
-
+/*
   	let result = $("#keyword").val();
   	$("input[name=categorycode]:checked").each(function() {
   		var test = $(this).val(); 
   		alert(test);
   	});
-  
+*/  
 
   	
   </script> 

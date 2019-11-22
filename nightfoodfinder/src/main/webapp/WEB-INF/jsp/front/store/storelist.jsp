@@ -38,7 +38,7 @@
 						<c:forEach var="s" items="${sList}" varStatus="status">
 							<tr class="store store_${status.count}st">
 								<td>${s.storeNo}</td>
-								<td><a href="storedetail.do?storeno=${s.storeNo}">${s.storeName}</a></td>
+								<td><a href="storedetail.do?no=${s.storeNo}">${s.storeName}</a></td>
 								<td>${s.storeTell}</td>
 								<td>${s.openTime}</td>
 							</tr>
