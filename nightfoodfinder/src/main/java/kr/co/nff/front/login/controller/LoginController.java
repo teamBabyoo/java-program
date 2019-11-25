@@ -89,7 +89,8 @@ public class LoginController {
     	
     	//1. 로그인 사용자 정보를 읽어온다.
     	apiResult = naverLoginBO.getUserProfile(oauthToken); //String형식의 json데이터
-    	/** apiResult json 구조
+    	/** 
+    	apiResult json 구조
     	{"resultcode":"00",
     	"message":"success",
     	"response":{
@@ -155,7 +156,9 @@ public class LoginController {
 	
 	//스토어 로그인
 	@RequestMapping("/storelogin.do")
-	public void storeLogin() {}
+	public void storeLogin() {
+		//session.attribute("type", 0);
+	}
 	//스토어 로그아웃
 	@RequestMapping("/storelogout.do")
 	public void storeLogout() {}
