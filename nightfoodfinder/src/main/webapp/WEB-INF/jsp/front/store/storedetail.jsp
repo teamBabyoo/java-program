@@ -119,7 +119,7 @@
                         <ul class="clearboth">
                             <li>
                                 <ul class="clearboth">
-                                    <li class="float_l"><i class="fa fa-user-circle-o" aria-hidden="true"></i></li>
+                                    <li class="float_l"><i class="fa fa-user-circle-o" aria-hidden="true"></i>${login.nickName}</li>
                                     <li class="float_r">☆☆☆☆☆</li>
                                 </ul>
                             </li>
@@ -134,50 +134,17 @@
                                     <li class="float_r"><button type="submit">등록</button></li>
                                 </ul>
                             </li>
-                        </ul>    
+                        </ul> 
+                        <input type="hidden" id="nickName" />   
                     </form>
                 </div>
 				
 				<div id="targetContainer">
 				
 				</div>
-                <div class="user_rv best_rv">
-                    <ul class="clearboth">
-                        <li>
-                            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-                            <p>★★★★</p>
-                        </li>
-                        <li>
-                            <ul>
-                                <li>사용자닉네임<span>2910.11.11</span></li>
-                                <li>맛있어 죽겠어요!</li>    
-                            </ul>
-                        </li>
-                        <li class="clearboth">
-                            <p><img src="${pageContext.request.contextPath}/resources/images/icon_hrt.png" /></p>
-                            <p>432</p>
-                        </li>
-                    </ul>
-                </div>
+                
 
-<%--                 <div class="user_rv">
-                    <ul class="clearboth">
-                        <li>
-                            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-                            <p>★★</p>
-                        </li>
-                        <li>
-                            <ul>
-                                <li>사용자닉네임<span>2910.11.11</span></li>
-                                <li>맛있어 죽겠어요!</li>    
-                            </ul>
-                        </li>
-                        <li class="clearboth">
-                            <p><img src="${pageContext.request.contextPath}/resources/images/icon_hrt.png" /></p>
-                            <p>4</p>
-                        </li>
-                    </ul>
-                </div> --%>
+
             </div>
 			</div> 
 			
@@ -195,12 +162,13 @@
 			<!-- 푸터 -->
 			<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 		</div>
-	</div>
 	<script type="text/javascript">
-	let no = ${store.storeNo};
+	console.log(${loginUser});
+	 let no = ${store.storeNo};
 	 let scope = ${store.scope};
 	 let openTime = '${store.openTime}';  
 	 let closeTime = '${store.closeTime}';
+	 let context = '${pageContext.request.contextPath}';
 	</script>
 	<script src="<c:url value='/resources/js/storedetail.js' />">
 	</script>
