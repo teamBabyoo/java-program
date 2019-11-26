@@ -14,3 +14,6 @@ nightfoodfinder/src/main/java/kr/co/nff/login/naver/oauth/bo/
 
 nightfoodfinder/.history/
 
+nightfoodfinder/src/main/webapp/index.jsp
+nightfoodfinder/src/main/resources/config/spring/repository-context.xml
+nightfoodfinder/src/main/resources/config/mybatis/db.properties
