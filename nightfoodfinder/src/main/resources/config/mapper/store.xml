@@ -224,7 +224,7 @@ select w.week_name, h.week_no
 				and a.city in
 				<foreach collection="cities" item="c" open="(" close=")"
 					separator=",">
-					'#{c}'
+					#{c}
 				</foreach>
 			</if>
 		</where>
