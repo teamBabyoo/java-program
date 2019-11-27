@@ -25,21 +25,26 @@
 		<h1>Admin Panel</h1>
 		<ul class="utilities">
 			<li class="users"><a href="#">My Account</a></li>
-			<li class="logout warn"><a href="${pageContext.request.contextPath}/front/main/main.do">Log Out</a></li>
+			<li class="logout warn"><a
+				href="${pageContext.request.contextPath}/front/main/main.do">Log
+					Out</a></li>
 		</ul>
 	</header>
 
 	<nav role="navigation">
 		<ul class="main">
-			<li class="member"><a href="${pageContext.request.contextPath}/admin/user/userlist.do">회원관리</a></li>
-			<li class="store"><a href="${pageContext.request.contextPath}/admin/store/storelist.do">가게관리</a></li>
+			<li class="member"><a
+				href="${pageContext.request.contextPath}/admin/user/userlist.do">회원관리</a></li>
+			<li class="store"><a
+				href="${pageContext.request.contextPath}/admin/store/storelist.do">가게관리</a></li>
 			<li class="review"><a href="#">리뷰관리</a>
 				<ul>
-					<li><a class="review_all" href="${pageContext.request.contextPath}/admin/review/reviewlist.do">전체리뷰</a></li>
+					<li><a class="review_all"
+						href="${pageContext.request.contextPath}/admin/review/reviewlist.do">전체리뷰</a></li>
 					<li><a class="review_report" href="#">신고리뷰</a></li>
 				</ul></li>
-			
-			
+
+
 		</ul>
 	</nav>
 
@@ -48,24 +53,54 @@
 
 	<section class="panel ">
 		<h2>가게 관리</h2>
-		
+
 		<!-- search -->
-			
-				<div class="form-group row justify-content-center">
-						<select class="form-control form-control-sm" name="searchType"
-							id="searchType">						
-									<option value="total" ${pagination.type eq "total" ? "selected" :""}>전체</option>
-									<option value="permit" ${pagination.type eq "permit" ? "selected" :""}>승인 완료</option>
-									<option value="nopermit" ${pagination.type eq "nopermit" ? "selected" :""}>승인 대기</option>
-									<option value="withdraw" ${pagination.type eq "withdraw" ? "selected" :""}>활동 정지</option>								
-						</select>
-						<input type="text" class="form-control form-control-sm"
-							name="keyword" id="keyword" value="${pagination.keyword}">
-						<button class="btn btn-sm btn-primary" name="btnSearch"
-							id="btnSearch">검색</button>
-					</div>
-			
-			<!-- search -->
+		<div class="storesearchbar">
+			<table class="admssearchtable">
+				<tr>
+					<th class="admssearchtable-lboi">가게 상태</th>
+					<td class="admssearchtable-lboi"><select name="searchType"
+						id="searchType">
+							<option value="total"
+								${pagination.type eq "total" ? "selected" :""}>전체</option>
+							<option value="permit"
+								${pagination.type eq "permit" ? "selected" :""}>승인 완료</option>
+							<option value="nopermit"
+								${pagination.type eq "nopermit" ? "selected" :""}>승인 대기</option>
+							<option value="withdraw"
+								${pagination.type eq "withdraw" ? "selected" :""}>활동 정지</option>
+					</select></td>
+					<th class="admssearchtable-lboi">가게 분류</th>
+					<td class="admssearchtable-lboi"><c:forEach
+							items="${cateList}" var="t">
+							<span class="cate"> <input id="foodtype_${t.categoryNo}"
+								name="categorycode" value="${t.categoryNo}" type="checkbox" />
+								<label for="foodtype_${t.categoryNo}" class="types">${t.categoryName}</label>
+							</span>
+						</c:forEach> <input id="foodtype_0" name="categorycode" value="0"
+						type="checkbox" onclick="checkAll();" /> <label for="foodtype_0"
+						class="types">전체</label></td>
+				</tr>
+				<tr>
+					<th class="admssearchtable-lboi">검색어</th>
+					<td class="admssearchtable-lboi" colspan="3"><span class="cate"><select
+						name="searchTypes" id="searchTypes">
+							<option value="storename"
+								${pagination.types eq "storename" ? "selected" :""}>가게이름</option>
+							<option value="ownername"
+								${pagination.types eq "ownername" ? "selected" :""}>대표자이름</option>
+							<option value="ownernum"
+								${pagination.types eq "ownernum" ? "selected" :""}>사업자번호</option>
+					</select></span><input type="text" class="form-control form-control-sm"
+						name="keyword" id="keyword" value="${pagination.keyword}"></td>
+				</tr>
+			</table>
+			<div class="btndiv">
+				<button class="btnSearch" name="btnSearch" id="btnSearch">검색</button>
+			</div>
+		</div>
+
+		<!-- search -->
 		<div class="searchcnt">전체 : ${pagination.listCnt}개</div>
 		<table>
 			<tr>
@@ -83,7 +118,8 @@
 			</c:if>
 			<c:forEach var="b" items="${slist}">
 				<tr>
-				<td><input type="checkbox" id="myCheckboxid" name="storeNo" data-storeNo="${b.storeNo}"/></td>
+					<td><input type="checkbox" id="myCheckboxid" name="storeNo"
+						data-storeNo="${b.storeNo}" /></td>
 					<td class="myBtn" id="storeName">${b.storeName}</td>
 					<td id="categoryName">${b.categoryName}</td>
 					<td id="storeOwner">${b.storeOwner}</td>
@@ -109,90 +145,110 @@
 				</tr>
 			</c:forEach>
 		</table>
-		  <div>
-		<button type="button" id="withdraw" onclick="withdraw()">강제 활동 정지</button>
- 		<button type="button" id="cancel" onclick="cancel()">활동 정지 취소</button>  
+		<div>
+			<button type="button" id="withdraw" onclick="withdraw()">강제
+				활동 정지</button>
+			<button type="button" id="cancel" onclick="cancel()">활동 정지
+				취소</button>
 		</div>
-		
-			<script>
-		function withdraw() {
-			let cnt = 0;
-			let chk = document.querySelectorAll("input[name='storeNo']");
-			for (let i = 0; i < chk.length; i++) {
-				if (chk[i].checked) {cnt++;
-				let withdraw = $(chk[i]).parent().parent().find(".storetype").text("활동 정지");}
-			}
-			if (cnt == 0) {
-				alert("강제 활동 정지할 가게를 선택하세요.");
-				return;
-			}
-			
-		
-			// storeNoArr을 status=2&storeList=1&storeList=3 이런식으로 만들기 위해서
-			var storeNoArr = new Array();
-			storeNoArr.push("status=2");	// 고정된 값이어서 미리 푸쉬
-			$("input[name='storeNo']:checked").each(function(){	// each : j쿼리의 반복문
-				storeNoArr.push("storeNoList=" + $(this).attr("data-storeNo"));
-			});
-			console.log(storeNoArr.join("&"));
-			storeNoArr = storeNoArr.join("&");
-			
-			$.ajax({
-				url: "${pageContext.request.contextPath}/admin/store/withdraw.do",
-				type: "POST",
-				data: storeNoArr,
-				dataType: "json",
-				success: function(){
-					location.href = "${pageContext.request.contextPath}/admin/store/storelist.do";
-				}
-			});
 
-			 for (let i = 0; i < chk.length; i++) {
-					if (chk[i].checked) 
-					$(chk[i]).prop('checked', false);
-				}	
-		}
-		function cancel() {
-			let cnt = 0;
-			let chk = document.querySelectorAll("input[name='storeNo']");
-			for (let i = 0; i < chk.length; i++) {
-				if (chk[i].checked) {cnt++;
-				let cancel = $(chk[i]).parent().parent().find(".storetype").text("승인 완료");}
-			}
-			if (cnt == 0) {
-				alert("활동 정지를 취소할 가게를 선택하세요.");
-				return;
-			}
-			
-		
-			// storeNoArr을 status=2&storeList=1&storeList=3 이런식으로 만들기 위해서
-			var storeNoArr = new Array();
-			storeNoArr.push("status=1");	// 고정된 값이어서 미리 푸쉬
-			$("input[name='storeNo']:checked").each(function(){	// each : j쿼리의 반복문
-				storeNoArr.push("storeNoList=" + $(this).attr("data-storeNo"));
-			});
-			console.log(storeNoArr.join("&"));
-			storeNoArr = storeNoArr.join("&");
-			
-			$.ajax({
-				url: "${pageContext.request.contextPath}/admin/store/withdraw.do",
-				type: "POST",
-				data: storeNoArr,
-				dataType: "json",
-				success: function(){
-					location.href = "${pageContext.request.contextPath}/admin/store/storelist.do";
+		<script>
+			/* 체크박스 전체선택, 전체해제 */
+			function checkAll() {
+				if ($("#foodtype_0").is(':checked')) {
+					$("input[name=categorycode]").prop("checked", true);
+				} else {
+					$("input[name=categorycode]").prop("checked", false);
 				}
-			});
+			}
 
-			 for (let i = 0; i < chk.length; i++) {
-					if (chk[i].checked) 
-					$(chk[i]).prop('checked', false);
-				}	
-		}
-		
+			function withdraw() {
+				let cnt = 0;
+				let chk = document.querySelectorAll("input[name='storeNo']");
+				for (let i = 0; i < chk.length; i++) {
+					if (chk[i].checked) {
+						cnt++;
+						let withdraw = $(chk[i]).parent().parent().find(
+								".storetype").text("활동 정지");
+					}
+				}
+				if (cnt == 0) {
+					alert("강제 활동 정지할 가게를 선택하세요.");
+					return;
+				}
+
+				// storeNoArr을 status=2&storeList=1&storeList=3 이런식으로 만들기 위해서
+				var storeNoArr = new Array();
+				storeNoArr.push("status=2"); // 고정된 값이어서 미리 푸쉬
+				$("input[name='storeNo']:checked").each(
+						function() { // each : j쿼리의 반복문
+							storeNoArr.push("storeNoList="
+									+ $(this).attr("data-storeNo"));
+						});
+				console.log(storeNoArr.join("&"));
+				storeNoArr = storeNoArr.join("&");
+
+				$
+						.ajax({
+							url : "${pageContext.request.contextPath}/admin/store/withdraw.do",
+							type : "POST",
+							data : storeNoArr,
+							dataType : "json",
+							success : function() {
+								location.href = "${pageContext.request.contextPath}/admin/store/storelist.do";
+							}
+						});
+
+				for (let i = 0; i < chk.length; i++) {
+					if (chk[i].checked)
+						$(chk[i]).prop('checked', false);
+				}
+			}
+			function cancel() {
+				let cnt = 0;
+				let chk = document.querySelectorAll("input[name='storeNo']");
+				for (let i = 0; i < chk.length; i++) {
+					if (chk[i].checked) {
+						cnt++;
+						let cancel = $(chk[i]).parent().parent().find(
+								".storetype").text("승인 완료");
+					}
+				}
+				if (cnt == 0) {
+					alert("활동 정지를 취소할 가게를 선택하세요.");
+					return;
+				}
+
+				// storeNoArr을 status=2&storeList=1&storeList=3 이런식으로 만들기 위해서
+				var storeNoArr = new Array();
+				storeNoArr.push("status=1"); // 고정된 값이어서 미리 푸쉬
+				$("input[name='storeNo']:checked").each(
+						function() { // each : j쿼리의 반복문
+							storeNoArr.push("storeNoList="
+									+ $(this).attr("data-storeNo"));
+						});
+				console.log(storeNoArr.join("&"));
+				storeNoArr = storeNoArr.join("&");
+
+				$
+						.ajax({
+							url : "${pageContext.request.contextPath}/admin/store/withdraw.do",
+							type : "POST",
+							data : storeNoArr,
+							dataType : "json",
+							success : function() {
+								location.href = "${pageContext.request.contextPath}/admin/store/storelist.do";
+							}
+						});
+
+				for (let i = 0; i < chk.length; i++) {
+					if (chk[i].checked)
+						$(chk[i]).prop('checked', false);
+				}
+			}
 		</script>
-		
-		   <!-- 페이징 -->
+
+		<!-- 페이징 -->
 
 		<div id="paginationBox">
 			<ul class="pagination">
@@ -224,13 +280,13 @@
 		</div>
 
 		<!-- 페이징 -->
-		
+
 		<!-- The admsmodal -->
 		<div id="myadmsmodal" class="admsmodal">
 			<!-- admsmodal content -->
 			<div class="admsmodal-content">
 				<span class="close">&times;</span>
-		
+
 				<table class="admsmodalpp">
 					<tr>
 						<th class="admsmodalpp-cly1">가게 이름</th>
@@ -267,7 +323,7 @@
 					<tr>
 						<th class="admsmodalpp-cly1">대표자 연락처</th>
 						<td class="admsmodalpp-cly1"></td>
-					</tr>									
+					</tr>
 				</table>
 			</div>
 
@@ -288,10 +344,13 @@
 					let storeTell = $(e.target).siblings("#storeTell").text();
 					let streetLoad = $(e.target).siblings("#streetLoad").text();
 					let time = $(e.target).siblings("#time").text();
-					let categoryName = $(e.target).siblings("#categoryName").text();
-					let businessNum = $(e.target).siblings("#businessNum").text();
+					let categoryName = $(e.target).siblings("#categoryName")
+							.text();
+					let businessNum = $(e.target).siblings("#businessNum")
+							.text();
 					let storeOwner = $(e.target).siblings("#storeOwner").text();
-					let storeOwnerPh = $(e.target).siblings("#storeOwnerPh").text();
+					let storeOwnerPh = $(e.target).siblings("#storeOwnerPh")
+							.text();
 					admsmodal.style.display = "block";
 					$(".admsmodalpp td:eq(0)").text(storeName)
 					$(".admsmodalpp td:eq(1)").text(storeEmail)
@@ -302,7 +361,7 @@
 					$(".admsmodalpp td:eq(6)").text(businessNum)
 					$(".admsmodalpp td:eq(7)").text(storeOwner)
 					$(".admsmodalpp td:eq(8)").text(storeOwnerPh)
-					
+
 				}
 			}
 			// When the user clicks on <span> (x), close the admsmodal
@@ -315,8 +374,8 @@
 					admsmodal.style.display = "none";
 				}
 			}
-			
-			 // 서치
+
+			// 서치
 			$(document)
 					.on(
 							'click',
@@ -324,8 +383,12 @@
 							function(e) {
 								e.preventDefault();
 								var url = "${pageContext.request.contextPath}/admin/store/storelist.do";
-								url = url + "?searchType="
+								url = url
+										+ "?searchType="
 										+ $('#searchType option:selected').val();
+								url = url
+										+ "&searchTypes="
+										+ $('#searchTypes option:selected').val();
 								url = url + "&keyword=" + $('#keyword').val();
 								location.href = url;
 							});
@@ -362,7 +425,6 @@
 				url = url + "&range=" + range;
 				location.href = url;
 			}
-			
 		</script>
 	</section>
 	</main>

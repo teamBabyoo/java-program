@@ -4,7 +4,7 @@
 <mapper namespace="kr.co.nff.repository.dao.UserDAO">
 	
 	<!-- admin userlist -->
-	<select id="adminSelectUser" parameterType="SearchRe" resultType="User">
+	<select id="adminSelectUser" parameterType="Search" resultType="User">
 		select u.user_no,
 		u.user_email,
 		u.nick_name,
@@ -50,7 +50,7 @@
 	
 	
 	<!-- admin user list에서 paging을 위한 전체 user 수 구하기 -->
-	<select id="adminUserPagingListCnt" parameterType="SearchRe" resultType="int">
+	<select id="adminUserPagingListCnt" parameterType="Search" resultType="int">
 		select count(*) as listCnt
 			from tb_user u
 		<!-- 검색 -->
