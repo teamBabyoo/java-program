@@ -12,7 +12,7 @@ import lombok.Data;
 		private String reviewContent;
 		private int likeCount;
 		private String regDate;
-		private String reComment;
+		private String recomment;
 		private int reviewNo;
 		private String reportNickname;
 		private int reportCount;
