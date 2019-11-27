@@ -10,13 +10,13 @@
 <body>
 	<script>
 
-//		location.href="${pageContext.request.contextPath}/front/main/main.do";
+		location.href="${pageContext.request.contextPath}/front/main/main.do";
 		
 		/*진실*/
 // 		location.href="${pageContext.request.contextPath}/front/store/storedetail.do?no=1";
 
 		/*승경*/
- 		location.href="${pageContext.request.contextPath}/admin/review/reportedreviewlist.do";
+// 		location.href="${pageContext.request.contextPath}/admin/review/reviewlist.do";
 		
 		/*주영*/
  //		location.href="${pageContext.request.contextPath}/front/login/storeJoinForm.do";
