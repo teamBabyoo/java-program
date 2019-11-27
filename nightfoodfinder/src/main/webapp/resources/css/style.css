@@ -144,24 +144,25 @@ div#commentplace > * { width: 100%; margin: 0 auto; }
 .detail_wrap #commentplace > ul li { padding: 15px; }
 .detail_wrap #commentplace > ul li:nth-child(2) { cursor: pointer; }
 
-.detail_wrap .user_rv { margin-bottom: 30px; padding: 20px; background: #fff; border: 1px solid #bfbfbf; border-radius: 5px; }
+.detail_wrap .user_rv .user_rv,
+.detail_wrap .leave_rv.user_rv { margin-bottom: 30px; padding: 20px; background: #fff; border: 1px solid #bfbfbf; border-radius: 5px; }
 .detail_wrap .user_rv > ul > li { float: left; }
-.detail_wrap .user_rv > ul > li:nth-child(1) { width: 10%; }
+.detail_wrap .user_rv > ul > li:nth-child(1) { width: 15%; }
 .detail_wrap .user_rv > ul > li:nth-child(1) * { display: block; text-align: center; }
 .detail_wrap .user_rv > ul > li:nth-child(1) p { color: #ff7000; }
 .detail_wrap .user_rv > ul > li:nth-child(2) { width: 75%; padding: 0 15px; border-radius: 5px; }
 .detail_wrap .user_rv > ul > li:nth-child(2) span:before { padding: 5px; content: '|'; color: #ababab; vertical-align: text-bottom}
 .detail_wrap .user_rv > ul > li:nth-child(2) li:last-child {margin-top: 10px;}
 .detail_wrap .user_rv > ul > li:nth-child(2) > ul > li:nth-child(2) { background: #f3f3f3;  padding: 5px; border-radius: 2px; }
-.detail_wrap .user_rv > ul > li:nth-child(3) { width: 15%; }
+.detail_wrap .user_rv > ul > li:nth-child(3) { width: 10%; }
 .detail_wrap .user_rv > ul > li i { font-size: 1.4rem; padding: 5px 0;}
 .detail_wrap .user_rv > ul > li:nth-child(3) > * { text-align: center; padding: 5px; }
 
 .detail_wrap .leave_rv textarea { margin: 10px 0; padding: 10px; width: 100%; height: 100%; background: #f3f3f3; resize: none; border: none; border-radius: 2px; }
 .detail_wrap .leave_rv li:nth-child(3) button { float: right; padding: 10px 30px; border: 1px solid #d4d4d4; background: #fff; color: #8a8a8a; transition: all .3s;}
-.detail_wrap .leave_rv li:nth-child(3) button:hover { border-color: #ea9c5f; }
+.detail_wrap .leave_rv li:nth-child(3) button:hover { border-color: #ea9c5f; color: #ea9c5f; }
 
-.detail_wrap .best_rv { border: 1px solid#ea9c5f; }
+.detail_wrap .best_rv { border: 1px solid#ea9c5f !important; }
 /** 지인  끝 **/
 
 
