@@ -28,8 +28,13 @@
 		destroy-method="close"
       	p:driverClassName="${driver}"
         p:url="${url}"
+<<<<<<< HEAD
         p:username="hr" 
         p:password="1111" />
+=======
+        p:username="nff" 
+        p:password="654321" />
+>>>>>>> master
 	                                                                                           
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />

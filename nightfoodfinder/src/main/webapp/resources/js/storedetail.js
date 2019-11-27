@@ -117,11 +117,18 @@ function makereviewlist(list) {
 	}	
 	
 //#commentplace 안에 넣어주기 
+//리뷰 리스트 뿌려주기	
 function makeReviewList(list){
-//	alert("성공");
-//	$tbl = $("<table></table>");
 	let $tbl = $("<div class='user_rv'></div>");
+	if(list.length == 0){
+		$tbl.append(
+				`
+	                     작성된 리뷰가 없습니다.
+	            `
+				);
+	}
 	$.each(list, (i, r) => {
+		
 
 		var date = new Date(r.regDate);
 		var time = date.getFullYear() + "-" 
@@ -159,7 +166,7 @@ function makeReviewList(list){
                         </li>
                         <li class="clearboth">
                             <p><img src="` + context + `/resources/images/icon_hrt.png" /></p>
-                            <p>432</p>
+                            <p>${r.good}</p>
                         </li>
                     </ul>
                 </div>`);
@@ -180,7 +187,7 @@ function makeReviewList(list){
                     </li>
                     <li class="clearboth">
                         <p><img src="` + context + `/resources/images/icon_hrt.png" /></p>
-                        <p>${r.storeScope}</p>
+                        <p>${r.good}</p>
                     </li>
                 </ul>
             </div>`
@@ -188,7 +195,6 @@ function makeReviewList(list){
 		}
 	});
 	$("#targetContainer").html($tbl);
-	console.log(location.href);
 	
 }
 
