@@ -119,7 +119,7 @@
                         <ul class="clearboth">
                             <li>
                                 <ul class="clearboth">
-                                    <li class="float_l"><i class="fa fa-user-circle-o" aria-hidden="true"></i>${login.nickName}</li>
+                                    <li class="float_l"><i class="fa fa-user-circle-o" aria-hidden="true"></i>${loginUser.nickName}</li>
                                     <li class="float_r">☆☆☆☆☆</li>
                                 </ul>
                             </li>

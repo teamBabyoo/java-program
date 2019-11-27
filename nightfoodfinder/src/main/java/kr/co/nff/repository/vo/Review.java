@@ -29,6 +29,9 @@ import lombok.Data;
 		// 리뷰 차단, 차단 풀기
 		private List<Integer> reviewNoList;
 		private int status;
+		
+		//좋아요
+		private int good;
 	}
 
 
