@@ -6,7 +6,6 @@ import kr.co.nff.repository.vo.Holiday;
 import kr.co.nff.repository.vo.Menu;
 import kr.co.nff.repository.vo.Review;
 import kr.co.nff.repository.vo.Search;
-import kr.co.nff.repository.vo.SearchRe;
 import kr.co.nff.repository.vo.Store;
 public interface StoreDAO {
 	// 메인 스토어 상세정보 리스트 조회
@@ -27,7 +26,7 @@ public interface StoreDAO {
     List<Holiday> storeHoliday(int no);
     List<Menu> storeMenuList();
     List<Holiday> storeHoliday();
-    List<Store> adminSelectStore(SearchRe search);
+    List<Store> adminSelectStore(Search search);
 	Store adminSelectOneStore(int no);
 	void adminDeleteStore(int no);
 	void adminStatusStore(int no);
@@ -45,7 +44,7 @@ public interface StoreDAO {
 	void storeContentUpdate(Store store);
 	
 	
-	int adminStorePagingListCnt(SearchRe search);
+	int adminStorePagingListCnt(Search search);
 	
 	
 	

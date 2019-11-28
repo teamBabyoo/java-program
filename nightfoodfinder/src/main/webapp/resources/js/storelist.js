@@ -27,7 +27,7 @@ $(".types").click((e) => {
 	$(e.target).next().attr("checked", true);
 	console.log($(e.target).next().is(":checked"));
 	
-	// 선택된 조건의 텍스트와 조건inputbox id 같이 넘긴다
+	// 선택된 조건의 텍스트와 조건 input box id 같이 넘긴다
 	creatediv(selected, id);  
 });
 

@@ -79,5 +79,11 @@ public class StoreServiceImpl implements StoreService {
 		return dao.selectReview(review.getStoreNo());
 	}
 
-		
+	@Override
+	public List<Review> reviewRegist(Review review) {
+		dao.registReview(review);
+		return dao.selectReview(review.getStoreNo());
+	}
+
+	
 }

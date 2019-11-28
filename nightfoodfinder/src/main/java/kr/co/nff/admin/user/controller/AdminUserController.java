@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.nff.admin.user.service.UserService;
-import kr.co.nff.repository.vo.SearchRe;
+import kr.co.nff.repository.vo.Search;
 import kr.co.nff.repository.vo.User;
 
 
@@ -27,7 +27,7 @@ public class AdminUserController {
 			@RequestParam(required = false) String keyword, 
 			Model model) {
 		
-		SearchRe search = new SearchRe();
+		Search search = new Search();
 		search.setType(searchType);
 		search.setKeyword(keyword);
 		

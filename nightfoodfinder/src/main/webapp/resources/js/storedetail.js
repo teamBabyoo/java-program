@@ -30,105 +30,28 @@ animateValue("scopescore", 0, scope, 100);
 	$("#operatingtime").html(openTime +" ~ " +closeTime);
 
 	
-
-/***
- * 리뷰 리스트 ajax로 조회 
-
+//리뷰 리스트 가져오는 에이작스 	
 function reviewListAjax() {
 	$.getJSON({
-		url : "review_list.do",
-		data : {no},
-		success : list => makereviewlist(list) 
+		url: "review_list.do",
+		data: {no},
+		success: list => makeReviewList(list),
+		complete: function() { reposition(); }
 	});
-	
-}
-function makereviewlist(list) {
-	let $con = $("#targetContainer")
-	let html = "";
-	$.each(list, (i, r)=> {
-		html += `
-			<div class="user_rv">
-		    <ul class="clearboth">
-		        <li>
-		            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-		            `;
-		if ('${r.storeScope}' == "1" ) {
-			html += `<p>★</p>`
-		} else if ('${r.storeScope}' == "2" ) {
-			html += `<p>★★</p>`
-		} else if ('${r.storeScope}' == "3" ) {
-			html += `<p>★★★</p>`
-		} else if ('${r.storeScope}' == "4" ) {
-			html += `<p>★★★★</p>`
-		} else {
-			html += `<p>★★★★★</p>`
-		} 
-			
-		html += 
-			`
-		        </li>
-		        <li>
-		            <ul>
-		                <li>${r.nickName}<span>${r.regDate}</span></li>
-		                <li>${r.reviewContent}</li>    
-		            </ul>
-		        </li>
-		        <li class="clearboth">
-		            <p><img src="images/icon_hrt.png" /></p>
-		            <p>4</p>
-		        </li>
-		    </ul>
-		</div>
-		`;
-	});
-	$con.html(html);
 }
 
-<div class="user_rv">
-    <ul class="clearboth">
-        <li>
-            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-            <p>★★</p>
-        </li>
-        <li>
-            <ul>
-                <li>사용자닉네임<span>2910.11.11</span></li>
-                <li>맛있어 죽겠어요!</li>    
-            </ul>
-        </li>
-        <li class="clearboth">
-            <p><img src="images/icon_hrt.png" /></p>
-            <p>4</p>
-        </li>
-    </ul>
-</div>  
-  */ 
-	//리뷰 리스트 가져오는 에이작스 	
-	function reviewListAjax() {
-		$.getJSON({
-			url: "review_list.do",
-			data: {no},
-			success: list => makeReviewList(list)
-		});
-	}
+function toPad(val) {
+	return val < 10 ? "0" + val : val;
+}	
 
-	function toPad(val) {
-		return val < 10 ? "0" + val : val;
-	}	
-	
 //#commentplace 안에 넣어주기 
 //리뷰 리스트 뿌려주기	
 function makeReviewList(list){
 	let $tbl = $("<div class='user_rv'></div>");
 	if(list.length == 0){
-		$tbl.append(
-				`
-	                     작성된 리뷰가 없습니다.
-	            `
-				);
+		$tbl.append(` 작성된 리뷰가 없습니다.`);
 	}
 	$.each(list, (i, r) => {
-		
 
 		var date = new Date(r.regDate);
 		var time = date.getFullYear() + "-" 
@@ -203,34 +126,43 @@ function makeReviewList(list){
 	$("#targetContainer").html($tbl);
 	
 }
-
+/**
+ * footer top값 재설정
+ * @returns
+ */
+function reposition() {
+	let $height_header = $('header').height();
+	let $height_content = $('.content').height();
+	let $top_footer = $('footer').offset().top;
+//	let $height_leave_rv = $('.leave_rv').height
+	console.log('$height_content', $height_content);
+	console.log('$height_header ->', $height_header);
+	console.log('$top_footer ->', $top_footer);
+//	$('footer').css('top', $height_header + $height_content + $height_leave_rv);
+	$('footer').css('top', $height_header + $height_content);
+}
 
 
 
 $(document).ready(function() {
-	let $wrapperH = $('wrapper').height();
-	$('footer').css('top', $wrapperH);
 	reviewListAjax();
 	// 상세페이지 (리뷰)
-	$('.leave_rv').hide();
-	$('#btn_leave_rv').click((e) => {
+//	$('.leave_rv').hide();
+/*	$('#btn_leave_rv').click((e) => {
+//		reposition();
 		$('.leave_rv').slideToggle();
 	});
-	
-	
-	
-	
+*/	
 	// 댓글 등록
-	$("#crForm").submit(() => {
+	$("#reviewForm").submit(() => {
+		console.log(storeNo, reviewContent, storeScope, recomment);
 		$.post({
 			url: "review_regist.do",
-			data: {no, 
-				writer: $("#writer").val(), 
-				content: $("#content").val()},
+			data: {storeNo, reviewContent, storeScope, recomment},
 			dataType: "json",
-			success: (list) => makeCommentList(list)
+			success: (list) => reviewListAjax(list)
 		});
-		$("#writer", "#content").val("");
+		$("textarea").val("");
 		return false;
 	});
 	

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.nff.repository.dao.UserDAO;
-import kr.co.nff.repository.vo.SearchRe;
+import kr.co.nff.repository.vo.Search;
 import kr.co.nff.repository.vo.User;
 
 @Service
@@ -16,7 +16,7 @@ public class UserServiceImpl implements UserService{
 	private UserDAO dao;
 	
 	
-	public List<User> listUser(SearchRe search) {
+	public List<User> listUser(Search search) {
 		return dao.adminSelectUser(search);
 	}
 
@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService{
 	public void deleteUser(int no) {
 		dao.adminDeleteUser(no);
 	}
-	public int GetListCnt(SearchRe search) {
+	public int GetListCnt(Search search) {
 		return dao.adminUserPagingListCnt(search);
 	}
 	

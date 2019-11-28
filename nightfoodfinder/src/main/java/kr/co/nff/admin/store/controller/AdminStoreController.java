@@ -1,5 +1,7 @@
 package kr.co.nff.admin.store.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.nff.admin.store.service.StoreService;
-import kr.co.nff.repository.vo.SearchRe;
+import kr.co.nff.repository.vo.Category;
+import kr.co.nff.repository.vo.Search;
 import kr.co.nff.repository.vo.Store;
 import kr.co.nff.repository.vo.User;
 
@@ -24,19 +27,26 @@ public class AdminStoreController {
 	@RequestMapping("/storelist.do")
 	public void storeList(@RequestParam(required = false, defaultValue = "1") int page,
 			@RequestParam(required = false, defaultValue = "1") int range,
-			@RequestParam(required = false, defaultValue = "nickName") String searchType,
+			@RequestParam(required = false, defaultValue = "total") String searchType,
+			@RequestParam(required = false, defaultValue = "storename") String searchTypes,
 			@RequestParam(required = false) String keyword, 
 			Model model) {
 		
-		SearchRe search = new SearchRe();
+		List<Category> cateList = service.selectCategory();
+		
+		Search search = new Search();
 		search.setType(searchType);
+		search.setTypes(searchTypes);
 		search.setKeyword(keyword);
+		
+		System.out.println(search.getType());
+		System.out.println(search.getTypes());
 		
 		// 전체 게시글 개수
 		int listCnt = service.GetListCnt(search);
 				
 		search.pageInfo(page, range, listCnt);
-	
+		model.addAttribute("cateList", cateList);		
 		model.addAttribute("pagination", search);		
 		model.addAttribute("slist", service.listStore(search));
 	}

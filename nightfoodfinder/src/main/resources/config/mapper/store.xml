@@ -224,7 +224,7 @@ select w.week_name, h.week_no
 				and a.city in
 				<foreach collection="cities" item="c" open="(" close=")"
 					separator=",">
-					'#{c}'
+					#{c}
 				</foreach>
 			</if>
 		</where>
@@ -272,7 +272,7 @@ select w.week_name, h.week_no
 
 
 	<!-- admin storelist -->
-	<select id="adminSelectStore" parameterType="SearchRe"
+	<select id="adminSelectStore" parameterType="Search"
 		resultType="Store">
 		select s.store_no,
 		s.store_name,
@@ -292,7 +292,7 @@ select w.week_name, h.week_no
 		where s.store_category = c.category_no) as category_name
 		from tb_store as s
 		<!-- 검색 -->
-		<trim prefix="WHERE" prefixOverrides="AND|OR">
+		<where>
 			<if test="type=='nopermit' ">
 				AND s.status = 0
 			</if>
@@ -302,7 +302,21 @@ select w.week_name, h.week_no
 			<if test="type=='withdraw' ">
 				AND s.status = 2
 			</if>
-		</trim>
+			<if test="type=='total' ">
+				AND s.status = 0
+				or s.status = 1
+				or s.status = 2			
+			</if>
+			<if test="types=='storename' and keyword != null and keyword != '' ">
+				AND s.store_name like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="types=='ownername' and keyword != null and keyword != '' ">
+				AND s.store_owner like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="types=='ownernum' and keyword != null and keyword != '' ">
+				AND s.business_num like CONCAT('%', #{keyword}, '%')
+			</if>
+		</where>
 		order by s.store_no desc
 
 		<!-- 페이징 -->
@@ -326,14 +340,14 @@ select w.week_name, h.week_no
 		where store_no = #{no}
 	</update>
 
-	<select id="adminStorePagingListCnt" parameterType="SearchRe"
+	<select id="adminStorePagingListCnt" parameterType="Search"
 		resultType="int">
 		select count(*) as listCnt
 		from tb_store s
 		<!-- 검색 -->
 
 		<!-- 검색 -->
-		<trim prefix="WHERE" prefixOverrides="AND|OR">
+		<where>
 			<if test="type=='nopermit' ">
 				AND s.status = 0
 			</if>
@@ -343,7 +357,21 @@ select w.week_name, h.week_no
 			<if test="type=='withdraw' ">
 				AND s.status = 2
 			</if>
-		</trim>
+			<if test="type=='total' ">
+				AND s.status = 0
+				or s.status = 1
+				or s.status = 2			
+			</if>
+			<if test="types=='storename' and keyword != null and keyword != '' ">
+				AND s.store_name like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="types=='ownername' and keyword != null and keyword != '' ">
+				AND s.store_owner like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="types=='ownernum' and keyword != null and keyword != '' ">
+				AND s.business_num like CONCAT('%', #{keyword}, '%')
+			</if>
+		</where>
 
 
 		<!-- 페이징 -->
@@ -424,6 +452,15 @@ select w.week_name, h.week_no
 		<!--
 		 -->
 
+	<!-- 리뷰 등록 -->
+	<insert id="registReview" parameterType="Review" >
+	INSERT INTO tb_review (
+	   store_no, user_no, review_content, reg_date, store_scope, file_group_code, status, recomment, recomment_reg_date
+	) VALUES (
+	   #{storeNo}, 6, #{reviewContent}, NOW(), #{storeScope}, 1, 0, #{recomment}, NOW()
+	)
+	</insert>
+	
 	<!-- 댓글 등록  -->
 	<!-- 파일등록 아직X -->
 	<insert id="registCommet" parameterType="Review">

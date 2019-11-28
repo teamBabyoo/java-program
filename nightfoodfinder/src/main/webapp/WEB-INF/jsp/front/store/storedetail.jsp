@@ -15,6 +15,7 @@
 <body>
 	<div class="wrapper detail_wrap">
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
+	
 		<div id="storedetail" class="content clearboth">
 			<div id="pictureplace"></div>
 			
@@ -106,97 +107,73 @@
 
 
 					</div>
-					<!-- 댓글  -->
-			<div id="commentplace">
-			<div class="commentwrap">
-			<ul class="clearboth">
-                    <li class="float_l">Review</li>
-                    <li id="btn_leave_rv" class="float_r"><i class="fa fa-plus-circle" aria-hidden="true"></i>리뷰남기기</li>
-                </ul>
-
-                <div class="leave_rv user_rv">
-                  <!--   <form action="" method="POST" enctype="multipart/form-data"> -->
-                        <ul class="clearboth">
-                            <li>
-                                <ul class="clearboth">
-                                    <li class="float_l"><i class="fa fa-user-circle-o" aria-hidden="true"></i>${loginUser.nickName}</li>
-                                    <li class="float_r">☆☆☆☆☆</li>
-                                </ul>
-                            </li>
-                            <li>
-                                <textarea name="" placeholder="매너있는 리뷰를 남겨주세요. "></textarea>
-                            </li>
-                            <li>
-                                <ul class="clearboth">
-                                    <li class="float_l">
-                                        <input type="file" name="attach1" />
-                                    </li>
-                                    <li class="float_r"><button type="submit">등록</button></li>
-                                </ul>
-                            </li>
-                        </ul> 
-                        <input type="hidden" id="nickName" />   
-                   <!--  </form> -->
-                </div>
-				
-				<div id="targetContainer">
-				
-				</div>
-                
-
-
-            </div>
-			</div> 
-			
-			
-                
-            <!-- 댓글 끝 -->
-
-
-
-				</div>
-			</div>
-			
-			
-			</div>
-			<!--신고 모달 -->
-			
-			<!-- <div id="rmyModal" class="rmodal">
-				Modal content
-				  <div class="rmodal-content animated zoomIn">
-				  <div class="rmodal-header">
-					 <span class="rclose">×</span>
-				 </div>
 					
-				<div class="rmodal-body nav">
-				   <ul>
-					 <li><input type="radio" name="reportWhy" value="1" />기타</li>
-					 <li><input type="radio" name="reportWhy" value="2" />음란</li>
-					 <li><input type="radio" name="reportWhy" value="3" />폭력성, 유해</li>
-					 <li><input type="radio" name="reportWhy" value="4" />광고</li>
-					</ul>
-				  </div>
-				  
+					<!-- 댓글  -->
+
+					<div id="commentplace">
+						<div class="commentwrap">
+							<ul class="clearboth">
+								<li class="float_l">Review</li>
+								<li id="btn_leave_rv" class="float_r"><i class="fa fa-plus-circle" aria-hidden="true"></i>리뷰남기기</li>
+							</ul>
+							
+							<div class="leave_rv user_rv">
+								<%-- <form name="reviewForm" id="reviewForm" action="<c:url value="/front/store/review_regist.do" />" method="POST" enctype="multipart/form-data"> --%>
+								<form name="reviewForm" id="reviewForm" method="POST" enctype="multipart/form-data">
+									<ul class="clearboth">
+										<li>
+											<ul class="clearboth">
+												<li class="float_l"><i class="fa fa-user-circle-o" aria-hidden="true"></i>${loginUser.nickName}</li>
+												<li class="float_r">☆☆☆☆☆</li>
+											</ul>
+										</li>
+										<li>
+											<textarea name="reviewContent" placeholder="매너있는 리뷰를 남겨주세요. "></textarea>
+										</li>
+										<li>
+											<ul class="clearboth">
+												<li class="float_l"><input type="file" name="attach" multiple="multiple" /></li>
+												<li class="float_r"><button type="submit">등록</button></li>
+											</ul>
+										</li>
+									</ul> 
+									<input type="hidden" id="nickName" />   
+									<%-- <input type="hidden" name="storeNo" value="${store.storeNo}" /> --%>
+									<!-- <input type="hidden" name="recomment" value="" /> -->
+								</form>
+							</div>
+							<div id="targetContainer">
+							
+							</div>
+						</div>
+					</div> 
+					<!-- // 댓글 끝 -->
+					
 				</div>
-			  </div> -->
-			  
-			  
-			  <div id="rmyModal" class="rmodal" style="display: none">
-       		 </div>
-			 
-			  
-			<!-- 푸터 -->
-			<c:import url="/WEB-INF/jsp/include/footer.jsp" />
+			</div>
 		</div>
+		
+		<!-- 푸터 -->
+		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
+		
+	    <!-- 팝업 백그라운드  -->
+    	<div class="bgbox"></div>
+    	<!-- 신고팝업 -->
+    	  <div id="rmyModal" class="rmodal" style="display: none"></div>
+	</div>
 	<script type="text/javascript">
-	console.log(${loginUser});
+//	console.log(${loginUser});
 	 let no = ${store.storeNo};
 	 let scope = ${store.scope};
 	 let openTime = '${store.openTime}';  
 	 let closeTime = '${store.closeTime}';
 	 let context = '${pageContext.request.contextPath}';
+	 let storeNo = ${store.storeNo};
+//	 let reviewContent = $('textarea[name="reviewContent"]').val();
+	 let reviewContent = "리뷰내용강제테스트";
+	 let storeScope = "4";
+	 let recomment = "답댓 강제 테스트";
 	</script>
-	<script src="<c:url value='/resources/js/storedetail.js' />">
-	</script>
+	<script src="<c:url value='/resources/js/storedetail.js' />"></script>
 </body>
 </html>
