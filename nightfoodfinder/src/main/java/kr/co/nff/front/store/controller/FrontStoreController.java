@@ -2,6 +2,9 @@ package kr.co.nff.front.store.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,12 +35,16 @@ public class FrontStoreController {
 	
 	
 	/* 가게 상세 */
+	
 	@RequestMapping("/storedetail.do")
-	public void storeDetail(Model model, int no) {
+	public void storeDetail(Model model, int no, HttpServletRequest req) {
+		HttpSession session = req.getSession();
+//		System.out.println("로그인한 유저: " + session.getAttribute("loginUser"));
 		model.addAttribute("store", service.storeDetail(no));
 		model.addAttribute("menu", service.storeMenu(no));
 		model.addAttribute("holidaylist", service.storeHoliday(no));
 		model.addAttribute("storeContent", service.storeContent(no));
+		model.addAttribute("user", session.getAttribute("loginUser"));
 	}
 	
 	/* 가게 정보 수정*/
@@ -77,8 +84,12 @@ public class FrontStoreController {
 	@RequestMapping("/review_report.do")
 	@ResponseBody
 	public List<Review> reviewReportAjax(Review review){
+		/*
 		System.out.println("리뷰번호: " + review.getReviewNo());
 		System.out.println("신고사유: " + review.getReportWhy());
+		System.out.println("가게번호: " + review.getStoreNo());
+		System.out.println("유저번호: " + review.getUserNo());
+		*/
 
 		return service.reviewReport(review);
 	}
@@ -116,7 +127,7 @@ public class FrontStoreController {
 */
 //        model.addAttribute("list", service.reviewRegist(review));
 		System.out.println("내용 : " + review.getReviewContent());
-		System.out.println("답댓 : " + review.getRecomment());
+		System.out.println("답댓 : " + review.getReComment());
 		System.out.println("스코프 : " + review.getStoreScope());
         System.out.println("게시글번호 확인" + review.getStoreNo());
         service.reviewRegist(review);

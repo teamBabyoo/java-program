@@ -123,7 +123,7 @@
 									<ul class="clearboth">
 										<li>
 											<ul class="clearboth">
-												<li class="float_l"><i class="fa fa-user-circle-o" aria-hidden="true"></i>${loginUser.nickName}</li>
+												<li class="float_l"><i class="fa fa-user-circle-o" aria-hidden="true"></i>${user.userEmail}</li>
 												<li class="float_r">☆☆☆☆☆</li>
 											</ul>
 										</li>
@@ -173,6 +173,7 @@
 	 let reviewContent = "리뷰내용강제테스트";
 	 let storeScope = "4";
 	 let recomment = "답댓 강제 테스트";
+	 let userNo = ${user.userNo};
 	</script>
 	<script src="<c:url value='/resources/js/storedetail.js' />"></script>
 </body>

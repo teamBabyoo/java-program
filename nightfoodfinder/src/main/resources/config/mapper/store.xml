@@ -506,9 +506,17 @@ select w.week_name, h.week_no
 	<!-- 리뷰신고 -->
 	<insert id="reportReview" parameterType="Review">
 	INSERT INTO tb_report_review (user_no, review_no, report_why) 
-		VALUES (6, #{reviewNo}, #{reportWhy})
+		VALUES (#{userNo}, #{reviewNo}, #{reportWhy})
 	</insert>
 	
+	
+	<!-- 리뷰 신고 제한수를 위한  -->
+	<select id="reviewcount" parameterType="Review" resultType="int" >
+	 select count(*)
+ 	   from tb_report_review
+	  where report_no = #{reportNo}
+ 		and user_no = #{userNo}
+	</select>
 	
 
 </mapper>
