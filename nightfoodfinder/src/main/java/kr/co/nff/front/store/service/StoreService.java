@@ -32,6 +32,10 @@ public interface StoreService {
 	public List<Review> reviewList(int no);
 	
 	
+	//리뷰신고
+	List<Review> reviewReport(Review review);
+	
+	
 	
 }
 

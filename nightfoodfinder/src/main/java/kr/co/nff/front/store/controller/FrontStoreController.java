@@ -73,7 +73,12 @@ public class FrontStoreController {
 		return service.reviewList(no);
 	}
 
-	
+	/*리뷰 신고하기*/
+	@RequestMapping("/review_report.do")
+	@ResponseBody
+	public List<Review> reviewReportAjax(Review review){
+		return service.reviewReport(review);
+	}
 
 	
 }

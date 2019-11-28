@@ -115,7 +115,7 @@
                 </ul>
 
                 <div class="leave_rv user_rv">
-                    <form action="" method="POST" enctype="multipart/form-data">
+                  <!--   <form action="" method="POST" enctype="multipart/form-data"> -->
                         <ul class="clearboth">
                             <li>
                                 <ul class="clearboth">
@@ -136,7 +136,7 @@
                             </li>
                         </ul> 
                         <input type="hidden" id="nickName" />   
-                    </form>
+                   <!--  </form> -->
                 </div>
 				
 				<div id="targetContainer">
@@ -159,6 +159,32 @@
 			
 			
 			</div>
+			<!--신고 모달 -->
+			
+			<!-- <div id="rmyModal" class="rmodal">
+				Modal content
+				  <div class="rmodal-content animated zoomIn">
+				  <div class="rmodal-header">
+					 <span class="rclose">×</span>
+				 </div>
+					
+				<div class="rmodal-body nav">
+				   <ul>
+					 <li><input type="radio" name="reportWhy" value="1" />기타</li>
+					 <li><input type="radio" name="reportWhy" value="2" />음란</li>
+					 <li><input type="radio" name="reportWhy" value="3" />폭력성, 유해</li>
+					 <li><input type="radio" name="reportWhy" value="4" />광고</li>
+					</ul>
+				  </div>
+				  
+				</div>
+			  </div> -->
+			  
+			  
+			  <div id="rmyModal" class="rmodal" style="display: none">
+       		 </div>
+			 
+			  
 			<!-- 푸터 -->
 			<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 		</div>

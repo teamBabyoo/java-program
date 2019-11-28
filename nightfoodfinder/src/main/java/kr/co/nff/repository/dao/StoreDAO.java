@@ -60,5 +60,9 @@ public interface StoreDAO {
 	void deleteReview(int no);
 	
 	
+	//리뷰신고
+	void reportReview(Review review);
+	
+	
 	
 }

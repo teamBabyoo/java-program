@@ -402,6 +402,7 @@ select w.week_name, h.week_no
 							) 
 		order by type, reg_date desc -->
 	 select r.store_no, 
+	 		r.review_no,
 	 		r.user_no, 
 	 		u.nick_name, 
 	 		r.review_content, 
@@ -463,5 +464,14 @@ select w.week_name, h.week_no
                 #{no}
             </foreach> 
 	</update>
+	
+	
+	<!-- 리뷰신고 -->
+	<insert id="reportReview" parameterType="Review">
+	INSERT INTO tb_report_review (user_no, review_no, report_why) 
+		VALUES (6, #{reportNo}, #{reportWhy})
+	</insert>
+	
+	
 
 </mapper>

@@ -302,5 +302,64 @@ div#commentplace > * { width: 100%; margin: 0 auto; }
  padding: 5px;
 }
 
+/*가게리뷰 신고*/
+.detail_wrap .tenten {
+	text-align: right;
+}
+/*Modal-Box*/
+.detail_wrap .rmodal {
+    position: fixed;
+    z-index: 1;
+    padding:0.5%;
+    left: 30%;
+    top: 50%;
+    width: 40%; 
+    height: 40%;
+    overflow: auto;
+    margin: 0 auto;
+}
+
+.detail_wrap .rmodal-content {
+    margin: 0 auto;
+    padding: 10px;
+    width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    background-color: #fff8d6;
+    display: grid;
+    grid-template-rows: 40px 1fr;
+}
+
+
+.detail_wrap .rmodal-body {
+    padding: 2px 16px;
+    background-color: #FFF0A5;
+}
+.detail_wrap .rclose {
+	text-align: right;
+    font-size: 5em;
+    font-weight: bold;
+    opacity: 1;
+}
+
+.detail_wrap .rclose:hover,
+.detail_wrap .rclose:focus {
+    color: #B64926;
+    text-decoration: none;
+    cursor: pointer;
+}
+.detail_wrap .rmodal-content li {
+    padding: 11px;
+    font-size: 20px;
+}
+
+.detail_wrap .rmodal-content button{
+	width: 100px;
+	height: 30px;
+}
+
 /** 진실 끝 **/
 

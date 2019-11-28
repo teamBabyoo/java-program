@@ -153,6 +153,9 @@ function makeReviewList(list){
 		if(i == 0){
 			$tbl.append(
 					`<div class="user_rv best_rv">
+					  <div class="tenten">
+					  	<button type="button" class="report" value="${r.reviewNo}">신고하기</button>  
+					  </div>
                     <ul class="clearboth">
                         <li>
                             <i class="fa fa-user-circle-o" aria-hidden="true"></i>
@@ -174,6 +177,9 @@ function makeReviewList(list){
 		else {
 		$tbl.append(
 			`<div class="user_rv">
+				<div class="tenten">
+					<button type="button" class="report"  value="${r.reviewNo}">신고하기</button>
+				</div>
                 <ul class="clearboth">
                     <li>
                         <i class="fa fa-user-circle-o" aria-hidden="true"></i>
@@ -197,6 +203,8 @@ function makeReviewList(list){
 	$("#targetContainer").html($tbl);
 	
 }
+
+
 
 
 $(document).ready(function() {
@@ -226,9 +234,72 @@ $(document).ready(function() {
 		return false;
 	});
 	
-	
+
 	
 });
+
+
+
+//신고하기
+$(document).on('click', '.report', function(e){
+	//신고사유 모달창
+	let rpop = $("#rmyModal");
+	//사유 모달창 띄우기
+	rpop.css("display", "block");
+
+	//review_no를 받기위해	
+	let rNo = e.target
+//	console.log(eval.value);
+	$("#rmyModal *").remove();
+	let rcon = $("#rmyModal");
+	
+	rcon.append(
+	`
+	<form id="reportsubmit" method="post" action="review_report.do">
+    <div class="rmodal-content">
+    <input type="hidden" id="reviewNo" value="`+rNo.value+`" />
+      <span class="rclose">&times;</span>                                                               
+       <ul>
+		 <li><input type="radio" name="reportWhy" value="1" /> 기타</li>
+		 <li><input type="radio" name="reportWhy" value="2" /> 음란</li>
+		 <li><input type="radio" name="reportWhy" value="3" /> 폭력성, 유해</li>
+		 <li><input type="radio" name="reportWhy" value="4" /> 광고</li>
+		</ul>
+		<button>제출하기</button>
+    </div>
+	</form>
+	`
+	);
+	//밸류 값 들어오는지 확인용
+	console.log($("#reviewNo").val());
+
+	//모달창 닫기
+	$(".rclose").click(()=>{
+		rpop.css("display", "none");
+	});
+	$('input[name=reportWhy]').change((e) => {
+		console.log(e.target);
+	})
+	// 리뷰신고 등록
+	$("#reportsubmit").submit(() => {
+		let userNo = 3;
+		$.post({
+			url: "review_report.do",
+			type: "POST",
+			data: {
+				reviewNo: $("#reviewNo").val(), 
+				reportWhy: $('input[name=reportWhy]:checked').val()
+				//추후 수정..
+				},
+			dataType: "json",
+			success: (list) => makeReviewList(list)
+		});
+		console.log($('input[name=reportWhy]:checked').val())
+		$('input[name=reportWhy]:checked').val("");
+		return false;
+	});
+});
+
 
 
 
