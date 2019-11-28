@@ -77,6 +77,9 @@ public class FrontStoreController {
 	@RequestMapping("/review_report.do")
 	@ResponseBody
 	public List<Review> reviewReportAjax(Review review){
+		System.out.println("리뷰번호: " + review.getReviewNo());
+		System.out.println("신고사유: " + review.getReportWhy());
+
 		return service.reviewReport(review);
 	}
 	/* 리뷰 작성 & 이미지 업로드 */

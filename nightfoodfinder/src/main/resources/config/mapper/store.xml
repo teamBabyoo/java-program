@@ -506,7 +506,7 @@ select w.week_name, h.week_no
 	<!-- 리뷰신고 -->
 	<insert id="reportReview" parameterType="Review">
 	INSERT INTO tb_report_review (user_no, review_no, report_why) 
-		VALUES (6, #{reportNo}, #{reportWhy})
+		VALUES (6, #{reviewNo}, #{reportWhy})
 	</insert>
 	
 	

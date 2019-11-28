@@ -12,13 +12,13 @@ import lombok.Data;
 		private String reviewContent;
 		private int likeCount;
 		private String regDate;
-		private Integer reviewNo;
+		private int reviewNo;
 		private String reComment;
 		private String recomment;
 		private String reportNickname;
 		private int reportCount;
 		private int storeNo;
-		private Integer userNo;
+		private int userNo;
 		private int reportNo;
 		
 		private List<ReportReview> reportlist;
@@ -35,7 +35,7 @@ import lombok.Data;
 		private int good;
 		
 		//신고사유
-		private Integer reportWhy;
+		private int reportWhy;
 	}
 
 
