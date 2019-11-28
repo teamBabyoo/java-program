@@ -15,7 +15,7 @@ public class Search extends Pagination {
 	public Search(int pageNo, int listSize) {
 		super(pageNo, listSize);
 	}
-
+	private String totalType;
 	private String type;  
 	private String types;  
 	private String keyword;  // 검색어          (이름, 지역, 메뉴 예정 - 스토어리스트)

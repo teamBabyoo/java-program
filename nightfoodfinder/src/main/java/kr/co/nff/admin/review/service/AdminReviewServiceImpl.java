@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.nff.repository.dao.ReviewDAO;
-
+import kr.co.nff.repository.vo.ReportReview;
 import kr.co.nff.repository.vo.Review;
 import kr.co.nff.repository.vo.Search;
 
@@ -30,7 +30,15 @@ public class AdminReviewServiceImpl implements AdminReviewService {
 		dao.blockReview(review);	
 	}
 	
-	public List<Review> listReportedReview() {
-		return dao.selectReportReview();
+	public List<Review> listReportedReview(Search search) {
+		return dao.selectReportReview(search);
+	}
+	
+	public int ReportGetCnt(Search search) {
+		return dao.pagingReportGetCnt(search);
+	}
+	
+	public List<ReportReview> reportDetail(int no) {
+		return dao.selectReportDetail(no);
 	}
 }

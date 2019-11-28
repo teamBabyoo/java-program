@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.nff.admin.review.service.AdminReviewService;
+import kr.co.nff.repository.vo.ReportReview;
 import kr.co.nff.repository.vo.Review;
 import kr.co.nff.repository.vo.Search;
 
@@ -49,7 +50,31 @@ public class AdminReviewController {
 
 	// 신고리뷰 목록 불러오기
 	@RequestMapping("/reportedreviewlist.do")
-	public void reportedreviewlist(Model model) {
-		model.addAttribute("list", service.listReportedReview());
+	public void reportedreviewlist(
+			@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range,
+			@RequestParam(required = false, defaultValue = "all") String totalSearchType,
+			@RequestParam(required = false, defaultValue = "nickName") String searchType,
+			@RequestParam(required = false) String keyword,
+			Model model) 
+	{
+		Search search = new Search();
+		search.setTotalType(totalSearchType);
+		search.setType(searchType);
+		search.setKeyword(keyword);
+		int listCnt = service.ReportGetCnt(search);
+		
+		search.pageInfo(page, range, listCnt);
+
+		model.addAttribute("pagination", search);
+		
+		model.addAttribute("list", service.listReportedReview(search));
 	}
+	
+
+	@RequestMapping("/reportmodal.do")
+	public List<ReportReview> reportmodal(int reportNo) {
+		return service.reportDetail(reportNo);
+	}
+
 }
