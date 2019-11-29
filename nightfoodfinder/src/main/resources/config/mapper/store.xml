@@ -439,32 +439,6 @@
 		from tb_like) l
 		on r.review_no = l.store_review_no
 		where r.store_no = #{storeNo}
-<<<<<<< HEAD
-		  and r.review_no != (select 
-		  						store_review_no 
-		  					 from tb_like 
-							group by store_review_no 
-							order by count(user_no) desc limit 1) 
-							) 
-		order by type, reg_date desc -->
-	 select r.store_no, 
-	 		r.review_no,
-	 		r.user_no, 
-	 		u.nick_name, 
-	 		r.review_content, 
-	 		r.reg_date, 
-	 		r.store_scope, 
-	 		ifnull(l.likeit, 0) as good
-         from tb_review r
-         inner join tb_user u
-         on r.user_no = u.user_no
-   left outer join (select ifnull(count(user_no), 0) as likeit,
-					       store_review_no
-				   	 from tb_like) l
-          on r.review_no = l.store_review_no
-          where r.store_no = #{storeNo}
-          order by reg_date desc;
-
 
 		<!-- LIMIT #{startList}, #{listSize} -->
 	</select>
