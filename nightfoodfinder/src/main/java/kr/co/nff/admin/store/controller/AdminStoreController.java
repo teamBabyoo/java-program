@@ -47,7 +47,6 @@ public class AdminStoreController {
 			codeArr[i] = Integer.parseInt(arrIdx[i]);
 //			System.out.println(codeArr[i]);
 		}
-		
 		search.setCategoryCode(codeArr);
 	
 

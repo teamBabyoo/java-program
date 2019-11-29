@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -73,11 +74,25 @@
 					<th class="admssearchtable-lboi">가게 분류</th>
 					<td class="admssearchtable-lboi"><c:forEach
 							items="${cateList}" var="t">
-							<span class="cate"> <input id="foodtype_${t.categoryNo}"
-								name="categorycode" value="${t.categoryNo}" type="checkbox" />
+							<span class="cate"> <input id="foodtype_${t.categoryNo}" 
+								name="categorycode" value="${t.categoryNo}" type="checkbox" 
+							<c:set var="contains" value="false" />
+								<c:forEach var="item" items="${pagination.categoryCode}">
+  									<c:if test="${item eq t.categoryNo}">
+ 									   <c:set var="contains" value="true" />
+ 								 	</c:if>
+								</c:forEach>
+								<c:if test="${contains}">
+									checked="checked"
+								</c:if>
+							/>
 								<label for="foodtype_${t.categoryNo}" class="types">${t.categoryName}</label>
 							</span>
-						</c:forEach> <input id="foodtype_0" type="checkbox" onclick="checkAll();" />
+						</c:forEach> <input id="foodtype_0" type="checkbox" onclick="checkAll();" 
+						<c:if test="${fn:length(pagination.categoryCode) eq fn:length(cateList)}">
+									checked="checked"
+								</c:if>
+								/>
 						<label for="foodtype_0" class="types">전체</label></td>
 				</tr>
 				<tr>
