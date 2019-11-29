@@ -9,5 +9,5 @@ public class ReportReview {
 	private int reviewNo;
 	private int reason;
 	//신고한 사람들
-	private String nickName;
+	private String ReportNickname;
 }

@@ -72,9 +72,9 @@ public class AdminReviewController {
 	}
 	
 
-	@RequestMapping("/reportmodal.do")
+/*	@RequestMapping("/reportmodal.do")
 	public List<ReportReview> reportmodal(int reportNo) {
 		return service.reportDetail(reportNo);
-	}
+	}*/
 
 }

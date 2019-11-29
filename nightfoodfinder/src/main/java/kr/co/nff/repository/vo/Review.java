@@ -21,7 +21,7 @@ import lombok.Data;
 		private int userNo;
 		private int reportNo;
 		
-		private List<ReportReview> reportlist;
+		private List<ReportReview> reportList;
 		
 		private int storeScope;
 		private int fileGroupCode;

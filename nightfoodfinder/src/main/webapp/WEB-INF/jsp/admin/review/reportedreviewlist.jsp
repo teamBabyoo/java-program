@@ -173,6 +173,12 @@
 						</c:otherwise>
 					</c:choose>
 					</td>
+			<!-- 		<td>
+						<c:forEach var="re" items="${li.reportList }">
+						<li>${re.reason }</li>
+						</c:forEach>
+						</td>
+					-->
 				</tr>
 			</c:forEach>
 
@@ -245,7 +251,7 @@
 		// 그런데, 모달팝업이 첫 리스트 줄에만 적용되고 반복되어서 나오는 리스트들에는 적용이 안되었음..
 		// 이렇게 해야 모든 리스트에 적용된다.	
 	
-		for (let i = 0; i < btn.length; i++) {
+/*		for (let i = 0; i < btn.length; i++) {
 			btn[i].onclick = function(e){ 
 			console.log("러")	
 			var k = $(e.target).attr("data-reportNo");
@@ -263,8 +269,16 @@
 			});
 			}
 		}
+		*/
+		for (let i = 0; i < btn.length; i++) {
+			btn[i].onclick = function(e) {
 		
-		
+            modal.style.display = "block";
+            $(".modal-content p:eq(0)").text(
+            		"리뷰: " + $(e.target).text())
+            
+        }
+		}
 		
 		
 		
