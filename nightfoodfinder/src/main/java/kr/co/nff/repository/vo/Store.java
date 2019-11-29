@@ -11,7 +11,7 @@ public class Store {
 	private String storeName;
 	private String storeEmail;
 	private String storePass;
-	private int storeTell;
+	private String storeTell;
 	private String categoryName;
 	private int storeCategory;
 	private String openTime;
@@ -29,7 +29,7 @@ public class Store {
 	private int status;
 	private int businessNum;
 	private String storeOwner;
-	private int storeOwnerPh;
+	private String storeOwnerPh;
 	
 	private String latitude;
 	private String longitude;
