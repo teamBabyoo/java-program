@@ -77,21 +77,20 @@
 								name="categorycode" value="${t.categoryNo}" type="checkbox" />
 								<label for="foodtype_${t.categoryNo}" class="types">${t.categoryName}</label>
 							</span>
-						</c:forEach> <input id="foodtype_0" name="categorycode" value="0"
-						type="checkbox" onclick="checkAll();" /> <label for="foodtype_0"
-						class="types">전체</label></td>
+						</c:forEach> <input id="foodtype_0" type="checkbox" onclick="checkAll();" />
+						<label for="foodtype_0" class="types">전체</label></td>
 				</tr>
 				<tr>
 					<th class="admssearchtable-lboi">검색어</th>
-					<td class="admssearchtable-lboi" colspan="3"><span class="cate"><select
-						name="searchTypes" id="searchTypes">
-							<option value="storename"
-								${pagination.types eq "storename" ? "selected" :""}>가게이름</option>
-							<option value="ownername"
-								${pagination.types eq "ownername" ? "selected" :""}>대표자이름</option>
-							<option value="ownernum"
-								${pagination.types eq "ownernum" ? "selected" :""}>사업자번호</option>
-					</select></span><input type="text" class="form-control form-control-sm"
+					<td class="admssearchtable-lboi" colspan="3"><span
+						class="cate"><select name="searchTypes" id="searchTypes">
+								<option value="storename"
+									${pagination.types eq "storename" ? "selected" :""}>가게이름</option>
+								<option value="ownername"
+									${pagination.types eq "ownername" ? "selected" :""}>대표자이름</option>
+								<option value="ownernum"
+									${pagination.types eq "ownernum" ? "selected" :""}>사업자번호</option>
+						</select></span><input type="text" class="form-control form-control-sm"
 						name="keyword" id="keyword" value="${pagination.keyword}"></td>
 				</tr>
 			</table>
@@ -382,13 +381,31 @@
 							'#btnSearch',
 							function(e) {
 								e.preventDefault();
+
+								var categorycode = "";
+								$("input[name='categorycode']:checked").each(
+										function() {
+											categorycode = categorycode
+													+ $(this).val() + ",";
+										});
+								categorycode = categorycode.substring(0,
+										categorycode.lastIndexOf(",")); //맨끝 콤마 지우기
+
+								if (categorycode == '') {
+									alert("가게 분류를 선택하세요.");
+									return false;
+								}
+
 								var url = "${pageContext.request.contextPath}/admin/store/storelist.do";
 								url = url
 										+ "?searchType="
-										+ $('#searchType option:selected').val();
+										+ $('#searchType option:selected')
+												.val();
+								url = url + "&categorycode=" + categorycode;
 								url = url
 										+ "&searchTypes="
-										+ $('#searchTypes option:selected').val();
+										+ $('#searchTypes option:selected')
+												.val();
 								url = url + "&keyword=" + $('#keyword').val();
 								location.href = url;
 							});
@@ -397,32 +414,71 @@
 
 			//이전 버튼 이벤트
 			function fn_prev(page, range, rangeSize) {
+				var categorycode = "";
+				$("input[name='categorycode']:checked").each(
+						function() {
+							categorycode = categorycode
+									+ $(this).val() + ",";
+						});
+				categorycode = categorycode.substring(0,
+						categorycode.lastIndexOf(",")); //맨끝 콤마 지우기
 				var page = ((range - 2) * rangeSize) + 1;
 				var range = range - 1;
 				var url = "${pageContext.request.contextPath}/admin/store/storelist.do";
-				url = url + "?page=" + page;
+				url = url + "?searchType="
+						+ $('#searchType option:selected').val();
+				url = url + "&categorycode=" + categorycode;
+				url = url + "&searchTypes="
+						+ $('#searchTypes option:selected').val();
+				url = url + "&page=" + page;
 				url = url + "&range=" + range;
+				url = url + "&keyword=" + $('#keyword').val();
 				location.href = url;
 			}
 
 			//페이지 번호 클릭
 			function fn_pagination(page, range, rangeSize) {
+				var categorycode = "";
+				$("input[name='categorycode']:checked").each(
+						function() {
+							categorycode = categorycode
+									+ $(this).val() + ",";
+						});
+				categorycode = categorycode.substring(0,
+						categorycode.lastIndexOf(",")); //맨끝 콤마 지우기
 				var url = "${pageContext.request.contextPath}/admin/store/storelist.do";
-				url = url + "?page=" + page;
-				url = url + "&range=" + range;
-				url = url + "&searchType="
+				url = url + "?searchType="
 						+ $('#searchType option:selected').val();
+				url = url + "&categorycode=" + categorycode;
+				url = url + "&searchTypes="
+						+ $('#searchTypes option:selected').val();
+				url = url + "&page=" + page;
+				url = url + "&range=" + range;
 				url = url + "&keyword=" + $('#keyword').val();
 				location.href = url;
 			}
 
 			//다음 버튼 이벤트
 			function fn_next(page, range, rangeSize) {
+				var categorycode = "";
+				$("input[name='categorycode']:checked").each(
+						function() {
+							categorycode = categorycode
+									+ $(this).val() + ",";
+						});
+				categorycode = categorycode.substring(0,
+						categorycode.lastIndexOf(",")); //맨끝 콤마 지우기
 				var page = parseInt((range * rangeSize)) + 1;
 				var range = parseInt(range) + 1;
 				var url = "${pageContext.request.contextPath}/admin/store/storelist.do";
-				url = url + "?page=" + page;
+				url = url + "?searchType="
+						+ $('#searchType option:selected').val();
+				url = url + "&categorycode=" + categorycode;
+				url = url + "&searchTypes="
+						+ $('#searchTypes option:selected').val();
+				url = url + "&page=" + page;
 				url = url + "&range=" + range;
+				url = url + "&keyword=" + $('#keyword').val();
 				location.href = url;
 			}
 		</script>

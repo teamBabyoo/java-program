@@ -17,7 +17,7 @@ public class Search extends Pagination {
 	}
 	private String totalType;
 	private String type;  
-	private String types;  
+	private String types;  // 다중 type 검색
 	private String keyword;  // 검색어          (이름, 지역, 메뉴 예정 - 스토어리스트)
 	private int[] categoryCode; // 카테고리 : 중복허용
 	private int[] priceType; // 가격대 : 중복허용
