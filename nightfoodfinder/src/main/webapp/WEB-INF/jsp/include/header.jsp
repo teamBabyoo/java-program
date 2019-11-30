@@ -46,36 +46,32 @@
           		<!-- 가격별 검색 -->
             	<div>
               		<label for="price_1" class="types">1만원 미만</label>
-              		<input id="price_1" type="checkbox" name="priceType" value="1" class="price hidden" />
+              		<input id="price_1" type="checkbox" name="priceType" value="1" class="hidden" />
             	</div>
 
             	<div>
               		<label for="price_2" class="types">1만원대</label>
-              		<input id="price_2" type="checkbox" name="priceType" value="2" class="price hidden" />
+              		<input id="price_2" type="checkbox" name="priceType" value="2" class="hidden" />
               		
             	</div>
 
 	            <div>
 	              <label for="price_3" class="types">2만원대</label>
-	              <input id="price_3" type="checkbox" name="priceType" value="3" class="price hidden" />
+	              <input id="price_3" type="checkbox" name="priceType" value="3" class="hidden" />
 	            </div>
 	
 	            <div>
 	              <label for="price_4" class="types">3만원 이상</label>
-	              <input id="price_4" type="checkbox" name="priceType" value="4" class="price hidden"  />
+	              <input id="price_4" type="checkbox" name="priceType" value="4" class="hidden"  />
 	            </div>
           	</div>
           <!-- tab_3 -->
 
-          <div class="userselect"> <!-- 검색 조건 선택시 넘어온다 -->
-	          <!-- 
-		          <div>
-		             <label for="checkedtype_2">강남구<i class="fa fa-times" aria-hidden="true"></i></label>
-		             <input id="checkedtype_2" name=""  type="checkbox" class="hidden" />
-		           </div>
-	           -->
-            </div> 
-            <!-- userselect-->
+          	<div class="closedstore"> 
+	      		<label for="closed" class="types">영업 종료한 가게도 포함하기</label>
+	      		<input id="closed" type="checkbox" name="includeClosed" value="1" class="price hidden"  />
+          	</div> 
+          <!-- userselect-->
 		</div>
 	</form>
     </div>
