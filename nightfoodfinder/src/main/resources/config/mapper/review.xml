@@ -2,7 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.nff.repository.dao.ReviewDAO">
+<resultMap type="Review" id="reviewMap">
+	<result column="nick_name" property="nickName" />
+	<result column="store_name" property="storeName" />
+	<result column="review_content" property="reviewContent" />
+	<result column="reg_date" property="regDate" />
+	<result column="recomment" property="reComment" />
+	<result column="review_no" property="reviewNo" />
+	<result column="store_no" property="storeNo" />
+	<result column="user_no" property="userNo" />
+	
+	<collection column="review_no" property="reportList" select="selectReportDetail" />
+</resultMap>
 
+
+	<!-- 어드민  -->
 	<!-- 전체리뷰 리스트, 좋아요 횟수 불러오기 -->
 	<select id="selectReview" parameterType="Search" resultType="Review">
 	
@@ -31,7 +45,7 @@
 	
 	
 	
-	
+	<!-- 어드민 -->
 	<!-- 페이징할 때 필요한 것!! 전체 리뷰 수 구하기, 검색 후에는 검색한 조건의 리뷰 수 구하기 -->
 	<select id="pagingGetListCnt" parameterType="Search" resultType="int">
 		select count(*) as listCnt
@@ -56,7 +70,7 @@
 	
 	
 	
-	
+	<!-- 어드민 -->
 	<!-- 리뷰 선택 차단이나 차단 풀기 했을 때 리뷰테이블의 상태를 바꿔주기, 체크박스로 여러개 선택 가능 -->
 	<update id="blockReview" parameterType="Review">
 		update tb_review
@@ -70,36 +84,135 @@
 	
 	
 	
-	<!-- 신고 리뷰 리스트  -->
+	<!-- 어드민 신고 리뷰 리스트  -->
+	
 	<!-- 신고당한 리뷰의 사람(리뷰 쓴 사람), 하나의 리뷰가 신고당한 횟수, 신고당한 리뷰의 가게, 신고당한 리뷰, 신고 당한 리뷰 작성날짜, 신고당한 리뷰 내용, 차단 상태 -->
-	<select id="selectReportReview" resultType="Review">
-<!-- 		select rr.review_no reviewNo, rr.user_no userNo, s.store_name storeName, r.reg_date regDate,
-			   r.review_content reviewContent, r.status status, u.nick_name nickName,
-     		   (select count(*) from tb_report_review rr where rr.review_no = r.review_no) as reportCount
-     	from tb_review r join tb_report_review rr on r.review_no = rr.review_no
-					     join tb_user u on r.user_no = u.user_no
-					     join tb_store s on r.store_no = s.store_no
-		group by rr.review_no order by rr.report_no desc  -->
-		
+<!-- 	<select id="selectReportReview" parameterType="Search" resultMap="reviewMap"> -->
+		<select id="selectReportReview" parameterType="Search" resultType="Review">
 		<!-- 같은 신고당한 리뷰 중에서도 최신으로 -->
-		select * from (
-    	select rr.report_no reportNo, rr.review_no reviewNo, rr.user_no userNo, s.store_name storeName,
-    		   r.reg_date regDate, r.review_content reviewContent, r.status status, u.nick_name nickName,
-     		   (select count(*) from tb_report_review rr where rr.review_no = r.review_no) as reportCount
+		select reportNo, reviewNo, userNo, storeName,
+    		   regDate, reviewContent, status, nickName,
+     		   reportCount from (
+    		select rr.report_no reportNo, rr.review_no reviewNo, rr.user_no userNo, s.store_name storeName,
+    		       r.reg_date regDate, r.review_content reviewContent, r.status status, u.nick_name nickName,
+     		       (select count(*) from tb_report_review rr where rr.review_no = r.review_no) as reportCount
      	from tb_review r join tb_report_review rr on r.review_no = rr.review_no
 					     join tb_user u on r.user_no = u.user_no
-					     join tb_store s on r.store_no = s.store_no 
+					     join tb_store s on r.store_no = s.store_no 	     
 		order by reportNo  desc) as list
+		
+		<!-- 검색 -->
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if 
+				test="totalType=='block'">
+				AND status = 1
+			</if>	
+			<if 
+				test="totalType=='break'">
+				AND status = 0 
+			</if>	
+			<if
+				test="totalType=='all' and type=='nickName' and keyword != null and keyword != '' ">
+				AND nickName like CONCAT('%', #{keyword}, '%') 
+			</if>
+			<if
+				test="totalType=='all' and type=='storeName' and keyword != null and keyword != '' ">
+				AND storeName like CONCAT('%', #{keyword}, '%') 
+			</if>
+			<if
+				test="totalType=='block' and type=='nickName' and keyword != null and keyword != '' ">
+				AND nickName like CONCAT('%', #{keyword}, '%') and status = 1
+			</if>
+			<if
+				test="totalType=='block' and type=='storeName' and keyword != null and keyword != '' ">
+				AND storeName like CONCAT('%', #{keyword}, '%') and status = 1
+			</if>
+			
+			<if
+				test="totalType=='break' and type=='nickName' and keyword != null and keyword != '' ">
+				AND nickName like CONCAT('%', #{keyword}, '%') and status = 0
+			</if>
+			<if
+				test="totalType=='break' and type=='storeName' and keyword != null and keyword != '' ">
+				AND storeName like CONCAT('%', #{keyword}, '%') and status = 0
+			</if>
+			<if 
+				test="totalType=='all' and keyword == null" >
+				AND status = 0 or status = 1
+			</if>
+		</trim>
+
 	  	group by reviewNo
 	  	
+	  	
+	  	<!-- 페이징  -->
+		LIMIT #{startList}, #{listSize}
+	  	
 	</select>
+	
+	
+		<!-- 페이징할 때 필요한 것!! 전체 리뷰 수 구하기, 검색 후에는 검색한 조건의 리뷰 수 구하기 -->
+	<select id="pagingReportGetCnt" parameterType="Search" resultType="int">
+    select count(*)from( 
+    	select rr.report_no reportNo, r.status status, u.nick_name nickName, s.store_name storeName
+    from tb_review r join tb_report_review rr on r.review_no = rr.review_no
+					 join tb_user u on r.user_no = u.user_no
+					 join tb_store s on r.store_no = s.store_no
+	group by rr.review_no ) as reportCnt
+	
+			<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if 
+				test="totalType=='block'">
+				AND status = 1
+			</if>	
+			<if 
+				test="totalType=='break'">
+				AND status = 0 
+			</if>		
+			<if
+				test="totalType=='all' and type=='nickName' and keyword != null and keyword != '' ">
+				AND nickName like CONCAT('%', #{keyword}, '%') 
+			</if>
+			<if
+				test="totalType=='all' and type=='storeName' and keyword != null and keyword != '' ">
+				AND storeName like CONCAT('%', #{keyword}, '%') 
+			</if>
+			<if
+				test="totalType=='block' and type=='nickName' and keyword != null and keyword != '' ">
+				AND nickName like CONCAT('%', #{keyword}, '%') and status = 1
+			</if>
+			<if
+				test="totalType=='block' and type=='storeName' and keyword != null and keyword != '' ">
+				AND storeName like CONCAT('%', #{keyword}, '%') and status = 1
+			</if>
+			
+			<if
+				test="totalType=='break' and type=='nickName' and keyword != null and keyword != '' ">
+				AND nickName like CONCAT('%', #{keyword}, '%') and status = 0
+			</if>
+			<if
+				test="totalType=='break' and type=='storeName' and keyword != null and keyword != '' ">
+				AND storeName like CONCAT('%', #{keyword}, '%') and status = 0
+			</if>
+			<if 
+				test="totalType=='all' and keyword == null" >
+				AND status = 0 or status = 1
+			</if>
+		</trim>
+
+		
+		<!-- 페이징  -->
+		LIMIT #{startList}, #{listSize}
+	</select>
+	
+	
 	
 	<!-- 신고한 사람, 신고 사유  -->
  	<select id="selectReportDetail" resultType="ReportReview">
 		select u.nick_name nickName, rr.report_why reason, rr.report_no reportNo 
 			from tb_user u, tb_report_review rr 
 		where u.user_no = rr.user_no 
-		and rr.report_no = #{reportNo}
+		and rr.review_no = #{review_no}
 		order by rr.report_no desc
 		
 		
@@ -119,35 +232,7 @@
 	
 	
 	
-	<!-- 신고리뷰 리스트 처음에 실수로 모든 내용 다 뽑았을 때 --> <!-- nickName: 신고 당한 사람 (리뷰 작성한 사람), reportNickname: 신고한 사람  -->
-<!-- 	<select id="selectReportedReview" resultType="Review">
-		select u.nick_name nickName, r.review_no reviewNo, rr.user_no userNo, s.store_name storeName, 
-               r.reg_date regDate, r.review_content reviewContent,
-			   (select u.nick_name from tb_user u where rr.user_no = u.user_no) as reportNickname,
-			   (select count(*) from tb_report_review rr where rr.review_no = r.review_no) as reportCount      
-	    from tb_review r join tb_report_review rr on r.review_no = rr.review_no
-			  			 join tb_user u on r.user_no = u.user_no
-			  			 join tb_store s on r.store_no = s.store_no;    			 
-		order by rr.report_no desc;
-	</select>
-	
--->
-	
 
-
-	<!-- 좋아요 횟수
-	 <select id="countLike" parameterType="int" resultType="int"> 
-		select count(*) as likeCount from tb_like l left join tb_review r on l.store_review_no 
-		= r.review_no where l.store_review_no = #{reviewNo} </select> -->
-		
-		
-<!-- 	where 쓰면 조건 사용할 때 에러나서 inner join으로
-
-select u.nick_name nickName, s.store_name storeName, r.review_content reviewContent, r.reg_date regDate,
-		(select count(*) from tb_like l where l.store_review_no = r.review_no) as likeCount, r.recomment reComment
-		from tb_user u, tb_review r, tb_store s
-		where r.user_no = u.user_no
-		and r.store_no = s.store_no -->
 		
 		
 		

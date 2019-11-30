@@ -178,6 +178,9 @@ $(document).on('click', '.report', function(e){
 	let rpop = $("#rmyModal");
 	//사유 모달창 띄우기
 	rpop.css("display", "block");
+	
+	//유저번호 들어오는지
+	console.log("유저번호", userNo);
 
 	//review_no를 받기위해	
 	let rNo = e.target
@@ -197,21 +200,27 @@ $(document).on('click', '.report', function(e){
 		 <li><input type="radio" name="reportWhy" value="3" /> 폭력성, 유해</li>
 		 <li><input type="radio" name="reportWhy" value="4" /> 광고</li>
 		</ul>
+		<input type="hidden" id="reportWhy" value="$('input[name=reportWhy]:checked').val()" />
+    	<input type="hidden" id="storeNo" value="`+storeNo+`" />
+    	<input type="hidden" id="userNo" value="`+userNo+`" />
 		<button>제출하기</button>
     </div>
 	</form>
 	`
 	);
 	//밸류 값 들어오는지 확인용
-	console.log($("#reviewNo").val());
+	/*console.log($("#reviewNo").val());
+	console.log($("#reportWhy").val());
+	console.log($("#storeNo").val());*/
+	console.log($("#userNo").val());
 
 	//모달창 닫기
 	$(".rclose").click(()=>{
 		rpop.css("display", "none");
 	});
-	$('input[name=reportWhy]').change((e) => {
-		console.log(e.target);
-	})
+//	$('input[name=reportWhy]').change((e) => {
+//		console.log(e.target);
+//	})
 	// 리뷰신고 등록
 	$("#reportsubmit").submit(() => {
 		let userNo = 3;
@@ -219,15 +228,17 @@ $(document).on('click', '.report', function(e){
 			url: "review_report.do",
 			type: "POST",
 			data: {
+				userNo: $("#userNo").val(),
 				reviewNo: $("#reviewNo").val(), 
-				reportWhy: $('input[name=reportWhy]:checked').val()
-				//추후 수정..
+				reportWhy: $('input[name=reportWhy]:checked').val(),
+				storeNo: $("#storeNo").val()
 				},
 			dataType: "json",
 			success: (list) => makeReviewList(list)
 		});
-		console.log($('input[name=reportWhy]:checked').val())
 		$('input[name=reportWhy]:checked').val("");
+		$("#rmyModal *").remove();
+		alert("신고되었습니다");
 		return false;
 	});
 });

@@ -74,6 +74,7 @@ public class StoreServiceImpl implements StoreService {
 		return dao.selectReview(review.getStoreNo());
 	}
 	
+	//신고하기
 	public List<Review> reviewReport(Review review) {
 		dao.reportReview(review);
 		return dao.selectReview(review.getStoreNo());
@@ -83,6 +84,11 @@ public class StoreServiceImpl implements StoreService {
 	public List<Review> reviewRegist(Review review) {
 		dao.registReview(review);
 		return dao.selectReview(review.getStoreNo());
+	}
+	
+	//리뷰 신고제한
+	public int reviewcount(Review review) {
+		return dao.reviewcount(review);
 	}
 
 	

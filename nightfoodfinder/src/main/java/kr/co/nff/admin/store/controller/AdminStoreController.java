@@ -28,6 +28,7 @@ public class AdminStoreController {
 	public void storeList(@RequestParam(required = false, defaultValue = "1") int page,
 			@RequestParam(required = false, defaultValue = "1") int range,
 			@RequestParam(required = false, defaultValue = "total") String searchType,
+			@RequestParam(required = false, defaultValue = "1,2,3,4,5,6") String categorycode,
 			@RequestParam(required = false, defaultValue = "storename") String searchTypes,
 			@RequestParam(required = false) String keyword, 
 			Model model) {
@@ -39,9 +40,16 @@ public class AdminStoreController {
 		search.setTypes(searchTypes);
 		search.setKeyword(keyword);
 		
-		System.out.println(search.getType());
-		System.out.println(search.getTypes());
-		
+		/*카테고리 코드 string으로 가져와서 int[]에 넣기*/
+		String[] arrIdx = categorycode.toString().split(",");
+		int[] codeArr = new int[arrIdx.length];
+		for (int i=0; i<arrIdx.length; i++) {
+			codeArr[i] = Integer.parseInt(arrIdx[i]);
+//			System.out.println(codeArr[i]);
+		}
+		search.setCategoryCode(codeArr);
+	
+
 		// 전체 게시글 개수
 		int listCnt = service.GetListCnt(search);
 				

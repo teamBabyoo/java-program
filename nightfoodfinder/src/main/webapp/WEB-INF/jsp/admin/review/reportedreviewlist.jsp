@@ -51,7 +51,7 @@
 
 </style>
     
-    <script src="js/jquery-3.3.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
     <header role="banner">
@@ -82,6 +82,51 @@
         <section class="panel ">
           <h2>Table</h2>
           <table>
+          
+          <!---------- 서치 ---------->
+				<div class="form-group row justify-content-center">
+				
+					<select class="totalSearchType" name="totalSearchType" id="totalSearchType" >
+						<c:choose>
+							<c:when test="${pagination.totalType eq 'all'}">
+								<option value="all" selected>모두</option>
+								<option value="block">차단</option>
+								<option value="break">정상</option>
+							</c:when>
+							<c:when test="${pagination.totalType eq 'block' }">
+								<option value="all" >모두</option>
+								<option value="block" selected>차단</option>
+								<option value="break">정상</option>
+							</c:when>
+							<c:otherwise>
+								<option value="all" >모두</option>
+								<option value="block" >차단</option>
+								<option value="break" selected >정상</option>
+							</c:otherwise>
+						</c:choose>
+					</select>
+				
+						<select class="form-control form-control-sm" name="searchType" id="searchType">
+							<c:choose>
+								<c:when test="${pagination.type eq 'storeName'}">
+									<option value="nickName">닉네임</option>
+									<option value="storeName" selected>가게 이름</option>
+								</c:when>
+								<c:otherwise>
+									<option value="nickName" selected>닉네임</option>
+									<option value="storeName">가게 이름</option>
+								</c:otherwise>
+							</c:choose>
+						</select>
+						<input type="text" class="form-control form-control-sm"
+							name="keyword" id="keyword" value="${pagination.keyword}">
+						<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button>
+						<button class="back" name="backList" id="backList"
+							onclick="location.href='/nightfoodfinder/admin/review/reportedreviewlist.do'">검색취소</button>
+				</div>
+			<!---------- 서치 끝 --------->
+			
+			
  			<div>전체 : ${pagination.listCnt}개</div>
 			
 			<li>
@@ -94,7 +139,7 @@
 			
 			<tr>
 				<th>선택</th>
-				<th>닉네임</th>
+				<th>리뷰 쓴 사람 닉네임</th>
 				<th>가게 이름</th>
 				<th>리뷰</th>
 				<th>리뷰 단 날짜</th>
@@ -114,7 +159,7 @@
 					<td><input type="checkbox" class="checkboxid" id="checkboxid" name="reviewNo" data-reviewNo="${list.reviewNo}"/></td>
 					<td>${list.nickName}</td>
 					<td>${list.storeName}</td>
-					<td class="myBtn"
+					<td class="myBtn" data-reportNo="${list.reportNo }"
 						style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${list.reviewContent }</td>	
 					<td>${list.regDate }</td>
 					<td>${list.reportCount }</td>
@@ -128,6 +173,12 @@
 						</c:otherwise>
 					</c:choose>
 					</td>
+			<!-- 		<td>
+						<c:forEach var="re" items="${li.reportList }">
+						<li>${re.reason }</li>
+						</c:forEach>
+						</td>
+					-->
 				</tr>
 			</c:forEach>
 
@@ -135,6 +186,43 @@
            
           </table>
           
+       <!-- 체크박스 차단, 차단 풀기 -->
+		<div>
+		<button type="button" class="bbutton" id="blockbutton" onclick="block()">차단하기</button>
+  		<button type="button" class="bbutton" id="breakbutton" onclick="bk()">차단 풀기</button> 	 
+		</div>
+        <!------------ 페이징 ---------------->
+
+		<div id="paginationBox">
+			<ul class="pagination">
+			<!-- 이전 버튼 -->
+				<c:if test="${pagination.prev}">
+					<li class="page-item"><a class="page-link" href="#"
+						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a>
+					</li>
+				</c:if>
+				
+			<!-- 페이지 버튼 -->
+				<c:forEach begin="${pagination.startPage}"
+					end="${pagination.endPage}" var="idx">
+					<li class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
+						<a class="page-link" href="#"
+						onClick="fn_pagination('${idx}', '${pagination.range}')">${idx}</a>
+					</li>
+				</c:forEach>
+
+			<!-- 다음 버튼 -->
+				<c:if test="${pagination.next}">
+					<li class="page-item"><a class="page-link" href="#"
+						onClick="fn_next('${pagination.range}', '${pagination.range}', '${pagination.rangeSize}')">Next</a>
+					</li>
+				</c:if>
+			</ul>
+		</div>
+
+		<!------------ 페이징 끝----------------->
+                
+    
         <!----------- 모달팝업 ----------------->
 		<div id="myModal" class="modal">
 			<!-- Modal content -->
@@ -163,6 +251,38 @@
 		// 그런데, 모달팝업이 첫 리스트 줄에만 적용되고 반복되어서 나오는 리스트들에는 적용이 안되었음..
 		// 이렇게 해야 모든 리스트에 적용된다.	
 	
+/*		for (let i = 0; i < btn.length; i++) {
+			btn[i].onclick = function(e){ 
+			console.log("러")	
+			var k = $(e.target).attr("data-reportNo");
+			var s = "reportNo="
+			console.log($(e.target).attr("data-reportNo"));
+			var kk = s.concat(k);
+			console.log(kk);
+			$.ajax({
+				url: "${pageContext.request.contextPath}/admin/review/reportmodal.do",
+				type: "POST",
+				data: { reportNo : k },
+				dataType: "json",
+				success: function(){
+				}
+			});
+			}
+		}
+		*/
+		for (let i = 0; i < btn.length; i++) {
+			btn[i].onclick = function(e) {
+		
+            modal.style.display = "block";
+            $(".modal-content p:eq(0)").text(
+            		"리뷰: " + $(e.target).text())
+            
+        }
+		}
+		
+		
+		
+		
 
 		// <span>의 x를 클릭했을 때, 모달을 닫는다.
 		span.onclick = function() {
@@ -175,7 +295,176 @@
 			}
 		}
 
-      
+		/* ------------------------ 서치 -------------------------- */
+		$(document).on('click', '#btnSearch',
+					function(e) {
+						e.preventDefault();
+						var url = "${pageContext.request.contextPath}/admin/review/reportedreviewlist.do";
+						url = url + "?totalSearchType=" + $('#totalSearchType option:selected').val();
+						url = url + "&searchType=" + $('#searchType option:selected').val();
+						url = url + "&keyword=" + $('#keyword').val();
+						console.log(url);
+						location.href = url;
+					});
+		/* ----------------------- 페이징 --------------------------- */
+
+		//이전 버튼 이벤트
+		function fn_prev(page, range, rangeSize) {
+			var page = ((range - 2) * rangeSize) + 1;
+			var range = range - 1;
+			var url = "${pageContext.request.contextPath}/admin/review/reportedreviewlist.do";
+			url = url + "?page=" + page;
+			url = url + "&range=" + range;
+			url = url + "&totalSearchType=" + $('#totalSearchType option:selected').val();
+			url = url + "&searchType=" + $('#searchType option:selected').val();
+			url = url + "&keyword=" + $('#keyword').val();
+			location.href = url;
+		}
+
+		//페이지 번호 클릭
+		function fn_pagination(page, range) {
+			var url = "${pageContext.request.contextPath}/admin/review/reportedreviewlist.do";
+			url = url + "?page=" + page;
+			url = url + "&range=" + range;
+			url = url + "&totalSearchType=" + $('#totalSearchType option:selected').val();
+			url = url + "&searchType=" + $('#searchType option:selected').val();
+			url = url + "&keyword=" + $('#keyword').val();
+			location.href = url;
+		}
+
+		//다음 버튼 이벤트
+		function fn_next(page, range, rangeSize) {
+			var page = parseInt((range * rangeSize)) + 1;
+			var range = parseInt(range) + 1;
+			var url = "${pageContext.request.contextPath}/admin/review/reportedreviewlist.do";
+			url = url + "?page=" + page;
+			url = url + "&range=" + range;
+			url = url + "&totalSearchType=" + $('#totalSearchType option:selected').val();
+			url = url + "&searchType=" + $('#searchType option:selected').val();
+			url = url + "&keyword=" + $('#keyword').val();
+			location.href = url;
+		}
+		
+		
+		/* ---------------- 체크박스 차단 : ajax 사용 (db의 status를 업데이트) ----------------- */
+		
+		function block() {
+			let cnt = 0;
+			let chk = document.querySelectorAll("input[name='reviewNo']");
+			for (let i = 0; i < chk.length; i++) {	// chk.length : 한 페이지에 있는 체크박스 개수
+				if (chk[i].checked) {
+					cnt++;	// 체크박스를 선택하고 클릭하는지 확인하기 위해서
+			
+					// chk[i] : <input type="checkbox" id="myCheckboxid" name="reviewNo" data-reviewNo=..." >
+					// db에서 status를 가져오지 않고 화면 상에서 글자만 바꿔준다. - 체크선택하고 차단버튼을 누르면 글자가 차단으로 바뀐다. 
+					let block = $(chk[i]).parent().parent().find(".block").text("차단");}
+				}
+			if (cnt == 0) {
+				alert("차단할 리뷰를 선택하세요.");
+				return;
+			}
+
+
+			// reviewNoArr을 status=1&reviewList=1&reviewList=3 이런식으로 만들 것임
+			var reviewNoArr = new Array();
+			reviewNoArr.push("status=1");	// 고정된 값이어서 미리 푸쉬
+			$("input[name='reviewNo']:checked").each(function(){	// each : j쿼리의 반복문
+				reviewNoArr.push("reviewNoList=" + $(this).attr("data-reviewNo"));
+			});
+			console.log(reviewNoArr.join("&"));
+			reviewNoArr = reviewNoArr.join("&");
+			
+			$.ajax({
+				url: "${pageContext.request.contextPath}/admin/review/block.do",
+				type: "POST",
+				data: reviewNoArr,
+				dataType: "json",
+				success: function(){
+					location.href = "${pageContext.request.contextPath}/admin/review/reportedreviewlist.do";
+				}
+			});
+			
+			// 체크되고 클릭된 것의 체크 표시를 없애준다.
+			 for (let i = 0; i < chk.length; i++) {
+					if (chk[i].checked) 
+						$(chk[i]).prop('checked', false);
+				}
+			
+			// 체크되어 있었던 모두선택의 체크 표시 없애준다.
+			$("#allCheck").prop("checked", false);
+			
+			}
+
+
+
+		/* ---------------- 체크박스 차단 풀기 : ajax 사용 (db의 status를 업데이트) ----------------- */
+
+		function bk() {
+			let cnt = 0;
+			let chk = document.querySelectorAll("input[name='reviewNo']");
+			for (let i = 0; i < chk.length; i++) {	// chk.length : 한 페이지에 있는 체크박스 개수
+				if (chk[i].checked) {
+					cnt++;	// 체크박스를 선택하고 클릭하는지 확인하기 위해서
+					
+					// chk[i] : <input type="checkbox" id="checkboxid" name="reviewNo" data-reviewNo=..." >
+					// db에서 status를 가져오지 않고 화면 상에서 글자만 바꿔준다. - 체크선택하고 체크풀기 버튼을 누르면 글자가 정상으로 바뀐다. 
+					let block = $(chk[i]).parent().parent().find(".block").text("정상");}
+				}
+			if (cnt == 0) {
+				alert("차단을 풀어줄 리뷰를 선택하세요.");
+				return;
+			}
+			
+			
+			// reviewNoArr을 status=0&reviewList=1&reviewList=3 이런식으로 만들 것임
+			var reviewNoArr = new Array();
+			reviewNoArr.push("status=0");	// 고정된 값이어서 미리 푸쉬
+			$("input[name='reviewNo']:checked").each(function(){	// each : j쿼리의 반복문
+				reviewNoArr.push("reviewNoList=" + $(this).attr("data-reviewNo"));
+			});
+			console.log(reviewNoArr.join("&"));
+			reviewNoArr = reviewNoArr.join("&");
+			
+			$.ajax({
+				url: "${pageContext.request.contextPath}/admin/review/block.do",
+				type: "POST",
+				data: reviewNoArr,
+				dataType: "json",
+				success: function(){
+					location.href = "${pageContext.request.contextPath}/admin/review/reportedreviewlist.do";
+				}
+			});
+			
+			// 체크되고 클릭된 것의 체크 표시를 없애준다.
+			 for (let i = 0; i < chk.length; i++) {
+					if (chk[i].checked) 
+						$(chk[i]).prop('checked', false);
+			 }
+				
+			// 체크되어 있었던 모두선택의 체크 표시 없애준다.
+			$("#allCheck").prop("checked", false);
+			
+			}
+
+			
+
+	/* ----------------- 체크박스 모두선택 ------------------------ */
+	
+		$("#allCheck").click(function(){
+			var chkall = $("#allCheck").prop("checked");
+			if(chkall) {
+				$(".checkboxid").prop("checked", true);
+			} else {
+				$(".checkboxid").prop("checked", false);
+				}
+		});
+	
+		// 모두선택되었을 때 체크박스를 하나라도 풀면 모두선택이 체크 표시가 없어지게 된다.
+		$(".checkboxid").click(function(){
+		$("#allCheck").prop("checked", false);
+		 });
+		
+
       
       </script>
       

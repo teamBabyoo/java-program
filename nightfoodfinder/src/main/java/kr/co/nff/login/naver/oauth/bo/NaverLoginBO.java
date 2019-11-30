@@ -17,7 +17,7 @@ import com.github.scribejava.core.oauth.OAuth20Service;
 import kr.co.nff.login.naver.oauth.model.NaverLoginApi;
 
 public class NaverLoginBO {
-	private final static String CLIENT_ID = "";
+	private final static String CLIENT_ID =  "";
 	private final static String CLIENT_SECRET = "";
 	private final static String REDIRECT_URI = "http://localhost:8000/nightfoodfinder/front/login/ncallback.do";
 	private final static String SESSION_STATE = "oauth_state";

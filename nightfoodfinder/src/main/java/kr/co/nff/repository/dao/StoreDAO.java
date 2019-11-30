@@ -62,6 +62,7 @@ public interface StoreDAO {
 	//리뷰신고
 	void reportReview(Review review);
 	
-	
-	
+	//리뷰 제한수 
+	int reviewcount(Review review);
+
 }
