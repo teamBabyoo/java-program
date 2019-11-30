@@ -207,7 +207,7 @@ select w.week_name, h.week_no
 		on s.store_no = m.store_no
 		inner join tb_address a
 		on s.store_no = a.store_no
-		<where>
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
 			<if test="includeClosed == 1"> <!-- 현재 영업중인 가게만 볼 때 (dafault : 1 , 0 : 영업끝난가게 포함) -->  
          		<![CDATA[
          		and str_to_date(s.open_time, '%h:%i') < now()
@@ -220,14 +220,19 @@ select w.week_name, h.week_no
 				or a.city like concat('%', #{keyword}, '%')
 				or a.street_load like concat('%', #{keyword}, '%')
 			</if>
+			<if test="categoryCode != null">
+				and s.store_category in
+				<foreach collection="categoryCode" item="k" open="(" close=")" separator=",">
+					#{k}
+				</foreach>
+			</if>
 			<if test="cities != null">
 				and a.city in
-				<foreach collection="cities" item="c" open="(" close=")"
-					separator=",">
+				<foreach collection="cities" item="c" open="(" close=")" separator=",">
 					#{c}
 				</foreach>
 			</if>
-		</where>
+		</trim>
 		<choose>
 			<when test="filter == 'scope'">  <!-- 평점순 -->
 				order by scope desc
@@ -242,7 +247,6 @@ select w.week_name, h.week_no
 				order by scope desc
 			</otherwise>
 		</choose>
-
 		<!-- limit #{startList}, #{listSize} -->
 		limit 0, 10
 	</select>
