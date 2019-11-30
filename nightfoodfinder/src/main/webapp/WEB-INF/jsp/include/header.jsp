@@ -7,11 +7,11 @@
         <img src="${pageContext.request.contextPath}/resources/images/mangoplate-logo-horizontal.svg" alt="anff 로고" />
     </div>
     <div class="search">
-    <form id="sto_search" onsubmit="return beforesearch()" action="${pageContext.request.contextPath}/front/store/storelist.do" method="post">
+    <form id="sto_search" onsubmit="return presubmit()" action="${pageContext.request.contextPath}/front/store/storelist.do" method="post">
     	<!-- 검색어 입력 부분 -->
 		<input type="text" name="keyword"/>
 		 <!-- 검색 버튼 부분 -->
-        <div class="icon_w" id="search_btn"><i class="fa fa-search" aria-hidden="true"></i></div>
+        <div class="icon_w" id="search_btn"><button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button></div>
         <div class="optionBox hidden">
         	<ul class="optionTab clearboth">
             	<li class="on">분류</li>
@@ -24,7 +24,7 @@
          		<c:forEach items="${cateList}" var="t" >
 	        		<div>
 	            		<label for="foodtype_${t.categoryNo}" class="types">${t.categoryName}</label>
-	            		<input id="foodtype_${t.categoryNo}" name="categorycode" value="${t.categoryNo}" type="checkbox" class="hidden" />
+	            		<input id="foodtype_${t.categoryNo}" name="categoryCode" value="${t.categoryNo}" type="checkbox" class="hidden" />
 	            	</div>
          		</c:forEach>
             </div>
@@ -35,7 +35,7 @@
           		<c:forEach items="${cityList}" var="ct" varStatus="status">
 	            	<div>
 	              		<label for="city_${status.count}" class="types">${ct}</label>
-	              		<input id="city_${status.count}" name="cities" value="${ct}" type="checkbox" class="hidden"  />
+	              		<input id="city_${status.count}" name="cities" value="${ct}" type="checkbox" class="hidden" />
 	            	</div>
           		</c:forEach>
           	</div>
@@ -46,22 +46,23 @@
           		<!-- 가격별 검색 -->
             	<div>
               		<label for="price_1" class="types">1만원 미만</label>
-              		<input id="price_1" type="checkbox" name="pricetype" value="1" class="price hidden" />
+              		<input id="price_1" type="checkbox" name="priceType" value="1" class="price hidden" />
             	</div>
 
             	<div>
               		<label for="price_2" class="types">1만원대</label>
-              		<input id="price_2" type="checkbox" name="pricetype" value="2" class="price hidden" />
+              		<input id="price_2" type="checkbox" name="priceType" value="2" class="price hidden" />
+              		
             	</div>
 
 	            <div>
 	              <label for="price_3" class="types">2만원대</label>
-	              <input id="price_3" type="checkbox" name="pricetype" value="3" class="price hidden" />
+	              <input id="price_3" type="checkbox" name="priceType" value="3" class="price hidden" />
 	            </div>
 	
 	            <div>
 	              <label for="price_4" class="types">3만원 이상</label>
-	              <input id="price_4" type="checkbox" name="pricetype" value="4" class="price hidden" />
+	              <input id="price_4" type="checkbox" name="priceType" value="4" class="price hidden"  />
 	            </div>
           	</div>
           <!-- tab_3 -->
@@ -70,7 +71,7 @@
 	          <!-- 
 		          <div>
 		             <label for="checkedtype_2">강남구<i class="fa fa-times" aria-hidden="true"></i></label>
-		             <input id="checkedtype_2" name=""  type="checkbox" checked class="hidden" />
+		             <input id="checkedtype_2" name=""  type="checkbox" class="hidden" />
 		           </div>
 	           -->
             </div> 
@@ -111,15 +112,4 @@
       </ul>
     </div>
   </header>
-  <script>
-/*
-  	let result = $("#keyword").val();
-  	$("input[name=categorycode]:checked").each(function() {
-  		var test = $(this).val(); 
-  		alert(test);
-  	});
-*/  
-
-  	
-  </script> 
   <script src='${pageContext.request.contextPath}/resources/js/storelist.js' ></script>

@@ -29,7 +29,6 @@ public class FrontStoreController {
 	/* 가게 목록 */
 	@RequestMapping("/storelist.do")
 	public void storeList(@RequestParam(value="pageNo", defaultValue="1") int pageNo, Model model, Search search) {
-		//System.out.println(model.getAttribute("keyword"));
 		model.addAttribute("sList", service.storeList(search));
 	}
 	
