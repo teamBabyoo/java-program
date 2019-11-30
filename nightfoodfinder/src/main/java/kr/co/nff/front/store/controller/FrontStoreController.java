@@ -79,6 +79,14 @@ public class FrontStoreController {
 	public List<Review> reviewListAjax(int no){
 		return service.reviewList(no);
 	}
+	
+	/*리뷰 신고 확인용*/
+	@RequestMapping("/review_report_check.do")
+	@ResponseBody
+	public int reviewReportCheckAjax(Review review){
+		return service.reviewcount(review);
+		
+	}
 
 	/*리뷰 신고하기*/
 	@RequestMapping("/review_report.do")

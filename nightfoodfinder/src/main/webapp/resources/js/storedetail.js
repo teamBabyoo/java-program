@@ -174,75 +174,99 @@ $(document).ready(function() {
 
 //신고하기
 $(document).on('click', '.report', function(e){
-	//신고사유 모달창
-	let rpop = $("#rmyModal");
-	//사유 모달창 띄우기
-	rpop.css("display", "block");
+	//신고 클릭시 했던 신고자인지
 	
 	//유저번호 들어오는지
 	console.log("유저번호", userNo);
 
 	//review_no를 받기위해	
-	let rNo = e.target
-//	console.log(eval.value);
-	$("#rmyModal *").remove();
-	let rcon = $("#rmyModal");
+	let rNo = e.target;
+	console.log(rNo);	
+	$.post({
+		url: "review_report_check.do",
+		data: {userNo, reviewNo: rNo.value},
+		dataType: "json",
+		success: (count) => reviewReport(count, rNo)
+	});
+	return false;
 	
-	rcon.append(
-	`
-	<form id="reportsubmit" method="post" action="review_report.do">
-    <div class="rmodal-content">
-    <input type="hidden" id="reviewNo" value="`+rNo.value+`" />
-      <span class="rclose">&times;</span>                                                               
-       <ul>
-		 <li><input type="radio" name="reportWhy" value="1" /> 기타</li>
-		 <li><input type="radio" name="reportWhy" value="2" /> 음란</li>
-		 <li><input type="radio" name="reportWhy" value="3" /> 폭력성, 유해</li>
-		 <li><input type="radio" name="reportWhy" value="4" /> 광고</li>
-		</ul>
-		<input type="hidden" id="reportWhy" value="$('input[name=reportWhy]:checked').val()" />
-    	<input type="hidden" id="storeNo" value="`+storeNo+`" />
-    	<input type="hidden" id="userNo" value="`+userNo+`" />
-		<button>제출하기</button>
-    </div>
-	</form>
-	`
-	);
-	//밸류 값 들어오는지 확인용
-	/*console.log($("#reviewNo").val());
-	console.log($("#reportWhy").val());
-	console.log($("#storeNo").val());*/
-	console.log($("#userNo").val());
 
-	//모달창 닫기
-	$(".rclose").click(()=>{
-		rpop.css("display", "none");
-	});
-//	$('input[name=reportWhy]').change((e) => {
-//		console.log(e.target);
-//	})
-	// 리뷰신고 등록
-	$("#reportsubmit").submit(() => {
-		let userNo = 3;
-		$.post({
-			url: "review_report.do",
-			type: "POST",
-			data: {
-				userNo: $("#userNo").val(),
-				reviewNo: $("#reviewNo").val(), 
-				reportWhy: $('input[name=reportWhy]:checked').val(),
-				storeNo: $("#storeNo").val()
-				},
-			dataType: "json",
-			success: (list) => makeReviewList(list)
-		});
-		$('input[name=reportWhy]:checked').val("");
-		$("#rmyModal *").remove();
-		alert("신고되었습니다");
-		return false;
-	});
+
 });
 
+function reviewReport(count, rNo) {
+	console.log("카운트", count, "글번호", rNo);
+	if(count == 0) {
+		//신고사유 모달창
+		let rpop = $("#rmyModal");
+		//사유 모달창 띄우기
+		rpop.css("display", "block");
+		
+		$("#rmyModal *").remove();
+		let rcon = $("#rmyModal");
+		
+		rcon.append(
+		`
+		<form id="reportsubmit" method="post" action="review_report.do">
+	    <div class="rmodal-content">
+	    <input type="hidden" id="reviewNo" value="`+rNo.value+`" />
+	      <span class="rclose">&times;</span>                                                               
+	       <ul>
+			 <li><input type="radio" name="reportWhy" value="1" /> 기타</li>
+			 <li><input type="radio" name="reportWhy" value="2" /> 음란</li>
+			 <li><input type="radio" name="reportWhy" value="3" /> 폭력성, 유해</li>
+			 <li><input type="radio" name="reportWhy" value="4" /> 광고</li>
+			</ul>
+			<input type="hidden" id="reportWhy" value="$('input[name=reportWhy]:checked').val()" />
+	    	<input type="hidden" id="storeNo" value="`+storeNo+`" />
+	    	<input type="hidden" id="userNo" value="`+userNo+`" />
+			<button>제출하기</button>
+	    </div>
+		</form>
+		`
+		);
+		//밸류 값 들어오는지 확인용
+		/*console.log($("#reviewNo").val());
+		console.log($("#reportWhy").val());
+		console.log($("#storeNo").val());*/
+		console.log($("#userNo").val());
+
+		//모달창 닫기
+		$(".rclose").click(()=>{
+			rpop.css("display", "none");
+		});
+//		$('input[name=reportWhy]').change((e) => {
+//			console.log(e.target);
+//		})
+		// 리뷰신고 등록
+		$("#reportsubmit").submit(() => {
+			let userNo = 3;
+			$.post({
+				url: "review_report.do",
+				type: "POST",
+				data: {
+					userNo: $("#userNo").val(),
+					reviewNo: $("#reviewNo").val(), 
+					reportWhy: $('input[name=reportWhy]:checked').val(),
+					storeNo: $("#storeNo").val()
+					},
+				dataType: "json",
+				success: (list) => makeReviewList(list)
+			});
+			$('input[name=reportWhy]:checked').val("");
+			$("#rmyModal *").remove();
+			alert("신고되었습니다");
+			return false;
+		});
+	} else {
+		alert("이미 신고한 리뷰입니다");
+		return false;
+	}
+};
+	
+	
+	
+	
 
 
 

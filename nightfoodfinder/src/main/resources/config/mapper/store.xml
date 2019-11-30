@@ -428,6 +428,7 @@
 		r.user_no,
 		u.nick_name,
 		r.review_content,
+		r.review_no,
 		r.reg_date,
 		r.store_scope,
 		ifnull(l.likeit, 0) as good
@@ -439,6 +440,7 @@
 		from tb_like) l
 		on r.review_no = l.store_review_no
 		where r.store_no = #{storeNo}
+		order by reg_date desc
 
 		<!-- LIMIT #{startList}, #{listSize} -->
 	</select>
@@ -508,7 +510,7 @@
 	<select id="reviewcount" parameterType="Review" resultType="int" >
 	 select count(*)
  	   from tb_report_review
-	  where report_no = #{reportNo}
+	  where review_no = #{reviewNo}
  		and user_no = #{userNo}
 	</select>
 	
