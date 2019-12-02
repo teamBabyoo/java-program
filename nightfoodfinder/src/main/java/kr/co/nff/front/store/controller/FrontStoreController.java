@@ -44,6 +44,7 @@ public class FrontStoreController {
 		model.addAttribute("holidaylist", service.storeHoliday(no));
 		model.addAttribute("storeContent", service.storeContent(no));
 		model.addAttribute("user", session.getAttribute("loginUser"));
+		
 	}
 	
 	/* 가게 정보 수정*/
@@ -141,5 +142,28 @@ public class FrontStoreController {
         return service.reviewList(review.getStoreNo());
 	}
 
+	
+	/*좋아요등록*/
+	@RequestMapping("/i_like.do")
+	@ResponseBody
+	public List<Review> likeInsertAjax(Review review){
+		/*
+		System.out.println("리뷰번호: " + review.getReviewNo());
+		System.out.println("유저번호: " + review.getUserNo());
+		System.out.println("신고사유: " + review.getReportWhy());
+		System.out.println("가게번호: " + review.getStoreNo());
+		 */
+		return service.insertLike(review);
+
+	}
+	
+	/*좋아요 확인용*/
+	@RequestMapping("/i_like_check.do")
+	@ResponseBody
+	public int likeCount(Review review) {
+		System.out.println("리뷰: " + review.getStoreReviewNo());
+		System.out.println("유저번호: " + review.getUserNo());
+		return service.likeCount(review);
+	}
 	
 }

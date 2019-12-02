@@ -34,11 +34,13 @@ animateValue("scopescore", 0, scope, 100);
 function reviewListAjax() {
 	$.getJSON({
 		url: "review_list.do",
-		data: {no},
+		data: {no, userNo},
 		success: list => makeReviewList(list),
 		complete: function() { reposition(); }
 	});
 }
+
+
 
 function toPad(val) {
 	return val < 10 ? "0" + val : val;
@@ -52,6 +54,18 @@ function makeReviewList(list){
 		$tbl.append(` 작성된 리뷰가 없습니다.`);
 	}
 	$.each(list, (i, r) => {
+		var reviewNoArray = [];
+		reviewNoArray.push(`${r.reviewNo}`);
+		$.getJSON({
+			url: "i_like_check.do",
+			data: {userNo,
+				   storeReviewNo: reviewNoArray.join(",")
+					},
+			success: list => makeLikeit(list)
+		});
+		
+		
+		
 
 		var date = new Date(r.regDate);
 		var time = date.getFullYear() + "-" 
@@ -91,7 +105,7 @@ function makeReviewList(list){
                             </ul>
                         </li>
                         <li class="clearboth">
-                            <p><img src="` + context + `/resources/images/icon_hrt.png" /></p>
+                            <p class="heartclick"><img src="` + context + `/resources/images/empty_hrt.png" /></p>
                             <p>${r.good}</p>
                         </li>
                     </ul>
@@ -115,7 +129,7 @@ function makeReviewList(list){
                         </ul>
                     </li>
                     <li class="clearboth">
-                        <p><img src="` + context + `/resources/images/icon_hrt.png" /></p>
+                        <p class="heartclick"><img src="` + context + `/resources/images/empty_hrt.png" /></p>
                         <p>${r.good}</p>
                     </li>
                 </ul>
@@ -264,10 +278,13 @@ function reviewReport(count, rNo) {
 	}
 };
 	
-	
-	
+$(document).on('click', '.heartclick', function(e){	
+	alert("하트 누름");
+});	
 	
 
-
+function makeLikeit(list) {
+	console.log("라이킷메킷", list);
+}
 
 

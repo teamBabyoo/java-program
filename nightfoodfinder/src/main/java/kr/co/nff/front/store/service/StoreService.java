@@ -40,6 +40,12 @@ public interface StoreService {
 	//리뷰신고제한
 	public int reviewcount(Review review);
 	
+	//좋아요
+	public List<Review> insertLike(Review review);
+	//좋아요 취소
+	public List<Review> deleteLike(Review review);	
+	
+	public int likeCount(Review review);
 	
 }
 

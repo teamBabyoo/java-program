@@ -36,6 +36,9 @@ import lombok.Data;
 		
 		//신고사유
 		private int reportWhy;
+		
+		//리뷰번호 받기 위한
+		private String storeReviewNo;
 	}
 
 

@@ -61,7 +61,6 @@ public class StoreServiceImpl implements StoreService {
 		dao.deleteHoliday(store);
 		dao.updateHoliday(store);
 		dao.storeContentUpdate(store);
-		
 	}
 	
 	public List<Review> reviewList(int no) {
@@ -90,6 +89,23 @@ public class StoreServiceImpl implements StoreService {
 	public int reviewcount(Review review) {
 		return dao.reviewcount(review);
 	}
+	
+	//좋아요
+	public List<Review> insertLike(Review review){
+		dao.insertLike(review);
+		return dao.selectReview(review.getStoreNo());
+	}
+	//좋아요 취소
+	public List<Review> deleteLike(Review review){
+		dao.deleteLike(review);
+		return dao.selectReview(review.getStoreNo());
+	}
+	
+	//좋아요 확인
+	public int likeCount(Review review) {
+		return dao.likeCount(review);
+	}
+	
 
 	
 }
