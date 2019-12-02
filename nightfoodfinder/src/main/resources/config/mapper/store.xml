@@ -540,8 +540,8 @@
 	 select count(*)
    		from tb_like
    		where
-   		<foreach collection="storeReviewNo" separator="," open="(" close=")">
-   		store_review_no = #{storeReviewNo}
+   		<foreach collection="storeReviewNo" item="sr" separator="," open="(" close=")">
+   		store_review_no = #{sr}
    		</foreach> 
      	  and user_no = #{userNo}
 	</select>
