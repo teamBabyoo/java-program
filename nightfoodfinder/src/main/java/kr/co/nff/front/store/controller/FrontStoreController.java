@@ -1,5 +1,7 @@
 package kr.co.nff.front.store.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.nff.front.store.service.StoreService;
 import kr.co.nff.repository.vo.Review;
@@ -105,7 +108,7 @@ public class FrontStoreController {
 	@RequestMapping("/review_regist.do")
 	@ResponseBody
 //	public List<Review> reviewRegistAjax(Review review, MultipartHttpServletRequest mtfRequest) {
-	public List<Review> reviewRegistAjax(Review review) {
+	public List<Review> reviewRegistAjax(Review review, List<MultipartFile> attach) throws Exception, IOException {
 		System.out.println("리뷰등록 시도");
 /*		
 		List<MultipartFile> fileList = mtfRequest.getFiles("file");
@@ -133,11 +136,26 @@ public class FrontStoreController {
             }
         }
 */
-//        model.addAttribute("list", service.reviewRegist(review));
+//      model.addAttribute("list", service.reviewRegist(review));
+		System.out.println("--------------------------------------");
 		System.out.println("내용 : " + review.getReviewContent());
 		System.out.println("답댓 : " + review.getReComment());
 		System.out.println("스코프 : " + review.getStoreScope());
         System.out.println("게시글번호 확인" + review.getStoreNo());
+        System.out.println("--------------------------------------");
+        System.out.println("attach.size() : " + attach.size());
+        for (MultipartFile file : attach) {
+        	if (file.isEmpty()) continue;
+        	
+        	String orgName = file.getOriginalFilename();
+        	long size = file.getSize();
+        	System.out.println("파일명 : " + orgName);
+        	System.out.println("파일크기 : " + size);
+        	file.transferTo(new File("c:/java/nffresources/" + orgName));
+        }
+        
+        
+        
         service.reviewRegist(review);
         return service.reviewList(review.getStoreNo());
 	}

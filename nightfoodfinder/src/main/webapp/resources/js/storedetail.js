@@ -158,6 +158,106 @@ function reposition() {
 
 
 
+/**
+ * 댓글 등록
+ * @returns
+ */
+/*
+function registReview() {
+	let reviewContent = $('textarea[name="reviewContent"]').val();
+	console.log(storeNo, reviewContent, storeScope, attach);
+	$.post({
+		url: "review_regist.do",
+		data: {storeNo, reviewContent, storeScope, attach},
+		dataType: "json",
+		success: (list) => reviewListAjax(list)
+	});
+	$("textarea").val("");
+	return false;
+};
+*/
+function registReview() {
+	let reviewContent = $('textarea[name="reviewContent"]').val();
+	let form = $('#reviewForm')[0];
+	let data = new FormData(form);
+	$.ajax({
+		type: "POST",
+		enctype: "multipart/form-data",
+		url: "review_regist.do",
+		data: data,
+		dataType: "json",
+        processData: false,
+        contentType: false,
+        success: function(data) {
+        	alert('성공');
+        },
+        error: function(e) {
+        	console.log("ERROR : ", e);
+            alert("fail");
+        }
+	});
+};
+
+
+/*
+		// Get form
+        var form = $('#fileUploadForm')[0];
+ 
+        // Create an FormData object 
+        var data = new FormData(form);
+ 
+       // disabled the submit button
+        $("#btnSubmit").prop("disabled", true);
+ 
+        $.ajax({
+            type: "POST",
+            enctype: 'multipart/form-data',
+            url: "/document/upload",
+            data: data,
+            processData: false,
+            contentType: false,
+            cache: false,
+            timeout: 600000,
+            success: function (data) {
+                alert("complete");
+                $("#btnSubmit").prop("disabled", false);
+            },
+            error: function (e) {
+                console.log("ERROR : ", e);
+                $("#btnSubmit").prop("disabled", false);
+                alert("fail");
+            }
+        });
+*/
+
+/**
+ * 리뷰 별점 전처리
+ * @returns
+ */
+$('#scopePannel > a').click(function(e) {
+	// 모든 별을 기본색상으로 초기설정
+	$pchildren = $(e.target).parent().children();	
+	$pchildren.css('color', '#7f7f7f');
+	
+	// 위로 튐 방지
+	e.preventDefault();
+	// storeScope --> n점 (n번째 별)
+	storeScope = parseInt($(e.target).attr('data-rscope'));
+	// 현재 클릭한 별의 형제 요소의 길이만큼 반복문 돌리며 rscope값이 작을 경우 색상변경(e.target 포함)
+	for (let i = 0; i < $(e.target).siblings().length; i++) {
+		let $sibling = $(e.target).siblings().eq(i);
+		console.log(i, "번째 siblings : ", $sibling.attr('data-rscope'));
+		if (parseInt($sibling.attr('data-rscope')) <= storeScope){
+			if ($sibling.attr('data-rscope') == '1') {
+				$sibling.css('color', 'yellow');
+			}
+			console.log(i, "번째 적용됨 : ", $sibling.attr('data-rscope'));
+			$(e.target).css('color', 'red');
+			$sibling.css('color', 'red');
+		}
+	}
+});
+
 $(document).ready(function() {
 	reviewListAjax();
 	// 상세페이지 (리뷰)
@@ -167,20 +267,6 @@ $(document).ready(function() {
 		$('.leave_rv').slideToggle();
 	});
 */	
-	// 댓글 등록
-	$("#reviewForm").submit(() => {
-		console.log(storeNo, reviewContent, storeScope, recomment);
-		$.post({
-			url: "review_regist.do",
-			data: {storeNo, reviewContent, storeScope, recomment},
-			dataType: "json",
-			success: (list) => reviewListAjax(list)
-		});
-		$("textarea").val("");
-		return false;
-	});
-	
-
 	
 });
 

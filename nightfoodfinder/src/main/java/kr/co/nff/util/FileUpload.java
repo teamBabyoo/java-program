@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
 
 import kr.co.nff.repository.dao.FileDAO;
-import kr.co.nff.repository.vo.FileVO;
+import kr.co.nff.repository.vo.File;
 
 public class FileUpload {
 	private HttpServletRequest req;
@@ -48,7 +48,7 @@ public class FileUpload {
 			String fName = names.nextElement();
 			File f = request.getFile(fName);
 			if (f != null) {
-				FileVO file = new FileVO();
+				File file = new File();
 				file.setGroupCode(tempgroupCode);
 				String orgName = request.getOriginalFileName(fName);
 				file.setOrgName(orgName);
