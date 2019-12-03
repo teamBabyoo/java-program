@@ -23,7 +23,6 @@ function presubmit() {
 	for(let i = 0; i < vals.length; i++){
 		console.log(i);
 	}
-//	return false;
 }
 
 
