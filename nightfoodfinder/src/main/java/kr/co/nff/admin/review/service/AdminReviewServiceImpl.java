@@ -38,7 +38,7 @@ public class AdminReviewServiceImpl implements AdminReviewService {
 		return dao.pagingReportGetCnt(search);
 	}
 	
-/*	public List<ReportReview> reportDetail(int no) {
+	public List<ReportReview> reportDetail(int no) {
 		return dao.selectReportDetail(no);
-	} */
+	} 
 }
