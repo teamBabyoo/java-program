@@ -173,6 +173,7 @@
 	 let reviewContent = "리뷰내용강제테스트";
 	 let storeScope = "4";
 	 let recomment = "답댓 강제 테스트";
+	 //로그인한 나의 유저 번호
 	 let userNo = ${user.userNo};
 	</script>
 	<script src="<c:url value='/resources/js/storedetail.js' />"></script>

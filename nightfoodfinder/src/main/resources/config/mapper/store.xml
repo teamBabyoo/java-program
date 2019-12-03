@@ -87,7 +87,7 @@
 		a.city,
 		a.street_load,
 		c.category_name,
-		ifnull(truncate(sum(r.store_scope) / count(r.user_no),
+		ifnull(truncate(sum(r.store_scope) / count(r.writer_no),
 		1), 0) as scope
 		from tb_store as s
 		inner join tb_address as a
@@ -417,8 +417,8 @@
 	<!-- 댓글 -->
 	<!-- 댓글 리스트 -->
 
-	<select id="selectReview" parameterType="int"
-		resultType="Review">
+	<select id="selectReview" parameterType="Review"
+		resultMap="reviewMap">
 		<!-- select '1' as type, r.review_no, r.user_no, u.nick_name, r.review_content, 
 			r.reg_date, r.store_scope, ifnull(l.iloveyou, 0) as likeCount from tb_review 
 			as r inner join tb_user as u on r.user_no = u.user_no inner join ( select 
@@ -432,7 +432,8 @@
 			= #{storeNo} and r.review_no != (select store_review_no from tb_like group 
 			by store_review_no order by count(user_no) desc limit 1) ) order by type, 
 			reg_date desc -->
-		select r.store_no,
+			
+		<!-- select r.store_no,
 				r.user_no,
 				u.nick_name,
 				r.review_content,
@@ -450,7 +451,31 @@
 		on r.review_no = l.store_review_no
 		where r.store_no = #{storeNo}
 		order by reg_date desc
-
+ -->
+ 	select r.store_no,
+				r.writer_no,
+				u.nick_name,
+				r.review_content,
+				r.review_no,
+				r.reg_date,
+				r.store_scope,
+				ifnull(l.likeit, 0) as good,
+                ifnull(li.store_review_no,0) as mylikecheck
+		from tb_review r
+		inner join tb_user u
+		on r.writer_no = u.user_no
+		left outer join (select count(user_no) as likeit,
+								store_review_no
+							from tb_like
+							group by store_review_no) l
+		on r.review_no = l.store_review_no
+         left outer join (select * 
+				      from tb_like
+                     where user_no = #{userNo}) li
+		on r.review_no = li.store_review_no
+		where r.store_no = #{storeNo}
+		order by reg_date desc
+ 
 		<!-- LIMIT #{startList}, #{listSize} -->
 	</select>
 	<!-- -->
@@ -535,19 +560,7 @@
 		where store_review_no = #{reviewNo}
      	  and user_no = #{userNo}
 	</delete>
-	<!-- 좋아요 카운트 -->
-	<select id="likeCount" parameterType="Review" resultType="int">
-	 select count(*)
-   		from tb_like
-   		where
-   		<foreach collection="storeReviewNo" item="sr" separator="," open="(" close=")">
-   		store_review_no = #{sr}
-   		</foreach> 
-     	  and user_no = #{userNo}
-	</select>
-	
-	
-	
-	
+
+
 
 </mapper>

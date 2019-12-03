@@ -34,7 +34,7 @@ animateValue("scopescore", 0, scope, 100);
 function reviewListAjax() {
 	$.getJSON({
 		url: "review_list.do",
-		data: {no, userNo},
+		data: {storeNo, userNo},
 		success: list => makeReviewList(list),
 		complete: function() { reposition(); }
 	});
@@ -49,23 +49,18 @@ function toPad(val) {
 //#commentplace 안에 넣어주기 
 //리뷰 리스트 뿌려주기	
 function makeReviewList(list){
+	console.dir(list);
 	let $tbl = $("<div class='user_rv'></div>");
 	if(list.length == 0){
 		$tbl.append(` 작성된 리뷰가 없습니다.`);
 	}
+	var reviewNoArray = [];
 	$.each(list, (i, r) => {
-		var reviewNoArray = [];
-		reviewNoArray.push(`${r.reviewNo}`);
-		$.getJSON({
-			url: "i_like_check.do",
-			data: {userNo,
-				   storeReviewNo: reviewNoArray.join(",")
-					},
-			success: list => makeLikeit(list)
-		});
-		
-		
-		
+		/*reviewNoArray.push(`${r.reviewNo}`);
+	
+	console.log(reviewNoArray);
+		 */
+		// 5 6 1 2 3 4
 
 		var date = new Date(r.regDate);
 		var time = date.getFullYear() + "-" 
@@ -88,6 +83,38 @@ function makeReviewList(list){
 		}
 		
 		if(i == 0){
+			let html = "";
+			html += `<div class="user_rv best_rv">
+				  <div class="tenten">
+			  	<button type="button" class="report" value="${r.reviewNo}">신고하기</button>  
+			  </div>
+            <ul class="clearboth">
+                <li>
+                    <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                    <p>★★★★</p>
+                </li>
+                <li>
+                    <ul>
+                        <li>${r.nickName}<span>${r.regDate}</span></li>
+                        <li>${r.reviewContent}</li>    
+                    </ul>
+                </li>
+                <li class="clearboth">
+                    <p class="heartclick">`;
+			
+			if(`${r.mylikecheck}` === '0' ) {
+				html += `<img src="` + context + `/resources/images/empty_hrt.png" />`;
+			} else {
+				html += `<img src="` + context + `/resources/images/icon_hrt.png" />`;
+			}
+
+			html += `</p>
+	                <p>${r.good}</p>
+	                </li>
+	            </ul>
+	        </div>`;
+			$tbl.append(html);
+				/*
 			$tbl.append(
 					`<div class="user_rv best_rv">
 					  <div class="tenten">
@@ -105,13 +132,53 @@ function makeReviewList(list){
                             </ul>
                         </li>
                         <li class="clearboth">
-                            <p class="heartclick"><img src="` + context + `/resources/images/empty_hrt.png" /></p>
+                            <p class="heartclick">`
+					);
+			console.log('${r.mylikecheck}? : ', `${r.mylikecheck}` + 1)
+					if(`${r.mylikecheck}` === '0' ) {
+						$tbl.append(`<img src="` + context + `/resources/images/empty_hrt.png" />`);
+					} else {
+						$tbl.append(`<img src="` + context + `/resources/images/icon_hrt.png" />`);
+					}
+			
+			$tbl.append(`</p>
                             <p>${r.good}</p>
                         </li>
                     </ul>
                 </div>`);
+                */
 		}
 		else {
+			html = "";
+			html += `
+			<div class="user_rv">
+				<div class="tenten">
+					<button type="button" class="report"  value="${r.reviewNo}">신고하기</button>
+				</div>
+                <ul class="clearboth">
+                    <li>
+                        <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                        <p>` + scopeCnt + `</p>
+                    </li>
+                    <li>
+                        <ul>
+                            <li>${r.nickName}<span>${time}</span></li>
+                            <li>${r.reviewContent}</li>    
+                        </ul>
+                    </li>
+                    <li class="clearboth">`
+                        if(`${r.mylikecheck}` === '0' ) {
+							html += `<img src="` + context + `/resources/images/empty_hrt.png" />`;
+						} else {
+							html += `<img src="` + context + `/resources/images/icon_hrt.png" />`;
+						}
+			html += `<p>${r.good}</p>
+                    </li>
+                </ul>
+            </div>`;
+			$tbl.append(html);
+			
+			/*
 		$tbl.append(
 			`<div class="user_rv">
 				<div class="tenten">
@@ -135,10 +202,11 @@ function makeReviewList(list){
                 </ul>
             </div>`
 			);
+			 */
 		}
 	});
+
 	$("#targetContainer").html($tbl);
-	
 }
 /**
  * footer top값 재설정
@@ -283,8 +351,5 @@ $(document).on('click', '.heartclick', function(e){
 });	
 	
 
-function makeLikeit(list) {
-	console.log("라이킷메킷", list);
-}
 
 

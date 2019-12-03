@@ -29,7 +29,7 @@ public interface StoreService {
 	public void updateHoliday(Store store);
 	
 	// 리뷰 리스트 조회
-	public List<Review> reviewList(int storeNo);
+	public List<Review> reviewList(Review review);
 	// 리뷰 등록 & 이미지 업로드
 	public List<Review> reviewRegist(Review review);
 	
@@ -45,7 +45,6 @@ public interface StoreService {
 	//좋아요 취소
 	public List<Review> deleteLike(Review review);	
 	
-	public int likeCount(Review review);
 	
 }
 
