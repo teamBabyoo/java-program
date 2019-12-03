@@ -20,7 +20,7 @@ i { font-style: normal; font-weight: normal; font-size: 1.4rem; }
 
 /* modules */
 .mt0a { margin: 0 auto; }
-.hidden { display: none; }
+.hidden { display: none !important;}
 .red { color : red; }
 .float_l { float: left; }
 .float_r { float: right; }
@@ -34,6 +34,7 @@ i { font-style: normal; font-weight: normal; font-size: 1.4rem; }
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.topshape { position: absolute; top: -40px; right: 40px; width: 25px; border-width: 20px; border-style: solid; border-color: transparent transparent #FBA4BC transparent;}
 /* 헤더 컨텐트 푸터 공통 */
 /* header */
 body { width: 100%; }
@@ -138,10 +139,23 @@ footer { position: absolute; width: 100%; line-height: 40px; text-align: center;
 
 /* 상세 */
 .detail_wrap #stTitle > ul { padding: 10px 45px; border-top: 1px solid #d4d4d4;width: 80%; margin: 0 auto; margin-top: 30px; }
-.detail_wrap #stTitle >  ul >  li { float: left; padding: 0 20px; padding-top: 10px; border-right: 1px solid #d4d4d4; }
-.detail_wrap #stTitle >  ul >  li * { display: block; color: #77747d; }
-.detail_wrap #stTitle >  ul >  li:last-child { border-right: none; }
-.detail_wrap #stTitle >  ul >  li:hover a * { transform: rotate(30deg); transition: all .3s; }
+.detail_wrap #stTitle > ul > li { float: left; padding: 0 20px; padding-top: 10px; border-right: 1px solid #d4d4d4; }
+.detail_wrap #stTitle > ul > li * { display: block; color: #77747d; }
+.detail_wrap #stTitle > ul > li:last-child { border-right: none; }
+.detail_wrap #stTitle > ul > li:hover>a * { transform: rotate(30deg); transition: all .3s; }
+
+.detail_wrap #stTitle .tab_share { position: relative; }
+.detail_wrap #stTitle .tab_share div { position: absolute; bottom: 0; left: 0; }
+.detail_wrap #stTitle .tab_share .topshape { top: 30px; bottom: 0; left: 50%; transform: translateX(-50%); }
+.detail_wrap #stTitle .tab_share .sharePop { padding: 10px; width: 260px; height: 100px; bottom: -300%; left: -50%; transform: translateX(-25%); background: #fff; border: 1px solid #d4d4d4; box-sizing: content-box; }
+
+.detail_wrap #stTitle .tab_share .sharePop li { float: left; width: calc(260px / 3); height: 80px; }
+.detail_wrap #stTitle .tab_share .sharePop li:nth-child(1) a:after { content: '트위터'; display: block; }
+.detail_wrap #stTitle .tab_share .sharePop li:nth-child(2) a:after { content: '페이스북'; display: block; }
+.detail_wrap #stTitle .tab_share .sharePop img { margin: 0 auto; width: 45px; height: 45px; }
+.detail_wrap #stTitle .tab_share .sharePop > div { width: 100%; padding: 10px; }
+.detail_wrap #stTitle .tab_share .sharePop > div p { float: left;  width: 80%; background: #d6d9dd; }
+.detail_wrap #stTitle .tab_share .sharePop > div a { float: left;  width: 20%; border: 1px solid #444; }
 
 /* 상세 리뷰(댓글) */
 .detail_wrap .content { position: relative; }
