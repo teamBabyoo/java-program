@@ -417,8 +417,7 @@
 	<!-- 댓글 -->
 	<!-- 댓글 리스트 -->
 
-	<select id="selectReview" parameterType="Review"
-		resultMap="reviewMap">
+	<select id="selectReview" parameterType="Review" resultType="Review">
 		<!-- select '1' as type, r.review_no, r.user_no, u.nick_name, r.review_content, 
 			r.reg_date, r.store_scope, ifnull(l.iloveyou, 0) as likeCount from tb_review 
 			as r inner join tb_user as u on r.user_no = u.user_no inner join ( select 

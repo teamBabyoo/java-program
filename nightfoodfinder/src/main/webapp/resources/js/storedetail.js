@@ -103,9 +103,9 @@ function makeReviewList(list){
                     <p class="heartclick">`;
 			
 			if(`${r.mylikecheck}` === '0' ) {
-				html += `<img src="` + context + `/resources/images/empty_hrt.png" />`;
+				html += `<img class="heartclick" src="` + context + `/resources/images/empty_hrt.png" />`;
 			} else {
-				html += `<img src="` + context + `/resources/images/icon_hrt.png" />`;
+				html += `<img class="heartclick" src="` + context + `/resources/images/icon_hrt.png" />`;
 			}
 
 			html += `</p>
@@ -168,9 +168,9 @@ function makeReviewList(list){
                     </li>
                     <li class="clearboth">`
                         if(`${r.mylikecheck}` === '0' ) {
-							html += `<img src="` + context + `/resources/images/empty_hrt.png" />`;
+							html += `<img class="heartclick" src="` + context + `/resources/images/empty_hrt.png" />`;
 						} else {
-							html += `<img src="` + context + `/resources/images/icon_hrt.png" />`;
+							html += `<img class="heartclick" src="` + context + `/resources/images/icon_hrt.png" />`;
 						}
 			html += `<p>${r.good}</p>
                     </li>
