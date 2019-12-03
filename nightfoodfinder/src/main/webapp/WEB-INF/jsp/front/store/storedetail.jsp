@@ -31,6 +31,22 @@
 					    </div>
 						<div id="stTitle">
 							<h2>${store.storeName}</h2>
+							<ul>
+								<li><a href="#"><i class="fa fa-bookmark-o" aria-hidden="true"></i>단골</a></li>
+								<li class="tab_share"><a href="#"><i class="fa fa-share-square-o" aria-hidden="true"></i>공유</a>
+									<!-- 공유 팝업 -->
+									<div class="sharePop hidden">
+										<ul class="clearboth">
+										<li><a href="https://twitter.com/intent/tweet?text=심야식당 서울 강동구 강동대로 205 (출처 : 심야식당)&url=http://www.naver.com" target="_blank"><img src="${pageContext.request.contextPath }/resources/images/f_twitter.png" /></a></li>
+										<li><a href="http://www.facebook.com/sharer/sharer.php?u=naver.com" target="_blank"><img src="${pageContext.request.contextPath }/resources/images/icon_facebookS.png" /></a></li>
+										<li><a href="#"><img src="${pageContext.request.contextPath }/resources/images/icon_kakao.png" />카카오톡</a></li>
+									</ul>
+									<div class="clearboth"><p class="ellipsis">https://app.slack.com/client/TPPHA763F/CPPH24F16/files/FPJQPCU4R</p><a href="#" id="copyclip">복사</a></div>
+								</div>
+								</li>
+								<!-- 맨 아래 지도로 보내는 a링크 -->
+								<li><a href="#"><i class="fa fa-car" aria-hidden="true"></i>길찾기</a></li>
+							</ul>							
 						</div>
 						<table>
 							<tbody>

@@ -62,5 +62,8 @@ $(document).ready(function() {
             $('#person_btn .pop_person').addClass('hidden');
         })
     });
-    
+    // 상세페이지 공유탭 클릭
+    $('.tab_share').click((e) => {
+        $('.sharePop.hidden').removeClass('hidden');
+    });    
 });
