@@ -153,19 +153,19 @@
 			</c:if>
 			
 			
-			<c:forEach var="list" items="${list}">
+			<c:forEach var="li" items="${list}">
 			
 				<tr>
-					<td><input type="checkbox" class="checkboxid" id="checkboxid" name="reviewNo" data-reviewNo="${list.reviewNo}"/></td>
-					<td>${list.nickName}</td>
-					<td>${list.storeName}</td>
-					<td class="myBtn" data-reportNo="${list.reportNo }"
-						style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${list.reviewContent }</td>	
-					<td>${list.regDate }</td>
-					<td>${list.reportCount }</td>
+					<td><input type="checkbox" class="checkboxid" id="checkboxid" name="reviewNo" data-reviewNo="${li.reviewNo}"/></td>
+					<td>${li.nickName}</td>
+					<td>${li.storeName}</td>
+					<td class="myBtn" id="myBtn" data-reviewNo="${li.reviewNo }" onclick="reportmodal(this)"
+						style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${li.reviewContent }</td>	
+					<td>${li.regDate }</td>
+					<td>${li.reportCount }</td>
 					<td class="block">
 						<c:choose>
-						<c:when test="${list.status eq 0 }">
+						<c:when test="${li.status eq 0 }">
 						정상
 						</c:when>
 						<c:otherwise>
@@ -173,12 +173,7 @@
 						</c:otherwise>
 					</c:choose>
 					</td>
-			<!-- 		<td>
-						<c:forEach var="re" items="${li.reportList }">
-						<li>${re.reason }</li>
-						</c:forEach>
-						</td>
-					-->
+
 				</tr>
 			</c:forEach>
 
@@ -229,11 +224,16 @@
 			<div class="modal-content">
 				<span class="close">&times;</span>
 				<p></p>
-				<p></p>
+				<div></div>
 			</div>
+
 		</div>
 		<!----------- 모달팝업 끝 ---------------->
         </section>
+      
+      
+      
+      
       
       <script>
 		
@@ -248,39 +248,40 @@
 		var span = document.getElementsByClassName("close")[0];
 
 		// 버튼을 클릭했을 때, 모달을 연다.
-		// 그런데, 모달팝업이 첫 리스트 줄에만 적용되고 반복되어서 나오는 리스트들에는 적용이 안되었음..
-		// 이렇게 해야 모든 리스트에 적용된다.	
 	
-/*		for (let i = 0; i < btn.length; i++) {
-			btn[i].onclick = function(e){ 
-			console.log("러")	
-			var k = $(e.target).attr("data-reportNo");
-			var s = "reportNo="
-			console.log($(e.target).attr("data-reportNo"));
-			var kk = s.concat(k);
-			console.log(kk);
+	
+		function reportmodal(a) {
+
+			var rno = $(a).attr("data-reviewNo");
+			console.log(rno);
 			$.ajax({
 				url: "${pageContext.request.contextPath}/admin/review/reportmodal.do",
 				type: "POST",
-				data: { reportNo : k },
+				data: { reviewNo : rno },
 				dataType: "json",
-				success: function(){
+				success: function(data){
+					
+					modal.style.display = "block";
+					$(".modal-content p:eq(0)").text(
+							"리뷰: " + $(a).text()) 
+					$(".modal-content div").empty()
+					for(var ele in data){
+						$(".modal-content div").append("<p>" + data[ele].reason + "</p>")
+											   .append("<p>" + data[ele].nickName + "</p>")
+					
+
+				//		console.log(data[ele].reason);
+				//		console.log(data[ele].nickName);
+					}
+			
+
 				}
 			});
-			}
-		}
-		*/
-		for (let i = 0; i < btn.length; i++) {
-			btn[i].onclick = function(e) {
+	}
 		
-            modal.style.display = "block";
-            $(".modal-content p:eq(0)").text(
-            		"리뷰: " + $(e.target).text())
-            
-        }
-		}
-		
-		
+				
+	
+
 		
 		
 
