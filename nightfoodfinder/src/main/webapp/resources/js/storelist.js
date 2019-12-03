@@ -18,9 +18,8 @@ $(".types").click((e) => {
 
 
 function presubmit() {
-	alert("성공");
 	console.log($("#sto_search").serialize());
-	let vals = $("input:checkbox[name='categorycode']").val();
+	let vals = $("input:checkbox[name='categoryCode']").val();
 	for(let i = 0; i < vals.length; i++){
 		console.log(i);
 	}
