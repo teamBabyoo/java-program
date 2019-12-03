@@ -31,6 +31,20 @@
 					    </div>
 						<div id="stTitle">
 							<h2>${store.storeName}</h2>
+							<ul>
+								<li><a href="#"><i class="fa fa-bookmark-o" aria-hidden="true"></i>단골</a></li>
+								<li><a href="#"><i class="fa fa-share-square-o" aria-hidden="true"></i>공유</a>
+									<!-- 공유 팝업 -->
+									<div class="topshape"></div>
+									<div class="sharePop">
+										<ul>
+											<li></li>
+										</ul>
+									</div>
+								</li>
+								<!-- 맨 아래 지도로 보내는 a링크 -->
+								<li><a href="#"><i class="fa fa-car" aria-hidden="true"></i>길찾기</a></li>
+							</ul>
 						</div>
 						<table>
 							<tbody>
