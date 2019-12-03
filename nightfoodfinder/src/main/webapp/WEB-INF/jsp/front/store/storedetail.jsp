@@ -118,13 +118,18 @@
 							</ul>
 							
 							<div class="leave_rv user_rv">
-								<%-- <form name="reviewForm" id="reviewForm" action="<c:url value="/front/store/review_regist.do" />" method="POST" enctype="multipart/form-data"> --%>
-								<form name="reviewForm" id="reviewForm" method="POST" enctype="multipart/form-data">
+								<form name="reviewForm" id="reviewForm" onsubmit="return registReview()" method="POST" enctype="multipart/form-data">
 									<ul class="clearboth">
 										<li>
 											<ul class="clearboth">
 												<li class="float_l"><i class="fa fa-user-circle-o" aria-hidden="true"></i>${user.userEmail}</li>
-												<li class="float_r">☆☆☆☆☆</li>
+												<li id="scopePannel" class="float_r">
+													<a href="#" data-rscope="1">★</a>
+													<a href="#" data-rscope="2">★</a>
+													<a href="#" data-rscope="3">★</a>
+													<a href="#" data-rscope="4">★</a>
+													<a href="#" data-rscope="5">★</a>
+												</li>
 											</ul>
 										</li>
 										<li>
@@ -169,11 +174,9 @@
 	 let closeTime = '${store.closeTime}';
 	 let context = '${pageContext.request.contextPath}';
 	 let storeNo = ${store.storeNo};
-//	 let reviewContent = $('textarea[name="reviewContent"]').val();
-	 let reviewContent = "리뷰내용강제테스트";
-	 let storeScope = "4";
-	 let recomment = "답댓 강제 테스트";
-	 //로그인한 나의 유저 번호
+	 let storeScope = "";
+	 let fileGroupCode = null;
+	 let recomment = null;
 	 let userNo = ${user.userNo};
 	</script>
 	<script src="<c:url value='/resources/js/storedetail.js' />"></script>

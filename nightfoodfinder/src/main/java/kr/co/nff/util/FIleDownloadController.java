@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.nff.repository.dao.FileDAO;
-import kr.co.nff.repository.vo.FileVO;
+import kr.co.nff.repository.vo.File;
 
 
 @WebServlet("/util/download.do")
@@ -30,7 +30,7 @@ public class FIleDownloadController extends HttpServlet{
 
 		int fgno = Integer.parseInt(req.getParameter("fgno"));
 		
-		FileVO file = dao.selectOneFile(fgno);
+		File file = dao.selectOneFile(fgno);
 		
 		
 		String path = file.getPath();

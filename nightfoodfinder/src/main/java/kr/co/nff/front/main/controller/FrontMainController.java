@@ -32,6 +32,6 @@ public class FrontMainController {
 		
 		model.addAttribute("sList", service.mainStoreList());
 		List<Store> mList = service.mainStoreList();
-		System.out.println(mList.size());
+//		System.out.println(mList.size());
 	}
 }
