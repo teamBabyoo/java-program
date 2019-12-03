@@ -473,7 +473,7 @@
                      where user_no = #{userNo}) li
 		on r.review_no = li.store_review_no
 		where r.store_no = #{storeNo}
-		order by reg_date desc
+		order by r.review_no desc
  
 		<!-- LIMIT #{startList}, #{listSize} -->
 	</select>

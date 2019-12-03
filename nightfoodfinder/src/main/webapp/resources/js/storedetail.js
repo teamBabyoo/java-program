@@ -100,12 +100,12 @@ function makeReviewList(list){
                     </ul>
                 </li>
                 <li class="clearboth">
-                    <p class="heartclick">`;
+                    <p>`;
 			
 			if(`${r.mylikecheck}` === '0' ) {
-				html += `<img class="heartclick" src="` + context + `/resources/images/empty_hrt.png" />`;
+				html += `<img class="heartclick" data-rno="${r.reviewNo}" src="` + context + `/resources/images/empty_hrt.png" />`;
 			} else {
-				html += `<img class="heartclick" src="` + context + `/resources/images/icon_hrt.png" />`;
+				html += `<img class="heartclick" data-rno="${r.reviewNo}" src="` + context + `/resources/images/icon_hrt.png" />`;
 			}
 
 			html += `</p>
@@ -114,39 +114,7 @@ function makeReviewList(list){
 	            </ul>
 	        </div>`;
 			$tbl.append(html);
-				/*
-			$tbl.append(
-					`<div class="user_rv best_rv">
-					  <div class="tenten">
-					  	<button type="button" class="report" value="${r.reviewNo}">신고하기</button>  
-					  </div>
-                    <ul class="clearboth">
-                        <li>
-                            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-                            <p>★★★★</p>
-                        </li>
-                        <li>
-                            <ul>
-                                <li>${r.nickName}<span>${r.regDate}</span></li>
-                                <li>${r.reviewContent}</li>    
-                            </ul>
-                        </li>
-                        <li class="clearboth">
-                            <p class="heartclick">`
-					);
-			console.log('${r.mylikecheck}? : ', `${r.mylikecheck}` + 1)
-					if(`${r.mylikecheck}` === '0' ) {
-						$tbl.append(`<img src="` + context + `/resources/images/empty_hrt.png" />`);
-					} else {
-						$tbl.append(`<img src="` + context + `/resources/images/icon_hrt.png" />`);
-					}
-			
-			$tbl.append(`</p>
-                            <p>${r.good}</p>
-                        </li>
-                    </ul>
-                </div>`);
-                */
+				
 		}
 		else {
 			html = "";
@@ -168,9 +136,9 @@ function makeReviewList(list){
                     </li>
                     <li class="clearboth">`
                         if(`${r.mylikecheck}` === '0' ) {
-							html += `<img class="heartclick" src="` + context + `/resources/images/empty_hrt.png" />`;
+							html += `<img class="heartclick" data-rno="${r.reviewNo}" src="` + context + `/resources/images/empty_hrt.png" />`;
 						} else {
-							html += `<img class="heartclick" src="` + context + `/resources/images/icon_hrt.png" />`;
+							html += `<img class="heartclick" data-rno="${r.reviewNo}" src="` + context + `/resources/images/icon_hrt.png" />`;
 						}
 			html += `<p>${r.good}</p>
                     </li>
@@ -433,7 +401,39 @@ function reviewReport(count, rNo) {
 };
 	
 $(document).on('click', '.heartclick', function(e){	
-	alert("하트 누름");
+	 
+//	console.log(rno);
+	console.log($(e.target).attr('data-rno'));
+	console.log("src : ", $(e.target).attr('src'));
+	let heart = "/nightfoodfinder/resources/images/icon_hrt.png";
+	//좋아요가 되어있으면 취소
+	if($(e.target).attr('src') === heart){
+		$.post({
+			url: "i_like_cancel.do",
+			data: {userNo,
+				storeNo,
+				reviewNo: $(e.target).attr('data-rno')},
+				dataType: "json",
+				success: (list) => makeReviewList(list)
+		});
+		return false;
+	} //좋아요 누르기 
+	else {
+		$.post({
+			url: "i_like.do",
+			data: {userNo,
+				storeNo,
+				reviewNo: $(e.target).attr('data-rno')},
+				dataType: "json",
+				success: (list) => makeReviewList(list)
+		});
+		return false;
+		
+	};
+//	alert("하트 누름");
+	/*
+*/
+	
 });	
 	
 
