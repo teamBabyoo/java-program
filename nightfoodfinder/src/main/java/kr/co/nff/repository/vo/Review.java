@@ -38,7 +38,14 @@ import lombok.Data;
 		private int reportWhy;
 		
 		//리뷰번호 받기 위한
-		private Integer[] storeReviewNo;
+		private Integer storeReviewNo;
+		
+		//컬렉션 받을 좋아요 리스트
+		private List<Like> reviewLikeList;
+		
+		private int mylikecheck;
+		
+		private int writerNo;
 	}
 
 

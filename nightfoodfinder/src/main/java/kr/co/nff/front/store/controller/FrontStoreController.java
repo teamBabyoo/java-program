@@ -79,8 +79,10 @@ public class FrontStoreController {
 	/*리뷰 가져오기*/
 	@RequestMapping("/review_list.do")
 	@ResponseBody
-	public List<Review> reviewListAjax(int no){
-		return service.reviewList(no);
+	public List<Review> reviewListAjax(Review review){
+		System.out.println("리뷰 내 유저 번호 : " + review.getUserNo());
+		System.out.println("리뷰 스토어 번호 : " + review.getStoreNo());
+		return service.reviewList(review);
 	}
 	
 	/*리뷰 신고 확인용*/
@@ -157,7 +159,7 @@ public class FrontStoreController {
         
         
         service.reviewRegist(review);
-        return service.reviewList(review.getStoreNo());
+        return service.reviewList(review);
 	}
 
 	
@@ -175,13 +177,6 @@ public class FrontStoreController {
 
 	}
 	
-	/*좋아요 확인용*/
-	@RequestMapping("/i_like_check.do")
-	@ResponseBody
-	public int likeCount(Review review) {
-		System.out.println("리뷰: " + review.getStoreReviewNo());
-		System.out.println("유저번호: " + review.getUserNo());
-		return service.likeCount(review);
-	}
+
 	
 }

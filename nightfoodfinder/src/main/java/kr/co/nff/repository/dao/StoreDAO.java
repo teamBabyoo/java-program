@@ -50,7 +50,7 @@ public interface StoreDAO {
 	
 	/*가게 리뷰*/
 	//리뷰 리스트
-	List<Review> selectReview(int no);
+	List<Review> selectReview(Review review);
 	//리뷰등록
 	void registReview(Review review);
 	//리뷰수정

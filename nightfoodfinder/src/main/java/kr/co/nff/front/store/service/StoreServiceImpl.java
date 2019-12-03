@@ -63,26 +63,26 @@ public class StoreServiceImpl implements StoreService {
 		dao.storeContentUpdate(store);
 	}
 	
-	public List<Review> reviewList(int no) {
+	public List<Review> reviewList(Review review) {
 //		System.out.println("댓글 리스트 요청  OK");
-		return dao.selectReview(no);
+		return dao.selectReview(review);
 	}
 	
 	public List<Review> updateReview(Review review){
 		dao.updateReview(review);
-		return dao.selectReview(review.getStoreNo());
+		return dao.selectReview(review);
 	}
 	
 	//신고하기
 	public List<Review> reviewReport(Review review) {
 		dao.reportReview(review);
-		return dao.selectReview(review.getStoreNo());
+		return dao.selectReview(review);
 	}
 
 	@Override
 	public List<Review> reviewRegist(Review review) {
 		dao.registReview(review);
-		return dao.selectReview(review.getStoreNo());
+		return dao.selectReview(review);
 	}
 	
 	//리뷰 신고제한
@@ -93,18 +93,14 @@ public class StoreServiceImpl implements StoreService {
 	//좋아요
 	public List<Review> insertLike(Review review){
 		dao.insertLike(review);
-		return dao.selectReview(review.getStoreNo());
+		return dao.selectReview(review);
 	}
 	//좋아요 취소
 	public List<Review> deleteLike(Review review){
 		dao.deleteLike(review);
-		return dao.selectReview(review.getStoreNo());
+		return dao.selectReview(review);
 	}
 	
-	//좋아요 확인
-	public int likeCount(Review review) {
-		return dao.likeCount(review);
-	}
 	
 
 	
