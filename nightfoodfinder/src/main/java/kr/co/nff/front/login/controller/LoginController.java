@@ -134,7 +134,7 @@ public class LoginController {
 	
 	
 	//스토어 가입
-	@RequestMapping("/storejoin.do")
+	@RequestMapping("/front/login/storejoin.do")
 	public String storeJoin() {
 		return "redirect:main.do";
 	}

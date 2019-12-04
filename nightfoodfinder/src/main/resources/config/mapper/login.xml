@@ -22,34 +22,9 @@
 	
 	<!-- 가게 회원가입(휴일 제외 정보 insert) -->
 	<insert id="storeUpdateInfo" parameterType="Store">
-		insert tb_store s
-		set
-		<if test="storeName != null">
-			store_name = #{storeName},
-		</if>
-		<if test="storePass != null">
-			store_pass = #{storePass},
-		</if>
-		<if test="storeCategory != null">
-			store_category = #{storeCategory},
-		</if>
-		<if test="openTime != null">
-			open_time = #{openTime},
-		</if>
-		<if test="closeTime != null">
-			close_time = #{closeTime},
-		</if>
-		<if test="storeOwner != null">
-			store_owner = #{storeOwner},
-		</if>
-		<if test="storeOwnerPh != null">
-			store_owner_ph = #{storeOwnerPh},
-		</if>
-
-		<if test="storeTell != null">
-			store_tell = #{storeTell}
-		</if>
-		WHERE store_no = #{storeNo}
+		insert into tb_store 
+			(store_name, business_num, store_email, store_pass, store_tell,
+				) values (#{storeName}, #{business_num}, #{store_email}, #{store_pass}, #{store_tell})
 	</insert>
 	<!-- 가게 회원가입(휴일 정보 insert) -->
 	<insert id="updateHoliday" parameterType="Store">
