@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.nff.front.main.service.MainService;
 import kr.co.nff.repository.vo.Category;
+import kr.co.nff.repository.vo.Notice;
 import kr.co.nff.repository.vo.Store;
+import kr.co.nff.repository.vo.User;
 
 @Controller
 @RequestMapping("/front/main")
@@ -33,5 +35,17 @@ public class FrontMainController {
 		model.addAttribute("sList", service.mainStoreList());
 		List<Store> mList = service.mainStoreList();
 //		System.out.println(mList.size());
+		
+		
+		// session에서 로그인된 user 가져온다. 일단은 storeuser 말고 일반 user만 구현해놓았음. 수정요
+		User user = (User)session.getAttribute("loginUser");
+		if(user != null) {
+			// 가지고온 user가 있다면 알림리스트 가녀와서 공유영역에 올려준다.
+			Notice notice = new Notice();
+			notice.setUserNo(user.getUserNo());
+			
+			List<Notice> noticeList = service.selectNotice(notice);
+			model.addAttribute("noticeList", noticeList);
+		}
 	}
 }
