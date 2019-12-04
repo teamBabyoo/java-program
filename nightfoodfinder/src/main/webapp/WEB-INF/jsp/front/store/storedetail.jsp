@@ -32,7 +32,7 @@
 						<div id="stTitle">
 							<h2>${store.storeName}</h2>
 							<ul>
-								<li><a href="#"><i class="fa fa-bookmark-o" aria-hidden="true"></i>단골</a></li>
+								<li><a href="#" class="frequent"><i class="fa fa-bookmark-o" aria-hidden="true"></i>단골</a></li>
 								<li><a href="#"><i class="fa fa-share-square-o" aria-hidden="true"></i>공유</a>
 									<!-- 공유 팝업 -->
 									<div class="topshape"></div>

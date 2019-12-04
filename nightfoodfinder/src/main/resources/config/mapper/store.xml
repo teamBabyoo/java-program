@@ -75,36 +75,29 @@
 	<select id="selectOneStore" resultType="Store"
 		parameterType="int">
 		select s.store_no,
-		s.store_name,
-		s.store_email,
-		s.store_tell,
-		s.business_num,
-		s.store_category,
-		s.store_owner,
-		s.store_owner_ph,
-		s.open_time,
-		s.close_time,
-		a.city,
-		a.street_load,
-		c.category_name,
-		ifnull(truncate(sum(r.store_scope) / count(r.writer_no),
-		1), 0) as scope
+				s.store_name,
+				s.store_email,
+				s.store_tell,
+				s.business_num,
+				s.store_category,
+				s.store_owner,
+				s.store_owner_ph,
+				s.open_time,
+				s.close_time,
+				a.city,
+				a.street_load,
+				c.category_name,
+				ifnull(truncate(sum(r.store_scope) / count(r.writer_no), 1), 0) as scope
 		from tb_store as s
 		inner join tb_address as a
-		on
-		s.store_no = a.store_no
+		   on s.store_no = a.store_no
 		inner join tb_category as c
-		on s.store_category
-		= c.category_no
-		inner
-		join tb_store_content as sc
-		on s.store_no =
-		sc.store_no
-		inner join
-		tb_review as r
-		on s.store_no = r.store_no
-		where
-		s.store_no = #{storeNo}
+	   		on s.store_category = c.category_no
+		inner join tb_store_content as sc
+			on s.store_no = sc.store_no
+		inner join tb_review as r
+			on s.store_no = r.store_no
+		where s.store_no = #{storeNo}
 
 	</select>
 
@@ -558,6 +551,28 @@
 		where store_review_no = #{reviewNo}
      	  and user_no = #{userNo}
 	</delete>
+	
+	
+	<!-- 단골등록 -->
+	<insert id="frequentRegist" parameterType="Store">
+		 insert into tb_frequent_store(user_no, store_no) value(#{userNo}, #{storeNo});
+	</insert>
+	
+	<!-- 단골 취소 -->
+	<delete id="frequentDelete" parameterType="Store">
+	   	delete
+		from tb_frequent_store
+		where user_no = #{userNo}
+		  and store_no = #{storeNo}
+	</delete>
+	
+	<!-- 단골 확인용 -->
+	<select id="checkfrequent" parameterType="Store" resultType="int">
+	  select ifnull(count(*), 0) as checkit
+	    from tb_frequent_store
+	    where user_no = #{userNo}
+		  and store_no = #{storeNo}
+	</select>
 
 
 

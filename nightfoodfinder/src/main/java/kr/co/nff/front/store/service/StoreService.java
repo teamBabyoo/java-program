@@ -45,6 +45,15 @@ public interface StoreService {
 	//좋아요 취소
 	public List<Review> deleteLike(Review review);	
 	
+	//단골체크
+	public int frequentCount(Store store);
+	
+	//단골등록
+	public int frequentRegist(Store store);
+	
+	//단골 취소 
+	public int frequentDelete(Store store);
+	
 	
 }
 

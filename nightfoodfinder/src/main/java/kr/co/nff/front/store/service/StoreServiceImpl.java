@@ -101,7 +101,20 @@ public class StoreServiceImpl implements StoreService {
 		return dao.selectReview(review);
 	}
 	
+	// 단골인지 체크
+	public int frequentCount(Store store) {
+		return dao.checkfrequent(store);
+	}
 	
+	public int frequentRegist(Store store) {
+		 dao.frequentRegist(store);
+		 return dao.checkfrequent(store);
+	}
+	
+	public int frequentDelete(Store store) {
+		 dao.frequentDelete(store);
+		 return dao.checkfrequent(store);
+	}
 
 	
 }
