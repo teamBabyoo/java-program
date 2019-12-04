@@ -1,10 +1,9 @@
 /*단골등록을 위한*/
 function checkFrequent(){
-	let msg = "ㅅㅈㅅㅈ";
 	$.getJSON({
 		url: "frequent_check.do",
 		data: {storeNo, userNo},
-		success: list => makeFrequent(list, msg),
+		success: list => makeFrequent(list),
 		complete: function() { reposition(); }
 	});
 	return false;
@@ -12,12 +11,9 @@ function checkFrequent(){
 checkFrequent();
 
 /*단골 등록하기*/
-function makeFrequent(list, msg) {
+function makeFrequent(list) {
 	// list 가 1이면 등록된 가게
 	// 0이면 등록되지 않은 가게
-	console.log(msg);
-	console.log("단골 ? ", list);
-	console.log(typeof list);
 	
 	$(".frequent").off();
    if(list) {
@@ -38,21 +34,18 @@ function makeFrequent(list, msg) {
 	   });
 	   
    }
-//   $(".frequent").off();
 }
 
 
 function frequentRegist(urlhtml) {
-	let msg = "얌마";
 	$.getJSON({
 		url: urlhtml,
 		data: {storeNo, userNo},
 		success: (list) => {
-			makeFrequent(list, msg)
+			makeFrequent(list)
 		},
 		error: function(e) {
-		}/*, 
-		complete: function() { checkFrequent(); }*/
+		} 
 	});
 	return false;
 }

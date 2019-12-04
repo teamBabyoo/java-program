@@ -18,10 +18,10 @@ import lombok.Data;
 		private String reportNickname;
 		private int reportCount;
 		private int storeNo;
-		private int userNo;
+		private int writerNo;
 		private int reportNo;
 		
-		private List<ReportReview> reportList;
+//		private List<ReportReview> reportList;
 		
 		private int storeScope;
 		private int fileGroupCode;
@@ -45,7 +45,7 @@ import lombok.Data;
 		
 		private int mylikecheck;
 		
-		private int writerNo;
+		private int userNo;
 	}
 
 
