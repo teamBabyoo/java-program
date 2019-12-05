@@ -20,9 +20,6 @@ public class MainServiceImpl implements MainService{
 	@Autowired
 	private StoreDAO sDao;
 	
-	@Autowired
-	private NoticeDAO nDao;
-	
 	
 	
 	// 검색 헤더 카테고리
@@ -50,11 +47,4 @@ public class MainServiceImpl implements MainService{
 	}
 	
 
-	/*------------------------------------------*/
-	
-	@Override
-	public List<Notice> selectNotice(Notice notice) {
-		return nDao.selectNotice(notice);
-	}
-	
 }

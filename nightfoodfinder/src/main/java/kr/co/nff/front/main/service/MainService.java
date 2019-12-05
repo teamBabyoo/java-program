@@ -19,9 +19,4 @@ public interface MainService {
 	List<Store> mainStoreList();
 	
 	
-	
-	
-	/*------------------------------*/
-	List<Notice> selectNotice(Notice notice);
-	/*------------------------------*/
 }

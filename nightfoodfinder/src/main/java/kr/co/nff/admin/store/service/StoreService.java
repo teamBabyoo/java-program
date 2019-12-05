@@ -14,4 +14,4 @@ public interface StoreService {
 	int GetListCnt(Search search);
 	void withdrawStore(Store store);
 	List<Category> selectCategory();
-}
+} 
