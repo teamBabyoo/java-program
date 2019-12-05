@@ -41,15 +41,15 @@
 					</span>
 				</p>
 				<div class="memInput" id="memInput" style="display : none;">
-					<!-- <form id="memForm" action="" onsubmit="return memChk()" method="post"> -->
+					<form id="memForm" action="storelogin.do" onsubmit="return memChk()" method="post">
 						<p>
 							<input type="text" name="storeEmail" id="storeEmail" placeholder="이메일을 입력해주세요"/>
 						</p>
 						<p>
 							<input type="password" name="storePass" id="storePass" placeholder="비밀번호를 입력해주세요"/>
 						</p>
-						<p><a class="login_btn" href="${pageContext.request.contextPath}/admin/user/userlist.do" >로그인</a></p>
-					<!-- </form> -->
+						<p><a class="login_btn" >로그인</a></p>
+					</form>
 				</div>
 				<div class="snsBox" id="snsBox">
 					<ul>

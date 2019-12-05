@@ -18,6 +18,7 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 import kr.co.nff.front.login.service.LoginService;
 import kr.co.nff.login.naver.oauth.bo.NaverLoginBO;
 import kr.co.nff.login.naver.oauth.model.JsonParser;
+import kr.co.nff.repository.vo.Store;
 import kr.co.nff.repository.vo.User;
 
 
@@ -135,15 +136,16 @@ public class LoginController {
 	
 	//스토어 가입
 	@RequestMapping("/front/login/storejoin.do")
-	public String storeJoin() {
-		return "redirect:main.do";
+	public String storeJoin(Store store) {
+		System.out.println(store);
+		loginservice.joinStore(store);
+	
+		return "redirect:/front/main/main.do";
 	}
 
 	
 	  @RequestMapping("/front/login/storeJoinForm.do") 
-	  public void storeJoinForm(){
-		  
-	  }
+	  public void storeJoinForm(){}
 	 
 	//스토어 중복이메일 체크
 	@RequestMapping(value="/front/login/storeEmailChk.do")
@@ -155,7 +157,7 @@ public class LoginController {
 	
 	
 	//스토어 로그인
-	@RequestMapping("/storelogin.do")
+	@RequestMapping("/front/login/storelogin.do")
 	public void storeLogin() {
 		//session.attribute("type", 0);
 	}

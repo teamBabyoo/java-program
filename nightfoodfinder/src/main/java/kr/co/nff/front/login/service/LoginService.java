@@ -4,7 +4,10 @@ import kr.co.nff.repository.vo.Store;
 import kr.co.nff.repository.vo.User;
 
 public interface LoginService {
-	void insertStore(Store store);
+	// 가게 회원가입
+	void joinStore(Store store);
+
+	
 	Store selectUserInfoByName(String storeName);
 	public int storeEmailChk(String storeEmail);
 	
