@@ -7,35 +7,38 @@
 		insert into tb_notice (
 			<if test="userNo != null">
 				user_no,
+				notice_code	
+			) values (
+				#{userNo},
+				#{noticeCode}
+			)
 			</if>
 			<if test="storeNo != null">
 				store_no,
-			</if>
-			notice_code	
-		) values (
-			<if test="userNo != null">
-				#{userNo},
-			</if>
-			<if test="storeNo != null">
+				notice_code	
+			) values (
 				#{storeNo},
+				#{noticeCode}
+			)
 			</if>
-			#{noticeCode}
-		)
 	</insert>
 
 	<!-- 알림 리스트 -->
 	<!-- 리스트 정렬할 때 확인 여부 표시해주어야한다. -->	
 	<select id="selectNotice" parameterType="Notice" resultType="Notice">
-		select *
-		  from tb_notice
+		select n.*,
+		       c.notice_content
+		  from tb_notice n
+		 inner join tb_notice_content c
+		    on n.notice_code = c.notice_code
 		 where 
 		 	<if test="storeNo != 0">
-         		store_no = #{storeNo}
+         		n.store_no = #{storeNo}
          	</if>
          	<if test="userNo != 0">
-         		user_no = #{userNo}
+         		n.user_no = #{userNo}
          	</if>
-		 order by reg_date desc 
+		 order by n.reg_date desc 
 		 limit 70
 	</select>
 	
