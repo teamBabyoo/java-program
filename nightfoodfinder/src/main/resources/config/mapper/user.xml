@@ -12,7 +12,7 @@
 		u.user_type,
 		(select count(*) 
 		from tb_review as r
-		where u.user_no = r.user_no) as review_cnt
+		where u.user_no = r.writer_no) as review_cnt
 		from tb_user u
 		<!-- 검색 -->
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
