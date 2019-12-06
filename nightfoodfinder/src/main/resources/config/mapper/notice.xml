@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.nff.repository.dao.NoticeDAO">
+	<!-- 알람 생성 -> user, store 공동 사용 -->
+	<insert id="insertNotice" parameterType="Notice">
+		insert into tb_notice (
+			<if test="userNo != null">
+				user_no,
+				notice_code	
+			) values (
+				#{userNo},
+				#{noticeCode}
+			)
+			</if>
+			<if test="storeNo != null">
+				store_no,
+				notice_code	
+			) values (
+				#{storeNo},
+				#{noticeCode}
+			)
+			</if>
+	</insert>
+
+	<!-- 알림 리스트 -->
+	<!-- 리스트 정렬할 때 확인 여부 표시해주어야한다. -->	
+	<select id="selectNotice" parameterType="Notice" resultType="Notice">
+		select n.*,
+		       c.notice_content
+		  from tb_notice n
+		 inner join tb_notice_content c
+		    on n.notice_code = c.notice_code
+		 where 
+		 	<if test="storeNo != 0">
+         		n.store_no = #{storeNo}
+         	</if>
+         	<if test="userNo != 0">
+         		n.user_no = #{userNo}
+         	</if>
+		 order by n.reg_date desc 
+		 limit 70
+	</select>
+	
+	<!-- 알림을 사용자가 확인했을 때  안읽음(0)에서 읽음(1)으로 업데이트-->
+	<update id="readNotice" parameterType="Notice">
+		update tb_notice
+  		   set status = 1
+         where 
+         	<if test="storeNo != 0">
+         		store_no = #{storeNo}
+         	</if>
+         	<if test="userNo != 0">
+         		user_no = #{userNo}
+         	</if>
+	</update>
+	
+	<!-- 안읽은 알림 몇 개인지 -->
+	<select id="countNewNotice" parameterType="Notice" resultType="int">
+		select count(*)
+		  from tb_notice
+		 where 
+		 	<if test="storeNo != 0">
+         		store_no = #{storeNo}
+         	</if>
+         	<if test="userNo != 0">
+         		user_no = #{userNo}
+         	</if>
+           and status = 0
+	</select>
+	
+</mapper>
+   

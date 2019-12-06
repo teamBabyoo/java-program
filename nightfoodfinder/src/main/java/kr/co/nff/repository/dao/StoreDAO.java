@@ -69,7 +69,12 @@ public interface StoreDAO {
 	void insertLike(Review review);
 	//좋아요취소
 	void deleteLike(Review review);
-	//좋아요 취소를 위한 확인 
-	int likeCount(Review review);
+		
+	//단골 체크 
+	int checkfrequent(Store store);
+	//단골등록
+	void frequentRegist(Store store);
+	//단골취소
+	void frequentDelete(Store store);
 
 }

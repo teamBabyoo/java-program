@@ -1,3 +1,56 @@
+/*단골등록을 위한*/
+function checkFrequent(){
+	$.getJSON({
+		url: "frequent_check.do",
+		data: {storeNo, userNo},
+		success: list => makeFrequent(list),
+		complete: function() { reposition(); }
+	});
+	return false;
+}
+checkFrequent();
+
+/*단골 등록하기*/
+function makeFrequent(list) {
+	// list 가 1이면 등록된 가게
+	// 0이면 등록되지 않은 가게
+	
+	$(".frequent").off();
+   if(list) {
+	   $(".frequent i").attr("class", "fa fa-bookmark").css("color", "red");
+	   $(".frequent").click(()=>{
+		   alert("단골취소을 취소되었습니다");
+		   frequentRegist("frequent_delete.do");
+		   $(".frequent i").attr("class", "fa fa-bookmark-o").css("color", "#77747d");
+		   
+	   });
+	   
+   } else {
+	   $(".frequent i").attr("class", "fa fa-bookmark-o");
+	   $(".frequent").click(()=>{
+		   alert("단골등록");
+		   frequentRegist("frequent_regist.do");
+		   $(".frequent i").attr("class", "fa fa-bookmark").css("color", "red");
+	   });
+	   
+   }
+}
+
+
+function frequentRegist(urlhtml) {
+	$.getJSON({
+		url: urlhtml,
+		data: {storeNo, userNo},
+		success: (list) => {
+			makeFrequent(list)
+		},
+		error: function(e) {
+		} 
+	});
+	return false;
+}
+	
+
 
 /*별점 애니메이션*/
 function animateValue(id, start, end, duration) {
@@ -185,11 +238,11 @@ function reposition() {
 	let $height_content = $('.content').height();
 	let $top_footer = $('footer').offset().top;
 //	let $height_leave_rv = $('.leave_rv').height
-	console.log('$height_content', $height_content);
-	console.log('$height_header ->', $height_header);
-	console.log('$top_footer ->', $top_footer);
+//	console.log('$height_content', $height_content);
+//	console.log('$height_header ->', $height_header);
+//	console.log('$top_footer ->', $top_footer);
 //	$('footer').css('top', $height_header + $height_content + $height_leave_rv);
-	$('footer').css('top', $height_header + $height_content);
+//	$('footer').css('top', $height_header + $height_content);
 }
 
 
@@ -303,6 +356,7 @@ $(document).ready(function() {
 		$('.leave_rv').slideToggle();
 	});
 */	
+
 	
 });
 

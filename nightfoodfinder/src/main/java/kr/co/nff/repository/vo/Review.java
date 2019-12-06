@@ -45,7 +45,7 @@ import lombok.Data;
 		
 		private int mylikecheck;
 		
-		private int writerNo;
+		private int userNo;
 	}
 
 

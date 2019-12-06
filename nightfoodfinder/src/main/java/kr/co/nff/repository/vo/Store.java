@@ -56,5 +56,11 @@ public class Store {
 	
 	//  storeNo 받을 리스트
 		private List<Integer> storeNoList;
+
+		//단골을 위한
+		private int userNo;
+		//단골 체크를 위한
+		private int checkit;
+		
 }
 	

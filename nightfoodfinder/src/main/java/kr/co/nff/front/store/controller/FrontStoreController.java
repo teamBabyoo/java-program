@@ -192,6 +192,38 @@ public class FrontStoreController {
 
 	}
 	
+	/*단골확인을 위한*/
+	@RequestMapping("/frequent_check.do")
+	@ResponseBody
+	public int frequentCount(Store store){ 
+		/*
+		System.out.println("가게번호 : " + store.getStoreNo());
+		System.out.println("유저번호 : " + store.getUserNo());
+		*/
+		return service.frequentCount(store);
+	};
+	
+	/*단골등록*/
+	@RequestMapping("/frequent_regist.do")
+	@ResponseBody
+	public int frequentRegist(Store store){ 
+		/*
+		System.out.println("등록가게번호 : " + store.getStoreNo());
+		System.out.println("등록유저번호 : " + store.getUserNo());
+		*/
+		return service.frequentRegist(store);
+	};
+	
+	
+	/*단골취소*/
+	@RequestMapping("/frequent_delete.do")
+	@ResponseBody
+	public int  frequentDelete(Store store){ 
+		System.out.println("삭제가게번호 : " + store.getStoreNo());
+		System.out.println("삭제유저번호 : " + store.getUserNo());
+		return service.frequentDelete(store);
+	};
+	
 	
 
 	

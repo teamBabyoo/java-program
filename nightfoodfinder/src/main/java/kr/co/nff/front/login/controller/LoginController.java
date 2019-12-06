@@ -1,6 +1,7 @@
 package kr.co.nff.front.login.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,8 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
 import kr.co.nff.front.login.service.LoginService;
+import kr.co.nff.front.notice.service.NoticeService;
 import kr.co.nff.login.naver.oauth.bo.NaverLoginBO;
 import kr.co.nff.login.naver.oauth.model.JsonParser;
+import kr.co.nff.repository.vo.Notice;
 import kr.co.nff.repository.vo.Store;
 import kr.co.nff.repository.vo.User;
 
@@ -25,6 +28,9 @@ import kr.co.nff.repository.vo.User;
 @Controller("kr.co.nff.front.login.LoginController")
 //@RequestMapping("/front/login")
 public class LoginController {
+	
+	@Autowired
+	public NoticeService noticeService;
 	
 	//유저 가입
 	@RequestMapping("/userjoin.do")
@@ -107,7 +113,23 @@ public class LoginController {
     	
     	if (loginservice.selectNaver(vo) > 0) { // 세션만들기
 			session.setAttribute("login", vo);
-			session.setAttribute("loginUser", loginservice.selectLoginOneUser(vo.getUserId()));
+			
+			// 로그인되는 유저 
+			User loginUser = (User)loginservice.selectLoginOneUser(vo.getUserId());
+			session.setAttribute("loginUser", loginUser);
+			
+			// 로그인된 유저의 알림리스트, 안읽은 알림 갯수 가져와서 같이 세션에 올린다.
+			Notice notice = new Notice();
+			notice.setUserNo(loginUser.getUserNo());
+			List<Notice> noticeList = noticeService.selectNotice(notice);
+			int numOfNotice = noticeService.countNewNotice(notice);
+			session.setAttribute("noticeList", noticeList);
+			session.setAttribute("countNotice", numOfNotice);
+			
+			System.out.println(noticeList.toString());
+			System.out.println(numOfNotice + "알림 갯수");
+			
+			
 			System.out.println(loginservice.selectLoginOneUser(vo.getUserId()));
 		} else {
 			loginservice.insertNaverUser(vo);
