@@ -79,12 +79,15 @@
 			(#{storeNo}, #{sggNm}, #{roadFullAddr}, #{entX}, #{entY})
 	</insert>
 	
-	
-	<select id="selectLoginOneUser" parameterType="String" resultType="User">
+	<!-- 가게회원 로그인체크 -->
+	<select id="storeLogin" parameterType="Store" resultType="Store">
 	 select * 
-	  from tb_user
-	  where user_id = #{userId}
+	  from tb_store
+	  where store_email = #{storeEmail} 
+	  and store_pass = #{storePass}
 	</select>
+	
+
 	
 	
 	

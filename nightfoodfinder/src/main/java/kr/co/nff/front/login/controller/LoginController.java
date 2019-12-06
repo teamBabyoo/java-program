@@ -144,7 +144,7 @@ public class LoginController {
   //로그아웃
     @RequestMapping(value = "/front/login/logout.do", method = { RequestMethod.GET, RequestMethod.POST })
     public String logout(HttpSession session)throws IOException {
-    System.out.println("여기는 logout");
+    //System.out.println("여기는 logout");
     session.invalidate();
     return "redirect:/front/main/main.do";
     }
@@ -161,13 +161,11 @@ public class LoginController {
 	public String storeJoin(Store store) {
 		System.out.println(store);
 		loginservice.joinStore(store);
-	
 		return "redirect:/front/main/main.do";
 	}
-
-	
-	  @RequestMapping("/front/login/storeJoinForm.do") 
-	  public void storeJoinForm(){}
+	// 스토어 가입폼
+	@RequestMapping("/front/login/storeJoinForm.do") 
+	 public void storeJoinForm(){}
 	 
 	//스토어 중복이메일 체크
 	@RequestMapping(value="/front/login/storeEmailChk.do")
@@ -180,12 +178,24 @@ public class LoginController {
 	
 	//스토어 로그인
 	@RequestMapping("/front/login/storelogin.do")
-	public void storeLogin() {
-		//session.attribute("type", 0);
+	public String storeLogin(Store s, HttpSession session) {
+		Store store = loginservice.storeLogin(s);
+		if(store == null) {
+			return "redirect:/front/login/userLoginForm.do";
+		}
+		session.setAttribute("login", store);
+		System.out.println("스토어 로그인 성공");
+		return "redirect:/front/main/main.do";
+		
 	}
+	
+	
 	//스토어 로그아웃
 	@RequestMapping("/storelogout.do")
-	public void storeLogout() {}
+	public String storeLogout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/front/main/main.do";
+	}
 	//스토어 아이디찾기
 	@RequestMapping("/storeidfind.do")
 	public void storeIdFind() {}

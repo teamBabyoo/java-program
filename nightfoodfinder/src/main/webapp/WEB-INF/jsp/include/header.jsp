@@ -84,10 +84,19 @@
 		<!-- 팝업 (로그인 X) -->
 		<div class="pop_person nMember hidden">
 	        <div class="topshape"></div>
+	        <c:choose>
+	        <c:when test="${login == null}">
 	        <div>
 				로그인 후<br />
 				이용 가능합니다
 	        </div>
+	        </c:when>
+	        <c:otherwise>
+	        <div>
+	        	MY PAGE
+	        </div>
+	        </c:otherwise>
+	        </c:choose>
 	        <div>
 	           <c:choose>
 				<c:when test="${login != null}">
