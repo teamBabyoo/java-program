@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -38,7 +38,7 @@
 				href="${pageContext.request.contextPath}/admin/user/userlist.do">회원관리</a></li>
 			<li class="store"><a
 				href="${pageContext.request.contextPath}/admin/store/storelist.do">가게관리</a></li>
-					<li class="stat"><a
+			<li class="stat"><a
 				href="${pageContext.request.contextPath}/admin/stat/statlist.do">통계관리</a></li>
 			<li class="review"><a href="#">리뷰관리</a>
 				<ul>
@@ -55,118 +55,63 @@
 
 
 	<section class="panel ">
-		<h2>가게 관리</h2>
+		<h2>통계 관리</h2>
 
 		<!-- search -->
 		<div class="storesearchbar">
 			<table class="admssearchtable">
 				<tr>
-					<th class="admssearchtable-lboi">가게 상태</th>
+					<th class="admssearchtable-lboi">성별</th>
 					<td class="admssearchtable-lboi"><select name="searchType"
 						id="searchType">
-							<option value="total"
-								${pagination.type eq "total" ? "selected" :""}>전체</option>
-							<option value="permit"
-								${pagination.type eq "permit" ? "selected" :""}>승인 완료</option>
-							<option value="nopermit"
-								${pagination.type eq "nopermit" ? "selected" :""}>승인 대기</option>
-							<option value="withdraw"
-								${pagination.type eq "withdraw" ? "selected" :""}>활동 정지</option>
+							<option value="total">전체</option>
+							<option value="female">여자</option>
+							<option value="male">남자</option>
 					</select></td>
-					<th class="admssearchtable-lboi">가게 분류</th>
-					<td class="admssearchtable-lboi"><c:forEach
-							items="${cateList}" var="t">
-							<span class="cate"> <input id="foodtype_${t.categoryNo}" 
-								name="categorycode" value="${t.categoryNo}" type="checkbox" 
-							<c:set var="contains" value="false" />
-								<c:forEach var="item" items="${pagination.categoryCode}">
-  									<c:if test="${item eq t.categoryNo}">
- 									   <c:set var="contains" value="true" />
- 								 	</c:if>
-								</c:forEach>
-								<c:if test="${contains}">
-									checked="checked"
-								</c:if>
-							/>
-								<label for="foodtype_${t.categoryNo}" class="types">${t.categoryName}</label>
+					<th class="admssearchtable-lboi">연령대</th>
+					<td class="admssearchtable-lboi"><c:forEach var="i" begin="1"
+							end="6" step="1">
+							<span class="cate"> <input id="age${i}"
+								name="categorycode" value="${i * 10}" type="checkbox" /> <label
+								for="age${i}" class="types">  ${i * 10}대
+							</label>
 							</span>
-						</c:forEach> <input id="foodtype_0" type="checkbox" onclick="checkAll();" 
-						<c:if test="${fn:length(pagination.categoryCode) eq fn:length(cateList)}">
-									checked="checked"
-								</c:if>
-								/>
-						<label for="foodtype_0" class="types">전체</label></td>
+						</c:forEach></td>
 				</tr>
 				<tr>
-					<th class="admssearchtable-lboi">검색어</th>
+					<th class="admssearchtable-lboi">기간</th>
 					<td class="admssearchtable-lboi" colspan="3"><span
-						class="cate"><select name="searchTypes" id="searchTypes">
-								<option value="storename"
-									${pagination.types eq "storename" ? "selected" :""}>가게이름</option>
-								<option value="ownername"
-									${pagination.types eq "ownername" ? "selected" :""}>대표자이름</option>
-								<option value="ownernum"
-									${pagination.types eq "ownernum" ? "selected" :""}>사업자번호</option>
-						</select></span><input type="text" class="form-control form-control-sm"
-						name="keyword" id="keyword" value="${pagination.keyword}"></td>
+						class="cate"><input type="date" id="userdate"
+							name="userdate">부터 <input type="date" id="userdate"
+							name="userdate" />까지</span></td>
 				</tr>
 			</table>
 			<div class="btndiv">
 				<button class="btnSearch" name="btnSearch" id="btnSearch">검색</button>
 			</div>
 		</div>
-
-		<!-- search -->
-		<div class="searchcnt">전체 : ${pagination.listCnt}개</div>
+		<!--  graph 들어갈 공간 -->
 		<table>
 			<tr>
-				<th class="choicee">선택</th>
-				<th>가게이름</th>
-				<th>가게분류</th>
-				<th>대표자이름</th>
-				<th>사업자번호</th>
-				<th>상태</th>
+				<th>Username</th>
+				<th>Posts</th>
+				<th>comments</th>
+				<th>date</th>
 			</tr>
-			<c:if test="${empty slist}">
-				<tr>
-					<td colspan="5">가입 가게가 없습니다.</td>
-				</tr>
-			</c:if>
-			<c:forEach var="b" items="${slist}">
-				<tr>
-					<td><input type="checkbox" id="myCheckboxid" name="storeNo"
-						data-storeNo="${b.storeNo}" /></td>
-					<td class="myBtn" id="storeName">${b.storeName}</td>
-					<td id="categoryName">${b.categoryName}</td>
-					<td id="storeOwner">${b.storeOwner}</td>
-					<td id="businessNum">${b.businessNum}</td>
-					<td class="storetype"><c:choose>
-							<c:when test="${b.status == 0}">
-								<span class="statusbutton"><a
-									href="storestatus.do?no=${b.storeNo}">승인 대기</a></span>
-							</c:when>
-							<c:when test="${b.status == 1}">
-								승인 완료
-							</c:when>
-							<c:otherwise>
-								활동 정지
-							</c:otherwise>
-						</c:choose></td>
-					<td class="ahide" id="status">${b.status}</td>
-					<td class="ahide" id="storeEmail">${b.storeEmail}</td>
-					<td class="ahide" id="storeTell">${b.storeTell}</td>
-					<td class="ahide" id="streetLoad">${b.streetLoad}</td>
-					<td class="ahide" id="time">${b.openTime}~${b.closeTime}</td>
-					<td class="ahide" id="storeOwnerPh">${b.storeOwnerPh}</td>
-				</tr>
-			</c:forEach>
+			<tr>
+				<td>Pete</td>
+				<td>4</td>
+				<td>7</td>
+				<td>Oct 10, 2015</td>
+
+			</tr>
+			<tr>
+				<td>Mary</td>
+				<td>5769</td>
+				<td>2517</td>
+				<td>Jan 1, 2014</td>
+			</tr>
 		</table>
-		<div>
-			<button type="button" id="withdraw" onclick="withdraw()">강제
-				활동 정지</button>
-			<button type="button" id="cancel" onclick="cancel()">활동 정지
-				취소</button>
-		</div>
 
 		<script>
 			/* 체크박스 전체선택, 전체해제 */
@@ -432,13 +377,11 @@
 			//이전 버튼 이벤트
 			function fn_prev(page, range, rangeSize) {
 				var categorycode = "";
-				$("input[name='categorycode']:checked").each(
-						function() {
-							categorycode = categorycode
-									+ $(this).val() + ",";
-						});
-				categorycode = categorycode.substring(0,
-						categorycode.lastIndexOf(",")); //맨끝 콤마 지우기
+				$("input[name='categorycode']:checked").each(function() {
+					categorycode = categorycode + $(this).val() + ",";
+				});
+				categorycode = categorycode.substring(0, categorycode
+						.lastIndexOf(",")); //맨끝 콤마 지우기
 				var page = ((range - 2) * rangeSize) + 1;
 				var range = range - 1;
 				var url = "${pageContext.request.contextPath}/admin/store/storelist.do";
@@ -456,13 +399,11 @@
 			//페이지 번호 클릭
 			function fn_pagination(page, range, rangeSize) {
 				var categorycode = "";
-				$("input[name='categorycode']:checked").each(
-						function() {
-							categorycode = categorycode
-									+ $(this).val() + ",";
-						});
-				categorycode = categorycode.substring(0,
-						categorycode.lastIndexOf(",")); //맨끝 콤마 지우기
+				$("input[name='categorycode']:checked").each(function() {
+					categorycode = categorycode + $(this).val() + ",";
+				});
+				categorycode = categorycode.substring(0, categorycode
+						.lastIndexOf(",")); //맨끝 콤마 지우기
 				var url = "${pageContext.request.contextPath}/admin/store/storelist.do";
 				url = url + "?searchType="
 						+ $('#searchType option:selected').val();
@@ -478,13 +419,11 @@
 			//다음 버튼 이벤트
 			function fn_next(page, range, rangeSize) {
 				var categorycode = "";
-				$("input[name='categorycode']:checked").each(
-						function() {
-							categorycode = categorycode
-									+ $(this).val() + ",";
-						});
-				categorycode = categorycode.substring(0,
-						categorycode.lastIndexOf(",")); //맨끝 콤마 지우기
+				$("input[name='categorycode']:checked").each(function() {
+					categorycode = categorycode + $(this).val() + ",";
+				});
+				categorycode = categorycode.substring(0, categorycode
+						.lastIndexOf(",")); //맨끝 콤마 지우기
 				var page = parseInt((range * rangeSize)) + 1;
 				var range = parseInt(range) + 1;
 				var url = "${pageContext.request.contextPath}/admin/store/storelist.do";

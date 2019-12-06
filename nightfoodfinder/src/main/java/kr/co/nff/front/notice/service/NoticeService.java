@@ -10,5 +10,6 @@ public interface NoticeService {
 	List<Notice> selectNotice(Notice notice);
 	void readNotice(Notice notice);
 	int countNewNotice(Notice notice);
-	
+	void deleteNotice(int noticeNo);
+	void deleteAllNotice(Notice notice);
 }

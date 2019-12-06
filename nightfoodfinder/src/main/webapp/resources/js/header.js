@@ -1,5 +1,5 @@
 /**
- * 조건을 선택할 경우
+ * 검색 조건을 선택할 경우
  */
 $(".types").click((e) => {
 	if($(e.target).next().is(":checked") == false) {
@@ -17,13 +17,8 @@ $(".types").click((e) => {
 
 
 
-function presubmit() {
-	console.log($("#sto_search").serialize());
-	let vals = $("input:checkbox[name='categoryCode']").val();
-	for(let i = 0; i < vals.length; i++){
-		console.log(i);
-	}
-}
+
+
 
 
 
