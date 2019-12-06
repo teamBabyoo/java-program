@@ -123,6 +123,10 @@ nav[role=navigation] .store a:before {
 	content: "";
 }
 
+nav[role=navigation] .stat a:before {
+	content: "\f1fe";
+}
+
 nav[role=navigation] .review a:before {
 	content: "";
 }
