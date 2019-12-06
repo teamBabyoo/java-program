@@ -208,8 +208,8 @@
 		 where s.status = 1 <!-- 관리자 허용 된 것만 -->
 		 	<if test="includeClosed != 1"> <!--  현재 영업중인 가게만 볼 때 (1 : 영업끝난가게 포함)  -->
          		<![CDATA[
-         		and str_to_date(s.open_time, '%h:%i') < now()
-            	and str_to_date(s.close_time, '%h:%i') > now()
+         		and str_to_date(s.open_time, '%H:%i') < now()
+            	and str_to_date(s.close_time, '%H:%i') > now()
          		]]>
 			</if>
 			<if test="keyword != null"> <!--  검색어가 있는 경우-->

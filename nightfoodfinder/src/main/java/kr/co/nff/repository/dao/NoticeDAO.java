@@ -16,4 +16,10 @@ public interface NoticeDAO {
 	
 	// 새알림 갯수
 	int countNewNotice(Notice notice);
+	
+	// 알림 삭제
+	void deleteNotice(int noticeNo);
+	
+	// 알림 모두 삭제
+	void deleteAllNotice(Notice notice);
 }
