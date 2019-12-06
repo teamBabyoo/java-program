@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html> 
+<head> 
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" /> 
+  <title>Google Maps Multiple Markers</title> 
+  <script src="http://maps.google.com/maps/api/js?sensor=false" 
+          type="text/javascript"></script>
+</head> 
+<body>
+  <div id="map" style="width: 500px; height: 400px;"></div>
+
+  <script type="text/javascript">
+  // 나온 마커로 중심좌표 찾기
+    var locations = [
+      ['수저가', 37.5493313, 126.937287],
+      ['맛있는집', 37.5529261, 126.937012],
+      ['청석골', 37.5677797, 126.905045],
+      ['가츠벤또', 37.5537907, 126.921552],
+    ];
+    let y = 0;
+    let x = 0;
+    let u = 0;
+    for(u=0; u < locations.length; u++){
+        y += locations[u][1];
+        x += locations[u][2];
+        u = u;
+        console.log(typeof(locations[u][1]));
+        console.log(y);
+    }
+    console.log("yxu입니다 : ", y, x, u);
+    y = y / u;
+    x = x / u;
+
+    console.log("나눈 값", y, x);
+       
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 12,
+      center: new google.maps.LatLng(y, x),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+    for (i = 0; i < locations.length; i++) {  
+      marker = new google.maps.Marker({
+        id:i,
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        map: map
+      });
+
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i][0]);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+      if(marker)
+      {
+        marker.addListener('click', function() {
+          map.setZoom(15);
+          map.setCenter(this.getPosition());
+        });
+        }
+    }
+
+  </script>
+</body>
+</html>
