@@ -31,4 +31,27 @@ public class FrontNoticeController {
 	public void readNoticeAjax(Notice notice) {
 		service.readNotice(notice);
 	}
+
+	/* 알림 갯수 */
+	@RequestMapping("/count_notice.do")
+	@ResponseBody
+	public void countNoticeAjax(Notice notice) {
+		service.countNewNotice(notice);
+	}
+	
+	/* 알림 하나 삭제 */
+	@RequestMapping("/delete_notice.do")
+	@ResponseBody
+	public void deleteNoticeAjax(int noticeNo) {
+		service.deleteNotice(noticeNo);
+	}
+	
+	/* 알림 전부 삭제 */
+	@RequestMapping("/deleteall_notice.do")
+	@ResponseBody
+	public void deleteAllNoticeAjax(Notice notice) {
+		service.deleteAllNotice(notice);
+	}
+	
+	
 }
