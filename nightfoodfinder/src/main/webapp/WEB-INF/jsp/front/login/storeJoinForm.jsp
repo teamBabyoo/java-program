@@ -26,7 +26,7 @@
 		<div class="content">
 
 			<div id="storeJoinForm">
-				<form name="form" id="form" method="post" onclick="/storeJoin.do">
+				<form name="form" id="form" method="post" action="storejoin.do" onsubmit="return validate();">
 					<table>
 						<tr>
 							<th>가게 이름</th>
@@ -61,9 +61,9 @@
 							<th rowspan="4">주소</th>
 						</tr>
 						<tr>
-							<td><input type="text" id="zipNo" name="zipNo" readOnly /> <input
-								type="hidden" id="sggNm" name="sggNm" /> <input type="button"
-								onClick="goPopup();" value="주소찾기" /></td>
+							<td><input type="text" id="zipNo" name="zipNo" readOnly /> 
+							<input type="hidden" id="sggNm" name="sggNm" /> 
+							<input type="button" onClick="goPopup();" value="주소찾기" /></td>
 						</tr>
 						<tr>
 							<td><input type="text" style="width: 300px;"
@@ -131,6 +131,8 @@
 					</table>
 					<input type="hidden" name="openTime"/>
 					<input type="hidden" name="closeTime"/>
+					<input type="hidden" id="entX" name="entX"/>
+					<input type="hidden" id="entY" name="entY"/>
 					<button id="reg_submit">가입하기</button>
 				</form>
 			</div>
@@ -141,44 +143,49 @@
 	function validate() {
 			let openH = $("select[name='openH']").val();
 			let openM = $("select[name='openM']").val();
-			if (openH < 10) {
-				openH = '0' + openH;
-			}
-			if (openM < 10) {
-				openM = '0' + openM;
-			}
-			let closeH = $("select[name='closeH']").val();
-			let closeM = $("select[name='closeM']").val();
-
-			if (closeH < 10) {
-				closeH *= 1;
-				closeH = closeH + 24;
-				closeH += "";
-			
-			}
-			if (closeM < 10) {
-				closeM = '0' + closeM;
-			}
-
+				if (openH < 10) {
+					openH = '0' + openH;
+				}
+				if (openM < 10) {
+					openM = '0' + openM;
+				}
+				let closeH = $("select[name='closeH']").val();
+				let closeM = $("select[name='closeM']").val();
+	
+				if (closeH < 10) {
+					closeH *= 1;
+					closeH = closeH + 24;
+					closeH += "";
+				
+				}
+				if (closeM < 10) {
+					closeM = '0' + closeM;
+				}
 			let openTime = openH + ":" + openM;
 			let closeTime = closeH + ":" + closeM;
 
 			$('input[name="openTime"]').val(openTime);
 			$('input[name="closeTime"]').val(closeTime);
+			}
 			
 //주소입력 팝업부분
 function goPopup(){
-	var pop = window.open("/nightfoodfinder/api/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+	var pop = window.open("/nightfoodfinder/api/addrPop.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
 }
 
-function jusoCallBack(roadFullAddr,zipNo,addrDetail,sggNm){
+function jusoCallBack(roadFullAddr,zipNo,addrDetail,sggNm,entX,entY){
 		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
 		document.form.roadFullAddr.value = roadFullAddr;
 		document.form.addrDetail.value = addrDetail;
 		document.form.zipNo.value = zipNo;
 		document.form.sggNm.value = sggNm;
+		document.form.entX.value = entX;
+		document.form.entY.value = entY;
 	
 }
+
+// 주소 위도경도 변환
+
 
 // 비밀번호 유효성검사
 $("#storePass").blur(function () {
@@ -188,7 +195,7 @@ $("#storePass").blur(function () {
         //alert('숫자+영문자+특수문자 조합으로 8자리 이상 사용해야 합니다.');
         $('#pwChk').text('숫자+영문자+특수문자 조합으로 8자리 이상 사용해야 합니다.');
 		$('#pwChk').css('color', 'red');
-		$("#reg_submit").attr("disabled", true);
+		//$("#reg_submit").attr("disabled", true);
         
         $('#pwChk').val('').focus();
         return false;
@@ -199,7 +206,7 @@ $("#storePass").blur(function () {
        // alert("숫자와 영문자를 혼용하여야 합니다.");
         $('#pwChk').text("숫자와 영문자를 혼용하여야 합니다.");
 		$('#pwChk').css('color', 'red');
-		$("#reg_submit").attr("disabled", true);
+		//$("#reg_submit").attr("disabled", true);
         
         $('#pwChk').val('').focus();
         return false;
@@ -208,7 +215,7 @@ $("#storePass").blur(function () {
         //alert('같은 문자를 4번 이상 사용하실 수 없습니다.');
         $('#pwChk').text('같은 문자를 4번 이상 사용하실 수 없습니다.');
 		$('#pwChk').css('color', 'red');
-		$("#reg_submit").attr("disabled", true);
+		//$("#reg_submit").attr("disabled", true);
         
         $('#pwChk').val('').focus();
         return false;

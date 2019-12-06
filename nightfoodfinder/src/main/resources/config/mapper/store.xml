@@ -195,19 +195,18 @@
 	<!-- 스토어 리스트 -->
 	<select id="storeList" resultType="Store" parameterType="Search">
 		select distinct s.*,
-		a.*,
-		c.category_name as category,
-		ifnull(round(s.store_scope_total / s.review_cnt_total, 1), 0) scope
-		from tb_store s
-		inner join tb_category c
-		on s.store_category =
-		c.category_no
-		left outer join tb_store_menu m
-		on s.store_no = m.store_no
-		inner join tb_address a
-		on s.store_no = a.store_no
-		<where>
-			<if test="includeClosed != 1"> <!--  현재 영업중인 가게만 볼 때 (1 : 영업끝난가게 포함)  -->
+			   a.*,
+			   c.category_name as category,
+			   ifnull(round(s.store_scope_total / s.review_cnt_total, 1), 0) scope
+		  from tb_store s
+		 inner join tb_category c
+		    on s.store_category = c.category_no
+	left outer join tb_store_menu m
+		    on s.store_no = m.store_no
+		 inner join tb_address a
+			on s.store_no = a.store_no
+		 where s.status = 1 <!-- 관리자 허용 된 것만 -->
+		 	<if test="includeClosed != 1"> <!--  현재 영업중인 가게만 볼 때 (1 : 영업끝난가게 포함)  -->
          		<![CDATA[
          		and str_to_date(s.open_time, '%h:%i') < now()
             	and str_to_date(s.close_time, '%h:%i') > now()
@@ -237,7 +236,6 @@
 					#{p}
 				</foreach>
 			</if>
-		</where>
 		<choose>
 			<when test="filter == 'scope'">  <!-- 평점순 -->
 				order by scope desc

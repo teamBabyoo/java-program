@@ -16,8 +16,12 @@ public class Store {
 	private int storeCategory;
 	private String openTime;
 	private String closeTime;
+	
 	private String city;
 	private String streetLoad;
+	private String sggNm;
+	private String roadFullAddr;
+	
 	private String storeContent;
 	private Date regDate;
 	private String menu;
@@ -31,8 +35,8 @@ public class Store {
 	private String storeOwner;
 	private String storeOwnerPh;
 	
-	private String latitude;
-	private String longitude;
+	private String entX;
+	private String entY;
 	private String storeJoinDate;
 	private int storeScopeTotal;	// 전체 평점
 	private int reviewCntTotal;		// 리뷰 갯수

@@ -2,7 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.nff.repository.dao.LoginDAO">
+<resultMap type="Store" id="storeMap">
+		<result column="store_no" property="storeNo" />
+		<result column="store_name" property="storeName" />
+		<result column="store_email" property="storeEmail" />
+		<result column="store_pass" property="storePass" />
+		<result column="store_tell" property="storeTell" />
+		<result column="store_category" property="storeCategory" />
+		<result column="open_time" property="openTime" />
+		<result column="close_time" property="closeTime" />
+		<result column="status" property="status" />
+		<result column="business_num" property="businessNum" />
+		<result column="store_owner" property="storeOwner" />
+		<result column="store_owner_ph" property="storeOwnerPh" />
+		<result column="latitude" property="latitude" />
+		<result column="longitude" property="longitude" />
+		<result column="store_join_date" property="storeJoinDate" />
+		<result column="price_type" property="priceType" />
+		<result column="see_cnt" property="seeCnt" />
+		<result column="store_scope_total" property="storeScopeTotal" />
+		<result column="review_cnt_total" property="reviewCntTotal" />
 
+		<collection property="holidayList" column="store_no"
+			select="selectHolidayListByStoreNo" />
+	</resultMap>
+	
 	<!-- 일반회원 가입(naver) -->
 	<insert id="insertNaverUser" parameterType="User" >
 		insert into tb_user (user_id, user_name, user_email, user_gender, user_age) values
@@ -21,25 +45,47 @@
 	</select>
 	
 	<!-- 가게 회원가입(휴일 제외 정보 insert) -->
-	<insert id="storeUpdateInfo" parameterType="Store">
+	<insert id="insertStore" parameterType="Store">
 		insert into tb_store 
-			(store_name, business_num, store_email, store_pass, store_tell,
-				) values (#{storeName}, #{business_num}, #{store_email}, #{store_pass}, #{store_tell})
+			(
+			store_name, business_num, store_email, 
+			store_pass, store_tell, store_category, 
+			open_time, close_time,
+			store_owner, store_owner_ph
+			) values (
+			#{storeName}, #{businessNum}, #{storeEmail}, 
+			#{storePass}, #{storeTell}, #{storeCategory},
+			#{openTime},#{closeTime}, #{storeOwner},#{storeOwnerPh}
+			)
 	</insert>
+	
 	<!-- 가게 회원가입(휴일 정보 insert) -->
-	<insert id="updateHoliday" parameterType="Store">
-		<if test="day != null">
-			INSERT INTO tb_holiday (week_no, store_no) VALUES
+	<insert id="insertHoliday" parameterType="Store">
+		<selectKey keyProperty="storeNo" resultType="int" order="BEFORE">
+			select max(store_no) from tb_store 
+		</selectKey>
+			INSERT INTO tb_holiday VALUES
 			<foreach collection="day" item="weekNo" separator=",">
-				(#{weekNo}, #{storeNo})
+				(#{weekNo}, #{storeNo} )
 			</foreach>
-		</if>
 	</insert>
+	
+	<!-- 가게 회원가입(주소정보 insert) -->
+	<insert id="insertAddress" parameterType="Store">
+		<selectKey keyProperty="storeNo" resultType="int" order="BEFORE">
+			select max(store_no) from tb_store 
+		</selectKey>
+		insert into tb_address values 
+			(#{storeNo}, #{sggNm}, #{roadFullAddr}, #{entX}, #{entY})
+	</insert>
+	
 	
 	<select id="selectLoginOneUser" parameterType="String" resultType="User">
 	 select * 
 	  from tb_user
 	  where user_id = #{userId}
 	</select>
+	
+	
 	
 </mapper>  

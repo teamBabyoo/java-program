@@ -39,7 +39,7 @@
 										<ul class="clearboth">
 										<li><a href="https://twitter.com/intent/tweet?text=심야식당 서울 강동구 강동대로 205 (출처 : 심야식당)&url=http://www.naver.com" target="_blank"><img src="${pageContext.request.contextPath }/resources/images/f_twitter.png" /></a></li>
 										<li><a href="http://www.facebook.com/sharer/sharer.php?u=naver.com" target="_blank"><img src="${pageContext.request.contextPath }/resources/images/icon_facebookS.png" /></a></li>
-										<li><a href="#"><img src="${pageContext.request.contextPath }/resources/images/icon_kakao.png" />카카오톡</a></li>
+										<li><a href="#" id="kakao-link-btn" href="javascript:;"><img src="${pageContext.request.contextPath }/resources/images/icon_kakao.png" />카카오톡</a></li>
 									</ul>
 									<div class="clearboth"><p class="ellipsis">https://app.slack.com/client/TPPHA763F/CPPH24F16/files/FPJQPCU4R</p><a href="#" id="copyclip">복사</a></div>
 								</div>
@@ -196,5 +196,20 @@
 	 let userNo = ${user.userNo};
 	</script>
 	<script src="<c:url value='/resources/js/storedetail.js' />"></script>
+	<script type='text/javascript'>
+	  //<![CDATA[
+	    // // 사용할 앱의 JavaScript 키를 설정해 주세요.
+	    Kakao.init('1a3bc389425e8dd17496e8a2a68ed3a4');
+	    // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
+	    Kakao.Link.createCustomButton({
+	      container: '#kakao-link-btn',
+	      templateId: 19523,
+	      templateArgs: {
+	        'title': '제목 영역입니다.',
+	        'description': '설명 영역입니다.'
+	      }
+	    });
+	  //]]>
+	</script>
 </body>
 </html>

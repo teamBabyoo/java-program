@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.nff.front.main.service.MainService;
 import kr.co.nff.repository.vo.Category;
+import kr.co.nff.repository.vo.Notice;
 import kr.co.nff.repository.vo.Store;
+import kr.co.nff.repository.vo.User;
 
 @Controller
 @RequestMapping("/front/main")
@@ -33,5 +35,6 @@ public class FrontMainController {
 		model.addAttribute("sList", service.mainStoreList());
 		List<Store> mList = service.mainStoreList();
 //		System.out.println(mList.size());
+		
 	}
 }

@@ -12,9 +12,11 @@ public class LoginServiceImpl implements LoginService {
 	@Autowired
 	private LoginDAO dao;
 	
-	public void insertStore(Store store) {
-	
-		dao.insertStore(store);
+	public void joinStore(Store store) {
+		dao.insertStore(store);		
+		dao.insertAddress(store);
+		dao.insertHoliday(store);
+		
 	}
 	
 	public Store selectUserInfoByName(String storeName) {
@@ -36,5 +38,7 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public User selectLoginOneUser(String userId) {
 		return dao.selectLoginOneUser(userId);
-	};
+	}
+
+
 }
