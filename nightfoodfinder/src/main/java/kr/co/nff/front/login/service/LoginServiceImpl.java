@@ -34,10 +34,10 @@ public class LoginServiceImpl implements LoginService {
 		return dao.selectNaver(user);
 	}
 
-	@Override
-	public User selectLoginOneUser(String userId) {
-		return dao.selectLoginOneUser(userId);
-	}
+//	@Override
+//	public User selectLoginOneUser(String userId) {
+//		return dao.selectLoginOneUser(userId);
+//	}
 
 	@Override
 	public int storeEmailChk(String storeEmail) {

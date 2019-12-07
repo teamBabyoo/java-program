@@ -55,5 +55,8 @@ public interface StoreService {
 	public int frequentDelete(Store store);
 	
 	
+	// 사장 답글 
+	public List<Review> insertRecomment(Review review);
+	public List<Review> deleteRecomment(Review review);
 }
 

@@ -71,7 +71,7 @@
 			<li class="review"><a href="#">리뷰관리</a>
 				<ul>
 				<li><a class="review_all" href="${pageContext.request.contextPath}/admin/review/reviewlist.do">전체리뷰</a></li>
-                <li><a class="review_report" href="#">신고리뷰</a></li>
+                <li><a class="review_report" href="${pageContext.request.contextPath}/admin/review/reportedreviewlist.do">신고리뷰</a></li>
             </ul>
         </li>
    

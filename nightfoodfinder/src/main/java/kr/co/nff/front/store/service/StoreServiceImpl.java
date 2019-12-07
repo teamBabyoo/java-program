@@ -117,4 +117,16 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	
+	
+	// 사장 답글 등록, 수정
+	public List<Review> insertRecomment(Review review) {
+		dao.insertRecomment(review);
+		return dao.selectReview(review);
+		}
+
+	// 사장 답글 삭제
+	public List<Review> deleteRecomment(Review review) {
+		dao.deleteRecomment(review.getReviewNo());
+		return dao.selectReview(review);
+	}
 }

@@ -41,7 +41,7 @@ public class FrontStoreController {
 	@RequestMapping("/storedetail.do")
 	public void storeDetail(Model model, int no, HttpServletRequest req) {
 		HttpSession session = req.getSession();
-//		System.out.println("로그인한 유저: " + session.getAttribute("loginUser"));
+		System.out.println("로그인한 유저: " + session.getAttribute("loginUser"));
 		model.addAttribute("store", service.storeDetail(no));
 		model.addAttribute("menu", service.storeMenu(no));
 		model.addAttribute("holidaylist", service.storeHoliday(no));
@@ -143,7 +143,7 @@ public class FrontStoreController {
 //      model.addAttribute("list", service.reviewRegist(review));
 		System.out.println("--------------------------------------");
 		System.out.println("내용 : " + review.getReviewContent());
-		System.out.println("답댓 : " + review.getReComment());
+		System.out.println("답댓 : " + review.getRecomment());
 		System.out.println("스코프 : " + review.getStoreScope());
         System.out.println("게시글번호 확인" + review.getStoreNo());
         System.out.println("--------------------------------------");
@@ -225,6 +225,20 @@ public class FrontStoreController {
 	};
 	
 	
+	/*사장 답글*/
+	@RequestMapping("/recomment_regist.do")
+	@ResponseBody
+	public List<Review> insertrecomment(Review review) {
+		service.insertRecomment(review);
+		return service.reviewList(review);
+	}
+		
+	@RequestMapping("/recomment_delete.do")
+	@ResponseBody
+	public List<Review> deleteRecomment(Review review) {
+		service.deleteRecomment(review);
+		return service.reviewList(review);
+	}
 
 	
 }

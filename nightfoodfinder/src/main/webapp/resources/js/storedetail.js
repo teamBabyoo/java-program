@@ -139,7 +139,12 @@ function makeReviewList(list){
 			let html = "";
 			html += `<div class="user_rv best_rv">
 				  <div class="tenten">
-			  	<button type="button" class="report" value="${r.reviewNo}">신고하기</button>  
+			  	<button type="button" class="report" value="${r.reviewNo}">신고하기</button>`
+			  	if (r.recomment == null){
+					html += `
+				<button type="button" class="reComment" data-no="${r.reviewNo}" onclick="makeform(this)">답장하기</button>`;
+				}
+		html+= `
 			  </div>
             <ul class="clearboth">
                 <li>
@@ -166,6 +171,26 @@ function makeReviewList(list){
 	                </li>
 	            </ul>
 	        </div>`;
+			
+			// 답글 내용
+			if (r.recomment != null) {
+				html += `
+				<table>
+					<tr id="row${r.reviewNo}">
+					<td>${r.recomment}</td>
+					<td>${r.reCommentRegDate}</td>
+					<td><button type="button" data-no="${r.reviewNo}" class="delRecomment">삭제</button>	
+						<button type="button" data-no="${r.reviewNo}" class="modRecomment">수정</button>	
+					</td>
+					</tr>
+					</table>`;
+			}
+			
+			// 답글 등록 폼
+			html += `<div id="bossComment${r.reviewNo}" class="bossComment" data-rno="${r.reviewNo}">
+
+					</div>	
+	        `;
 			$tbl.append(html);
 				
 		}
@@ -174,7 +199,12 @@ function makeReviewList(list){
 			html += `
 			<div class="user_rv">
 				<div class="tenten">
-					<button type="button" class="report"  value="${r.reviewNo}">신고하기</button>
+					<button type="button" class="report"  value="${r.reviewNo}">신고하기</button>`
+			  	if (r.recomment == null){
+					html += `
+				<button type="button" class="reComment" data-no="${r.reviewNo}" onclick="makeform(this)">답장하기</button>`;
+				}
+		html+= `
 				</div>
                 <ul class="clearboth">
                     <li>
@@ -197,6 +227,27 @@ function makeReviewList(list){
                     </li>
                 </ul>
             </div>`;
+			
+			// 답글 내용
+            if (r.recomment != null) {
+				html += `
+					<table>
+					<tr id="row${r.reviewNo}">
+					<td>${r.recomment}</td>
+					<td>${r.reCommentRegDate}</td>
+					<td><button type="button" data-no="${r.reviewNo}" class="delRecomment">삭제</button>	
+						<button type="button" data-no="${r.reviewNo}" class="modRecomment">수정</button>	
+					</td>
+					</tr>
+					</table>`;
+			}
+	        
+	        	
+			// 답글 등록 폼 들어가는 거
+			html += `<div id="bossComment${r.reviewNo}" class="bossComment" data-rno="${r.reviewNo}">
+
+					</div>
+            `;
 			$tbl.append(html);
 			
 			/*
@@ -491,5 +542,120 @@ $(document).on('click', '.heartclick', function(e){
 });	
 	
 
+
+/*사장 답글*/
+
+//답글 등록 폼 보이기
+
+function makeform(a) {
+	var rno = $(a).attr("data-no");	// 리뷰 넘버
+	
+	console.log(rno);
+	$(".bossComment").empty();
+	
+	$("#bossComment" + rno).append(
+		`<form id="bossCForm" method="post" action="recomment_regist.do">
+		<table>
+		<tr id="bossform" data-rno="${rno}">
+		<td>
+		<div>
+		<textarea id="bossContent" class="bossContent" ></textarea>
+		</div>
+		</td>
+		<td colspan="2"> 
+			
+          <button type="button" id="insertid" data-rno="${rno}" class="insert" onclick="recommentSubmit(this)">확인</button>
+          <button type="button" data-rno="${rno}" class="onecancel" onclick="onecancel(this)">취소</button>
+          
+          
+            	</td>
+            </tr>
+            </table> </form>`
+		);
+}
+
+
+//답글 등록
+function recommentSubmit(a) {
+	var rno = $(a).attr("data-rno");
+
+		$.post({
+			url: "recomment_regist.do",
+			data: {storeNo, reviewNo: rno, recomment : $("#bossContent").val() },
+			success: (list) => makeReviewList(list), 
+			error: () => console.log("에러")
+		});		
+}
+//답글 등록 폼 취소
+function onecancel(a) {
+	let rno = $(a).attr("data-rno");
+	$("#bossComment" + rno).empty();
+}
+
+//답글 삭제
+$("#targetContainer").on("click", "button.delRecomment", (e) => {
+	$.getJSON({
+		
+		url: "recomment_delete.do",
+		data: {reviewNo: $(e.target).data("no"), storeNo },
+		success: (list) => makeReviewList(list),
+		error: () => console.log("에러")
+	});
+});
+
+//답글 수정 폼 보이기
+
+$("#targetContainer").on("click", "button.modRecomment", (e) => {
+	let rno = $(e.target).data("no");
+	$("#targetContainer tr[id^=row]").show();
+	$("#targetContainer tr[id^=modRow]").remove();
+	var modContent = $(`#row${rno} > td:eq(0)`).text();
+	var modRegDate = $(`#row${rno} > td:eq(1)`).text();
+	var html = `
+	<table>
+	<tr id="modRow${rno}">
+    	<td>${modRegDate}</td>
+    	<td>
+    		<div class="form-group">
+    			<textarea name="content" id="modbossContent" value="${modContent}" class="form-control input-wp2" placeholder="내용을 입력하세요"></textarea>
+    		</div>
+    	</td>
+    	<td colspan="2"> 
+    		<a href="#" data-rno="${rno}" class="updatetwo" role="button">수정</a>
+    		<a href="#" data-rno="${rno}" class="canceltwo" role="button">취소</a>
+    	</td>
+    </tr>
+    </table>`;
+$("#row" + rno).after(html);	
+$("#row" + rno).hide();
+	
+});
+
+//답글 수정
+$("#targetContainer").on("click", "a.updatetwo", (e) => {
+	e.preventDefault();
+	let rno = $(e.target).data("rno");
+	$.ajax({
+		url: "recomment_regist.do",
+		type: "POST",
+		data: {
+			storeNo,
+			reviewNo : rno,
+			recomment : $("#modbossContent").val() 
+			},
+		dataType: "json",
+		success: result => makeReviewList(result)
+			
+	});
+});
+
+
+//수정 등록 폼 취소
+$("#targetContainer").on("click", "a.canceltwo", (e) => {
+	e.preventDefault();
+	let rno = $(e.target).data("rno");
+	$("#row" + rno).show();
+	$("#modRow" + rno).remove();
+});
 
 

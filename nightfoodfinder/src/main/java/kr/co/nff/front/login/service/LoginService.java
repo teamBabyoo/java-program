@@ -22,5 +22,5 @@ public interface LoginService {
 	int selectNaver(User user);
 	
 	//로그인한 유저 정보
-	User selectLoginOneUser(String userId);
+//	User selectLoginOneUser(String userId);
 }

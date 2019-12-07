@@ -449,6 +449,8 @@
 				r.review_no,
 				r.reg_date,
 				r.store_scope,
+				r.recomment,
+				r.recomment_reg_date,
 				ifnull(l.likeit, 0) as good,
                 ifnull(li.store_review_no,0) as mylikecheck
 		from tb_review r
@@ -574,4 +576,22 @@
 
 
 
+	<!-- 사장 답글 -->
+
+	<!-- 사장 답글 등록, 수정 -->
+	<select id="insertRecomment" parameterType="Review">
+		update tb_review
+		set recomment = #{recomment},
+			recomment_reg_date = now()
+		where review_no = #{reviewNo}
+	
+	</select>
+
+	<!-- 사장 답글 삭제 -->
+	<select id="deleteRecomment" parameterType="int">
+		update tb_review 
+			set recomment = null
+		where review_no = #{reviewNo}
+	
+	</select>
 </mapper>

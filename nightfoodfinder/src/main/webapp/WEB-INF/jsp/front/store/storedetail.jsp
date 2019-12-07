@@ -192,7 +192,7 @@
 	 let storeNo = ${store.storeNo};
 	 let storeScope = "";
 	 let fileGroupCode = null;
-	 let recomment = null;
+//	 let recomment = null;
 	 let userNo = ${user.userNo};
 	</script>
 	<script src="<c:url value='/resources/js/storedetail.js' />"></script>
