@@ -11,6 +11,7 @@ import kr.co.nff.front.notice.service.NoticeService;
 import kr.co.nff.repository.vo.Notice;
 
 @Controller("kr.co.nff.front.notice.controller.FrontNoticeController")
+@RequestMapping("/front/main")
 public class FrontNoticeController {
 	
 	@Autowired
