@@ -17,10 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
 import kr.co.nff.front.login.service.LoginService;
-//import kr.co.nff.front.notice.service.NoticeService;
+import kr.co.nff.front.notice.service.NoticeService;
 import kr.co.nff.login.naver.oauth.bo.NaverLoginBO;
 import kr.co.nff.login.naver.oauth.model.JsonParser;
-//import kr.co.nff.repository.vo.Notice;
+import kr.co.nff.repository.vo.Notice;
 import kr.co.nff.repository.vo.Store;
 import kr.co.nff.repository.vo.User;
 
