@@ -65,5 +65,22 @@ $(document).ready(function() {
     // 상세페이지 공유탭 클릭
     $('.tab_share').click((e) => {
         $('.sharePop.hidden').removeClass('hidden');
-    });    
+    });
+    
+    // btnTop
+    var btn = $('#btnTop');
+
+    $(window).scroll(function() {
+      if ($(window).scrollTop() > 300) {
+        btn.addClass('show');
+      } else {
+        btn.removeClass('show');
+      }
+    });
+
+    btn.on('click', function(e) {
+      e.preventDefault();
+      $('html, body').animate({scrollTop:0}, '300');
+    });
+    // --------- btnTop 끝
 });

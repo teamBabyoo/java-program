@@ -184,6 +184,45 @@ div#commentplace > * { width: 100%; margin: 0 auto; }
 .detail_wrap .leave_rv li:nth-child(3) button:hover { border-color: #ea9c5f; color: #ea9c5f; }
 
 .detail_wrap .best_rv { border: 1px solid#ea9c5f !important; }
+
+
+/* 탑버튼 */
+#btnTop {
+  display: inline-block;
+  background-color: #FF9800;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-radius: 4px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  transition: background-color .3s, 
+    opacity .5s, visibility .5s;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+}
+#btnTop::after {
+  content: "\f077";
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 2em;
+  line-height: 50px;
+  color: #fff;
+}
+#btnTop:hover {
+  cursor: pointer;
+  background-color: #333;
+}
+#btnTop:active {
+  background-color: #555;
+}
+#btnTop.show {
+  opacity: 1;
+  visibility: visible;
+}
 /** 지인  끝 **/
 
 
