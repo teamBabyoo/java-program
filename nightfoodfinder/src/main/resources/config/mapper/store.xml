@@ -475,9 +475,9 @@
 	<!-- 리뷰 등록 -->
 	<insert id="registReview" parameterType="Review">
 		INSERT INTO tb_review (
-		store_no, user_no, review_content, reg_date, store_scope, file_group_code
+		store_no, writer_no, review_content, reg_date, store_scope, file_group_code
 		) VALUES (
-		#{storeNo}, 6, #{reviewContent}, NOW(), #{storeScope}, #{fileGroupCode}
+		#{storeNo}, #{userNo}, #{reviewContent}, NOW(), #{storeScope}, #{fileGroupCode}
 		)
 	</insert>
 

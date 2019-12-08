@@ -111,7 +111,6 @@ public class FrontStoreController {
 	/* 리뷰 작성 & 이미지 업로드 */
 	@RequestMapping("/review_regist.do")
 	@ResponseBody
-//	public List<Review> reviewRegistAjax(Review review, MultipartHttpServletRequest mtfRequest) {
 	public List<Review> reviewRegistAjax(Review review, List<MultipartFile> attach) throws Exception, IOException {
 		System.out.println("리뷰등록 시도");
 /*		
@@ -142,6 +141,7 @@ public class FrontStoreController {
 */
 //      model.addAttribute("list", service.reviewRegist(review));
 		System.out.println("--------------------------------------");
+		System.out.println("작성자 : " + review.getWriterNo());
 		System.out.println("내용 : " + review.getReviewContent());
 		System.out.println("답댓 : " + review.getRecomment());
 		System.out.println("스코프 : " + review.getStoreScope());

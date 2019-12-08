@@ -17,6 +17,7 @@
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 	
 		<div id="storedetail" class="content clearboth">
+			<div id="btnTop"></div>
 			<div id="pictureplace"></div>
 			
 			<div id="detaillistjs">
@@ -38,7 +39,7 @@
 									<div class="sharePop hidden">
 										<ul class="clearboth">
 										<li><a href="https://twitter.com/intent/tweet?text=심야식당 서울 강동구 강동대로 205 (출처 : 심야식당)&url=http://www.naver.com" target="_blank"><img src="${pageContext.request.contextPath }/resources/images/f_twitter.png" /></a></li>
-										<li><a href="http://www.facebook.com/sharer/sharer.php?u=naver.com" target="_blank"><img src="${pageContext.request.contextPath }/resources/images/icon_facebookS.png" /></a></li>
+										<li><a href="http://www.facebook.com/sharer/sharer.php?u=http://naver.com" target="_blank"><img src="${pageContext.request.contextPath }/resources/images/icon_facebookS.png" /></a></li>
 										<li><a href="#" id="kakao-link-btn" href="javascript:;"><img src="${pageContext.request.contextPath }/resources/images/icon_kakao.png" />카카오톡</a></li>
 									</ul>
 									<div class="clearboth"><p class="ellipsis">https://app.slack.com/client/TPPHA763F/CPPH24F16/files/FPJQPCU4R</p><a href="#" id="copyclip">복사</a></div>
@@ -193,7 +194,10 @@
 	 let storeScope = "";
 	 let fileGroupCode = null;
 //	 let recomment = null;
-	 let userNo = ${user.userNo};
+//	 let userNo = ${user.userNo};
+	 let userNo = 43;
+	 console.log("userNo: ", userNo);
+	 console.log("storeNo: ", storeNo);
 	</script>
 	<script src="<c:url value='/resources/js/storedetail.js' />"></script>
 	<script type='text/javascript'>

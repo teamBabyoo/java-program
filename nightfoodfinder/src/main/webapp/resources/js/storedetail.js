@@ -288,12 +288,12 @@ function reposition() {
 	let $height_header = $('header').height();
 	let $height_content = $('.content').height();
 	let $top_footer = $('footer').offset().top;
-//	let $height_leave_rv = $('.leave_rv').height
+	let $height_leave_rv = $('.leave_rv').height
 //	console.log('$height_content', $height_content);
 //	console.log('$height_header ->', $height_header);
 //	console.log('$top_footer ->', $top_footer);
-//	$('footer').css('top', $height_header + $height_content + $height_leave_rv);
-//	$('footer').css('top', $height_header + $height_content);
+	$('footer').css('top', $height_header + $height_content + $height_leave_rv);
+	$('footer').css('top', $height_header + $height_content);
 }
 
 
@@ -302,23 +302,9 @@ function reposition() {
  * 댓글 등록
  * @returns
  */
-/*
 function registReview() {
 	let reviewContent = $('textarea[name="reviewContent"]').val();
-	console.log(storeNo, reviewContent, storeScope, attach);
-	$.post({
-		url: "review_regist.do",
-		data: {storeNo, reviewContent, storeScope, attach},
-		dataType: "json",
-		success: (list) => reviewListAjax(list)
-	});
-	$("textarea").val("");
-	return false;
-};
-*/
-function registReview() {
-	let reviewContent = $('textarea[name="reviewContent"]').val();
-	let form = $('#reviewForm')[0];
+	let form = $('#reviewForm');
 	let data = new FormData(form);
 	$.ajax({
 		type: "POST",
@@ -383,6 +369,7 @@ $('#scopePannel > a').click(function(e) {
 	e.preventDefault();
 	// storeScope --> n점 (n번째 별)
 	storeScope = parseInt($(e.target).attr('data-rscope'));
+	console.log("현재별점: ", storeScope);
 	// 현재 클릭한 별의 형제 요소의 길이만큼 반복문 돌리며 rscope값이 작을 경우 색상변경(e.target 포함)
 	for (let i = 0; i < $(e.target).siblings().length; i++) {
 		let $sibling = $(e.target).siblings().eq(i);
@@ -398,6 +385,19 @@ $('#scopePannel > a').click(function(e) {
 	}
 });
 
+/**
+ * 공유하기
+ * @returns
+ */
+function copyText(text) {
+	var temp = document.createElement('input');
+	document.body.appendChild(temp);
+	temp.vale = text;
+	temp.select();
+	document.execCommand('Copy');
+	document.body.removeChild(temp);
+	alert('클립보드로 복사되었습니다.');
+}
 $(document).ready(function() {
 	reviewListAjax();
 	// 상세페이지 (리뷰)
@@ -407,7 +407,11 @@ $(document).ready(function() {
 		$('.leave_rv').slideToggle();
 	});
 */	
-
+	$('.sharePop p').html(location.href);
+	
+	$('#copyclip').on('click', function() {
+		copyText(location.href);
+	});
 	
 });
 
