@@ -194,6 +194,7 @@
 	 let fileGroupCode = null;
 //	 let recomment = null;
 	 let userNo = ${user.userNo};
+// 	let userNo = 7;
 	</script>
 	<script src="<c:url value='/resources/js/storedetail.js' />"></script>
 	<script type='text/javascript'>

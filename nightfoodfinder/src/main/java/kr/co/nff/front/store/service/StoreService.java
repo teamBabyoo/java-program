@@ -58,5 +58,8 @@ public interface StoreService {
 	// 사장 답글 
 	public List<Review> insertRecomment(Review review);
 	public List<Review> deleteRecomment(Review review);
+	
+	//리뷰 페이징 처리를 위한
+	public int getReviewCnt(int no);
 }
 

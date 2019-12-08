@@ -129,4 +129,10 @@ public class StoreServiceImpl implements StoreService {
 		dao.deleteRecomment(review.getReviewNo());
 		return dao.selectReview(review);
 	}
+	
+	
+	//리뷰 페이징을 위한
+	public int getReviewCnt(int no) {
+		return dao.getReviewCnt(no);
+	}
 }

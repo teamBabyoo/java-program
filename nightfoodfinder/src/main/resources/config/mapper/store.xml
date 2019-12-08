@@ -468,7 +468,7 @@
 		where r.store_no = #{storeNo}
 		order by r.review_no desc
  
-		<!-- LIMIT #{startList}, #{listSize} -->
+		<!-- LIMIT #{startList}, #{listSize} --> 
 	</select>
 	<!-- -->
 
@@ -594,4 +594,17 @@
 		where review_no = #{reviewNo}
 	
 	</select>
+	
+	
+	
+	<!-- 리뷰 페이징 처리 -->
+	<select id="getReviewCnt" parameterType="int" resultType="int">
+		select count(*)
+		  from tb_review
+		  where store_no = #{StoreNo}
+	</select>
+	
+	
+	
+	
 </mapper>

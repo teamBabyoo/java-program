@@ -82,4 +82,8 @@ public interface StoreDAO {
 	// 사장 답글 삭제
 	void deleteRecomment(int reviewNo);
 	
+	
+	
+	//리뷰페이징을 위한 
+	int getReviewCnt(int no);
 }
