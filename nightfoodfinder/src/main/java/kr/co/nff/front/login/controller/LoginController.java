@@ -31,27 +31,12 @@ public class LoginController {
 	
 //	@Autowired
 	
-	//유저 가입
-	@RequestMapping("/userjoin.do")
-	public void userJoin() {}
-	
-	//유저 로그인
-	@RequestMapping("/userlogin.do")
-	public void userLogin() {}
-	
-	//유저 로그아웃
-	@RequestMapping("/userlogout.do")
-	public void userLogout() {}
-	
-	//유저 정보 업데이트
-	@RequestMapping("/userupdate.do")
-	public void userUpdate() {}
-	
 	//유저 상세 내용
 	@RequestMapping("/userdetail.do")
 	public void userDetail() {}
 	
-//----------------------------
+//카카오 로그인
+	
 	
 //네이버 로그인
 
@@ -89,29 +74,18 @@ public class LoginController {
     				HttpSession session, User vo)
             throws Exception {
     	
-    	System.out.println("여기는 callback");
+    	//System.out.println("여기는 callback");
     	OAuth2AccessToken oauthToken;
     	oauthToken = naverLoginBO.getAccessToken(session, code, state);
     	
     	//1. 로그인 사용자 정보를 읽어온다.
     	apiResult = naverLoginBO.getUserProfile(oauthToken); //String형식의 json데이터
-    	/** 
-    	apiResult json 구조
-    	{"resultcode":"00",
-    	"message":"success",
-    	"response":{
-    		"id":"5884525",
-    		"age":"30-39",
-    		"gender":"F",
-    		"email":"pang103@naver.com",
-    		"name":"\uc1a1\ubcf4\ub984"}}
-    	**/
     	JsonParser json = new JsonParser();
     	vo = json.changeJson(apiResult);
     	
     	
     	if (loginservice.selectNaver(vo) > 0) { // 세션만들기
-			session.setAttribute("login", vo);
+			session.setAttribute("loginUser", vo);
 			
 			// 로그인되는 유저 
 //			User loginUser = (User)loginservice.selectLoginOneUser(vo.getUserId());
@@ -132,7 +106,7 @@ public class LoginController {
 //			System.out.println(loginservice.selectLoginOneUser(vo.getUserId()));
 		} else {
 			loginservice.insertNaverUser(vo);
-			session.setAttribute("login", vo);
+			session.setAttribute("loginUser", vo);
 		}
     	
     	//"front/login/ncallback"
@@ -182,7 +156,7 @@ public class LoginController {
 		if(store == null) {
 			return "redirect:/front/login/userLoginForm.do";
 		}
-		session.setAttribute("login", store);
+		session.setAttribute("loginStore", store);
 		System.out.println("스토어 로그인 성공");
 		return "redirect:/front/main/main.do";
 		

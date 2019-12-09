@@ -85,28 +85,37 @@
 		<div class="pop_person nMember hidden">
 	        <div class="topshape"></div>
 	        <c:choose>
-	        <c:when test="${login == null}">
+	        <c:when test="${loginUser != null}">
 	        <div>
-				로그인 후<br />
-				이용 가능합니다
+				MY PAGE
+	        </div>
+	        </c:when>
+	        <c:when test="${loginStore != null}">
+	        <div>
+				MY PAGE
 	        </div>
 	        </c:when>
 	        <c:otherwise>
 	        <div>
-	        	MY PAGE
+	        	로그인 후<br />
+				이용 가능합니다
 	        </div>
 	        </c:otherwise>
 	        </c:choose>
 	        <div>
 	           <c:choose>
-				<c:when test="${login != null}">
+				<c:when test="${loginUser != null}">
+				<ul>
+					<li><a href="${pageContext.request.contextPath}/front/login/logout.do">로그아웃</a></li>
+				</ul>
+				</c:when>
+				<c:when test="${loginStore != null}">
 				<ul>
 					<li><a href="${pageContext.request.contextPath}/front/login/logout.do">로그아웃</a></li>
 				</ul>
 				</c:when>
 				<c:otherwise>
 	            <ul>
-	           		
 	                <li><a href="${pageContext.request.contextPath}/front/login/userLoginForm.do">로그인하기</a></li>
 	            </ul>
 				</c:otherwise>
