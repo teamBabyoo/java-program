@@ -34,6 +34,7 @@ public class Store {
 	private int businessNum;
 	private String storeOwner;
 	private String storeOwnerPh;
+	private int frequentCnt; // 단골 수
 	
 	private String entX;
 	private String entY;
