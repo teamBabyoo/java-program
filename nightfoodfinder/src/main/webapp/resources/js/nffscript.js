@@ -53,13 +53,22 @@ $(document).ready(function() {
         }
     });
     
-    // 로그인 띄우기
+    // 로그인 띄우기, 알림팝업 띄우기
     $('#person_btn').click((e) => {
         $('.bgbox').addClass('active');
         $('#person_btn .pop_person.hidden').removeClass('hidden');
         $('.bgbox.active').click((e) => {
             $('.bgbox').removeClass('active');
             $('#person_btn .pop_person').addClass('hidden');
+        })
+    });
+    
+    $('#notice_btn').click((e) => {
+        $('.bgbox').addClass('active');
+        $('#notice_btn .notice_list_box.hidden').removeClass('hidden');
+        $('.bgbox.active').click((e) => {
+            $('.bgbox').removeClass('active');
+            $('#notice_btn .notice_list_box').addClass('hidden');
         })
     });
     // 상세페이지 공유탭 클릭
