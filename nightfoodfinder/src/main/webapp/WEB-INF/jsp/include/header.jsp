@@ -80,11 +80,13 @@
         <li><a href="#">내주변맛집</a></li>
         <li><a href="#">NFF Awards</a></li>
         <li id="notice_btn"><i class="fa fa-bell-o" aria-hidden="true"></i>
+        	<!-- 새 알림 갯수 뿌려줄 span -->
+        	<span class="newnotice"></span>
         	<!-- 알림 리스트 나올 div -->
         	<div class="notice_list_box hidden">
 	        	<div class="topshape"></div>
 	        	<div>
-	        		
+	        		gggggggggggg
 	        	</div>
         	</div>
         </li>
@@ -135,7 +137,4 @@
       </ul>
     </div>
   </header>
-  <script>
-  let userNo = ${session.user.userNo};
-  </script>
   <script src='${pageContext.request.contextPath}/resources/js/header.js' ></script>
