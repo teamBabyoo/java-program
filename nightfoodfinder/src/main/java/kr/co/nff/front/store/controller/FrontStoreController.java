@@ -86,17 +86,15 @@ public class FrontStoreController {
 		System.out.println("리뷰 내 유저 번호 : " + review.getUserNo());
 		System.out.println("리뷰 스토어 번호 : " + review.getStoreNo());
 		*/
-		if(review.getPage() == 0) {
-			review.setPage(1);
-			review.setRange(1);
-		}
 
 		review.setListCnt(service.getReviewCnt(review.getStoreNo()));
-		System.out.println("페이지넘버: " +review.getPage());
-		System.out.println("스타트 페이지" + review.getStartPage());
 		Map<String, Object> map= new HashMap<>();
+		review.pageInfo(review.getPage(), review.getRange() , review.getListCnt());
 		map.put("list", service.reviewList(review));
 		map.put("pagination", review);
+		System.out.println("페이지넘버: " +review.getPage());
+		System.out.println("스타트 페이지" + review.getStartPage());
+		
 		return map;
 	}
 	

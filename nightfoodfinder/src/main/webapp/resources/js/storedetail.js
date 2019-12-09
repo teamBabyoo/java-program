@@ -108,12 +108,29 @@ function toPad(val) {
 //리뷰 리스트 뿌려주기	
 function makeReviewList(list){
 	console.dir(list);
+	console.log(list.pagination);
+	let pagination = list.pagination;
 	let $tbl = $("<div class='user_rv'></div>");
 	if(list.length == 0){
 		$tbl.append(` 작성된 리뷰가 없습니다.`);
 	}
 	var reviewNoArray = [];
-	$.each(list, (i, r) => {
+	/*
+	list = jQuery.map(list, function(n, i) {
+		  console.log(n, 0);
+		});
+	var str = "";
+	for(key in list) {
+		str += key+"="+list[key]+"\n";
+		console.log("str", str);
+	}*/
+	let reviewList = list.list;
+	console.log("reviewLsit", reviewList);
+
+	
+	$.each(reviewList, (i, r) => {
+		
+		
 		/*reviewNoArray.push(`${r.reviewNo}`);
 	
 	console.log(reviewNoArray);
@@ -259,34 +276,42 @@ function makeReviewList(list){
 	});
 
 	$("#targetContainer").html($tbl);
-	$("#paginationBox").append();
-	
-	`<ul class="pagination">
-				<c:if test="${pagination.prev}">
-					<li class="page-item"><a class="page-link" href="#"
-						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">
-							Previous</a></li>
-				</c:if>
-
-				<c:forEach begin="${pagination.startPage}"
-					end="${pagination.endPage}" var="idx">
-					<li
-						class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
-						<a class="page-link" href="#"
-						onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')">
-							${idx} </a>
-					</li>
-
-				</c:forEach>
-
-				<c:if test="${pagination.next}">
-
-					<li class="page-item"><a class="page-link" href="#"
-						onClick="fn_next('${pagination.range}', 
-					'${pagination.range}', '${pagination.rangeSize}')">Next</a>
-					</li>
-				</c:if>
-			</ul>`
+	let pageEle = "";
+	$("#paginationBox").html("");
+	pageEle += `<ul class="pagination">`;
+	if (`${pagination.prev}`) {
+		pageEle += `
+		<li class="page-item">
+			<a class="page-link" href="#" onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')"> Previous</a>
+		</li>
+		`
+	}
+	for (let idx = `${pagination.startPage}`; idx <= `${pagination.endPage}`; idx++) {
+		if (`${pagination.page}` == idx) {
+			pageEle += `
+			<li class="page-item active">
+				<a class="page-link" href="#" onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')"> ${idx} </a>
+			</li>
+			`;
+		} else {
+			pageEle += `
+			<li class="page-item">
+				<a class="page-link" href="#" onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')"> ${idx} </a>
+			</li>
+			`;
+		}
+	}
+	if (`${pagination.next}`) {
+		pageEle += `
+			<li class="page-item">
+			<a class="page-link" href="#" onClick="fn_next('${pagination.range}', '${pagination.range}', '${pagination.rangeSize}')">Next</a>
+			</li>
+		`;
+	}
+	pageEle += `
+		</ul>
+	`;
+	$("#paginationBox").append(pageEle);
 	
 	
 }
