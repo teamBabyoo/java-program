@@ -26,6 +26,9 @@ public class Search extends Pagination {
 	
 	private String filter;
 	private List<String[]> filters;
+	
+	private int storeNo;
+	private int userNo;
 
 	
 	// 리스트 정렬

@@ -164,9 +164,17 @@
 									<!-- <input type="hidden" name="recomment" value="" /> -->
 								</form>
 							</div>
+							
 							<div id="targetContainer">
 							
 							</div>
+							<!-- 페이징 -->
+
+		<div id="paginationBox">
+			
+		</div>
+
+		<!-- 페이징 -->
 						</div>
 					</div> 
 					<!-- // 댓글 끝 -->
@@ -195,7 +203,7 @@
 	 let fileGroupCode = null;
 //	 let recomment = null;
 //	 let userNo = ${user.userNo};
-	 let userNo = 43;
+	 let userNo = 7;
 //	 console.log("userNo: ", userNo);
 	 console.log("storeNo: ", storeNo);
 	</script>

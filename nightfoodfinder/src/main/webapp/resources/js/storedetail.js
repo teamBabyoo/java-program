@@ -85,9 +85,14 @@ animateValue("scopescore", 0, scope, 100);
 	
 //리뷰 리스트 가져오는 에이작스 	
 function reviewListAjax() {
-	$.getJSON({
+	$.ajax({
 		url: "review_list.do",
-		data: {storeNo, userNo},
+		data: {
+			storeNo, 
+			userNo,
+			page:1,
+			range:1
+			},
 		success: list => makeReviewList(list),
 		complete: function() { reposition(); }
 	});
@@ -113,7 +118,7 @@ function makeReviewList(list){
 	
 	console.log(reviewNoArray);
 		 */
-		// 5 6 1 2 3 4
+	
 
 		var date = new Date(r.regDate);
 		var time = date.getFullYear() + "-" 
@@ -249,36 +254,41 @@ function makeReviewList(list){
 					</div>
             `;
 			$tbl.append(html);
-			
-			/*
-		$tbl.append(
-			`<div class="user_rv">
-				<div class="tenten">
-					<button type="button" class="report"  value="${r.reviewNo}">신고하기</button>
-				</div>
-                <ul class="clearboth">
-                    <li>
-                        <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-                        <p>` + scopeCnt + `</p>
-                    </li>
-                    <li>
-                        <ul>
-                            <li>${r.nickName}<span>${time}</span></li>
-                            <li>${r.reviewContent}</li>    
-                        </ul>
-                    </li>
-                    <li class="clearboth">
-                        <p class="heartclick"><img src="` + context + `/resources/images/empty_hrt.png" /></p>
-                        <p>${r.good}</p>
-                    </li>
-                </ul>
-            </div>`
-			);
-			 */
+		
 		}
 	});
 
 	$("#targetContainer").html($tbl);
+	$("#paginationBox").append();
+	
+	`<ul class="pagination">
+				<c:if test="${pagination.prev}">
+					<li class="page-item"><a class="page-link" href="#"
+						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">
+							Previous</a></li>
+				</c:if>
+
+				<c:forEach begin="${pagination.startPage}"
+					end="${pagination.endPage}" var="idx">
+					<li
+						class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
+						<a class="page-link" href="#"
+						onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')">
+							${idx} </a>
+					</li>
+
+				</c:forEach>
+
+				<c:if test="${pagination.next}">
+
+					<li class="page-item"><a class="page-link" href="#"
+						onClick="fn_next('${pagination.range}', 
+					'${pagination.range}', '${pagination.rangeSize}')">Next</a>
+					</li>
+				</c:if>
+			</ul>`
+	
+	
 }
 /**
  * footer top값 재설정
@@ -662,4 +672,63 @@ $("#targetContainer").on("click", "a.canceltwo", (e) => {
 	$("#modRow" + rno).remove();
 });
 
+//페이징
 
+//이전 버튼 이벤트
+function fn_prev(page, range, rangeSize) {
+	var page = ((range - 2) * rangeSize) + 1;
+	var range = range - 1;
+	
+	$.ajax({
+		url: "review_list.do",
+		type: "POST",
+		data: {
+			storeNo, 
+			userNo,
+			page,
+			range
+			},
+		success: list => makeReviewList(list),
+		complete: function() { reposition(); }
+	});
+	
+
+}
+
+//페이지 번호 클릭
+function fn_pagination(page, range, rangeSize) {
+	
+	$.ajax({
+		url: "review_list.do",
+		type: "POST",
+		data: {
+			storeNo, 
+			userNo,
+			page,
+			range
+			},
+		success: list => makeReviewList(list),
+		complete: function() { reposition(); }
+	});
+}
+
+//다음 버튼 이벤트
+function fn_next(page, range, rangeSize) {
+	var page = parseInt((range * rangeSize)) + 1;
+	var range = parseInt(range) + 1;
+	
+	$.ajax({
+		url: "review_list.do",
+		type: "POST",
+		data: {
+			storeNo, 
+			userNo,
+			page,
+			range
+			},
+		success: list => makeReviewList(list),
+		complete: function() { reposition(); }
+	});
+	
+	
+}

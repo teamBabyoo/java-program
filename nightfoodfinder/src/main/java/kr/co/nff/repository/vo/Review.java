@@ -6,7 +6,15 @@ import java.util.List;
 import lombok.Data;
 
 	@Data
-	public class Review {
+	public class Review extends Pagination{
+		public Review() {
+			super();
+		}
+		
+		public Review(int pageNo, int listSize) {
+			super(pageNo, listSize);
+		}		
+	
 		private String nickName;
 		private String storeName;
 		private String reviewContent;
@@ -47,6 +55,7 @@ import lombok.Data;
 		private int mylikecheck;
 		
 		private int userNo;
+
 	}
 
 
