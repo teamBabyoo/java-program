@@ -22,6 +22,7 @@ public class Search extends Pagination {
 	private int[] categoryCode; // 카테고리 : 중복허용
 	private int[] priceType; // 가격대 : 중복허용
 	private String[] cities; // 주소 : 중복허용 (구단위)
+	private String[] ageCode; // 나이대 : 중복허용
 	private int includeClosed; // 영업끝난 가게 결과 포함하기 (1인 경우만 포함)
 	
 	private String filter;
