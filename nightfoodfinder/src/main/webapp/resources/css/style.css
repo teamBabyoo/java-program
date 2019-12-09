@@ -439,13 +439,13 @@ div#commentplace > * { width: 100%; margin: 0 auto; }
 /** 유빈 **/
 #notice_btn .topshape { top: 20px; right: 95px; }
 .notice_list_box div:nth-child(2) { position: absolute; background: #fff; right: 50px; padding: 20px; }
+#notice_btn {
+	position: relative;
+}
 .newnotice {
 	position: absolute;
     top: -10px;
     left: 34px;
-}
-.notice_btn {
-	position: relative;
 }
 #rednotice {
 	background-color: #fa3e3e;
