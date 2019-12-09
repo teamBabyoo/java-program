@@ -208,8 +208,8 @@
 		 where s.status = 1 <!-- 관리자 허용 된 것만 -->
 		 	<if test="includeClosed != 1"> <!--  현재 영업중인 가게만 볼 때 (1 : 영업끝난가게 포함)  -->
          		<![CDATA[
-         		and str_to_date(s.open_time, '%h:%i') < now()
-            	and str_to_date(s.close_time, '%h:%i') > now()
+         		and str_to_date(s.open_time, '%H:%i') < now()
+            	and str_to_date(s.close_time, '%H:%i') > now()
          		]]>
 			</if>
 			<if test="keyword != null"> <!--  검색어가 있는 경우-->
@@ -449,6 +449,8 @@
 				r.review_no,
 				r.reg_date,
 				r.store_scope,
+				r.recomment,
+				r.recomment_reg_date,
 				ifnull(l.likeit, 0) as good,
                 ifnull(li.store_review_no,0) as mylikecheck
 		from tb_review r
@@ -466,16 +468,16 @@
 		where r.store_no = #{storeNo}
 		order by r.review_no desc
  
-		<!-- LIMIT #{startList}, #{listSize} -->
+		 LIMIT #{startList}, #{listSize} 
 	</select>
 	<!-- -->
 
 	<!-- 리뷰 등록 -->
 	<insert id="registReview" parameterType="Review">
 		INSERT INTO tb_review (
-		store_no, user_no, review_content, reg_date, store_scope, file_group_code
+		store_no, writer_no, review_content, reg_date, store_scope, file_group_code
 		) VALUES (
-		#{storeNo}, 6, #{reviewContent}, NOW(), #{storeScope}, #{fileGroupCode}
+		#{storeNo}, #{userNo}, #{reviewContent}, NOW(), #{storeScope}, #{fileGroupCode}
 		)
 	</insert>
 
@@ -574,4 +576,35 @@
 
 
 
+	<!-- 사장 답글 -->
+
+	<!-- 사장 답글 등록, 수정 -->
+	<select id="insertRecomment" parameterType="Review">
+		update tb_review
+		set recomment = #{recomment},
+			recomment_reg_date = now()
+		where review_no = #{reviewNo}
+	
+	</select>
+
+	<!-- 사장 답글 삭제 -->
+	<select id="deleteRecomment" parameterType="int">
+		update tb_review 
+			set recomment = null
+		where review_no = #{reviewNo}
+	
+	</select>
+	
+	
+	
+	<!-- 리뷰 페이징 처리 -->
+	<select id="getReviewCnt" parameterType="int" resultType="int">
+		select count(*)
+		  from tb_review
+		  where store_no = #{StoreNo}
+	</select>
+	
+	
+	
+	
 </mapper>

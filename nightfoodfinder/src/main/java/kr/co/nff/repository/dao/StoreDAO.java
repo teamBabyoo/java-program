@@ -76,5 +76,14 @@ public interface StoreDAO {
 	void frequentRegist(Store store);
 	//단골취소
 	void frequentDelete(Store store);
-
+	
+	// 사장 답글 등록, 수정
+	void insertRecomment(Review review);
+	// 사장 답글 삭제
+	void deleteRecomment(int reviewNo);
+	
+	
+	
+	//리뷰페이징을 위한 
+	int getReviewCnt(int no);
 }

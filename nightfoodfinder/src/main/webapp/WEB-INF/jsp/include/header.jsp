@@ -7,7 +7,7 @@
         <img src="${pageContext.request.contextPath}/resources/images/mangoplate-logo-horizontal.svg" alt="anff 로고" />
     </div>
     <div class="search">
-    <form id="sto_search" onsubmit="return presubmit()" action="${pageContext.request.contextPath}/front/store/storelist.do" method="post">
+    <form id="sto_search" action="${pageContext.request.contextPath}/front/store/storelist.do" method="post">
     	<!-- 검색어 입력 부분 -->
 		<input type="text" name="keyword"/>
 		 <!-- 검색 버튼 부분 -->
@@ -79,25 +79,52 @@
       <ul>
         <li><a href="#">내주변맛집</a></li>
         <li><a href="#">NFF Awards</a></li>
-        <li><i class="fa fa-bell-o" aria-hidden="true"></i></li>
+        <li id="notice_btn"><i class="fa fa-bell-o" aria-hidden="true"></i>
+        	<!-- 알림 리스트 나올 div -->
+        	<div class="notice_list_box hidden">
+	        	<div class="topshape"></div>
+	        	<div>
+	        		
+	        	</div>
+        	</div>
+        </li>
+        
         <li id="person_btn"><i class="fa fa-user-o" aria-hidden="true"></i>
 		<!-- 팝업 (로그인 X) -->
 		<div class="pop_person nMember hidden">
 	        <div class="topshape"></div>
+	        <c:choose>
+	        <c:when test="${loginUser != null}">
 	        <div>
-				로그인 후<br />
+				MY PAGE
+	        </div>
+	        </c:when>
+	        <c:when test="${loginStore != null}">
+	        <div>
+				MY PAGE
+	        </div>
+	        </c:when>
+	        <c:otherwise>
+	        <div>
+	        	로그인 후<br />
 				이용 가능합니다
 	        </div>
+	        </c:otherwise>
+	        </c:choose>
 	        <div>
 	           <c:choose>
-				<c:when test="${login != null}">
+				<c:when test="${loginUser != null}">
+				<ul>
+					<li><a href="${pageContext.request.contextPath}/front/login/logout.do">로그아웃</a></li>
+				</ul>
+				</c:when>
+				<c:when test="${loginStore != null}">
 				<ul>
 					<li><a href="${pageContext.request.contextPath}/front/login/logout.do">로그아웃</a></li>
 				</ul>
 				</c:when>
 				<c:otherwise>
 	            <ul>
-	           		
 	                <li><a href="${pageContext.request.contextPath}/front/login/userLoginForm.do">로그인하기</a></li>
 	            </ul>
 				</c:otherwise>
@@ -108,4 +135,7 @@
       </ul>
     </div>
   </header>
-  <script src='${pageContext.request.contextPath}/resources/js/storelist.js' ></script>
+  <script>
+  let userNo = ${session.user.userNo};
+  </script>
+  <script src='${pageContext.request.contextPath}/resources/js/header.js' ></script>

@@ -8,7 +8,7 @@
 	<result column="store_name" property="storeName" />
 	<result column="review_content" property="reviewContent" />
 	<result column="reg_date" property="regDate" />
-	<result column="recomment" property="reComment" />
+	<result column="recomment" property="recomment" />
 	<result column="review_no" property="reviewNo" />
 	<result column="store_no" property="storeNo" />
 	<result column="writer_no" property="writerNo" />
@@ -23,7 +23,7 @@
 	
 		select u.nick_name nickName, s.store_name storeName, r.review_content reviewContent, r.reg_date regDate,
 			   (select count(*) from tb_like l where l.store_review_no = r.review_no) as likeCount, 
-			   r.recomment reComment, r.status status, r.review_no reviewNo
+			   r.recomment recomment, r.status status, r.review_no reviewNo
 		from tb_review r join tb_user u on r.writer_no = u.user_no
 					     join tb_store s on r.store_no = s.store_no
 		
@@ -222,13 +222,7 @@
 	
 	
 	
-	
-	
-	<!-- 사장 답글 -->
-	
-	
-	
-	
+
 	
 	
 	

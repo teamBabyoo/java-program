@@ -1,5 +1,7 @@
 package kr.co.nff.repository.dao;
 
+import java.util.Map;
+
 import kr.co.nff.repository.vo.Store;
 import kr.co.nff.repository.vo.User;
 
@@ -8,8 +10,8 @@ public interface LoginDAO {
 	void insertHoliday(Store store);
 	void insertAddress(Store store);
 	
+	Store storeLogin(Store store);
 	int storeEmailChk(String storeEmail);
-	Store selectUserInfoByName(String storeName);
 	
 	//void loginStore(Store store);
 	
@@ -17,5 +19,5 @@ public interface LoginDAO {
 	int selectNaver(User user);
 	
 	//로그인한 회원
-	User selectLoginOneUser(String userId); 
+//	User selectLoginOneUser(String userId); 
 }

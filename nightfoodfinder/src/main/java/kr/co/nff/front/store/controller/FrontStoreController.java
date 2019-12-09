@@ -2,7 +2,9 @@ package kr.co.nff.front.store.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.nff.front.store.service.StoreService;
+import kr.co.nff.repository.vo.Pagination;
 import kr.co.nff.repository.vo.Review;
 import kr.co.nff.repository.vo.Search;
 import kr.co.nff.repository.vo.Store;
@@ -41,13 +44,12 @@ public class FrontStoreController {
 	@RequestMapping("/storedetail.do")
 	public void storeDetail(Model model, int no, HttpServletRequest req) {
 		HttpSession session = req.getSession();
-//		System.out.println("로그인한 유저: " + session.getAttribute("loginUser"));
+		System.out.println("로그인한 유저: " + session.getAttribute("loginUser"));
 		model.addAttribute("store", service.storeDetail(no));
 		model.addAttribute("menu", service.storeMenu(no));
 		model.addAttribute("holidaylist", service.storeHoliday(no));
 		model.addAttribute("storeContent", service.storeContent(no));
 		model.addAttribute("user", session.getAttribute("loginUser"));
-		
 	}
 	
 	/* 가게 정보 수정*/
@@ -79,12 +81,23 @@ public class FrontStoreController {
 	/*리뷰 가져오기*/
 	@RequestMapping("/review_list.do")
 	@ResponseBody
-	public List<Review> reviewListAjax(Review review){
+	public Map<String, Object> reviewListAjax(Review review){
 		/*
 		System.out.println("리뷰 내 유저 번호 : " + review.getUserNo());
 		System.out.println("리뷰 스토어 번호 : " + review.getStoreNo());
 		*/
-		return service.reviewList(review);
+		if(review.getPage() == 0) {
+			review.setPage(1);
+			review.setRange(1);
+		}
+
+		review.setListCnt(service.getReviewCnt(review.getStoreNo()));
+		System.out.println("페이지넘버: " +review.getPage());
+		System.out.println("스타트 페이지" + review.getStartPage());
+		Map<String, Object> map= new HashMap<>();
+		map.put("list", service.reviewList(review));
+		map.put("pagination", review);
+		return map;
 	}
 	
 	/*리뷰 신고 확인용*/
@@ -111,7 +124,6 @@ public class FrontStoreController {
 	/* 리뷰 작성 & 이미지 업로드 */
 	@RequestMapping("/review_regist.do")
 	@ResponseBody
-//	public List<Review> reviewRegistAjax(Review review, MultipartHttpServletRequest mtfRequest) {
 	public List<Review> reviewRegistAjax(Review review, List<MultipartFile> attach) throws Exception, IOException {
 		System.out.println("리뷰등록 시도");
 /*		
@@ -142,8 +154,9 @@ public class FrontStoreController {
 */
 //      model.addAttribute("list", service.reviewRegist(review));
 		System.out.println("--------------------------------------");
+		System.out.println("작성자 : " + review.getWriterNo());
 		System.out.println("내용 : " + review.getReviewContent());
-		System.out.println("답댓 : " + review.getReComment());
+		System.out.println("답댓 : " + review.getRecomment());
 		System.out.println("스코프 : " + review.getStoreScope());
         System.out.println("게시글번호 확인" + review.getStoreNo());
         System.out.println("--------------------------------------");
@@ -225,6 +238,20 @@ public class FrontStoreController {
 	};
 	
 	
+	/*사장 답글*/
+	@RequestMapping("/recomment_regist.do")
+	@ResponseBody
+	public List<Review> insertrecomment(Review review) {
+		service.insertRecomment(review);
+		return service.reviewList(review);
+	}
+		
+	@RequestMapping("/recomment_delete.do")
+	@ResponseBody
+	public List<Review> deleteRecomment(Review review) {
+		service.deleteRecomment(review);
+		return service.reviewList(review);
+	}
 
 	
 }

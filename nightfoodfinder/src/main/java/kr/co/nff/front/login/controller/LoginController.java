@@ -29,30 +29,14 @@ import kr.co.nff.repository.vo.User;
 //@RequestMapping("/front/login")
 public class LoginController {
 	
-	@Autowired
-	public NoticeService noticeService;
-	
-	//유저 가입
-	@RequestMapping("/userjoin.do")
-	public void userJoin() {}
-	
-	//유저 로그인
-	@RequestMapping("/userlogin.do")
-	public void userLogin() {}
-	
-	//유저 로그아웃
-	@RequestMapping("/userlogout.do")
-	public void userLogout() {}
-	
-	//유저 정보 업데이트
-	@RequestMapping("/userupdate.do")
-	public void userUpdate() {}
+//	@Autowired
 	
 	//유저 상세 내용
 	@RequestMapping("/userdetail.do")
 	public void userDetail() {}
 	
-//----------------------------
+//카카오 로그인
+	
 	
 //네이버 로그인
 
@@ -90,50 +74,39 @@ public class LoginController {
     				HttpSession session, User vo)
             throws Exception {
     	
-    	System.out.println("여기는 callback");
+    	//System.out.println("여기는 callback");
     	OAuth2AccessToken oauthToken;
     	oauthToken = naverLoginBO.getAccessToken(session, code, state);
     	
     	//1. 로그인 사용자 정보를 읽어온다.
     	apiResult = naverLoginBO.getUserProfile(oauthToken); //String형식의 json데이터
-    	/** 
-    	apiResult json 구조
-    	{"resultcode":"00",
-    	"message":"success",
-    	"response":{
-    		"id":"5884525",
-    		"age":"30-39",
-    		"gender":"F",
-    		"email":"pang103@naver.com",
-    		"name":"\uc1a1\ubcf4\ub984"}}
-    	**/
     	JsonParser json = new JsonParser();
     	vo = json.changeJson(apiResult);
     	
     	
     	if (loginservice.selectNaver(vo) > 0) { // 세션만들기
-			session.setAttribute("login", vo);
+			session.setAttribute("loginUser", vo);
 			
 			// 로그인되는 유저 
-			User loginUser = (User)loginservice.selectLoginOneUser(vo.getUserId());
-			session.setAttribute("loginUser", loginUser);
+//			User loginUser = (User)loginservice.selectLoginOneUser(vo.getUserId());
+//			session.setAttribute("loginUser", loginUser);
 			
 			// 로그인된 유저의 알림리스트, 안읽은 알림 갯수 가져와서 같이 세션에 올린다.
-			Notice notice = new Notice();
-			notice.setUserNo(loginUser.getUserNo());
-			List<Notice> noticeList = noticeService.selectNotice(notice);
-			int numOfNotice = noticeService.countNewNotice(notice);
-			session.setAttribute("noticeList", noticeList);
-			session.setAttribute("countNotice", numOfNotice);
+//			Notice notice = new Notice();
+//			notice.setUserNo(loginUser.getUserNo());
+//			List<Notice> noticeList = noticeService.selectNotice(notice);
+//			int numOfNotice = noticeService.countNewNotice(notice);
+//			session.setAttribute("noticeList", noticeList);
+//			session.setAttribute("countNotice", numOfNotice);
 			
-			System.out.println(noticeList.toString());
-			System.out.println(numOfNotice + "알림 갯수");
+//			System.out.println(noticeList.toString());
+//			System.out.println(numOfNotice + "알림 갯수");
 			
 			
-			System.out.println(loginservice.selectLoginOneUser(vo.getUserId()));
+//			System.out.println(loginservice.selectLoginOneUser(vo.getUserId()));
 		} else {
 			loginservice.insertNaverUser(vo);
-			session.setAttribute("login", vo);
+			session.setAttribute("loginUser", vo);
 		}
     	
     	//"front/login/ncallback"
@@ -144,7 +117,7 @@ public class LoginController {
   //로그아웃
     @RequestMapping(value = "/front/login/logout.do", method = { RequestMethod.GET, RequestMethod.POST })
     public String logout(HttpSession session)throws IOException {
-    System.out.println("여기는 logout");
+    //System.out.println("여기는 logout");
     session.invalidate();
     return "redirect:/front/main/main.do";
     }
@@ -161,13 +134,11 @@ public class LoginController {
 	public String storeJoin(Store store) {
 		System.out.println(store);
 		loginservice.joinStore(store);
-	
 		return "redirect:/front/main/main.do";
 	}
-
-	
-	  @RequestMapping("/front/login/storeJoinForm.do") 
-	  public void storeJoinForm(){}
+	// 스토어 가입폼
+	@RequestMapping("/front/login/storeJoinForm.do") 
+	 public void storeJoinForm(){}
 	 
 	//스토어 중복이메일 체크
 	@RequestMapping(value="/front/login/storeEmailChk.do")
@@ -180,12 +151,24 @@ public class LoginController {
 	
 	//스토어 로그인
 	@RequestMapping("/front/login/storelogin.do")
-	public void storeLogin() {
-		//session.attribute("type", 0);
+	public String storeLogin(Store s, HttpSession session) {
+		Store store = loginservice.storeLogin(s);
+		if(store == null) {
+			return "redirect:/front/login/userLoginForm.do";
+		}
+		session.setAttribute("loginStore", store);
+		System.out.println("스토어 로그인 성공");
+		return "redirect:/front/main/main.do";
+		
 	}
+	
+	
 	//스토어 로그아웃
 	@RequestMapping("/storelogout.do")
-	public void storeLogout() {}
+	public String storeLogout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/front/main/main.do";
+	}
 	//스토어 아이디찾기
 	@RequestMapping("/storeidfind.do")
 	public void storeIdFind() {}

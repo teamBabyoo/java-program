@@ -82,7 +82,7 @@
 			<li class="review"><a href="#">리뷰관리</a>
 				<ul>
 					<li><a class="review_all" href="${pageContext.request.contextPath}/admin/review/reviewlist.do">전체리뷰</a></li>
-					<li><a class="review_report" href="#">신고리뷰</a></li>
+					<li><a class="review_report" href="${pageContext.request.contextPath}/admin/review/reportedreviewlist.do">신고리뷰</a></li>
 				</ul></li>
 
 		
@@ -155,7 +155,7 @@
 						<!-- style : 문장이 가능한 문자길이 이상 길어지면 뒷부분이 ... 으로 바뀐다. -->
 					<td>${list.regDate }</td>
 					<td>${list.likeCount }</td>
-					<td class="reComment">${list.reComment}</td>
+					<td class="reComment">${list.recomment}</td>
 					<td class="block">
 						<c:choose>
 						<c:when test="${list.status eq 0 }">

@@ -41,15 +41,16 @@
 					</span>
 				</p>
 				<div class="memInput" id="memInput" style="display : none;">
-					<form id="memForm" action="storelogin.do" onsubmit="return memChk()" method="post">
+						<form id="slForm" action="storelogin.do" method="post" onsubmit="">
 						<p>
 							<input type="text" name="storeEmail" id="storeEmail" placeholder="이메일을 입력해주세요"/>
 						</p>
 						<p>
 							<input type="password" name="storePass" id="storePass" placeholder="비밀번호를 입력해주세요"/>
 						</p>
-						<p><a class="login_btn" >로그인</a></p>
-					</form>
+						<p><button id="login_btn" class="login_btn" >로그인</button></p>
+						</form>
+					
 				</div>
 				<div class="snsBox" id="snsBox">
 					<ul>
@@ -59,7 +60,12 @@
 								 	src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/>
 							 </a>
 						</li>
-						<li></li>
+						<li>
+							 <a href="${url}" target="_blank">
+								 <img width="223" 
+								 	src="${pageContext.request.contextPath}/resources/images/kakao_account_login_btn.png"/>
+							 </a>						
+						</li>
 					</ul>
 				</div>
 	      	</div>
@@ -79,6 +85,22 @@ uType2.onclick = function() {
 	snsBox.style.display = "none";
 	mInput.style.display = "block";
 }
+
+$(document).ready(() => {
+	$("#login_btn").click(() =>{
+		//e.preventDefault();
+		fn_login();
+	});
+});
+
+function fn_login() {
+	if($("#storeEmail").val().length < 1) {
+		alert("이메일을 입력해주세요.");
+	} if ($("#storePass").val().length < 1) {
+		alert("비밀번호를 입력해주세요.");
+	} 
+}
+
 
 </script>
 </body>

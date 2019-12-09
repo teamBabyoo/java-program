@@ -1,5 +1,9 @@
 package kr.co.nff.front.login.service;
 
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,13 +23,8 @@ public class LoginServiceImpl implements LoginService {
 		
 	}
 	
-	public Store selectUserInfoByName(String storeName) {
-		 return dao.selectUserInfoByName(storeName);
-	}
-	
-	
-	public int storeEmailChk(String storeEmail) {
-		return dao.storeEmailChk(storeEmail);
+	public Store storeLogin(Store store) {
+		return dao.storeLogin(store);
 	}
 	
 	public void insertNaverUser(User user) {
@@ -35,10 +34,16 @@ public class LoginServiceImpl implements LoginService {
 		return dao.selectNaver(user);
 	}
 
+//	@Override
+//	public User selectLoginOneUser(String userId) {
+//		return dao.selectLoginOneUser(userId);
+//	}
+
 	@Override
-	public User selectLoginOneUser(String userId) {
-		return dao.selectLoginOneUser(userId);
+	public int storeEmailChk(String storeEmail) {
+		return dao.storeEmailChk(storeEmail);
 	}
+
 
 
 }
