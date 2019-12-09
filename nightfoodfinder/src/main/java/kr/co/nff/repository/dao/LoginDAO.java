@@ -19,5 +19,6 @@ public interface LoginDAO {
 	int selectNaver(User user);
 	
 	//로그인한 회원
-//	User selectLoginOneUser(String userId); 
+	User selectLoginOneUser(User user); 
+	
 }

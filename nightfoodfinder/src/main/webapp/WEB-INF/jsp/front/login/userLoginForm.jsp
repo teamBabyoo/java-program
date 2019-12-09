@@ -12,15 +12,8 @@
 	    margin-top: 10px;
 	    text-align: center;
 	}
-	.login_btn {
-	
-	}
-	.memSel span {
-		
-	}    
-
-
-</style>    
+</style>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 </head>
 <body>
  <div class="wrapper main_wrap">
@@ -55,14 +48,14 @@
 				<div class="snsBox" id="snsBox">
 					<ul>
 						<li>
-							 <a href="${url}" target="_blank">
+							 <a href="${naver_url}" target="_blank">
 								 <img width="223" 
 								 	src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/>
 							 </a>
 						</li>
 						<li>
-							 <a href="${url}" target="_blank">
-								 <img width="223" 
+							 <a href="${kakao_url}" target="_blank">
+								 <img id="kakao-login-btn" width="223" 
 								 	src="${pageContext.request.contextPath}/resources/images/kakao_account_login_btn.png"/>
 							 </a>						
 						</li>
@@ -100,7 +93,6 @@ function fn_login() {
 		alert("비밀번호를 입력해주세요.");
 	} 
 }
-
 
 </script>
 </body>

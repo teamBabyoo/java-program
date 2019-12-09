@@ -39,6 +39,11 @@
 			where user_email = #{userEmail}
 	</select>
 	
+	<!-- 회원정보 가져오기 -->
+	<select id="selectLoginOneUser" resultType="User" parameterType="User">
+		select * from tb_user
+			where user_email = #{userEmail}
+	</select>
 	<!-- 가게 이메일 중복체크 -->
 	<select id="storeEmailChk" parameterType="String" resultType="int" flushCache="true" useCache="true">
 		select count(*) from tb_store where store_email = #{storeEmail}
