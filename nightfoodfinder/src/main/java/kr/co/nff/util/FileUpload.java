@@ -2,73 +2,39 @@ package kr.co.nff.util;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Enumeration;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.web.multipart.MultipartFile;
 
-import org.springframework.web.multipart.MultipartRequest;
-
-import kr.co.nff.repository.dao.FileDAO;
-import kr.co.nff.repository.vo.File;
+import kr.co.nff.repository.vo.FileVO;
 
 public class FileUpload {
-	private HttpServletRequest req;
-	private MultipartRequest request;
 	private Integer groupCode;
-	private FileDAO dao;
 
-	public FileUpload(HttpServletRequest req, String type) throws ServletException, IOException {
-		this.req = req;
-		this.dao = MyAppSqlConfig.getSqlSessionInstance().getMapper(FileDAO.class);
-		SimpleDateFormat sdf = new SimpleDateFormat("/yyyy/MM/dd");
-		String filePath = "/" + type + sdf.format(new Date());
-		File fi = new File("c:/java/upload" + filePath);
-		if (!fi.exists()) {
-			fi.mkdirs();
-		}
-
-		this.request = new MultipartRequest(req, fi.getPath(), 1024 * 1024 * 100, "utf-8",
-				new MomstudyFileRenamePolicy());
-	}
-
-	public MultipartRequest getRequest() {
-		return request;
-	}
-
-	public void upload() throws ServletException, IOException {
-
-		Enumeration<String> names = request.getFileNames();
-
-		int tempgroupCode = dao.selectGroupCode();
-		int cycle = 0;
-		while (names.hasMoreElements()) {
-			String fName = names.nextElement();
-			File f = request.getFile(fName);
-			if (f != null) {
-				File file = new File();
-				file.setGroupCode(tempgroupCode);
-				String orgName = request.getOriginalFileName(fName);
-				file.setOrgName(orgName);
-				String systemName = request.getFilesystemName(fName);
-				file.setSystemName(systemName);
-				file.setPath(f.getParent());
-				Thumbnails.of(new File(f.getParent(), systemName)).forceSize(300, 200).outputFormat("jpg")
-						.toFile(new File(f.getParent(), "thumb_" + systemName));
-				dao.insertFile(file);
-				cycle++;
-			}
-		}
-		if(cycle > 0 ) {
-			groupCode = tempgroupCode;
-		}
+	public static List<MultipartFile> upload(List<MultipartFile> attach) {
+		List<MultipartFile> list = new ArrayList<>();
 		
+		//
+		for (MultipartFile file : attach) {
+        	if (file.isEmpty()) continue;
+        	
+        	FileVO f = new FileVO();
+        	String orgName = file.getOriginalFilename();
+        	long size = file.getSize();
+        	System.out.println("파일명 : " + orgName);
+        	System.out.println("파일크기 : " + size);
+        	f.setOrgName(orgName);
+        	try {
+				file.transferTo(new File("c:/java/nffresources/" + orgName));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        	list.add(file);
+        }
+		// 
+		System.out.println("성공");
+		return list;
 	}
-
-	public Integer getGroupCode() {
-		return groupCode;
-	}
-
 }

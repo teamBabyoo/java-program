@@ -1,13 +1,13 @@
 package kr.co.nff.repository.dao;
 
-import kr.co.nff.repository.vo.File;
+import kr.co.nff.repository.vo.FileVO;
 
 public interface FileDAO {
 
 	public int selectGroupCode();
 
-	public void insertFile(File file);
+	public void insertFile(FileVO file);
 
-	public File selectOneFile(int fno);
+	public FileVO selectOneFile(int fno);
 
 }

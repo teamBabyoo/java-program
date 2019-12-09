@@ -422,6 +422,18 @@ div#commentplace > * { width: 100%; margin: 0 auto; }
 	height: 30px;
 }
 
+.detail_wrap li.page-item {
+		display: inline-block;
+		border: #aaaaaa 1px solid;
+	}
+.detail_wrap li.page-item.active {
+    background: #193669;
+    color: white;
+}
+.detail_wrap ul.pagination {
+		text-align: center;
+	}
+
 /** 진실 끝 **/
 
 .types {

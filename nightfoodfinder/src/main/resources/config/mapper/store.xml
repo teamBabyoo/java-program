@@ -468,7 +468,7 @@
 		where r.store_no = #{storeNo}
 		order by r.review_no desc
  
-		<!-- LIMIT #{startList}, #{listSize} --> 
+		 LIMIT #{startList}, #{listSize} 
 	</select>
 	<!-- -->
 

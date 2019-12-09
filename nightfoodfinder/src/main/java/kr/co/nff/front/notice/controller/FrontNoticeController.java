@@ -2,6 +2,8 @@ package kr.co.nff.front.notice.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,7 @@ import kr.co.nff.front.notice.service.NoticeService;
 import kr.co.nff.repository.vo.Notice;
 
 @Controller("kr.co.nff.front.notice.controller.FrontNoticeController")
+@RequestMapping("/front/main")
 public class FrontNoticeController {
 	
 	@Autowired
@@ -20,7 +23,8 @@ public class FrontNoticeController {
 	/* 알림 리스트 */
 	@RequestMapping("/notice_list.do")
 	@ResponseBody
-	public List<Notice> noticeListAjax(Notice notice) {
+	public List<Notice> noticeListAjax(Notice notice, HttpSession session) {
+		System.out.println(session.getAttribute("login"));
 		System.out.println(notice.getNoticeNo() + "알림남바");
 		return service.selectNotice(notice);
 	}

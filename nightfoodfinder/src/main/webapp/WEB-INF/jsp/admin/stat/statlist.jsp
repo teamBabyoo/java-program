@@ -78,13 +78,13 @@
 							</span>
 						</c:forEach></td>
 				</tr>
-				<tr>
+				<!-- <tr>
 					<th class="admssearchtable-lboi">기간</th>
 					<td class="admssearchtable-lboi" colspan="3"><span
 						class="cate"><input type="date" id="userdate"
 							name="userdate">부터 <input type="date" id="userdate"
 							name="userdate" />까지</span></td>
-				</tr>
+				</tr> -->
 			</table>
 			<div class="btndiv">
 				<button class="btnSearch" name="btnSearch" id="btnSearch">검색</button>
