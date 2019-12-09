@@ -60,7 +60,12 @@
 								 	src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/>
 							 </a>
 						</li>
-						<li></li>
+						<li>
+							 <a href="${url}" target="_blank">
+								 <img width="223" 
+								 	src="${pageContext.request.contextPath}/resources/images/kakao_account_login_btn.png"/>
+							 </a>						
+						</li>
 					</ul>
 				</div>
 	      	</div>

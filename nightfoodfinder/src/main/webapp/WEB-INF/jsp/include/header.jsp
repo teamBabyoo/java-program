@@ -79,34 +79,52 @@
       <ul>
         <li><a href="#">내주변맛집</a></li>
         <li><a href="#">NFF Awards</a></li>
-        <li><i class="fa fa-bell-o" aria-hidden="true"></i></li>
+        <li id="notice_btn"><i class="fa fa-bell-o" aria-hidden="true"></i>
+        	<!-- 알림 리스트 나올 div -->
+        	<div class="notice_list_box hidden">
+	        	<div class="topshape"></div>
+	        	<div>
+	        		
+	        	</div>
+        	</div>
+        </li>
+        
         <li id="person_btn"><i class="fa fa-user-o" aria-hidden="true"></i>
 		<!-- 팝업 (로그인 X) -->
 		<div class="pop_person nMember hidden">
 	        <div class="topshape"></div>
 	        <c:choose>
-	        <c:when test="${login == null}">
+	        <c:when test="${loginUser != null}">
 	        <div>
-				로그인 후<br />
-				이용 가능합니다
+				MY PAGE
+	        </div>
+	        </c:when>
+	        <c:when test="${loginStore != null}">
+	        <div>
+				MY PAGE
 	        </div>
 	        </c:when>
 	        <c:otherwise>
 	        <div>
-	        	MY PAGE
+	        	로그인 후<br />
+				이용 가능합니다
 	        </div>
 	        </c:otherwise>
 	        </c:choose>
 	        <div>
 	           <c:choose>
-				<c:when test="${login != null}">
+				<c:when test="${loginUser != null}">
+				<ul>
+					<li><a href="${pageContext.request.contextPath}/front/login/logout.do">로그아웃</a></li>
+				</ul>
+				</c:when>
+				<c:when test="${loginStore != null}">
 				<ul>
 					<li><a href="${pageContext.request.contextPath}/front/login/logout.do">로그아웃</a></li>
 				</ul>
 				</c:when>
 				<c:otherwise>
 	            <ul>
-	           		
 	                <li><a href="${pageContext.request.contextPath}/front/login/userLoginForm.do">로그인하기</a></li>
 	            </ul>
 				</c:otherwise>
@@ -117,4 +135,7 @@
       </ul>
     </div>
   </header>
+  <script>
+  let userNo = ${session.user.userNo};
+  </script>
   <script src='${pageContext.request.contextPath}/resources/js/header.js' ></script>
