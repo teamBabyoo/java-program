@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.nff.repository.dao.FileDAO;
-import kr.co.nff.repository.vo.File;
+import kr.co.nff.repository.vo.FileVO;
 
 
 @WebServlet("/util/download.do")

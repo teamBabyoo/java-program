@@ -56,6 +56,18 @@ import lombok.Data;
 		
 		private int userNo;
 
+		@Override
+		public String toString() {
+			return "Review [nickName=" + nickName + ", storeName=" + storeName + ", reviewContent=" + reviewContent
+					+ ", likeCount=" + likeCount + ", regDate=" + regDate + ", reviewNo=" + reviewNo + ", recomment="
+					+ recomment + ", reportNickname=" + reportNickname + ", reportCount=" + reportCount + ", storeNo="
+					+ storeNo + ", writerNo=" + writerNo + ", reportNo=" + reportNo + ", reCommentRegDate="
+					+ reCommentRegDate + ", storeScope=" + storeScope + ", fileGroupCode=" + fileGroupCode
+					+ ", reviewNoList=" + reviewNoList + ", status=" + status + ", good=" + good + ", reportWhy="
+					+ reportWhy + ", storeReviewNo=" + storeReviewNo + ", reviewLikeList=" + reviewLikeList
+					+ ", mylikecheck=" + mylikecheck + ", userNo=" + userNo + "]";
+		}
+		
 	}
 
 

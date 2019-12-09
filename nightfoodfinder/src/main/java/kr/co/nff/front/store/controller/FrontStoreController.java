@@ -1,8 +1,8 @@
 package kr.co.nff.front.store.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +22,7 @@ import kr.co.nff.repository.vo.Pagination;
 import kr.co.nff.repository.vo.Review;
 import kr.co.nff.repository.vo.Search;
 import kr.co.nff.repository.vo.Store;
+import kr.co.nff.util.FileUpload;
 import net.sf.json.JSONArray;
 
 
@@ -124,6 +125,14 @@ public class FrontStoreController {
 	@ResponseBody
 	public List<Review> reviewRegistAjax(Review review, List<MultipartFile> attach) throws Exception, IOException {
 		System.out.println("리뷰등록 시도");
+		
+		List<MultipartFile> list = new ArrayList<>();
+		
+		FileUpload fu = new FileUpload();
+		list = fu.upload(attach);
+		
+		System.out.println("list결과 : " + list);
+		
 /*		
 		List<MultipartFile> fileList = mtfRequest.getFiles("file");
         String src = mtfRequest.getParameter("src");
@@ -152,12 +161,13 @@ public class FrontStoreController {
 */
 //      model.addAttribute("list", service.reviewRegist(review));
 		System.out.println("--------------------------------------");
-		System.out.println("작성자 : " + review.getWriterNo());
-		System.out.println("내용 : " + review.getReviewContent());
-		System.out.println("답댓 : " + review.getRecomment());
-		System.out.println("스코프 : " + review.getStoreScope());
-        System.out.println("게시글번호 확인" + review.getStoreNo());
-        System.out.println("--------------------------------------");
+//		System.out.println("작성자 : " + review.getWriterNo());
+//		System.out.println("내용 : " + review.getReviewContent());
+//		System.out.println("답댓 : " + review.getRecomment());
+//		System.out.println("스코프 : " + review.getStoreScope());
+//        System.out.println("게시글번호 확인" + review.getStoreNo());
+/*
+		System.out.println("--------------------------------------");
         System.out.println("attach.size() : " + attach.size());
         for (MultipartFile file : attach) {
         	if (file.isEmpty()) continue;
@@ -168,10 +178,10 @@ public class FrontStoreController {
         	System.out.println("파일크기 : " + size);
         	file.transferTo(new File("c:/java/nffresources/" + orgName));
         }
+*/        
         
         
-        
-        service.reviewRegist(review);
+//        service.reviewRegist(review);
         return service.reviewList(review);
 	}
 
