@@ -24,6 +24,9 @@ $(document).ready(() => {
 		// 클릭시 사라졌다 나타났다 hidden 클래스 
 		$(".notice_list_box").toggleClass("hidden");
 	
+		
+//		let userNo = user.userNo;
+		
 		$.ajax({
 			url: "notice_list.do",
 			data: {userNo: 42},

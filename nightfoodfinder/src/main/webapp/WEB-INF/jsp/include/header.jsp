@@ -126,4 +126,7 @@
       </ul>
     </div>
   </header>
+  <script>
+  let userNo = ${session.user.userNo};
+  </script>
   <script src='${pageContext.request.contextPath}/resources/js/header.js' ></script>
