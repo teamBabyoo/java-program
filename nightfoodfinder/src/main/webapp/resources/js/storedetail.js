@@ -279,7 +279,7 @@ function makeReviewList(list){
 	let pageEle = "";
 	$("#paginationBox").html("");
 	pageEle += `<ul class="pagination">`;
-	if (`${pagination.prev}`) {
+	if (`${pagination.prev}` === 'true') {
 		pageEle += `
 		<li class="page-item">
 			<a class="page-link" href="#" onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')"> Previous</a>
@@ -301,7 +301,7 @@ function makeReviewList(list){
 			`;
 		}
 	}
-	if (`${pagination.next}`) {
+	if (`${pagination.next}`  === 'true') {
 		pageEle += `
 			<li class="page-item">
 			<a class="page-link" href="#" onClick="fn_next('${pagination.range}', '${pagination.range}', '${pagination.rangeSize}')">Next</a>
