@@ -13,7 +13,7 @@
 	    text-align: center;
 	}
 </style>
-<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script src="http://developers.kakao.com/sdk/js/kakao.min.js"></script>
 </head>
 <body>
  <div class="wrapper main_wrap">
@@ -54,10 +54,13 @@
 							 </a>
 						</li>
 						<li>
-							 <a href="${kakao_url}" target="_blank">
-								 <img id="kakao-login-btn" width="223" 
-								 	src="${pageContext.request.contextPath}/resources/images/kakao_account_login_btn.png"/>
-							 </a>						
+						<!-- <a id="custom-login-btn" href="javascript:loginWithKakao()" >
+						<img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="223"/>
+						</a> -->
+						 <a href="${kakao_url}" target="_blank">
+							 <img id="kakao-login-btn" width="223" 
+							 	src="${pageContext.request.contextPath}/resources/images/kakao_account_login_btn.png"/>
+						</a>						
 						</li>
 					</ul>
 				</div>
@@ -66,6 +69,23 @@
 	      	
      	
 <script>
+
+Kakao.init('5f7e99b864f210e1d5cb763a42e411cb');
+function loginWithKakao() {
+  // 로그인 창을 띄웁니다.
+  Kakao.Auth.login({
+    success: function(authObj) {
+      alert(JSON.stringify(authObj));
+      
+      
+    },
+    fail: function(err) {
+      alert(JSON.stringify(err));
+    }
+  });
+};
+
+
 var uType1 = document.getElementById("userType1");
 var uType2 = document.getElementById("userType2");
 var mInput = document.getElementById("memInput");

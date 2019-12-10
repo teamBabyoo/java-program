@@ -58,4 +58,5 @@
 	
    <!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
    <bean id="naverLoginBO" class="kr.co.nff.login.naver.oauth.bo.NaverLoginBO" />
+   <bean id="KakaoLogin" class="kr.co.nff.login.kakao.oauth.model.KakaoLogin" />
 </beans>

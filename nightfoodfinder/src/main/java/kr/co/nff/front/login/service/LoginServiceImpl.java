@@ -44,6 +44,17 @@ public class LoginServiceImpl implements LoginService {
 		return dao.storeEmailChk(storeEmail);
 	}
 
+	@Override
+	public void insertKakaoUser(User user) {
+		dao.insertKakaoUser(user);
+	}
 
+	@Override
+	public int selectKakao(User user) {
+		
+		return dao.selectKakao(user);
+	}
+
+	
 
 }
