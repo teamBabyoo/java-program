@@ -22,34 +22,21 @@ h3 {
   padding: 0.6em;
 }
 </style>
-<script type="text/javascript">
-  $(document).ready(function() {
-    var name = ${result}.response.name;
-    var email = ${result}.response.email;
-    $("#name").html("환영합니다. "+name+"님");
-    $("#email").html(email);
-    });
-  //location.href = "${pageContext.request.contextPath}/";
-</script>
   </head>
   <body>
-   <div
-    style="background-color: #15a181; width: 100%; height: 50px; text-align: center; color: white;">
-    <h3>Kakao_Login Success</h3>
-  </div>
-  <br>
-  <h2 style="text-align: center" id="name"></h2>
-  <h4 style="text-align: center" id="email"></h4>
+	<form >
+	
+	</form>
+
+  
   <script>
-    $(function () {
+  
+   /*  $(function () {
       $("body").hide();
       $("body").fadeIn(1000);  // 1초 뒤에 사라 지자 
-     
       setTimeout(function(){$("body").fadeOut(1000);},1000);
       setTimeout(function(){location.href= "${pageContext.request.contextPath}/front/main/main.do"},2000);
-// 2초 뒤에 메인 화면 으로 가자  
-    
-    })
+    }) */
   </script>
 
   </body>

@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
 import kr.co.nff.front.login.service.LoginService;
@@ -77,11 +76,12 @@ public class LoginController {
     				HttpSession session, User vo)
             throws Exception {
     	
-    	//System.out.println("여기는 callback");
+    	System.out.println("여기는 callback");
     	OAuth2AccessToken oauthToken;
     	oauthToken = naverLoginBO.getAccessToken(session, code, state);
     	
-    	//1. 로그인 사용자 정보를 읽어온다.ng형식의 json데이터
+    	//1. 로그인 사용자 정보를 읽어온다.
+    	apiResult = naverLoginBO.getUserProfile(oauthToken);
     	JsonParser json = new JsonParser();
     	vo = json.changeJson(apiResult);
     	
@@ -90,7 +90,6 @@ public class LoginController {
 			session.setAttribute("loginUser", loginservice.selectLoginOneUser(vo));
 			
 			// 로그인되는 유저 
-    	apiResult = naverLoginBO.getUserProfile(oauthToken); //Stri
 //			User loginUser = (User)loginservice.selectLoginOneUser(vo.getUserId());
 //			session.setAttribute("loginUser", loginUser);
 			
@@ -146,10 +145,6 @@ public class LoginController {
 			System.out.println("첫로그인 유저"+loginservice.selectLoginOneUser(vo));
 			session.setAttribute("loginUser", loginservice.selectLoginOneUser(vo));
 		}
-		
-		
-		
-	
 		mav.setViewName("front/login/kakaologin");
 		
 		
