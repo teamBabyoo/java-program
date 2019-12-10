@@ -40,6 +40,7 @@ public class FrontNoticeController {
 	@RequestMapping("/count_notice.do")
 	@ResponseBody
 	public int countNoticeAjax(Notice notice) {
+		System.out.println(service.countNewNotice(notice));
 		return service.countNewNotice(notice);
 	}
 	

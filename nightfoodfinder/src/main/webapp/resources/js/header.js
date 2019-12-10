@@ -5,11 +5,10 @@ $(document).ready(() => {
 		url: "count_notice.do",
 		data : {userNo : 7},
 		success: (noticeCnt) => {
+			console.log(noticeCnt);
 			let html = (noticeCnt == 0) ? `` :
-				`<span id="rednotice">${noticeCnt}</span>`
-			
+				`<span id="rednotice">${noticeCnt}</span>`;
 			$(".newnotice").append(html);
-				
 		}
 	})*/
 	
