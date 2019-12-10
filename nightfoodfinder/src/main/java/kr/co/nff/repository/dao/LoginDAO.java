@@ -18,6 +18,9 @@ public interface LoginDAO {
 	void insertNaverUser(User user);
 	int selectNaver(User user);
 	
+	void insertKakaoUser(User user);
+	int selectKakao(User user);
+	
 	//로그인한 회원
 	User selectLoginOneUser(User user); 
 	

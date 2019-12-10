@@ -1,6 +1,7 @@
 package kr.co.nff.front.login.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,13 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
 import kr.co.nff.front.login.service.LoginService;
-import kr.co.nff.login.kakao.oauth.KakaoLogin;
+import kr.co.nff.login.kakao.oauth.model.KakaoLogin;
 import kr.co.nff.login.naver.oauth.bo.NaverLoginBO;
 import kr.co.nff.login.naver.oauth.model.JsonParser;
 import kr.co.nff.repository.vo.Store;
@@ -30,18 +30,14 @@ import kr.co.nff.repository.vo.User;
 @Controller("kr.co.nff.front.login.LoginController")
 //@RequestMapping("/front/login")
 public class LoginController {
-	
-//	@Autowired
-	
-	//유저 상세 내용
-	@RequestMapping("/userdetail.do")
-	public void userDetail() {}
-	
-//카카오 로그인
+
+	//카카오 로그인
+	@Autowired
 	private KakaoLogin kakao;
 	
-//네이버 로그인
-
+	
+	
+	//네이버 로그인
 	/* NaverLoginBO */
 	private NaverLoginBO naverLoginBO;
 	private String apiResult = null;
@@ -56,17 +52,20 @@ public class LoginController {
     @RequestMapping(value = "/front/login/userLoginForm.do", method = { RequestMethod.GET, RequestMethod.POST })
     public ModelAndView login(Model model, HttpSession session) {
     	ModelAndView mav = new ModelAndView();
+    	
         /* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
         String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+        //System.out.println(session);
+        
         /* 카카오 로그인 URL 가져오기*/
-        //String kakaoAuthUrl = kakao.getAuthorizationUrl(session);
+        String kakaoAuthUrl = kakao.getAuthorizationUrl(session);
         
         mav.setViewName("front/login/userLoginForm");
         
         //네이버 
         mav.addObject("naver_url", naverAuthUrl);
         //카카오
-       // mav.addObject("kakao_url", kakaoAuthUrl);
+        mav.addObject("kakao_url", kakaoAuthUrl);
         /* 생성한 인증 URL을 View로 전달 */
         return mav;
     }
@@ -82,8 +81,7 @@ public class LoginController {
     	OAuth2AccessToken oauthToken;
     	oauthToken = naverLoginBO.getAccessToken(session, code, state);
     	
-    	//1. 로그인 사용자 정보를 읽어온다.
-    	apiResult = naverLoginBO.getUserProfile(oauthToken); //String형식의 json데이터
+    	//1. 로그인 사용자 정보를 읽어온다.ng형식의 json데이터
     	JsonParser json = new JsonParser();
     	vo = json.changeJson(apiResult);
     	
@@ -92,6 +90,7 @@ public class LoginController {
 			session.setAttribute("loginUser", loginservice.selectLoginOneUser(vo));
 			
 			// 로그인되는 유저 
+    	apiResult = naverLoginBO.getUserProfile(oauthToken); //Stri
 //			User loginUser = (User)loginservice.selectLoginOneUser(vo.getUserId());
 //			session.setAttribute("loginUser", loginUser);
 			
@@ -119,43 +118,47 @@ public class LoginController {
         return "front/login/ncallback";
     }
     
-    
+  // 카카오 콜백 
     @RequestMapping(value = "/front/login/kakaologin.do", produces = "application/json", method = { RequestMethod.GET,
 			RequestMethod.POST })
 	public ModelAndView kakaoLogin(@RequestParam("code") String code, HttpServletRequest request,
-			HttpServletResponse response, HttpSession session) throws Exception {
+			HttpServletResponse response, HttpSession session,User vo) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		// 결과값을 node에 담아줌
-		JsonNode node = kakao.getAccessToken(code);
+		
+		// 결과값을  담아줌
+		String accessToken = kakao.getAccessToken(code);
+		
 		// accessToken에 사용자의 로그인한 모든 정보가 들어있음
-		JsonNode accessToken = node.get("access_token");
 		// 사용자의 정보
-		JsonNode userInfo = kakao.getKakaoUserInfo(accessToken);
-		String kemail = null;
-		String kname = null;
-		String kgender = null;
-		String kbirthday = null;
-		String kage = null;
-		String kimage = null;
-		// 유저정보 카카오에서 가져오기 Get properties
-		JsonNode properties = userInfo.path("properties");
-		JsonNode kakao_account = userInfo.path("kakao_account");
-		kemail = kakao_account.path("email").asText();
-		kname = properties.path("nickname").asText();
-		kimage = properties.path("profile_image").asText();
-		kgender = kakao_account.path("gender").asText();
-		kbirthday = kakao_account.path("birthday").asText();
-		kage = kakao_account.path("age_range").asText();
-		session.setAttribute("kemail", kemail);
-		session.setAttribute("kname", kname);
-		session.setAttribute("kimage", kimage);
-		session.setAttribute("kgender", kgender);
-		session.setAttribute("kbirthday", kbirthday);
-		session.setAttribute("kage", kage);
-		mav.setViewName("main");
+		HashMap<String, Object> userInfo = kakao.getUserInfo(accessToken);
+		System.out.println("유저정보:::" + userInfo.get("email"));
+		
+		vo.setUserEmail(userInfo.get("email").toString());
+		vo.setNickName(userInfo.get("nickname").toString());
+		
+		if(loginservice.selectKakao(vo) > 0) {
+			// 로그인 기록 있는 유저
+			System.out.println("기존 유저"+loginservice.selectLoginOneUser(vo));
+			session.setAttribute("loginUser", loginservice.selectLoginOneUser(vo));
+		} else {
+			// 로그인 기록 없는 유저, 디비에 정보 insert 해줘야함
+			loginservice.insertKakaoUser(vo);
+			System.out.println("첫로그인 유저"+loginservice.selectLoginOneUser(vo));
+			session.setAttribute("loginUser", loginservice.selectLoginOneUser(vo));
+		}
+		
+		
+		
+	
+		mav.setViewName("front/login/kakaologin");
+		
+		
+		
+		
+		
 		return mav;
 	}// end kakaoLogin()
-    
+     
     
     
     

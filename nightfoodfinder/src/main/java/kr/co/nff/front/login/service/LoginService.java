@@ -21,6 +21,10 @@ public interface LoginService {
 	// 네이버 회원체크
 	int selectNaver(User user);
 	
+	// 카카오 회원가입
+	void insertKakaoUser(User user);
+	// 카카오 회원체크
+	int selectKakao(User user);
 	//로그인한 유저 정보
 	User selectLoginOneUser(User user);
 }

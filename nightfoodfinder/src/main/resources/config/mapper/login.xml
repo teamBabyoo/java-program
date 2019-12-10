@@ -33,8 +33,20 @@
 			(#{userId},#{userName},#{userEmail},#{userGender},#{userAge})
 	</insert>
 	
+	<!-- 일반회원 가입(kakao) -->
+	<insert id="insertKakaoUser" parameterType="User">
+		insert into tb_user (user_id, user_name, user_email, user_gender, user_age) values
+			(#{userId},#{userName},#{userEmail},#{userGender},#{userAge})
+	</insert>
+	
 	<!-- naver 회원 체크 -->
 	<select id="selectNaver" resultType="int" parameterType="User">
+		select count(*) from tb_user 
+			where user_email = #{userEmail}
+	</select>
+	
+	<!-- 카카오 회원 체크 -->
+	<select id="selectKakao" resultType="int" parameterType="User">
 		select count(*) from tb_user 
 			where user_email = #{userEmail}
 	</select>
