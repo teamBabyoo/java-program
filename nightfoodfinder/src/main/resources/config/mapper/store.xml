@@ -192,12 +192,7 @@
 		</if>
 	</update>
 
-	<!-- 스토어 리스트 -->
-	<select id="storeList" resultType="Store" parameterType="Search">
-		select distinct s.*,
-			   a.*,
-			   c.category_name as category,
-			   ifnull(round(s.store_scope_total / s.review_cnt_total, 1), 0) scope
+	<sql id="commonStoreList">
 		  from tb_store s
 		 inner join tb_category c
 		    on s.store_category = c.category_no
@@ -236,6 +231,16 @@
 					#{p}
 				</foreach>
 			</if>
+	
+	</sql>
+
+	<!-- 스토어 리스트 -->
+	<select id="storeList" resultType="Store" parameterType="Search">
+		select distinct s.*,
+			   a.*,
+			   c.category_name as category,
+			   ifnull(round(s.store_scope_total / s.review_cnt_total, 1), 0) scope
+		<include refid="commonStoreList" />
 		<choose>
 			<when test="filter == 'scope'">  <!-- 평점순 -->
 				order by scope desc
@@ -250,8 +255,12 @@
 				order by scope desc
 			</otherwise>
 		</choose>
-		<!-- limit #{startList}, #{listSize} -->
-		limit 0, 10
+		limit #{startList}, #{listSize}
+	</select>
+	<!-- 스토어 리스트 -->
+	<select id="storeListCnt" resultType="int" parameterType="Search">
+		select count(*)
+		<include refid="commonStoreList" />
 	</select>
 
 

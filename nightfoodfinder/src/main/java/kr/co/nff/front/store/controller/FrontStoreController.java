@@ -35,8 +35,18 @@ public class FrontStoreController {
 	
 	/* 가게 목록 */
 	@RequestMapping("/storelist.do")
-	public void storeList(@RequestParam(value="pageNo", defaultValue="1") int pageNo, Model model, Search search) {
-		model.addAttribute("sList", service.storeList(search));
+	public void storeList(Model model, Search search) {
+		model.addAttribute("result", service.storeList(search));
+		
+	}
+
+	@RequestMapping("/storelistAjax.do")
+	@ResponseBody
+	public Map<String, Object> storeListAjax(Search search) {
+		Map<String, Object> result = service.storeList(search);
+		System.out.println(service.storeList(search));
+		System.out.println("페이지결과" + search.getPage());
+		return service.storeList(search);
 	}
 	
 	

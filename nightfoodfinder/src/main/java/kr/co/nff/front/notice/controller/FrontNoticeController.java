@@ -24,7 +24,7 @@ public class FrontNoticeController {
 	@RequestMapping("/notice_list.do")
 	@ResponseBody
 	public List<Notice> noticeListAjax(Notice notice, HttpSession session) {
-		System.out.println(session.getAttribute("login"));
+		System.out.println(session.getAttribute("loginUser"));
 		System.out.println(notice.getNoticeNo() + "알림남바");
 		return service.selectNotice(notice);
 	}
@@ -39,8 +39,9 @@ public class FrontNoticeController {
 	/* 알림 갯수 */
 	@RequestMapping("/count_notice.do")
 	@ResponseBody
-	public void countNoticeAjax(Notice notice) {
-		service.countNewNotice(notice);
+	public int countNoticeAjax(Notice notice) {
+		System.out.println(service.countNewNotice(notice));
+		return service.countNewNotice(notice);
 	}
 	
 	/* 알림 하나 삭제 */

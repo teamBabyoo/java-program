@@ -1,6 +1,8 @@
 package kr.co.nff.front.store.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 import kr.co.nff.repository.dao.StoreDAO;
 import kr.co.nff.repository.vo.Holiday;
 import kr.co.nff.repository.vo.Menu;
+import kr.co.nff.repository.vo.Pagination;
 import kr.co.nff.repository.vo.Review;
 import kr.co.nff.repository.vo.Search;
 import kr.co.nff.repository.vo.Store;
@@ -20,8 +23,14 @@ public class StoreServiceImpl implements StoreService {
 	
 	// 가게 전체 리스트
 	@Override
-	public List<Store> storeList(Search search){
-		return dao.storeList(search);
+	public Map<String, Object>  storeList(Search search){
+		Map<String, Object> result = new HashMap<>();
+		// 지워야함
+		System.out.println("llll : " + search.getPage());
+		System.out.println("llll : " + search.getStartList());
+		result.put("sList", dao.storeList(search));
+		result.put("pi", new Pagination(1, dao.storeListCnt(search), 2, 3));
+		return result;
 	}
 
 	@Override

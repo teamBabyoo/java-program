@@ -20,6 +20,7 @@ public interface StoreDAO {
 	List<String> cityList();
 	// 스토어 리스트
     List<Store> storeList(Search search);
+    int storeListCnt(Search search);
     Store selectOneStore(int no);
     Store selectContent(int no);
     List<Menu> storeMenuList(int no);
