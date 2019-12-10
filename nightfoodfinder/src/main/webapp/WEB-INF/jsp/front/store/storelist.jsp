@@ -18,7 +18,7 @@
 		<!-- 헤더 -->
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 		<!-- // 헤더 -->
-
+		<c:set var="sList" value="${result.sList}" />
 		<!-- 컨텐트  -->
 		<div class="content">
 
@@ -38,7 +38,7 @@
 								<th>등록일</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="storetListTbody">
 							<c:if test="${empty sList}">
 								<tr>
 									<td colspan="5">검색 결과가 없습니다.</td>
@@ -55,6 +55,26 @@
 							</c:forEach>
 						</tbody>
 					</table>
+					<%-- paging 영역 --%>
+					<div id="storePageDiv">
+						<ul class="pagination">
+						<c:if test="${result.pi.prev}">
+						<li class="page-item">
+							<a class="page-link" href="#${result.pi.startPage- 1}" data-page="${result.pi.startPage- 1}"> Previous</a>
+						</li>
+						</c:if>
+						<c:forEach var="i" begin="${result.pi.startPage}" end="${result.pi.endPage}">
+						<li class="page-item active">
+							<a class="page-link" href="#${i}" data-page="${i}">${i}</a>
+						</li>
+						</c:forEach>
+						<c:if test="${result.pi.next}">
+						<li class="page-item">
+							<a class="page-link" href="#${result.pi.endPage + 1}" data-page="${result.pi.endPage + 1}"> Next</a>
+						</li>
+						</c:if>
+						</ul>
+					</div>
 				</div>
 			</div>
 
@@ -68,8 +88,24 @@
 		<!-- 팝업 백그라운드  -->
 		<div class="bgbox"></div>
 	</div>
-	<script>
+	<form id="searchStoreForm" method="post">
+		<c:forEach var="city" items="${search.cities}">
+			<input name="cities" type="hidden"  value="${city}" />
+		</c:forEach>
+		<c:forEach var="price" items="${search.priceType}">
+			<input name="priceType" type="hidden"  value="${price}" />
+		</c:forEach>
 		
-	</script>
+		<c:forEach var="category" items="${search.categoryCode}">
+			<input name="categoryCode" type="hidden"  value="${category}" />
+		</c:forEach>
+		<input name="keyword" type="hidden"  value="${search.keyword}" />
+	</form>	
+	<script src="<c:url value='/resources/js/storelist.js' />"></script>
 </body>
 </html>
+
+
+
+
+

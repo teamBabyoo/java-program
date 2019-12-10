@@ -1,6 +1,7 @@
 package kr.co.nff.front.store.service;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.co.nff.repository.vo.Holiday;
 import kr.co.nff.repository.vo.Menu;
@@ -10,7 +11,7 @@ import kr.co.nff.repository.vo.Store;
 
 public interface StoreService {
 	//전체리스트
-	List<Store> storeList(Search search);
+	Map<String, Object> storeList(Search search);
 	//추후 int no 넣어주기
 	public Store storeDetail(int storeNo); 	
 	//메뉴 가져오기
