@@ -85,8 +85,9 @@
         	<!-- 알림 리스트 나올 div -->
         	<div class="notice_list_box hidden">
 	        	<div class="topshape"></div>
-	        	<div>
-	        		gggggggggggg
+			    <!-- 알림 리스트 나올 div -->
+	        	<div class="notice_content">
+
 	        	</div>
         	</div>
         </li>
@@ -137,4 +138,9 @@
       </ul>
     </div>
   </header>
+  <script type="text/javascript">
+  /* if (window.sessionStorage) {
+      console.dir(sessionStorage);
+  } */
+  </script>
   <script src='${pageContext.request.contextPath}/resources/js/header.js' ></script>
