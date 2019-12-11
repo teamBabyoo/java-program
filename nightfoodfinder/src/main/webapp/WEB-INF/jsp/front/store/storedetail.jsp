@@ -131,11 +131,17 @@
 						<div class="commentwrap">
 							<ul class="clearboth">
 								<li class="float_l">Review</li>
-								<li id="btn_leave_rv" class="float_r"><i class="fa fa-plus-circle" aria-hidden="true"></i>리뷰남기기</li>
+								<li id="btn_leave_rv" class="float_r">
+									<a href="${pageContext.request.contextPath}/front/store/storeReviewRegistForm.do?storeNo=${store.storeNo}">
+										<i class="fa fa-plus-circle" aria-hidden="true"></i>리뷰남기기
+									</a>
+								</li>
 							</ul>
 							
+							<!-- 
 							<div class="leave_rv user_rv">
-								<form name="reviewForm" id="reviewForm" onsubmit="return registReview()" method="POST" enctype="multipart/form-data">
+								<!-- <form name="reviewForm" id="reviewForm" onsubmit="return registReview()" method="POST" enctype="multipart/form-data"> ->
+								<form name="reviewForm" id="reviewForm" method="POST" enctype="multipart/form-data">
 									<ul class="clearboth">
 										<li>
 											<ul class="clearboth">
@@ -155,15 +161,19 @@
 										<li>
 											<ul class="clearboth">
 												<li class="float_l"><input type="file" name="attach" multiple="multiple" /></li>
-												<li class="float_r"><button type="submit">등록</button></li>
+												<!-- <li class="float_r"><button type="submit">등록</button></li> ->
+												<li class="float_r"><input type="button" onclick="registReview()"/>등록</li>
 											</ul>
 										</li>
 									</ul> 
-									<input type="hidden" id="nickName" />   
+									<input type="hidden" id="nickName" />
+									<input type="hidden" name="storeScope" />
+									<input type="hidden" name="storeNo" value="${store.storeNo }"/>     
 									<%-- <input type="hidden" name="storeNo" value="${store.storeNo}" /> --%>
-									<!-- <input type="hidden" name="recomment" value="" /> -->
+									<!-- <input type="hidden" name="recomment" value="" /> ->
 								</form>
 							</div>
+							 -->
 							
 							<div id="targetContainer">
 							
