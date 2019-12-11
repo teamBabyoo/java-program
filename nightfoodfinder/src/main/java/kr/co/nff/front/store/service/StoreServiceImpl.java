@@ -14,9 +14,13 @@ import kr.co.nff.repository.vo.Pagination;
 import kr.co.nff.repository.vo.Review;
 import kr.co.nff.repository.vo.Search;
 import kr.co.nff.repository.vo.Store;
+import kr.co.nff.util.FileUpload;
 
 @Service("kr.co.nff.front.store.service.StoreServiceImpl")
 public class StoreServiceImpl implements StoreService {
+	
+	@Autowired
+	private FileUpload fileService;
 	
 	@Autowired
 	private StoreDAO dao;
@@ -89,8 +93,11 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public List<Review> reviewRegist(Review review) {
+	public List<Review> reviewRegist(Review review) throws Exception {
+		int fileGroupCode = fileService.upload(review.getAttach());
+		review.setFileGroupCode(fileGroupCode);
 		dao.registReview(review);
+		
 		return dao.selectReview(review);
 	}
 	

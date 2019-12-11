@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.nff.repository.dao.FileDAO">
+	<select id="selectGroupCode" resultType="int">
+		select ifnull(max(file_group_code), 0) + 1
+		  from tb_file
+	</select>
+	
+	<!-- <select id="selectFile" resultType="FileVO" parameterType="int">
+		select *
+		  from tb_file
+		 where file_group_code = #{groupCode}
+	</select>
+	
+	<select id="selectOneFile" resultType="FileVO" parameterType="int">
+		select * 
+		  from tb_file
+		 where file_group_code = #{file
+	</select> -->
+	
+	<insert id="insertFile" parameterType="FileVO">
+		insert into tb_file (
+			file_group_code, org_name, sys_name, path, extension 
+		) values (
+			#{fileGroupCode}, #{orgName}, #{sysName}, #{path}, #{extension} 
+		)
+	</insert>
+</mapper>   
+<!-- <mapper namespace="kr.co.nff.repository.dao.FileDAO"></mapper> -->

@@ -486,7 +486,7 @@
 		INSERT INTO tb_review (
 		store_no, writer_no, review_content, reg_date, store_scope, file_group_code
 		) VALUES (
-		#{storeNo}, #{userNo}, #{reviewContent}, NOW(), #{storeScope}, #{fileGroupCode}
+		#{storeNo}, #{writerNo}, #{reviewContent}, NOW(), #{storeScope}, #{fileGroupCode}
 		)
 	</insert>
 
