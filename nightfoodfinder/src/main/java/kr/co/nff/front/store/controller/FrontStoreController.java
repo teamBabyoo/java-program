@@ -114,22 +114,22 @@ public class FrontStoreController {
 	@ResponseBody
 	public int reviewReportCheckAjax(Review review){
 		return service.reviewcount(review);
-		
 	}
 
 	/*리뷰 신고하기*/
 	@RequestMapping("/review_report.do")
 	@ResponseBody
-	public List<Review> reviewReportAjax(Review review){
-		/*
-		System.out.println("리뷰번호: " + review.getReviewNo());
-		System.out.println("신고사유: " + review.getReportWhy());
-		System.out.println("가게번호: " + review.getStoreNo());
-		System.out.println("유저번호: " + review.getUserNo());
-		*/
+	public Map<String, Object> reviewReportAjax(Review review){
 
-		return service.reviewReport(review);
+		review.setListCnt(service.getReviewCnt(review.getStoreNo()));
+		Map<String, Object> map= new HashMap<>();
+		map.put("list", service.reviewReport(review));
+		map.put("pagination", new Pagination(review.getPage(), service.getReviewCnt(review.getStoreNo())));
+		return map;
 	}
+		
+		
+
 	/* 리뷰 작성 & 이미지 업로드 */
 	@RequestMapping("/review_regist.do")
 	@ResponseBody
@@ -199,27 +199,36 @@ public class FrontStoreController {
 	/*좋아요등록*/
 	@RequestMapping("/i_like.do")
 	@ResponseBody
-	public List<Review> likeInsertAjax(Review review){
+	public Map<String, Object> likeInsertAjax(Review review){
 		/*
 		System.out.println("리뷰번호: " + review.getReviewNo());
 		System.out.println("유저번호: " + review.getUserNo());
 		System.out.println("신고사유: " + review.getReportWhy());
 		System.out.println("가게번호: " + review.getStoreNo());
 		 */
-		return service.insertLike(review);
+		review.setListCnt(service.getReviewCnt(review.getStoreNo()));
+		System.out.println("좋아요페이지" + review.getPage());
+		Map<String, Object> map = new HashMap<>();
+		map.put("list", service.insertLike(review));
+		map.put("pagination", new Pagination(review.getPage(), service.getReviewCnt(review.getStoreNo())));
+		return map;
 
 	}
 	/*좋아요 취소*/
 	@RequestMapping("/i_like_cancel.do")
 	@ResponseBody
-	public List<Review> deleteLiketAjax(Review review){
+	public Map<String, Object> deleteLiketAjax(Review review){
 		System.out.println("리뷰번호: " + review.getReviewNo());
 		System.out.println("유저번호: " + review.getUserNo());
 		/*
 		System.out.println("신고사유: " + review.getReportWhy());
 		System.out.println("가게번호: " + review.getStoreNo());
 		 */
-		return service.deleteLike(review);
+		review.setListCnt(service.getReviewCnt(review.getStoreNo()));
+		Map<String, Object> map = new HashMap<>();
+		map.put("list", service.deleteLike(review));
+		map.put("pagination", new Pagination(review.getPage(), service.getReviewCnt(review.getStoreNo())));
+		return map;
 
 	}
 	

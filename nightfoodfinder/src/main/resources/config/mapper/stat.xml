@@ -12,29 +12,26 @@
 	<!-- store 단골 랭킹 리스트 -->
 	<select id="statFrequentStore" parameterType="Search"
 		resultType="Stat">
-		 select fv.store_no,
-		store_name,
-		store_owner,
-		status,
-		store_tell,
-		(select count(user_no) from tb_frequent_store f where fv.store_no = f.store_no) as frequentCnt,
-		open_time,
-		close_time,
-		(select c.category_name
-		from tb_category
-		as c
-		where store_category = c.category_no) as category_name,
-         (select a.street_load
-		from tb_address as a
-		where fv.store_no = a.store_no) as street_load
-		from
-		frequent_view as fv
-        inner join tb_frequent_store f
-        on fv.store_no = f.store_no
-         inner join tb_address a
-        on fv.store_no = a.store_no
-		group by fv.store_no
-		order by frequentCnt desc
+		  select *
+    from frequent_view f
+    left outer join (
+		select count(store_no) as allfq, store_no
+		from frequent_view
+		group by store_no
+    ) freCnt
+    on f.store_no = freCnt.store_no
+    left outer join (
+     select count(user_no) filterfq, store_no
+       from frequent_view
+       <where>
+       <include refid="statGenderFilter"/>
+       <include refid="statAgeFilter"/>
+       </where>
+       group by store_no
+    ) gen
+    on f.store_no = gen.store_no
+    group by f.store_no
+    order by filterfq desc
 
 		<!-- 페이징 -->
 		LIMIT #{startList}, #{listSize}
