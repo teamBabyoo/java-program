@@ -202,8 +202,8 @@
 	 let storeScope = "";
 	 let fileGroupCode = null;
 //	 let recomment = null;
-//	 let userNo = ${user.userNo};
-	 let userNo = 7;
+// 	 let userNo = ${user.userNo};
+	 let userNo = 17;
 //	 console.log("userNo: ", userNo);
 	 console.log("storeNo: ", storeNo);
 	</script>

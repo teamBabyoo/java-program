@@ -277,9 +277,11 @@ function makeReviewList(list){
 
 	$("#targetContainer").html($tbl);
 	let pageEle = "";
+	
 	$("#paginationBox").html("");
 	pageEle += `<ul class="pagination">`;
-	if (`${pagination.prev}` === 'true') {
+	//에러 잡아야 한다
+	if (pagination.prev === 'true') {
 		pageEle += `
 		<li class="page-item">
 			<a class="page-link" href="#" onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')"> Previous</a>
@@ -290,7 +292,7 @@ function makeReviewList(list){
 		if (`${pagination.page}` == idx) {
 			pageEle += `
 			<li class="page-item active">
-				<a class="page-link" href="#" onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')"> ${idx} </a>
+				<a class="page-link" href="#" onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')" data-page="${idx}"> ${idx} </a>
 			</li>
 			`;
 		} else {
@@ -312,7 +314,6 @@ function makeReviewList(list){
 		</ul>
 	`;
 	$("#paginationBox").append(pageEle);
-	
 	
 }
 /**
@@ -458,6 +459,7 @@ $(document).on('click', '.report', function(e){
 	
 	//유저번호 들어오는지
 	console.log("유저번호", userNo);
+	let page = $(".page-item.active a").attr("data-page");
 
 	//review_no를 받기위해	
 	let rNo = e.target;
@@ -466,7 +468,7 @@ $(document).on('click', '.report', function(e){
 		url: "review_report_check.do",
 		data: {userNo, reviewNo: rNo.value},
 		dataType: "json",
-		success: (count) => reviewReport(count, rNo)
+		success: (count) => reviewReport(count, rNo, page)
 	});
 	return false;
 	
@@ -474,7 +476,7 @@ $(document).on('click', '.report', function(e){
 
 });
 
-function reviewReport(count, rNo) {
+function reviewReport(count, rNo, page) {
 	console.log("카운트", count, "글번호", rNo);
 	if(count == 0) {
 		//신고사유 모달창
@@ -525,6 +527,7 @@ function reviewReport(count, rNo) {
 				url: "review_report.do",
 				type: "POST",
 				data: {
+					page,
 					userNo: $("#userNo").val(),
 					reviewNo: $("#reviewNo").val(), 
 					reportWhy: $('input[name=reportWhy]:checked').val(),
@@ -549,6 +552,7 @@ $(document).on('click', '.heartclick', function(e){
 //	console.log(rno);
 	console.log($(e.target).attr('data-rno'));
 	console.log("src : ", $(e.target).attr('src'));
+	let page = $(".page-item.active a").attr("data-page");
 	let heart = "/nightfoodfinder/resources/images/icon_hrt.png";
 	//좋아요가 되어있으면 취소
 	if($(e.target).attr('src') === heart){
@@ -556,6 +560,7 @@ $(document).on('click', '.heartclick', function(e){
 			url: "i_like_cancel.do",
 			data: {userNo,
 				storeNo,
+				page,
 				reviewNo: $(e.target).attr('data-rno')},
 				dataType: "json",
 				success: (list) => makeReviewList(list)
@@ -567,6 +572,7 @@ $(document).on('click', '.heartclick', function(e){
 			url: "i_like.do",
 			data: {userNo,
 				storeNo,
+				page,
 				reviewNo: $(e.target).attr('data-rno')},
 				dataType: "json",
 				success: (list) => makeReviewList(list)
