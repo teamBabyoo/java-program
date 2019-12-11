@@ -70,21 +70,6 @@
      	
 <script>
 
-Kakao.init('5f7e99b864f210e1d5cb763a42e411cb');
-function loginWithKakao() {
-  // 로그인 창을 띄웁니다.
-  Kakao.Auth.login({
-    success: function(authObj) {
-      alert(JSON.stringify(authObj));
-      
-      
-    },
-    fail: function(err) {
-      alert(JSON.stringify(err));
-    }
-  });
-};
-
 
 var uType1 = document.getElementById("userType1");
 var uType2 = document.getElementById("userType2");
