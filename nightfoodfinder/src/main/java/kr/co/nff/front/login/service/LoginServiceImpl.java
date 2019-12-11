@@ -55,6 +55,13 @@ public class LoginServiceImpl implements LoginService {
 		return dao.selectKakao(user);
 	}
 
+	@Override
+	public void insertKakaoInfo(User user) {
+		dao.insertKakaoInfo(user);
+		
+	}
+
+	
 	
 
 }

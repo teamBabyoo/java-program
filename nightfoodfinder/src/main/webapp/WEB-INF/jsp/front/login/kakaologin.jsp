@@ -3,7 +3,7 @@
 <%@ page import="java.net.HttpURLConnection" %>
 <%@ page import="java.io.BufferedReader" %>
 <%@ page import="java.io.InputStreamReader" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>    
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -24,19 +24,31 @@ h3 {
 </style>
   </head>
   <body>
-	<form >
-	
-	</form>
+  <div>
+  	
+  </div>
 
   
   <script>
-  
-   /*  $(function () {
+  var kInfo = "<%=session.getAttribute("kakaoInfo") %>"
+
+
+ $(function () {
       $("body").hide();
       $("body").fadeIn(1000);  // 1초 뒤에 사라 지자 
       setTimeout(function(){$("body").fadeOut(1000);},1000);
-      setTimeout(function(){location.href= "${pageContext.request.contextPath}/front/main/main.do"},2000);
-    }) */
+      setTimeout(function(){
+    	  console.log(kInfo);
+    	  if(kInfo == "y"){
+    		  //console.log("기존"+kInfo.value());
+    	  	location.href= "${pageContext.request.contextPath}/front/main/main.do"    		  
+    	  } else {
+    		  //console.log("최초"+kInfo.value());
+    		  alert('최초 카카오 로그인 추가정보입력 페이지 이동');
+    		  location.href= "${pageContext.request.contextPath}/front/login/kakaoinfo.do" 
+    	  }
+    	  },2000);
+    })
   </script>
 
   </body>

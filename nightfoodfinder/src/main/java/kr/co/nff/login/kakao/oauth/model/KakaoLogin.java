@@ -127,9 +127,10 @@ public class KakaoLogin {
 			String nickname = properties.getAsJsonObject().get("nickname").getAsString();
 			 String email = kakao_account.getAsJsonObject().get("email").getAsString();
 			 
-			 userInfo.put("nickname", nickname); userInfo.put("email", email);
+			 userInfo.put("nickname", nickname); 
+			 userInfo.put("email", email);
+			//userInfo.put("result", result);
 			
-	            userInfo.put("result", result);
 	        } catch (IOException e) {
 	            // TODO Auto-generated catch block
 	            e.printStackTrace();

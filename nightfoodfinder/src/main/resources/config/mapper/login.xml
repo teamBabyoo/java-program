@@ -51,6 +51,13 @@
 			where user_email = #{userEmail}
 	</select>
 	
+	<!-- 카카오 회원정보 입력 -->
+	<update id="insertKakaoInfo" parameterType="User">
+		update tb_user 
+			set user_gender = #{userGender} , user_age = #{userAge} 
+			where (user_no = #{userNo})
+	</update>
+	
 	<!-- 회원정보 가져오기 -->
 	<select id="selectLoginOneUser" resultType="User" parameterType="User">
 		select * from tb_user
