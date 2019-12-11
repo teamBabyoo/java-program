@@ -268,16 +268,27 @@ public class FrontStoreController {
 	/*사장 답글*/
 	@RequestMapping("/recomment_regist.do")
 	@ResponseBody
-	public List<Review> insertrecomment(Review review) {
+	public Map<String, Object> insertrecomment(Review review) {
 		service.insertRecomment(review);
-		return service.reviewList(review);
+		
+		review.setListCnt(service.getReviewCnt(review.getStoreNo()));
+		Map<String, Object> map= new HashMap<>();
+		map.put("list", service.reviewList(review));
+		map.put("pagination", new Pagination(review.getPage(), service.getReviewCnt(review.getStoreNo())));
+		return map;
+//		return service.reviewList(review);
 	}
 		
 	@RequestMapping("/recomment_delete.do")
 	@ResponseBody
-	public List<Review> deleteRecomment(Review review) {
+	public Map<String, Object> deleteRecomment(Review review) {
 		service.deleteRecomment(review);
-		return service.reviewList(review);
+		review.setListCnt(service.getReviewCnt(review.getStoreNo()));
+		Map<String, Object> map= new HashMap<>();
+		map.put("list", service.reviewList(review));
+		map.put("pagination", new Pagination(review.getPage(), service.getReviewCnt(review.getStoreNo())));
+		return map;
+//		return service.reviewList(review);
 	}
 
 	

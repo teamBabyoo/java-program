@@ -148,6 +148,7 @@
 				<th>신고 횟수</th>
 				<th>차단 여부</th>
 			</tr>
+			<div id="pppp">
 			<c:if test="${empty list}">
 				<tr>
 					<td colspan="5">리뷰가 없습니다.</td>
@@ -161,7 +162,7 @@
 					<td><input type="checkbox" class="checkboxid" id="checkboxid" name="reviewNo" data-reviewNo="${li.reviewNo}"/></td>
 					<td>${li.nickName}</td>
 					<td>${li.storeName}</td>
-					<td class="myBtn" id="myBtn" data-reviewNo="${li.reviewNo }" onclick="reportmodal(this)"
+ 					<td class="myBtn" id="myBtn" data-reviewNo="${li.reviewNo }" onClick="reportmodal(${li.reviewNo}, 1,'${li.reviewContent }')"
 						style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${li.reviewContent }</td>	
 					<td>${li.regDate }</td>
 					<td>${li.reportCount }</td>
@@ -178,7 +179,7 @@
 
 				</tr>
 			</c:forEach>
-
+</div>
       
            
           </table>
@@ -195,7 +196,7 @@
 			<!-- 이전 버튼 -->
 				<c:if test="${pagination.prev}">
 					<li class="page-item"><a class="page-link" href="#"
-						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a>
+						onClick="fn_prev( '${pagination.range}', '${pagination.rangeSize}')">Previous</a>
 					</li>
 				</c:if>
 				
@@ -211,7 +212,7 @@
 			<!-- 다음 버튼 -->
 				<c:if test="${pagination.next}">
 					<li class="page-item"><a class="page-link" href="#"
-						onClick="fn_next('${pagination.range}', '${pagination.range}', '${pagination.rangeSize}')">Next</a>
+						onClick="fn_next('${pagination.range}', '${pagination.rangeSize}')">Next</a>
 					</li>
 				</c:if>
 			</ul>
@@ -227,6 +228,7 @@
 				<span class="close">&times;</span>
 				<p></p>
 				<div></div>
+			<div id="paginationBox_two"></div>
 			</div>
 
 		</div>
@@ -239,7 +241,7 @@
       
       <script>
 		
-		/* ----------------------- 모달팝업 -------------------------- */
+		/* ----------------------- 모달팝업, 모달 페이징 -------------------------- */
 		// 모달 가져온다.
 		var modal = document.getElementById('myModal');
 
@@ -249,9 +251,93 @@
 		// 모달을 닫는 <span>을 가져온다.
 		var span = document.getElementsByClassName("close")[0];
 
-		// 버튼을 클릭했을 때, 모달을 연다.
+		
+		
+		// 버튼을 클릭했을 때, 모달을 연다. 모달 내 페이징
 	
-	
+		let content = "";
+		function reportmodal(reviewNo, pageNo, c) {
+			if (c) content = c;
+			var data = {};
+			data["reviewNo"] = reviewNo;
+			data["page"]  = pageNo;
+			
+//			data["page"] = page;
+		//	data["range"] = range;
+			console.log(data);
+
+			$.ajax({
+				url: "${pageContext.request.contextPath}/admin/review/reportmodal.do",
+				type: "POST",
+				data: data,
+				dataType: "json",
+				success: function(data){
+					console.log(data);
+					$("#myModal").data("reviewNo", reviewNo);
+					modal.style.display = "block";
+					$(".modal-content p:eq(0)").text(
+							"리뷰: " +  content) 
+// 							"리뷰: " + $(a).text()) 
+					$(".modal-content div").empty()
+					for(var i=0; i< data.list.length; i++){
+						$(".modal-content div").append("<p>" + data.list[i].reason + "</p>")
+											   .append("<p>" + data.list[i].nickName + "</p>")
+					
+
+						console.log(data.list[i].reason);
+						console.log(data.list[i].nickName);
+					}
+
+
+					let html = `<ul class="pagination_two">`;
+					
+					<!-- 이전 버튼 -->
+					if (data.paginationtwo.prev) {
+						
+						html += `<li class="page-item_two"><a class="page-link_two" href="#\${data.paginationtwo.startPage - 1}"
+							onClick="reportmodal(\${reviewNo}, '\${data.paginationtwo.startPage - 1}')">Previous</a>
+							</li>`;
+					}	
+						
+					<!-- 페이지 버튼 -->
+
+						for (let i = data.paginationtwo.startPage; i <= data.paginationtwo.endPage; i++)	{
+					
+							
+							if (data.paginationtwo.page == i ){
+								html += `<li class="page-item_two active">`;
+							} else {
+								html += `<li class="page-item_two">`;
+							}
+							html += `
+								<a class="page-link_two" href="#\${i}"
+								onClick="reportmodal(\${reviewNo}, '\${i}')">\${i}</a>
+							</li>`
+
+						}
+
+					<!-- 다음 버튼 -->
+					if (data.paginationtwo.next) {
+						
+						html += `<li class="page-item_two"><a class="page-link_two" href="#\${data.paginationtwo.endPage + 1}"
+								onClick="reportmodal(\${reviewNo}, '\${data.paginationtwo.endPage + 1}')">Next</a>
+							</li>`;
+					}	
+
+
+					html += `</ul>`;
+					
+					$("#paginationBox_two").html(html);
+
+				}
+			});
+	}
+		
+		
+		
+		
+		
+		/*
 		function reportmodal(a) {
 
 			var rno = $(a).attr("data-reviewNo");
@@ -282,8 +368,7 @@
 	}
 		
 				
-	
-
+	*/
 		
 		
 
@@ -312,7 +397,7 @@
 		/* ----------------------- 페이징 --------------------------- */
 
 		//이전 버튼 이벤트
-		function fn_prev(page, range, rangeSize) {
+		function fn_prev(range, rangeSize) {
 			var page = ((range - 2) * rangeSize) + 1;
 			var range = range - 1;
 			var url = "${pageContext.request.contextPath}/admin/review/reportedreviewlist.do";
@@ -336,7 +421,7 @@
 		}
 
 		//다음 버튼 이벤트
-		function fn_next(page, range, rangeSize) {
+		function fn_next(range, rangeSize) {
 			var page = parseInt((range * rangeSize)) + 1;
 			var range = parseInt(range) + 1;
 			var url = "${pageContext.request.contextPath}/admin/review/reportedreviewlist.do";

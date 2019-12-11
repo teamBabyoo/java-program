@@ -1,6 +1,7 @@
 package kr.co.nff.admin.review.service;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.co.nff.repository.vo.ReportReview;
 import kr.co.nff.repository.vo.Review;
@@ -16,5 +17,6 @@ public interface AdminReviewService {
 	
 	List<Review> listReportedReview(Search search);
 	int ReportGetCnt(Search search);
-	List<ReportReview> reportDetail(int no);
+	Map<String, Object> reportDetail(ReportReview report);
+	
 }

@@ -20,6 +20,7 @@ public interface LoginDAO {
 	
 	void insertKakaoUser(User user);
 	int selectKakao(User user);
+	void insertKakaoInfo(User user);
 	
 	//로그인한 회원
 	User selectLoginOneUser(User user); 

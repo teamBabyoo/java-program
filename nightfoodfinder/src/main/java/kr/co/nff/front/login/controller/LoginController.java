@@ -139,22 +139,31 @@ public class LoginController {
 			// 로그인 기록 있는 유저
 			System.out.println("기존 유저"+loginservice.selectLoginOneUser(vo));
 			session.setAttribute("loginUser", loginservice.selectLoginOneUser(vo));
+			session.setAttribute("kakaoInfo", "y");
+			System.out.println("기존 유저"+session.getAttribute("kakaoInfo"));
 		} else {
 			// 로그인 기록 없는 유저, 디비에 정보 insert 해줘야함
 			loginservice.insertKakaoUser(vo);
-			System.out.println("첫로그인 유저"+loginservice.selectLoginOneUser(vo));
+			System.out.println(loginservice.selectLoginOneUser(vo));
 			session.setAttribute("loginUser", loginservice.selectLoginOneUser(vo));
+			session.setAttribute("kakaoInfo", "n");
+			System.out.println("첫로그인 유저"+session.getAttribute("kakaoInfo"));
 		}
 		mav.setViewName("front/login/kakaologin");
-		
-		
-		
-		
-		
 		return mav;
 	}// end kakaoLogin()
      
-    
+ // 카카오 추가정보 페이지 이동   
+ @RequestMapping("front/login/kakaoinfo.do")
+ public void kakaoinfo () {}
+ 
+ // 카카오 추가정보 입력
+ @RequestMapping("front/login/kakaoinsert.do")
+ public String kakaoinsert (User user) {
+	 System.out.println("추가정보입력"+user.getUserGender());
+	 loginservice.insertKakaoInfo(user);
+	 return "redirect:/front/main/main.do";
+ }
     
     
   //로그아웃
@@ -176,7 +185,7 @@ public class LoginController {
 	//스토어 가입
 	@RequestMapping("/front/login/storejoin.do")
 	public String storeJoin(Store store) {
-		System.out.println(store);
+		//System.out.println(store);
 		loginservice.joinStore(store);
 		return "redirect:/front/main/main.do";
 	}

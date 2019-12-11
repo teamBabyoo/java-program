@@ -594,8 +594,7 @@ $(document).on('click', '.heartclick', function(e){
 
 function makeform(a) {
 	var rno = $(a).attr("data-no");	// 리뷰 넘버
-	
-	console.log(rno);
+
 	$(".bossComment").empty();
 	
 	$("#bossComment" + rno).append(
@@ -623,10 +622,12 @@ function makeform(a) {
 //답글 등록
 function recommentSubmit(a) {
 	var rno = $(a).attr("data-rno");
-
+	let page = $(".page-item.active a").attr("data-page");
+	console.log(page);
+	
 		$.post({
 			url: "recomment_regist.do",
-			data: {storeNo, reviewNo: rno, recomment : $("#bossContent").val() },
+			data: {storeNo, reviewNo: rno, recomment : $("#bossContent").val(), page },
 			success: (list) => makeReviewList(list), 
 			error: () => console.log("에러")
 		});		
@@ -639,10 +640,11 @@ function onecancel(a) {
 
 //답글 삭제
 $("#targetContainer").on("click", "button.delRecomment", (e) => {
+	let page = $(".page-item.active a").attr("data-page");
 	$.getJSON({
 		
 		url: "recomment_delete.do",
-		data: {reviewNo: $(e.target).data("no"), storeNo },
+		data: {reviewNo: $(e.target).data("no"), storeNo, page },
 		success: (list) => makeReviewList(list),
 		error: () => console.log("에러")
 	});
@@ -680,13 +682,15 @@ $("#row" + rno).hide();
 $("#targetContainer").on("click", "a.updatetwo", (e) => {
 	e.preventDefault();
 	let rno = $(e.target).data("rno");
+	let page = $(".page-item.active a").attr("data-page");
 	$.ajax({
 		url: "recomment_regist.do",
 		type: "POST",
 		data: {
 			storeNo,
 			reviewNo : rno,
-			recomment : $("#modbossContent").val() 
+			recomment : $("#modbossContent").val(),
+			page 
 			},
 		dataType: "json",
 		success: result => makeReviewList(result)
