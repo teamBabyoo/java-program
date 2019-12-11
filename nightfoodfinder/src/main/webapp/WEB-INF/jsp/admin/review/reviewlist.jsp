@@ -188,7 +188,7 @@
 			<!-- 이전 버튼 -->
 				<c:if test="${pagination.prev}">
 					<li class="page-item"><a class="page-link" href="#"
-						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a>
+						onClick="fn_prev('${pagination.range}', '${pagination.rangeSize}')">Previous</a>
 					</li>
 				</c:if>
 				
@@ -204,7 +204,7 @@
 			<!-- 다음 버튼 -->
 				<c:if test="${pagination.next}">
 					<li class="page-item"><a class="page-link" href="#"
-						onClick="fn_next('${pagination.range}', '${pagination.range}', '${pagination.rangeSize}')">Next</a>
+						onClick="fn_next('${pagination.range}', '${pagination.rangeSize}')">Next</a>
 					</li>
 				</c:if>
 			</ul>
@@ -290,7 +290,7 @@
 			/* ----------------------- 페이징 --------------------------- */
 
 			//이전 버튼 이벤트
-			function fn_prev(page, range, rangeSize) {
+			function fn_prev( range, rangeSize) {
 				var page = ((range - 2) * rangeSize) + 1;
 				var range = range - 1;
 				var url = "${pageContext.request.contextPath}/admin/review/reviewlist.do";
@@ -312,7 +312,7 @@
 			}
 
 			//다음 버튼 이벤트
-			function fn_next(page, range, rangeSize) {
+			function fn_next( range, rangeSize) {
 				var page = parseInt((range * rangeSize)) + 1;
 				var range = parseInt(range) + 1;
 				var url = "${pageContext.request.contextPath}/admin/review/reviewlist.do";

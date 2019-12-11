@@ -18,12 +18,12 @@ public class Pagination {
 	
 	public Pagination() {
 		this.page = 1;
-		this.listSize = 5; // 초기값으로 목록개수를 10으로 셋팅
-		this.rangeSize = 10; // 초기값으로 페이지범위를 5로 셋팅
+		this.listSize = 10; // 초기값으로 목록개수를 10으로 셋팅
+		this.rangeSize = 5; // 초기값으로 페이지범위를 5로 셋팅
 	}
 	
 	public Pagination(int page, int listCnt) {
-		this(page, listCnt, 5, 10);
+		this(page, listCnt, 10, 5);
 		
 	}
 
