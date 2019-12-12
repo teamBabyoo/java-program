@@ -5,22 +5,18 @@
 	<!-- 알람 생성 -> user, store 공동 사용 -->
 	<insert id="insertNotice" parameterType="Notice">
 		insert into tb_notice (
-			<if test="userNo != null">
+		<choose>
+			<!-- user의  -->
+			<when test="noticeCode == 1">
 				user_no,
-				notice_code	
-			) values (
-				#{userNo},
-				#{noticeCode}
-			)
-			</if>
-			<if test="storeNo != null">
-				store_no,
-				notice_code	
-			) values (
-				#{storeNo},
-				#{noticeCode}
-			)
-			</if>
+				notice_code,
+				from_store_no
+			</when>
+			<when test=""></when>
+			<when test=""></when>
+			<when test=""></when>
+			<when test=""></when>
+		</choose>
 	</insert>
 
 	<!-- 알림 리스트 -->

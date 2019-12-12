@@ -64,10 +64,7 @@ function noticeList(list) {
 	// 있다면
 	 let html = ``;
 	 for (let val of list) {
-		 html += 
-			 `<li>
-			 	
-			 </li>`
+		 
 	 };
 	
 	
