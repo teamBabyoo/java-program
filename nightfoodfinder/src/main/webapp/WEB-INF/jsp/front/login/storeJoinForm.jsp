@@ -18,9 +18,10 @@
 <script type="text/javascript"
 	src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js"
 	charset="utf-8"></script>
+<script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2e2c217701074a631a1029878ed30d6f&libraries=services"></script>	
 </head>
 <body>
-
 	<div class="wrapper sJoin_wrap">
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 		<div class="content">
@@ -61,17 +62,17 @@
 							<th rowspan="4">주소</th>
 						</tr>
 						<tr>
-							<td><input type="text" id="zipNo" name="zipNo" readOnly /> 
+							<td><input type="text" id="zipNo" name="zipNo"  /> 
 							<input type="hidden" id="sggNm" name="sggNm" /> 
 							<input type="button" onClick="goPopup();" value="주소찾기" /></td>
 						</tr>
 						<tr>
 							<td><input type="text" style="width: 300px;"
-								id="roadFullAddr" name="roadFullAddr" readOnly /></td>
+								id="roadFullAddr" name="roadFullAddr"  /></td>
 						</tr>
 						<tr>
 							<td><input type="text" style="width: 300px;" id="addrDetail"
-								name="addrDetail" readOnly /></td>
+								name="addrDetail"  /></td>
 						</tr>
 
 						<tr>
@@ -133,7 +134,7 @@
 					<input type="hidden" name="closeTime"/>
 					<input type="hidden" id="entX" name="entX"/>
 					<input type="hidden" id="entY" name="entY"/>
-					<button id="reg_submit">가입하기</button>
+					<button type="submit" id="reg_submit">가입하기</button>
 				</form>
 			</div>
 		</div>
@@ -166,6 +167,7 @@
 
 			$('input[name="openTime"]').val(openTime);
 			$('input[name="closeTime"]').val(closeTime);
+			
 			}
 			
 //주소입력 팝업부분
@@ -173,18 +175,31 @@ function goPopup(){
 	var pop = window.open("/nightfoodfinder/api/addrPop.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
 }
 
-function jusoCallBack(roadFullAddr,zipNo,addrDetail,sggNm,entX,entY){
+function jusoCallBack(roadFullAddr,zipNo,addrDetail,sggNm){
 		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
 		document.form.roadFullAddr.value = roadFullAddr;
 		document.form.addrDetail.value = addrDetail;
 		document.form.zipNo.value = zipNo;
 		document.form.sggNm.value = sggNm;
-		document.form.entX.value = entX;
-		document.form.entY.value = entY;
+		/* document.form.entX.value = entX;
+		document.form.entY.value = entY; */
+		
+		var geocoder = new kakao.maps.services.Geocoder();
+		var callback = function (result, status) {
+		    if (status === kakao.maps.services.Status.OK) {
+		        console.log(result);
+		        document.form.entX.value = result[0].y;
+		        document.form.entY.value = result[0].x;
+		        
+		    }
+		};
+		geocoder.addressSearch(roadFullAddr, callback);  
+
 	
 }
 
 // 주소 위도경도 변환
+
 
 
 // 비밀번호 유효성검사
