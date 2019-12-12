@@ -45,7 +45,13 @@ public class FrontNoticeController {
 		User loginUser = (User)session.getAttribute("loginUser");
 		Notice notice = new Notice();
 		notice.setUserNo(loginUser.getUserNo());
-		return service.countNewNotice(notice);
+		
+		int noticeCnt = service.countNewNotice(notice);
+		
+		// 알림 갯수가 0이라면 0 반환. -> script단에서 걸러준다.
+		if (noticeCnt != 0) return service.countNewNotice(notice);
+		return 0;
+
 	}
 	
 	/* 알림 하나 삭제 */
