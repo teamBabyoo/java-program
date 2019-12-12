@@ -114,7 +114,7 @@
 						<tr name="trMenu">
 							<th>대표 메뉴 / 가격</th>
 							<td>
-								<input type="text" name="menu">
+								<input type="text" name="menuName">
 								<input type="number" name="price">
 								<i class="fa fa-plus-square-o" aria-hidden="true" id="plus_btn"></i>
 								<i class="fa fa-minus-square-o" aria-hidden="true" id="minus_btn"></i></td>
@@ -266,25 +266,25 @@ $("#storeEmail").blur(function() {
 						// 1 : 아이디가 중복되는 문구
 						$("#emailChk").text("사용중인 이메일입니다");
 						$("#emailChk").css("color", "red");
-						$("#reg_submit").attr("disabled", true);
+						//$("#reg_submit").attr("disabled", true);
 					} 
 				else {
 						if(idJ.test(storeEmail)){
 							// 0 : 아이디 길이 / 문자열 검사
 							$("#emailChk").text("");
-							$("#reg_submit").attr("disabled", false);
+							//$("#reg_submit").attr("disabled", false);
 				
 						} else if(storeEmail == ""){
 							
 							$('#emailChk').text('이메일을 입력해주세요');
 							$('#emailChk').css('color', 'red');
-							$("#reg_submit").attr("disabled", true);				
+							//$("#reg_submit").attr("disabled", true);				
 							
 						} else {
 							
 							$('#emailChk').text("올바른 형식의 이메일을 입력해주세요.");
 							$('#emailChk').css('color', 'red');
-							$("#reg_submit").attr("disabled", true);
+							//$("#reg_submit").attr("disabled", true);
 						}
 						
 					} 
@@ -307,25 +307,19 @@ function addRow () {
 	var addMenu =  '<tr name="trMenu">'+
 		'<th></th>'+
 		'<td>'+
-			'<input type="text" name="menu">'+
+			'<input type="text" name="menuName">'+
 			'<input type="number" name="price">'+
 	'</tr>';
-     
-var trHtml = $( "tr[name=trMenu]:last" ); //last를 사용하여 trStaff라는 명을 가진 마지막 태그 호출
- 
-trHtml.after(addMenu); //마지막 trStaff명 뒤에 붙인다.
+
+var trHtml = $( "tr[name=trMenu]:last" ); 
+trHtml.after(addMenu); 
 }
 
 function delRow () {
-	 
 	var trHtml =$( "tr[name=trMenu]:last" );
-    
     if ($( "tr[name=trMenu]" ).length ==1) return;
     trHtml.remove(); //tr 테그 삭제
 	
-	
-    
-    
 }
 
 

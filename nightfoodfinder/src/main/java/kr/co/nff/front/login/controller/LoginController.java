@@ -1,7 +1,9 @@
 package kr.co.nff.front.login.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +24,7 @@ import kr.co.nff.front.login.service.LoginService;
 import kr.co.nff.login.kakao.oauth.model.KakaoLogin;
 import kr.co.nff.login.naver.oauth.bo.NaverLoginBO;
 import kr.co.nff.login.naver.oauth.model.JsonParser;
+import kr.co.nff.repository.vo.Menu;
 import kr.co.nff.repository.vo.Store;
 import kr.co.nff.repository.vo.User;
 
@@ -29,7 +32,9 @@ import kr.co.nff.repository.vo.User;
 @Controller("kr.co.nff.front.login.LoginController")
 //@RequestMapping("/front/login")
 public class LoginController {
-
+	
+	
+	
 	//카카오 로그인
 	@Autowired
 	private KakaoLogin kakao;
@@ -186,7 +191,20 @@ public class LoginController {
 	@RequestMapping("/front/login/storejoin.do")
 	public String storeJoin(Store store) {
 		System.out.println(store);
-		loginservice.joinStore(store);
+		String [] menus = store.getMenuName();
+		Integer [] prices = store.getPrice();
+		List<Menu> list = new ArrayList<Menu>();
+		
+		for(int i = 0; i < menus.length; i++) {
+			Menu m = new Menu();
+			m.setMenuName(menus[i]);
+			m.setPrice(prices[i]);
+			list.add(m);
+		}
+		
+		System.out.println(list.toString());
+		//gson.format("넘어오는 스트링문자열", Menu.class);
+		//loginservice.joinStore(store);
 		return "redirect:/front/main/main.do";
 	}
 	// 스토어 가입폼
