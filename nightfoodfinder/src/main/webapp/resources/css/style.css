@@ -437,6 +437,10 @@ div#commentplace > * { width: 100%; margin: 0 auto; }
 /** 진실 끝 **/
 
 /** 유빈 **/
+header div:nth-child(3) li span {
+    line-height: 20px;
+    top: 10px;
+}
 #notice_btn .topshape { top: 20px; right: 12px; }
 .notice_content { 
 	position: absolute; 
@@ -454,6 +458,7 @@ div#commentplace > * { width: 100%; margin: 0 auto; }
     top: -10px;
     left: 34px;
 }
+
 #rednotice {
 	background-color: #fa3e3e;
     border-radius: 3px;

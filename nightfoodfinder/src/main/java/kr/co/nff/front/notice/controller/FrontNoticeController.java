@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.nff.front.notice.service.NoticeService;
 import kr.co.nff.repository.vo.Notice;
+import kr.co.nff.repository.vo.Store;
 import kr.co.nff.repository.vo.User;
 
 @Controller("kr.co.nff.front.notice.controller.FrontNoticeController")
@@ -43,8 +44,11 @@ public class FrontNoticeController {
 	@ResponseBody
 	public int countNoticeAjax(HttpSession session) {
 		User loginUser = (User)session.getAttribute("loginUser");
+		Store storeUser = (Store)session.getAttribute("storeUser");
+		
 		Notice notice = new Notice();
-		notice.setUserNo(loginUser.getUserNo());
+		if (storeUser == null) notice.setUserNo(loginUser.getUserNo());
+		else notice.setStoreNo(storeUser.getStoreNo());
 		
 		int noticeCnt = service.countNewNotice(notice);
 		
