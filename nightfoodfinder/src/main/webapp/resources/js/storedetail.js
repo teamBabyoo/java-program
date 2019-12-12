@@ -340,14 +340,16 @@ function reposition() {
  */
 function registReview() {
 	let reviewContent = $('textarea[name="reviewContent"]').val();
-	let form = $('#reviewForm');
+	let form = $('#reviewForm')[0];
 	let data = new FormData(form);
+	console.log("나", data);
 	$.ajax({
 		type: "POST",
 		enctype: "multipart/form-data",
 		url: "review_regist.do",
 		data: data,
 		dataType: "json",
+		cache: false,
         processData: false,
         contentType: false,
         success: function(data) {
@@ -358,6 +360,7 @@ function registReview() {
             alert("fail");
         }
 	});
+	return false;
 };
 
 
@@ -405,6 +408,7 @@ $('#scopePannel > a').click(function(e) {
 	e.preventDefault();
 	// storeScope --> n점 (n번째 별)
 	storeScope = parseInt($(e.target).attr('data-rscope'));
+	$('input[name="storeScope"]').val(storeScope); 
 	console.log("현재별점: ", storeScope);
 	// 현재 클릭한 별의 형제 요소의 길이만큼 반복문 돌리며 rscope값이 작을 경우 색상변경(e.target 포함)
 	for (let i = 0; i < $(e.target).siblings().length; i++) {

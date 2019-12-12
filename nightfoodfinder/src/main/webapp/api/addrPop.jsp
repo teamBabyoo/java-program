@@ -4,6 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
 <% 
 	//request.setCharacterEncoding("UTF-8");  //한글깨지면 주석제거
 	//request.setCharacterEncoding("EUC-KR");  //해당시스템의 인코딩타입이 EUC-KR일경우에
@@ -15,11 +16,13 @@
 	
 	String sggNm  = request.getParameter("sggNm");
 	
-	String entX  = request.getParameter("entX");
-	String entY  = request.getParameter("entY");
+	/* String entX  = request.getParameter("entX");
+	String entY  = request.getParameter("entY"); */
 %>
 </head>
 <script language="javascript">
+
+
 function init(){
 	var url = location.href;
 	var confmKey = "devU01TX0FVVEgyMDE5MTIwNTE1MTQxMTEwOTI4MjE=";//승인키
@@ -34,10 +37,12 @@ function init(){
 	}else{
 		opener.jusoCallBack("<%=roadFullAddr%>","<%=addrDetail%>", 
 			 "<%=zipNo%>", "<%=sggNm%>"
-			, "<%=entX%>", "<%=entY%>");
+			<%-- , "<%=entX%>", "<%=entY%>" --%>);
 		window.close();
 	}
 }
+
+
 </script>
 <body onload="init();">
 	<form id="form" name="form" method="post">

@@ -3,6 +3,8 @@ package kr.co.nff.repository.vo;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 	@Data
@@ -14,7 +16,7 @@ import lombok.Data;
 		public Review(int pageNo, int listSize) {
 			super(pageNo, listSize);
 		}		
-	
+		List<MultipartFile> attach;
 		private String nickName;
 		private String storeName;
 		private String reviewContent;

@@ -9,5 +9,6 @@ public interface FileDAO {
 	public void insertFile(FileVO file);
 
 	public FileVO selectOneFile(int fno);
+	
 
 }
