@@ -19,7 +19,8 @@
 	src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js"
 	charset="utf-8"></script>
 <script type="text/javascript"
-        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2e2c217701074a631a1029878ed30d6f&libraries=services"></script>	
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2e2c217701074a631a1029878ed30d6f&libraries=services"></script>
+<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">	
 </head>
 <body>
 	<div class="wrapper sJoin_wrap">
@@ -110,6 +111,15 @@
 							<input type="checkbox" name="day" value="6" />토 
 							<input type="checkbox" name="day" value="7" />일</td>
 						</tr>
+						<tr name="trMenu">
+							<th>대표 메뉴 / 가격</th>
+							<td>
+								<input type="text" name="menu">
+								<input type="number" name="price">
+								<i class="fa fa-plus-square-o" aria-hidden="true" id="plus_btn"></i>
+								<i class="fa fa-minus-square-o" aria-hidden="true" id="minus_btn"></i></td>
+						</tr>
+					
 						<tr>
 							<th>가게 분류</th>
 							<td><select name="storeCategory">
@@ -178,8 +188,8 @@ function goPopup(){
 function jusoCallBack(roadFullAddr,zipNo,addrDetail,sggNm){
 		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
 		document.form.roadFullAddr.value = roadFullAddr;
-		document.form.addrDetail.value = addrDetail;
 		document.form.zipNo.value = zipNo;
+		document.form.addrDetail.value = addrDetail;
 		document.form.sggNm.value = sggNm;
 		/* document.form.entX.value = entX;
 		document.form.entY.value = entY; */
@@ -197,8 +207,6 @@ function jusoCallBack(roadFullAddr,zipNo,addrDetail,sggNm){
 
 	
 }
-
-// 주소 위도경도 변환
 
 
 
@@ -287,7 +295,38 @@ $("#storeEmail").blur(function() {
 			});
 		});
 
+// 메뉴 입력 추가,삭제
+$("#plus_btn").click(() => {
+	addRow();
+})
+$("#minus_btn").click(() => {
+	delRow();
+})
 
+function addRow () {
+	var addMenu =  '<tr name="trMenu">'+
+		'<th></th>'+
+		'<td>'+
+			'<input type="text" name="menu">'+
+			'<input type="number" name="price">'+
+	'</tr>';
+     
+var trHtml = $( "tr[name=trMenu]:last" ); //last를 사용하여 trStaff라는 명을 가진 마지막 태그 호출
+ 
+trHtml.after(addMenu); //마지막 trStaff명 뒤에 붙인다.
+}
+
+function delRow () {
+	 
+	var trHtml =$( "tr[name=trMenu]:last" );
+    
+    if ($( "tr[name=trMenu]" ).length ==1) return;
+    trHtml.remove(); //tr 테그 삭제
+	
+	
+    
+    
+}
 
 
 </script>

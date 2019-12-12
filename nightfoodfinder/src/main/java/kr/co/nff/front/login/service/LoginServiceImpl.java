@@ -20,7 +20,7 @@ public class LoginServiceImpl implements LoginService {
 		dao.insertStore(store);		
 		dao.insertAddress(store);
 		dao.insertHoliday(store);
-		
+		dao.insertMenuList(store);
 	}
 	
 	public Store storeLogin(Store store) {

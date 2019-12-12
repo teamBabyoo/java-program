@@ -103,6 +103,21 @@
 			(#{storeNo}, #{sggNm}, #{roadFullAddr}, #{entX}, #{entY})
 	</insert>
 	
+	<!-- 가게 회원가입(메뉴정보 insert) -->
+	 <insert id="insertMenuList" parameterType="Store">
+		<selectKey keyProperty="storeNo" resultType="int" order="BEFORE">
+			select max(store_no) from tb_store 
+		</selectKey>
+		insert into tb_store_menu values
+			<foreach collection="menu" item="menu" separator=",">
+				#{menu}
+			</foreach>
+			<foreach collection="menu" item="price" separator=",">
+				#{price}
+			</foreach>
+		
+	</insert>
+	
 	<!-- 가게회원 로그인체크 -->
 	<select id="storeLogin" parameterType="Store" resultType="Store">
 	 select * 

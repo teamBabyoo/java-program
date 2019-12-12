@@ -185,7 +185,7 @@ public class LoginController {
 	//스토어 가입
 	@RequestMapping("/front/login/storejoin.do")
 	public String storeJoin(Store store) {
-		//System.out.println(store);
+		System.out.println(store);
 		loginservice.joinStore(store);
 		return "redirect:/front/main/main.do";
 	}

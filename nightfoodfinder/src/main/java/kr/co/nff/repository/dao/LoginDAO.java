@@ -9,6 +9,7 @@ public interface LoginDAO {
 	void insertStore(Store store);
 	void insertHoliday(Store store);
 	void insertAddress(Store store);
+	void insertMenuList(Store store);
 	
 	Store storeLogin(Store store);
 	int storeEmailChk(String storeEmail);
