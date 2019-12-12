@@ -42,7 +42,9 @@ $(() => {
 })
 
 
-
+/**
+ * 알림 리스트 가져오는 함수 
+ */
 function noticeList() {
 	$.ajax({
 		url: "notice_list.do",
@@ -57,22 +59,26 @@ function noticeList() {
 			
 			// 있다면
 			let html, addr = ``;
+			
+		
 			 for (let notice of list) {
 				 switch (notice.noticeCode) {
 				 case "1": // user : 단골 store 정보 업데이트
-					 addr += `storedetail.do?no=${notice.fromStoreNo}`;
+					 addr = `storedetail.do?no=${notice.fromStoreNo}`;
 					 break;
 				 case "2": // user : 내 리뷰를 다른 user가 좋아요
-					 addr += `storedetail.do?no=${notice.fromStoreNo}`;
+					 addr = `storedetail.do?no=${notice.fromStoreNo}`;
 					 break;
 				 case "4": // store : 내 가게의 단골 리스트
 					 break;
 				 case "5": // store : 내 가게 상세페이지에 새 리뷰가 등록 되었을 때
-					 addr += `storedetail.do?no=${notice.storeNo}`;
+					 addr = `storedetail.do?no=${notice.storeNo}`;
 					 break;
 				 default: // 코드3 store : 가입승인 => 내 상세페이지
-					 addr += `storedetail.do?no=${notice.storeNo}`;
-				 } 
+					 addr = `storedetail.do?no=${notice.storeNo}`;
+				 }
+				 
+				 console.log(addr);
 				 	
 				 
 				 
