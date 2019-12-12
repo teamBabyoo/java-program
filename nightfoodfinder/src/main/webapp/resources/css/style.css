@@ -438,7 +438,14 @@ div#commentplace > * { width: 100%; margin: 0 auto; }
 
 /** 유빈 **/
 #notice_btn .topshape { top: 20px; right: 12px; }
-.notice_list_box div:nth-child(2) { position: absolute; background: #fff; right: 50px; padding: 20px; }
+.notice_content { 
+	position: absolute; 
+	background: #fff; 
+	right: -3px; 
+	padding: 8px; 
+	width: 360px; 
+	z-index: 100;
+}
 #notice_btn {
 	position: relative;
 }
@@ -454,4 +461,6 @@ div#commentplace > * { width: 100%; margin: 0 auto; }
     padding: 1px 3px;
     font-size: 2px;
 }
+
+
 /** 유빈 끝 **/

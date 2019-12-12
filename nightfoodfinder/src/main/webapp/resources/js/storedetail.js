@@ -340,14 +340,16 @@ function reposition() {
  */
 function registReview() {
 	let reviewContent = $('textarea[name="reviewContent"]').val();
-	let form = $('#reviewForm');
+	let form = $('#reviewForm')[0];
 	let data = new FormData(form);
+	console.log("나", data);
 	$.ajax({
 		type: "POST",
 		enctype: "multipart/form-data",
 		url: "review_regist.do",
 		data: data,
 		dataType: "json",
+		cache: false,
         processData: false,
         contentType: false,
         success: function(data) {
@@ -358,6 +360,7 @@ function registReview() {
             alert("fail");
         }
 	});
+	return false;
 };
 
 
@@ -405,6 +408,7 @@ $('#scopePannel > a').click(function(e) {
 	e.preventDefault();
 	// storeScope --> n점 (n번째 별)
 	storeScope = parseInt($(e.target).attr('data-rscope'));
+	$('input[name="storeScope"]').val(storeScope); 
 	console.log("현재별점: ", storeScope);
 	// 현재 클릭한 별의 형제 요소의 길이만큼 반복문 돌리며 rscope값이 작을 경우 색상변경(e.target 포함)
 	for (let i = 0; i < $(e.target).siblings().length; i++) {
@@ -594,8 +598,7 @@ $(document).on('click', '.heartclick', function(e){
 
 function makeform(a) {
 	var rno = $(a).attr("data-no");	// 리뷰 넘버
-	
-	console.log(rno);
+
 	$(".bossComment").empty();
 	
 	$("#bossComment" + rno).append(
@@ -623,10 +626,12 @@ function makeform(a) {
 //답글 등록
 function recommentSubmit(a) {
 	var rno = $(a).attr("data-rno");
-
+	let page = $(".page-item.active a").attr("data-page");
+	console.log(page);
+	
 		$.post({
 			url: "recomment_regist.do",
-			data: {storeNo, reviewNo: rno, recomment : $("#bossContent").val() },
+			data: {storeNo, reviewNo: rno, recomment : $("#bossContent").val(), page },
 			success: (list) => makeReviewList(list), 
 			error: () => console.log("에러")
 		});		
@@ -639,10 +644,11 @@ function onecancel(a) {
 
 //답글 삭제
 $("#targetContainer").on("click", "button.delRecomment", (e) => {
+	let page = $(".page-item.active a").attr("data-page");
 	$.getJSON({
 		
 		url: "recomment_delete.do",
-		data: {reviewNo: $(e.target).data("no"), storeNo },
+		data: {reviewNo: $(e.target).data("no"), storeNo, page },
 		success: (list) => makeReviewList(list),
 		error: () => console.log("에러")
 	});
@@ -680,13 +686,15 @@ $("#row" + rno).hide();
 $("#targetContainer").on("click", "a.updatetwo", (e) => {
 	e.preventDefault();
 	let rno = $(e.target).data("rno");
+	let page = $(".page-item.active a").attr("data-page");
 	$.ajax({
 		url: "recomment_regist.do",
 		type: "POST",
 		data: {
 			storeNo,
 			reviewNo : rno,
-			recomment : $("#modbossContent").val() 
+			recomment : $("#modbossContent").val(),
+			page 
 			},
 		dataType: "json",
 		success: result => makeReviewList(result)

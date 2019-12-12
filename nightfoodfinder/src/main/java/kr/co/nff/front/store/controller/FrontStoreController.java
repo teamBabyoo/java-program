@@ -2,11 +2,11 @@ package kr.co.nff.front.store.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +15,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.nff.front.store.service.StoreService;
 import kr.co.nff.repository.vo.Pagination;
 import kr.co.nff.repository.vo.Review;
 import kr.co.nff.repository.vo.Search;
 import kr.co.nff.repository.vo.Store;
-import kr.co.nff.util.FileUpload;
 import net.sf.json.JSONArray;
 
 
@@ -132,18 +130,48 @@ public class FrontStoreController {
 
 	/* 리뷰 작성 & 이미지 업로드 */
 	@RequestMapping("/review_regist.do")
-	@ResponseBody
-	public List<Review> reviewRegistAjax(Review review, List<MultipartFile> attach) throws Exception, IOException {
-		System.out.println("리뷰등록 시도");
+	public String reviewRegist(Review review, HttpServletRequest req, HttpServletResponse res) throws Exception, IOException {
+		System.out.println(review);
+		service.reviewRegist(review);
+//		System.out.println(review.getAttach().size());
+//		List<MultipartFile> list = new ArrayList<>();
 		
-		List<MultipartFile> list = new ArrayList<>();
+
+		//--------------------------------------------
+
+
 		
-		FileUpload fu = new FileUpload();
-		list = fu.upload(attach);
+
+			
+	//		req.setCharacterEncoding("UTF-8");
+			
 		
-		System.out.println("list결과 : " + list);
+			/*
+			
+				File f1 = req.getFile("attach");
+			
+				FileVO fileVo = new FileVO();
+				if (f1 != null) {
+					String orgName = request.getOriginalFileName("attach");
+					String sysName = request.getFilesystemName("attach");
+					String extension = sysName.substring(sysName.lastIndexOf(".") + 1);
+					
+					
+					fileVo.setFileGroupCode(service.selectGroupCode());
+					fileVo.setOrgName(orgName);
+					fileVo.setSysName(sysName);
+					fileVo.setExtension(extension);
+					fileVo.setPath(f.getPath());
+					
+					service.insertFile(fileVo);
+					
+					Thumbnails.of(new File(f1.getParent(), sysName)).size(250, 300).outputFormat("jpg")
+					.toFile(new File(f1.getParent(), "thumb_" + sysName));
+				}
+
+			System.out.println("성공");
+		//--------------------------------------------
 		
-/*		
 		List<MultipartFile> fileList = mtfRequest.getFiles("file");
         String src = mtfRequest.getParameter("src");
         System.out.println("src value : " + src);
@@ -168,7 +196,6 @@ public class FrontStoreController {
                 e.printStackTrace();
             }
         }
-*/
 //      model.addAttribute("list", service.reviewRegist(review));
 		System.out.println("--------------------------------------");
 //		System.out.println("작성자 : " + review.getWriterNo());
@@ -176,7 +203,6 @@ public class FrontStoreController {
 //		System.out.println("답댓 : " + review.getRecomment());
 //		System.out.println("스코프 : " + review.getStoreScope());
 //        System.out.println("게시글번호 확인" + review.getStoreNo());
-/*
 		System.out.println("--------------------------------------");
         System.out.println("attach.size() : " + attach.size());
         for (MultipartFile file : attach) {
@@ -188,11 +214,23 @@ public class FrontStoreController {
         	System.out.println("파일크기 : " + size);
         	file.transferTo(new File("c:/java/nffresources/" + orgName));
         }
-*/        
-        
-        
-//        service.reviewRegist(review);
-        return service.reviewList(review);
+		
+		
+		System.out.println("list결과 : " + fileVo);
+		
+        review.setFileGroupCode(fileVo.getFileGroupCode());
+        service.reviewRegist(review);
+        System.out.println(review);
+        */
+        return "redirect:storedetail.do?no=" + review.getStoreNo();
+	}
+	
+	public void reviewRegistAjax(){	}
+
+	/* 리뷰작성폼 */
+	@RequestMapping("/storeReviewRegistForm.do")
+	public void reviewRegistForm(Review review) {
+		System.out.println("여기는 댓글작성폼");
 	}
 
 	
@@ -268,16 +306,27 @@ public class FrontStoreController {
 	/*사장 답글*/
 	@RequestMapping("/recomment_regist.do")
 	@ResponseBody
-	public List<Review> insertrecomment(Review review) {
+	public Map<String, Object> insertrecomment(Review review) {
 		service.insertRecomment(review);
-		return service.reviewList(review);
+		
+		review.setListCnt(service.getReviewCnt(review.getStoreNo()));
+		Map<String, Object> map= new HashMap<>();
+		map.put("list", service.reviewList(review));
+		map.put("pagination", new Pagination(review.getPage(), service.getReviewCnt(review.getStoreNo())));
+		return map;
+//		return service.reviewList(review);
 	}
 		
 	@RequestMapping("/recomment_delete.do")
 	@ResponseBody
-	public List<Review> deleteRecomment(Review review) {
+	public Map<String, Object> deleteRecomment(Review review) {
 		service.deleteRecomment(review);
-		return service.reviewList(review);
+		review.setListCnt(service.getReviewCnt(review.getStoreNo()));
+		Map<String, Object> map= new HashMap<>();
+		map.put("list", service.reviewList(review));
+		map.put("pagination", new Pagination(review.getPage(), service.getReviewCnt(review.getStoreNo())));
+		return map;
+//		return service.reviewList(review);
 	}
 
 	
