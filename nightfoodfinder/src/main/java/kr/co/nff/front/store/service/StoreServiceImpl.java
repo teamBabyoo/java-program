@@ -93,9 +93,15 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public List<Review> reviewRegist(Review review) throws Exception {
-		int fileGroupCode = fileService.upload(review.getAttach());
-		review.setFileGroupCode(fileGroupCode);
+	public List<Review> reviewRegist(Review review, boolean fileFlag) throws Exception {
+		int fileGroupCode = 0;
+		if (fileFlag == true) {
+//			System.out.println("파일 올바르게 넘어옴");
+//			System.out.println("파일서비스 갔다오기 전 : " + fileGroupCode);
+			fileGroupCode = fileService.upload(review.getAttach());
+			review.setFileGroupCode(fileGroupCode);
+		}
+//		System.out.println("파일서비스 갔다오기 전 (파일 올렸으면 숫자, 안 올렸으면 0): " + fileGroupCode);
 		dao.registReview(review);
 		
 		return dao.selectReview(review);

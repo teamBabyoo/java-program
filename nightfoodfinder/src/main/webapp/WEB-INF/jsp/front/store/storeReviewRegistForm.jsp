@@ -39,11 +39,11 @@
 	                  <ul class="clearboth">
 	                    <li id="scopePannel" class="float_l">
 	                      평점
-	                      <a href="#" data-rscope="1">★</a>
-	                      <a href="#" data-rscope="2">★</a>
-	                      <a href="#" data-rscope="3">★</a>
-	                      <a href="#" data-rscope="4">★</a>
-	                      <a href="#" data-rscope="5">★</a>
+	                      <a href="#" data-rscope=1>★</a>
+	                      <a href="#" data-rscope=2>★</a>
+	                      <a href="#" data-rscope=3>★</a>
+	                      <a href="#" data-rscope=4>★</a>
+	                      <a href="#" data-rscope=5>★</a>
 	                    </li>
 	                    <li class="float_r">
 	                      <i class="fa fa-user-circle-o" aria-hidden="true"></i>${user.userEmail}
@@ -81,7 +81,7 @@
 		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 	</div>
 <script>
-let writerNo = ${loginuser.userNo};
+let writerNo = 7;
 /**
  * 댓글 등록
  * @returns
