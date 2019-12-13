@@ -264,16 +264,13 @@
 	</select>
 
 
-	<select id="storeMenuList" resultType="Store"
-		parameterType="int">
+	<select id="storeMenuList" resultType="Menu" parameterType="int">
 		select menu, price
 		from tb_store_menu
-		where store_no =
-		#{storeNo}
+		where store_no = #{storeNo}
 	</select>
 
-	<select id="storeHoliday" resultType="Holiday"
-		parameterType="int">
+	<select id="storeHoliday" resultType="Holiday" parameterType="int">
 		select w.week_name, h.week_no
 		from tb_holiday as h
 		inner
@@ -612,6 +609,23 @@
 		  from tb_review
 		  where store_no = #{StoreNo}
 	</select>
+	
+	
+	<!-- 메뉴지우기 -->
+	<delete id="deleteMenuList" parameterType="int">
+		delete 
+		from tb_store_menu 
+		where store_no=#{storeNo}
+	</delete>
+	
+	<insert id="insertMenuList" parameterType="Store">
+	  insert into tb_store_menu (store_no, menu, price ) values 
+	  <if test="menulist != null">
+			<foreach collection="menulist" item="item" separator="," >
+				(#{storeNo}, #{item.menu}, #{item.price})
+			</foreach>
+	  </if>
+	</insert>
 	
 	
 	

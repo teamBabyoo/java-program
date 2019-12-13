@@ -39,11 +39,11 @@
 	                  <ul class="clearboth">
 	                    <li id="scopePannel" class="float_l">
 	                      평점
-	                      <a href="#" data-rscope="1">★</a>
-	                      <a href="#" data-rscope="2">★</a>
-	                      <a href="#" data-rscope="3">★</a>
-	                      <a href="#" data-rscope="4">★</a>
-	                      <a href="#" data-rscope="5">★</a>
+	                      <a href="#" data-rscope=1>★</a>
+	                      <a href="#" data-rscope=2>★</a>
+	                      <a href="#" data-rscope=3>★</a>
+	                      <a href="#" data-rscope=4>★</a>
+	                      <a href="#" data-rscope=5>★</a>
 	                    </li>
 	                    <li class="float_r">
 	                      <i class="fa fa-user-circle-o" aria-hidden="true"></i>${user.userEmail}
@@ -58,6 +58,7 @@
 	                    <li class="float_l">
 	                      <input id="input_file" type="file" name="attach" multiple="multiple" />
 	                      <label for="input_file">+</label>
+	                      <img id="foo" class="hidden" src="#" />
 	                    </li>
 	                    <!-- <li class="float_r"><button type="submit">등록</button></li> -->
 	                    <li class="float_r"><input type="submit" />등록</li>
@@ -67,7 +68,7 @@
 	              <input type="hidden" id="nickName" />
 	              <input type="hidden" name="storeScope" />
 	              <input type="hidden" name="storeNo" value="${review.storeNo }" />
-	              <input type="hidden" name="writerNo" value="7" />
+	              <input type="hidden" name="writerNo" value="${loginUser.userNo}" />
 	              <!-- <input type="hidden" name="recomment" value="" /> -->
 	            </form>
 	          </div>
@@ -81,7 +82,7 @@
 		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 	</div>
 <script>
-let writerNo = ${loginuser.userNo};
+//let writerNo = ${loginuser.userNo};
 /**
  * 댓글 등록
  * @returns
@@ -172,6 +173,30 @@ $('#scopePannel > a').click(function(e) {
 		}
 	}
 });
+
+/**
+ * 파일업로드 프리뷰
+ */
+ function readURL(input) {
+     if (input.files && input.files[0]) {
+    	 
+         var reader = new FileReader();
+         reader.onload = function(e) {
+        	 $('#foo').removeClass('hidden');
+             $('#foo').attr('src', e.target.result);
+         }
+         reader.readAsDataURL(input.files[0]);
+     }
+ }
+ 
+ $(document).ready(function(){
+	 
+	 
+	 $("#input_file").change(function(){
+		 readURL(this);
+	});
+	 
+ });
 </script>
 </body>
 </html>

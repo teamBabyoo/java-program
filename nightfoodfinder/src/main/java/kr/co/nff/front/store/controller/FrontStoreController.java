@@ -1,12 +1,11 @@
 package kr.co.nff.front.store.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.nff.front.store.service.StoreService;
 import kr.co.nff.repository.vo.Pagination;
@@ -59,13 +59,29 @@ public class FrontStoreController {
 		model.addAttribute("holidaylist", service.storeHoliday(no));
 		model.addAttribute("storeContent", service.storeContent(no));
 		model.addAttribute("user", session.getAttribute("loginUser"));
+		System.out.println("로그인한가게 :" + session.getAttribute("loginStore"));
+		model.addAttribute("loginStore", session.getAttribute("loginStore"));
 	}
 	
 	/* 가게 정보 수정*/
 	@RequestMapping("/storeinfoupdate.do")
 	public String storeInfoUpdate(Store store, @RequestParam(value="storeNo") int no) {
 		service.updateHoliday(store);
-		System.out.println(service.storeDetail(no));
+		
+		String [] menuNames = store.getMenuName();
+		int [] prices = store.getMenuPrice();
+		
+		List<Map<String, Object>> menulist = new ArrayList<Map<String, Object>>();
+		
+		for(int i = 0; i < menuNames.length; i++) {
+			 Map<String, Object> menuMap = new HashMap<String, Object>();
+			 menuMap.put("menu", menuNames[i]);
+			 menuMap.put("price",prices[i]);
+			 menulist.add(menuMap);
+		}
+		
+		store.setMenulist(menulist);
+		service.updateMenuList(store, no);
 		return "redirect:storedetail.do?no="+no;
 	}
 	
@@ -76,6 +92,7 @@ public class FrontStoreController {
 		model.addAttribute("storeContent", service.storeContentUpdateForm(no));
 		JSONArray jsonArray = new JSONArray();
 		model.addAttribute("holidaylist", jsonArray.fromObject(service.storeHoliday(no)));
+		model.addAttribute("menulist", service.storeMenu(no));
 	}
 
 	/* 단골 등록 */
@@ -130,9 +147,21 @@ public class FrontStoreController {
 
 	/* 리뷰 작성 & 이미지 업로드 */
 	@RequestMapping("/review_regist.do")
-	public String reviewRegist(Review review, HttpServletRequest req, HttpServletResponse res) throws Exception, IOException {
-		System.out.println(review);
-		service.reviewRegist(review);
+	public String reviewRegist(Review review) throws Exception, IOException {
+		
+		boolean fileFlag = true;
+		
+		for (MultipartFile mf : review.getAttach()) {
+			if (mf.getContentType().equals("application/octet-stream")) {
+//				System.out.println("파일 첨부");
+				fileFlag = false;
+			};
+//			System.out.println("파일첨부X");
+		}
+		System.out.println(fileFlag);
+		
+		service.reviewRegist(review, fileFlag);
+		
 //		System.out.println(review.getAttach().size());
 //		List<MultipartFile> list = new ArrayList<>();
 		
@@ -229,8 +258,9 @@ public class FrontStoreController {
 
 	/* 리뷰작성폼 */
 	@RequestMapping("/storeReviewRegistForm.do")
-	public void reviewRegistForm(Review review) {
+	public void reviewRegistForm(Review review, Model model, HttpSession session) {
 		System.out.println("여기는 댓글작성폼");
+		model.addAttribute("loginUser", session.getAttribute("loginUser"));
 	}
 
 	

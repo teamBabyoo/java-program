@@ -42,18 +42,25 @@
 	<!-- 알림 리스트 -->
 	<!-- 리스트 정렬할 때 확인 여부 표시해주어야한다. -->	
 	<select id="selectNotice" parameterType="Notice" resultType="Notice">
-		select n.*,
-		       c.notice_content
-		  from tb_notice n
-		 inner join tb_notice_content c
-		    on n.notice_code = c.notice_code
-		 where 
+		select n.* ,
+               u.nick_name as from_user_name,
+      		   s.store_name as from_store_name,
+      		   c.notice_content as notice_content
+  		  from tb_notice n
+	inner join tb_notice_content c
+   			on n.notice_code = c.notice_code
+	left outer join tb_user u
+   			on n.from_user_no = u.user_no
+ 	left outer join tb_store s
+   			on n.from_store_no = s.store_no
+		 <where>
 		 	<if test="storeNo != 0">
          		n.store_no = #{storeNo}
          	</if>
          	<if test="userNo != 0">
          		n.user_no = #{userNo}
          	</if>
+		 </where> 
 		 order by n.reg_date desc 
 		 limit 70
 	</select>
@@ -62,13 +69,14 @@
 	<update id="readNotice" parameterType="Notice">
 		update tb_notice
   		   set status = 1
-         where 
+         <where>
          	<if test="storeNo != 0">
          		store_no = #{storeNo}
          	</if>
          	<if test="userNo != 0">
          		user_no = #{userNo}
          	</if>
+         </where> 
 	</update>
 	
 	<!-- 안읽은 알림 몇 개인지 -->
@@ -76,10 +84,10 @@
 		select count(*)
 		  from tb_notice
 		 where 
-		 	<if test="storeNo != 0">
+		 	<if test="storeNo != 0 and userNo == 0">
          		store_no = #{storeNo}
          	</if>
-         	<if test="userNo != 0">
+         	<if test="userNo != 0 and storeNo == 0">
          		user_no = #{userNo}
          	</if>
            and status = 0
