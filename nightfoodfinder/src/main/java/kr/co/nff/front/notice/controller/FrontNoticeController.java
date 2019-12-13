@@ -46,10 +46,13 @@ public class FrontNoticeController {
 		User loginUser = (User)session.getAttribute("loginUser");
 		Store storeUser = (Store)session.getAttribute("storeUser");
 		
+		// 로그인 상태 걸러준다.
+		if (loginUser == null && storeUser == null) return 0;
+		
 		Notice notice = new Notice();
 		if (storeUser == null && loginUser != null) notice.setUserNo(loginUser.getUserNo());
 		else if (storeUser != null && loginUser == null) notice.setStoreNo(storeUser.getStoreNo());
-		
+
 		int noticeCnt = service.countNewNotice(notice);
 		
 		// 알림 갯수가 0이라면 0 반환. -> script단에서 걸러준다.
