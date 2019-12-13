@@ -54,7 +54,7 @@
 	<!-- 카카오 회원정보 입력 -->
 	<update id="insertKakaoInfo" parameterType="User">
 		update tb_user 
-			set user_gender = #{userGender} , user_age = #{userAge} 
+			set user_gender = #{userGender} , user_age = #{userAge} , nick_name=#{nickName}
 			where (user_no = #{userNo})
 	</update>
 	

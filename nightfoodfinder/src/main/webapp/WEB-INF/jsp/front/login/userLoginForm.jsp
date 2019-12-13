@@ -4,15 +4,11 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <c:import url="/WEB-INF/jsp/include/head.jsp">
-    	<c:param name="msg" value="로그인"/>
-    </c:import>
-<style>
-	.content {
-	    margin-top: 10px;
-	    text-align: center;
-	}
-</style>
+<c:import url="/WEB-INF/jsp/include/head.jsp">
+    <c:param name="msg" value="로그인"/>
+</c:import>
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/style.css" />">
 <script src="http://developers.kakao.com/sdk/js/kakao.min.js"></script>
 </head>
 <body>
@@ -21,18 +17,16 @@
     <c:import url="/WEB-INF/jsp/include/header.jsp" />
     <!-- // 헤더 -->
 			<div class="content clearboth" >
-		        <h1>NFF</h1>                                                               
-				<p class="memSel" >
-					<span>
-						<input type="radio" id="userType1" name="r" checked>
-						<label for="userType1" id="userLabel1">개인회원</label>
-					</span>
+		        <div id="login_container">
+			 		<div id="login_tab">
+				 		<ul>
+				 			<li>일반회원 로그인</li>
+				 			<li>스토어회원 로그인</li>
+				 		</ul>                                                 
+			 		</div>
+		 			<div id="login_box">
+		 			
 				
-					<span>
-						<input type="radio" id="userType2" name="r">
-						<label for="userType2" id="userLabel2">점주회원</label>
-					</span>
-				</p>
 				<div class="memInput" id="memInput" style="display : none;">
 						<form id="slForm" action="storelogin.do" method="post" onsubmit="">
 						<p>
@@ -64,11 +58,30 @@
 						</li>
 					</ul>
 				</div>
+				</div>
+				 </div>     
 	      	</div>
 	      	</div>
 	      	
      	
 <script>
+function show_layer(div_name){
+
+	 document.all.div_01.style.display="none";
+	 document.all.div_02.style.display="none";
+
+	 switch(div_name)
+	 {
+	  case '1':
+	  document.all.div_01.style.display="";
+	  break;
+	  case '2':
+	  document.all.div_02.style.display="";
+	  break;
+	  
+	 }
+	}
+
 
 
 var uType1 = document.getElementById("userType1");

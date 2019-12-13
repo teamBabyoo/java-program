@@ -99,12 +99,12 @@
 	        <c:choose>
 	        <c:when test="${loginUser != null}">
 	        <div>
-				MY PAGE
+				<a href="">MY PAGE</a>
 	        </div>
 	        </c:when>
 	        <c:when test="${loginStore != null}">
 	        <div>
-				MY PAGE
+				<a href="${pageContext.request.contextPath}/front/store/storedetail.do?no=${loginStore.storeNo}">MY PAGE</a>
 	        </div>
 	        </c:when>
 	        <c:otherwise>
