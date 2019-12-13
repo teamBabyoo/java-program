@@ -209,8 +209,8 @@
 	
 	
 	
-	<!-- 신고한 사람, 신고 사유  -->
- 	<select id="selectReportDetail" resultType="ReportReview">
+	<!-- 신고한 사람, 신고 사유  (모달)-->
+ 	<select id="selectReportDetail" parameterType="ReportReview" resultType="ReportReview">
 		select u.nick_name, rw.reason, rr.report_no  
 			from tb_user u, tb_report_review rr, tb_report_reason rw
 		where u.user_no = rr.user_no 
@@ -218,7 +218,17 @@
 		and rr.review_no = #{reviewNo}
 		order by rr.report_no desc
 		
+				<!-- 페이징  -->
+		LIMIT #{startList}, #{listSize}
+		
 	</select>  
+	
+	<!-- 모달 페이징에 필요한 전체 갯수 -->
+	<select id="reportModalGetPage" parameterType="int" resultType="int">
+		select count(*) from tb_report_review
+		where review_no = #{reviewNo}
+	
+	</select>
 	
 	
 	

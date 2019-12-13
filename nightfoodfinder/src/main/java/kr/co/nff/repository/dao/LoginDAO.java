@@ -9,6 +9,7 @@ public interface LoginDAO {
 	void insertStore(Store store);
 	void insertHoliday(Store store);
 	void insertAddress(Store store);
+	void insertMenuList(Store store);
 	
 	Store storeLogin(Store store);
 	int storeEmailChk(String storeEmail);
@@ -20,6 +21,7 @@ public interface LoginDAO {
 	
 	void insertKakaoUser(User user);
 	int selectKakao(User user);
+	void insertKakaoInfo(User user);
 	
 	//로그인한 회원
 	User selectLoginOneUser(User user); 

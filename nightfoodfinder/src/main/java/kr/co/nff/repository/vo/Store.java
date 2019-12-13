@@ -24,8 +24,9 @@ public class Store {
 	
 	private String storeContent;
 	private Date regDate;
-	private String menu;
-	private int price;
+	private String[] menuName;
+	private Integer[] price;
+	//private int[] price;
 	private int priceType; // 가격대
 	private int seeCnt;
 	
@@ -62,6 +63,10 @@ public class Store {
 		private int userNo;
 		//단골 체크를 위한
 		private int checkit;
+		
+		
+		
+		
 		
 }
 	

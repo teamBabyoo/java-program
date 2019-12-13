@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.nff.front.notice.service.NoticeService;
 import kr.co.nff.repository.vo.Notice;
+import kr.co.nff.repository.vo.Store;
+import kr.co.nff.repository.vo.User;
 
 @Controller("kr.co.nff.front.notice.controller.FrontNoticeController")
 @RequestMapping("/front/main")
@@ -23,9 +25,10 @@ public class FrontNoticeController {
 	/* 알림 리스트 */
 	@RequestMapping("/notice_list.do")
 	@ResponseBody
-	public List<Notice> noticeListAjax(Notice notice, HttpSession session) {
-		System.out.println(session.getAttribute("loginUser"));
-		System.out.println(notice.getNoticeNo() + "알림남바");
+	public List<Notice> noticeListAjax(HttpSession session) {
+		User loginUser = (User)session.getAttribute("loginUser");
+		Notice notice = new Notice();
+		notice.setUserNo(loginUser.getUserNo());
 		return service.selectNotice(notice);
 	}
 	
@@ -39,9 +42,20 @@ public class FrontNoticeController {
 	/* 알림 갯수 */
 	@RequestMapping("/count_notice.do")
 	@ResponseBody
-	public int countNoticeAjax(Notice notice) {
-		System.out.println(service.countNewNotice(notice));
-		return service.countNewNotice(notice);
+	public int countNoticeAjax(HttpSession session) {
+		User loginUser = (User)session.getAttribute("loginUser");
+		Store storeUser = (Store)session.getAttribute("storeUser");
+		
+		Notice notice = new Notice();
+		if (storeUser == null && loginUser != null) notice.setUserNo(loginUser.getUserNo());
+		else if (storeUser != null && loginUser == null) notice.setStoreNo(storeUser.getStoreNo());
+		
+		int noticeCnt = service.countNewNotice(notice);
+		
+		// 알림 갯수가 0이라면 0 반환. -> script단에서 걸러준다.
+		if (noticeCnt != 0) return service.countNewNotice(notice);
+		return 0;
+
 	}
 	
 	/* 알림 하나 삭제 */

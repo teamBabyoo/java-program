@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <header class="clearboth">
-    <div class="logo">
+    <div class="logo" onclick="location.href='${pageContext.request.contextPath}/front/main/main.do'">
         <img src="${pageContext.request.contextPath}/resources/images/mangoplate-logo-horizontal.svg" alt="anff 로고" />
     </div>
     <div class="search">
@@ -79,14 +79,15 @@
       <ul>
         <li><a href="#">내주변맛집</a></li>
         <li><a href="#">NFF Awards</a></li>
-        <li id="notice_btn"><i class="fa fa-bell-o" aria-hidden="true"></i>
+        <li id="notice_btn" ><i class="fa fa-bell-o" aria-hidden="true" data-user="${loginUser}" data-store="${loginStore}"></i>
         	<!-- 새 알림 갯수 뿌려줄 span -->
         	<span class="newnotice"></span>
         	<!-- 알림 리스트 나올 div -->
         	<div class="notice_list_box hidden">
 	        	<div class="topshape"></div>
-	        	<div>
-	        		gggggggggggg
+			    <!-- 알림 리스트 나올 div -->
+	        	<div class="notice_content">
+
 	        	</div>
         	</div>
         </li>
@@ -137,4 +138,9 @@
       </ul>
     </div>
   </header>
+  <script type="text/javascript">
+  /* if (window.sessionStorage) {
+      console.dir(sessionStorage);
+  } */
+  </script>
   <script src='${pageContext.request.contextPath}/resources/js/header.js' ></script>

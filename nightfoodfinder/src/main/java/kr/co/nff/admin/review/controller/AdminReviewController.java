@@ -1,6 +1,7 @@
 package kr.co.nff.admin.review.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -75,8 +76,9 @@ public class AdminReviewController {
 
 	@RequestMapping("/reportmodal.do")
 	@ResponseBody
-	public List<ReportReview> reportmodalAjax(int reviewNo) {
-		return service.reportDetail(reviewNo);
+	public Map <String, Object> reportmodalAjax(ReportReview report) {
+		
+		Map <String, Object> map = service.reportDetail(report);
+		return service.reportDetail(report);  
 	}
-
 }

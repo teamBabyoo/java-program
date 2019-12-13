@@ -25,6 +25,9 @@ public interface LoginService {
 	void insertKakaoUser(User user);
 	// 카카오 회원체크
 	int selectKakao(User user);
+	// 카카오 회원정보 추가
+	void insertKakaoInfo(User user);
+	
 	//로그인한 유저 정보
 	User selectLoginOneUser(User user);
 }

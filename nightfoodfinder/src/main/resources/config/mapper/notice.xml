@@ -5,22 +5,38 @@
 	<!-- 알람 생성 -> user, store 공동 사용 -->
 	<insert id="insertNotice" parameterType="Notice">
 		insert into tb_notice (
-			<if test="userNo != null">
-				user_no,
-				notice_code	
-			) values (
-				#{userNo},
-				#{noticeCode}
-			)
-			</if>
-			<if test="storeNo != null">
-				store_no,
-				notice_code	
-			) values (
-				#{storeNo},
-				#{noticeCode}
-			)
-			</if>
+		<choose>
+			<!-- user의  단골 store 정보 업데이트시-->
+			<when test="noticeCode == 1">
+				user_no, notice_code, from_store_no
+				) values (
+				#{userNo}, #{noticeCode}, #{fromStoreNo}
+				)
+			</when>
+			<!-- user의 리뷰를 다른 user가 '좋아요' 했을 때 -->
+			<when test="noticeCode == 2">
+				user_no, notice_code, from_user_no, from_store_no
+				) values (
+				#{userNo}, #{noticeCode}, #{fromUserNo}, #{fromStoreNo}
+				)
+			</when>
+			
+			<!-- store의 가입이 승인 되었을 때 -->
+			<when test="noticeCode == 3">
+				store_no, notice_code
+				) values (
+				#{storeNo}, #{noticeCode}
+				)
+			</when>
+			<!-- store의 단골 user가 늘어났을 때, 리뷰가 새로 등록됐을 때  -->
+			<!-- noticeCode == 4, 5 -->
+			<otherwise>
+				store_no, notice_code, from_user_no
+				) values (
+				#{storeNo}, #{noticeCode}, #{fromUserNo}
+				)
+			</otherwise>
+		</choose>
 	</insert>
 
 	<!-- 알림 리스트 -->

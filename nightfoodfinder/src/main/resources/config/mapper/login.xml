@@ -51,6 +51,13 @@
 			where user_email = #{userEmail}
 	</select>
 	
+	<!-- 카카오 회원정보 입력 -->
+	<update id="insertKakaoInfo" parameterType="User">
+		update tb_user 
+			set user_gender = #{userGender} , user_age = #{userAge} 
+			where (user_no = #{userNo})
+	</update>
+	
 	<!-- 회원정보 가져오기 -->
 	<select id="selectLoginOneUser" resultType="User" parameterType="User">
 		select * from tb_user
@@ -95,6 +102,24 @@
 		insert into tb_address values 
 			(#{storeNo}, #{sggNm}, #{roadFullAddr}, #{entX}, #{entY})
 	</insert>
+	
+	<!-- 가게 회원가입(메뉴정보 insert) -->
+	<!--  <insert id="insertMenuList" parameterType="Store">
+		<selectKey keyProperty="storeNo" resultType="int" order="BEFORE">
+			select max(store_no) from tb_store 
+		</selectKey>
+		
+		
+		
+		insert into tb_store_menu values ( #{storeNo},
+			<foreach collection="menu" item="menu"  separator=",">
+				#{menu}
+			</foreach>,
+			<foreach collection="price" item="price" separator=",">
+				#{price}
+			</foreach>
+		)
+	</insert> -->
 	
 	<!-- 가게회원 로그인체크 -->
 	<select id="storeLogin" parameterType="Store" resultType="Store">

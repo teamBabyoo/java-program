@@ -277,9 +277,11 @@ function makeReviewList(list){
 
 	$("#targetContainer").html($tbl);
 	let pageEle = "";
+	
 	$("#paginationBox").html("");
 	pageEle += `<ul class="pagination">`;
-	if (`${pagination.prev}` === 'true') {
+	//에러 잡아야 한다
+	if (pagination.prev === 'true') {
 		pageEle += `
 		<li class="page-item">
 			<a class="page-link" href="#" onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')"> Previous</a>
@@ -290,7 +292,7 @@ function makeReviewList(list){
 		if (`${pagination.page}` == idx) {
 			pageEle += `
 			<li class="page-item active">
-				<a class="page-link" href="#" onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')"> ${idx} </a>
+				<a class="page-link" href="#" onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')" data-page="${idx}"> ${idx} </a>
 			</li>
 			`;
 		} else {
@@ -312,7 +314,6 @@ function makeReviewList(list){
 		</ul>
 	`;
 	$("#paginationBox").append(pageEle);
-	
 	
 }
 /**
@@ -339,14 +340,16 @@ function reposition() {
  */
 function registReview() {
 	let reviewContent = $('textarea[name="reviewContent"]').val();
-	let form = $('#reviewForm');
+	let form = $('#reviewForm')[0];
 	let data = new FormData(form);
+	console.log("나", data);
 	$.ajax({
 		type: "POST",
 		enctype: "multipart/form-data",
 		url: "review_regist.do",
 		data: data,
 		dataType: "json",
+		cache: false,
         processData: false,
         contentType: false,
         success: function(data) {
@@ -357,6 +360,7 @@ function registReview() {
             alert("fail");
         }
 	});
+	return false;
 };
 
 
@@ -404,6 +408,7 @@ $('#scopePannel > a').click(function(e) {
 	e.preventDefault();
 	// storeScope --> n점 (n번째 별)
 	storeScope = parseInt($(e.target).attr('data-rscope'));
+	$('input[name="storeScope"]').val(storeScope); 
 	console.log("현재별점: ", storeScope);
 	// 현재 클릭한 별의 형제 요소의 길이만큼 반복문 돌리며 rscope값이 작을 경우 색상변경(e.target 포함)
 	for (let i = 0; i < $(e.target).siblings().length; i++) {
@@ -458,6 +463,7 @@ $(document).on('click', '.report', function(e){
 	
 	//유저번호 들어오는지
 	console.log("유저번호", userNo);
+	let page = $(".page-item.active a").attr("data-page");
 
 	//review_no를 받기위해	
 	let rNo = e.target;
@@ -466,7 +472,7 @@ $(document).on('click', '.report', function(e){
 		url: "review_report_check.do",
 		data: {userNo, reviewNo: rNo.value},
 		dataType: "json",
-		success: (count) => reviewReport(count, rNo)
+		success: (count) => reviewReport(count, rNo, page)
 	});
 	return false;
 	
@@ -474,7 +480,7 @@ $(document).on('click', '.report', function(e){
 
 });
 
-function reviewReport(count, rNo) {
+function reviewReport(count, rNo, page) {
 	console.log("카운트", count, "글번호", rNo);
 	if(count == 0) {
 		//신고사유 모달창
@@ -525,6 +531,7 @@ function reviewReport(count, rNo) {
 				url: "review_report.do",
 				type: "POST",
 				data: {
+					page,
 					userNo: $("#userNo").val(),
 					reviewNo: $("#reviewNo").val(), 
 					reportWhy: $('input[name=reportWhy]:checked').val(),
@@ -549,6 +556,7 @@ $(document).on('click', '.heartclick', function(e){
 //	console.log(rno);
 	console.log($(e.target).attr('data-rno'));
 	console.log("src : ", $(e.target).attr('src'));
+	let page = $(".page-item.active a").attr("data-page");
 	let heart = "/nightfoodfinder/resources/images/icon_hrt.png";
 	//좋아요가 되어있으면 취소
 	if($(e.target).attr('src') === heart){
@@ -556,6 +564,7 @@ $(document).on('click', '.heartclick', function(e){
 			url: "i_like_cancel.do",
 			data: {userNo,
 				storeNo,
+				page,
 				reviewNo: $(e.target).attr('data-rno')},
 				dataType: "json",
 				success: (list) => makeReviewList(list)
@@ -567,6 +576,7 @@ $(document).on('click', '.heartclick', function(e){
 			url: "i_like.do",
 			data: {userNo,
 				storeNo,
+				page,
 				reviewNo: $(e.target).attr('data-rno')},
 				dataType: "json",
 				success: (list) => makeReviewList(list)
@@ -588,8 +598,7 @@ $(document).on('click', '.heartclick', function(e){
 
 function makeform(a) {
 	var rno = $(a).attr("data-no");	// 리뷰 넘버
-	
-	console.log(rno);
+
 	$(".bossComment").empty();
 	
 	$("#bossComment" + rno).append(
@@ -617,10 +626,12 @@ function makeform(a) {
 //답글 등록
 function recommentSubmit(a) {
 	var rno = $(a).attr("data-rno");
-
+	let page = $(".page-item.active a").attr("data-page");
+	console.log(page);
+	
 		$.post({
 			url: "recomment_regist.do",
-			data: {storeNo, reviewNo: rno, recomment : $("#bossContent").val() },
+			data: {storeNo, reviewNo: rno, recomment : $("#bossContent").val(), page },
 			success: (list) => makeReviewList(list), 
 			error: () => console.log("에러")
 		});		
@@ -633,10 +644,11 @@ function onecancel(a) {
 
 //답글 삭제
 $("#targetContainer").on("click", "button.delRecomment", (e) => {
+	let page = $(".page-item.active a").attr("data-page");
 	$.getJSON({
 		
 		url: "recomment_delete.do",
-		data: {reviewNo: $(e.target).data("no"), storeNo },
+		data: {reviewNo: $(e.target).data("no"), storeNo, page },
 		success: (list) => makeReviewList(list),
 		error: () => console.log("에러")
 	});
@@ -674,13 +686,15 @@ $("#row" + rno).hide();
 $("#targetContainer").on("click", "a.updatetwo", (e) => {
 	e.preventDefault();
 	let rno = $(e.target).data("rno");
+	let page = $(".page-item.active a").attr("data-page");
 	$.ajax({
 		url: "recomment_regist.do",
 		type: "POST",
 		data: {
 			storeNo,
 			reviewNo : rno,
-			recomment : $("#modbossContent").val() 
+			recomment : $("#modbossContent").val(),
+			page 
 			},
 		dataType: "json",
 		success: result => makeReviewList(result)

@@ -1,18 +1,7 @@
-$(document).ready(() => {
+$(() => {
 	
-/*	// 안읽은 알림 갯수 가져온다.
-	$.ajax({
-		url: "count_notice.do",
-		data : {userNo : 7},
-		success: (noticeCnt) => {
-			console.log(noticeCnt);
-			let html = (noticeCnt == 0) ? `` :
-				`<span id="rednotice">${noticeCnt}</span>`;
-			$(".newnotice").append(html);
-		}
-	})*/
-	
-	
+	// 알림 갯수 세팅
+	noticeCounter();
 	
 	
 	/**
@@ -31,33 +20,20 @@ $(document).ready(() => {
 			});
 		}
 	});
+
 	
 	
-	
-	
-	
-	
-	
-	
-/*// 종 아이콘 클릭시 알림 리스트 나타냄
+	/**
+	 * 알림 아이콘 클릭시
+	 */
 	$("#notice_btn").click((e) => {
-		// 클릭시 사라졌다 나타났다 hidden 클래스 
-//		$(".notice_list_box").toggleClass("hidden");
-	
+		// 로그인 된 유저, 스토어 없다면 그냥 리턴
+		if ( $(e.target).data("user") == null && $(e.target).data("store") == null) return; 
 		
-//		let userNo = user.userNo;
-		
-		$.ajax({
-			url: "notice_list.do",
-			data: {userNo: 7},
-			success: (result) => noticeList(result),
-				// 결과로 알림 리스트 가지고 온다.
-			error: (e) => {
-				console.log("error:", e);
-			}
-		});
+		// 리스트 호출
+		noticeList();
+	});
 	
-	});*/
 	
 	
 	
@@ -65,21 +41,82 @@ $(document).ready(() => {
 	
 })
 
-/*// 알람 리스트 만드는 함수
-function noticeList(data) {
-	let $div = $("<div class='notice_rw'></div>");
-	
-	// 만약 알림이 없다면
-	if(data.length == 0) {
-		$div.append(`알림이 없습니다.`);
-	}
-	
-	// 있다면
-	
-	
-	
-};*/
 
+/**
+ * 알림 리스트 가져오는 함수 
+ */
+function noticeList() {
+	$.ajax({
+		url: "notice_list.do",
+		type: "POST",
+		success: (list) => {
+			let $ul = $("<ul></ul>");
+			
+			// 만약 알림이 없다면
+			if(list.length == 0) {
+				$ul.append(`알림이 없습니다.`);
+			}
+			
+			// 있다면
+			let html, addr = ``;
+			
+		
+			 for (let notice of list) {
+				 switch (notice.noticeCode) {
+				 case "1": // user : 단골 store 정보 업데이트
+					 addr = `storedetail.do?no=${notice.fromStoreNo}`;
+					 break;
+				 case "2": // user : 내 리뷰를 다른 user가 좋아요
+					 addr = `storedetail.do?no=${notice.fromStoreNo}`;
+					 break;
+				 case "4": // store : 내 가게의 단골 리스트
+					 break;
+				 case "5": // store : 내 가게 상세페이지에 새 리뷰가 등록 되었을 때
+					 addr = `storedetail.do?no=${notice.storeNo}`;
+					 break;
+				 default: // 코드3 store : 가입승인 => 내 상세페이지
+					 addr = `storedetail.do?no=${notice.storeNo}`;
+				 }
+				 
+				 console.log(addr);
+				 	
+				 
+				 
+				 html += 
+					 `<li>
+					 	<a href="">${notice.noticeContent}</a>
+					 </li>
+					 `;
+			 };
+			
+			
+			$(".notice_content").html(html);
+		},
+		error: (e) => {
+			console.log("error:", e);
+		}
+	});
+}
+
+
+
+
+
+
+/**
+ * 안 읽은 알림 갯수 가져오기
+ */
+function noticeCounter() {
+	$.ajax({
+		url: "count_notice.do",
+		success: (noticeCnt) => {
+			console.log(noticeCnt);
+			let html = (noticeCnt == 0) ? 
+					`` : `<span id="rednotice">${noticeCnt}</span>`;
+			$(".newnotice").append(html);
+		}
+	})
+};
 
 
 

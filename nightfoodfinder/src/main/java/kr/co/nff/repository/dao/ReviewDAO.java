@@ -14,5 +14,6 @@ public interface ReviewDAO {
 	// 관리자 신고리뷰
 	List<Review> selectReportReview(Search search);
 	int pagingReportGetCnt(Search search);
-	List<ReportReview> selectReportDetail(int no);
+	List<ReportReview> selectReportDetail(ReportReview report);
+	int reportModalGetPage(int reviewNo);
 }

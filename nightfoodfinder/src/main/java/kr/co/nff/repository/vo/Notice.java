@@ -10,4 +10,9 @@ public class Notice {
 	private String regDate;
 	private String noticeCode;
 	private int status;
+	/* 알림을 준 유저 */
+	private int fromUserNo;
+	private int fromStoreNo;
+	
+	private String noticeContent;
 }
