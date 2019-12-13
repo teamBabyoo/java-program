@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.co.nff.repository.dao.statDAO">
+<mapper namespace="kr.co.nff.repository.dao.StatDAO">
 
 	<!-- 전체 단골 등록 수 -->
 	<select id="frequentCountAll" resultType="int">
@@ -12,41 +12,44 @@
 	<!-- store 단골 랭킹 리스트 -->
 	<select id="statFrequentStore" parameterType="Search"
 		resultType="Stat">
-		  select *
+		 select *
     from frequent_view f
     left outer join (
 		select count(store_no) as allfq, store_no
+		<where>
+		         <include refid="statAgeFilter"/>
+		         </where>
 		from frequent_view
 		group by store_no
     ) freCnt
     on f.store_no = freCnt.store_no
     left outer join (
-     select count(user_no) filterfq, store_no
+     select count(user_no) malefq, store_no
        from frequent_view
-       <where>
-       <include refid="statGenderFilter"/>
-       <include refid="statAgeFilter"/>
-       </where>
+       where user_gender = 'M'
+         <include refid="statAgeFilter"/>
        group by store_no
-    ) gen
-    on f.store_no = gen.store_no
+    ) male
+      on f.store_no = male.store_no
+    left outer join (
+     select count(user_no) femalefq, store_no
+       from frequent_view
+       where user_gender = 'F'
+         <include refid="statAgeFilter"/>
+       group by store_no
+    ) female
+    on f.store_no = female.store_no
     group by f.store_no
-    order by filterfq desc
+    order by femalefq desc;
 
-		<!-- 페이징 -->
-		LIMIT #{startList}, #{listSize}
 
 	</select>
 	
 
 	<!-- 연령별 필터 -->
 		<sql id="statAgeFilter">
-		<if test="ageCode != null and ageCode != ''">
-		and user_age in
-			<foreach item="age" index="index"
-				collection="ageCode" open="(" separator="," close=")">
-				#{age.value}
-			</foreach>
+		<if test="userAge != null and userAge != ''">
+		and user_age like #{userAge}
 		</if>
 	</sql>
 	<!-- 성별 필터 -->
