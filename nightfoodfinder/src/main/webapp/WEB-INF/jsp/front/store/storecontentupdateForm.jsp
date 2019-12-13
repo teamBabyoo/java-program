@@ -48,25 +48,23 @@
 						--%>
 						<tr>
 							<th>가게 전화번호</th>
-							<td><input type="text" name="storeTell"
-								value="${store.storeTell}" /></td>
+							<td><input type="text" name="storeTell"	value="${store.storeTell}" /></td>
 						</tr>
 						<tr>
 							<th rowspan="4">주소</th>
 						</tr>
 						<tr>
-							<td><input type="text" id="zipNo" name="zipNo" readOnly /> 
+							<td><input type="text" id="zipNo" name="zipNo"  /> 
 							<input type="hidden" id="sggNm" name="sggNm" /> 
 							<input type="button" onClick="goPopup();" value="주소찾기" /></td>
 						</tr>
 						<tr>
 							<td><input type="text" style="width: 300px;"
-								id="roadFullAddr" name="roadFullAddr" value="${store.city}"
-								readOnly /></td>
+								id="roadFullAddr" name="roadFullAddr"  /></td>
 						</tr>
 						<tr>
 							<td><input type="text" style="width: 300px;" id="addrDetail"
-								name="addrDetail" value="${store.streetLoad}" readOnly /></td>
+								name="addrDetail"  /></td>
 						</tr>
 
 						<tr>
@@ -101,6 +99,28 @@
 							<input type="checkbox" name="day" value="7" />일
 							</td>
 						</tr>
+						<c:forEach items="${menulist}" var="m" varStatus="status">
+						<tr name="trMenu">
+							<c:choose>
+							<c:when test="${status.index == 0}">
+								<th>대표 메뉴 / 가격</th>
+								<td>
+									<input type="text" name="menuName" value="${m.menu}">
+									<input type="number" name="menuPrice" value="${m.price}">
+									<i class="fa fa-plus-square-o" aria-hidden="true" id="plus_btn"></i>
+									<i class="fa fa-minus-square-o" aria-hidden="true" id="minus_btn"></i>
+								</td>
+							</c:when>
+							<c:otherwise>
+								<th></th>
+							<td>
+								<input type="text" name="menuName" value="${m.menu}">
+								<input type="number" name="menuPrice" value="${m.price}">
+							</td>
+							</c:otherwise>
+							</c:choose>
+						</tr>
+						</c:forEach>
 						<tr>
 							<th>가게 분류</th>
 							<td><select name="storeCategory">
@@ -185,16 +205,28 @@
 	
 	//주소입력 팝업부분
 	function goPopup(){
-		var pop = window.open("/nightfoodfinder/api/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+		var pop = window.open("/nightfoodfinder/api/addrPop.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
 	}
 
 	function jusoCallBack(roadFullAddr,zipNo,addrDetail,sggNm){
-			// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-			document.form.roadFullAddr.value = roadFullAddr;
-			document.form.addrDetail.value = addrDetail;
-			document.form.zipNo.value = zipNo;
-			document.form.sggNm.value = sggNm;
+		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+		document.form.roadFullAddr.value = roadFullAddr;
+		document.form.zipNo.value = addrDetail;
+		document.form.addrDetail.value = zipNo;
+		document.form.sggNm.value = sggNm;
+		/* document.form.entX.value = entX;
+		document.form.entY.value = entY; */
 		
+		var geocoder = new kakao.maps.services.Geocoder();
+		var callback = function (result, status) {
+		    if (status === kakao.maps.services.Status.OK) {
+		        console.log(result);
+		        document.form.entX.value = result[0].y;
+		        document.form.entY.value = result[0].x;
+		        
+		    }
+		};
+		geocoder.addressSearch(roadFullAddr, callback);  
 	}
 	
 	$(document).ready(function() {
@@ -264,6 +296,119 @@
 			});
 		}
 	});
+	
+
+	// 비밀번호 유효성검사
+	$("#storePass").blur(function () {
+		var storePass = $('#storePass').val();
+		console.log("비밀번호 체크");
+	    if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/.test(storePass)){            
+	        //alert('숫자+영문자+특수문자 조합으로 8자리 이상 사용해야 합니다.');
+	        $('#pwChk').text('숫자+영문자+특수문자 조합으로 8자리 이상 사용해야 합니다.');
+			$('#pwChk').css('color', 'red');
+			//$("#reg_submit").attr("disabled", true);
+	        
+	        $('#pwChk').val('').focus();
+	        return false;
+	    }    
+	    var checkNumber = storePass.search(/[0-9]/g);
+	    var checkEnglish = storePass.search(/[a-z]/ig);
+	    if(checkNumber <0 || checkEnglish <0){
+	       // alert("숫자와 영문자를 혼용하여야 합니다.");
+	        $('#pwChk').text("숫자와 영문자를 혼용하여야 합니다.");
+			$('#pwChk').css('color', 'red');
+			//$("#reg_submit").attr("disabled", true);
+	        
+	        $('#pwChk').val('').focus();
+	        return false;
+	    }
+	    if(/(\w)\1\1\1/.test(storePass)){
+	        //alert('같은 문자를 4번 이상 사용하실 수 없습니다.');
+	        $('#pwChk').text('같은 문자를 4번 이상 사용하실 수 없습니다.');
+			$('#pwChk').css('color', 'red');
+			//$("#reg_submit").attr("disabled", true);
+	        
+	        $('#pwChk').val('').focus();
+	        return false;
+	    }
+	    return true;
+		
+	});
+
+
+
+
+	//이메일 검사 정규식
+	var idJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+	//이메일 중복체크
+	$("#storeEmail").blur(function() {
+			var storeEmail = $('#storeEmail').val();
+			console.log("이메일체크");
+			$.ajax({
+				url : '${pageContext.request.contextPath}/front/login/storeEmailChk.do?storeEmail='+ storeEmail,
+				success : function(data) {
+					console.log("1 = 중복o / 0 = 중복x : "+ data);							
+					
+					if (data == 1) {
+							// 1 : 아이디가 중복되는 문구
+							$("#emailChk").text("사용중인 이메일입니다");
+							$("#emailChk").css("color", "red");
+							//$("#reg_submit").attr("disabled", true);
+						} 
+					else {
+							if(idJ.test(storeEmail)){
+								// 0 : 아이디 길이 / 문자열 검사
+								$("#emailChk").text("");
+								//$("#reg_submit").attr("disabled", false);
+					
+							} else if(storeEmail == ""){
+								
+								$('#emailChk').text('이메일을 입력해주세요');
+								$('#emailChk').css('color', 'red');
+								//$("#reg_submit").attr("disabled", true);				
+								
+							} else {
+								
+								$('#emailChk').text("올바른 형식의 이메일을 입력해주세요.");
+								$('#emailChk').css('color', 'red');
+								//$("#reg_submit").attr("disabled", true);
+							}
+							
+						} 
+					}, error : function() {
+							console.log("실패");
+							console.log(data);
+					}
+				});
+			});
+
+	// 메뉴 입력 추가,삭제
+	$("#plus_btn").click(() => {
+		addRow();
+	})
+	$("#minus_btn").click(() => {
+		delRow();
+	})
+
+	function addRow () {
+		var addMenu =  '<tr name="trMenu">'+
+			'<th></th>'+
+			'<td>'+
+				'<input type="text" name="menuName">'+
+				'<input type="number" name="menuPrice">'+
+		'</tr>';
+
+	var trHtml = $( "tr[name=trMenu]:last" ); 
+	trHtml.after(addMenu); 
+	}
+
+	function delRow () {
+		var trHtml =$( "tr[name=trMenu]:last" );
+	    if ($( "tr[name=trMenu]" ).length ==1) return;
+	    trHtml.remove(); //tr 테그 삭제
+		
+	}
 				
 	
 
@@ -297,6 +442,7 @@
 
 // 			return false;
 		}
+		
 	</script>
 </body>
 </html>

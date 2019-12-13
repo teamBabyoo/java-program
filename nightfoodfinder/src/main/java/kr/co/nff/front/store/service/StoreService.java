@@ -62,5 +62,8 @@ public interface StoreService {
 	
 	//리뷰 페이징 처리를 위한
 	public int getReviewCnt(int no);
+	
+	//메뉴 업데이트
+	public void updateMenuList(Store store, int no);
 }
 

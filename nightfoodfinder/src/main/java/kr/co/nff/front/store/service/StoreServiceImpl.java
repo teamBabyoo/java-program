@@ -43,8 +43,8 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public List<Menu> storeMenu(int no) {
-		return dao.storeMenuList(no);
+	public List<Menu> storeMenu(int storeNo) {
+		return dao.storeMenuList(storeNo);
 	}
 
 	@Override
@@ -66,6 +66,8 @@ public class StoreServiceImpl implements StoreService {
 	public Store storeContentUpdateForm(int no) {
 		return dao.selectContent(no);
 	}
+	
+
 	
 
 	@Override
@@ -150,5 +152,11 @@ public class StoreServiceImpl implements StoreService {
 	//리뷰 페이징을 위한
 	public int getReviewCnt(int no) {
 		return dao.getReviewCnt(no);
+	}
+	
+	//메뉴 업데이트
+	public void updateMenuList(Store store, int no) {
+		dao.deleteMenuList(no);
+		dao.insertMenuList(store);
 	}
 }

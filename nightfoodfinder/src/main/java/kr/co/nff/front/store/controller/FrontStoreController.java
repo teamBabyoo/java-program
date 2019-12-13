@@ -1,6 +1,7 @@
 package kr.co.nff.front.store.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,13 +60,29 @@ public class FrontStoreController {
 		model.addAttribute("holidaylist", service.storeHoliday(no));
 		model.addAttribute("storeContent", service.storeContent(no));
 		model.addAttribute("user", session.getAttribute("loginUser"));
+		System.out.println("로그인한가게 :" + session.getAttribute("loginStore"));
+		model.addAttribute("loginStore", session.getAttribute("loginStore"));
 	}
 	
 	/* 가게 정보 수정*/
 	@RequestMapping("/storeinfoupdate.do")
 	public String storeInfoUpdate(Store store, @RequestParam(value="storeNo") int no) {
 		service.updateHoliday(store);
-		System.out.println(service.storeDetail(no));
+		
+		String [] menuNames = store.getMenuName();
+		int [] prices = store.getMenuPrice();
+		
+		List<Map<String, Object>> menulist = new ArrayList<Map<String, Object>>();
+		
+		for(int i = 0; i < menuNames.length; i++) {
+			 Map<String, Object> menuMap = new HashMap<String, Object>();
+			 menuMap.put("menu", menuNames[i]);
+			 menuMap.put("price",prices[i]);
+			 menulist.add(menuMap);
+		}
+		
+		store.setMenulist(menulist);
+		service.updateMenuList(store, no);
 		return "redirect:storedetail.do?no="+no;
 	}
 	
@@ -76,6 +93,7 @@ public class FrontStoreController {
 		model.addAttribute("storeContent", service.storeContentUpdateForm(no));
 		JSONArray jsonArray = new JSONArray();
 		model.addAttribute("holidaylist", jsonArray.fromObject(service.storeHoliday(no)));
+		model.addAttribute("menulist", service.storeMenu(no));
 	}
 
 	/* 단골 등록 */
