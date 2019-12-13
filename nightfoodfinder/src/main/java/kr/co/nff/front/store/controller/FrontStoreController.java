@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -130,7 +129,7 @@ public class FrontStoreController {
 
 	/* 리뷰 작성 & 이미지 업로드 */
 	@RequestMapping("/review_regist.do")
-	public String reviewRegist(Review review, HttpServletRequest req, HttpServletResponse res) throws Exception, IOException {
+	public String reviewRegist(Review review) throws Exception, IOException {
 		
 		boolean fileFlag = true;
 		
@@ -241,8 +240,9 @@ public class FrontStoreController {
 
 	/* 리뷰작성폼 */
 	@RequestMapping("/storeReviewRegistForm.do")
-	public void reviewRegistForm(Review review) {
+	public void reviewRegistForm(Review review, Model model, HttpSession session) {
 		System.out.println("여기는 댓글작성폼");
+		model.addAttribute("loginUser", session.getAttribute("loginUser"));
 	}
 
 	
