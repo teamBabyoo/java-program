@@ -38,41 +38,39 @@
 
     let eventMarker;
 
-    $(".storeLn").click((e) => {
-      // console.log("클릭하기이름", $(e.target).data("store"));
+    $(".storeLn").mouseover((e) => {
       markerEvent($(e.target).data("store"));
     });
 
     function markerEvent(storeName) {
-      // map.setZoom(20);
-      infowindow.setContent(locations[0][0]);
-      infowindow.open(map, markerArr[0]);
       markerImage = new google.maps.MarkerImage("https://www.siksinhot.com/static2/images/common/bg_ico_s_like.png",
         null, null, null, new google.maps.Size(30, 50));
-      markerImage = new google.maps.MarkerImage("",
-        null, null, null, new google.maps.Size(30, 50));
-      console.dir(markerArr[0]);
-      console.log(markerArr[0].store_name);
+
       map.setCenter(new google.maps.LatLng(locations[0][1], locations[0][2]));
 
+      /*마커 애니메이션 효과 주기*/
       for (let i = 0; i < markerArr.length; i++) {
-        markerArr[i].setAnimation(null)
+        markerArr[i].setAnimation(null);
+         $(".storeLn").mouseleave(()=>{
+           markerArr[i].setIcon(null);
+          });
+
         if (markerArr[i].store_name == storeName) {
-          if (markerArr[i].getAnimation() !== null) {
-            eventMarker = markerArr[i];
-            markerArr[i].setAnimation(null)
-            markerArr[i].setIcon(markerImage);
-          } else {
-            markerArr[i].setAnimation(google.maps.Animation.BOUNCE);
-            markerArr[i].setIcon(markerImage);
+          /*가게이름 나오기*/
+           infowindow.setContent(markerArr[i].store_name);
+            infowindow.open(map, markerArr[i]);
+            
+            /*애니메이션 주기*/
+            if (markerArr[i].getAnimation() !== null) {
+              eventMarker = markerArr[i];         
+              
+            } else {
+              markerArr[i].setAnimation(google.maps.Animation.BOUNCE);
+              markerArr[i].setIcon(markerImage);
           }
         }
       }
 
-
-
-      //  markerArr[0].setMap(null);
-      // markerArr[0].remove();
     }
 
     function drawMap() {
@@ -90,14 +88,9 @@
         y += locations[u][1];
         x += locations[u][2];
         u = u;
-        console.log(typeof (locations[u][1]));
-        console.log(y);
       }
-      console.log("yxu입니다 : ", y, x, u);
       y = y / u;
       x = x / u;
-
-      console.log("나눈 값", y, x);
 
 
       map = new google.maps.Map(document.getElementById('map'), {
@@ -125,36 +118,21 @@
         markerArr.push(marker);
 
 
-
-
         google.maps.event.addListener(marker, 'click', (function (marker, i) {
           return function () {
             infowindow.setContent(locations[i][0]);
             infowindow.open(map, marker);
           }
         })(marker, i));
-        /*
-        if(marker.store_name === "청석골") {
-             var markerImage = new
-               google.maps.MarkerImage("https://www.siksinhot.com/static2/images/common/bg_ico_s_like.png",
-               null, null, null, new
-               google.maps.Size(12,20));
-               marker.icon = markerImage;
-        }
-        */
 
         if (marker) {
-          // console.log("이름내놔", marker.store_name);
           marker.addListener('click', function () {
             map.setZoom(15);
             map.setCenter(this.getPosition());
-            // alert(this.store_name); 누른 현재의 가게 이름
+            marker.setIcon(null);
           });
         }
-
-
       }
-
     };
     drawMap();
   </script>

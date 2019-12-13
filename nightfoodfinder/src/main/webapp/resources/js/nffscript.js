@@ -7,7 +7,7 @@ $(document).ready(function() {
 
     // footer 위치
     // ↙ 문서가 로딩된 후에 변경된 내용은 반영이 안 될수도 있음
-    $('footer').css('top', $height_header + $height_content);
+//    $('footer').css('top', $height_header + $height_content);
 
 
 

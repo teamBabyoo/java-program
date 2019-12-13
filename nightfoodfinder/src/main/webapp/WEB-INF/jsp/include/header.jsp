@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <header class="clearboth">
-    <div class="logo">
+    <div class="logo" onclick="location.href='${pageContext.request.contextPath}/front/main/main.do'">
         <img src="${pageContext.request.contextPath}/resources/images/mangoplate-logo-horizontal.svg" alt="anff ·Î°í" />
     </div>
     <div class="search">

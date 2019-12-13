@@ -4,10 +4,12 @@ package kr.co.nff.admin.stat.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.nff.admin.stat.service.StatService;
 import kr.co.nff.repository.vo.Search;
+import kr.co.nff.repository.vo.Stat;
 
 
 @Controller("kr.co.nff.admin.stat.controller.AdminStatController")
@@ -18,8 +20,8 @@ public class AdminStatController {
 	private StatService service;
 	
 	@RequestMapping("/statlist.do")
-	public void storeList(Search search) {
-		service.statFrequentStore(search);
+	public void storeList(Search search, Model model) {
+		model.addAttribute("statList", service.statFrequentStore(search));
 	}
 	
 	

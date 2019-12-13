@@ -47,8 +47,8 @@ public class FrontNoticeController {
 		Store storeUser = (Store)session.getAttribute("storeUser");
 		
 		Notice notice = new Notice();
-		if (storeUser == null) notice.setUserNo(loginUser.getUserNo());
-		else notice.setStoreNo(storeUser.getStoreNo());
+		if (storeUser == null && loginUser != null) notice.setUserNo(loginUser.getUserNo());
+		else if (storeUser != null && loginUser == null) notice.setStoreNo(storeUser.getStoreNo());
 		
 		int noticeCnt = service.countNewNotice(notice);
 		
