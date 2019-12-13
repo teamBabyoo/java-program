@@ -115,7 +115,7 @@
 							<th>대표 메뉴 / 가격</th>
 							<td>
 								<input type="text" name="menuName">
-								<input type="number" name="price">
+								<input type="number" name="menuPrice">
 								<i class="fa fa-plus-square-o" aria-hidden="true" id="plus_btn"></i>
 								<i class="fa fa-minus-square-o" aria-hidden="true" id="minus_btn"></i></td>
 						</tr>
@@ -308,7 +308,7 @@ function addRow () {
 		'<th></th>'+
 		'<td>'+
 			'<input type="text" name="menuName">'+
-			'<input type="number" name="price">'+
+			'<input type="number" name="menuPrice">'+
 	'</tr>';
 
 var trHtml = $( "tr[name=trMenu]:last" ); 

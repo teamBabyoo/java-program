@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +25,6 @@ import kr.co.nff.front.login.service.LoginService;
 import kr.co.nff.login.kakao.oauth.model.KakaoLogin;
 import kr.co.nff.login.naver.oauth.bo.NaverLoginBO;
 import kr.co.nff.login.naver.oauth.model.JsonParser;
-import kr.co.nff.repository.vo.Menu;
 import kr.co.nff.repository.vo.Store;
 import kr.co.nff.repository.vo.User;
 
@@ -190,21 +190,29 @@ public class LoginController {
 	//스토어 가입
 	@RequestMapping("/front/login/storejoin.do")
 	public String storeJoin(Store store) {
-		System.out.println(store);
-		String [] menus = store.getMenuName();
-		Integer [] prices = store.getPrice();
-		List<Menu> list = new ArrayList<Menu>();
 		
-		for(int i = 0; i < menus.length; i++) {
-			Menu m = new Menu();
-			m.setMenuName(menus[i]);
-			m.setPrice(prices[i]);
-			list.add(m);
+		String [] menuNames = store.getMenuName();
+		int [] prices = store.getMenuPrice();
+		
+		List<Map<String, Object>> menulist = new ArrayList<Map<String, Object>>();
+		
+		//List<Menu> menulist = new ArrayList<Menu>();
+		for(int i = 0; i < menuNames.length; i++) {
+			
+			 //Menu m = new Menu();
+			 Map<String, Object> menuMap = new HashMap<String, Object>();
+			 menuMap.put("menu", menuNames[i]);
+			 //System.out.println();
+			 menuMap.put("price",prices[i]);
+			 
+			 menulist.add(menuMap);
+			
 		}
 		
-		System.out.println(list.toString());
-		//gson.format("넘어오는 스트링문자열", Menu.class);
-		//loginservice.joinStore(store);
+		//System.out.println(menulist.toString());
+		store.setMenulist(menulist);
+		System.out.println(menulist);
+		loginservice.joinStore(store);
 		return "redirect:/front/main/main.do";
 	}
 	// 스토어 가입폼

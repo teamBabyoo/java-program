@@ -1,7 +1,7 @@
 package kr.co.nff.repository.dao;
 
-import java.util.Map;
 
+import kr.co.nff.repository.vo.Menu;
 import kr.co.nff.repository.vo.Store;
 import kr.co.nff.repository.vo.User;
 

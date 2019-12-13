@@ -2,11 +2,12 @@ package kr.co.nff.repository.vo;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import lombok.Data;
 
 @Data
-public class Store {
+public class Store  {
 	private int storeNo;
 	private String storeName;
 	private String storeEmail;
@@ -25,7 +26,7 @@ public class Store {
 	private String storeContent;
 	private Date regDate;
 	private String[] menuName;
-	private Integer[] price;
+	private int[] menuPrice;
 	//private int[] price;
 	private int priceType; // 가격대
 	private int seeCnt;
@@ -54,6 +55,9 @@ public class Store {
 	
 	//휴무일 받을 리스트 
 	private List<Integer> day;
+	
+	// 메뉴리스트
+	private List<Map<String, Object>> menulist;
 	
 	
 	//  storeNo 받을 리스트
