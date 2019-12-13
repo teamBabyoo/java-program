@@ -441,7 +441,10 @@ header div:nth-child(3) li span {
     line-height: 20px;
     top: 10px;
 }
-#notice_btn .topshape { top: 20px; right: 12px; }
+#notice_btn .topshape { 
+	top: 20px; 
+	right: 12px; 
+}
 .notice_content { 
 	position: absolute; 
 	background: #fff; 
@@ -458,7 +461,6 @@ header div:nth-child(3) li span {
     top: -10px;
     left: 34px;
 }
-
 #rednotice {
 	background-color: #fa3e3e;
     border-radius: 3px;
@@ -466,6 +468,8 @@ header div:nth-child(3) li span {
     padding: 1px 3px;
     font-size: 2px;
 }
-
+.notice_content ul li {
+	line-height: 5px;
+}
 
 /** 유빈 끝 **/
