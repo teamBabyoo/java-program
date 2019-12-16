@@ -1,9 +1,4 @@
-/*가게수정 생성*/
-if(loginStore === storeNo){
-		$("#btdiv").append(
-				`<span id="updatebutton" onclick="location.href='${pageContext.request.contextPath}/front/store/storecontentupdateForm.do?no=${store.storeNo}'">수정하기</span>`
-					);
-	}
+
 
 /*단골등록을 위한*/
 function checkFrequent(){
@@ -21,26 +16,38 @@ checkFrequent();
 function makeFrequent(list) {
 	// list 가 1이면 등록된 가게
 	// 0이면 등록되지 않은 가게
-	
+	console.log("프리퀀트", list);
 	$(".frequent").off();
    if(list) {
 	   $(".frequent i").attr("class", "fa fa-bookmark").css("color", "red");
 	   $(".frequent").click(()=>{
-		   alert("단골취소을 취소되었습니다");
-		   frequentRegist("frequent_delete.do");
-		   $(".frequent i").attr("class", "fa fa-bookmark-o").css("color", "#77747d");
+		   if(userNo === 0 || loginStore != storeNo){
+			  
+			   Swal.fire('로그인 후 이용이 가능합니다')
+			   return false;
+		   } else {
+			   alert("단골취소을 취소되었습니다");
+			   frequentRegist("frequent_delete.do");
+			   $(".frequent i").attr("class", "fa fa-bookmark-o").css("color", "#77747d");
+		   }
 		   
 	   });
 	   
    } else {
 	   $(".frequent i").attr("class", "fa fa-bookmark-o");
 	   $(".frequent").click(()=>{
-		   alert("단골등록");
-		   frequentRegist("frequent_regist.do");
-		   $(".frequent i").attr("class", "fa fa-bookmark").css("color", "red");
+		   if(userNo === 0){
+			   Swal.fire('로그인 후 이용이 가능합니다')
+			   return false;
+		   } else {
+			   alert("단골등록");
+			   frequentRegist("frequent_regist.do");
+			   $(".frequent i").attr("class", "fa fa-bookmark").css("color", "red");
+		   }
 	   });
-	   
    }
+			   
+	   
 }
 
 
@@ -75,7 +82,7 @@ function animateValue(id, start, end, duration) {
     }, stepTime);
 }
 animateValue("scopescore", 0, scope, 100);
-
+    /*
 	let close = closeTime.split(":");
 	let closehour = '';
 	if(close[0] >= 24 && close[0] <= 36) {
@@ -88,7 +95,7 @@ animateValue("scopescore", 0, scope, 100);
 	console.log(closeTime);
 	
 	$("#operatingtime").html(openTime +" ~ " +closeTime);
-
+*/
 	
 //리뷰 리스트 가져오는 에이작스 	
 function reviewListAjax() {
@@ -116,11 +123,9 @@ function toPad(val) {
 function makeReviewList(list){
 	console.dir(list);
 	console.log(list.pagination);
+	let html = "";
 	let pagination = list.pagination;
 	let $tbl = $("<div class='user_rv'></div>");
-	if(list.length == 0){
-		$tbl.append(` 작성된 리뷰가 없습니다.`);
-	}
 	var reviewNoArray = [];
 	/*
 	list = jQuery.map(list, function(n, i) {
@@ -132,7 +137,12 @@ function makeReviewList(list){
 		console.log("str", str);
 	}*/
 	let reviewList = list.list;
-	console.log("reviewLsit", reviewList);
+	console.log("reviewLsit", reviewList.length);
+	if(reviewList.length == 0){
+		html += `<div class='user_rv'> 작성된 리뷰가 없습니다.</div>`;
+		$tbl.append(html);
+		$("#targetContainer").html($tbl);
+	} else {
 
 	
 	$.each(reviewList, (i, r) => {
@@ -165,7 +175,7 @@ function makeReviewList(list){
 		}
 		
 		if(i == 0){
-			let html = "";
+			
 			html += `<div class="user_rv best_rv">
 				  <div class="tenten">
 			  	<button type="button" class="report" value="${r.reviewNo}">신고하기</button>`
@@ -281,6 +291,7 @@ function makeReviewList(list){
 		
 		}
 	});
+	}
 
 	$("#targetContainer").html($tbl);
 	let pageEle = "";
@@ -467,7 +478,10 @@ $(document).ready(function() {
 //신고하기
 $(document).on('click', '.report', function(e){
 	//신고 클릭시 했던 신고자인지
-	
+	if(loginStore != storeNo && userNo === 0){
+		   Swal.fire('신고할 수 없습니다')
+		   return false;
+	} else {
 	//유저번호 들어오는지
 	console.log("유저번호", userNo);
 	let page = $(".page-item.active a").attr("data-page");
@@ -483,7 +497,7 @@ $(document).on('click', '.report', function(e){
 	});
 	return false;
 	
-
+	}
 
 });
 

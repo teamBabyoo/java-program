@@ -10,7 +10,7 @@
 </c:import>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 <body>
 	<div class="wrapper detail_wrap">
@@ -92,7 +92,7 @@
 									<td class="tabletitlefont">Time</td>
 								</tr>
 								<tr>
-									<td class="tabletdfont" id="operatingtime"></td>
+									<td class="tabletdfont" id="operatingtime">${store.openTime} ~ ${store.closeTime}</td>
 
 								</tr>
 								<tr>
@@ -127,7 +127,7 @@
 									<td class="tabletitlefont">Introduce</td>
 								</tr>
 						</table>
-						<div class="menulist">${storeContent.storeContent}</div>
+						<div class="menulist" id="introduce"></div>
 						<div id="btdiv">
 						</div>
 
@@ -212,22 +212,36 @@
 		let openTime = '${store.openTime}';
 		let closeTime = '${store.closeTime}';
 		let context = '${pageContext.request.contextPath}';
-		let nnono = 1;
 		let storeNo = '${store.storeNo}';
 		let storeScope = "";
 		let fileGroupCode = null;
 		//	 let recomment = null;
 		let userNo = '${user.userNo}';
+		if(userNo === ""){
+			userNo = 0;
+		}
 // 		let userNo = 17;
 			 console.log("userNo: ", userNo);
 		let loginStore = "";
-		if('${loginStore.storeNo}' === null){
+		if('${loginStore.storeNo}' === ""){
 			loginStore = 0;
 		} else {
 			loginStore = '${loginStore.storeNo}';
 		}
 		console.log("storeNo: ", storeNo);
+		if(loginStore === storeNo){
+	        $("#btdiv").append(
+	                `<span id="updatebutton" onclick="location.href='${pageContext.request.contextPath}/front/store/storecontentupdateForm.do?no=${store.storeNo}'">수정하기</span>`
+	                    );
+	    }
+		
+		let content = `${storeContent.storeContent}`;
+		if(content === ""){
+			$("#introduce").append("소개글을 입력해주세요");
+		} else {
+			$("#introduce").append(content);
 			
+		}
 	
 	</script>
 	<script src="<c:url value='/resources/js/storedetail.js' />"></script>
