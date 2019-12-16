@@ -1,3 +1,10 @@
+/*가게수정 생성*/
+if(loginStore === storeNo){
+		$("#btdiv").append(
+				`<span id="updatebutton" onclick="location.href='${pageContext.request.contextPath}/front/store/storecontentupdateForm.do?no=${store.storeNo}'">수정하기</span>`
+					);
+	}
+
 /*단골등록을 위한*/
 function checkFrequent(){
 	$.getJSON({

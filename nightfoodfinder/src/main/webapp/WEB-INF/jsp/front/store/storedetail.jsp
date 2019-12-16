@@ -212,19 +212,23 @@
 		let openTime = '${store.openTime}';
 		let closeTime = '${store.closeTime}';
 		let context = '${pageContext.request.contextPath}';
-		let storeNo = ${store.storeNo};
+		let nnono = 1;
+		let storeNo = '${store.storeNo}';
 		let storeScope = "";
 		let fileGroupCode = null;
 		//	 let recomment = null;
-		// 	 let userNo = ${user.userNo};
-		let userNo = 17;
-		//	 console.log("userNo: ", userNo);
-		console.log("storeNo: ", storeNo);
-		if(${loginStore.storeNo} === ${store.storeNo}){
-			$("#btdiv").append(
-		`<span id="updatebutton" onclick="location.href='${pageContext.request.contextPath}/front/store/storecontentupdateForm.do?no=${store.storeNo}'">수정하기</span>`
-					);
+		let userNo = '${user.userNo}';
+// 		let userNo = 17;
+			 console.log("userNo: ", userNo);
+		let loginStore = "";
+		if('${loginStore.storeNo}' === null){
+			loginStore = 0;
+		} else {
+			loginStore = '${loginStore.storeNo}';
 		}
+		console.log("storeNo: ", storeNo);
+			
+	
 	</script>
 	<script src="<c:url value='/resources/js/storedetail.js' />"></script>
 	<script type='text/javascript'>
