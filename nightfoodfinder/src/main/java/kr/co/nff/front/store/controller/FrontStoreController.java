@@ -51,9 +51,12 @@ public class FrontStoreController {
 	@ResponseBody
 	public Map<String, Object> storeListAjax(Search search) {
 		Map<String, Object> result = service.storeList(search);
-		System.out.println(service.storeList(search));
-		System.out.println("페이지결과" + search.getPage());
-		return service.storeList(search);
+		/*
+		 * System.out.println(service.storeList(search)); System.out.println("페이지결과" +
+		 * search.getPage());
+		 */
+		/* return service.storeList(search); */
+		return result;
 	}
 	
 	
