@@ -12,7 +12,10 @@
 <script src="http://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <style>
 .login_container {
+	margin : 0px;
+	padding : 0px;
 	text-align : center;
+	
 }
 </style>
 
@@ -25,11 +28,9 @@
 			<div class="content clearboth" >
 		        <div class="login_container">
 			 		<div id="login_div01">
-			 			<div id="login_tab">
-					 		<ul>
-					 			<li>일반회원 로그인</li>
-					 			<li><a href="javascript:show_layer('2');">스토어 로그인</a></li>
-					 		</ul>                                                 
+			 			<div id="login_tab" >
+					 		<div>일반회원 로그인</div>
+					 		<div><a href="javascript:show_layer('2');">스토어 로그인</a></div>
 				 		</div>
 			 			<div class="snsBox" id="snsBox">
 							<ul>
@@ -53,11 +54,9 @@
 				 	</div> 	
 				 	
 				 	<div id="login_div02" style="display : none">
-			 			<div id="login_tab">
-					 		<ul>
-					 			<li><a href="javascript:show_layer('1');">일반회원 로그인</a></li>
-					 			<li>스토어 로그인</li>
-					 		</ul>                                                 
+			 			<div id="login_tab" >
+					 		<div>일반회원 로그인</div>
+					 		<div><a href="javascript:show_layer('2');">스토어 로그인</a></div>
 				 		</div>
 			 			<div class="memInput" id="memInput" >
 							<form id="slForm" action="storelogin.do" method="post" onsubmit="return fn_login()">

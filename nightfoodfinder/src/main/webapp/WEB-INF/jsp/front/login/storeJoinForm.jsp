@@ -153,8 +153,28 @@
 		</div>
 	</div>
 <script>
-// 시간 변환
+
+// 시간 변환, 유효성검사
+ function isEmpty(ele, msg){
+	 if (ele.value.trim() == ""  ){
+		 alert(msg);
+		
+		 return true;
+	 }
+	 return false;
+ }
+ function isLong(ele, msg, max){
+	 if( ele.value.length > max){
+		 alert(msg);
+		
+		 return true;
+	 }
+	 return false;
+ }	
+ 
 	function validate() {
+			let f = document.form;
+
 			let openH = $("select[name='openH']").val();
 			let openM = $("select[name='openM']").val();
 				if (openH < 10) {
@@ -181,6 +201,21 @@
 			$('input[name="openTime"]').val(openTime);
 			$('input[name="closeTime"]').val(closeTime);
 			
+			
+			// 유효성검사
+			if(isEmpty(f.storeName, "가게 이름을 입력해주세요")) return false;
+			if(isEmpty(f.businessNum, "사업자번호를 입력해주세요")) return false;
+			if(isEmpty(f.storeEmail, "이메일을 입력해주세요")) return false;
+			if(isEmpty(f.storeTell, "전화번호를 입력해주세요")) return false;
+			if(isEmpty(f.roadFullAddr, "주소를 입력해주세요")) return false;
+			if(isEmpty(f.menuName, "대표메뉴를 입력해주세요")) return false;
+			if(isEmpty(f.storeCategory, "가게분류를 선택해주세요")) return false;
+			if(isEmpty(f.storeOwner, "대표자 이름을 입력해주세요")) return false;
+			if(isEmpty(f.storeOwnerPh, "대표자 휴대폰번호를 입력해주세요")) return false;
+			
+			return true;
+	
+	
 			}
 			
 //주소입력 팝업부분
