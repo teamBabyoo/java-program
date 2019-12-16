@@ -48,12 +48,15 @@
 						<tr>
 							<th>비밀번호</th>
 							<td><input type="password" id="storePass" name="storePass" />
-								<div id="pwChk"></div></td>
+								<div id="pwChk"> <span id="alert-success" style="display: none;">비밀번호가 일치합니다.</span></div></td>
 						</tr>
 						<tr>
 							<th>비밀번호 확인</th>
 							<td><input type="password" id="storePass2" name="storePass2" />
-								<div id="pwChk2"></div></td>
+								<div id="pwChk2">
+									 <span id="alert-success" style="display: none;">비밀번호가 일치합니다.</span>
+									 <span id="alert-danger" style="display: none;  ">비밀번호가 일치하지 않습니다.</span>
+								</div></td>
 						</tr>
 						<tr>
 							<th>가게 전화번호</th>
@@ -246,6 +249,22 @@ $("#storePass").blur(function () {
     return true;
 	
 });
+
+//비밀번호 일치 검사
+$('#storePass2').focusout(function () {
+        var pwd1 = $("#storePass").val();
+        var pwd2 = $("#storePass2").val();
+        if (pwd1 != "" || pwd2 != "") {
+            if (pwd1 == pwd2) {
+                $("#alert-success").css('display', 'inline-block');
+                $("#alert-danger").css('display', 'none');
+            } else {
+                //alert("비밀번호가 일치하지 않습니다. 비밀번호를 재확인해주세요.");
+                $("#alert-success").css('display', 'none');
+                $("#alert-danger").css('display', 'inline-block');
+            }
+        }
+    });
 
 
 

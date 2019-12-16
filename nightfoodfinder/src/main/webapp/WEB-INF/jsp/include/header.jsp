@@ -128,7 +128,7 @@
 				</c:when>
 				<c:otherwise>
 	            <ul>
-	                <li><a href="${pageContext.request.contextPath}/front/login/userLoginForm.do">로그인하기</a></li>
+	                <li><a href="${pageContext.request.contextPath}/front/login/userLoginForm.do">로그인 / 회원가입</a></li>
 	            </ul>
 				</c:otherwise>
 	           </c:choose>
