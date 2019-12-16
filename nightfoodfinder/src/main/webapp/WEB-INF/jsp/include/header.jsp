@@ -141,9 +141,4 @@
       </ul>
     </div>
   </header>
-  <script type="text/javascript">
-  /* if (window.sessionStorage) {
-      console.dir(sessionStorage);
-  } */
-  </script>
   <script src='${pageContext.request.contextPath}/resources/js/header.js' ></script>

@@ -12,6 +12,10 @@
 	href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
 	integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
 	crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+
+
 </head>
 <body>
 	<div class="wrapper list_wrap">
@@ -20,7 +24,7 @@
 		<!-- // 헤더 -->
 		<c:set var="sList" value="${result.sList}" />
 		<!-- 컨텐트  -->
-		<div class="content">
+		<div class="content list_content">
 
 			<div class="leftarea">
 				<div class="listnotice">
@@ -29,53 +33,64 @@
 					</div>
 				</div>
 				<div class="storelist">
-					<table class="table table-bordered">
-						<thead>
-							<tr>
-								<th>번호</th>
-								<th></th>
-								<th>글쓴이</th>
-								<th>등록일</th>
-							</tr>
-						</thead>
-						<tbody id="storetListTbody">
-							<c:if test="${empty sList}">
-								<tr>
-									<td colspan="5">검색 결과가 없습니다.</td>
-								</tr>
-							</c:if>
-
-							<c:forEach var="s" items="${sList}" varStatus="status">
-								<tr class="store store_${status.count}st">
-									<td>${s.storeNo}</td>
-									<td><a href="storedetail.do?no=${s.storeNo}">${s.storeName}</a></td>
-									<td>${s.storeTell}</td>
-									<td>${s.openTime}</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
+      				<ul>
+      				<c:if test="${empty sList}">
+						<li>검색 결과가 없습니다.</li>
+					</c:if>
+					
+			<!-- store list 부분 -->
+					<c:forEach var="s" items="${sList}" varStatus="status">
+				       	<li id="li_${status.count}" class="storeLn" data-store="${s.storeName}">
+				       		<div class="sto_li">
+					       		<a href="storedetail.do?no=${s.storeNo}" ></a>
+					       		<!-- 썸네일 사진 들어갈 div -->
+					       		<div class="sto_li_left">
+					       			<div class="thum" >
+					       				<div class="thum_imgs">
+					       					<img class="imgss" src="<c:url value='/resources/images/flower.jpg' />" />
+					       					<img class="imgss" src="<c:url value='/resources/images/flower2.jpg' />" />
+					       					<img class="imgss" src="<c:url value='/resources/images/flower3.jpeg' />" />
+					       					<img class="imgss" src="<c:url value='/resources/images/flower4.jpg' />" />
+					       					<img class="imgss" src="<c:url value='/resources/images/flower5.jpg' />" />
+					       				</div>
+					       			</div>
+					       			<div class="banner_navi">
+					       				<i class="fas fa-chevron-circle-left btn_left"></i>
+					       				<i class="fas fa-chevron-circle-right btn_right"></i>
+					       			</div>
+					       		</div>
+				       			<div class="sto_li_content" >
+									${s.storeName}				       			
+				       			</div>
+				       		</div>
+				       	</li>
+				    </c:forEach>
+				    </ul>
 					<%-- paging 영역 --%>
 					<div id="storePageDiv">
-						<ul class="pagination">
-						<c:if test="${result.pi.prev}">
-						<li class="page-item">
-							<a class="page-link" href="#${result.pi.startPage- 1}" data-page="${result.pi.startPage- 1}"> Previous</a>
-						</li>
-						</c:if>
-						<c:forEach var="i" begin="${result.pi.startPage}" end="${result.pi.endPage}">
-						<li class="page-item active">
-							<a class="page-link" href="#${i}" data-page="${i}">${i}</a>
-						</li>
-						</c:forEach>
-						<c:if test="${result.pi.next}">
-						<li class="page-item">
-							<a class="page-link" href="#${result.pi.endPage + 1}" data-page="${result.pi.endPage + 1}"> Next</a>
-						</li>
-						</c:if>
+						<ul class="stolist_pagination modal-3">
+							<c:if test="${result.pi.prev}">
+								<li class="page-item">
+									<a class="page-link" href="#${result.pi.startPage- 1}" data-page="${result.pi.startPage- 1}"> Previous</a>
+								</li>
+							</c:if>
+							<c:forEach var="i" begin="${result.pi.startPage}" end="${result.pi.endPage}">
+								<li class="page-item active">
+									<a class="page-link" href="#${i}" data-page="${i}">${i}</a>
+								</li>
+							</c:forEach>
+							<c:if test="${result.pi.next}">
+								<li class="page-item">
+									<a class="page-link" href="#${result.pi.endPage + 1}" data-page="${result.pi.endPage + 1}"> Next</a>
+								</li>
+							</c:if>
 						</ul>
 					</div>
 				</div>
+			</div>
+			
+			<div class="rightarea">
+				<div id="map"></div>
 			</div>
 
 		</div>
@@ -90,18 +105,19 @@
 	</div>
 	<form id="searchStoreForm" method="post">
 		<c:forEach var="city" items="${search.cities}">
-			<input name="cities" type="hidden"  value="${city}" />
+			<input name="cities" type="hidden" value="${city}" />
 		</c:forEach>
 		<c:forEach var="price" items="${search.priceType}">
-			<input name="priceType" type="hidden"  value="${price}" />
+			<input name="priceType" type="hidden" value="${price}" />
 		</c:forEach>
-		
+
 		<c:forEach var="category" items="${search.categoryCode}">
-			<input name="categoryCode" type="hidden"  value="${category}" />
+			<input name="categoryCode" type="hidden" value="${category}" />
 		</c:forEach>
-		<input name="keyword" type="hidden"  value="${search.keyword}" />
-	</form>	
+		<input name="keyword" type="hidden" value="${search.keyword}" />
+	</form>
 	<script src="<c:url value='/resources/js/storelist.js' />"></script>
+	<script src="<c:url value='/resources/js/map_in_storelist.js' />"></script>
 </body>
 </html>
 
