@@ -99,7 +99,9 @@
 	        <c:choose>
 	        <c:when test="${loginUser != null}">
 	        <div>
-				<a href="">MY PAGE</a>
+	        	<label>
+				<a href="${pageContext.request.contextPath}/front/login/userdetail.do?no=${loginUser.userNo}">MY PAGE</a>
+	        	</label>
 	        </div>
 	        </c:when>
 	        <c:when test="${loginStore != null}">
@@ -114,6 +116,7 @@
 	        </div>
 	        </c:otherwise>
 	        </c:choose>
+	        
 	        <div>
 	           <c:choose>
 				<c:when test="${loginUser != null}">

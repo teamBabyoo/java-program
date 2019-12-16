@@ -21,6 +21,8 @@ public class Store  {
 	private String city;
 	private String streetLoad;
 	private String sggNm;
+	private String zipNo;
+	private String addrDetail;
 	private String roadFullAddr;
 	
 	private String storeContent;

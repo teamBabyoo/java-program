@@ -30,16 +30,12 @@ import kr.co.nff.repository.vo.User;
 
 
 @Controller("kr.co.nff.front.login.LoginController")
-//@RequestMapping("/front/login")
+@RequestMapping("/front/login")
 public class LoginController {
-	
-	
 	
 	//카카오 로그인
 	@Autowired
 	private KakaoLogin kakao;
-	
-	
 	
 	//네이버 로그인
 	/* NaverLoginBO */
@@ -53,7 +49,7 @@ public class LoginController {
 	}
 	
 	 //로그인 첫 화면 요청 메소드
-    @RequestMapping(value = "/front/login/userLoginForm.do", method = { RequestMethod.GET, RequestMethod.POST })
+    @RequestMapping(value = "/userLoginForm.do", method = { RequestMethod.GET, RequestMethod.POST })
     public ModelAndView login(Model model, HttpSession session) {
     	ModelAndView mav = new ModelAndView();
     	
@@ -75,7 +71,7 @@ public class LoginController {
     }
 
     //네이버 로그인 성공시 callback호출 메소드
-    @RequestMapping(value = "/front/login/ncallback.do", method = { RequestMethod.GET, RequestMethod.POST })
+    @RequestMapping(value = "/ncallback.do", method = { RequestMethod.GET, RequestMethod.POST })
     public String callback(Model model, 
     				@RequestParam String code, @RequestParam String state, 
     				HttpSession session, User vo)
@@ -123,7 +119,7 @@ public class LoginController {
     }
     
   // 카카오 콜백 
-    @RequestMapping(value = "/front/login/kakaologin.do", produces = "application/json", method = { RequestMethod.GET,
+    @RequestMapping(value = "/kakaologin.do", produces = "application/json", method = { RequestMethod.GET,
 			RequestMethod.POST })
 	public ModelAndView kakaoLogin(@RequestParam("code") String code, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session,User vo) throws Exception {
@@ -159,11 +155,11 @@ public class LoginController {
 	}// end kakaoLogin()
      
  // 카카오 추가정보 페이지 이동   
- @RequestMapping("front/login/kakaoinfo.do")
+ @RequestMapping("/kakaoinfo.do")
  public void kakaoinfo () {}
  
  // 카카오 추가정보 입력
- @RequestMapping("front/login/kakaoinsert.do")
+ @RequestMapping("/kakaoinsert.do")
  public String kakaoinsert (User user) {
 	 System.out.println("추가정보입력"+user.getUserGender());
 	 loginservice.insertKakaoInfo(user);
@@ -172,7 +168,7 @@ public class LoginController {
     
     
   //로그아웃
-    @RequestMapping(value = "/front/login/logout.do", method = { RequestMethod.GET, RequestMethod.POST })
+    @RequestMapping(value = "/logout.do", method = { RequestMethod.GET, RequestMethod.POST })
     public String logout(HttpSession session)throws IOException {
     //System.out.println("여기는 logout");
     session.invalidate();
@@ -180,8 +176,18 @@ public class LoginController {
     return "redirect:/front/main/main.do";
     }
 
-    
-   
+    // 유저 마이페이지 
+    @RequestMapping("/userdetail.do")
+    public void userDetail (Model model, User user, int no, HttpSession session) {
+    	
+		System.out.println("로그인한 유저: " + session.getAttribute("loginUser"));
+		model.addAttribute("loginUser", session.getAttribute("loginUser"));
+		model.addAttribute("user", loginservice.userDetail(no));
+		model.addAttribute("freqList",loginservice.userFreqList(no));
+		model.addAttribute("reviewList", loginservice.userReviewList(no));
+		System.out.println("단골목록"+ loginservice.userFreqList(no));
+		System.out.println("댓글목록" + loginservice.userReviewList(no));
+    }
 //---------------------------------------------	
 	@Autowired
 	LoginService loginservice;
