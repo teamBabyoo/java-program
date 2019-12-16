@@ -93,9 +93,7 @@
 		   on s.store_no = a.store_no
 		inner join tb_category as c
 	   		on s.store_category = c.category_no
-		inner join tb_store_content as sc
-			on s.store_no = sc.store_no
-		inner join tb_review as r
+		left outer join tb_review as r
 			on s.store_no = r.store_no
 		where s.store_no = #{storeNo}
 
