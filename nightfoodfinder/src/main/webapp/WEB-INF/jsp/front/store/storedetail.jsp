@@ -18,16 +18,18 @@
 
 		<div id="storedetail" class="content clearboth">
 			<div id="btnTop"></div>
-			<div id="pictureplace"></div>
+				<c:forEach var="i" begin="1" end="${imageListSize}">
+						<div id="pictureplace">
+						 <img alt="실패ㅜ" src="${pageContext.request.contextPath}/front/store/getByteImage.do" />
+						</div>
+				</c:forEach>
 
 			<div id="detaillistjs">
 				<div id="storeinfo">
 					<div id="stinfo">
 						<div id="star">
 							<div>
-								<img
-									src="${pageContext.request.contextPath}/resources/images/star.png"
-									alt="별" />
+								<img src="${pageContext.request.contextPath}/resources/images/star.png"	alt="별" />
 							</div>
 							<div id="scopescore"></div>
 						</div>
@@ -206,7 +208,6 @@
 		<div id="rmyModal" class="rmodal" style="display: none"></div>
 	</div>
 	<script type="text/javascript">
-		//	console.log(${loginUser});
 		let no = ${store.storeNo};
 		let scope = ${store.scope};
 		let openTime = '${store.openTime}';
@@ -215,13 +216,10 @@
 		let storeNo = '${store.storeNo}';
 		let storeScope = "";
 		let fileGroupCode = null;
-		//	 let recomment = null;
 		let userNo = '${user.userNo}';
 		if(userNo === ""){
 			userNo = 0;
 		}
-// 		let userNo = 17;
-			 console.log("userNo: ", userNo);
 		let loginStore = "";
 		if('${loginStore.storeNo}' === ""){
 			loginStore = 0;
@@ -242,7 +240,7 @@
 			$("#introduce").append(content);
 			
 		}
-	
+		console.log("이미지사이즈", `${imageListSize}`);
 	</script>
 	<script src="<c:url value='/resources/js/storedetail.js' />"></script>
 	<script type='text/javascript'>

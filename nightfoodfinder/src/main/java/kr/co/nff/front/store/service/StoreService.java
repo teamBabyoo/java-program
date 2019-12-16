@@ -3,6 +3,7 @@ package kr.co.nff.front.store.service;
 import java.util.List;
 import java.util.Map;
 
+import kr.co.nff.repository.vo.FileVO;
 import kr.co.nff.repository.vo.Holiday;
 import kr.co.nff.repository.vo.Menu;
 import kr.co.nff.repository.vo.Review;
@@ -65,5 +66,11 @@ public interface StoreService {
 	
 	//메뉴 업데이트
 	public void updateMenuList(Store store, int no);
+	
+	//파일가져오기
+	public List<FileVO> getImage();
+	
+	public int getImageCount(int storeNo);
+
 }
 

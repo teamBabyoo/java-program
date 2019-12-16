@@ -625,6 +625,24 @@
 	  </if>
 	</insert>
 	
+	<!-- 이미지가져오기 -->
+	<select id="getImage" resultType="FileVO">
+	  select f.*, r.review_no, f.file_no
+   		 from tb_file f
+   		inner join tb_review r
+   		  on f.file_group_code = r.file_group_code
+    	where r.store_no = 1
+	</select>
+	
+	<!-- 이미지 갯수 -->
+	<select id="getImageCount" parameterType="int" resultType="int">
+	  	select ifnull(count(f.file_no), 0)
+	     from tb_file f 
+		 inner join tb_review r
+        	on f.file_group_code = r.file_group_code
+	     where r.store_no = #{storeNo}
+	</select>
+	
 	
 	
 	
