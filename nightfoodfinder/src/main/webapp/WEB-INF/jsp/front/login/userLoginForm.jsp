@@ -55,8 +55,8 @@
 				 	
 				 	<div id="login_div02" style="display : none">
 			 			<div id="login_tab" >
-					 		<div>일반회원 로그인</div>
-					 		<div><a href="javascript:show_layer('2');">스토어 로그인</a></div>
+					 		<div><a href="javascript:show_layer('1');">일반회원 로그인</a></div>
+					 		<div>스토어 로그인</div>
 				 		</div>
 			 			<div class="memInput" id="memInput" >
 							<form id="slForm" action="storelogin.do" method="post" onsubmit="return fn_login()">

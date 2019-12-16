@@ -26,4 +26,14 @@ public class User {
 	private String userName;
 	private String userAge;
 	
+	// 유저의 단골 가게 번호, 리뷰 남긴 가게번호
+	private int storeNo;
+	private int rstoreNo;
+	private String reviewContent;
+	private String regDate;
+	private int storeScope;
+	private int fileGroupCode;
+	private int status;
+	
+	
 }

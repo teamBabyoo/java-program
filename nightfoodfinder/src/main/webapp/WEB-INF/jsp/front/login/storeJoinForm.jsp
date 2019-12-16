@@ -120,9 +120,20 @@
 								<input type="text" name="menuName">
 								<input type="number" name="menuPrice">
 								<i class="fa fa-plus-square-o" aria-hidden="true" id="plus_btn"></i>
-								<i class="fa fa-minus-square-o" aria-hidden="true" id="minus_btn"></i></td>
+								<i class="fa fa-minus-square-o" aria-hidden="true" id="minus_btn"></i>
+							</td>
 						</tr>
-					
+						<tr>
+							<th>가격대</th>
+							<td>
+								<select name="priceType">
+									<option value="1">1만원대</option>
+									<option value="2">2만원대</option>
+									<option value="3">3만원대</option>
+									<option value="4">4만원대 이상</option>
+								</select>
+							</td>
+						</tr>
 						<tr>
 							<th>가게 분류</th>
 							<td><select name="storeCategory">
@@ -147,6 +158,7 @@
 					<input type="hidden" name="closeTime"/>
 					<input type="hidden" id="entX" name="entX"/>
 					<input type="hidden" id="entY" name="entY"/>
+					<input type="hidden" id="roadAddrPart1" name="roadAddrPart1"/>
 					<button type="submit" id="reg_submit">가입하기</button>
 				</form>
 			</div>
@@ -208,7 +220,7 @@
 			if(isEmpty(f.storeEmail, "이메일을 입력해주세요")) return false;
 			if(isEmpty(f.storeTell, "전화번호를 입력해주세요")) return false;
 			if(isEmpty(f.roadFullAddr, "주소를 입력해주세요")) return false;
-			if(isEmpty(f.menuName, "대표메뉴를 입력해주세요")) return false;
+			//if(isEmpty(f.menuName, "대표메뉴를 입력해주세요")) return false;
 			if(isEmpty(f.storeCategory, "가게분류를 선택해주세요")) return false;
 			if(isEmpty(f.storeOwner, "대표자 이름을 입력해주세요")) return false;
 			if(isEmpty(f.storeOwnerPh, "대표자 휴대폰번호를 입력해주세요")) return false;
@@ -223,25 +235,26 @@ function goPopup(){
 	var pop = window.open("/nightfoodfinder/api/addrPop.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
 }
 
-function jusoCallBack(roadFullAddr,zipNo,addrDetail,sggNm){
+function jusoCallBack(roadFullAddr,zipNo,addrDetail,sggNm,roadAddrPart1){
 		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
 		document.form.roadFullAddr.value = roadFullAddr;
-		document.form.zipNo.value = addrDetail;
-		document.form.addrDetail.value = zipNo;
+		document.form.addrDetail.value = addrDetail;
+		document.form.zipNo.value = zipNo;
 		document.form.sggNm.value = sggNm;
+		document.form.roadAddrPart1.value = roadAddrPart1;
 		/* document.form.entX.value = entX;
 		document.form.entY.value = entY; */
 		
 		var geocoder = new kakao.maps.services.Geocoder();
 		var callback = function (result, status) {
 		    if (status === kakao.maps.services.Status.OK) {
-		        console.log(result);
+		        alert(roadAddrPart1);
 		        document.form.entX.value = result[0].y;
 		        document.form.entY.value = result[0].x;
 		        
 		    }
 		};
-		geocoder.addressSearch(roadFullAddr, callback);  
+		geocoder.addressSearch(roadAddrPart1, callback);  
 
 	
 }

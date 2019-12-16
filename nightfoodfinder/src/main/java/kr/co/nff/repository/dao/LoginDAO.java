@@ -1,7 +1,9 @@
 package kr.co.nff.repository.dao;
 
 
-import kr.co.nff.repository.vo.Menu;
+import java.util.List;
+
+import kr.co.nff.repository.vo.Review;
 import kr.co.nff.repository.vo.Store;
 import kr.co.nff.repository.vo.User;
 
@@ -26,4 +28,7 @@ public interface LoginDAO {
 	//로그인한 회원
 	User selectLoginOneUser(User user); 
 	
+	User userDetail(int userNo);
+	List<Store> userFreqList(int userNo);
+	List<Review> userReviewList(int userNo);
 }
