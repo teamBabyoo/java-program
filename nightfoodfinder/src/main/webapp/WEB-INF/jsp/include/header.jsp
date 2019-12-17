@@ -79,18 +79,21 @@
       <ul>
         <li><a href="#">내주변맛집</a></li>
         <li><a href="#">NFF Awards</a></li>
-        <li id="notice_btn" ><i class="fa fa-bell-o" aria-hidden="true" data-user="${loginUser}" data-store="${loginStore}"></i>
-        	<!-- 새 알림 갯수 뿌려줄 span -->
-        	<span class="newnotice"></span>
-        	<!-- 알림 리스트 나올 div -->
-        	<div class="notice_list_box hidden">
-	        	<div class="topshape"></div>
-			    <!-- 알림 리스트 나올 div -->
-	        	<div class="notice_content">
-
+     <%--    <c:if test="${loginUser && loginStore}"> --%>
+	        <li id="notice_btn" data-user="${loginUser}" data-store="${loginStore}">
+	        	<i class="fa fa-bell-o" aria-hidden="true" ></i>
+	        	<!-- 새 알림 갯수 뿌려줄 span -->
+	        	<span class="newnotice"></span>
+	        	<!-- 알림 리스트 나올 div -->
+	        	<div class="notice_list_box hidden">
+		        	<div class="topshape"></div>
+				    <!-- 알림 리스트 나올 div -->
+		        	<div class="notice_content">
+	
+		        	</div>
 	        	</div>
-        	</div>
-        </li>
+	        </li>
+        <%-- </c:if> --%>
         
         <li id="person_btn"><i class="fa fa-user-o" aria-hidden="true"></i>
 		<!-- 팝업 (로그인 X) -->
@@ -99,12 +102,16 @@
 	        <c:choose>
 	        <c:when test="${loginUser != null}">
 	        <div>
-				MY PAGE
+	        	<div id="history_box">
+	        	</div>
+	        	<label>
+				<a href="${pageContext.request.contextPath}/front/login/userdetail.do?no=${loginUser.userNo}">MY PAGE</a>
+	        	</label>
 	        </div>
 	        </c:when>
 	        <c:when test="${loginStore != null}">
 	        <div>
-				MY PAGE
+				<a href="${pageContext.request.contextPath}/front/store/storedetail.do?no=${loginStore.storeNo}">MY PAGE</a>
 	        </div>
 	        </c:when>
 	        <c:otherwise>
@@ -114,6 +121,7 @@
 	        </div>
 	        </c:otherwise>
 	        </c:choose>
+	        
 	        <div>
 	           <c:choose>
 				<c:when test="${loginUser != null}">
@@ -128,7 +136,7 @@
 				</c:when>
 				<c:otherwise>
 	            <ul>
-	                <li><a href="${pageContext.request.contextPath}/front/login/userLoginForm.do">로그인하기</a></li>
+	                <li><a href="${pageContext.request.contextPath}/front/login/userLoginForm.do">로그인 / 회원가입</a></li>
 	            </ul>
 				</c:otherwise>
 	           </c:choose>
@@ -142,5 +150,5 @@
   /* if (window.sessionStorage) {
       console.dir(sessionStorage);
   } */
-  </script>
+		</script>
   <script src='${pageContext.request.contextPath}/resources/js/header.js' ></script>

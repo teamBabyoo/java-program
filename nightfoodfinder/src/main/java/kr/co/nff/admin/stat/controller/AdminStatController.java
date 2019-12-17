@@ -34,8 +34,13 @@ public class AdminStatController {
 		model.addAttribute("statMap", jsonArray.fromObject(statMap));
 	}
 	
+	@RequestMapping("/visitorcount.do")
+	public void visitorcount(Stat stat, Model model) {
+		model.addAttribute("visitorList", service.visitorList(stat));
+		model.addAttribute("countByDate", service.countByDate(stat));
+	}
 	
-	
+
 	
 }
 

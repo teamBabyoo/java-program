@@ -1,9 +1,8 @@
 package kr.co.nff.front.login.service;
 
-import java.util.Map;
+import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
+import kr.co.nff.repository.vo.Review;
 import kr.co.nff.repository.vo.Store;
 import kr.co.nff.repository.vo.User;
 
@@ -30,4 +29,7 @@ public interface LoginService {
 	
 	//로그인한 유저 정보
 	User selectLoginOneUser(User user);
+	User userDetail(int userNo);
+	List<Store> userFreqList(int userNo);
+	List<Review> userReviewList(int userNo);
 }

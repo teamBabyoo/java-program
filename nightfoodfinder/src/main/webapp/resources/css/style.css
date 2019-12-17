@@ -185,7 +185,7 @@ div#commentplace > * { width: 100%; margin: 0 auto; }
 
 .detail_wrap .best_rv { border: 1px solid#ea9c5f !important; }
 /* 리뷰작성 페이지 */
-.reviewRegist_wrap { background: #fff; }
+.reviewRegist_wrap { background: #fff; height: 760px; }
 .reviewRegist_wrap > .content { float: left; left: 50%; transform: translateX(-50%); width: 678px; margin: 101px auto 62px; }
 .reviewRegist_wrap .commentwrap > ul:first-child { padding: 30px 0; }
 .reviewRegist_wrap .commentwrap ul:first-child > li > span { font-size: 2rem; color: #ff7100; }
@@ -197,6 +197,7 @@ div#commentplace > * { width: 100%; margin: 0 auto; }
 .reviewRegist_wrap .leave_rv.user_rv > form > ul > li:nth-child(3) > ul > li:first-child * { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 .reviewRegist_wrap .leave_rv.user_rv > form > ul > li:nth-child(3) > ul > li input[type="file"] { opacity: .6; } 
 .reviewRegist_wrap .leave_rv.user_rv > form > ul > li:nth-child(3) > ul > li label { text-align: center; line-height: 90px; font-size: 100px; font-weight: lighter; }
+.reviewRegist_wrap .leave_rv.user_rv > form > ul > li:nth-child(3) > ul > li #foo { left: 100px; }
 /*  */
 
 /* 탑버튼 */
@@ -454,7 +455,11 @@ header div:nth-child(3) li span {
     line-height: 20px;
     top: 10px;
 }
-#notice_btn .topshape { top: 20px; right: 12px; }
+/*----------------------------------------*/
+#notice_btn .topshape { 
+	top: 20px; 
+	right: 12px; 
+}
 .notice_content { 
 	position: absolute; 
 	background: #fff; 
@@ -471,7 +476,6 @@ header div:nth-child(3) li span {
     top: -10px;
     left: 34px;
 }
-
 #rednotice {
 	background-color: #fa3e3e;
     border-radius: 3px;
@@ -479,6 +483,204 @@ header div:nth-child(3) li span {
     padding: 1px 3px;
     font-size: 2px;
 }
+.notice_content ul li {
+	line-height: 5px;
+}
+/*--------------스토어 리스트------------------*/
+#map {
+	width: 765px;
+    height: 657px;
+}
+.list_content{
+	display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    padding-right: 0px;
+}
+.listnotice {
+	padding: 10px;
+    padding-left: 1px;
+}
+.storeLn {
+	height: 230px;
+    width: 808px;
+	margin: 13px;
+}
+.scroll-fixed {
+    position: fixed;
+    top: 60px;
+    right: 0px;
+}
 
+.imgss{
+	float: flex;
+	width: 300px;
+	/* border: solid 1px; */
+}
+.thum_imgs{
+	width: 1500px;
+	position: absolute;
+}
+.thum {
+	width: 300px;
+	height: 200px;
+	overflow: hidden;
+	position: relative;
+}
+.fas {
+	width: 50px;
+}
+.sto_li_left, .sto_li_content {
+	float: left;
+    display: inline;
+    margin: 20px;
+}
+.banner_navi{
+	text-align: center;
+}
+
+
+
+
+/*-------------스토어 리스트 끝------------------*/
+
+/* storelist pagination */
+#storePageDiv{
+	text-align: center;
+}
+.stolist_pagination{
+	list-style: none;
+    display: inline-block;
+    padding: 0;
+    margin-top: 10px;
+}
+.page-item {
+	list-style: none;
+	float: left;
+	display: inline;
+    text-align: center;
+}
+.page-link {
+    display: block;
+    font-size: 14px;
+    text-decoration: none;
+    margin-left: 3px;
+	padding: 0;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	border-radius: 100%;
+}
+.page-link:hover{
+	background-color: #ffe31f;
+}
+.page-link:active {
+	background-color: #ffe31f;
+}
+
+
+
+
+/* --------------------                */
 
 /** 유빈 끝 **/
+
+
+/** 주영시작 **/
+/* 로그인페이지 시작*/
+.login_container {
+	margin : 0px;
+	padding-top : 20px;
+	text-align : center;
+	
+}
+#login_div01 , #login_div02 {
+	display : inline-block;
+}
+#login_tab {
+	overflow : hidden;
+	border-color: #d7d7d7;
+}
+#login_tab div {
+	display: block;
+	width: 50%;
+    color: #999;
+    font-size: 1.333em;
+    letter-spacing: -.50px;
+    background: #000;
+    height: 53px;
+    line-height: 52px;
+    text-align: center;
+    border-top: 1px solid #000;
+    border-right: 1px solid #000;
+    float : left;
+}
+#login_tab .on {
+	background: #fff;
+    border-color: #d7d7d7;
+    font-weight: 700;
+    color: #000;
+}
+#login_div01 #login_tab01 {
+	border-left: solid 1px #d7d7d7;
+}
+.sns_cont, .mem_cont {
+	border: 1px solid #d7d7d7;
+	width: 500px;
+	border-top : none;
+	padding: 20px 50px 20px;
+}
+.mem_cont ul li input {
+	border: 1px solid #d7d7d7;
+    height: 38px;
+    padding: 0 12px;
+    position: relative;
+    background: #fff;
+}
+.mem_cont ul li {
+	padding-bottom : 10px;
+}
+.txt {
+    font-size: 1.2em;
+    font-weight: 500;
+    letter-spacing: -.50px;
+    padding-bottom: 10px;
+}
+#mem_div {
+	position : relative;
+}
+.login_btn {
+	position: absolute;
+    right: 0;
+    bottom: 10px;
+    width: 94px;
+    height: 86px;
+    line-height: 90px;
+    letter-spacing: -.50px;
+    background: white;
+    border: 1px solid #d7d7d7
+}
+/* 로그인페이지 끝 */
+
+/* 스토어 회원가입페이지 시작*/
+.sjoin_content {
+	padding-top : 20px;
+	
+}
+.sjoin_content table th {
+	width: 125px;
+}
+.sjoin_content .reg_submit {
+	margin-left: 130px;
+    margin-top: 5px;
+    background: white;
+    border: 1px solid #d7d7d7;
+}
+
+.sjoin_content .loc_btn {
+	background: white;
+    border: 1px solid #d7d7d7;
+}
+/* 스토어 회원가입페이지 끝*/
+
+/** 주영 끝 **/

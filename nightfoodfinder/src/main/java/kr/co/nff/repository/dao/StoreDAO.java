@@ -1,7 +1,9 @@
 package kr.co.nff.repository.dao;
 import java.util.List;
+import java.util.Map;
 
 import kr.co.nff.repository.vo.Category;
+import kr.co.nff.repository.vo.FileVO;
 import kr.co.nff.repository.vo.Holiday;
 import kr.co.nff.repository.vo.Menu;
 import kr.co.nff.repository.vo.Review;
@@ -23,7 +25,7 @@ public interface StoreDAO {
     int storeListCnt(Search search);
     Store selectOneStore(int no);
     Store selectContent(int no);
-    List<Menu> storeMenuList(int no);
+    List<Menu> storeMenuList(int storeNo);
     List<Holiday> storeHoliday(int no);
     List<Menu> storeMenuList();
     List<Holiday> storeHoliday();
@@ -87,4 +89,13 @@ public interface StoreDAO {
 	
 	//리뷰페이징을 위한 
 	int getReviewCnt(int no);
+	
+	//메뉴 삭제
+	void deleteMenuList(int no);
+	//메뉴 수정(등록)
+	void insertMenuList(Store store);
+	
+	List<FileVO> getImage();
+	
+	int getImageCount(int storeNo);
 }

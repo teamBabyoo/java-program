@@ -26,6 +26,25 @@
 		<collection property="holidayList" column="store_no"
 			select="selectHolidayListByStoreNo" />
 	</resultMap>
+	<resultMap type="User" id="userMap">
+		<result column="user_no" property="userNo"/>
+		<result column="user_email" property="userEmail"/>
+		<result column="nick_name" property="nickName"/>
+		<result column="join_date" property="joinDate"/>
+		<result column="review_cnt" property="reviewCnt"/>
+		<result column="user_type" property="userType"/>
+		<result column="user_gender" property="userGender"/>
+		<result column="user_id" property="userId"/>
+		<result column="user_name" property="userName"/>
+		<result column="user_age" property="userAge"/>
+		<result column="store_no" property="storeNo"/>
+		<result column="rstore_no" property="rstoreNo"/>
+		<result column="review_content" property="reviewContent"/>
+		<result column="reg_date" property="regDate"/>
+		<result column="store_scope" property="storeScope"/>
+		<result column="file_group_code" property="fileGroupCode"/>
+		<result column="status" property="status"/>
+	</resultMap>
 	
 	<!-- 일반회원 가입(naver) -->
 	<insert id="insertNaverUser" parameterType="User" >
@@ -54,15 +73,54 @@
 	<!-- 카카오 회원정보 입력 -->
 	<update id="insertKakaoInfo" parameterType="User">
 		update tb_user 
-			set user_gender = #{userGender} , user_age = #{userAge} 
+			set user_gender = #{userGender} , user_age = #{userAge} , nick_name=#{nickName}
 			where (user_no = #{userNo})
 	</update>
 	
-	<!-- 회원정보 가져오기 -->
+	<!-- 회원정보 가져오기(이메일) -->
 	<select id="selectLoginOneUser" resultType="User" parameterType="User">
 		select * from tb_user
 			where user_email = #{userEmail}
 	</select>
+	<!-- 회원정보 가져오기(번호) -->
+	<select id="userDetail"  resultMap="userMap" parameterType="int">
+		select   user_no,
+				 user_email,
+				 user_type,
+				 nick_name,
+				 user_gender,
+				 user_age,
+				 user_id,
+				 user_name
+			from tb_user 
+			where user_no = #{userNo}
+	</select>
+	<!-- 회원 단골목록 가져오기 -->
+	<select id="userFreqList" resultType="Store" parameterType="int">
+		select 	f.user_no,
+				f.store_no,
+				s.store_name
+			from tb_frequent_store as f
+			left outer join tb_store as s
+	          on f.store_no = s.store_no
+			where f.user_no= #{userNo}
+	</select>
+	
+	<!-- 회원 리뷰목록 가져오기 -->
+	<select id="userReviewList" resultType="Review" parameterType="int">
+		select u.user_no,
+			   r.store_no,
+			   r.review_content,
+			   r.reg_date,
+			   r.store_scope,
+			   r.file_group_code,
+			   r.status
+			from tb_user as u
+			left outer join tb_review as r
+				on u.user_no = r.writer_no
+				where u.user_no = #{userNo}
+	</select>
+	
 	<!-- 가게 이메일 중복체크 -->
 	<select id="storeEmailChk" parameterType="String" resultType="int" flushCache="true" useCache="true">
 		select count(*) from tb_store where store_email = #{storeEmail}
@@ -75,11 +133,11 @@
 			store_name, business_num, store_email, 
 			store_pass, store_tell, store_category, 
 			open_time, close_time,
-			store_owner, store_owner_ph
+			store_owner, store_owner_ph, price_type
 			) values (
 			#{storeName}, #{businessNum}, #{storeEmail}, 
 			#{storePass}, #{storeTell}, #{storeCategory},
-			#{openTime},#{closeTime}, #{storeOwner},#{storeOwnerPh}
+			#{openTime},#{closeTime}, #{storeOwner},#{storeOwnerPh},#{priceType}
 			)
 	</insert>
 	
@@ -100,26 +158,21 @@
 			select max(store_no) from tb_store 
 		</selectKey>
 		insert into tb_address values 
-			(#{storeNo}, #{sggNm}, #{roadFullAddr}, #{entX}, #{entY})
+			(#{storeNo}, #{sggNm}, #{roadFullAddr}, #{entX}, #{entY}, #{zipNo}, #{addrDetail})
 	</insert>
 	
 	<!-- 가게 회원가입(메뉴정보 insert) -->
-	<!--  <insert id="insertMenuList" parameterType="Store">
+	<insert id="insertMenuList" parameterType="Store">
 		<selectKey keyProperty="storeNo" resultType="int" order="BEFORE">
 			select max(store_no) from tb_store 
 		</selectKey>
-		
-		
-		
-		insert into tb_store_menu values ( #{storeNo},
-			<foreach collection="menu" item="menu"  separator=",">
-				#{menu}
-			</foreach>,
-			<foreach collection="price" item="price" separator=",">
-				#{price}
+			
+		insert into tb_store_menu (store_no, menu, price ) values 
+			<foreach collection="menulist" item="item" separator="," >
+				(#{storeNo}, #{item.menu}, #{item.price})
 			</foreach>
-		)
-	</insert> -->
+			
+	</insert>
 	
 	<!-- 가게회원 로그인체크 -->
 	<select id="storeLogin" parameterType="Store" resultType="Store">

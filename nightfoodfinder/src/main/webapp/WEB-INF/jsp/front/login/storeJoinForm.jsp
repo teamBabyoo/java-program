@@ -21,14 +21,16 @@
 <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2e2c217701074a631a1029878ed30d6f&libraries=services"></script>
 <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">	
+<link rel="stylesheet" href="<c:url value="/resources/css/style.css" />">
 </head>
 <body>
-	<div class="wrapper sJoin_wrap">
-		<c:import url="/WEB-INF/jsp/include/header.jsp" />
-		<div class="content">
-
-			<div id="storeJoinForm">
-				<form name="form" id="form" method="post" action="storejoin.do" onsubmit="return validate();">
+<div class="wrapper sjoin_wrap">
+  	<!-- 헤더 -->
+    <c:import url="/WEB-INF/jsp/include/header.jsp" />
+    <!-- // 헤더 -->
+		<div class="content clearboth" >
+		<div class="sjoin_content">
+				<form name="sjform" id="sjform" method="post" action="storejoin.do" onsubmit="return validate();">
 					<table>
 						<tr>
 							<th>가게 이름</th>
@@ -40,20 +42,22 @@
 						</tr>
 						<tr>
 							<th>이메일</th>
-							<td><input type="text" id="storeEmail" name="storeEmail"
-								placeholder="이메일을 입력해주세요" />
+							<td><input type="text" id="storeEmail" name="storeEmail" />
 								<div id="emailChk"></div></td>
 						</tr>
 
 						<tr>
 							<th>비밀번호</th>
 							<td><input type="password" id="storePass" name="storePass" />
-								<div id="pwChk"></div></td>
+								<div id="pwChk"> <span id="alert-success" style="display: none;">비밀번호가 일치합니다.</span></div></td>
 						</tr>
 						<tr>
 							<th>비밀번호 확인</th>
 							<td><input type="password" id="storePass2" name="storePass2" />
-								<div id="pwChk2"></div></td>
+								<div id="pwChk2">
+									 <span id="alert-success" style="display: none;">비밀번호가 일치합니다.</span>
+									 <span id="alert-danger" style="display: none;  ">비밀번호가 일치하지 않습니다.</span>
+								</div></td>
 						</tr>
 						<tr>
 							<th>가게 전화번호</th>
@@ -65,7 +69,7 @@
 						<tr>
 							<td><input type="text" id="zipNo" name="zipNo"  /> 
 							<input type="hidden" id="sggNm" name="sggNm" /> 
-							<input type="button" onClick="goPopup();" value="주소찾기" /></td>
+							<input type="button" class="loc_btn" onClick="goPopup();" value="주소찾기" /></td>
 						</tr>
 						<tr>
 							<td><input type="text" style="width: 300px;"
@@ -115,11 +119,22 @@
 							<th>대표 메뉴 / 가격</th>
 							<td>
 								<input type="text" name="menuName">
-								<input type="number" name="price">
+								<input type="number" name="menuPrice">
 								<i class="fa fa-plus-square-o" aria-hidden="true" id="plus_btn"></i>
-								<i class="fa fa-minus-square-o" aria-hidden="true" id="minus_btn"></i></td>
+								<i class="fa fa-minus-square-o" aria-hidden="true" id="minus_btn"></i>
+							</td>
 						</tr>
-					
+						<tr>
+							<th>가격대</th>
+							<td>
+								<select name="priceType">
+									<option value="1">1만원대</option>
+									<option value="2">2만원대</option>
+									<option value="3">3만원대</option>
+									<option value="4">4만원대 이상</option>
+								</select>
+							</td>
+						</tr>
 						<tr>
 							<th>가게 분류</th>
 							<td><select name="storeCategory">
@@ -144,14 +159,36 @@
 					<input type="hidden" name="closeTime"/>
 					<input type="hidden" id="entX" name="entX"/>
 					<input type="hidden" id="entY" name="entY"/>
-					<button type="submit" id="reg_submit">가입하기</button>
+					<input type="hidden" id="roadAddrPart1" name="roadAddrPart1"/>
+					<button type="submit" id="reg_submit" class="reg_submit">가입하기</button>
 				</form>
 			</div>
 		</div>
-	</div>
+		</div>
+	
 <script>
-// 시간 변환
+
+// 시간 변환, 유효성검사
+ function isEmpty(ele, msg){
+	 if (ele.value.trim() == ""  ){
+		 alert(msg);
+		
+		 return true;
+	 }
+	 return false;
+ }
+ function isLong(ele, msg, max){
+	 if( ele.value.length > max){
+		 alert(msg);
+		
+		 return true;
+	 }
+	 return false;
+ }	
+ 
 	function validate() {
+			let f = document.form;
+
 			let openH = $("select[name='openH']").val();
 			let openM = $("select[name='openM']").val();
 				if (openH < 10) {
@@ -178,6 +215,21 @@
 			$('input[name="openTime"]').val(openTime);
 			$('input[name="closeTime"]').val(closeTime);
 			
+			
+			// 유효성검사
+			if(isEmpty(f.storeName, "가게 이름을 입력해주세요")) return false;
+			if(isEmpty(f.businessNum, "사업자번호를 입력해주세요")) return false;
+			if(isEmpty(f.storeEmail, "이메일을 입력해주세요")) return false;
+			if(isEmpty(f.storeTell, "전화번호를 입력해주세요")) return false;
+			if(isEmpty(f.roadFullAddr, "주소를 입력해주세요")) return false;
+			//if(isEmpty(f.menuName, "대표메뉴를 입력해주세요")) return false;
+			if(isEmpty(f.storeCategory, "가게분류를 선택해주세요")) return false;
+			if(isEmpty(f.storeOwner, "대표자 이름을 입력해주세요")) return false;
+			if(isEmpty(f.storeOwnerPh, "대표자 휴대폰번호를 입력해주세요")) return false;
+			
+			return true;
+	
+	
 			}
 			
 //주소입력 팝업부분
@@ -185,25 +237,26 @@ function goPopup(){
 	var pop = window.open("/nightfoodfinder/api/addrPop.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
 }
 
-function jusoCallBack(roadFullAddr,zipNo,addrDetail,sggNm){
+function jusoCallBack(roadFullAddr,zipNo,addrDetail,sggNm,roadAddrPart1){
 		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
 		document.form.roadFullAddr.value = roadFullAddr;
-		document.form.zipNo.value = zipNo;
 		document.form.addrDetail.value = addrDetail;
+		document.form.zipNo.value = zipNo;
 		document.form.sggNm.value = sggNm;
+		document.form.roadAddrPart1.value = roadAddrPart1;
 		/* document.form.entX.value = entX;
 		document.form.entY.value = entY; */
 		
 		var geocoder = new kakao.maps.services.Geocoder();
 		var callback = function (result, status) {
 		    if (status === kakao.maps.services.Status.OK) {
-		        console.log(result);
+		        alert(roadAddrPart1);
 		        document.form.entX.value = result[0].y;
 		        document.form.entY.value = result[0].x;
 		        
 		    }
 		};
-		geocoder.addressSearch(roadFullAddr, callback);  
+		geocoder.addressSearch(roadAddrPart1, callback);  
 
 	
 }
@@ -246,6 +299,22 @@ $("#storePass").blur(function () {
     return true;
 	
 });
+
+//비밀번호 일치 검사
+$('#storePass2').focusout(function () {
+        var pwd1 = $("#storePass").val();
+        var pwd2 = $("#storePass2").val();
+        if (pwd1 != "" || pwd2 != "") {
+            if (pwd1 == pwd2) {
+                $("#alert-success").css('display', 'inline-block');
+                $("#alert-danger").css('display', 'none');
+            } else {
+                //alert("비밀번호가 일치하지 않습니다. 비밀번호를 재확인해주세요.");
+                $("#alert-success").css('display', 'none');
+                $("#alert-danger").css('display', 'inline-block');
+            }
+        }
+    });
 
 
 
@@ -290,7 +359,7 @@ $("#storeEmail").blur(function() {
 					} 
 				}, error : function() {
 						console.log("실패");
-						console.log(data);
+			 			console.log(data);
 				}
 			});
 		});
@@ -308,7 +377,7 @@ function addRow () {
 		'<th></th>'+
 		'<td>'+
 			'<input type="text" name="menuName">'+
-			'<input type="number" name="price">'+
+			'<input type="number" name="menuPrice">'+
 	'</tr>';
 
 var trHtml = $( "tr[name=trMenu]:last" ); 

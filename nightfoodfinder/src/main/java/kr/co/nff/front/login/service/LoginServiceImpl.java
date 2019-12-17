@@ -1,13 +1,12 @@
 package kr.co.nff.front.login.service;
 
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.nff.repository.dao.LoginDAO;
+import kr.co.nff.repository.vo.Review;
 import kr.co.nff.repository.vo.Store;
 import kr.co.nff.repository.vo.User;
 
@@ -39,6 +38,13 @@ public class LoginServiceImpl implements LoginService {
 		return dao.selectLoginOneUser(user);
 	}
 
+	public User userDetail(int userNo) {
+		return dao.userDetail(userNo);
+	}
+	public List<Store> userFreqList(int userNo) {
+		return dao.userFreqList(userNo);
+	}
+	//-------------------
 	@Override
 	public int storeEmailChk(String storeEmail) {
 		return dao.storeEmailChk(storeEmail);
@@ -59,6 +65,11 @@ public class LoginServiceImpl implements LoginService {
 	public void insertKakaoInfo(User user) {
 		dao.insertKakaoInfo(user);
 		
+	}
+
+	@Override
+	public List<Review> userReviewList(int userNo) {
+		return dao.userReviewList(userNo);
 	}
 
 	

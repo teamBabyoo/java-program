@@ -35,6 +35,9 @@
 					<option value="60-69">60-69</option>
 				</select>
 			</div>
+			<div>
+				<input type="text" name="nickName" />
+			</div>
 			<div><button>제출</button></div>
 		</form>
 		

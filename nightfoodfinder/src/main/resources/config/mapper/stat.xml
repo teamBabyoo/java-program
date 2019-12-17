@@ -58,4 +58,25 @@
 			and user_gender like '%' || #{type} || '%'
 		</if>
 	</sql>
+	
+	
+	<insert id="insertVisitor" parameterType="Stat">
+		insert into tb_visitor
+		(visit_ip, visit_date, date_time) values
+		(#{visitIp}, curdate(), now())
+	
+	</insert>
+	
+	<select id="visitorList" resultType="Stat">
+		select count(*) as totalVisit, 
+		(select count(*) from tb_visitor where visit_date = curdate()) as todayVisit from tb_visitor;
+	</select>
+	
+	<select id="countByDate" resultType="Stat">
+		 select date_time, count(*) as byDate from tb_visitor 
+		 where date_time between date_add(now(), INTERVAL -1 month ) and now()
+		 group by visit_date order by date_time;
+
+	</select>
+	
 </mapper>

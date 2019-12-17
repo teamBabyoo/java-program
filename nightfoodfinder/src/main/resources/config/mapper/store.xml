@@ -93,9 +93,7 @@
 		   on s.store_no = a.store_no
 		inner join tb_category as c
 	   		on s.store_category = c.category_no
-		inner join tb_store_content as sc
-			on s.store_no = sc.store_no
-		inner join tb_review as r
+		left outer join tb_review as r
 			on s.store_no = r.store_no
 		where s.store_no = #{storeNo}
 
@@ -264,16 +262,13 @@
 	</select>
 
 
-	<select id="storeMenuList" resultType="Store"
-		parameterType="int">
+	<select id="storeMenuList" resultType="Menu" parameterType="int">
 		select menu, price
 		from tb_store_menu
-		where store_no =
-		#{storeNo}
+		where store_no = #{storeNo}
 	</select>
 
-	<select id="storeHoliday" resultType="Holiday"
-		parameterType="int">
+	<select id="storeHoliday" resultType="Holiday" parameterType="int">
 		select w.week_name, h.week_no
 		from tb_holiday as h
 		inner
@@ -611,6 +606,41 @@
 		select count(*)
 		  from tb_review
 		  where store_no = #{StoreNo}
+	</select>
+	
+	
+	<!-- 메뉴지우기 -->
+	<delete id="deleteMenuList" parameterType="int">
+		delete 
+		from tb_store_menu 
+		where store_no=#{storeNo}
+	</delete>
+	
+	<insert id="insertMenuList" parameterType="Store">
+	  insert into tb_store_menu (store_no, menu, price ) values 
+	  <if test="menulist != null">
+			<foreach collection="menulist" item="item" separator="," >
+				(#{storeNo}, #{item.menu}, #{item.price})
+			</foreach>
+	  </if>
+	</insert>
+	
+	<!-- 이미지가져오기 -->
+	<select id="getImage" resultType="FileVO">
+	  select f.*, r.review_no, f.file_no
+   		 from tb_file f
+   		inner join tb_review r
+   		  on f.file_group_code = r.file_group_code
+    	where r.store_no = 1
+	</select>
+	
+	<!-- 이미지 갯수 -->
+	<select id="getImageCount" parameterType="int" resultType="int">
+	  	select ifnull(count(f.file_no), 0)
+	     from tb_file f 
+		 inner join tb_review r
+        	on f.file_group_code = r.file_group_code
+	     where r.store_no = #{storeNo}
 	</select>
 	
 	

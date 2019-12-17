@@ -27,8 +27,12 @@ public class FrontNoticeController {
 	@ResponseBody
 	public List<Notice> noticeListAjax(HttpSession session) {
 		User loginUser = (User)session.getAttribute("loginUser");
+		Store loginStore = (Store)session.getAttribute("loginStore");
+		
 		Notice notice = new Notice();
-		notice.setUserNo(loginUser.getUserNo());
+		if (loginUser != null) notice.setUserNo(loginUser.getUserNo());
+		if (loginStore != null) notice.setStoreNo(loginStore.getStoreNo());
+		
 		return service.selectNotice(notice);
 	}
 	
@@ -46,10 +50,13 @@ public class FrontNoticeController {
 		User loginUser = (User)session.getAttribute("loginUser");
 		Store storeUser = (Store)session.getAttribute("storeUser");
 		
+		// 로그인 상태 걸러준다.
+		if (loginUser == null && storeUser == null) return 0;
+		
 		Notice notice = new Notice();
 		if (storeUser == null && loginUser != null) notice.setUserNo(loginUser.getUserNo());
 		else if (storeUser != null && loginUser == null) notice.setStoreNo(storeUser.getStoreNo());
-		
+
 		int noticeCnt = service.countNewNotice(notice);
 		
 		// 알림 갯수가 0이라면 0 반환. -> script단에서 걸러준다.
