@@ -455,6 +455,7 @@ header div:nth-child(3) li span {
     line-height: 20px;
     top: 10px;
 }
+/*----------------------------------------*/
 #notice_btn .topshape { 
 	top: 20px; 
 	right: 12px; 
@@ -485,5 +486,101 @@ header div:nth-child(3) li span {
 .notice_content ul li {
 	line-height: 5px;
 }
+/*--------------스토어 리스트------------------*/
+#map {
+	width: 765px;
+    height: 657px;
+}
+.list_content{
+	display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    padding-right: 0px;
+}
+.listnotice {
+	padding: 10px;
+    padding-left: 1px;
+}
+.storeLn {
+	height: 230px;
+    width: 808px;
+	margin: 13px;
+}
+.scroll-fixed {
+    position: fixed;
+    top: 60px;
+    right: 0px;
+}
+
+.imgss{
+	float: flex;
+	width: 300px;
+	/* border: solid 1px; */
+}
+.thum_imgs{
+	width: 1500px;
+	position: absolute;
+}
+.thum {
+	width: 300px;
+	height: 200px;
+	overflow: hidden;
+	position: relative;
+}
+.fas {
+	width: 50px;
+}
+.sto_li_left, .sto_li_content {
+	float: left;
+    display: inline;
+    margin: 20px;
+}
+.banner_navi{
+	text-align: center;
+}
+
+
+
+
+/*-------------스토어 리스트 끝------------------*/
+
+/* storelist pagination */
+#storePageDiv{
+	text-align: center;
+}
+.stolist_pagination{
+	list-style: none;
+    display: inline-block;
+    padding: 0;
+    margin-top: 10px;
+}
+.page-item {
+	list-style: none;
+	float: left;
+	display: inline;
+    text-align: center;
+}
+.page-link {
+    display: block;
+    font-size: 14px;
+    text-decoration: none;
+    margin-left: 3px;
+	padding: 0;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	border-radius: 100%;
+}
+.page-link:hover{
+	background-color: #ffe31f;
+}
+.page-link:active {
+	background-color: #ffe31f;
+}
+
+
+
+
+/* --------------------                */
 
 /** 유빈 끝 **/

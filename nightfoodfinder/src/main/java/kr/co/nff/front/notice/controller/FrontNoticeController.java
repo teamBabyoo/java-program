@@ -27,8 +27,12 @@ public class FrontNoticeController {
 	@ResponseBody
 	public List<Notice> noticeListAjax(HttpSession session) {
 		User loginUser = (User)session.getAttribute("loginUser");
+		Store loginStore = (Store)session.getAttribute("loginStore");
+		
 		Notice notice = new Notice();
-		notice.setUserNo(loginUser.getUserNo());
+		if (loginUser != null) notice.setUserNo(loginUser.getUserNo());
+		if (loginStore != null) notice.setStoreNo(loginStore.getStoreNo());
+		
 		return service.selectNotice(notice);
 	}
 	

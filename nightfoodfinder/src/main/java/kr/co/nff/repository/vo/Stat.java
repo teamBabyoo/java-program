@@ -58,4 +58,12 @@ public class Stat {
 	
 	//여자 단골 cnt
 	private int femalefq;
+	
+	// 방문자 
+	private String visitIp;
+	private String visitDate;
+	private int totalVisit;
+	private int todayVisit;
+	private int byDate;
+	private Date dateTime;
 }

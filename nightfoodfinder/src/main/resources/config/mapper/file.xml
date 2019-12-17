@@ -19,6 +19,13 @@
 		 where file_group_code = #{file
 	</select> -->
 	
+	<select id="selectOneFile" parameterType="int" resultType="FileVO">
+		select * 
+		  from tb_file
+		 where file_group_code = 1
+	
+	</select>
+	
 	<insert id="insertFile" parameterType="FileVO">
 		insert into tb_file (
 			file_group_code, org_name, sys_name, path, extension 

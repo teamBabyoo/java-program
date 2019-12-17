@@ -10,6 +10,7 @@ public class FileVO {
 	private String sysName;
 	private String path;
 	private String extension;
+	private int count;
 	@Override
 	public String toString() {
 		return "FileVO [fileNo=" + fileNo + ", fileGroupCode=" + fileGroupCode + ", orgName=" + orgName + ", sysName="

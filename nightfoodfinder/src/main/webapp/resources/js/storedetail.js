@@ -21,8 +21,7 @@ function makeFrequent(list) {
    if(list) {
 	   $(".frequent i").attr("class", "fa fa-bookmark").css("color", "red");
 	   $(".frequent").click(()=>{
-		   if(userNo === 0 || loginStore != storeNo){
-			  
+		   if(userNo === 0 && loginStore != storeNo){			  
 			   Swal.fire('로그인 후 이용이 가능합니다')
 			   return false;
 		   } else {
