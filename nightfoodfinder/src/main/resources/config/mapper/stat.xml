@@ -60,23 +60,39 @@
 	</sql>
 	
 	
+	<!-- 방문자 등록 -->
 	<insert id="insertVisitor" parameterType="Stat">
 		insert into tb_visitor
-		(visit_ip, visit_date, date_time) values
-		(#{visitIp}, curdate(), now())
+		(visit_ip, date_time) values
+		(#{visitIp}, now())
 	
 	</insert>
-	
+
+	<!-- 총 방문자, 오늘 방문자  세기 -->
 	<select id="visitorList" resultType="Stat">
 		select count(*) as totalVisit, 
-		(select count(*) from tb_visitor where visit_date = curdate()) as todayVisit from tb_visitor;
+		(select count(*) from tb_visitor where date(date_time) = curdate()) as todayVisit from tb_visitor
 	</select>
 	
+	<!-- 날짜별 방문자 그래프 -->
 	<select id="countByDate" resultType="Stat">
 		 select date_time, count(*) as byDate from tb_visitor 
 		 where date_time between date_add(now(), INTERVAL -1 month ) and now()
-		 group by visit_date order by date_time;
+		 group by date(date_time) order by date_time
 
 	</select>
+	
+	<!-- 일반 가입자 수 -->
+	<select id="countJoinUser" resultType="Stat">
+		select count(*) as totalUser, 
+		(select count(*) from tb_user where date(join_date) =  date(now())) as todayUser from tb_user;
+	</select>
+	
+	<!-- 가게 가입자 수 -->
+	<select id="countJoinStore" resultType="Stat">
+		select count(*) as totalStore, 
+		(select count(*) from tb_store where date(store_join_date) =  date(now())) as todayStore from tb_store;
+	</select>
+	
 	
 </mapper>

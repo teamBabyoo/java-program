@@ -10,6 +10,10 @@ public interface StatDAO {
 	
 	// 방문자
 	public void insertVisitor(Stat stat);
-	public List<Stat> visitorList(Stat stat);
-	public List<Stat> countByDate(Stat stat);
+	public Stat visitorList();
+	public List<Stat> countByDate();
+	
+	// 가입자
+	public Stat countJoinUser();
+	public Stat countJoinStore();
 }

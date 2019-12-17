@@ -26,13 +26,23 @@ public class StatServiceImpl implements StatService{
 	}
 	
 	@Override
-	public List<Stat> visitorList(Stat stat) {
-		return dao.visitorList(stat);
+	public Stat visitorList() {
+		return dao.visitorList();
 	}
 	
 	@Override
-	public List<Stat> countByDate(Stat stat) {
-		return dao.countByDate(stat);
+	public List<Stat> countByDate() {
+		return dao.countByDate();
+	}
+	
+	@Override
+	public Stat countJoinUser() {
+		return dao.countJoinUser();
+	}
+	
+	@Override
+	public Stat countJoinStore() {
+		return dao.countJoinStore();
 	}
 	
 	

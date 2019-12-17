@@ -9,6 +9,8 @@ public interface StatService {
 	Stat statFrequentStore(Search search);
 	
 	void insertVisitor(Stat stat);
-	List<Stat> visitorList(Stat stat);
-	List<Stat> countByDate(Stat stat);
+	Stat visitorList();
+	List<Stat> countByDate();
+	Stat countJoinUser();
+	Stat countJoinStore();
 }

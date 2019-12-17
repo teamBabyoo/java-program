@@ -66,4 +66,11 @@ public class Stat {
 	private int todayVisit;
 	private int byDate;
 	private Date dateTime;
+	
+	// 가입자
+	private int totalUser;
+	private int todayUser;
+	private int totalStore;
+	private int todayStore;
+	
 }
