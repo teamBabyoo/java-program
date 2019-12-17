@@ -1,7 +1,6 @@
 package kr.co.nff.util;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,5 +43,11 @@ public class FileUploadImpl implements FileUpload {
 			fileDao.insertFile(fileVO);
         }
 		return fileGroupCode;
+	}
+
+	@Override
+	public FileVO selectOnefile(int reviewNo) {
+		FileVO f = fileDao.selectOneFile(reviewNo);
+		return f;
 	}
 }
