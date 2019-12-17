@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.nff.admin.stat.service.StatService;
 import kr.co.nff.repository.vo.Search;
+import kr.co.nff.repository.vo.Stat;
 import net.sf.json.JSONArray;
 
 

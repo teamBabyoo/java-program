@@ -1,11 +1,7 @@
 package kr.co.nff.admin.stat.service;
 
 import java.util.List;
-<<<<<<< HEAD
-=======
 import java.util.Map;
->>>>>>> karam/admin-user
-
 import kr.co.nff.repository.vo.Search;
 import kr.co.nff.repository.vo.Stat;
 
