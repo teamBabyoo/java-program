@@ -12,8 +12,26 @@
 	href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
 	integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
 	crossorigin="anonymous">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>  -->
 <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+
+
+<script>
+/* $(document).ready(function(){
+	var main = $('.bxslider').bxSlider({
+		mode: 'fade',
+	    captions: true,
+	    slideWidth: 300,
+		pager:true	//페이징
+	});
+  
+}); */
+</script>
+
 
 
 </head>
@@ -44,21 +62,24 @@
 				       		<div class="sto_li">
 					       		<a href="storedetail.do?no=${s.storeNo}" ></a>
 					       		<!-- 썸네일 사진 들어갈 div -->
-					       		<div class="sto_li_left">
-					       			<div class="thum" >
-					       				<div class="thum_imgs">
+					       		<%-- 	<div class="thum" >
+					       				 <div class="thum_imgs">
 					       					<img class="imgss" src="<c:url value='/resources/images/flower.jpg' />" />
 					       					<img class="imgss" src="<c:url value='/resources/images/flower2.jpg' />" />
 					       					<img class="imgss" src="<c:url value='/resources/images/flower3.jpeg' />" />
 					       					<img class="imgss" src="<c:url value='/resources/images/flower4.jpg' />" />
 					       					<img class="imgss" src="<c:url value='/resources/images/flower5.jpg' />" />
 					       				</div>
-					       			</div>
-					       			<div class="banner_navi">
-					       				<i class="fas fa-chevron-circle-left btn_left"></i>
-					       				<i class="fas fa-chevron-circle-right btn_right"></i>
-					       			</div>
-					       		</div>
+					       			</div>  --%>
+
+					       			
+					       			<div class="home__slider">
+										<div class="bxslider">
+					       					<img src="<c:url value='/resources/images/flower.jpg' />" />
+											<img src="<c:url value='/resources/images/flower2.jpg' />" />
+											<img src="<c:url value='/resources/images/flower5.jpg' />" />
+										</div>
+									</div>
 				       			<div class="sto_li_content" >
 									${s.storeName}				       			
 				       			</div>
@@ -116,8 +137,12 @@
 		</c:forEach>
 		<input name="keyword" type="hidden" value="${search.keyword}" />
 	</form>
+	
+	
+	<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 	<script src="<c:url value='/resources/js/storelist.js' />"></script>
 	<script src="<c:url value='/resources/js/map_in_storelist.js' />"></script>
+
 </body>
 </html>
 

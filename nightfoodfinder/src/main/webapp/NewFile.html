@@ -1,0 +1,602 @@
+
+
+
+
+   
+   
+   
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+
+	
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>NFF | store list</title>
+    <link rel="stylesheet" href="/nightfoodfinder/resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/nightfoodfinder/resources/css/style.css">
+<!--     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="crossorigin="anonymous"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <link rel="shortcut icon" href="/nightfoodfinder/resources/favicon.ico">
+    <script src="/nightfoodfinder/resources/js/nffscript.js"></script>
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+	integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+	crossorigin="anonymous">
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>  -->
+<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+
+
+<script>
+$(document).ready(function(){
+	var main = $('.bxslider').bxSlider({
+		mode: 'fade',
+		auto: true,		//자동으로 슬라이드
+		controls : true,	//좌우 화살표	
+		autoControls: true,	//stop,play
+		pager:true,	//페이징
+		pause: 3000,
+		autoDelay: 0,	
+		slideWidth: 800,
+		speed: 500,
+		stopAutoOnclick:true
+	});
+  
+	$(".bx-stop").click(function(){	// 중지버튼 눌렀을때
+		main.stopAuto();
+		$(".bx-stop").hide();
+		$(".bx-start").show();
+		return false;
+	});
+
+	$(".bx-start").click(function(){	//시작버튼 눌렀을때
+	    main.startAuto();
+		$(".bx-start").hide();
+		$(".bx-stop").show();
+		return false;
+	});
+	
+	$(".bx-start").hide();	//onload시 시작버튼 숨김.
+});
+</script>
+
+
+
+</head>
+<body>
+	<div class="wrapper list_wrap">
+		<!-- 헤더 -->
+		
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<header class="clearboth">
+    <div class="logo" onclick="location.href='/nightfoodfinder/front/main/main.do'">
+        <img src="/nightfoodfinder/resources/images/mangoplate-logo-horizontal.svg" alt="anff 로고" />
+    </div>
+    <div class="search">
+    <form id="sto_search" action="/nightfoodfinder/front/store/storelist.do" method="post">
+    	<!-- 검색어 입력 부분 -->
+		<input type="text" name="keyword"/>
+		 <!-- 검색 버튼 부분 -->
+        <div class="icon_w" id="search_btn"><button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button></div>
+        <div class="optionBox hidden">
+        	<ul class="optionTab clearboth">
+            	<li class="on">분류</li>
+            	<li>위치</li>
+            	<li>가격대</li>
+        	</ul>
+        	
+        	<div class="select clearboth tab_1">
+          		<!-- 카테고리 별 검색-->
+         		
+            </div>
+          	<!-- tab_1 -->
+          
+          	<div class="select clearboth tab_2 hidden">
+          		<!-- 지역구 별 검색 -->
+          		
+          	</div>
+          	<!-- tab_2 -->
+          
+          
+          	<div class="select clearboth tab_3 hidden">
+          		<!-- 가격별 검색 -->
+            	<div>
+              		<label for="price_1" class="types">1만원 미만</label>
+              		<input id="price_1" type="checkbox" name="priceType" value="1" class="hidden" />
+            	</div>
+
+            	<div>
+              		<label for="price_2" class="types">1만원대</label>
+              		<input id="price_2" type="checkbox" name="priceType" value="2" class="hidden" />
+              		
+            	</div>
+
+	            <div>
+	              <label for="price_3" class="types">2만원대</label>
+	              <input id="price_3" type="checkbox" name="priceType" value="3" class="hidden" />
+	            </div>
+	
+	            <div>
+	              <label for="price_4" class="types">3만원 이상</label>
+	              <input id="price_4" type="checkbox" name="priceType" value="4" class="hidden"  />
+	            </div>
+          	</div>
+          <!-- tab_3 -->
+
+          	<div class="closedstore"> 
+	      		<label for="closed" class="types">영업 종료한 가게도 포함하기</label>
+	      		<input id="closed" type="checkbox" name="includeClosed" value="1" class="price hidden"  />
+          	</div> 
+          <!-- userselect-->
+		</div>
+	</form>
+    </div>
+    <div class="float_r">
+      <ul>
+        <li><a href="#">내주변맛집</a></li>
+        <li><a href="#">NFF Awards</a></li>
+     
+	        <li id="notice_btn" data-user="" data-store="">
+	        	<i class="fa fa-bell-o" aria-hidden="true" ></i>
+<!-- 	        	새 알림 갯수 뿌려줄 span
+	        	<span class="newnotice"></span> -->
+	        	<!-- 알림 리스트 나올 div -->
+	        	<div class="notice_list_box hidden">
+		        	<div class="topshape"></div>
+				    <!-- 알림 리스트 나올 div -->
+		        	<div class="notice_content">
+	
+		        	</div>
+	        	</div>
+	        </li>
+        
+        
+        <li id="person_btn"><i class="fa fa-user-o" aria-hidden="true"></i>
+		<!-- 팝업 (로그인 X) -->
+		<div class="pop_person nMember hidden">
+	        <div class="topshape"></div>
+	        
+	        
+	        
+	        
+	        <div>
+	        	로그인 후<br />
+				이용 가능합니다
+	        </div>
+	        
+	        
+	        
+	        <div>
+	           
+				
+				
+				
+	            <ul>
+	                <li><a href="/nightfoodfinder/front/login/userLoginForm.do">로그인 / 회원가입</a></li>
+	            </ul>
+				
+	           
+	        </div>
+	    </div>
+		</li>
+      </ul>
+    </div>
+  </header>
+  <script src='/nightfoodfinder/resources/js/header.js' ></script>
+		<!-- // 헤더 -->
+		
+		<!-- 컨텐트  -->
+		<div class="content list_content">
+
+			<div class="leftarea">
+				<div class="listnotice">
+					<div>
+						<i class="far fa-moon">10 개의 가게가 검색 되었습니다.</i>
+					</div>
+				</div>
+				<div class="storelist">
+      				
+					
+			<!-- store list 부분 -->
+					
+				      				<ul>
+				       	<li id="li_1" class="storeLn" data-store="수저가">
+				       	<div>
+				       	<div class="home__slider">
+										<div class="bxslider">
+											<div><img src="/nightfoodfinder/resources/images/flower2.jpg" /></div>
+											<div><img src="/nightfoodfinder/resources/images/flower5.jpg" /></div>
+										</div>
+									</div>	
+									</div>
+										</li>
+										</ul>
+				
+      				<ul>
+      				
+					
+			<!-- store list 부분 -->
+					
+				       	<li id="li_1" class="storeLn" data-store="수저가">
+				       		<div class="sto_li">
+					       		<a href="storedetail.do?no=1" ></a>
+					       		<!-- 썸네일 사진 들어갈 div -->
+					       		<div class="sto_li_left">
+					       		
+
+					       			
+					       			<div class="home__slider">
+										<div class="bxslider">
+											<div><img src="/nightfoodfinder/resources/images/flower2.jpg" /></div>
+											<div><img src="/nightfoodfinder/resources/images/flower5.jpg" /></div>
+										</div>
+									</div>
+
+					
+
+					       			
+					       			
+					       			
+					       			<!-- <div class="banner_navi">
+					       				<i class="fas fa-chevron-circle-left btn_left"></i>
+					       				<i class="fas fa-chevron-circle-right btn_right"></i>
+					       			</div> -->
+					       		</div>
+				       			<div class="sto_li_content" >
+									수저가				       			
+				       			</div>
+				       		</div>
+				       	</li>
+				    
+				       	<li id="li_2" class="storeLn" data-store="김밥천국">
+				       		<div class="sto_li">
+					       		<a href="storedetail.do?no=2" ></a>
+					       		<!-- 썸네일 사진 들어갈 div -->
+					       		<div class="sto_li_left">
+					       		
+
+					       			
+					       			<div class="home__slider">
+										<div class="bxslider">
+											<div><img src="/nightfoodfinder/resources/images/flower2.jpg" /></div>
+											<div><img src="/nightfoodfinder/resources/images/flower5.jpg" /></div>
+										</div>
+									</div>
+
+					
+
+					       			
+					       			
+					       			
+					       			<!-- <div class="banner_navi">
+					       				<i class="fas fa-chevron-circle-left btn_left"></i>
+					       				<i class="fas fa-chevron-circle-right btn_right"></i>
+					       			</div> -->
+					       		</div>
+				       			<div class="sto_li_content" >
+									김밥천국				       			
+				       			</div>
+				       		</div>
+				       	</li>
+				    
+				       	<li id="li_3" class="storeLn" data-store="거구장">
+				       		<div class="sto_li">
+					       		<a href="storedetail.do?no=3" ></a>
+					       		<!-- 썸네일 사진 들어갈 div -->
+					       		<div class="sto_li_left">
+					       		
+
+					       			
+					       			<div class="home__slider">
+										<div class="bxslider">
+											<div><img src="/nightfoodfinder/resources/images/flower2.jpg" /></div>
+											<div><img src="/nightfoodfinder/resources/images/flower5.jpg" /></div>
+										</div>
+									</div>
+
+					
+
+					       			
+					       			
+					       			
+					       			<!-- <div class="banner_navi">
+					       				<i class="fas fa-chevron-circle-left btn_left"></i>
+					       				<i class="fas fa-chevron-circle-right btn_right"></i>
+					       			</div> -->
+					       		</div>
+				       			<div class="sto_li_content" >
+									거구장				       			
+				       			</div>
+				       		</div>
+				       	</li>
+				    
+				       	<li id="li_4" class="storeLn" data-store="맛있는집">
+				       		<div class="sto_li">
+					       		<a href="storedetail.do?no=4" ></a>
+					       		<!-- 썸네일 사진 들어갈 div -->
+					       		<div class="sto_li_left">
+					       		
+
+					       			
+					       			<div class="home__slider">
+										<div class="bxslider">
+											<div><img src="/nightfoodfinder/resources/images/flower2.jpg" /></div>
+											<div><img src="/nightfoodfinder/resources/images/flower5.jpg" /></div>
+										</div>
+									</div>
+
+					
+
+					       			
+					       			
+					       			
+					       			<!-- <div class="banner_navi">
+					       				<i class="fas fa-chevron-circle-left btn_left"></i>
+					       				<i class="fas fa-chevron-circle-right btn_right"></i>
+					       			</div> -->
+					       		</div>
+				       			<div class="sto_li_content" >
+									맛있는집				       			
+				       			</div>
+				       		</div>
+				       	</li>
+				    
+				       	<li id="li_5" class="storeLn" data-store="하동관">
+				       		<div class="sto_li">
+					       		<a href="storedetail.do?no=10" ></a>
+					       		<!-- 썸네일 사진 들어갈 div -->
+					       		<div class="sto_li_left">
+					       		
+
+					       			
+					       			<div class="home__slider">
+										<div class="bxslider">
+											<div><img src="/nightfoodfinder/resources/images/flower2.jpg" /></div>
+											<div><img src="/nightfoodfinder/resources/images/flower5.jpg" /></div>
+										</div>
+									</div>
+
+					
+
+					       			
+					       			
+					       			
+					       			<!-- <div class="banner_navi">
+					       				<i class="fas fa-chevron-circle-left btn_left"></i>
+					       				<i class="fas fa-chevron-circle-right btn_right"></i>
+					       			</div> -->
+					       		</div>
+				       			<div class="sto_li_content" >
+									하동관				       			
+				       			</div>
+				       		</div>
+				       	</li>
+				    
+				       	<li id="li_6" class="storeLn" data-store="명동교자">
+				       		<div class="sto_li">
+					       		<a href="storedetail.do?no=11" ></a>
+					       		<!-- 썸네일 사진 들어갈 div -->
+					       		<div class="sto_li_left">
+					       		
+
+					       			
+					       			<div class="home__slider">
+										<div class="bxslider">
+											<div><img src="/nightfoodfinder/resources/images/flower2.jpg" /></div>
+											<div><img src="/nightfoodfinder/resources/images/flower5.jpg" /></div>
+										</div>
+									</div>
+
+					
+
+					       			
+					       			
+					       			
+					       			<!-- <div class="banner_navi">
+					       				<i class="fas fa-chevron-circle-left btn_left"></i>
+					       				<i class="fas fa-chevron-circle-right btn_right"></i>
+					       			</div> -->
+					       		</div>
+				       			<div class="sto_li_content" >
+									명동교자				       			
+				       			</div>
+				       		</div>
+				       	</li>
+				    
+				       	<li id="li_7" class="storeLn" data-store="시골애">
+				       		<div class="sto_li">
+					       		<a href="storedetail.do?no=12" ></a>
+					       		<!-- 썸네일 사진 들어갈 div -->
+					       		<div class="sto_li_left">
+					       		
+
+					       			
+					       			<div class="home__slider">
+										<div class="bxslider">
+											<div><img src="/nightfoodfinder/resources/images/flower2.jpg" /></div>
+											<div><img src="/nightfoodfinder/resources/images/flower5.jpg" /></div>
+										</div>
+									</div>
+
+					
+
+					       			
+					       			
+					       			
+					       			<!-- <div class="banner_navi">
+					       				<i class="fas fa-chevron-circle-left btn_left"></i>
+					       				<i class="fas fa-chevron-circle-right btn_right"></i>
+					       			</div> -->
+					       		</div>
+				       			<div class="sto_li_content" >
+									시골애				       			
+				       			</div>
+				       		</div>
+				       	</li>
+				    
+				       	<li id="li_8" class="storeLn" data-store="길버트버거">
+				       		<div class="sto_li">
+					       		<a href="storedetail.do?no=13" ></a>
+					       		<!-- 썸네일 사진 들어갈 div -->
+					       		<div class="sto_li_left">
+					       		
+
+					       			
+					       			<div class="home__slider">
+										<div class="bxslider">
+											<div><img src="/nightfoodfinder/resources/images/flower2.jpg" /></div>
+											<div><img src="/nightfoodfinder/resources/images/flower5.jpg" /></div>
+										</div>
+									</div>
+
+					
+
+					       			
+					       			
+					       			
+					       			<!-- <div class="banner_navi">
+					       				<i class="fas fa-chevron-circle-left btn_left"></i>
+					       				<i class="fas fa-chevron-circle-right btn_right"></i>
+					       			</div> -->
+					       		</div>
+				       			<div class="sto_li_content" >
+									길버트버거				       			
+				       			</div>
+				       		</div>
+				       	</li>
+				    
+				       	<li id="li_9" class="storeLn" data-store="가온">
+				       		<div class="sto_li">
+					       		<a href="storedetail.do?no=14" ></a>
+					       		<!-- 썸네일 사진 들어갈 div -->
+					       		<div class="sto_li_left">
+					       		
+
+					       			
+					       			<div class="home__slider">
+										<div class="bxslider">
+											<div><img src="/nightfoodfinder/resources/images/flower2.jpg" /></div>
+											<div><img src="/nightfoodfinder/resources/images/flower5.jpg" /></div>
+										</div>
+									</div>
+
+					
+
+					       			
+					       			
+					       			
+					       			<!-- <div class="banner_navi">
+					       				<i class="fas fa-chevron-circle-left btn_left"></i>
+					       				<i class="fas fa-chevron-circle-right btn_right"></i>
+					       			</div> -->
+					       		</div>
+				       			<div class="sto_li_content" >
+									가온				       			
+				       			</div>
+				       		</div>
+				       	</li>
+				    
+				       	<li id="li_10" class="storeLn" data-store="라연">
+				       		<div class="sto_li">
+					       		<a href="storedetail.do?no=15" ></a>
+					       		<!-- 썸네일 사진 들어갈 div -->
+					       		<div class="sto_li_left">
+					       		
+
+					       			
+					       			<div class="bx-viewport">
+										<div class="bxslider">
+											<div><img src="/nightfoodfinder/resources/images/flower2.jpg" /></div>
+											<div><img src="/nightfoodfinder/resources/images/flower5.jpg" /></div>
+										</div>
+									</div>
+
+					
+
+					       			
+					       			
+					       			
+					       			<!-- <div class="banner_navi">
+					       				<i class="fas fa-chevron-circle-left btn_left"></i>
+					       				<i class="fas fa-chevron-circle-right btn_right"></i>
+					       			</div> -->
+					       		</div>
+				       			<div class="sto_li_content" >
+									라연				       			
+				       			</div>
+				       		</div>
+				       	</li>
+				    
+				    </ul>
+					
+					<div id="storePageDiv">
+						<ul class="stolist_pagination modal-3">
+							
+							
+								<li class="page-item active">
+									<a class="page-link" href="#1" data-page="1">1</a>
+								</li>
+							
+								<li class="page-item active">
+									<a class="page-link" href="#2" data-page="2">2</a>
+								</li>
+							
+								<li class="page-item active">
+									<a class="page-link" href="#3" data-page="3">3</a>
+								</li>
+							
+							
+								<li class="page-item">
+									<a class="page-link" href="#4" data-page="4"> Next</a>
+								</li>
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			<div class="rightarea">
+				<div id="map"></div>
+			</div>
+
+		</div>
+		<!-- // 컨텐트  -->
+
+		<!-- 푸터 -->
+		
+<footer>
+  <p> Copyright &copy; 2019 by Night Food Finder All rights reserved.</p>
+</footer>
+		<!-- // 푸터 -->
+
+		<!-- 팝업 백그라운드  -->
+		<div class="bgbox"></div>
+	</div>
+	<form id="searchStoreForm" method="post">
+		
+		
+
+		
+		<input name="keyword" type="hidden" value="" />
+	</form>
+	
+	
+	<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+	<script src="/nightfoodfinder/resources/js/storelist.js"></script>
+	<script src="/nightfoodfinder/resources/js/map_in_storelist.js"></script>
+
+</body>
+</html>
+
+
+
+
+

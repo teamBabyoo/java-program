@@ -512,32 +512,36 @@ header div:nth-child(3) li span {
     right: 0px;
 }
 
-.imgss{
-	float: flex;
+ .imgss{
+	/* float: flex; */
 	width: 300px;
-	/* border: solid 1px; */
+	border: solid 1px;
 }
+/*
 .thum_imgs{
 	width: 1500px;
 	position: absolute;
 }
+*/
 .thum {
 	width: 300px;
 	height: 200px;
-	overflow: hidden;
-	position: relative;
-}
+} 
 .fas {
 	width: 50px;
 }
-.sto_li_left, .sto_li_content {
+/* .sto_li_left, .sto_li_content {
 	float: left;
     display: inline;
     margin: 20px;
-}
+} */
 .banner_navi{
 	text-align: center;
 }
+
+
+
+
 
 
 
