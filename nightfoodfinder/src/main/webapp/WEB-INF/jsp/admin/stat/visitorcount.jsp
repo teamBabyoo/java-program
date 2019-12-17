@@ -52,6 +52,8 @@
             <tr>
               <th>총 방문자 수</th>
               <th>오늘 방문자 수</th>
+              <th>총 일반 가입자 수 / 오늘 일반 가입자 수</th>
+              <th>총 가게 가입자 수 / 오늘 가게 가입자 수</th>
 
             </tr>
             <c:if test="${empty visitorList}">
@@ -60,12 +62,14 @@
             </tr>
             </c:if>
             
-          	<c:forEach var="List" items="${ visitorList}">
+
             <tr>
-              <td>${List.totalVisit}</td>
-              <td>${List.todayVisit}</td>
+              <td>${visitorList.totalVisit}</td>
+              <td>${visitorList.todayVisit}</td>
+              <td>${countJoinUser.totalUser} / ${countJoinUser.todayUser }</td>
+              <td>${countJoinStore.totalStore } / ${countJoinStore.todayStore }</td>
       	</tr>
-      	</c:forEach>
+
       	<script>
       	let dateTime = [];
       	</script>
@@ -105,11 +109,8 @@
     		        var chartLineCount    = 10;
     		        //컨트롤러 바 차트의 라인 수
     		        var controlLineCount	= 10;
-    		        
-    		
-    		        
-    		        
-    		        
+    		           		
+
     		        function drawDashboard() {
         	
     		          var data = new google.visualization.DataTable();

@@ -49,20 +49,6 @@ public class StatServiceImpl implements StatService{
 		return statList;
 	}
 	
-	@Override
-	public void insertVisitor(Stat stat) {
-		dao.insertVisitor(stat);
-	}
-	
-	@Override
-	public List<Stat> visitorList(Stat stat) {
-		return dao.visitorList(stat);
-	}
-	
-	@Override
-	public List<Stat> countByDate(Stat stat) {
-		return dao.countByDate(stat);
-	}
 	
 	
 
@@ -113,6 +99,31 @@ public class StatServiceImpl implements StatService{
 		
 		return statMap;
 	}
+
+	@Override
+	public void insertVisitor(Stat stat) {
+		dao.insertVisitor(stat);
+	}
 	
+	@Override
+	public Stat visitorList() {
+		return dao.visitorList();
+	}
+	
+	@Override
+	public List<Stat> countByDate() {
+		return dao.countByDate();
+	}
+	
+	@Override
+	public Stat countJoinUser() {
+		return dao.countJoinUser();
+	}
+	
+	@Override
+	public Stat countJoinStore() {
+		return dao.countJoinStore();
+	}
+
 
 }

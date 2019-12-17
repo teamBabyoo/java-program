@@ -36,10 +36,14 @@ public class AdminStatController {
 	}
 	
 	@RequestMapping("/visitorcount.do")
-	public void visitorcount(Stat stat, Model model) {
-		model.addAttribute("visitorList", service.visitorList(stat));
-		model.addAttribute("countByDate", service.countByDate(stat));
+	public void visitorcount(Model model) {
+		model.addAttribute("visitorList", service.visitorList());
+		model.addAttribute("countByDate", service.countByDate());
+		model.addAttribute("countJoinUser", service.countJoinUser());
+		model.addAttribute("countJoinStore", service.countJoinStore());
+		
 	}
+	
 	
 
 	
