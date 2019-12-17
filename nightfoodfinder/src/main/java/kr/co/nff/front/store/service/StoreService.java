@@ -32,9 +32,11 @@ public interface StoreService {
 	
 	// 리뷰 리스트 조회
 	public List<Review> reviewList(Review review);
+	
 	// 리뷰 등록 & 이미지 업로드
 	public List<Review> reviewRegist(Review review, boolean fileFlag) throws Exception;
-	
+	// 리뷰 이미지 가져오기
+	public FileVO selectOneFile(int reviewNo);
 	
 	//리뷰신고
 	public List<Review> reviewReport(Review review);

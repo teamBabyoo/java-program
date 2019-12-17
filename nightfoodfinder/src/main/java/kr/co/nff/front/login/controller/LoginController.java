@@ -194,7 +194,7 @@ public class LoginController {
 	
 	
 	//스토어 가입
-	@RequestMapping("/front/login/storejoin.do")
+	@RequestMapping("/storejoin.do")
 	public String storeJoin(Store store) {
 		
 		String [] menuNames = store.getMenuName();
@@ -222,11 +222,12 @@ public class LoginController {
 		return "redirect:/front/main/main.do";
 	}
 	// 스토어 가입폼
-	@RequestMapping("/front/login/storeJoinForm.do") 
-	 public void storeJoinForm(){}
+	@RequestMapping("/storeJoinForm.do") 
+	 public void storeJoinForm(){
+	}
 	 
 	//스토어 중복이메일 체크
-	@RequestMapping(value="/front/login/storeEmailChk.do")
+	@RequestMapping(value="/storeEmailChk.do")
 	@ResponseBody
 	public int storeEmailChk(String storeEmail) {
 		System.out.println("email중복체크 컨트롤러 ");
@@ -235,7 +236,7 @@ public class LoginController {
 	
 	
 	//스토어 로그인
-	@RequestMapping("/front/login/storelogin.do")
+	@RequestMapping("/storelogin.do")
 	public String storeLogin(Store s, HttpSession session) {
 		Store store = loginservice.storeLogin(s);
 		if(store == null) {

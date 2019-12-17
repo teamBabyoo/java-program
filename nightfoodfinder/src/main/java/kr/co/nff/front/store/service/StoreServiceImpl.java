@@ -109,6 +109,15 @@ public class StoreServiceImpl implements StoreService {
 		
 		return dao.selectReview(review);
 	}
+
+	// 이미지 다운로드 하지 않으면서 그냥 경로로 가져오기
+	@Override
+	public FileVO selectOneFile(int reviewNo) {
+		FileVO f = new FileVO(); 
+		f = fileService.selectOnefile(3);
+		System.out.println(f);
+		return f;
+	}
 	
 	//리뷰 신고제한
 	public int reviewcount(Review review) {

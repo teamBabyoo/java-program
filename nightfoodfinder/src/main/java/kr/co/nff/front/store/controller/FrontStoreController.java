@@ -78,6 +78,17 @@ public class FrontStoreController {
 		model.addAttribute("imageListSize", service.getImageCount(no));
 		model.addAttribute("imgList", service.getImage(no));
 //		System.out.println("이미지리스트"+service.getImage());
+		
+		/* 파일 다운로드 하지 않으면서 그냥 경로로 가져오기 */
+//		model.addAttribute("reviewImg", service.selectOneFile(1));
+	}
+	
+	/* 파일 다운로드하지 안흐면서 그냥 경로 가져오는 테스트 */
+	@RequestMapping("/imgsrctest.do")
+	public void imgsrctest() {
+		System.out.println("이미지 경로 확인하기 요청 성공");
+		int reviewNo = 1;
+		service.selectOneFile(reviewNo);
 	}
 	
 	/* 가게 정보 수정*/

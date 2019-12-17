@@ -21,14 +21,16 @@
 <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2e2c217701074a631a1029878ed30d6f&libraries=services"></script>
 <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">	
+<link rel="stylesheet" href="<c:url value="/resources/css/style.css" />">
 </head>
 <body>
-	<div class="wrapper sJoin_wrap">
-		<c:import url="/WEB-INF/jsp/include/header.jsp" />
-		<div class="content">
-
-			<div id="storeJoinForm">
-				<form name="form" id="form" method="post" action="storejoin.do" onsubmit="return validate();">
+<div class="wrapper sjoin_wrap">
+  	<!-- 헤더 -->
+    <c:import url="/WEB-INF/jsp/include/header.jsp" />
+    <!-- // 헤더 -->
+		<div class="content clearboth" >
+		<div class="sjoin_content">
+				<form name="sjform" id="sjform" method="post" action="storejoin.do" onsubmit="return validate();">
 					<table>
 						<tr>
 							<th>가게 이름</th>
@@ -40,8 +42,7 @@
 						</tr>
 						<tr>
 							<th>이메일</th>
-							<td><input type="text" id="storeEmail" name="storeEmail"
-								placeholder="이메일을 입력해주세요" />
+							<td><input type="text" id="storeEmail" name="storeEmail" />
 								<div id="emailChk"></div></td>
 						</tr>
 
@@ -68,7 +69,7 @@
 						<tr>
 							<td><input type="text" id="zipNo" name="zipNo"  /> 
 							<input type="hidden" id="sggNm" name="sggNm" /> 
-							<input type="button" onClick="goPopup();" value="주소찾기" /></td>
+							<input type="button" class="loc_btn" onClick="goPopup();" value="주소찾기" /></td>
 						</tr>
 						<tr>
 							<td><input type="text" style="width: 300px;"
@@ -159,11 +160,12 @@
 					<input type="hidden" id="entX" name="entX"/>
 					<input type="hidden" id="entY" name="entY"/>
 					<input type="hidden" id="roadAddrPart1" name="roadAddrPart1"/>
-					<button type="submit" id="reg_submit">가입하기</button>
+					<button type="submit" id="reg_submit" class="reg_submit">가입하기</button>
 				</form>
 			</div>
 		</div>
-	</div>
+		</div>
+	
 <script>
 
 // 시간 변환, 유효성검사
@@ -357,7 +359,7 @@ $("#storeEmail").blur(function() {
 					} 
 				}, error : function() {
 						console.log("실패");
-						console.log(data);
+			 			console.log(data);
 				}
 			});
 		});
