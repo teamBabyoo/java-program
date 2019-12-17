@@ -12,18 +12,20 @@
 <title>My Page</title>
 </head>
 <body>
-<div class="content clearboth">
 	<!-- 헤더 -->
     <c:import url="/WEB-INF/jsp/include/header.jsp" />
     <!-- // 헤더 -->
+<div class="content clearboth">
 
 	<div id="mp_container">
 		<div id="mp_profile">
-			<div id="nickName">${user.nickName}</div>
+			<span id="nickName">${user.nickName}</span>
+			<span>
 			<a href="#">
 			<i class="fa fa-cog" aria-hidden="true"></i>닉네임수정
-			<span class="img">프로필 이미지 영역</span>
 			</a>
+			</span>
+			<span class="img"><!-- 프로필 이미지 영역 --></span>
 		</div>
 		<div id="mp_content">
 			<div id="mp_div01">

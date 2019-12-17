@@ -99,6 +99,8 @@
 	        <c:choose>
 	        <c:when test="${loginUser != null}">
 	        <div>
+	        	<div id="history_box">
+	        	</div>
 	        	<label>
 				<a href="${pageContext.request.contextPath}/front/login/userdetail.do?no=${loginUser.userNo}">MY PAGE</a>
 	        	</label>
@@ -145,5 +147,5 @@
   /* if (window.sessionStorage) {
       console.dir(sessionStorage);
   } */
-  </script>
+		</script>
   <script src='${pageContext.request.contextPath}/resources/js/header.js' ></script>
