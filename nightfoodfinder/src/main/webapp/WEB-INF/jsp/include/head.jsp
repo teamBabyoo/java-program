@@ -8,3 +8,4 @@
     <script src="${pageContext.request.contextPath}/resources/js/nffscript.js"></script>
     <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/favicon.ico">
+   

@@ -170,8 +170,8 @@ public class StoreServiceImpl implements StoreService {
 
 
 	@Override
-	public List<FileVO> getImage() {
-		return dao.getImage();
+	public List<FileVO> getImage(int no) {
+		return dao.getImage(no);
 	}
 	
 	public int getImageCount(int storeNo) {

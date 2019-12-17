@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.protobuf.Field;
+
 import kr.co.nff.front.store.service.StoreService;
 import kr.co.nff.repository.vo.FileVO;
 import kr.co.nff.repository.vo.Pagination;
@@ -65,15 +67,17 @@ public class FrontStoreController {
 	@RequestMapping("/storedetail.do")
 	public void storeDetail(Model model, int no, HttpServletRequest req) {
 		HttpSession session = req.getSession();
-		System.out.println("로그인한 유저: " + session.getAttribute("loginUser"));
+//		System.out.println("로그인한 유저: " + session.getAttribute("loginUser"));
 		model.addAttribute("store", service.storeDetail(no));
 		model.addAttribute("menu", service.storeMenu(no));
 		model.addAttribute("holidaylist", service.storeHoliday(no));
 		model.addAttribute("storeContent", service.storeContent(no));
 		model.addAttribute("user", session.getAttribute("loginUser"));
-		System.out.println("로그인한가게 :" + session.getAttribute("loginStore"));
+//		System.out.println("로그인한가게 :" + session.getAttribute("loginStore"));
 		model.addAttribute("loginStore", session.getAttribute("loginStore"));
 		model.addAttribute("imageListSize", service.getImageCount(no));
+		model.addAttribute("imgList", service.getImage(no));
+//		System.out.println("이미지리스트"+service.getImage());
 	}
 	
 	/* 가게 정보 수정*/
@@ -374,67 +378,14 @@ public class FrontStoreController {
 	
 	/*이미지 가져오기*/
 	@RequestMapping(value="/getByteImage.do")
-	public void getByteImage(HttpServletResponse res, FileVO fileVO) throws ServletException, IOException {
-	     //사용자가 요청하는 파일을 찾아서 사용자에게 전송	
-		 //파라미터 사용
-		 //사용자가 요청한 파일 (시스템에 저장된 이름)
-		List<FileVO> list = service.getImage();
-		//5, 6
-		
-		
-		for(int i = 0; i < list.size(); i++) {
-			System.out.println("리스트다"+list.get(i));
-			String uploadRoot = list.get(i).getPath();
-			String name = list.get(i).getSysName();
-			String dname = list.get(i).getOrgName();
-			System.out.println("경로 : " + uploadRoot);
-			System.out.println("실제이름 : " + dname);
-			File f = new File(uploadRoot, name);
-			
-			//전송하는 내용에 대한 설정
-			if(dname == null) {
-				res.setHeader("Content-Type", "image/jpg");
-			} //다운로드 시킬 때
-			   else {
-				 //브라우저가 타입을 모르면 다운시켜주는게 있었다..
-				res.setHeader("Content-Type", "application/octet-stream"); 
-				//한글이름일 경우 처리
-				dname = new String(dname.getBytes("utf-8"), "8859_1");
-				//다운로드할 이름을 지정
-				res.setHeader("Content-Disposition", "attachment;filename=" + dname);
-			}
-				
-			//브라우저로 전송
-			//읽어서 사용자에게 전송 reader가 아닌 InputStream. 이미지 일 수 있으니.. 텍스트를 바이트로 보내도 된다. 반대는 X
-			FileInputStream fis = new FileInputStream(f);
-			//속도향상
-			BufferedInputStream bis = new BufferedInputStream(fis);
-			//byte 단위를 파일로 보내기 위해
-			OutputStream out = res.getOutputStream();
-			BufferedOutputStream bos = new BufferedOutputStream(out);
-			
-			while(true) {
-				int ch = bis.read();
-				if(ch == -1) break;
-				//파일읽을 내용이 있으면
-				bos.write(ch);
-			}
-			
-			
-			
-		}
-
-		/*
+	public void getByteImage(HttpServletRequest req, HttpServletResponse res, FileVO fileVO) throws ServletException, IOException {
 		//사용자가  요청한 파일이 어느날짜 어느 시간에 있는지 모른다.
-		String path = service.getImage().getPath();// 사용자 요청 파일이 저장된 경로 
-		String name = service.getImage().getSysName(); // 사용자 요청 파일명
-		String dname = service.getImage().getOrgName(); // 다운로드할 파일명
+		String path = req.getParameter("path"); // 사용자 요청 파일이 저장된 경로 
+		String name = req.getParameter("name"); // 사용자 요청 파일명
+		String dname = req.getParameter("dname"); // 다운로드할 파일명
 		
-		
-		System.out.println("경로입니다 : " + fileVO.getPath());
-		System.out.println("저장된 이름 : " + fileVO.getSysName());
 		//파일의 읽기 위한 파일 객체 생성
-		File f = new File(uploadRoot, name);
+		File f = new File(path, name);
 		
 		//전송하는 내용에 대한 설정
 		if(dname == null) {
@@ -448,7 +399,7 @@ public class FrontStoreController {
 			//다운로드할 이름을 지정
 			res.setHeader("Content-Disposition", "attachment;filename=" + dname);
 		}
-			
+		
 		//브라우저로 전송
 		//읽어서 사용자에게 전송 reader가 아닌 InputStream. 이미지 일 수 있으니.. 텍스트를 바이트로 보내도 된다. 반대는 X
 		FileInputStream fis = new FileInputStream(f);
@@ -466,7 +417,12 @@ public class FrontStoreController {
 		}
 		bis.close();fis.close();
 		bos.close();out.close();
-		 */
+		
+		
+		
+		
+		
+	
 		
 	}
 	

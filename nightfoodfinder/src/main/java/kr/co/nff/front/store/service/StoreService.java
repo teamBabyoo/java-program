@@ -68,7 +68,7 @@ public interface StoreService {
 	public void updateMenuList(Store store, int no);
 	
 	//파일가져오기
-	public List<FileVO> getImage();
+	public List<FileVO> getImage(int no);
 	
 	public int getImageCount(int storeNo);
 
