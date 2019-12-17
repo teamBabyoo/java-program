@@ -12,39 +12,54 @@
 	<!-- store 단골 랭킹 리스트 -->
 	<select id="statFrequentStore" parameterType="Search"
 		resultType="Stat">
-		 select *
+   	 select *
     from frequent_view f
     left outer join (
-		select count(store_no) as allfq, store_no
-		<where>
-		         <include refid="statAgeFilter"/>
-		         </where>
+		select count(store_no) as fqCount, store_no as st
 		from frequent_view
-		group by store_no
+		 <where>
+       <include refid="statAgeFilter"/>
+       </where>
+		group by st
     ) freCnt
-    on f.store_no = freCnt.store_no
-    left outer join (
-     select count(user_no) malefq, store_no
-       from frequent_view
-       where user_gender = 'M'
-         <include refid="statAgeFilter"/>
-       group by store_no
-    ) male
-      on f.store_no = male.store_no
-    left outer join (
-     select count(user_no) femalefq, store_no
-       from frequent_view
-       where user_gender = 'F'
-         <include refid="statAgeFilter"/>
-       group by store_no
-    ) female
-    on f.store_no = female.store_no
+    on f.store_no = st
     group by f.store_no
-    order by femalefq desc;
-
-
+    order by fqCount desc;
 	</select>
 	
+	<select id="statMaleFrequentStore" parameterType="Search"
+		resultType="Stat">
+     select *
+    from frequent_view f
+    left outer join (
+     select count(user_no) fqCount, store_no as st
+       from frequent_view
+       where user_gender = 'M'
+       <include refid="statAgeFilter"/>
+       group by st
+    ) male
+      on f.store_no = st
+    group by f.store_no
+    order by fqCount desc;
+	</select>
+
+	<select id="statFemaleFrequentStore" parameterType="Search"
+		resultType="Stat">
+  select *
+    from frequent_view f
+    left outer join (
+     select count(user_no) fqCount, store_no as st
+       from frequent_view
+       where user_gender = 'F'
+       <include refid="statAgeFilter"/>
+       group by st
+    ) female
+      on f.store_no = st
+    group by f.store_no
+    order by fqCount desc;
+    	</select>
+
+
 
 	<!-- 연령별 필터 -->
 		<sql id="statAgeFilter">

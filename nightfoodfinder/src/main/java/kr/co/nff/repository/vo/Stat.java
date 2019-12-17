@@ -10,7 +10,6 @@ public class Stat {
 	private int storeNo;
 	private String storeName;
 	private String storeEmail;
-	private String storePass;
 	private String storeTell;
 	private String categoryName;
 	private int storeCategory;
@@ -50,12 +49,10 @@ public class Stat {
 	private String userName;
 	private String userAge;
 	
-	//성별 상관없이 단골 count
-	private int allfq;
+	//단골 count
+	private int fqCount;
 	
-	//남자 단골 cnt
-	private int malefq;
+	// 랭킹
+	private int rank;
 	
-	//여자 단골 cnt
-	private int femalefq;
 }

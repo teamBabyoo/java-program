@@ -25,7 +25,7 @@ public class Search extends Pagination {
 	private String[] ageCode; // 나이대 : 중복허용
 	private int includeClosed; // 영업끝난 가게 결과 포함하기 (1인 경우만 포함)
 	private String userAge; // 나이대 (중복 x)
-	
+	private int count; // 검색 시 상위 몇 개까지 출력할지 입력
 	private String filter;
 	private List<String[]> filters;
 	

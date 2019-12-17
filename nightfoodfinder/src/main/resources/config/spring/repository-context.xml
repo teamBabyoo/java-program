@@ -24,7 +24,7 @@
 	     DBCP2 »ç¿ë
 		 https://commons.apache.org/proper/commons-dbcp/configuration.html
 	 -->	                     
-	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
 		destroy-method="close"
       	p:driverClassName="${driver}"
         p:url="${url}"
