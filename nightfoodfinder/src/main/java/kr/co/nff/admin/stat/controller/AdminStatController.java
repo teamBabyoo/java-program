@@ -24,8 +24,13 @@ public class AdminStatController {
 		model.addAttribute("statList", service.statFrequentStore(search));
 	}
 	
+	@RequestMapping("/visitorcount.do")
+	public void visitorcount(Stat stat, Model model) {
+		model.addAttribute("visitorList", service.visitorList(stat));
+		model.addAttribute("countByDate", service.countByDate(stat));
+	}
 	
-	
+
 	
 }
 
