@@ -9,8 +9,9 @@
   <head>
     <title>카카오로그인</title>
 <script src="http://developers.kakao.com/sdk/js/kakao.min.js"></script>
-<script type="text/javascript"
-  src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<!-- <script type="text/javascript"
+  src="http://code.jquery.com/jquery-1.11.3.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style type="text/css">
 html, div, body, h3 {
   margin: 0;
