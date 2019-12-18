@@ -1,5 +1,6 @@
 package kr.co.nff.front.store.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.co.nff.repository.dao.FileDAO;
 import kr.co.nff.repository.dao.StoreDAO;
 import kr.co.nff.repository.vo.FileVO;
 import kr.co.nff.repository.vo.Holiday;
@@ -15,16 +17,20 @@ import kr.co.nff.repository.vo.Pagination;
 import kr.co.nff.repository.vo.Review;
 import kr.co.nff.repository.vo.Search;
 import kr.co.nff.repository.vo.Store;
+import kr.co.nff.util.FileDownload;
 import kr.co.nff.util.FileUpload;
 
 @Service("kr.co.nff.front.store.service.StoreServiceImpl")
 public class StoreServiceImpl implements StoreService {
 	
 	@Autowired
-	private FileUpload fileService;
+	private FileUpload fileUpService;
+	@Autowired
+	private FileDownload fileDnService;
 	
 	@Autowired
 	private StoreDAO dao;
+	@Autowired FileDAO fDao;
 	
 	// 가게 전체 리스트
 	@Override
@@ -101,7 +107,7 @@ public class StoreServiceImpl implements StoreService {
 		if (fileFlag == true) {
 //			System.out.println("파일 올바르게 넘어옴");
 //			System.out.println("파일서비스 갔다오기 전 : " + fileGroupCode);
-			fileGroupCode = fileService.upload(review.getAttach());
+			fileGroupCode = fileUpService.upload(review.getAttach());
 			review.setFileGroupCode(fileGroupCode);
 		}
 //		System.out.println("파일서비스 갔다오기 전 (파일 올렸으면 숫자, 안 올렸으면 0): " + fileGroupCode);
@@ -112,11 +118,11 @@ public class StoreServiceImpl implements StoreService {
 
 	// 이미지 다운로드 하지 않으면서 그냥 경로로 가져오기
 	@Override
-	public FileVO selectOneFile(int reviewNo) {
-		FileVO f = new FileVO(); 
-		f = fileService.selectOnefile(3);
-		System.out.println(f);
-		return f;
+	public List<FileVO> selectFileList(int reviewNo) {
+		List<FileVO> fList = new ArrayList<>(); 
+		fList = fDao.selectFileList(5);
+		System.out.println(fList);
+		return fList;
 	}
 	
 	//리뷰 신고제한
@@ -179,8 +185,8 @@ public class StoreServiceImpl implements StoreService {
 
 
 	@Override
-	public List<FileVO> getImage() {
-		return dao.getImage();
+	public List<FileVO> getImage(int no) {
+		return dao.getImage(no);
 	}
 	
 	public int getImageCount(int storeNo) {

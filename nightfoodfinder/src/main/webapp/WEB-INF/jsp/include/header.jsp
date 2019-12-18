@@ -83,8 +83,8 @@
      <%--    <c:if test="${loginUser && loginStore}"> --%>
 	        <li id="notice_btn" data-user="${loginUser}" data-store="${loginStore}">
 	        	<i class="fa fa-bell-o" aria-hidden="true" ></i>
-	        	<!-- 새 알림 갯수 뿌려줄 span -->
-	        	<span class="newnotice"></span>
+<!-- 	        	새 알림 갯수 뿌려줄 span
+	        	<span class="newnotice"></span> -->
 	        	<!-- 알림 리스트 나올 div -->
 	        	<div class="notice_list_box hidden">
 		        	<div class="topshape"></div>

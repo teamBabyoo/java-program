@@ -95,7 +95,7 @@ public interface StoreDAO {
 	//메뉴 수정(등록)
 	void insertMenuList(Store store);
 	
-	List<FileVO> getImage();
+	List<FileVO> getImage(int no);
 	
 	int getImageCount(int storeNo);
 }

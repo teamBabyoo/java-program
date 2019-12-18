@@ -36,7 +36,7 @@ public interface StoreService {
 	// 리뷰 등록 & 이미지 업로드
 	public List<Review> reviewRegist(Review review, boolean fileFlag) throws Exception;
 	// 리뷰 이미지 가져오기
-	public FileVO selectOneFile(int reviewNo);
+	public List<FileVO> selectFileList(int reviewNo);
 	
 	//리뷰신고
 	public List<Review> reviewReport(Review review);
@@ -70,7 +70,7 @@ public interface StoreService {
 	public void updateMenuList(Store store, int no);
 	
 	//파일가져오기
-	public List<FileVO> getImage();
+	public List<FileVO> getImage(int no);
 	
 	public int getImageCount(int storeNo);
 
