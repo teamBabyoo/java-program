@@ -4,6 +4,7 @@ $(() => {
 		mode: 'fade',
 	    captions: true,
 	    slideWidth: 300,
+	    slideMargin: 0,
 		pager:true	//페이징
 	});
 	
