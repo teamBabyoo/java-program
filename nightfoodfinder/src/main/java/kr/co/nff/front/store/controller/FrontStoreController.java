@@ -87,8 +87,8 @@ public class FrontStoreController {
 	@RequestMapping("/imgsrctest.do")
 	public void imgsrctest() {
 		System.out.println("이미지 경로 확인하기 요청 성공");
-		int reviewNo = 1;
-		service.selectOneFile(reviewNo);
+		int reviewNo = 5;
+		System.out.println(service.selectFileList(reviewNo));
 	}
 	
 	/* 가게 정보 수정*/
@@ -149,6 +149,12 @@ public class FrontStoreController {
 		System.out.println("페이지넘버: " +review.getPage());
 		System.out.println("스타트 페이지" + review.getStartPage());
 		
+		// -------- 이미지 다운로드 -------
+		System.out.println("이미지 경로 확인하기 요청 성공");
+		int reviewNo = 5;
+		System.out.println(service.selectFileList(reviewNo));
+		// ---------------------------
+		
 		return map;
 	}
 	
@@ -192,98 +198,13 @@ public class FrontStoreController {
 		
 //		System.out.println(review.getAttach().size());
 //		List<MultipartFile> list = new ArrayList<>();
-		
-
-		//--------------------------------------------
-
-
-		
-
-			
-	//		req.setCharacterEncoding("UTF-8");
-			
-		
-			/*
-			
-				File f1 = req.getFile("attach");
-			
-				FileVO fileVo = new FileVO();
-				if (f1 != null) {
-					String orgName = request.getOriginalFileName("attach");
-					String sysName = request.getFilesystemName("attach");
-					String extension = sysName.substring(sysName.lastIndexOf(".") + 1);
-					
-					
-					fileVo.setFileGroupCode(service.selectGroupCode());
-					fileVo.setOrgName(orgName);
-					fileVo.setSysName(sysName);
-					fileVo.setExtension(extension);
-					fileVo.setPath(f.getPath());
-					
-					service.insertFile(fileVo);
-					
-					Thumbnails.of(new File(f1.getParent(), sysName)).size(250, 300).outputFormat("jpg")
-					.toFile(new File(f1.getParent(), "thumb_" + sysName));
-				}
-
-			System.out.println("성공");
 		//--------------------------------------------
 		
-		List<MultipartFile> fileList = mtfRequest.getFiles("file");
-        String src = mtfRequest.getParameter("src");
-        System.out.println("src value : " + src);
-
-        String path = "C:\\image\\";
-
-        for (MultipartFile mf : fileList) {
-            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-            long fileSize = mf.getSize(); // 파일 사이즈
-
-            System.out.println("originFileName : " + originFileName);
-            System.out.println("fileSize : " + fileSize);
-
-            String safeFile = path + System.currentTimeMillis() + originFileName;
-            try {
-                mf.transferTo(new File(safeFile));
-            } catch (IllegalStateException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-//      model.addAttribute("list", service.reviewRegist(review));
-		System.out.println("--------------------------------------");
-//		System.out.println("작성자 : " + review.getWriterNo());
-//		System.out.println("내용 : " + review.getReviewContent());
-//		System.out.println("답댓 : " + review.getRecomment());
-//		System.out.println("스코프 : " + review.getStoreScope());
-//        System.out.println("게시글번호 확인" + review.getStoreNo());
-		System.out.println("--------------------------------------");
-        System.out.println("attach.size() : " + attach.size());
-        for (MultipartFile file : attach) {
-        	if (file.isEmpty()) continue;
-        	
-        	String orgName = file.getOriginalFilename();
-        	long size = file.getSize();
-        	System.out.println("파일명 : " + orgName);
-        	System.out.println("파일크기 : " + size);
-        	file.transferTo(new File("c:/java/nffresources/" + orgName));
-        }
+		//--------------------------------------------
 		
-		
-		System.out.println("list결과 : " + fileVo);
-		
-        review.setFileGroupCode(fileVo.getFileGroupCode());
-        service.reviewRegist(review);
-        System.out.println(review);
-        */
         return "redirect:storedetail.do?no=" + review.getStoreNo();
 	}
 	
-	public void reviewRegistAjax(){	}
-
 	/* 리뷰작성폼 */
 	@RequestMapping("/storeReviewRegistForm.do")
 	public void reviewRegistForm(Review review, Model model, HttpSession session) {
