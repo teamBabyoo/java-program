@@ -16,9 +16,10 @@
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>  -->
 <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+<%-- <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/css/jquery.bxslider.css"> --%>
 </head>
 <body>
 	<div class="wrapper list_wrap">
@@ -54,9 +55,15 @@
 									</div>
 								</div>
 							</div>
-				       			<div class="sto_li_content" >
-									${s.storeName}				       			
-				       			</div>
+							<!-- 가게 리스트의 내용 부분 -->
+				       		<div class="sto_li_content" >
+								<ul>
+									<li>${s. }</li>		
+									<li>${s.storeName}</li>		
+									<li></li>		
+								</ul>
+													       			
+				       		</div>
 				       	</li>
 				    </c:forEach>
 				    </ul>
@@ -91,7 +98,7 @@
 		<!-- // 컨텐트  -->
 
 		<!-- 푸터 -->
-		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
+		<%-- <c:import url="/WEB-INF/jsp/include/footer.jsp" /> --%>
 		<!-- // 푸터 -->
 
 		<!-- 팝업 백그라운드  -->
@@ -111,11 +118,10 @@
 		<input name="keyword" type="hidden" value="${search.keyword}" />
 	</form>
 	
-	
-	<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+	<%-- <script src="<c:url value='/resources/js/jquery.bxslider.js' />"></script> --%>
+ 	<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 	<script src="<c:url value='/resources/js/storelist.js' />"></script>
 	<script src="<c:url value='/resources/js/map_in_storelist.js' />"></script>
-
 </body>
 </html>
 
