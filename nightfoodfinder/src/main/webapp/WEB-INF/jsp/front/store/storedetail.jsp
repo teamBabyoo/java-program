@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/jsp/include/taglib.jsp"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,52 +18,44 @@
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 		
 		<div id="storedetail" class="content clearboth">
-			<c:if test="${empty imgList}">
-				<div class="slick" style="width: 100%">
-					<div>
-	   						 <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" />
-							</div>
-							<div>
-	   							 <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" />
-							</div>
-							<div>
-							    <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" />
-							</div>
-							<div>
-							    <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" />
-							</div>
-							<div>
-							    <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" />
-							</div>
-							<div>
-							    <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" />
-							</div>
-							<div>
-							    <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" />
-							</div>
-							<div>
-							    <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" />
-							</div>
-				</div>
-			</c:if>
 			<div class="slick" style="width: 100%">
-				<c:forEach items="${imgList}" var="imgList" varStatus="i">
-				<c:choose>
-					<c:when test="${i.end < 1}">
+			<c:choose>
+				<c:when test="${empty imgList}">
+						<div>
+		   					<img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" />
+						</div>
+						<div>
+		   					 <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" />
+						</div>
+						<div>
+						    <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" />
+						</div>
+				</c:when>
+				<c:otherwise>
+				 <c:set value="${fn:length(imgList)}" var="size" />
+					<c:forEach items="${imgList}" var="img" varStatus="i" end="${size}">
+					<c:choose>
+					<c:when test="${size < 2}">
 							<div>
-								<img src="${pageContext.request.contextPath}/front/store/getByteImage.do?name=${imgList.sysName}&path=${imgList.path}" />
+								<img src="${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}" />
 							</div>
-						   <div>
-	   						 <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" />
+							<div>
+			   					 <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" />
+							</div>							
+							<div>
+			   					 <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" />
 							</div>							
 					</c:when>
 					<c:otherwise>
-						<div>
-							<img src="${pageContext.request.contextPath}/front/store/getByteImage.do?name=${imgList.sysName}&path=${imgList.path}" />
-						</div>
+								<div>
+									<img src="${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}" />
+								</div>
 					</c:otherwise>
-				</c:choose>
-				</c:forEach>
+					</c:choose>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
+			</div>
 					
 			</div>	
 			
@@ -210,9 +203,11 @@
 		<div class="bgbox"></div>
 		<!-- 신고팝업 -->
 		<div id="rmyModal" class="rmodal" style="display: none"></div>
-	</div>
 	<script src="${pageContext.request.contextPath}/resources/js/slick.min.js"></script>
 	<script type="text/javascript">
+		let imglist = `${imgList}`;
+		console.log("imglist", imglist.size);
+		console.dir(imglist);
 		let no = ${store.storeNo};
 		let scope = ${store.scope};
 		let openTime = '${store.openTime}';
