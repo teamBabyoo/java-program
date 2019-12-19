@@ -30,7 +30,7 @@ public class Store  {
 	private String[] menuName;
 	private int[] menuPrice;
 	//private int[] price;
-	private int priceType; // 가격대
+	private int priceTypeNo; // 가격대
 	private int seeCnt;
 	
 	private String weekName;

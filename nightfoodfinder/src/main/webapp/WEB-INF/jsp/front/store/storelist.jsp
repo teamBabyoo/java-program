@@ -57,12 +57,17 @@
 							</div>
 							<!-- 가게 리스트의 내용 부분 -->
 				       		<div class="sto_li_content" >
-								<ul>
-									<li>${s.categoryName}</li>		
-									<li><h2>${s.storeName}</h2></li>		
-									<li></li>		
-								</ul>
-													       			
+								<div>
+									<span>${s.categoryName}</span>
+									<span class="sto_scope">
+										<span class="scope_star">★</span>${s.scope}(${s.reviewCntTotal})
+									</span>		
+								</div>
+								<div class="store_name">${s.storeName}</div>
+								<div class="store_info">
+									<div>${s.priceTypeNo}</div>
+									<div>영업 시간 : ${s.openTime} ~ ${s.closeTime}</div>
+								</div>		
 				       		</div>
 				       	</li>
 				    </c:forEach>
@@ -108,8 +113,8 @@
 		<c:forEach var="city" items="${search.cities}">
 			<input name="cities" type="hidden" value="${city}" />
 		</c:forEach>
-		<c:forEach var="price" items="${search.priceType}">
-			<input name="priceType" type="hidden" value="${price}" />
+		<c:forEach var="price" items="${search.priceTypeNo}">
+			<input name="priceTypeNo" type="hidden" value="${price}" />
 		</c:forEach>
 
 		<c:forEach var="category" items="${search.categoryCode}">
