@@ -865,6 +865,9 @@ header div:nth-child(3) li span {
 .store_info {
 	margin-top: 12px;
 }
+.sto_li_content > div:nth-child(1) {
+	margin-bottom: 2px;
+}
 
 	
 
