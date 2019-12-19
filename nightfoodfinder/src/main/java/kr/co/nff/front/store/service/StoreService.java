@@ -41,7 +41,7 @@ public interface StoreService {
 	public List<Review> reviewList(Review review);
 	
 	// 리뷰 등록 & 이미지 업로드
-	public List<Review> reviewRegist(Review review, boolean fileFlag) throws Exception;
+	public int reviewRegist(Review review, boolean fileFlag) throws Exception;
 	// 리뷰 이미지 가져오기
 //	public List<FileVO> selectFileList(int reviewNo);
 	// 리뷰 이미지

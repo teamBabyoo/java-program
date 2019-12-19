@@ -55,7 +55,7 @@ public interface StoreDAO {
 	//리뷰 리스트
 	List<Review> selectReview(Review review);
 	//리뷰등록
-	void registReview(Review review);
+	int registReview(Review review);
 	//리뷰수정
 	void updateReview(Review review);
 	//리뷰삭제

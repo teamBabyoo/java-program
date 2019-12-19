@@ -498,7 +498,12 @@
 	</select>
 	<!-- -->
 
-	<!-- 리뷰 등록 -->
+	<!-- 
+		리뷰 등록
+		성공시 영향받은 행의수 (1)을 반환하고 
+		컨트롤러에서 1을 받았을 때
+		store테이블을 업데이트 하는 쿼리 수행 -> updateStoreByReview
+	 -->
 	<insert id="registReview" parameterType="Review">
 		INSERT INTO tb_review (
 		store_no, writer_no, review_content, reg_date, store_scope, file_group_code
@@ -506,6 +511,15 @@
 		#{storeNo}, #{writerNo}, #{reviewContent}, NOW(), #{storeScope}, #{fileGroupCode}
 		)
 	</insert>
+	
+	<update id="updateStoreByReview">
+		update tb_store
+		   set store_scope_total = store_scope_total + 4,
+		       review_cnt_total = review_cnt_total + 1
+		 where store_scope_total = store_scope_total
+		   and review_cnt_total = review_cnt_total
+           and store_no = 1;
+	</update>
 
 	<!-- 댓글 등록 -->
 	<!-- 파일등록 아직X -->

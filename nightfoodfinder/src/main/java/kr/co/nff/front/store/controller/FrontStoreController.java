@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,8 +23,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.google.protobuf.Field;
 
 import kr.co.nff.front.store.service.StoreService;
 import kr.co.nff.repository.vo.FileVO;
@@ -89,7 +86,7 @@ public class FrontStoreController {
 	/* 파일 다운로드하지 안흐면서 그냥 경로 가져오는 테스트 */
 	@RequestMapping("/getreviewimgsrc.do")
 	public void getreviewimgsrc(HttpServletRequest req, HttpServletResponse res, Review review) throws ServletException, IOException {
-		System.out.println("이미지 경로 확인하기 요청 성공");
+//		System.out.println("이미지 경로 확인하기 요청 성공");
 		int fileGroupCode = review.getFileGroupCode();
 //		System.out.println(service.selectFileList(fileGroupCode));
 		
@@ -231,26 +228,26 @@ public class FrontStoreController {
 	/* 리뷰 작성 & 이미지 업로드 */
 	@RequestMapping("/review_regist.do")
 	public String reviewRegist(Review review) throws Exception, IOException {
+		Store store = new Store();
+		int storeNo = review.getStoreNo();
+		Map<String, Object> map = new HashMap<>();
+		map.put("newscope", review.getStoreScope());
+		map.put("storeno", storeNo);
+//		map.put("exiscope", );
 		
+		// 파일 유무 체크
 		boolean fileFlag = true;
-		
 		for (MultipartFile mf : review.getAttach()) {
 			if (mf.getContentType().equals("application/octet-stream")) {
-//				System.out.println("파일 첨부");
 				fileFlag = false;
 			};
-//			System.out.println("파일첨부X");
 		}
-		System.out.println(fileFlag);
-		
-		service.reviewRegist(review, fileFlag);
-		
-//		System.out.println(review.getAttach().size());
-//		List<MultipartFile> list = new ArrayList<>();
-		//--------------------------------------------
-		
-		//--------------------------------------------
-		
+//		System.out.println(fileFlag);
+//		service.reviewRegist(review, fileFlag);
+		int result = service.reviewRegist(review, fileFlag);
+		if (result == 1) {
+//			service
+		}
         return "redirect:storedetail.do?no=" + review.getStoreNo();
 	}
 	
