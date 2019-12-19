@@ -259,7 +259,7 @@
 	<select id="storeList" resultType="Store" parameterType="Search">
 		select distinct s.*,
 			   a.*,
-			   c.category_name as category,
+			   c.category_name,
 			   ifnull(round(s.store_scope_total / s.review_cnt_total, 1), 0) scope
 		<include refid="commonStoreList" />
 		<choose>
