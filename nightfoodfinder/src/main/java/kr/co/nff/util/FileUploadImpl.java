@@ -45,9 +45,4 @@ public class FileUploadImpl implements FileUpload {
 		return fileGroupCode;
 	}
 
-	@Override
-	public FileVO selectOnefile(int reviewNo) {
-		FileVO f = fileDao.selectOneFile(reviewNo);
-		return f;
-	}
 }

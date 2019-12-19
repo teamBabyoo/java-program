@@ -57,6 +57,9 @@ import lombok.Data;
 		private int mylikecheck;
 		
 		private int userNo;
+		
+		// 리뷰에 파일VO 리스트
+		private List<FileVO> fileVoList;
 
 		@Override
 		public String toString() {
@@ -68,8 +71,9 @@ import lombok.Data;
 					+ ", fileGroupCode=" + fileGroupCode + ", reviewNoList=" + reviewNoList + ", status=" + status
 					+ ", good=" + good + ", reportWhy=" + reportWhy + ", storeReviewNo=" + storeReviewNo
 					+ ", reviewLikeList=" + reviewLikeList + ", mylikecheck=" + mylikecheck + ", userNo=" + userNo
-					+ "]";
+					+ ", fileVoList=" + fileVoList + "]";
 		}
+
 	}
 
 
