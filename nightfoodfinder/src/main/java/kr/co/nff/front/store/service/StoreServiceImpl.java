@@ -113,7 +113,8 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public List<Review> reviewRegist(Review review, boolean fileFlag) throws Exception {
+//	public List<Review> reviewRegist(Review review, boolean fileFlag) throws Exception {
+	public int reviewRegist(Review review, boolean fileFlag) throws Exception {
 		int fileGroupCode = 0;
 		if (fileFlag == true) {
 //			System.out.println("파일 올바르게 넘어옴");
@@ -122,9 +123,11 @@ public class StoreServiceImpl implements StoreService {
 			review.setFileGroupCode(fileGroupCode);
 		}
 //		System.out.println("파일서비스 갔다오기 전 (파일 올렸으면 숫자, 안 올렸으면 0): " + fileGroupCode);
-		dao.registReview(review);
-		
-		return dao.selectReview(review);
+		// ---------- 망하면 여기 주석 풀기
+//		dao.registReview(review);
+//		return dao.selectReview(review);
+		// --------------------------
+		return dao.registReview(review);
 	}
 
 	// 이미지 다운로드 하지 않으면서 그냥 경로로 가져오기
@@ -132,7 +135,7 @@ public class StoreServiceImpl implements StoreService {
 	public List<FileVO> selectFileList(HttpServletRequest req, HttpServletResponse res, Review review) throws IOException {
 		List<FileVO> fList = new ArrayList<>(); 
 		fList = fDao.selectFileList(review.getReviewNo());
-		System.out.println("서비스 결과값 : " + fList);
+//		System.out.println("서비스 결과값 : " + fList);
 		
 		// ---------------------------------------------
 		//사용자가  요청한 파일이 어느날짜 어느 시간에 있는지 모른다.
