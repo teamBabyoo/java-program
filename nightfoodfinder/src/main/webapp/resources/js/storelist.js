@@ -14,19 +14,16 @@ $(() => {
      
 	/* 지도 스크롤 고정 부분*/
 	$(window).ready(() => {
-		// 지도의 좌표값
-		let mapOffset = $(".rightarea").offset();
-		
-		// 화면에 스크롤이 생기면 고정한다.
-		$(window).scroll(() => {
-			if ($(document).scrollTop() > mapOffset.top - 60) {
-				$(".rightarea").addClass("scroll-fixed");
-			} else {
-				$(".rightarea").removeClass("scroll-fixed");
-			}
-		});
-		
+		const contentHeight = window.innerHeight - 60;
+		$('.rightarea').css('height', contentHeight);
 	});
+	
+	/*
+	 
+	 지도의 높이 고정 위해 헤더 부분을
+	 window.innerHeight 에서 헤더만큼 빼준다.
+	 
+	 */
 	
 	
 	

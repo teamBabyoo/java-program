@@ -30,6 +30,9 @@
 		<!-- 컨텐트  -->
 		<div class="content list_content">
 			<div class="leftarea">
+				<div id="map"></div>
+			</div>
+			<div class="rightarea">
 				<div class="listnotice">
 					<div>
 						<i class="far fa-moon">${sList.size()} 개의 가게가 검색 되었습니다.</i>
@@ -96,9 +99,6 @@
 				</div>
 			</div>
 			
-			<div class="rightarea">
-				<div id="map"></div>
-			</div>
 
 		</div>
 		<!-- // 컨텐트  -->

@@ -801,13 +801,14 @@ header div:nth-child(3) li span {
 }
 /*--------------스토어 리스트------------------*/
 
+
 #map {
-	width: 786.5px;
-	height: 657px;
+	width: 100%;
+    height: 100%;
 }
 .list_content {
 	display: grid;
-	grid-template-columns: 797px 1fr;
+	grid-template-columns: 1fr 797px;
 	padding-right: 0px;
 }
 .listnotice {
@@ -819,17 +820,18 @@ header div:nth-child(3) li span {
 	width: 808px;
 	margin: 13px;
 }
-.scroll-fixed {
+/* .scroll-fixed {
 	position: fixed;
 	top: 60px;
 	right: 0px;
-}
+} */
 .fas {
 	width: 50px;
 }
-.leftarea{
+.rightarea{
 	min-width: 797px; 
 	padding: 10px;
+	overflow: scroll;
 }
 .sto_li > div {
 	float: left;
@@ -912,7 +914,7 @@ header div:nth-child(3) li span {
 
 .page-item {
 	list-style: none;
-	float: left;
+	float: `;
 	display: inline;
 	text-align: center;
 }
