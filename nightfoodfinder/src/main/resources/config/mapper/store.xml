@@ -222,6 +222,8 @@
 		    on s.store_no = m.store_no
 		 inner join tb_address a
 			on s.store_no = a.store_no
+		 inner join tb_price_type p
+		    on p.price_type_no = s.price_type_no
 		 where s.status = 1 <!-- 관리자 허용 된 것만 -->
 		 	<if test="includeClosed != 1"> <!--  현재 영업중인 가게만 볼 때 (1 : 영업끝난가게 포함)  -->
          		<![CDATA[
@@ -260,6 +262,8 @@
 	<select id="storeList" resultType="Store" parameterType="Search">
 		select distinct s.*,
 			   a.*,
+			   m.*,
+			   p.price_type,
 			   c.category_name,
 			   ifnull(round(s.store_scope_total / s.review_cnt_total, 1), 0) scope
 		<include refid="commonStoreList" />

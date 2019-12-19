@@ -65,8 +65,9 @@
 								</div>
 								<div class="store_name">${s.storeName}</div>
 								<div class="store_info">
-									<div>${s.priceTypeNo}</div>
+									<div>가격대 : ${s.priceType}</div>
 									<div>영업 시간 : ${s.openTime} ~ ${s.closeTime}</div>
+									<div></div>
 								</div>		
 				       		</div>
 				       	</li>
