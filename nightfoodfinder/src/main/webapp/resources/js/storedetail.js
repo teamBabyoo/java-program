@@ -407,7 +407,6 @@ function reposition() {
 	let $height_header = $('header').height();
 	let $height_content = $('.content').height();
 	let $height_wrapper = $('.wrapper').height();
-	let $top_footer = $('footer').offset().top;
 	let $height_leave_rv = $('.leave_rv').height
 //	console.log('$height_content', $height_content);
 //	console.log('$height_header ->', $height_header);

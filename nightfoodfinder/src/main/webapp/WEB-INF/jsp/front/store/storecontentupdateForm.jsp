@@ -9,7 +9,8 @@
 	<c:param name="msg" value="가게정보수정" />
 </c:import>
 <meta charset="UTF-8">
-
+<script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2e2c217701074a631a1029878ed30d6f&libraries=services"></script>
 
 <title>Store Join Page</title>
 </head>
@@ -210,9 +211,11 @@
 
 	function jusoCallBack(roadFullAddr,zipNo,addrDetail,sggNm){
 		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-		document.form.roadFullAddr.value = roadFullAddr;
+		let rrr = roadFullAddr.split(',');
+		console.log(rrr[0]);
+		document.form.roadFullAddr.value = rrr[0];
 		document.form.zipNo.value = zipNo;
-		document.form.addrDetail.value = addrDetail;
+		document.form.addrDetail.value = rrr[1];
 		document.form.sggNm.value = sggNm;
 		/* document.form.entX.value = entX;
 		document.form.entY.value = entY; */
