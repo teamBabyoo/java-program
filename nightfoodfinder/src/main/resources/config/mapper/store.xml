@@ -111,6 +111,8 @@
 				a.city,
 				a.street_load,
 				c.category_name,
+				s.store_scope_total,
+				s.review_cnt_total,
 				ifnull(truncate(sum(r.store_scope) / count(r.writer_no), 1), 0) as scope
 		from tb_store as s
 		inner join tb_address as a
@@ -512,13 +514,13 @@
 		)
 	</insert>
 	
-	<update id="updateStoreByReview">
+	<update id="updateStoreByReview" parameterType="hashMap">
 		update tb_store
-		   set store_scope_total = store_scope_total + 4,
+		   set store_scope_total = store_scope_total + #{review.storeScope},
 		       review_cnt_total = review_cnt_total + 1
-		 where store_scope_total = store_scope_total
-		   and review_cnt_total = review_cnt_total
-           and store_no = 1;
+		 where store_scope_total = #{exiscope}
+		   and review_cnt_total = #{curtcnt}
+           and store_no = #{review.storeNo};
 	</update>
 
 	<!-- 댓글 등록 -->

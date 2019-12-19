@@ -42,6 +42,10 @@ public interface StoreService {
 	
 	// 리뷰 등록 & 이미지 업로드
 	public int reviewRegist(Review review, boolean fileFlag) throws Exception;
+
+	// 리뷰 등록시 가게테이블 총 리뷰수, 총 별점 업데이트
+	int updateStoreByReview(Map<String, Object> map);
+	
 	// 리뷰 이미지 가져오기
 //	public List<FileVO> selectFileList(int reviewNo);
 	// 리뷰 이미지

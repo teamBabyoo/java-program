@@ -228,12 +228,14 @@ public class FrontStoreController {
 	/* 리뷰 작성 & 이미지 업로드 */
 	@RequestMapping("/review_regist.do")
 	public String reviewRegist(Review review) throws Exception, IOException {
-		Store store = new Store();
 		int storeNo = review.getStoreNo();
+		Store store = service.storeDetail(storeNo);
+		
 		Map<String, Object> map = new HashMap<>();
-		map.put("newscope", review.getStoreScope());
+		map.put("review", review);
 		map.put("storeno", storeNo);
-//		map.put("exiscope", );
+		map.put("exiscope", store.getStoreScopeTotal());
+		map.put("curtcnt", store.getReviewCntTotal());
 		
 		// 파일 유무 체크
 		boolean fileFlag = true;
@@ -245,8 +247,9 @@ public class FrontStoreController {
 //		System.out.println(fileFlag);
 //		service.reviewRegist(review, fileFlag);
 		int result = service.reviewRegist(review, fileFlag);
-		if (result == 1) {
-//			service
+		if (result == 1) {	// 등록 성공하여 영향받은 행의 개수 1이 반환되었다면
+			// map이 준비되면 store테이블을 업데이트한다
+			service.updateStoreByReview(map);
 		}
         return "redirect:storedetail.do?no=" + review.getStoreNo();
 	}
