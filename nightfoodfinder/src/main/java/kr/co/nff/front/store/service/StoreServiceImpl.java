@@ -117,6 +117,7 @@ public class StoreServiceImpl implements StoreService {
 		return dao.selectReview(review);
 	}
 
+	// 리뷰등록
 	@Override
 //	public List<Review> reviewRegist(Review review, boolean fileFlag) throws Exception {
 	public int reviewRegist(Review review, boolean fileFlag) throws Exception {
@@ -133,6 +134,12 @@ public class StoreServiceImpl implements StoreService {
 //		return dao.selectReview(review);
 		// --------------------------
 		return dao.registReview(review);
+	}
+	
+	// 리뷰 등록시 가게테이블 총 리뷰수, 총 별점 업데이트
+	@Override
+	public int updateStoreByReview(Map<String, Object> map) {
+		return dao.updateStoreByReview(map);
 	}
 
 	// 이미지 다운로드 하지 않으면서 그냥 경로로 가져오기
