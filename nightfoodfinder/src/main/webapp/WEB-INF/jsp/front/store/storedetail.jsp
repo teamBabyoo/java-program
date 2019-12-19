@@ -4,6 +4,7 @@
 <%@ include file="/WEB-INF/jsp/include/taglib.jsp"%>
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <head>
 <c:import url="/WEB-INF/jsp/include/head.jsp">
 	<c:param name="msg" value="상세페이지" />
