@@ -19,7 +19,7 @@
 		<result column="latitude" property="latitude" />
 		<result column="longitude" property="longitude" />
 		<result column="store_join_date" property="storeJoinDate" />
-		<result column="price_type" property="priceType" />
+		<result column="price_type_no" property="priceTypeNo" />
 		<result column="see_cnt" property="seeCnt" />
 		<result column="store_scope_total" property="storeScopeTotal" />
 		<result column="review_cnt_total" property="reviewCntTotal" />
@@ -247,9 +247,9 @@
 					#{c}
 				</foreach>
 			</if>
-			<if test="priceType != null">
-				and s.price_type in
-				<foreach collection="priceType" item="p" open="(" close=")" separator=",">
+			<if test="priceTypeNo != null">
+				and s.price_type_no in
+				<foreach collection="priceTypeNo" item="p" open="(" close=")" separator=",">
 					#{p}
 				</foreach>
 			</if>

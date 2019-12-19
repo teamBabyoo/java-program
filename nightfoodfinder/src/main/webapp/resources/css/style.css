@@ -837,19 +837,36 @@ header div:nth-child(3) li span {
 }
 .sto_li > div:nth-child(2) {
 	width: 40%;
-
 }
 .sto_li > div:nth-child(3) {
 	width: 60%;
 }
 .sto_li {
 	border-bottom: 1px solid rgb(235, 235, 235); 
-	width: 100%;
+	width: 750px;
+}
+.sto_li:last-child {
+    border-bottom: 0px;
 }
 .sto_li_content {
-	padding: 10px;
+	padding: 14px;
+	padding-top: 0;
+}
+.sto_scope {
+	float: right;
+    padding-right: 9px;
+}
+.scope_star {
+	color: red;
+}
+.store_name {
+	font-size: 20px;
+}
+.store_info {
+	margin-top: 12px;
 }
 
+	
 
 /* 이미지 슬라이더 */
 
@@ -872,18 +889,10 @@ header div:nth-child(3) li span {
     height: auto; 
     overflow: hidden;
 }
-/*-----*/
-
- 
-
-
-
-
-
-
-
-
-
+.bx-wrapper .bx-controls-direction a {
+    z-index: 0 !important;
+}
+/*--이미지슬라이더 끝---*/
 /*-------------스토어 리스트 끝------------------*/
 
 /* storelist pagination */
@@ -925,7 +934,9 @@ header div:nth-child(3) li span {
 	background-color: #ffe31f;
 }
 
-/* --------------------                */
+/* -------------------- */
+
+/* .notice_content > ul > li > a { position: absolute; top: 0; left: 0; } */
 
 /** 유빈 끝 **/
 
