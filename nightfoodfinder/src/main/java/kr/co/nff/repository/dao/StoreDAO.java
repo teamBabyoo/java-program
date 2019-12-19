@@ -98,4 +98,9 @@ public interface StoreDAO {
 	List<FileVO> getImage(int no);
 	
 	int getImageCount(int storeNo);
+	
+	void updateStoreSeeCnt(int no);
+	
+	//나의 단골가져오기
+	List<Integer> myfrequent(int no);
 }

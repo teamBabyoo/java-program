@@ -81,20 +81,7 @@ function animateValue(id, start, end, duration) {
     }, stepTime);
 }
 animateValue("scopescore", 0, scope, 100);
-    /*
-	let close = closeTime.split(":");
-	let closehour = '';
-	if(close[0] >= 24 && close[0] <= 36) {
-		closehour *= 1;
-		closehour = close[0] - 24;
-		closehour += "";
-		closehour = "0"+closehour;
-	}
-	closeTime = closehour+":"+close[0];
-	console.log(closeTime);
-	
-	$("#operatingtime").html(openTime +" ~ " +closeTime);
-*/
+
 	
 //리뷰 리스트 가져오는 에이작스 	
 function reviewListAjax() {
@@ -222,7 +209,7 @@ console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
                     <p>`;
 			
 			if(`${r.mylikecheck}` === '0' ) {
-				html += `<img class="heartclick" data-rno="${r.reviewNo}" src="` + context + `/resources/images/empty_hrt.png" />`;
+				html += `<img class="heartclick" data-rno="${r.reviewNo}" data-writer="${r.writerNo}" src="` + context + `/resources/images/empty_hrt.png" />`;
 			} else {
 				html += `<img class="heartclick" data-rno="${r.reviewNo}" src="` + context + `/resources/images/icon_hrt.png" />`;
 			}
@@ -301,7 +288,7 @@ console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
                     </li>
                     <li class="clearboth">`
                         if(`${r.mylikecheck}` === '0' ) {
-							html += `<img class="heartclick" data-rno="${r.reviewNo}" src="` + context + `/resources/images/empty_hrt.png" />`;
+							html += `<img class="heartclick" data-rno="${r.reviewNo}" data-writer="${r.writerNo}" src="` + context + `/resources/images/empty_hrt.png" />`;
 						} else {
 							html += `<img class="heartclick" data-rno="${r.reviewNo}" src="` + context + `/resources/images/icon_hrt.png" />`;
 						}
@@ -616,9 +603,13 @@ function reviewReport(count, rNo, page) {
 };
 	
 $(document).on('click', '.heartclick', function(e){	
-	 
+	 if(userNo === 0){
+		 alert("로그인 후 이용가능합니다");
+		 return false;
+	 }
 //	console.log(rno);
-	console.log($(e.target).attr('data-rno'));
+	console.log("리뷰번호", $(e.target).attr('data-rno'));
+	console.log("리뷰글쓴이", $(e.target).attr('data-writer'));
 	console.log("src : ", $(e.target).attr('src'));
 	let page = $(".page-item.active a").attr("data-page");
 	let heart = "/nightfoodfinder/resources/images/icon_hrt.png";
@@ -629,7 +620,8 @@ $(document).on('click', '.heartclick', function(e){
 			data: {userNo,
 				storeNo,
 				page,
-				reviewNo: $(e.target).attr('data-rno')},
+				reviewNo: $(e.target).attr('data-rno')
+				},
 				dataType: "json",
 				success: (list) => makeReviewList(list)
 		});
@@ -641,7 +633,9 @@ $(document).on('click', '.heartclick', function(e){
 			data: {userNo,
 				storeNo,
 				page,
-				reviewNo: $(e.target).attr('data-rno')},
+				writerNo: $(e.target).attr('data-writer'),
+				reviewNo: $(e.target).attr('data-rno')
+				},
 				dataType: "json",
 				success: (list) => makeReviewList(list)
 		});

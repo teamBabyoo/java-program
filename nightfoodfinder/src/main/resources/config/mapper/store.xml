@@ -107,6 +107,7 @@
 				s.store_owner_ph,
 				s.open_time,
 				s.close_time,
+				s.status,
 				a.city,
 				a.street_load,
 				c.category_name,
@@ -299,9 +300,6 @@
 		on h.week_no = w.week_no
 		where h.store_no = #{storeNo}
 	</select>
-
-	<update id="">
-	</update>
 
 
 
@@ -667,7 +665,18 @@
 	     where r.store_no = #{storeNo}
 	</select>
 	
+	<!--가게 조회수 업데이트 -->
+	<update id="updateStoreSeeCnt" parameterType="int">
+	   update tb_store
+	     set see_cnt = see_cnt + 1
+	    where store_no = #{storeNo}
+	</update>
 	
-	
+	<!-- 가게의 단골가져오기 -->
+	<select id="myfrequent" parameterType="int" resultType="int">
+	select user_no 
+ 		from tb_frequent_store 
+ 		where store_no = #{storeNo}
+	</select>
 	
 </mapper>

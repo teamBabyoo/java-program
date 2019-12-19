@@ -197,7 +197,7 @@
 		</div>
 
 		<!-- 푸터 -->
-		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
+<%-- 		<%-- <c:import url="/WEB-INF/jsp/include/footer.jsp" /> --%> --%>
 
 		<!-- 팝업 백그라운드  -->
 		<div class="bgbox"></div>
@@ -258,6 +258,10 @@ $(".slick").slick(
      
   }
   );
+  
+  if(${store.status} != 1){
+	  $("#storedetail").html('<div>가입승인 대기를 기다려주세요</div>');
+  }
 
 
  

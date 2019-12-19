@@ -1,5 +1,7 @@
 package kr.co.nff.repository.vo;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -17,5 +19,8 @@ public class Notice {
 	private String fromStoreName;
 	
 	private String noticeContent;
+	
+	/*단골 유저들*/
+	private List<Integer> people;
 	
 }

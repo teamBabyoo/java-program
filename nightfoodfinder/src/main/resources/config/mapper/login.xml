@@ -183,7 +183,12 @@
 	</select>
 	
 
-	
+	<!-- 가게 조회수 올리기 -->
+	<update id="updateStoreSeeCnt" parameterType="int">
+	update tb_store
+   		set see_cnt = see_cnt+1 
+  	 where store_no = #{storeNo};
+	</update>
 	
 	
 </mapper>  

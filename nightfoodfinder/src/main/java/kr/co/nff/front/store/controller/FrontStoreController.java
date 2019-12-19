@@ -29,6 +29,7 @@ import com.google.protobuf.Field;
 
 import kr.co.nff.front.store.service.StoreService;
 import kr.co.nff.repository.vo.FileVO;
+import kr.co.nff.repository.vo.Notice;
 import kr.co.nff.repository.vo.Pagination;
 import kr.co.nff.repository.vo.Review;
 import kr.co.nff.repository.vo.Search;
@@ -79,9 +80,10 @@ public class FrontStoreController {
 		model.addAttribute("imageListSize", service.getImageCount(no));
 		model.addAttribute("imgList", service.getImage(no));
 //		System.out.println("이미지리스트"+service.getImage());
-		
+			
 		/* 파일 다운로드 하지 않으면서 그냥 경로로 가져오기 */
 //		model.addAttribute("reviewImg", service.selectOneFile(1));
+			
 	}
 	
 	/* 파일 다운로드하지 안흐면서 그냥 경로 가져오는 테스트 */
@@ -153,6 +155,16 @@ public class FrontStoreController {
 		
 		store.setMenulist(menulist);
 		service.updateMenuList(store, no);
+		
+		Notice notice = new Notice();
+		List<Integer> fList = service.myfrequent(no);
+		System.out.println("나의 단골손님 목록"+ fList);
+		notice.setPeople(fList);
+		notice.setFromStoreNo(store.getStoreNo());
+		notice.setNoticeCode("1");
+		service.insertNotice(notice);
+	
+		
 		return "redirect:storedetail.do?no="+no;
 	}
 	
@@ -260,6 +272,12 @@ public class FrontStoreController {
 		System.out.println("신고사유: " + review.getReportWhy());
 		System.out.println("가게번호: " + review.getStoreNo());
 		 */
+		Notice notice = new Notice();
+		notice.setNoticeCode("2");
+		notice.setFromStoreNo(review.getStoreNo());
+		notice.setFromUserNo(review.getUserNo());
+		notice.setUserNo(review.getWriterNo());
+		service.insertNotice(notice);
 		review.setListCnt(service.getReviewCnt(review.getStoreNo()));
 		System.out.println("좋아요페이지" + review.getPage());
 		Map<String, Object> map = new HashMap<>();
@@ -300,12 +318,11 @@ public class FrontStoreController {
 	/*단골등록*/
 	@RequestMapping("/frequent_regist.do")
 	@ResponseBody
-	public int frequentRegist(Store store){ 
-		/*
-		System.out.println("등록가게번호 : " + store.getStoreNo());
-		System.out.println("등록유저번호 : " + store.getUserNo());
-		*/
-		return service.frequentRegist(store);
+	public int frequentRegist(Store store, Notice notice){ 
+		notice.setFromUserNo(store.getUserNo());
+		notice.setStoreNo(store.getStoreNo());
+		notice.setNoticeCode("4");
+		return service.frequentRegist(store, notice);
 	};
 	
 	
@@ -395,4 +412,5 @@ public class FrontStoreController {
 		
 	}
 	
+
 }

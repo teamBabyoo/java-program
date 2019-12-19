@@ -20,10 +20,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.nff.repository.dao.FileDAO;
+import kr.co.nff.repository.dao.NoticeDAO;
 import kr.co.nff.repository.dao.StoreDAO;
 import kr.co.nff.repository.vo.FileVO;
 import kr.co.nff.repository.vo.Holiday;
 import kr.co.nff.repository.vo.Menu;
+import kr.co.nff.repository.vo.Notice;
 import kr.co.nff.repository.vo.Pagination;
 import kr.co.nff.repository.vo.Review;
 import kr.co.nff.repository.vo.Search;
@@ -42,6 +44,7 @@ public class StoreServiceImpl implements StoreService {
 	@Autowired
 	private StoreDAO dao;
 	@Autowired FileDAO fDao;
+	@Autowired NoticeDAO noticeDAO;
 	
 	// 가게 전체 리스트
 	@Override
@@ -57,6 +60,8 @@ public class StoreServiceImpl implements StoreService {
 
 	@Override
 	public Store storeDetail(int no) {
+		/*조회수 올리기*/
+		dao.updateStoreSeeCnt(no);
 		return dao.selectOneStore(no);
 	}
 
@@ -188,6 +193,7 @@ public class StoreServiceImpl implements StoreService {
 		dao.insertLike(review);
 		return dao.selectReview(review);
 	}
+	
 	//좋아요 취소
 	public List<Review> deleteLike(Review review){
 		dao.deleteLike(review);
@@ -199,8 +205,9 @@ public class StoreServiceImpl implements StoreService {
 		return dao.checkfrequent(store);
 	}
 	
-	public int frequentRegist(Store store) {
+	public int frequentRegist(Store store, Notice notice) {
 		 dao.frequentRegist(store);
+		 noticeDAO.insertNotice(notice);
 		 return dao.checkfrequent(store);
 	}
 	
@@ -245,6 +252,16 @@ public class StoreServiceImpl implements StoreService {
 	public int getImageCount(int storeNo) {
 		return dao.getImageCount(storeNo);
 	}
+	
+	
+	/*알림*/
+	public void insertNotice(Notice notice) {
+		noticeDAO.insertNotice(notice);
+	}
+	
+	public List<Integer> myfrequent(int no){
+		return dao.myfrequent(no);
+	};
 
 
 }
