@@ -10,6 +10,26 @@
 </c:import>
 <meta charset="UTF-8">
 <title>My Page</title>
+<link rel="stylesheet" href="<c:url value="/resources/css/style.css" />">
+<style>
+#mp_container {
+	margin : 0px;
+	padding-top : 20px;
+	text-align : center;	
+}
+#mp_div01 , #mp_div02 {
+	display : inline-block;
+}
+#mp_profile {
+	width: auto;
+	height: 36px;
+    position: relative;
+}
+#mp_profile span {
+	float: left;
+    margin-left: 5px;
+}
+</style>
 </head>
 <body>
 	<!-- 헤더 -->
@@ -25,7 +45,7 @@
 			<i class="fa fa-cog" aria-hidden="true"></i>닉네임수정
 			</a>
 			</span>
-			<span class="img"><!-- 프로필 이미지 영역 --></span>
+			
 		</div>
 		<div id="mp_content">
 			<div id="mp_div01">
@@ -33,14 +53,22 @@
 					<div>단골</div>
 					<div><a href="javascript:show_layer('2');">리뷰</a></div>
 				</div>
-				<div id="frequent_list"></div>
+				<div id="frequent_list">
+					<c:forEach items="${freqList}" var="f" >
+						${f.storeName} <br />
+					</c:forEach>
+				</div>
 			</div>
 			<div id="mp_div02" style="display : none">
 				<div id="mp_tab">
 					<div><a href="javascript:show_layer('1');">단골</a></div>
 					<div>리뷰</div>
 				</div>
-				<div id="myreview_list"></div>
+				<div id="myreview_list">
+					<c:forEach items="${reviewList}" var="r">
+						${r.reviewContent}	<br />
+					</c:forEach>
+				</div>
 			</div>
 		</div>
 	</div>

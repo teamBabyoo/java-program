@@ -16,24 +16,10 @@
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>  -->
 <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 
-
-<script>
-/* $(document).ready(function(){
-	var main = $('.bxslider').bxSlider({
-		mode: 'fade',
-	    captions: true,
-	    slideWidth: 300,
-		pager:true	//페이징
-	});
-  
-}); */
-</script>
-
-
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+<%-- <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/css/jquery.bxslider.css"> --%>
 </head>
 <body>
 	<div class="wrapper list_wrap">
@@ -43,7 +29,6 @@
 		<c:set var="sList" value="${result.sList}" />
 		<!-- 컨텐트  -->
 		<div class="content list_content">
-
 			<div class="leftarea">
 				<div class="listnotice">
 					<div>
@@ -58,31 +43,26 @@
 					
 			<!-- store list 부분 -->
 					<c:forEach var="s" items="${sList}" varStatus="status">
-				       	<li id="li_${status.count}" class="storeLn" data-store="${s.storeName}">
-				       		<div class="sto_li">
-					       		<a href="storedetail.do?no=${s.storeNo}" ></a>
+				       	<li id="li_${status.count}" class="storeLn sto_li clearboth" data-store="${s.storeName}">
+					        <a href="storedetail.do?no=${s.storeNo}" ></a>
+							<div>
 					       		<!-- 썸네일 사진 들어갈 div -->
-					       		<%-- 	<div class="thum" >
-					       				 <div class="thum_imgs">
-					       					<img class="imgss" src="<c:url value='/resources/images/flower.jpg' />" />
-					       					<img class="imgss" src="<c:url value='/resources/images/flower2.jpg' />" />
-					       					<img class="imgss" src="<c:url value='/resources/images/flower3.jpeg' />" />
-					       					<img class="imgss" src="<c:url value='/resources/images/flower4.jpg' />" />
-					       					<img class="imgss" src="<c:url value='/resources/images/flower5.jpg' />" />
-					       				</div>
-					       			</div>  --%>
-
-					       			
-					       			<div class="home__slider">
-										<div class="bxslider">
-					       					<img src="<c:url value='/resources/images/flower.jpg' />" />
+					       		<div class="home__slider">
+									<div class="bxslider">  
+						    				<img src="<c:url value='/resources/images/flower.jpg' />" />
 											<img src="<c:url value='/resources/images/flower2.jpg' />" />
 											<img src="<c:url value='/resources/images/flower5.jpg' />" />
-										</div>
 									</div>
-				       			<div class="sto_li_content" >
-									${s.storeName}				       			
-				       			</div>
+								</div>
+							</div>
+							<!-- 가게 리스트의 내용 부분 -->
+				       		<div class="sto_li_content" >
+								<ul>
+									<li>${s. }</li>		
+									<li>${s.storeName}</li>		
+									<li></li>		
+								</ul>
+													       			
 				       		</div>
 				       	</li>
 				    </c:forEach>
@@ -118,7 +98,7 @@
 		<!-- // 컨텐트  -->
 
 		<!-- 푸터 -->
-		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
+		<%-- <c:import url="/WEB-INF/jsp/include/footer.jsp" /> --%>
 		<!-- // 푸터 -->
 
 		<!-- 팝업 백그라운드  -->
@@ -138,11 +118,10 @@
 		<input name="keyword" type="hidden" value="${search.keyword}" />
 	</form>
 	
-	
-	<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+	<%-- <script src="<c:url value='/resources/js/jquery.bxslider.js' />"></script> --%>
+ 	<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 	<script src="<c:url value='/resources/js/storelist.js' />"></script>
 	<script src="<c:url value='/resources/js/map_in_storelist.js' />"></script>
-
 </body>
 </html>
 

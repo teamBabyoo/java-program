@@ -152,6 +152,7 @@ function makeReviewList(list){
 	console.log(reviewNoArray);
 		 */
 	
+console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
 
 		var date = new Date(r.regDate);
 		var time = date.getFullYear() + "-" 
@@ -192,8 +193,30 @@ function makeReviewList(list){
                 <li>
                     <ul>
                         <li>${r.nickName}<span>${r.regDate}</span></li>
-                        <li>${r.reviewContent}</li>    
-                    </ul>
+                        <li>${r.reviewContent}</li>`;
+						if (r.fileGroupCode != 0) {
+							html += `<li>`;
+//							console.log("r.fileGroupCode: ", r.fileGroupCode);
+							for (let i = 0; i < r.fileVoList.length; i++) {
+								let url = r.fileVoList[i].path + "/" + r.fileVoList[i].sysName;
+								url = url.replace(/\s/gi, "");
+								let fileGroupCode = r.fileGroupCode;
+//								alert(r.fileVoList[i].path);
+								html += `<div class="rv_img" style="background-image: url(` + context + `/front/store/getreviewimgsrc.do?name=${r.fileVoList[i].sysName}&path=${r.fileVoList[i].path})"></div>`;
+//								console.log(url.replace(/\s/gi, ""));
+							}
+							html += `</li>`;
+						}
+/*
+	<li>
+    	<div class="rv_img" style="background-image: url(&quot;https://jypfanscdn.azureedge.net/jype317/NOTICE_SK_20191204200507_up2.jpg&quot;)"></div>
+		<div class="rv_img" style="background-image: url(https://jypfanscdn.azureedge.net/jype317/NOTICE_SK_20191204200457_up1.jpg)"></div>
+    </li>
+*/
+				
+                            
+				html+= `
+					</ul>
                 </li>
                 <li class="clearboth">
                     <p>`;
@@ -252,8 +275,29 @@ function makeReviewList(list){
                     <li>
                         <ul>
                             <li>${r.nickName}<span>${time}</span></li>
-                            <li>${r.reviewContent}</li>    
-                        </ul>
+                            <li>${r.reviewContent}</li>`;
+						if (r.fileGroupCode != 0) {
+							html += `<li>`;
+//							console.log("r.fileGroupCode: ", r.fileGroupCode);
+							for (let i = 0; i < r.fileVoList.length; i++) {
+								let url = r.fileVoList[i].path + "/" + r.fileVoList[i].sysName;
+								url = url.replace(/\s/gi, "");
+								let fileGroupCode = r.fileGroupCode;
+//								alert(r.fileVoList[i].sysName);
+								html += `<div class="rv_img" style="background-image: url(` + context + `/front/store/getreviewimgsrc.do?name=${r.fileVoList[i].sysName}&path=${r.fileVoList[i].path})"></div>`;
+//								console.log(url.replace(/\s/gi, ""));
+							}
+							html += `</li>`;
+						}
+/*
+	<li>
+    	<div class="rv_img" style="background-image: url(&quot;https://jypfanscdn.azureedge.net/jype317/NOTICE_SK_20191204200507_up2.jpg&quot;)"></div>
+		<div class="rv_img" style="background-image: url(https://jypfanscdn.azureedge.net/jype317/NOTICE_SK_20191204200457_up1.jpg)"></div>
+    </li>
+*/
+				
+                            
+				html+= `</ul>
                     </li>
                     <li class="clearboth">`
                         if(`${r.mylikecheck}` === '0' ) {

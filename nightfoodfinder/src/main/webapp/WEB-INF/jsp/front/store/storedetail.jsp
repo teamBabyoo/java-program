@@ -214,6 +214,7 @@
 		let closeTime = '${store.closeTime}';
 		let context = '${pageContext.request.contextPath}';
 		let storeNo = '${store.storeNo}';
+		let storeName = '${store.storeName}';
 		let storeScope = "";
 		let fileGroupCode = null;
 		let userNo = '${user.userNo}';
@@ -281,5 +282,6 @@ $(".slick").slick(
 		});
 		//]]>
 	</script>
+	<script src="<c:url value='/resources/js/storage.js' />"></script>
 </body>
 </html>

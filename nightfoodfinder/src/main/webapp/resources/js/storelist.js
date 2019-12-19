@@ -2,9 +2,12 @@ $(() => {
 
 	var main = $('.bxslider').bxSlider({
 		mode: 'fade',
+		controls : true,
 	    captions: true,
 	    slideWidth: 300,
+	    slideMargin: 0,
 		pager:true	//페이징
+		
 	});
 	
 	
