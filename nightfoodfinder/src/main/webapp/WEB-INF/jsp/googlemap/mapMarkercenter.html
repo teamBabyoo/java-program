@@ -5,7 +5,7 @@
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <title>Google Maps Multiple Markers</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNCaXw_Gz4bCvZo_U7ZyPmZ-_ZCig1eoc&callback=initMap"
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSQHW_pWBrzI8-rkc4FczxQWzCSciCJS4"
     type="text/javascript"></script>
   <style>
     .container {
@@ -24,6 +24,7 @@
         <li id="li_3" class="storeLn" data-store="청석골">청석골</li>
         <li id="li_4" class="storeLn" data-store="가츠벤또">가츠벤또</li>
       </ul>
+      <div id="message"></div>
     </div>
 
 
@@ -103,6 +104,19 @@
       geocoder = new google.maps.Geocoder;
       infowindow = new google.maps.InfoWindow();
 
+      google.maps.event.addListener(map, 'click', function(event) {
+           console.log(event.latLng.toString());
+           var latLng = event.latLng.toString();
+           let ss = latLng.split('(', 2)[1];
+           let sms = ss.split(')', 2)[0];
+           let latlngStr = sms.split(',', 2);
+           let lat = latlngStr[0];
+           let lng = latlngStr[1];
+           let lngg = lng.replace(/\s/gi, "");
+           console.log("lat", lat);
+           codeLatLng(lat, lngg);
+      });
+
       //마커 뿌려주기
       var i;
 
@@ -126,67 +140,6 @@
           }
         })(marker, i));
 
-        /*지도상 누른 좌표값 받기*/
-        google.maps.event.addListener(map, 'click', function(event) {
-          console.log(event.latLng.toString());
-          var latLng = event.latLng.toString();
-          let latlngStr = latLng.split(',', 2);
-          let lat = latlngStr[0];
-          let lng = latlngStr[1];
-          codeLatLng(lat, lng);
-        });
-
-                         
-    function codeLatLng(lat, lng) {
-    var latlng = new google.maps.LatLng(lat, lng);
-    geocoder.geocode({'latLng': latlng}, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-      //console.log(results);
-        if (results[1]) {
-        var indice=0;
-        for (var j=0; j<results.length; j++)
-        {
-            if (results[j].types[0]=='locality')
-                {
-                    indice=j;
-                    break;
-                }
-            }
-        alert('The good number is: '+j);
-        console.log(results[j]);
-        for (var i=0; i<results[j].address_components.length; i++)
-            {
-                if (results[j].address_components[i].types[0] == "locality") {
-                        //this is the object you are looking for City
-                        city = results[j].address_components[i];
-                    }
-                if (results[j].address_components[i].types[0] == "administrative_area_level_1") {
-                        //this is the object you are looking for State
-                        region = results[j].address_components[i];
-                    }
-                if (results[j].address_components[i].types[0] == "country") {
-                        //this is the object you are looking for
-                        country = results[j].address_components[i];
-                    }
-            }
-
-            //city data
-            alert(city.long_name + " || " + region.long_name + " || " + country.short_name)
-
-
-            } else {
-              alert("No results found");
-            }
-        //}
-      } else {
-        alert("Geocoder failed due to: " + status);
-      }
-    });
-  }
-
-
-
-
         if (marker) {
           marker.addListener('click', function () {
             map.setZoom(15);
@@ -197,6 +150,46 @@
       }
     };
     drawMap();
+    /*지도상 누른 좌표값 받기*/
+ function codeLatLng(lat, lng) {
+   console.log("코드", lat, lng);
+    geocode =
+    "https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&key=AIzaSyCSQHW_pWBrzI8-rkc4FczxQWzCSciCJS4";
+    jQuery.ajax({
+        url: geocode,
+        type: 'POST',
+           success: function(myJSONResult){
+                    if(myJSONResult.status == 'OK') {
+                        var tag = "";
+                        let addr = "";
+                        var i;
+                        for (i = 0; i < myJSONResult.results.length; i++) {
+                          /*누른 좌표의 상세주소*/
+                          addr = myJSONResult.results[0].formatted_address;
+                          /*
+                          tag += "주소 : " +myJSONResult.results[i].formatted_address+" <br />";
+                          tag += "위도 : " +myJSONResult.results[i].geometry.location.lat+" <br />";
+                          tag += "경도 : " +myJSONResult.results[i].geometry.location.lng+" <br />";
+                          */
+                        }
+                        document.getElementById("message").innerHTML = addr;
+                    } else if(myJSONResult.status == 'ZERO_RESULTS') {
+                        alert("지오코딩이 성공했지만 반환된 결과가 없음을 나타냅니다.\n\n이는 지오코딩이 존재하지 않는 address 또는 원격 지역의 latlng을 전달받는 경우 발생할 수 있습니다.")
+                    } else if(myJSONResult.status == 'OVER_QUERY_LIMIT') {
+                        alert("할당량이 초과되었습니다.");
+                    } else if(myJSONResult.status == 'REQUEST_DENIED') {
+                        alert("요청이 거부되었습니다.\n\n대부분의 경우 sensor 매개변수가 없기 때문입니다.");
+                    } else if(myJSONResult.status == 'INVALID_REQUEST') {
+                        alert("일반적으로 쿼리(address 또는 latlng)가 누락되었음을 나타냅니다.");
+                    }
+            }
+          
+    });
+   }
+
+   
+
+
   </script>
 </body>
 
