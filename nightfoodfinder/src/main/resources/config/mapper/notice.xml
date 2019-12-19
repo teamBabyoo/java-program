@@ -16,7 +16,7 @@
 			<!-- user의 리뷰를 다른 user가 '좋아요' 했을 때 -->
 			<when test="noticeCode == 2">
 				user_no, notice_code, from_user_no, from_store_no
-				) values (
+				) values (               <!-- 다른 유저 --> <!-- 리뷰가있는 스토어 -->
 				#{userNo}, #{noticeCode}, #{fromUserNo}, #{fromStoreNo}
 				)
 			</when>

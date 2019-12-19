@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class Notice {
 	private int noticeNo;
-	private int userNo;
+	private int userNo; // 사용자
 	private int storeNo;
 	private String regDate;
 	private String noticeCode;
