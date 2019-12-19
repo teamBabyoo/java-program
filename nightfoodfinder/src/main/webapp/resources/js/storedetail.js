@@ -384,13 +384,15 @@ console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
 function reposition() {
 	let $height_header = $('header').height();
 	let $height_content = $('.content').height();
+	let $height_wrapper = $('.wrapper').height();
 	let $top_footer = $('footer').offset().top;
 	let $height_leave_rv = $('.leave_rv').height
 //	console.log('$height_content', $height_content);
 //	console.log('$height_header ->', $height_header);
 //	console.log('$top_footer ->', $top_footer);
-	$('footer').css('top', $height_header + $height_content + $height_leave_rv);
-	$('footer').css('top', $height_header + $height_content);
+//	$('footer').css('top', $height_header + $height_content + $height_leave_rv);
+	$('footer').css('bottom', -($height_wrapper));
+	console.log("$height_wrapper~!! ", $height_wrapper);
 }
 
 
