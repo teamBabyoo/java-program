@@ -27,8 +27,24 @@
 		<collection property="holidayList" column="store_no"
 			select="selectHolidayListByStoreNo" />
 	</resultMap>
+	
+	<!-- resultMap (리뷰에 파일리스트 조회) -->
+	<resultMap type="Review" id="reviewMap" >
+		<result column="review_no" property="reviewNo" />
+		<result column="store_no" property="storeNo" />
+		<result column="writer_no" property="writerNo" />
+		<result column="review_content" property="reviewContent" />
+		<result column="reg_date" property="regDate" />
+		<result column="store_scope" property="storeScope" />
+		<result column="file_group_code" property="fileGroupCode" />
+		<result column="status" property="status" />
+		<result column="recomment" property="recomment" />
+		<result column="recomment_reg_date" property="reCommentRegDate" />
+		
+		<collection property="fileVoList" column="file_group_code" select="selectFileListByCode" />
+	</resultMap>
 
-	<!-- collection이 호출하는 selet -->
+	<!-- store collection이 호출하는 select -->
 	<select id="selectHolidayListByStoreNo" parameterType="int"
 		resultType="Holiday">
 		select w.week_name, h.week_no
@@ -38,6 +54,13 @@
 		where store_no = #{store_no}
 	</select>
 
+	<!-- review collection이 호출하는 select -->
+	<select id="selectFileListByCode" parameterType="int" resultType="FileVO">
+		select * 
+		  from tb_file
+		 where file_group_code = #{file_group_code}
+	</select>
+	
 	<!-- 메인에 표시할 가게 상세정보 리스트 -->
 	<select id="mainStoreList" resultMap="storeMap">
 		select distinct s.*,
@@ -236,7 +259,7 @@
 	<select id="storeList" resultType="Store" parameterType="Search">
 		select distinct s.*,
 			   a.*,
-			   c.category_name as category,
+			   c.category_name,
 			   ifnull(round(s.store_scope_total / s.review_cnt_total, 1), 0) scope
 		<include refid="commonStoreList" />
 		<choose>
@@ -412,7 +435,7 @@
 	<!-- 댓글 -->
 	<!-- 댓글 리스트 -->
 
-	<select id="selectReview" parameterType="Review" resultType="Review">
+	<select id="selectReview" parameterType="Review" resultMap="reviewMap">
 		<!-- select '1' as type, r.review_no, r.user_no, u.nick_name, r.review_content, 
 			r.reg_date, r.store_scope, ifnull(l.iloveyou, 0) as likeCount from tb_review 
 			as r inner join tb_user as u on r.user_no = u.user_no inner join ( select 
@@ -455,6 +478,7 @@
 				r.store_scope,
 				r.recomment,
 				r.recomment_reg_date,
+				r.file_group_code,
 				ifnull(l.likeit, 0) as good,
                 ifnull(li.store_review_no,0) as mylikecheck
 		from tb_review r

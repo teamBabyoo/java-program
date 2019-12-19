@@ -1,7 +1,13 @@
 package kr.co.nff.front.store.service;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import kr.co.nff.repository.vo.FileVO;
 import kr.co.nff.repository.vo.Holiday;
@@ -36,8 +42,10 @@ public interface StoreService {
 	// 리뷰 등록 & 이미지 업로드
 	public List<Review> reviewRegist(Review review, boolean fileFlag) throws Exception;
 	// 리뷰 이미지 가져오기
-	public List<FileVO> selectFileList(int reviewNo);
-	
+//	public List<FileVO> selectFileList(int reviewNo);
+	// 리뷰 이미지
+	public List<FileVO> selectFileList(HttpServletRequest req, HttpServletResponse res, Review review) throws UnsupportedEncodingException, FileNotFoundException, IOException;
+
 	//리뷰신고
 	public List<Review> reviewReport(Review review);
 	
@@ -73,6 +81,5 @@ public interface StoreService {
 	public List<FileVO> getImage(int no);
 	
 	public int getImageCount(int storeNo);
-
 }
 
