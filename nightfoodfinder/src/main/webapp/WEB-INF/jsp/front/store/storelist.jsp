@@ -58,8 +58,8 @@
 							<!-- 가게 리스트의 내용 부분 -->
 				       		<div class="sto_li_content" >
 								<ul>
-									<li>${s. }</li>		
-									<li>${s.storeName}</li>		
+									<li>${s.categoryName}</li>		
+									<li><h2>${s.storeName}</h2></li>		
 									<li></li>		
 								</ul>
 													       			
