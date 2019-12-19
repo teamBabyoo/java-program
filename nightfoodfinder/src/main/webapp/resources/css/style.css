@@ -258,8 +258,8 @@ table.reply_content {
 	border: 1px solid #DBDBDB;
 	border-radius: 10px;
   	height: 100px;
-  	/* margin-left: 90px; */
-  	margin-bottom: 20px;
+	position: relative;
+    bottom: 10px;
   	table-layout: fixed;
 }
 table.reply_content tr td:nth-child(1) {
@@ -303,13 +303,16 @@ button.modRecomment {
 }
 
 .reply_form {
-	border: 1px solid black;
+	border: 1px solid darkgray;
 	border-radius: 10px;
   	height: 100px;
-  	margin-left: 90px;
-  	margin-bottom: 20px;
+  	position: relative;
+    left: 45px;
+    bottom: 10px;
+    width: 85%;
   	resize: vertical;
 }
+
 
 .reply_form tr td:nth-child(1) {
 	width: 85%;
