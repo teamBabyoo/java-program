@@ -31,14 +31,15 @@
       
       <nav role="navigation">
         <ul class="main">
-          <li class="member"><a href="#">회원관리</a></li>
-          <li class="store"><a href="#">가게관리</a></li>
-          <li class="review"><a href="#">리뷰관리</a>
-            <ul>
-                <li><a class="review_all" href="#">전체리뷰</a></li>
-                <li><a class="review_report" href="#">신고리뷰</a></li>
-            </ul>
-        </li>
+          <li class="member"><a href="${pageContext.request.contextPath}/admin/user/userlist.do">회원관리</a></li>
+			<li class="store"><a href="${pageContext.request.contextPath}/admin/store/storelist.do">가게관리</a></li>
+          <li class="stat"><a
+				href="${pageContext.request.contextPath}/admin/stat/statlist.do">통계관리</a></li>
+			<li class="review"><a href="#">리뷰관리</a>
+				<ul>
+					<li><a class="review_all" href="${pageContext.request.contextPath}/admin/review/reviewlist.do">전체리뷰</a></li>
+					<li><a class="review_report" href="${pageContext.request.contextPath}/admin/review/reportedreviewlist.do">신고리뷰</a></li>
+				</ul></li>
 
         </ul>
       </nav>
@@ -66,8 +67,8 @@
             <tr>
               <td>${visitorList.totalVisit}</td>
               <td>${visitorList.todayVisit}</td>
-              <td>${countJoinUser.totalUser} / ${countJoinUser.todayUser }</td>
-              <td>${countJoinStore.totalStore } / ${countJoinStore.todayStore }</td>
+              <td>${countJoinUser.todayUser} / ${countJoinUser.totalUser }</td>
+              <td>${countJoinStore.todayStore } / ${countJoinStore.totalStore }</td>
       	</tr>
 
       	<script>
