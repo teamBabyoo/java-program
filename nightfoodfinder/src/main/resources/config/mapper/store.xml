@@ -61,6 +61,7 @@
 		 where file_group_code = #{file_group_code}
 	</select>
 	
+	
 	<!-- 메인에 표시할 가게 상세정보 리스트 -->
 	<select id="mainStoreList" resultMap="storeMap">
 		select distinct s.*,
@@ -281,7 +282,6 @@
 	<select id="storeList" resultType="Store" parameterType="Search">
 		select distinct s.*,
 			   a.*,
-			   m.*,
 			   p.price_type,
 			   c.category_name,
 			   ifnull(round(s.store_scope_total / s.review_cnt_total, 1), 0) scope

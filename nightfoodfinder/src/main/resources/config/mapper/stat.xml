@@ -25,7 +25,7 @@
     on f.store_no = st
     group by f.store_no
     order by fqCount desc
-    limit 10;
+    limit 10
 	</select>
 	
 	<select id="statMaleFrequentStore" parameterType="Search"
@@ -42,7 +42,7 @@
       on f.store_no = st
     group by f.store_no
     order by fqCount desc
-    limit 10;
+    limit 10
 	</select>
 
 	<select id="statFemaleFrequentStore" parameterType="Search"
@@ -59,7 +59,7 @@
       on f.store_no = st
     group by f.store_no
     order by fqCount desc
-    limit 10;
+    limit 10
     	</select>
 
 <!-- <insert id="insertAward" parameterType="Search">

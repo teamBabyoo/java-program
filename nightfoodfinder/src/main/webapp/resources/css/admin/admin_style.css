@@ -669,6 +669,13 @@ tspan {
     font-size: 15px;
 }
 
+.show_graph {
+	display : block;
+}
+
+.hidden_graph {
+	display : none;
+}
   /*승경 시작*/
 
   th.choice {
@@ -695,7 +702,7 @@ input#keyword {
     position: relative;
     bottom: 1px;
 }
-.searchcnt {
+.searchcnt-review {
     position: relative;
     left: 11%;
     bottom: 63px;
@@ -708,7 +715,7 @@ input#keyword {
     top: 15px;
 }
 
-label {
+div.allCheck label {
     font-size: 13px;
     position: relative;
     bottom: 12px;
@@ -755,6 +762,20 @@ label {
 .reComment {
 	display: none
 }
+
+
+
+/*신고리뷰*/
+
+/*모달 페이징*/
+	li.page-item_two {
+		display: inline-block;
+		border: #aaaaaa 1px solid;
+	}
+	ul.pagination_two {
+		text-align: center;
+	}
+
 
 
 
