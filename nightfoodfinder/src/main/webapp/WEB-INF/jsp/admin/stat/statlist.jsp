@@ -22,34 +22,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
-	<header role="banner">
-		<h1>Admin Panel</h1>
-		<ul class="utilities">
-			<li class="users"><a href="#">My Account</a></li>
-			<li class="logout warn"><a
-				href="${pageContext.request.contextPath}/front/main/main.do">Log
-					Out</a></li>
-		</ul>
-	</header>
-	<nav role="navigation">
-		<ul class="main">
-			<li class="member"><a
-				href="${pageContext.request.contextPath}/admin/user/userlist.do">회원관리</a></li>
-			<li class="store"><a
-				href="${pageContext.request.contextPath}/admin/store/storelist.do">가게관리</a></li>
-			<li class="stat"><a
-				href="${pageContext.request.contextPath}/admin/stat/statlist.do">통계관리</a></li>
-			<li class="review"><a href="#">리뷰관리</a>
-				<ul>
-					<li><a class="review_all"
-						href="${pageContext.request.contextPath}/admin/review/reviewlist.do">전체리뷰</a></li>
-					<li><a class="review_report" href="#">신고리뷰</a></li>
-				</ul></li>
-
-
-		</ul>
-	</nav>
-
+	    <c:import url="/WEB-INF/jsp/include/adminsidemenu.jsp" />
 	<main role="main">
 
 
@@ -88,10 +61,15 @@
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
 <figure class="highcharts-figure">
-    <div id="chartcontainer-1"></div>
-    <div id="chartcontainer-2"></div>
-    <div id="chartcontainer-3"></div>
+<c:forEach var="i" begin="1" end="3" step="1">
+    <br/>				
+    <br/>	
+		<%-- <span class="button"><a href="insertAward.do?genderType=${i}&userAge=${search.userAge}">award 등록</a></span> --%>
+    <div id="chartcontainer-${i}"></div>	
+							</c:forEach>
+
 </figure>
+
 <script>
 function fnMove(seq){
     var offset = $("#chartcontainer-" + seq).offset();

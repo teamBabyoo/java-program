@@ -31,6 +31,9 @@ public class Search extends Pagination {
 	
 	private int storeNo;
 	private int userNo;
+	
+	private String userGender;
+	private int genderType;
 
 	
 	// 리스트 정렬

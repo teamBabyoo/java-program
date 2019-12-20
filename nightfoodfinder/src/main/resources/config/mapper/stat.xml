@@ -24,7 +24,8 @@
     ) freCnt
     on f.store_no = st
     group by f.store_no
-    order by fqCount desc;
+    order by fqCount desc
+    limit 10;
 	</select>
 	
 	<select id="statMaleFrequentStore" parameterType="Search"
@@ -40,7 +41,8 @@
     ) male
       on f.store_no = st
     group by f.store_no
-    order by fqCount desc;
+    order by fqCount desc
+    limit 10;
 	</select>
 
 	<select id="statFemaleFrequentStore" parameterType="Search"
@@ -56,10 +58,21 @@
     ) female
       on f.store_no = st
     group by f.store_no
-    order by fqCount desc;
+    order by fqCount desc
+    limit 10;
     	</select>
 
+<!-- <insert id="insertAward" parameterType="Search">
+INSERT INTO tb_award 
+(user_gender, user_age, reg_date) 
+VALUES (#{userGender}, #{userAge}, NOW());
+</insert>
 
+<delete id="deleteAward" parameterType="Search">
+DELETE FROM tb_award 
+WHERE user_gender = #{userGender} 
+and user_age = #{userAge};
+</delete> -->
 
 	<!-- 연령별 필터 -->
 		<sql id="statAgeFilter">
