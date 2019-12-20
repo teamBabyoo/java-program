@@ -668,3 +668,11 @@ td {
 tspan {
     font-size: 15px;
 }
+
+.show_graph {
+	display : block;
+}
+
+.hidden_graph {
+	display : none;
+}
