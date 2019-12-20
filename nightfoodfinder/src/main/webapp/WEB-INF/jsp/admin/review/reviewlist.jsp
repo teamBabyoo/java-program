@@ -11,54 +11,7 @@
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/admin/font-awesome.min.css" />">
 <link rel="stylesheet"
-	href="<c:url value="/resources/css/admin/style.css" />">
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/admin/admin_style.css" />">
-
-
-<style type="text/css">
-/* The Modal (background) */
-.modal {
-	display: none; /* Hidden by default */
-	position: fixed; /* Stay in place */
-	z-index: 1; /* Sit on top */
-	left: 0;
-	top: 0;
-	width: 100%; /* Full width */
-	height: 100%; /* Full height */
-	overflow: auto; /* Enable scroll if needed */
-	background-color: rgb(0, 0, 0); /* Fallback color */
-	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-}
-
-/* 모달 내용/팝업박스  */
-.modal-content {
-	background-color: #fefefe;
-	margin: 15% auto; /* 15% from the top and centered */
-	padding: 20px;
-	border: 1px solid #888;
-	width: 50%; /* Could be more or less, depending on screen size */
-}
-/* 닫기 버튼 */
-.close {
-	color: #aaa;
-	float: right;
-	font-size: 28px;
-	font-weight: bold;
-}
-
-.close:hover, .close:focus {
-	color: black;
-	text-decoration: none;
-	cursor: pointer;
-}
-/* 모달에 들어가는 사장님 답변 : 리스트에서는 안보이게 하고 모달팝업 띄웠을 때 보이게 하기 위해서 */
-.reComment {
-	display: none
-}
-
-
-</style>
+	href="<c:url value="/resources/css/admin/admin_style.css" />"> 
 
 
 <script
@@ -97,8 +50,8 @@
 	<section class="panel ">
 		<h2>전체 리뷰</h2>
 	<!---------- 서치 ---------->
-				<div class="form-group row justify-content-center">
-						<select class="form-control form-control-sm" name="searchType" id="searchType">
+				<div class="search-form">
+						<select class="search-form-select" name="searchType" id="searchType">
 							<c:choose>
 								<c:when test="${pagination.type eq 'storeName'}">
 									<option value="nickName">닉네임</option>
@@ -110,7 +63,7 @@
 								</c:otherwise>
 							</c:choose>
 						</select>
-						<input type="text" class="form-control form-control-sm"
+						<input type="text" class="search-text"
 							name="keyword" id="keyword" value="${pagination.keyword}">
 						<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button>
 						<button class="back" name="backList" id="backList"
@@ -119,7 +72,7 @@
 			<!---------- 서치 끝 --------->
 
 			<div class="searchcnt">전체 : ${pagination.listCnt}개</div>
-		<table>
+		<table id="review-table">
 			
 			<li>
 				<div class="allCheck">
@@ -130,7 +83,7 @@
 
 			
 			<tr>
-				<th class="choicee">선택</th>
+				<th class="choice">선택</th>
 				<th>닉네임</th>
 				<th>가게 이름</th>
 				<th>리뷰</th>

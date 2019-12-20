@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import kr.co.nff.repository.dao.StatDAO;
 import kr.co.nff.repository.vo.Search;
 import kr.co.nff.repository.vo.Stat;
+import kr.co.nff.repository.vo.User;
 
 @Service("kr.co.nff.admin.stat.service.StatServiceImpl")
 public class StatServiceImpl implements StatService{
@@ -100,6 +101,21 @@ public class StatServiceImpl implements StatService{
 		return statMap;
 	}
 
+	
+//	@Override
+//	public void insertAward(Search search) {
+//		switch(search.getGenderType()) {
+//		case 1: search.setUserGender("전체");
+//		break;
+//		case 2: search.setUserGender("여자");
+//		break;
+//		case 3: search.setUserGender("남자");
+//		break;
+//		}
+//		dao.deleteAward(search);
+//		dao.insertAward(search);
+//	}
+//	
 	@Override
 	public void insertVisitor(Stat stat) {
 		dao.insertVisitor(stat);

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import kr.co.nff.repository.vo.Search;
 import kr.co.nff.repository.vo.Stat;
+import kr.co.nff.repository.vo.User;
 
 public interface StatService {
 	
@@ -15,4 +16,5 @@ public interface StatService {
 	List<Stat> countByDate();
 	Stat countJoinUser();
 	Stat countJoinStore();
+//	void insertAward(Search search);
 }
