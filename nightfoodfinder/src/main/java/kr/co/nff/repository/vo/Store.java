@@ -30,7 +30,7 @@ public class Store  {
 	private String[] menuName;
 	private int[] menuPrice;
 	//private int[] price;
-	private int priceType; // 가격대
+	private int priceTypeNo;
 	private int seeCnt;
 	
 	private String weekName;
@@ -50,6 +50,8 @@ public class Store  {
 	private double scope;
 	// 스토어 카테고리
 	private String category;
+	// 가격 타입 (1만원 미만..등)
+	private String priceType;
 	
 	// ↙ 콜렉션 (메인페이지 리스트에서 사용)
 	private List<Holiday> holidayList;

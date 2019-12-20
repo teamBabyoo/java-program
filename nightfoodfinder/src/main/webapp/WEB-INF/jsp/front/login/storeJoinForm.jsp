@@ -123,7 +123,7 @@
 						<tr>
 							<th>가격대</th>
 							<td>
-								<select name="priceType">
+								<select name="priceTypeNo">
 									<option value="1">1만원대</option>
 									<option value="2">2만원대</option>
 									<option value="3">3만원대</option>

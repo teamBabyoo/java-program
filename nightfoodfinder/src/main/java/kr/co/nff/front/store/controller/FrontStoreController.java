@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,10 +24,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.google.protobuf.Field;
-
 import kr.co.nff.front.store.service.StoreService;
 import kr.co.nff.repository.vo.FileVO;
+import kr.co.nff.repository.vo.Notice;
 import kr.co.nff.repository.vo.Pagination;
 import kr.co.nff.repository.vo.Review;
 import kr.co.nff.repository.vo.Search;
@@ -79,15 +77,16 @@ public class FrontStoreController {
 		model.addAttribute("imageListSize", service.getImageCount(no));
 		model.addAttribute("imgList", service.getImage(no));
 //		System.out.println("이미지리스트"+service.getImage());
-		
+			
 		/* 파일 다운로드 하지 않으면서 그냥 경로로 가져오기 */
 //		model.addAttribute("reviewImg", service.selectOneFile(1));
+			
 	}
 	
 	/* 파일 다운로드하지 안흐면서 그냥 경로 가져오는 테스트 */
 	@RequestMapping("/getreviewimgsrc.do")
 	public void getreviewimgsrc(HttpServletRequest req, HttpServletResponse res, Review review) throws ServletException, IOException {
-		System.out.println("이미지 경로 확인하기 요청 성공");
+//		System.out.println("이미지 경로 확인하기 요청 성공");
 		int fileGroupCode = review.getFileGroupCode();
 //		System.out.println(service.selectFileList(fileGroupCode));
 		
@@ -153,6 +152,16 @@ public class FrontStoreController {
 		
 		store.setMenulist(menulist);
 		service.updateMenuList(store, no);
+		
+		Notice notice = new Notice();
+		List<Integer> fList = service.myfrequent(no);
+		System.out.println("나의 단골손님 목록"+ fList);
+		notice.setPeople(fList);
+		notice.setFromStoreNo(store.getStoreNo());
+		notice.setNoticeCode("1");
+		service.insertNotice(notice);
+	
+		
 		return "redirect:storedetail.do?no="+no;
 	}
 	
@@ -219,26 +228,29 @@ public class FrontStoreController {
 	/* 리뷰 작성 & 이미지 업로드 */
 	@RequestMapping("/review_regist.do")
 	public String reviewRegist(Review review) throws Exception, IOException {
+		int storeNo = review.getStoreNo();
+		Store store = service.storeDetail(storeNo);
 		
+		Map<String, Object> map = new HashMap<>();
+		map.put("review", review);
+		map.put("storeno", storeNo);
+		map.put("exiscope", store.getStoreScopeTotal());
+		map.put("curtcnt", store.getReviewCntTotal());
+		
+		// 파일 유무 체크
 		boolean fileFlag = true;
-		
 		for (MultipartFile mf : review.getAttach()) {
 			if (mf.getContentType().equals("application/octet-stream")) {
-//				System.out.println("파일 첨부");
 				fileFlag = false;
 			};
-//			System.out.println("파일첨부X");
 		}
-		System.out.println(fileFlag);
-		
-		service.reviewRegist(review, fileFlag);
-		
-//		System.out.println(review.getAttach().size());
-//		List<MultipartFile> list = new ArrayList<>();
-		//--------------------------------------------
-		
-		//--------------------------------------------
-		
+//		System.out.println(fileFlag);
+//		service.reviewRegist(review, fileFlag);
+		int result = service.reviewRegist(review, fileFlag);
+		if (result == 1) {	// 등록 성공하여 영향받은 행의 개수 1이 반환되었다면
+			// map이 준비되면 store테이블을 업데이트한다
+			service.updateStoreByReview(map);
+		}
         return "redirect:storedetail.do?no=" + review.getStoreNo();
 	}
 	
@@ -260,6 +272,12 @@ public class FrontStoreController {
 		System.out.println("신고사유: " + review.getReportWhy());
 		System.out.println("가게번호: " + review.getStoreNo());
 		 */
+		Notice notice = new Notice();
+		notice.setNoticeCode("2");
+		notice.setFromStoreNo(review.getStoreNo());
+		notice.setFromUserNo(review.getUserNo());
+		notice.setUserNo(review.getWriterNo());
+		service.insertNotice(notice);
 		review.setListCnt(service.getReviewCnt(review.getStoreNo()));
 		System.out.println("좋아요페이지" + review.getPage());
 		Map<String, Object> map = new HashMap<>();
@@ -300,12 +318,11 @@ public class FrontStoreController {
 	/*단골등록*/
 	@RequestMapping("/frequent_regist.do")
 	@ResponseBody
-	public int frequentRegist(Store store){ 
-		/*
-		System.out.println("등록가게번호 : " + store.getStoreNo());
-		System.out.println("등록유저번호 : " + store.getUserNo());
-		*/
-		return service.frequentRegist(store);
+	public int frequentRegist(Store store, Notice notice){ 
+		notice.setFromUserNo(store.getUserNo());
+		notice.setStoreNo(store.getStoreNo());
+		notice.setNoticeCode("4");
+		return service.frequentRegist(store, notice);
 	};
 	
 	
@@ -395,4 +412,5 @@ public class FrontStoreController {
 		
 	}
 	
+
 }

@@ -81,20 +81,7 @@ function animateValue(id, start, end, duration) {
     }, stepTime);
 }
 animateValue("scopescore", 0, scope, 100);
-    /*
-	let close = closeTime.split(":");
-	let closehour = '';
-	if(close[0] >= 24 && close[0] <= 36) {
-		closehour *= 1;
-		closehour = close[0] - 24;
-		closehour += "";
-		closehour = "0"+closehour;
-	}
-	closeTime = closehour+":"+close[0];
-	console.log(closeTime);
-	
-	$("#operatingtime").html(openTime +" ~ " +closeTime);
-*/
+
 	
 //리뷰 리스트 가져오는 에이작스 	
 function reviewListAjax() {
@@ -222,7 +209,7 @@ console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
                     <p>`;
 			
 			if(`${r.mylikecheck}` === '0' ) {
-				html += `<img class="heartclick" data-rno="${r.reviewNo}" src="` + context + `/resources/images/empty_hrt.png" />`;
+				html += `<img class="heartclick" data-rno="${r.reviewNo}" data-writer="${r.writerNo}" src="` + context + `/resources/images/empty_hrt.png" />`;
 			} else {
 				html += `<img class="heartclick" data-rno="${r.reviewNo}" src="` + context + `/resources/images/icon_hrt.png" />`;
 			}
@@ -236,7 +223,30 @@ console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
 			// 답글 내용
 			if (r.recomment != null) {
 				html += `
-				<table>
+				<div class="reply clearboth">
+				<table class="reply_content">
+				<i class="fa fa-reply fa-rotate-180 fa-4x" aria-hidden="true"></i>
+					<tr id="row${r.reviewNo}">
+					<td>
+					<ul>
+					<li>사장님 답글</li>
+					<li>${r.reCommentRegDate}</li>
+					</ul>
+					</td>
+					<td><li>${r.recomment}</li></td>
+					<td><button type="button" data-no="${r.reviewNo}" class="delRecomment">삭제</button>	
+						<button type="button" data-no="${r.reviewNo}" class="modRecomment">수정</button>	
+					</td>
+					</tr>
+					</table>
+					</div>`;
+			}
+			
+			/**
+			 * 			// 답글 내용
+			if (r.recomment != null) {
+				html += `
+				<table class="reply_content">
 					<tr id="row${r.reviewNo}">
 					<td>${r.recomment}</td>
 					<td>${r.reCommentRegDate}</td>
@@ -246,6 +256,10 @@ console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
 					</tr>
 					</table>`;
 			}
+			 * 
+			 * 
+			 * 
+			 * */
 			
 			// 답글 등록 폼
 			html += `<div id="bossComment${r.reviewNo}" class="bossComment" data-rno="${r.reviewNo}">
@@ -301,7 +315,7 @@ console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
                     </li>
                     <li class="clearboth">`
                         if(`${r.mylikecheck}` === '0' ) {
-							html += `<img class="heartclick" data-rno="${r.reviewNo}" src="` + context + `/resources/images/empty_hrt.png" />`;
+							html += `<img class="heartclick" data-rno="${r.reviewNo}" data-writer="${r.writerNo}" src="` + context + `/resources/images/empty_hrt.png" />`;
 						} else {
 							html += `<img class="heartclick" data-rno="${r.reviewNo}" src="` + context + `/resources/images/icon_hrt.png" />`;
 						}
@@ -313,15 +327,23 @@ console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
 			// 답글 내용
             if (r.recomment != null) {
 				html += `
-					<table>
+				<div class="reply clearboth">
+				<table class="reply_content">
+				<i class="fa fa-reply fa-rotate-180 fa-4x" aria-hidden="true"></i>
 					<tr id="row${r.reviewNo}">
-					<td>${r.recomment}</td>
-					<td>${r.reCommentRegDate}</td>
+					<td>
+					<ul>
+					<li>사장님 답글</li>
+					<li>${r.reCommentRegDate}</li>
+					</ul>
+					</td>
+					<td><li>${r.recomment}</li></td>
 					<td><button type="button" data-no="${r.reviewNo}" class="delRecomment">삭제</button>	
 						<button type="button" data-no="${r.reviewNo}" class="modRecomment">수정</button>	
 					</td>
 					</tr>
-					</table>`;
+					</table>
+					</div>`;
 			}
 	        
 	        	
@@ -384,13 +406,14 @@ console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
 function reposition() {
 	let $height_header = $('header').height();
 	let $height_content = $('.content').height();
+	let $height_wrapper = $('.wrapper').height();
 	let $top_footer = $('footer').offset().top;
 	let $height_leave_rv = $('.leave_rv').height
 //	console.log('$height_content', $height_content);
 //	console.log('$height_header ->', $height_header);
 //	console.log('$top_footer ->', $top_footer);
-	$('footer').css('top', $height_header + $height_content + $height_leave_rv);
-	$('footer').css('top', $height_header + $height_content);
+//	$('footer').css('top', $height_header + $height_content + $height_leave_rv);
+	$('footer').css('bottom', -($height_wrapper));
 }
 
 
@@ -616,9 +639,13 @@ function reviewReport(count, rNo, page) {
 };
 	
 $(document).on('click', '.heartclick', function(e){	
-	 
+	 if(userNo === 0){
+		 alert("로그인 후 이용가능합니다");
+		 return false;
+	 }
 //	console.log(rno);
-	console.log($(e.target).attr('data-rno'));
+	console.log("리뷰번호", $(e.target).attr('data-rno'));
+	console.log("리뷰글쓴이", $(e.target).attr('data-writer'));
 	console.log("src : ", $(e.target).attr('src'));
 	let page = $(".page-item.active a").attr("data-page");
 	let heart = "/nightfoodfinder/resources/images/icon_hrt.png";
@@ -629,7 +656,8 @@ $(document).on('click', '.heartclick', function(e){
 			data: {userNo,
 				storeNo,
 				page,
-				reviewNo: $(e.target).attr('data-rno')},
+				reviewNo: $(e.target).attr('data-rno')
+				},
 				dataType: "json",
 				success: (list) => makeReviewList(list)
 		});
@@ -641,7 +669,9 @@ $(document).on('click', '.heartclick', function(e){
 			data: {userNo,
 				storeNo,
 				page,
-				reviewNo: $(e.target).attr('data-rno')},
+				writerNo: $(e.target).attr('data-writer'),
+				reviewNo: $(e.target).attr('data-rno')
+				},
 				dataType: "json",
 				success: (list) => makeReviewList(list)
 		});
@@ -667,11 +697,13 @@ function makeform(a) {
 	
 	$("#bossComment" + rno).append(
 		`<form id="bossCForm" method="post" action="recomment_regist.do">
-		<table>
+		<table class="reply_form">
 		<tr id="bossform" data-rno="${rno}">
 		<td>
 		<div>
-		<textarea id="bossContent" class="bossContent" ></textarea>
+		<textarea id="bossContent" class="bossContent" onKeyUp="fnChkByte(this,'400')" placeholder="최대 200자(400바이트)까지 입력 가능합니다."></textarea>
+		<br />
+		<span id="counter">0</span><span id="countertwo"> / 400bytes</span>
 		</div>
 		</td>
 		<td colspan="2"> 
@@ -684,6 +716,41 @@ function makeform(a) {
             </tr>
             </table> </form>`
 		);
+}
+
+// 답글 등록 폼 글자수 제한
+
+function fnChkByte(obj, maxByte) {
+    var content = obj.value;
+    var content_len = content.length;
+    var rbyte = 0;
+    var rlen = 0;
+    var one_char = "";
+    var content2 = "";
+
+    for(var i=0; i<content_len; i++) {
+        one_char = content.charAt(i);
+        if(escape(one_char).length > 4) {
+        	rbyte += 2; }                                     //한글2Byte
+        else {
+            rbyte++; }                                       //영문 등 나머지 1Byte
+
+        if(rbyte <= maxByte) {
+            rlen = i+1;  }                                   //return할 문자열 갯수
+     }
+
+     if(rbyte > maxByte)
+     {
+  // alert("한글 "+(maxByte/2)+"자 / 영문 "+maxByte+"자를 초과 입력할 수 없습니다.");
+  alert("메세지는 최대 " + maxByte + "byte를 초과할 수 없습니다.")
+  content2 = content.substr(0,rlen);                                  //문자열 자르기
+  obj.value = content2;
+  fnChkByte(obj, maxByte);
+     }
+     else
+     {
+        document.getElementById('counter').innerText = rbyte;
+     }
 }
 
 
@@ -723,31 +790,55 @@ $("#targetContainer").on("click", "button.delRecomment", (e) => {
 $("#targetContainer").on("click", "button.modRecomment", (e) => {
 	let rno = $(e.target).data("no");
 	$("#targetContainer tr[id^=row]").show();
-	$("#targetContainer tr[id^=modRow]").remove();
-	var modContent = $(`#row${rno} > td:eq(0)`).text();
-	var modRegDate = $(`#row${rno} > td:eq(1)`).text();
+	$("#targetContainer div[id^=modRow]").remove();
+	var modRegDate = $(`#row${rno} > td:eq(0) > ul > li:eq(1)`).text();
+	var modContent = $(`#row${rno} > td:eq(1)`).text();
 	var html = `
-	<table>
-	<tr id="modRow${rno}">
-    	<td>${modRegDate}</td>
-    	<td>
+	<div id="modRow${rno}">
+		<ul class="modli">
+    	<li class="mod_one">${modRegDate}</li>
+    	<li class="mod_two">
     		<div class="form-group">
-    			<textarea name="content" id="modbossContent" value="${modContent}" class="form-control input-wp2" placeholder="내용을 입력하세요"></textarea>
+    		<textarea name="content" id="modbossContent" value="${modContent}" class="modbossContent" onKeyUp="fnChkByte(this,'400')" placeholder="최대 200자(400바이트)까지 입력 가능합니다."></textarea>
+    		<br />
+		<span id="counter">0</span><span id="countertwo"> / 400bytes</span>
+    		</div>
+    	</li>
+    	<li colspan="2" class="mod_three"> 
+    		<a href="#" data-rno="${rno}" class="modbtn mod" id="updatetwo" role="button">수정</a>
+    		<a href="#" data-rno="${rno}" class="modbtn can" id="canceltwo" role="button">취소</a>
+    	</li>
+    	</ul>
+    </div>`;
+	
+	/*
+	 * 
+	 * `
+	<table class="modform">
+	<tr id="modRow${rno}">
+    	<td class="modtd_one">${modRegDate}</td>
+    	<td class="modtd_two">
+    		<div class="form-group">
+    		<textarea name="content" id="modbossContent" value="${modContent}" class="modbossContent" onKeyUp="fnChkByte(this,'400')" placeholder="최대 200자(400바이트)까지 입력 가능합니다."></textarea>
+    		<br />
+		<span id="counter">0</span><span id="countertwo"> / 400bytes</span>
     		</div>
     	</td>
-    	<td colspan="2"> 
+    	<td colspan="2" class="modtd_three"> 
     		<a href="#" data-rno="${rno}" class="updatetwo" role="button">수정</a>
     		<a href="#" data-rno="${rno}" class="canceltwo" role="button">취소</a>
     	</td>
     </tr>
-    </table>`;
+    </table>`
+	 * 
+	 * */
 $("#row" + rno).after(html);	
 $("#row" + rno).hide();
 	
 });
 
 //답글 수정
-$("#targetContainer").on("click", "a.updatetwo", (e) => {
+$("#targetContainer").on("click", "a#updatetwo", (e) => {
 	e.preventDefault();
 	let rno = $(e.target).data("rno");
 	let page = $(".page-item.active a").attr("data-page");
@@ -768,7 +859,7 @@ $("#targetContainer").on("click", "a.updatetwo", (e) => {
 
 
 //수정 등록 폼 취소
-$("#targetContainer").on("click", "a.canceltwo", (e) => {
+$("#targetContainer").on("click", "a#canceltwo", (e) => {
 	e.preventDefault();
 	let rno = $(e.target).data("rno");
 	$("#row" + rno).show();

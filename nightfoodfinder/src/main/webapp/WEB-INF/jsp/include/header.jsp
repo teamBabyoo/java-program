@@ -47,23 +47,23 @@
           		<!-- 가격별 검색 -->
             	<div>
               		<label for="price_1" class="types">1만원 미만</label>
-              		<input id="price_1" type="checkbox" name="priceType" value="1" class="hidden" />
+              		<input id="price_1" type="checkbox" name="priceTypeNo" value="1" class="hidden" />
             	</div>
 
             	<div>
               		<label for="price_2" class="types">1만원대</label>
-              		<input id="price_2" type="checkbox" name="priceType" value="2" class="hidden" />
+              		<input id="price_2" type="checkbox" name="priceTypeNo" value="2" class="hidden" />
               		
             	</div>
 
 	            <div>
 	              <label for="price_3" class="types">2만원대</label>
-	              <input id="price_3" type="checkbox" name="priceType" value="3" class="hidden" />
+	              <input id="price_3" type="checkbox" name="priceTypeNo" value="3" class="hidden" />
 	            </div>
 	
 	            <div>
 	              <label for="price_4" class="types">3만원 이상</label>
-	              <input id="price_4" type="checkbox" name="priceType" value="4" class="hidden"  />
+	              <input id="price_4" type="checkbox" name="priceTypeNo" value="4" class="hidden"  />
 	            </div>
           	</div>
           <!-- tab_3 -->
@@ -150,7 +150,7 @@
   /* if (window.sessionStorage) {
       console.dir(sessionStorage);
   } */
-  
+	let context = '${pageContext.request.contextPath}';
 </script>
   <script src='${pageContext.request.contextPath}/resources/js/header.js' ></script>
   

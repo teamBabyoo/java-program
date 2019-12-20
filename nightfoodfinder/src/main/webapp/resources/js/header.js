@@ -31,7 +31,7 @@ $(() => {
 		
 		console.log($(e.target));
 		console.log($("#notice_btn").data("user"));
-		console.log($("#notice_btn").data("store") == "");
+		console.log($("#notice_btn").data("store"));
 		
 		// 로그인 된 유저, 스토어 없다면 그냥 리턴
 		/*if ( $("#notice_btn").data("user") == "" && $("#notice_btn").data("store") == "") {
@@ -42,7 +42,7 @@ $(() => {
 		
 		
 		// 리스트 호출
-		/*noticeList();*/
+		noticeList();
 	});
 	
 	
@@ -61,17 +61,22 @@ function noticeList() {
 		url: "notice_list.do",
 		type: "POST",
 		success: (list) => {
-			let $ul = $("<ul></ul>");
+			// attr이용해 속성값 바꾸는 방법으로 바꾸어서 진행해보자ㅠ
+			let $ul = $("<ul>" +
+					"<li>" +
+					"<a herf='#'></a>" +
+					"</li>" +
+					"</ul>");
 			
 			// 만약 알림이 없다면
 			if(list.length == 0) {
-				$ul.append(`알림이 없습니다.`);
+				$ul.append(`<li>알림이 없습니다.</li>`);
 			} else {
 				// 있다면
 				let html, content = ``;
 				
 				// row 클릭시 이동할 url
-				let addr = '../store/storedetail.do?no=';
+				let addr = context + '/front/store/storedetail.do?no=';
 				
 				for (let notice of list) {
 					
@@ -86,7 +91,7 @@ function noticeList() {
 						content = `${notice.fromUsername}${notice.noticeContent}`;
 						break;
 					case "4": // store : 내 가게의 단골 리스트
-						addr += ``;
+						addr += `${notice.storeNo}`;
 						content = `${notice.fromUsername}${notice.noticeContent}`;
 						break;
 					case "5": // store : 내 가게 상세페이지에 새 리뷰가 등록 되었을 때
@@ -119,6 +124,7 @@ function noticeList() {
 		}
 	});
 }
+
 
 
 

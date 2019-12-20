@@ -5,6 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <head>
 <c:import url="/WEB-INF/jsp/include/head.jsp">
 	<c:param name="msg" value="상세페이지" />
@@ -197,7 +198,7 @@
 		</div>
 
 		<!-- 푸터 -->
-		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
+<%-- 		<%-- <c:import url="/WEB-INF/jsp/include/footer.jsp" /> --%> --%>
 
 		<!-- 팝업 백그라운드  -->
 		<div class="bgbox"></div>
@@ -258,6 +259,10 @@ $(".slick").slick(
      
   }
   );
+  
+  if(${store.status} != 1){
+	  $("#storedetail").html('<div>가입승인 대기를 기다려주세요</div>');
+  }
 
 
  

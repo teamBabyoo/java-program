@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import kr.co.nff.repository.vo.FileVO;
 import kr.co.nff.repository.vo.Holiday;
 import kr.co.nff.repository.vo.Menu;
+import kr.co.nff.repository.vo.Notice;
 import kr.co.nff.repository.vo.Review;
 import kr.co.nff.repository.vo.Search;
 import kr.co.nff.repository.vo.Store;
@@ -40,7 +41,11 @@ public interface StoreService {
 	public List<Review> reviewList(Review review);
 	
 	// 리뷰 등록 & 이미지 업로드
-	public List<Review> reviewRegist(Review review, boolean fileFlag) throws Exception;
+	public int reviewRegist(Review review, boolean fileFlag) throws Exception;
+
+	// 리뷰 등록시 가게테이블 총 리뷰수, 총 별점 업데이트
+	int updateStoreByReview(Map<String, Object> map);
+	
 	// 리뷰 이미지 가져오기
 //	public List<FileVO> selectFileList(int reviewNo);
 	// 리뷰 이미지
@@ -61,7 +66,7 @@ public interface StoreService {
 	public int frequentCount(Store store);
 	
 	//단골등록
-	public int frequentRegist(Store store);
+	public int frequentRegist(Store store, Notice notice);
 	
 	//단골 취소 
 	public int frequentDelete(Store store);
@@ -81,5 +86,10 @@ public interface StoreService {
 	public List<FileVO> getImage(int no);
 	
 	public int getImageCount(int storeNo);
+	
+	//좋아요알림
+	public void insertNotice(Notice notice);
+	
+	public List<Integer> myfrequent(int no);
 }
 
