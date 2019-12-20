@@ -30,6 +30,9 @@
 		<!-- 컨텐트  -->
 		<div class="content list_content">
 			<div class="leftarea">
+				<div id="map"></div>
+			</div>
+			<div class="rightarea">
 				<div class="listnotice">
 					<div>
 						<i class="far fa-moon">${sList.size()} 개의 가게가 검색 되었습니다.</i>
@@ -65,8 +68,9 @@
 								</div>
 								<div class="store_name">${s.storeName}</div>
 								<div class="store_info">
-									<div>${s.priceTypeNo}</div>
+									<div>가격대 : ${s.priceType}</div>
 									<div>영업 시간 : ${s.openTime} ~ ${s.closeTime}</div>
+									<div></div>
 								</div>		
 				       		</div>
 				       	</li>
@@ -95,9 +99,6 @@
 				</div>
 			</div>
 			
-			<div class="rightarea">
-				<div id="map"></div>
-			</div>
 
 		</div>
 		<!-- // 컨텐트  -->
