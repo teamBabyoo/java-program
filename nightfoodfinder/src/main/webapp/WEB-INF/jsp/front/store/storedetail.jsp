@@ -119,7 +119,7 @@
 									<td class="tabletitlefont">Location</td>
 								</tr>
 								<tr>
-									<td class="tabletdfont">${store.streetLoad}</td>
+									<td class="tabletdfont">${store.streetLoad} ${store.addrDetail}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -195,6 +195,7 @@
 
 				</div>
 			</div>
+		<div id="map" style="width: 500px; height: 400px;"></div>
 		</div>
 
 		<!-- 푸터 -->
@@ -266,7 +267,9 @@ $(".slick").slick(
 
 
  
-
+ //지도 넘길 것 
+ let longitude = `${store.longitude}`;
+ let latitude = `${store.latitude}`
 
 
 

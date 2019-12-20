@@ -288,7 +288,14 @@ console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
                     </li>
                     <li>
                         <ul>
-                            <li>${r.nickName}<span>${time}</span></li>
+                            <li>`
+                        if(`${r.nickName}` === "null"){
+                        	let userEmail = `${r.userEmail}`;
+                        	html += userEmail.substr(0,5)+"***";
+                        } else {
+                        	html += `${r.nickName}`;
+                        }
+						 html +=`<span>${time}</span></li>
                             <li>${r.reviewContent}</li>`;
 						if (r.fileGroupCode != 0) {
 							html += `<li>`;
@@ -363,7 +370,6 @@ console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
 	
 	$("#paginationBox").html("");
 	pageEle += `<ul class="pagination">`;
-	//에러 잡아야 한다
 	if (pagination.prev === 'true') {
 		pageEle += `
 		<li class="page-item">
@@ -700,7 +706,7 @@ function makeform(a) {
 		<tr id="bossform" data-rno="${rno}">
 		<td>
 		<div>
-		<textarea id="bossContent" class="bossContent" onKeyUp="fnChkByte(this,'400')" placeholder="최대 200자(400바이트)까지 입력 가능합니다."></textarea>
+		<textarea id="bossContent" class="bossContent" onKeyUp="ChkByte(this,'400')" placeholder="최대 200자(400바이트)까지 입력 가능합니다."></textarea>
 		<br />
 		<span id="counter">0</span><span id="countertwo"> / 400bytes</span>
 		</div>
@@ -719,7 +725,7 @@ function makeform(a) {
 
 // 답글 등록 폼 글자수 제한
 
-function fnChkByte(obj, maxByte) {
+function ChkByte(obj, maxByte) {
     var content = obj.value;
     var content_len = content.length;
     var rbyte = 0;
@@ -744,7 +750,7 @@ function fnChkByte(obj, maxByte) {
   alert("메세지는 최대 " + maxByte + "byte를 초과할 수 없습니다.")
   content2 = content.substr(0,rlen);                                  //문자열 자르기
   obj.value = content2;
-  fnChkByte(obj, maxByte);
+  ChkByte(obj, maxByte);
      }
      else
      {
@@ -857,7 +863,7 @@ $("#targetContainer").on("click", "a#updatetwo", (e) => {
 });
 
 
-//수정 등록 폼 취소
+// 답글 수정 등록 폼 취소
 $("#targetContainer").on("click", "a#canceltwo", (e) => {
 	e.preventDefault();
 	let rno = $(e.target).data("rno");
@@ -926,5 +932,43 @@ function fn_next(page, range, rangeSize) {
 	
 }
 
+//지도 붙이기
+let y;
+let x;
+function mapDraw(longitude, latitude, storeName){
+	console.log("지도 넘길 것", longitude, latitude, storeName);
+	y = latitude;
+	x = longitude
+	locations = [
+		[storeName, y, x]
+	];
+	
+	map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 19,
+        center: new google.maps.LatLng(y, x),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      });
+	infowindow = new google.maps.InfoWindow();
+	
+    var i;
+
+    for (i = 0; i < locations.length; i++) {
+      var marker = new google.maps.Marker({
+        id: i,
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        animation: google.maps.Animation.DROP,
+        store_name: locations[i][0],
+        store_lati: locations[i][1],
+        store_long: locations[i][2],
+        icon: null,
+        map: map
+      });
+      infowindow.setContent(locations[i][0]);
+      infowindow.open(map, marker);
+      markerArr.push(marker);
+    }
+	
+}
+mapDraw(longitude, latitude, storeName);
 
 

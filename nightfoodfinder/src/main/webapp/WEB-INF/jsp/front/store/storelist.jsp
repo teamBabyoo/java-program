@@ -35,13 +35,14 @@
 			<div class="rightarea">
 				<div class="listnotice">
 					<div>
-						<i class="far fa-moon">${sList.size()} 개의 가게가 검색 되었습니다.</i>
+						<i class="far fa-moon"></i>
+						<span>${sList.size()} 개의 가게가 검색 되었습니다.</span>
 					</div>
 				</div>
 				<div class="storelist">
       				<ul>
       				<c:if test="${empty sList}">
-						<li>검색 결과가 없습니다.</li>
+						<li class="storeLn sto_li clearboth">검색 결과가 없습니다.</li>
 					</c:if>
 					
 			<!-- store list 부분 -->

@@ -735,6 +735,10 @@ a.modbtn.can {
 	display: none;
 }
 
+.detail_wrap #map{
+	margin: 0 auto;
+}
+
 /* 화살표 */
 .detail_wrap .slick-arrow {
 	z-index: 2; /* prev버튼은 위치 이동시 이미지 뒤로 숨겨짐 */
@@ -753,6 +757,11 @@ a.modbtn.can {
 	right: 0;
 }
 
+.detail_wrap .gmnoprint {
+    display: none;
+}
+
+
 /** 진실 끝 **/
 
 
@@ -768,7 +777,6 @@ header div:nth-child(3) li span {
 	top: 20px;
 	right: 12px;
 }
-
 .notice_content {
 	position: absolute;
 	background: #fff;
@@ -777,17 +785,14 @@ header div:nth-child(3) li span {
 	width: 360px;
 	z-index: 100;
 }
-
 #notice_btn {
 	position: relative;
 }
-
 .newnotice {
 	position: absolute;
 	top: -10px;
 	left: 34px;
 }
-
 #rednotice {
 	background-color: #fa3e3e;
 	border-radius: 3px;
@@ -795,12 +800,10 @@ header div:nth-child(3) li span {
 	padding: 1px 3px;
 	font-size: 2px;
 }
-
 .notice_content ul li {
 	line-height: 5px;
 }
 /*--------------스토어 리스트------------------*/
-
 
 #map {
 	width: 100%;
@@ -814,17 +817,28 @@ header div:nth-child(3) li span {
 .listnotice {
 	padding: 10px;
 	padding-left: 1px;
+	border-bottom: 1px solid rgb(235, 235, 235);
+}
+.listnotice > div {
+	margin: 13px;
+}
+.listnotice > div > i {
+	font-weight: 700;
+    font-size: 24px;
+    color: #ffe31f;
+    margin-right: 14px;
+    margin-top: 10px;
+}
+.listnotice > div > span {
+	font-weight: 700;
+    font-size: 23px;
+    color: #484848;
 }
 .storeLn {
 	height: 200px;
 	width: 808px;
 	margin: 13px;
 }
-/* .scroll-fixed {
-	position: fixed;
-	top: 60px;
-	right: 0px;
-} */
 .fas {
 	width: 50px;
 }
@@ -846,6 +860,13 @@ header div:nth-child(3) li span {
 .sto_li {
 	border-bottom: 1px solid rgb(235, 235, 235); 
 	width: 750px;
+	position: relative;
+}
+.sto_li > a {
+	display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
 }
 .sto_li:last-child {
     border-bottom: 0px;
@@ -870,11 +891,9 @@ header div:nth-child(3) li span {
 .sto_li_content > div:nth-child(1) {
 	margin-bottom: 2px;
 }
-
 	
 
 /* 이미지 슬라이더 */
-
 .bx-wrapper{
 	border: none !important;
 	box-shadow: none !important;
@@ -914,7 +933,7 @@ header div:nth-child(3) li span {
 
 .page-item {
 	list-style: none;
-	float: `;
+	float: left;
 	display: inline;
 	text-align: center;
 }
