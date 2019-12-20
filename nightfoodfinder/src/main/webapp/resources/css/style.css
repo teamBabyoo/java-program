@@ -427,12 +427,21 @@ a.modbtn.can {
 /** 승경 끝 **/
 
 /** 진실 **/
-.detail_wrap #storedetail {
+.detail_wrap #allDetail{
 	display: grid;
-	grid-template-rows: 300px 1fr;
+	grid-template-rows: 10% 1fr 10%;
+}
+
+.detail_wrap #detaillistjs {
+    z-index: 1;
+}    
+.detail_wrap #storedetail {
+
 	margin: 0 auto;
-	width: 960px;
+	width: 100%;
 	/* border: 1px solid red; */
+	height: 100%;
+    overflow: hidden;
 }
 
 .detail_wrap #storeinfo {
@@ -440,6 +449,8 @@ a.modbtn.can {
 	border: 2px solid #c1c1c1;
 	padding: 30px 20px;
 	margin: 0 auto;
+	background: white;
+    margin-top: -10px;
 }
 
 .detail_wrap #stinfo {
