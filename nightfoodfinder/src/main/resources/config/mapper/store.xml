@@ -210,26 +210,24 @@
 	<update id="updateStoreAddr" parameterType="Store">
 		update tb_address
 		set
-		<choose>
-		<when test="city != null">
-			city = #{city}
-		</when>
-		<when test="streetLoad != null">
-			street_load = #{streetLoad}
-		</when>
-		<when test="entY != null">
-  			latitude= #{entY}
-		</when>
-		<when test="entX != null">
- 			longitude= #{entX}
-		</when>
-		<when test="zipNo != null">
- 			 zip_no= #{zipNo}
-		</when>
-		<when test="addrDetail != null">
- 			 addr_detail= #{addrDetail}
-		</when>
-		</choose>
+		<if test="city != null">
+			city = #{city},
+		</if>
+		<if test="streetLoad != null">
+			street_load = #{streetLoad},
+		</if>
+		<if test="entY != null">
+  			latitude= #{entY},
+		</if>
+		<if test="entX != null">
+ 			longitude= #{entX},
+		</if>
+		<if test="zipNo != null">
+ 			 zip_no= #{zipNo},
+		</if>
+		<if test="addrDetail != null">
+ 			 addr_detail = #{addrDetail}
+		</if>
   		where store_no = #{storeNo}
 	</update>
 

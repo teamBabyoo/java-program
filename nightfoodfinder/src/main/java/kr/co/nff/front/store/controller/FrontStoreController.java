@@ -136,6 +136,7 @@ public class FrontStoreController {
 	/* 가게 정보 수정*/
 	@RequestMapping("/storeinfoupdate.do")
 	public String storeInfoUpdate(Store store, @RequestParam(value="storeNo") int no) {
+		System.out.println("디테일주소는 ?"+ store.getAddrDetail());
 		service.updateHoliday(store);
 		
 		String [] menuNames = store.getMenuName();

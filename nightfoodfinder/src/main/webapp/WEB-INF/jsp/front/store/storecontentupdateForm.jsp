@@ -39,13 +39,16 @@
 						--%>
 						<tr>
 							<th>비밀번호</th>
-							<td><input type="text" id="storePw" />123</td>
+							<td><input type="password" id="storePass" name="storePass" />
+								<div id="pwChk"> <span id="alert-success" style="display: none;">비밀번호가 일치합니다.</span></div></td>
 						</tr>
 						<tr>
 							<th>비밀번호 확인</th>
-							<c:if test="">
-							<td><input type="text" name="storeEmail" />123</td>
-							</c:if>
+							<td><input type="password" id="storePass2" name="storePass2" />
+								<div id="pwChk2">
+									 <span id="alert-success" style="display: none;">비밀번호가 일치합니다.</span>
+									 <span id="alert-danger" style="display: none; color: red ">비밀번호가 일치하지 않습니다.</span>
+								</div></td>
 						</tr> 
 						<tr>
 							<th>가게 전화번호</th>
@@ -55,17 +58,17 @@
 							<th rowspan="4">주소</th>
 						</tr>
 						<tr>
-							<td><input type="text" id="zipNo" name="zipNo"  /> 
-							<input type="hidden" id="sggNm" name="sggNm" /> 
+							<td><input type="text" id="zipNo" name="zipNo" value="${store.zipNo}" /> 
+							<input type="hidden" id="sggNm" name="city" /> 
 							<input type="button" onClick="goPopup();" value="주소찾기" /></td>
 						</tr>
 						<tr>
 							<td><input type="text" style="width: 300px;"
-								id="roadFullAddr" name="roadFullAddr"  /></td>
+								id="roadFullAddr" name="streetLoad"  value="${store.streetLoad}"/></td>
 						</tr>
 						<tr>
 							<td><input type="text" style="width: 300px;" id="addrDetail"
-								name="addrDetail"  /></td>
+								name="addrDetail" value="${store.addrDetail}" /></td>
 						</tr>
 
 						<tr>
@@ -154,6 +157,8 @@
 					<input type="hidden" name="openTime"/>
 					<input type="hidden" name="closeTime"/>
 					<input type= "hidden" name="storeNo" value="${store.storeNo}"/>
+					<input type="hidden" id="entX" name="entX"/>
+					<input type="hidden" id="entY" name="entY"/>
 					
 					<div>
 						<button type='submit' id="updateBtn">수정하기</button>
@@ -213,19 +218,17 @@
 		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
 		let rrr = roadFullAddr.split(',');
 		console.log(rrr[0]);
-		document.form.roadFullAddr.value = rrr[0];
+		document.form.streetLoad.value = rrr[0];
 		document.form.zipNo.value = zipNo;
 		document.form.addrDetail.value = rrr[1];
-		document.form.sggNm.value = sggNm;
-		/* document.form.entX.value = entX;
-		document.form.entY.value = entY; */
+		document.form.city.value = sggNm;
 		
 		var geocoder = new kakao.maps.services.Geocoder();
 		var callback = function (result, status) {
 		    if (status === kakao.maps.services.Status.OK) {
 		        console.log(result);
-		        document.form.entX.value = result[0].y;
-		        document.form.entY.value = result[0].x;
+		        document.form.entX.value = result[0].x;
+		        document.form.entY.value = result[0].y;
 		        
 		    }
 		};
@@ -318,13 +321,16 @@
 	    var checkEnglish = storePass.search(/[a-z]/ig);
 	    if(checkNumber <0 || checkEnglish <0){
 	       // alert("숫자와 영문자를 혼용하여야 합니다.");
+	       $('#pwChk').text("");
 	        $('#pwChk').text("숫자와 영문자를 혼용하여야 합니다.");
 			$('#pwChk').css('color', 'red');
 			//$("#reg_submit").attr("disabled", true);
 	        
 	        $('#pwChk').val('').focus();
 	        return false;
-	    }
+	    } 
+	    	
+	   
 	    if(/(\w)\1\1\1/.test(storePass)){
 	        //alert('같은 문자를 4번 이상 사용하실 수 없습니다.');
 	        $('#pwChk').text('같은 문자를 4번 이상 사용하실 수 없습니다.');
@@ -334,9 +340,29 @@
 	        $('#pwChk').val('').focus();
 	        return false;
 	    }
+	    $('#pwChk').text('사용가능한 비밀번호입니다');
+		$('#pwChk').css('color', 'black');
 	    return true;
 		
 	});
+
+	//비밀번호 일치 검사
+	$('#storePass2').focusout(function () {
+	        var pwd1 = $("#storePass").val();
+	        var pwd2 = $("#storePass2").val();
+	        if (pwd1 != "" || pwd2 != "") {
+	            if (pwd1 == pwd2) {
+	                $("#alert-success").css('display', 'inline-block');
+	                $("#alert-danger").css('display', 'none');
+	            } else {
+	                //alert("비밀번호가 일치하지 않습니다. 비밀번호를 재확인해주세요.");
+	                $("#alert-success").css('display', 'none');
+	                $("#alert-danger").css('display', 'inline-block');
+	            }
+	        }
+	    });
+
+
 
 
 
