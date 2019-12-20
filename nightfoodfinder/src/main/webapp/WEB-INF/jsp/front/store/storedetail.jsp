@@ -17,35 +17,46 @@
 <body>
 	<div class="wrapper detail_wrap">
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
-		
+	  <div id="allDetail">
+	  	<c:if test="${store.status == 1}">
 		<div id="storedetail" class="content clearboth">
 			<div class="slick" style="width: 100%">
 			<c:choose>
 				<c:when test="${empty imgList}">
+					<c:forEach begin="1" end="5">
 						<div>
 		   					<img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" />
 						</div>
-						<div>
-		   					 <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" />
-						</div>
-						<div>
-						    <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" />
-						</div>
+					</c:forEach>
+
 				</c:when>
 				<c:otherwise>
+
 				 <c:set value="${fn:length(imgList)}" var="size" />
 					<c:forEach items="${imgList}" var="img" varStatus="i" end="${size}">
 					<c:choose>
-					<c:when test="${size < 2}">
+					<c:when test="${size < 4}">
 							<div>
 								<img src="${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}" />
 							</div>
+						<c:if test="${i.last}">
+						<c:forEach begin="1" end="${5-size}">
 							<div>
 			   					 <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" />
 							</div>							
-							<div>
-			   					 <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" />
-							</div>							
+						</c:forEach>
+						</c:if>	
+					</c:when>
+					<c:when test="${size == 4}">
+								<div>
+									<img src="${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}" />
+								</div>
+							<c:if test="${i.last}">
+								<div>
+			   						 <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" />
+								</div>
+							</c:if>	
+												
 					</c:when>
 					<c:otherwise>
 								<div>
@@ -195,7 +206,9 @@
 
 				</div>
 			</div>
-		<div id="map" style="width: 500px; height: 400px;"></div>
+		<div id="map" style="width: 100%; height: 400px;"></div>
+		</c:if>
+		</div>
 		</div>
 
 		<!-- 푸터 -->
@@ -248,7 +261,7 @@
 
 $(".slick").slick(
   { infinite: true , /* 맨끝이미지에서 끝나지 않고 다시 맨앞으로 이동 */ 
-    slidesToShow: 2, /* 화면에 보여질 이미지 갯수*/
+    slidesToShow: 4, /* 화면에 보여질 이미지 갯수*/
     slidesToScroll: 1, /* 스크롤시 이동할 이미지 갯수 */
     autoplay: false, /* 자동으로 다음이미지 보여주기 */
     arrows: true, /* 화살표 */
@@ -257,12 +270,18 @@ $(".slick").slick(
     speed:1000 , /* 다음이미지로 넘겨질때 걸리는 시간 */
     pauseOnHover:false, /* 마우스 호버시 슬라이드 이동 멈춤 */ 
     //vertical:true,/* 세로방향으로 슬라이드를 원하면 추가하기// 기본값 가로방향 슬라이드*/
+    prevArrow:"<button type='button' class='slick-prev pull-left'><i class='fa fa-arrow-circle-o-left' aria-hidden='true'></i></button>",
+    nextArrow:"<button type='button' class='slick-next pull-right'><i class='fa fa-arrow-circle-o-right' aria-hidden='true'></i></button>"
      
   }
   );
   
   if(${store.status} != 1){
-	  $("#storedetail").html('<div>가입승인 대기를 기다려주세요</div>');
+	  $("#allDetail").html("");
+	  Swal.fire('관리자의 승인을 기다려주세요');
+	  $(".swal2-styled.swal2-confirm").click(() => {
+		  location.href= "${pageContext.request.contextPath}/front/main/main.do";
+	  });
   }
 
 
