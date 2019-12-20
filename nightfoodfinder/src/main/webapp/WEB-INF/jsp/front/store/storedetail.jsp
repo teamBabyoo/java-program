@@ -107,7 +107,7 @@
 										</div>
 									</div></li>
 								<!-- 맨 아래 지도로 보내는 a링크 -->
-								<li><a href="#"><i class="fa fa-car" aria-hidden="true"></i>길찾기</a></li>
+								<li id="goMap"><a href="#"><i class="fa fa-map-o" aria-hidden="true"></i>지도</a></li>
 							</ul>
 						</div>
 						<table>
@@ -206,7 +206,7 @@
 
 				</div>
 			</div>
-		<div id="map" style="width: 100%; height: 400px;"></div>
+		<div id="map" style="width: 50%; height: 400px;"></div>
 		</c:if>
 		</div>
 		</div>
@@ -289,6 +289,15 @@ $(".slick").slick(
  //지도 넘길 것 
  let longitude = `${store.longitude}`;
  let latitude = `${store.latitude}`
+ 
+ $("#goMap").click(() => {
+	 let offset = $("#map").offset();
+		 $('html, body').animate({
+     		scrollTop: offset.top
+		 }, 400);
+ });
+	 
+ 
 
 
 
