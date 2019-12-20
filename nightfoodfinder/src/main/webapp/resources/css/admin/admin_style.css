@@ -669,6 +669,13 @@ tspan {
     font-size: 15px;
 }
 
+.show_graph {
+	display : block;
+}
+
+.hidden_graph {
+	display : none;
+}
   /*승경 시작*/
 
   th.choice {

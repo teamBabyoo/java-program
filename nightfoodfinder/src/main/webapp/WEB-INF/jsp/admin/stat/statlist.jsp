@@ -47,9 +47,9 @@
 			</td>
 					<th class="admssearchtable-lboi">성별</th>
 					<td class="admssearchtable-lboi">
-							<button id="genderchoice" onclick="fnMove('1')">전체</button>
-							<button id="genderchoice" onclick="fnMove('2')">여자</button>
-							<button id="genderchoice" onclick="fnMove('3')">남자</button>
+							<button id="genderchoice" onclick="fnShow('1')">전체</button>
+							<button id="genderchoice" onclick="fnShow('2')">여자</button>
+							<button id="genderchoice" onclick="fnShow('3')">남자</button>
 					</td>
 				</tr>
 			</table>
@@ -62,18 +62,31 @@
 
 <figure class="highcharts-figure">
 <c:forEach var="i" begin="1" end="3" step="1">
-    <br/>				
-    <br/>	
+<c:choose>
+<c:when test="${i == 1}">
+<c:set value="show_graph" var="className"/>
+</c:when>
+<c:otherwise>
+<c:set value="hidden_graph" var="className"/>
+</c:otherwise>
+</c:choose>
 		<%-- <span class="button"><a href="insertAward.do?genderType=${i}&userAge=${search.userAge}">award 등록</a></span> --%>
-    <div id="chartcontainer-${i}"></div>	
+    <div id="chartcontainer-${i}" class=${className}></div>	
 							</c:forEach>
 
 </figure>
 
 <script>
-function fnMove(seq){
-    var offset = $("#chartcontainer-" + seq).offset();
-    $('html, body').animate({scrollTop : offset.top - 150}, 400);
+function fnShow(seq){
+	for (let i = 1; i < 4; i++) {
+		
+	let graphs = document.querySelector("#chartcontainer-" + i);
+	graphs.classList.replace("show_graph", "hidden_graph");
+		
+	}
+	
+    let graph = document.querySelector("#chartcontainer-" + seq);
+    graph.classList.replace("hidden_graph", "show_graph");
 }
 
 let statMap =  JSON.parse('${statMap}');

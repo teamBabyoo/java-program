@@ -288,7 +288,14 @@ console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
                     </li>
                     <li>
                         <ul>
-                            <li>${r.nickName}<span>${time}</span></li>
+                            <li>`
+                        if(`${r.nickName}` === "null"){
+                        	let userEmail = `${r.userEmail}`;
+                        	html += userEmail.substr(0,5)+"***";
+                        } else {
+                        	html += `${r.nickName}`;
+                        }
+						 html +=`<span>${time}</span></li>
                             <li>${r.reviewContent}</li>`;
 						if (r.fileGroupCode != 0) {
 							html += `<li>`;
@@ -363,7 +370,6 @@ console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
 	
 	$("#paginationBox").html("");
 	pageEle += `<ul class="pagination">`;
-	//에러 잡아야 한다
 	if (pagination.prev === 'true') {
 		pageEle += `
 		<li class="page-item">
@@ -926,5 +932,43 @@ function fn_next(page, range, rangeSize) {
 	
 }
 
+//지도 붙이기
+let y;
+let x;
+function mapDraw(longitude, latitude, storeName){
+	console.log("지도 넘길 것", longitude, latitude, storeName);
+	y = latitude;
+	x = longitude
+	locations = [
+		[storeName, y, x]
+	];
+	
+	map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 19,
+        center: new google.maps.LatLng(y, x),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      });
+	infowindow = new google.maps.InfoWindow();
+	
+    var i;
+
+    for (i = 0; i < locations.length; i++) {
+      var marker = new google.maps.Marker({
+        id: i,
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        animation: google.maps.Animation.DROP,
+        store_name: locations[i][0],
+        store_lati: locations[i][1],
+        store_long: locations[i][2],
+        icon: null,
+        map: map
+      });
+      infowindow.setContent(locations[i][0]);
+      infowindow.open(map, marker);
+      markerArr.push(marker);
+    }
+	
+}
+mapDraw(longitude, latitude, storeName);
 
 

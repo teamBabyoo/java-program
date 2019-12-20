@@ -60,6 +60,9 @@ import lombok.Data;
 		
 		// 리뷰에 파일VO 리스트
 		private List<FileVO> fileVoList;
+		
+		//userEmail
+		private String userEmail;
 
 		@Override
 		public String toString() {
