@@ -72,7 +72,9 @@ public class Store  {
 		//단골 체크를 위한
 		private int checkit;
 		
-		
+		// XY 좌표 받기
+		private String longitude;
+		private String latitude;
 		
 		
 		

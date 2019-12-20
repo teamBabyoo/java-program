@@ -735,6 +735,10 @@ a.modbtn.can {
 	display: none;
 }
 
+.detail_wrap #map{
+	margin: 0 auto;
+}
+
 /* 화살표 */
 .detail_wrap .slick-arrow {
 	z-index: 2; /* prev버튼은 위치 이동시 이미지 뒤로 숨겨짐 */
@@ -752,6 +756,11 @@ a.modbtn.can {
 .detail_wrap .slick-next.slick-arrow { /* next 다음 */
 	right: 0;
 }
+
+.detail_wrap .gmnoprint {
+    display: none;
+}
+
 
 /** 진실 끝 **/
 
