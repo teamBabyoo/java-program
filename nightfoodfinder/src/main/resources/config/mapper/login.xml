@@ -18,7 +18,7 @@
 		<result column="latitude" property="latitude" />
 		<result column="longitude" property="longitude" />
 		<result column="store_join_date" property="storeJoinDate" />
-		<result column="price_type" property="priceType" />
+		<result column="price_type_no" property="priceTypeNo" />
 		<result column="see_cnt" property="seeCnt" />
 		<result column="store_scope_total" property="storeScopeTotal" />
 		<result column="review_cnt_total" property="reviewCntTotal" />
@@ -133,11 +133,11 @@
 			store_name, business_num, store_email, 
 			store_pass, store_tell, store_category, 
 			open_time, close_time,
-			store_owner, store_owner_ph, price_type
+			store_owner, store_owner_ph, price_type_no
 			) values (
 			#{storeName}, #{businessNum}, #{storeEmail}, 
 			#{storePass}, #{storeTell}, #{storeCategory},
-			#{openTime},#{closeTime}, #{storeOwner},#{storeOwnerPh},#{priceType}
+			#{openTime},#{closeTime}, #{storeOwner},#{storeOwnerPh},#{priceTypeNo0}
 			)
 	</insert>
 	
@@ -183,7 +183,12 @@
 	</select>
 	
 
-	
+	<!-- 가게 조회수 올리기 -->
+	<update id="updateStoreSeeCnt" parameterType="int">
+	update tb_store
+   		set see_cnt = see_cnt+1 
+  	 where store_no = #{storeNo};
+	</update>
 	
 	
 </mapper>  

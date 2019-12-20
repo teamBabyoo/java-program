@@ -176,6 +176,23 @@ public class LoginController {
     return "redirect:/front/main/main.do";
     }
 
+    // 일반회원로그인
+    @RequestMapping("/userlogin.do")
+    public String userlogin(User u, HttpSession session) {
+    	User user = loginservice.selectLoginOneUser(u);
+    	session.setAttribute("loginUser", user);
+    	System.out.println("더미데이터용 로그인 완료");
+		return "redirect:/front/main/main.do";
+    }
+    
+    //일반회원로그인페이지
+    @RequestMapping("/loginpage.do")
+    public void loginpage() {}
+    
+    
+    
+    
+    
     // 유저 마이페이지 
     @RequestMapping("/userdetail.do")
     public void userDetail (Model model, User user, int no, HttpSession session) {

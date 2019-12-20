@@ -2,8 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/jsp/include/taglib.jsp"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <head>
 <c:import url="/WEB-INF/jsp/include/head.jsp">
 	<c:param name="msg" value="상세페이지" />
@@ -15,14 +17,49 @@
 <body>
 	<div class="wrapper detail_wrap">
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
-
+		
 		<div id="storedetail" class="content clearboth">
-			<div id="btnTop"></div>
-				<c:forEach var="i" begin="1" end="${imageListSize}">
-						<div id="pictureplace">
-						 <img alt="실패ㅜ" src="${pageContext.request.contextPath}/front/store/getByteImage.do" />
+			<div class="slick" style="width: 100%">
+			<c:choose>
+				<c:when test="${empty imgList}">
+						<div>
+		   					<img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" />
 						</div>
-				</c:forEach>
+						<div>
+		   					 <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" />
+						</div>
+						<div>
+						    <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" />
+						</div>
+				</c:when>
+				<c:otherwise>
+				 <c:set value="${fn:length(imgList)}" var="size" />
+					<c:forEach items="${imgList}" var="img" varStatus="i" end="${size}">
+					<c:choose>
+					<c:when test="${size < 2}">
+							<div>
+								<img src="${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}" />
+							</div>
+							<div>
+			   					 <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" />
+							</div>							
+							<div>
+			   					 <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" />
+							</div>							
+					</c:when>
+					<c:otherwise>
+								<div>
+									<img src="${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}" />
+								</div>
+					</c:otherwise>
+					</c:choose>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
+			</div>
+					
+			</div>	
+			
 
 			<div id="detaillistjs">
 				<div id="storeinfo">
@@ -147,50 +184,11 @@
 										<i class="fa fa-plus-circle" aria-hidden="true"></i>리뷰남기기
 								</a></li>
 							</ul>
-
-							<!-- 
-							<div class="leave_rv user_rv">
-								<!-- <form name="reviewForm" id="reviewForm" onsubmit="return registReview()" method="POST" enctype="multipart/form-data"> ->
-								<form name="reviewForm" id="reviewForm" method="POST" enctype="multipart/form-data">
-									<ul class="clearboth">
-										<li>
-											<ul class="clearboth">
-												<li class="float_l"><i class="fa fa-user-circle-o" aria-hidden="true"></i>${user.userEmail}</li>
-												<li id="scopePannel" class="float_r">
-													<a href="#" data-rscope="1">★</a>
-													<a href="#" data-rscope="2">★</a>
-													<a href="#" data-rscope="3">★</a>
-													<a href="#" data-rscope="4">★</a>
-													<a href="#" data-rscope="5">★</a>
-												</li>
-											</ul>
-										</li>
-										<li>
-											<textarea name="reviewContent" placeholder="매너있는 리뷰를 남겨주세요. "></textarea>
-										</li>
-										<li>
-											<ul class="clearboth">
-												<li class="float_l"><input type="file" name="attach" multiple="multiple" /></li>
-												<!-- <li class="float_r"><button type="submit">등록</button></li> ->
-												<li class="float_r"><input type="button" onclick="registReview()"/>등록</li>
-											</ul>
-										</li>
-									</ul> 
-									<input type="hidden" id="nickName" />
-									<input type="hidden" name="storeScope" />
-									<input type="hidden" name="storeNo" value="${store.storeNo }"/>     
-									<%-- <input type="hidden" name="storeNo" value="${store.storeNo}" /> --%>
-									<!-- <input type="hidden" name="recomment" value="" /> ->
-								</form>
-							</div>
-							 -->
-
 							<div id="targetContainer"></div>
+						
 							<!-- 페이징 -->
-
 							<div id="paginationBox"></div>
 
-							<!-- 페이징 -->
 						</div>
 					</div>
 					<!-- // 댓글 끝 -->
@@ -200,20 +198,24 @@
 		</div>
 
 		<!-- 푸터 -->
-		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
+		<c:import url="/WEB-INF/jsp/include/footer.jsp" /> 
 
 		<!-- 팝업 백그라운드  -->
 		<div class="bgbox"></div>
 		<!-- 신고팝업 -->
 		<div id="rmyModal" class="rmodal" style="display: none"></div>
-	</div>
+	<script src="${pageContext.request.contextPath}/resources/js/slick.min.js"></script>
 	<script type="text/javascript">
+		let imglist = `${imgList}`;
+		console.log("imglist", imglist.size);
+		console.dir(imglist);
 		let no = ${store.storeNo};
 		let scope = ${store.scope};
 		let openTime = '${store.openTime}';
 		let closeTime = '${store.closeTime}';
-		let context = '${pageContext.request.contextPath}';
+		//let context = '${pageContext.request.contextPath}';
 		let storeNo = '${store.storeNo}';
+		let storeName = '${store.storeName}';
 		let storeScope = "";
 		let fileGroupCode = null;
 		let userNo = '${user.userNo}';
@@ -240,7 +242,34 @@
 			$("#introduce").append(content);
 			
 		}
-		console.log("이미지사이즈", `${imageListSize}`);
+// 		console.dir(`${imgList}`);
+/*slick*/
+
+$(".slick").slick(
+  { infinite: true , /* 맨끝이미지에서 끝나지 않고 다시 맨앞으로 이동 */ 
+    slidesToShow: 2, /* 화면에 보여질 이미지 갯수*/
+    slidesToScroll: 1, /* 스크롤시 이동할 이미지 갯수 */
+    autoplay: false, /* 자동으로 다음이미지 보여주기 */
+    arrows: true, /* 화살표 */
+    dots:false, /* 아래점 */ 
+    autoplaySpeed:10000,/* 다음이미지로 넘어갈 시간 */ 
+    speed:1000 , /* 다음이미지로 넘겨질때 걸리는 시간 */
+    pauseOnHover:false, /* 마우스 호버시 슬라이드 이동 멈춤 */ 
+    //vertical:true,/* 세로방향으로 슬라이드를 원하면 추가하기// 기본값 가로방향 슬라이드*/
+     
+  }
+  );
+  
+  if(${store.status} != 1){
+	  $("#storedetail").html('<div>가입승인 대기를 기다려주세요</div>');
+  }
+
+
+ 
+
+
+
+
 	</script>
 	<script src="<c:url value='/resources/js/storedetail.js' />"></script>
 	<script type='text/javascript'>
@@ -258,5 +287,6 @@
 		});
 		//]]>
 	</script>
+	<script src="<c:url value='/resources/js/storage.js' />"></script>
 </body>
 </html>

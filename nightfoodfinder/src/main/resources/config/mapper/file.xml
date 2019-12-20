@@ -6,31 +6,18 @@
 		select ifnull(max(file_group_code), 0) + 1
 		  from tb_file
 	</select>
-	
-	<!-- <select id="selectFile" resultType="FileVO" parameterType="int">
-		select *
-		  from tb_file
-		 where file_group_code = #{groupCode}
-	</select>
-	
-	<select id="selectOneFile" resultType="FileVO" parameterType="int">
+
+	<select id="selectFileList" parameterType="int" resultType="FileVO">
 		select * 
 		  from tb_file
-		 where file_group_code = #{file
-	</select> -->
-	
-	<select id="selectOneFile" parameterType="int" resultType="FileVO">
-		select * 
-		  from tb_file
-		 where file_group_code = 1
-	
+		 where file_group_code = #{fileGroupCode}
 	</select>
 	
 	<insert id="insertFile" parameterType="FileVO">
 		insert into tb_file (
-			file_group_code, org_name, sys_name, path, extension 
+			file_group_code, org_name, sys_name, path, extension
 		) values (
-			#{fileGroupCode}, #{orgName}, #{sysName}, #{path}, #{extension} 
+			#{fileGroupCode}, #{orgName}, #{sysName}, #{path}, #{extension}
 		)
 	</insert>
 </mapper>   

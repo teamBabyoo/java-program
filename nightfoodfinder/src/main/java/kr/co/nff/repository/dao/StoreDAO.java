@@ -55,11 +55,13 @@ public interface StoreDAO {
 	//리뷰 리스트
 	List<Review> selectReview(Review review);
 	//리뷰등록
-	void registReview(Review review);
+	int registReview(Review review);
 	//리뷰수정
 	void updateReview(Review review);
 	//리뷰삭제
 	void deleteReview(int no);
+	// 리뷰 등록시 스토어테이블 업데이트
+	int updateStoreByReview(Map<String, Object> map);
 	
 	
 	//리뷰신고
@@ -95,7 +97,15 @@ public interface StoreDAO {
 	//메뉴 수정(등록)
 	void insertMenuList(Store store);
 	
-	List<FileVO> getImage();
+	List<FileVO> getImage(int no);
 	
 	int getImageCount(int storeNo);
+	
+	void updateStoreSeeCnt(int no);
+	
+	//나의 단골가져오기
+	List<Integer> myfrequent(int no);
+	
+	//주소 업데이트하기
+	void updateStoreAddr(Store store);
 }

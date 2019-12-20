@@ -19,7 +19,7 @@
 		<result column="latitude" property="latitude" />
 		<result column="longitude" property="longitude" />
 		<result column="store_join_date" property="storeJoinDate" />
-		<result column="price_type" property="priceType" />
+		<result column="price_type_no" property="priceTypeNo" />
 		<result column="see_cnt" property="seeCnt" />
 		<result column="store_scope_total" property="storeScopeTotal" />
 		<result column="review_cnt_total" property="reviewCntTotal" />
@@ -27,8 +27,24 @@
 		<collection property="holidayList" column="store_no"
 			select="selectHolidayListByStoreNo" />
 	</resultMap>
+	
+	<!-- resultMap (리뷰에 파일리스트 조회) -->
+	<resultMap type="Review" id="reviewMap" >
+		<result column="review_no" property="reviewNo" />
+		<result column="store_no" property="storeNo" />
+		<result column="writer_no" property="writerNo" />
+		<result column="review_content" property="reviewContent" />
+		<result column="reg_date" property="regDate" />
+		<result column="store_scope" property="storeScope" />
+		<result column="file_group_code" property="fileGroupCode" />
+		<result column="status" property="status" />
+		<result column="recomment" property="recomment" />
+		<result column="recomment_reg_date" property="reCommentRegDate" />
+		
+		<collection property="fileVoList" column="file_group_code" select="selectFileListByCode" />
+	</resultMap>
 
-	<!-- collection이 호출하는 selet -->
+	<!-- store collection이 호출하는 select -->
 	<select id="selectHolidayListByStoreNo" parameterType="int"
 		resultType="Holiday">
 		select w.week_name, h.week_no
@@ -38,6 +54,13 @@
 		where store_no = #{store_no}
 	</select>
 
+	<!-- review collection이 호출하는 select -->
+	<select id="selectFileListByCode" parameterType="int" resultType="FileVO">
+		select * 
+		  from tb_file
+		 where file_group_code = #{file_group_code}
+	</select>
+	
 	<!-- 메인에 표시할 가게 상세정보 리스트 -->
 	<select id="mainStoreList" resultMap="storeMap">
 		select distinct s.*,
@@ -84,9 +107,14 @@
 				s.store_owner_ph,
 				s.open_time,
 				s.close_time,
+				s.status,
 				a.city,
-				a.street_load,
+			    a.street_load,
+                a.zip_no,
+                a.addr_detail,
 				c.category_name,
+				s.store_scope_total,
+				s.review_cnt_total,
 				ifnull(truncate(sum(r.store_scope) / count(r.writer_no), 1), 0) as scope
 		from tb_store as s
 		inner join tb_address as a
@@ -186,8 +214,21 @@
 			city = #{city},
 		</if>
 		<if test="streetLoad != null">
-			street_load = #{streetLoad}
+			street_load = #{streetLoad},
 		</if>
+		<if test="entY != null">
+  			latitude= #{entY},
+		</if>
+		<if test="entX != null">
+ 			longitude= #{entX},
+		</if>
+		<if test="zipNo != null">
+ 			 zip_no= #{zipNo},
+		</if>
+		<if test="addrDetail != null">
+ 			 addr_detail = #{addrDetail}
+		</if>
+  		where store_no = #{storeNo}
 	</update>
 
 	<sql id="commonStoreList">
@@ -198,6 +239,8 @@
 		    on s.store_no = m.store_no
 		 inner join tb_address a
 			on s.store_no = a.store_no
+		 inner join tb_price_type p
+		    on p.price_type_no = s.price_type_no
 		 where s.status = 1 <!-- 관리자 허용 된 것만 -->
 		 	<if test="includeClosed != 1"> <!--  현재 영업중인 가게만 볼 때 (1 : 영업끝난가게 포함)  -->
          		<![CDATA[
@@ -223,9 +266,9 @@
 					#{c}
 				</foreach>
 			</if>
-			<if test="priceType != null">
-				and s.price_type in
-				<foreach collection="priceType" item="p" open="(" close=")" separator=",">
+			<if test="priceTypeNo != null">
+				and s.price_type_no in
+				<foreach collection="priceTypeNo" item="p" open="(" close=")" separator=",">
 					#{p}
 				</foreach>
 			</if>
@@ -236,7 +279,9 @@
 	<select id="storeList" resultType="Store" parameterType="Search">
 		select distinct s.*,
 			   a.*,
-			   c.category_name as category,
+			   m.*,
+			   p.price_type,
+			   c.category_name,
 			   ifnull(round(s.store_scope_total / s.review_cnt_total, 1), 0) scope
 		<include refid="commonStoreList" />
 		<choose>
@@ -276,9 +321,6 @@
 		on h.week_no = w.week_no
 		where h.store_no = #{storeNo}
 	</select>
-
-	<update id="">
-	</update>
 
 
 
@@ -412,7 +454,7 @@
 	<!-- 댓글 -->
 	<!-- 댓글 리스트 -->
 
-	<select id="selectReview" parameterType="Review" resultType="Review">
+	<select id="selectReview" parameterType="Review" resultMap="reviewMap">
 		<!-- select '1' as type, r.review_no, r.user_no, u.nick_name, r.review_content, 
 			r.reg_date, r.store_scope, ifnull(l.iloveyou, 0) as likeCount from tb_review 
 			as r inner join tb_user as u on r.user_no = u.user_no inner join ( select 
@@ -455,6 +497,7 @@
 				r.store_scope,
 				r.recomment,
 				r.recomment_reg_date,
+				r.file_group_code,
 				ifnull(l.likeit, 0) as good,
                 ifnull(li.store_review_no,0) as mylikecheck
 		from tb_review r
@@ -476,7 +519,12 @@
 	</select>
 	<!-- -->
 
-	<!-- 리뷰 등록 -->
+	<!-- 
+		리뷰 등록
+		성공시 영향받은 행의수 (1)을 반환하고 
+		컨트롤러에서 1을 받았을 때
+		store테이블을 업데이트 하는 쿼리 수행 -> updateStoreByReview
+	 -->
 	<insert id="registReview" parameterType="Review">
 		INSERT INTO tb_review (
 		store_no, writer_no, review_content, reg_date, store_scope, file_group_code
@@ -484,6 +532,15 @@
 		#{storeNo}, #{writerNo}, #{reviewContent}, NOW(), #{storeScope}, #{fileGroupCode}
 		)
 	</insert>
+	
+	<update id="updateStoreByReview" parameterType="hashMap">
+		update tb_store
+		   set store_scope_total = store_scope_total + #{review.storeScope},
+		       review_cnt_total = review_cnt_total + 1
+		 where store_scope_total = #{exiscope}
+		   and review_cnt_total = #{curtcnt}
+           and store_no = #{review.storeNo};
+	</update>
 
 	<!-- 댓글 등록 -->
 	<!-- 파일등록 아직X -->
@@ -626,12 +683,12 @@
 	</insert>
 	
 	<!-- 이미지가져오기 -->
-	<select id="getImage" resultType="FileVO">
+	<select id="getImage" parameterType="int" resultType="FileVO">
 	  select f.*, r.review_no, f.file_no
    		 from tb_file f
    		inner join tb_review r
    		  on f.file_group_code = r.file_group_code
-    	where r.store_no = 1
+    	where r.store_no = #{storeNo}
 	</select>
 	
 	<!-- 이미지 갯수 -->
@@ -643,7 +700,21 @@
 	     where r.store_no = #{storeNo}
 	</select>
 	
+	<!--가게 조회수 업데이트 -->
+	<update id="updateStoreSeeCnt" parameterType="int">
+	   update tb_store
+	     set see_cnt = see_cnt + 1
+	    where store_no = #{storeNo}
+	</update>
+	
+	<!-- 가게의 단골가져오기 -->
+	<select id="myfrequent" parameterType="int" resultType="int">
+	select user_no 
+ 		from tb_frequent_store 
+ 		where store_no = #{storeNo}
+	</select>
 	
 	
+
 	
 </mapper>

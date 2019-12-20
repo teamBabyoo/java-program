@@ -1,66 +1,43 @@
 $(() => {
-	var BANNER_INDEX = 1;
-	var BANNER_LEN = 0;
-	var BANNER_WIDTH = 102;
 
-
-	 $(".btn_left").unbind();
-     $(".btn_left").bind("click", () => {           
-    	 var nIndex = BANNER_INDEX-1;
-    	    if(nIndex<0)
-    	        nIndex = BANNER_LEN-1;
-    	    // n번째 배너 보이기. 
-    	    showBannerAt(nIndex);
-     });
-     $(".btn_right").unbind();
-     $(".btn_right").bind("click", () => {
-    	    var nIndex = BANNER_INDEX+1;
-    	    if(nIndex>=BANNER_LEN)
-    	        nIndex = 0;
-    	    // n번째 배너 보이기.
-    	    showBannerAt(nIndex);  
-     });
-
-     function showBannerAt(nIndex){
-    	    if (nIndex != BANNER_INDEX) {
-    	        //  n번째 배너 위치 값 구하기.
-    	        var nPosition = -BANNER_WIDTH * nIndex;
-    	         
-    	        // 슬라이드 시작.
-    	        $(".thum_imgs").stop();
-    	        $(".thum_imgs").animate({
-    	            left: nPosition
-    	        }, 200);
-    	        //현재 배너 인덱스 업데이트 시키기.
-    	        BANNENR_INDEX = nIndex;
-    	    }
-    	}
-     
-     
-     
-     
-     
-     
-     
+	var main = $('.bxslider').bxSlider({
+		mode: 'fade',
+		controls : true,
+	    captions: true,
+	    slideWidth: 300,
+	    slideMargin: 0,
+		pager:true	//페이징
+		
+	});
+	
+	
      
 	/* 지도 스크롤 고정 부분*/
 	$(window).ready(() => {
-		// 지도의 좌표값
-		let mapOffset = $(".rightarea").offset();
-		
-		// 화면에 스크롤이 생기면 고정한다.
-		$(window).scroll(() => {
-			if ($(document).scrollTop() > mapOffset.top - 60) {
-				$(".rightarea").addClass("scroll-fixed");
-			} else {
-				$(".rightarea").removeClass("scroll-fixed");
-			}
-		});
-		
-		
-		
-		
+		const contentHeight = window.innerHeight - 60;
+		$('.rightarea').css('height', contentHeight);
 	});
+	
+	/*
+	 
+	 지도의 높이 고정 위해 헤더 부분을
+	 window.innerHeight 에서 헤더만큼 빼준다.
+	 
+	 */
+	
+	
+	
+	
+	
+
+		
+		
+	
+
+	
+	
+	
+	
 	
 	
 	
