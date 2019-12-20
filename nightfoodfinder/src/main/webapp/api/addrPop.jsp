@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<c:import url="/WEB-INF/jsp/include/head.jsp">
+	<c:param name="msg" value="주소입력" />
+</c:import>
 
 <% 
 	//request.setCharacterEncoding("UTF-8");  //한글깨지면 주석제거
@@ -20,7 +23,7 @@
 </head>
 <script language="javascript">
 
-
+	
 function init(){
 	var url = location.href;
 	var confmKey = "devU01TX0FVVEgyMDE5MTIwNTE1MTQxMTEwOTI4MjE=";//승인키
@@ -37,6 +40,7 @@ function init(){
 		window.close();
 	}
 }
+
 
 
 </script>
