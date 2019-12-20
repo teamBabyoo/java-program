@@ -45,24 +45,18 @@ public class FrontStoreController {
 	@RequestMapping("/storelist.do")
 	public void storeList(Model model, Search search) {
 		model.addAttribute("result", service.storeList(search));
-		
 	}
 
 	@RequestMapping("/storelistAjax.do")
 	@ResponseBody
 	public Map<String, Object> storeListAjax(Search search) {
 		Map<String, Object> result = service.storeList(search);
-		/*
-		 * System.out.println(service.storeList(search)); System.out.println("페이지결과" +
-		 * search.getPage());
-		 */
-		/* return service.storeList(search); */
 		return result;
 	}
 	
 	
 	/* 가게 상세 */
-	
+	 
 	@RequestMapping("/storedetail.do")
 	public void storeDetail(Model model, int no, HttpServletRequest req) {
 		HttpSession session = req.getSession();
@@ -405,11 +399,6 @@ public class FrontStoreController {
 		bis.close();fis.close();
 		bos.close();out.close();
 		
-		
-		
-		
-		
-	
 		
 	}
 	
