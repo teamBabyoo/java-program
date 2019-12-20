@@ -707,7 +707,7 @@ function makeform(a) {
 		<tr id="bossform" data-rno="${rno}">
 		<td>
 		<div>
-		<textarea id="bossContent" class="bossContent" onKeyUp="fnChkByte(this,'400')" placeholder="최대 200자(400바이트)까지 입력 가능합니다."></textarea>
+		<textarea id="bossContent" class="bossContent" onKeyUp="ChkByte(this,'400')" placeholder="최대 200자(400바이트)까지 입력 가능합니다."></textarea>
 		<br />
 		<span id="counter">0</span><span id="countertwo"> / 400bytes</span>
 		</div>
@@ -726,7 +726,7 @@ function makeform(a) {
 
 // 답글 등록 폼 글자수 제한
 
-function fnChkByte(obj, maxByte) {
+function ChkByte(obj, maxByte) {
     var content = obj.value;
     var content_len = content.length;
     var rbyte = 0;
@@ -751,7 +751,7 @@ function fnChkByte(obj, maxByte) {
   alert("메세지는 최대 " + maxByte + "byte를 초과할 수 없습니다.")
   content2 = content.substr(0,rlen);                                  //문자열 자르기
   obj.value = content2;
-  fnChkByte(obj, maxByte);
+  ChkByte(obj, maxByte);
      }
      else
      {
@@ -864,7 +864,7 @@ $("#targetContainer").on("click", "a#updatetwo", (e) => {
 });
 
 
-//수정 등록 폼 취소
+// 답글 수정 등록 폼 취소
 $("#targetContainer").on("click", "a#canceltwo", (e) => {
 	e.preventDefault();
 	let rno = $(e.target).data("rno");
