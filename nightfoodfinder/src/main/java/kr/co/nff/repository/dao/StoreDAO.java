@@ -105,4 +105,7 @@ public interface StoreDAO {
 	
 	//나의 단골가져오기
 	List<Integer> myfrequent(int no);
+	
+	//주소 업데이트하기
+	void updateStoreAddr(Store store);
 }

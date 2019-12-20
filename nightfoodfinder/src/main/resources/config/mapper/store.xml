@@ -109,7 +109,9 @@
 				s.close_time,
 				s.status,
 				a.city,
-				a.street_load,
+			    a.street_load,
+                a.zip_no,
+                a.addr_detail,
 				c.category_name,
 				s.store_scope_total,
 				s.review_cnt_total,
@@ -208,12 +210,27 @@
 	<update id="updateStoreAddr" parameterType="Store">
 		update tb_address
 		set
-		<if test="city != null">
-			city = #{city},
-		</if>
-		<if test="streetLoad != null">
+		<choose>
+		<when test="city != null">
+			city = #{city}
+		</when>
+		<when test="streetLoad != null">
 			street_load = #{streetLoad}
-		</if>
+		</when>
+		<when test="entY != null">
+  			latitude= #{entY}
+		</when>
+		<when test="entX != null">
+ 			longitude= #{entX}
+		</when>
+		<when test="zipNo != null">
+ 			 zip_no= #{zipNo}
+		</when>
+		<when test="addrDetail != null">
+ 			 addr_detail= #{addrDetail}
+		</when>
+		</choose>
+  		where store_no = #{storeNo}
 	</update>
 
 	<sql id="commonStoreList">
@@ -694,5 +711,8 @@
  		from tb_frequent_store 
  		where store_no = #{storeNo}
 	</select>
+	
+	
+
 	
 </mapper>

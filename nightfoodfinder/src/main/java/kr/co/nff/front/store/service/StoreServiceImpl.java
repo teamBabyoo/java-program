@@ -99,6 +99,7 @@ public class StoreServiceImpl implements StoreService {
 		dao.deleteHoliday(store);
 		dao.updateHoliday(store);
 		dao.storeContentUpdate(store);
+		dao.updateStoreAddr(store);
 	}
 	
 	public List<Review> reviewList(Review review) {
