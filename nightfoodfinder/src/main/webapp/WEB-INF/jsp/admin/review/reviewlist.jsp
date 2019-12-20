@@ -18,33 +18,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
-	<header role="banner">
-		<h1>Admin Panel</h1>
-		<ul class="utilities">
-			<li class="users"><a href="#">My Account</a></li>
-			<li class="logout warn"><a href="${pageContext.request.contextPath}/front/main/main.do">Log Out</a></li>
-		</ul>
-	</header>
-
-	<nav role="navigation">
-		<ul class="main">
-			<li class="member"><a href="${pageContext.request.contextPath}/admin/user/userlist.do">회원관리</a></li>
-			<li class="store"><a href="${pageContext.request.contextPath}/admin/store/storelist.do">가게관리</a></li>
-				<li class="stat"><a
-				href="${pageContext.request.contextPath}/admin/stat/statlist.do">통계관리</a></li>
-			<li class="review"><a href="#">리뷰관리</a>
-				<ul>
-					<li><a class="review_all" href="${pageContext.request.contextPath}/admin/review/reviewlist.do">전체리뷰</a></li>
-					<li><a class="review_report" href="${pageContext.request.contextPath}/admin/review/reportedreviewlist.do">신고리뷰</a></li>
-				</ul></li>
-
-		
-
-
 	
-		</ul>
-	</nav>
-
+ <c:import url="/WEB-INF/jsp/include/adminsidemenu.jsp" />
 	<main role="main">
 
 	<section class="panel ">
@@ -71,7 +46,7 @@
 				</div>
 			<!---------- 서치 끝 --------->
 
-			<div class="searchcnt">전체 : ${pagination.listCnt}개</div>
+			<div class="searchcnt-review">전체 : ${pagination.listCnt}개</div>
 		<table id="review-table">
 			
 			<li>
@@ -202,14 +177,14 @@
 				btn[i].onclick = function(e) {
 					let reComment = $(e.target).siblings(".reComment").text();
 					if (reComment.length < 1) {
-						reComment = "사장님 리뷰가 없습니다.";
+						reComment = "사장님 답글이 없습니다.";
 					} else {
-						reComment = "사장님 리뷰 : " + reComment;
+						reComment = "사장님 답글  : " + reComment;
 					}
 
 					modal.style.display = "block";
 					$(".modal-content p:eq(0)").text(
-							"리뷰 : " + $(e.target).text())
+							"리뷰  : " + $(e.target).text())
 					$(".modal-content p:eq(1)").text(reComment)
 				}
 			}
