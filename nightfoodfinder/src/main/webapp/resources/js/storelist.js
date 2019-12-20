@@ -1,5 +1,5 @@
 $(() => {
-
+	/* 스토어 리스트의 이미지 슬라이더 */
 	var main = $('.bxslider').bxSlider({
 		mode: 'fade',
 		controls : true,
@@ -7,52 +7,15 @@ $(() => {
 	    slideWidth: 300,
 	    slideMargin: 0,
 		pager:true	//페이징
-		
 	});
 	
 	
      
 	/* 지도 스크롤 고정 부분*/
-	$(window).ready(() => {
+	$(window).ready(() => {                   /* 헤더의 height만큼 뺀다 */
 		const contentHeight = window.innerHeight - 60;
 		$('.rightarea').css('height', contentHeight);
 	});
-	
-	/*
-	 
-	 지도의 높이 고정 위해 헤더 부분을
-	 window.innerHeight 에서 헤더만큼 빼준다.
-	 
-	 */
-	
-	
-	
-	
-	
-
-		
-		
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
@@ -129,7 +92,7 @@ $(() => {
 				$("#storePageDiv").html(html);
 			},
 			error: () => {
-				console.log(111);
+				console.log("에러발생");
 			}
 		});
 		
