@@ -22,7 +22,7 @@ $(() => {
 	
 	
 	
-	// page 클리
+	// page 클릭
 	$("#storePageDiv").on("click", "ul > li > a", (e) => {
 //		let fd = new FormData(document.querySelector("#searchStoreForm"));
 		let fd = new FormData();
@@ -41,29 +41,49 @@ $(() => {
 				
 				if (!data.sList) {
 					sHtml += `
-						<tr>
-							<td colspan="5">검색 결과가 없습니다.</td>
-						</tr>
+						<li class="storeLn sto_li clearboth">검색 결과가 없습니다.</li>
 					`;
 				} else {
 					for (let s of data.sList) {
 						sHtml += `
-							<tr class="store">
-									<td>${s.storeNo}</td>
-									<td><a href="storedetail.do?no=${s.storeNo}">${s.storeName}</a></td>
-									<td>${s.storeTell}</td>
-									<td>${s.openTime}</td>
-								</tr>
+							<li id="li_${status.count}" class="storeLn sto_li clearboth" data-store="${s.storeName}">
+					        <a href="storedetail.do?no=${s.storeNo}" ></a>
+							<div>
+					       		<!-- 썸네일 사진 들어갈 div -->
+					       		<div class="home__slider">
+									<div class="bxslider">  
+						    				<img src="<c:url value='/resources/images/flower.jpg' />" />
+											<img src="<c:url value='/resources/images/flower2.jpg' />" />
+											<img src="<c:url value='/resources/images/flower5.jpg' />" />
+									</div>
+								</div>
+							</div>
+							<!-- 가게 리스트의 내용 부분 -->
+				       		<div class="sto_li_content" >
+								<div>
+									<span>${s.categoryName}</span>
+									<span class="sto_scope">
+										<span class="scope_star">★</span>${s.scope}(${s.reviewCntTotal})
+									</span>		
+								</div>
+								<div class="store_name">${s.storeName}</div>
+								<div class="store_info">
+									<div>가격대 : ${s.priceType}</div>
+									<div>영업 시간 : ${s.openTime} ~ ${s.closeTime}</div>
+									<div></div>
+								</div>		
+				       		</div>
+				       	</li>
 							`;
 					}
 				}
 				
-				$("#storetListTbody").html(sHtml);
+				$(".storelist").html(sHtml);
 				
 				// 페이징
 				let html = "";
 				html += `
-				<ul class="pagination">
+				<ul class="stolist_pagination">
 				`;
 				if (data.pi.prev) {
 					html += `
@@ -80,7 +100,6 @@ $(() => {
 						</li>
 					`;
 				}
-				
 				if (data.pi.next) {
 					html += `
 						<li class="page-item">

@@ -53,6 +53,8 @@ public class StoreServiceImpl implements StoreService {
 		// 지워야함
 		System.out.println("llll : " + search.getPage());
 		System.out.println("llll : " + search.getStartList());
+		System.out.println(search.toString());
+		System.out.println("검색결과 몇개? " + dao.storeListCnt(search));
 		result.put("sList", dao.storeList(search));
 		result.put("pi", new Pagination(search.getPage(), dao.storeListCnt(search), 10, 5));
 		return result;

@@ -36,7 +36,7 @@
 				<div class="listnotice">
 					<div>
 						<i class="far fa-moon"></i>
-						<span>${sList.size()} 개의 가게가 검색 되었습니다.</span>
+						<span>${result.pi.listCnt} 개의 가게가 검색 되었습니다.</span>
 					</div>
 				</div>
 				<div class="storelist">
@@ -79,7 +79,7 @@
 				    </ul>
 					<%-- paging 영역 --%>
 					<div id="storePageDiv">
-						<ul class="stolist_pagination modal-3">
+						<ul class="stolist_pagination">
 							<c:if test="${result.pi.prev}">
 								<li class="page-item">
 									<a class="page-link" href="#${result.pi.startPage- 1}" data-page="${result.pi.startPage- 1}"> Previous</a>
