@@ -57,9 +57,14 @@
 					       		<!-- 썸네일 사진 들어갈 div -->
 					       		<div class="home__slider">
 									<div class="bxslider">  
-						    				<img src="<c:url value='/resources/images/flower.jpg' />" />
+						    				<c:forEach items="${sList.flieVoList}" var="img">
+												<div>
+		   											<img src="${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}" />
+												</div>
+											</c:forEach>
+						    				<%-- <img src="<c:url value='/resources/images/flower.jpg' />" />
 											<img src="<c:url value='/resources/images/flower2.jpg' />" />
-											<img src="<c:url value='/resources/images/flower5.jpg' />" />
+											<img src="<c:url value='/resources/images/flower5.jpg' />" /> --%>
 									</div>
 								</div>
 							</div>
