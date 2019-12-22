@@ -75,7 +75,8 @@ public class Store  {
 		// XY 좌표 받기
 		private String longitude;
 		private String latitude;
-		
+	
+	private List<FileVO> fileVoList;
 		
 		
 }

@@ -26,9 +26,13 @@
 		<!-- 헤더 -->
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 		<!-- // 헤더 -->
+		
 		<c:set var="sList" value="${result.sList}" />
 		<!-- 컨텐트  -->
 		<div class="content list_content">
+			<div class="search_conditions">
+					검색조건을 뿌려주자
+			</div>
 			<div class="leftarea">
 				<div id="map"></div>
 			</div>
