@@ -22,7 +22,9 @@ public interface StoreDAO {
 	List<String> cityList();
 	// 스토어 리스트
     List<Store> storeList(Search search);
+    // 스토어 검색 결과의 전체 크기
     int storeListCnt(Search search);
+    
     Store selectOneStore(int no);
     Store selectContent(int no);
     List<Menu> storeMenuList(int storeNo);

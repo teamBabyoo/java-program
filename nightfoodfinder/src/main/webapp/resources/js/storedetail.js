@@ -965,7 +965,6 @@ function mapDraw(longitude, latitude, storeName){
       });
       infowindow.setContent(locations[i][0]);
       infowindow.open(map, marker);
-      markerArr.push(marker);
     }
 	
 }

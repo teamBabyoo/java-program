@@ -166,14 +166,12 @@
         <!----------- 모달팝업 ----------------->
 		<div id="myModal" class="modal">
 			<!-- Modal content -->
-			<div class="modal-content">
+			<div class="modal-content-reportreview">
 				<span class="close">&times;</span>
 				<p></p>
 				<div class="one">
-
 				</div>
 				<div class="two">
-
 				</div>
 			<div id="paginationBox_two"></div>
 			</div>
@@ -222,13 +220,13 @@
 					console.log(data);
 					$("#myModal").data("reviewNo", reviewNo);
 					modal.style.display = "block";
-					$(".modal-content p:eq(0)").text(
+					$(".modal-content-reportreview p:eq(0)").text(
 							"리뷰: " +  content) 
-					$(".modal-content div").empty()
+					$(".modal-content-reportreview div").empty()
 					for(var i=0; i< data.list.length; i++){
-						$(".modal-content div.one").append("<p>" + data.list[i].reason + "</p>")
+						$(".modal-content-reportreview div.one").append("<p>" + data.list[i].reason + "</p>")
 											    //  .append("<li>" + data.list[i].nickName + "</li>")
-						$(".modal-content div.two").append("<p>" + data.list[i].nickName + "</p>")
+						$(".modal-content-reportreview div.two").append("<p>" + data.list[i].nickName + "</p>")
 
 						console.log(data.list[i].reason);
 						console.log(data.list[i].nickName);
@@ -240,7 +238,7 @@
 					<!-- 이전 버튼 -->
 					if (data.paginationtwo.prev) {
 						
-						html += `<li class="page-item_two"><a class="page-link_two" href="#\${data.paginationtwo.startPage - 1}"
+						html += `<li class="page-item_two"><a class="page-link_two" href="#\${data.paginationtwo.startPage - 4}"
 							onClick="reportmodal(\${reviewNo}, '\${data.paginationtwo.startPage - 1}')">Previous</a>
 							</li>`;
 					}	

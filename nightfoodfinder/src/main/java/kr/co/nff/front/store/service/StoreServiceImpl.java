@@ -48,13 +48,15 @@ public class StoreServiceImpl implements StoreService {
 	
 	// 가게 전체 리스트
 	@Override
-	public Map<String, Object>  storeList(Search search){
+	public Map<String, Object> storeList(Search search){
 		Map<String, Object> result = new HashMap<>();
 		// 지워야함
 		System.out.println("llll : " + search.getPage());
 		System.out.println("llll : " + search.getStartList());
+		System.out.println(search.toString());
+		System.out.println("검색결과 몇개? " + dao.storeListCnt(search));
 		result.put("sList", dao.storeList(search));
-		result.put("pi", new Pagination(1, dao.storeListCnt(search), 2, 3));
+		result.put("pi", new Pagination(search.getPage(), dao.storeListCnt(search), 10, 5));
 		return result;
 	}
 
