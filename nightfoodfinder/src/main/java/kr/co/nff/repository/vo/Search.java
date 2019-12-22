@@ -32,6 +32,10 @@ public class Search extends Pagination {
 	private int storeNo;
 	private int userNo;
 	
+	//award에서 top10 list
+	private String storeNoList;
+	
+	
 	private String userGender;
 	private int genderType;
 

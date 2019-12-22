@@ -45,17 +45,17 @@ public class AdminStatController {
 		model.addAttribute("countJoinStore", service.countJoinStore());
 	}
 	
-//	@RequestMapping("/insertAward.do")
-//	public String insertAward(Search search) {
-//		
-//		service.insertAward(search);
-//		
-//		String userAge = search.getUserAge();
-//		
-//		String url = "redirect:statlist.do?" + "userAge=" + userAge;
-//		
-//		return url;
-//	}
+	@RequestMapping("/insertAward.do")
+	public String insertAward(Search search) {
+		
+		service.insertAward(search);
+		
+		String userAge = search.getUserAge();
+		
+		String url = "redirect:statlist.do?" + "userAge=" + userAge;
+		
+		return url;
+	}
 
 	
 }

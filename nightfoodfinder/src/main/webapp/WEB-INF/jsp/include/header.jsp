@@ -79,7 +79,7 @@
     <div class="float_r">
       <ul>
         <li><a href="#">내주변맛집</a></li>
-        <li><a href="#">NFF Awards</a></li>
+        <li><a href="${pageContext.request.contextPath}/front/award/awardlist.do">NFF Awards</a></li>
      <%--    <c:if test="${loginUser && loginStore}"> --%>
 	        <li id="notice_btn" data-user="${loginUser}" data-store="${loginStore}">
 	        	<i class="fa fa-bell-o" aria-hidden="true" ></i>

@@ -17,8 +17,8 @@ public interface StatDAO {
 	public Stat countJoinUser();
 	public Stat countJoinStore();
 	
-//	public void insertAward(Search search);
-//	public void deleteAward(Search search);
+	public void insertAward(Search search);
+	public void deleteAward(Search search);
 	
 	List<Stat> statFrequentStore(Search search);
 	List<Stat> statMaleFrequentStore(Search search);

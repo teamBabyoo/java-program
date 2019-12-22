@@ -76,7 +76,12 @@ public class Store  {
 		private String longitude;
 		private String latitude;
 		
-		
+		//award store review image
+		private int fileNo;
+		private String orgName;
+		private String sysName;
+		private String path;
+		private String extension;
 		
 }
 	

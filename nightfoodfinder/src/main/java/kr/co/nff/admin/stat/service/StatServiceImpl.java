@@ -59,6 +59,7 @@ public class StatServiceImpl implements StatService{
 		List<Object> rankList = new ArrayList<>();
 		List<Object> storeNameList = new ArrayList<>();
 		List<Object> fqCountList = new ArrayList<>();
+		List<Object> storeNoList = new ArrayList<>();
 					
 		Map<String, Object> statMap = new HashMap<>();
 		
@@ -72,11 +73,13 @@ public class StatServiceImpl implements StatService{
 			rankList.add(k, stat.getRank());
 			storeNameList.add(k, stat.getStoreName());
 			fqCountList.add(k, stat.getFqCount());
+			storeNoList.add(k, stat.getStoreNo());
 			}
 			if (k == 10 || k + 1 == statList.size()) {
 				statMap.put("rankList", rankList);
 				statMap.put("storeNameList", storeNameList);
 				statMap.put("fqCountList", fqCountList);
+				statMap.put("storeNoList", storeNoList);
 				break;
 			}
 			k++;
@@ -102,20 +105,22 @@ public class StatServiceImpl implements StatService{
 	}
 
 	
-//	@Override
-//	public void insertAward(Search search) {
-//		switch(search.getGenderType()) {
-//		case 1: search.setUserGender("전체");
-//		break;
-//		case 2: search.setUserGender("여자");
-//		break;
-//		case 3: search.setUserGender("남자");
-//		break;
-//		}
-//		dao.deleteAward(search);
-//		dao.insertAward(search);
-//	}
-//	
+	@Override
+	public void insertAward(Search search) {
+		switch(search.getGenderType()) {
+		case 1: search.setUserGender("전체");
+		break;
+		case 2: search.setUserGender("여자");
+		break;
+		case 3: search.setUserGender("남자");
+		break;
+		}
+		String storeNoList = search.getStoreNoList();
+		search.setStoreNoList(storeNoList.substring(1, storeNoList.length()-1));
+		dao.deleteAward(search);
+		dao.insertAward(search);
+	}
+	
 	@Override
 	public void insertVisitor(Stat stat) {
 		dao.insertVisitor(stat);

@@ -65,13 +65,30 @@
 <c:choose>
 <c:when test="${i == 1}">
 <c:set value="show_graph" var="className"/>
+<c:set value= "${statMap['0'].allMap}" var="mapName" />
+</c:when>
+<c:when test="${i == 2}">
+<c:set value="hidden_graph" var="className"/>
+<c:set value= "${statMap['0'].femaleMap}" var="mapName" />
 </c:when>
 <c:otherwise>
 <c:set value="hidden_graph" var="className"/>
+<c:set value= "${statMap['0'].maleMap}" var="mapName" />
 </c:otherwise>
 </c:choose>
-		<%-- <span class="button"><a href="insertAward.do?genderType=${i}&userAge=${search.userAge}">award 등록</a></span> --%>
-    <div id="chartcontainer-${i}" class=${className}></div>	
+<form method='post' action='insertAward.do'>
+<input type="hidden" name="genderType" value="${i}" />
+<input type="hidden" name="userAge" value="${search.userAge}" />
+<c:set value="${search.userAge}" var="userAge"/>
+<input type="hidden" name="storeNoList" value="${mapName.storeNoList}" />
+<c:if test="${userAge != ''}">
+<c:if test="${userAge ne null}">
+		<button type='submit' class="${className}">award 등록</button>
+		</c:if>
+		</c:if>
+</form>
+ <span class="button"><a href="${pageContext.request.contextPath}/front/award/awardlist.do" target="_blank" class="${className}">award 목록</a></span>
+    <div id="chartcontainer-${i}" class="${className}"></div>	
 							</c:forEach>
 
 </figure>
@@ -93,7 +110,7 @@ let statMap =  JSON.parse('${statMap}');
 let allMap = statMap["0"].allMap;
 let maleMap = statMap["0"].maleMap;
 let femaleMap = statMap["0"].femaleMap;
-console.log(statMap["0"]);
+console.log(statMap["0"].allMap.storeNoList);
 Highcharts.chart('chartcontainer-1', {
     chart: {
         type: 'bar'

@@ -62,17 +62,17 @@
     limit 10
     	</select>
 
-<!-- <insert id="insertAward" parameterType="Search">
+<insert id="insertAward" parameterType="Search">
 INSERT INTO tb_award 
-(user_gender, user_age, reg_date) 
-VALUES (#{userGender}, #{userAge}, NOW());
+(user_gender, user_age, store_no_list, reg_date) 
+VALUES (#{userGender}, #{userAge}, #{storeNoList}, NOW());
 </insert>
 
 <delete id="deleteAward" parameterType="Search">
 DELETE FROM tb_award 
 WHERE user_gender = #{userGender} 
 and user_age = #{userAge};
-</delete> -->
+</delete> 
 
 	<!-- 연령별 필터 -->
 		<sql id="statAgeFilter">

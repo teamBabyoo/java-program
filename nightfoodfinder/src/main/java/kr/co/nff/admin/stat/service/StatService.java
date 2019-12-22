@@ -16,5 +16,5 @@ public interface StatService {
 	List<Stat> countByDate();
 	Stat countJoinUser();
 	Stat countJoinStore();
-//	void insertAward(Search search);
+	void insertAward(Search search);
 }

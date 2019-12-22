@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.nff.repository.dao.AwardDAO">
+
+<select id="listAwardStore" resultType="Award">
+select * 
+from tb_award
+order by reg_date desc
+</select>
+
+<select id="detailAwardStore" parameterType="int" resultType="Store">
+  select s.store_no,
+				s.store_name,
+				s.store_tell,
+				c.category_name as category,
+				s.open_time,
+				s.close_time,
+			    a.street_load,
+                a.addr_detail,
+				ifnull(truncate(sum(r.store_scope) / count(r.writer_no), 1), 0) as scope,
+                f.*
+		from tb_store as s
+		inner join tb_address as a
+		   on s.store_no = a.store_no
+           inner join tb_category c
+		on s.store_category = c.category_no
+         left outer join tb_file f
+        on s.store_no = f.store_no
+		left outer join tb_review as r
+			on s.store_no = r.store_no
+		where s.store_no = #{storeNo};
+</select>
+
+
+
+</mapper>
