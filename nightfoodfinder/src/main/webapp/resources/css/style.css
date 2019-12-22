@@ -822,8 +822,12 @@ header div:nth-child(3) li span {
 }
 .list_content {
 	display: grid;
-	grid-template-columns: 1fr 797px;
-	padding-right: 0px;
+    grid-template-rows: 48px 1fr;
+    grid-template-columns: 1fr 797px;
+    grid-template-areas:
+        "header header"
+        "leftarea rightarea";
+    padding-right: 0px;
 }
 .listnotice {
 	padding: 10px;
@@ -853,7 +857,15 @@ header div:nth-child(3) li span {
 .fas {
 	width: 50px;
 }
+.search_conditions {
+	grid-area: header;
+	border-bottom: 1px solid rgb(235, 235, 235);
+}
+.leftarea {
+	grid-area: leftarea;
+}
 .rightarea{
+	gird-area: rightarea;
 	min-width: 797px; 
 	padding: 10px;
 	overflow: scroll;

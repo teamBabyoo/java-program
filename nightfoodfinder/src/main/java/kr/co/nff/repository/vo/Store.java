@@ -82,6 +82,10 @@ public class Store  {
 		private String sysName;
 		private String path;
 		private String extension;
+	
+	// storelist images
+	private List<FileVO> fileVoList;
+		
 		
 }
 	

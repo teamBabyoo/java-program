@@ -45,26 +45,12 @@
           
           	<div class="select clearboth tab_3 hidden">
           		<!-- 가격별 검색 -->
-            	<div>
-              		<label for="price_1" class="types">1만원 미만</label>
-              		<input id="price_1" type="checkbox" name="priceTypeNo" value="1" class="hidden" />
-            	</div>
-
-            	<div>
-              		<label for="price_2" class="types">1만원대</label>
-              		<input id="price_2" type="checkbox" name="priceTypeNo" value="2" class="hidden" />
-              		
-            	</div>
-
-	            <div>
-	              <label for="price_3" class="types">2만원대</label>
-	              <input id="price_3" type="checkbox" name="priceTypeNo" value="3" class="hidden" />
-	            </div>
-	
-	            <div>
-	              <label for="price_4" class="types">3만원 이상</label>
-	              <input id="price_4" type="checkbox" name="priceTypeNo" value="4" class="hidden"  />
-	            </div>
+          		<c:forEach items="${priceList}" var="price" varStatus="status">
+	            	<div>
+	              		<label for="price_${status.count}" class="types">${price.priceType}</label>
+	              		<input id="price_${status.count}" type="checkbox" name="priceTypeNo" value="${price.priceTypeNo}" class="hidden" />
+	            	</div>
+          		</c:forEach>
           	</div>
           <!-- tab_3 -->
 
