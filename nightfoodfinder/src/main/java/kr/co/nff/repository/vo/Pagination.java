@@ -91,7 +91,6 @@ public class Pagination {
 		if (this.endPage > this.pageCnt) {
 			this.endPage = this.pageCnt;
 			this.next = false;
-			
 		}
 		
 	}
