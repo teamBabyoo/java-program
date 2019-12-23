@@ -19,7 +19,6 @@
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-<%-- <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/css/jquery.bxslider.css"> --%>
 </head>
 <body>
 	<div class="wrapper list_wrap">
@@ -51,20 +50,27 @@
 					
 			<!-- store list 부분 -->
 					<c:forEach var="s" items="${sList}" varStatus="status">
+						<c:set value="${s.fileVoList}" var="files" />
 				       	<li id="li_${status.count}" class="storeLn sto_li clearboth" data-store="${s.storeName}">
 					        <a href="storedetail.do?no=${s.storeNo}" ></a>
 							<div>
 					       		<!-- 썸네일 사진 들어갈 div -->
 					       		<div class="home__slider">
-									<div class="bxslider">  
-<%-- 						    				<c:forEach items="${sList.flieVoList}" var="img">
-												<div>
+									<div class="bxslider">
+										<!-- 사진이 없을때 default 이미지 보여준다. -->  
+										<c:if test="${empty files}">
+											<img src="https://i.pinimg.com/originals/33/6a/ea/336aea314c68c0bc3eb8f6b5cd799de4.jpg" />
+										</c:if>
+										
+										<!--  사진이 있을 때 이미지 슬라이더 -->
+										<c:if test="${not empty files}">
+ 						    				<c:forEach items="${files}" var="img">
 		   											<img src="${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}" />
-												</div>
-											</c:forEach> --%>
-						    				<img src="<c:url value='/resources/images/flower.jpg' />" />
+											</c:forEach>
+										</c:if> 
+						    			<%-- 	<img src="<c:url value='/resources/images/flower.jpg' />" />
 											<img src="<c:url value='/resources/images/flower2.jpg' />" />
-											<img src="<c:url value='/resources/images/flower5.jpg' />" />
+											<img src="<c:url value='/resources/images/flower5.jpg' />" /> --%>
 									</div>
 								</div>
 							</div>
@@ -134,7 +140,6 @@
 		<input name="keyword" type="hidden" value="${search.keyword}" />
 	</form>
 	
-	<%-- <script src="<c:url value='/resources/js/jquery.bxslider.js' />"></script> --%>
  	<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 	<script src="<c:url value='/resources/js/storelist.js' />"></script>
 	<script src="<c:url value='/resources/js/map_in_storelist.js' />"></script>
