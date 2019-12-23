@@ -22,34 +22,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
-	<header role="banner">
-		<h1>Admin Panel</h1>
-		<ul class="utilities">
-			<li class="users"><a href="#">My Account</a></li>
-			<li class="logout warn"><a
-				href="${pageContext.request.contextPath}/front/main/main.do">Log
-					Out</a></li>
-		</ul>
-	</header>
-	<nav role="navigation">
-		<ul class="main">
-			<li class="member"><a
-				href="${pageContext.request.contextPath}/admin/user/userlist.do">회원관리</a></li>
-			<li class="store"><a
-				href="${pageContext.request.contextPath}/admin/store/storelist.do">가게관리</a></li>
-			<li class="stat"><a
-				href="${pageContext.request.contextPath}/admin/stat/statlist.do">통계관리</a></li>
-			<li class="review"><a href="#">리뷰관리</a>
-				<ul>
-					<li><a class="review_all"
-						href="${pageContext.request.contextPath}/admin/review/reviewlist.do">전체리뷰</a></li>
-					<li><a class="review_report" href="#">신고리뷰</a></li>
-				</ul></li>
-
-
-		</ul>
-	</nav>
-
+	    <c:import url="/WEB-INF/jsp/include/adminsidemenu.jsp" />
 	<main role="main">
 
 
@@ -74,9 +47,9 @@
 			</td>
 					<th class="admssearchtable-lboi">성별</th>
 					<td class="admssearchtable-lboi">
-							<button id="genderchoice" onclick="fnMove('1')">전체</button>
-							<button id="genderchoice" onclick="fnMove('2')">여자</button>
-							<button id="genderchoice" onclick="fnMove('3')">남자</button>
+							<button id="genderchoice" onclick="fnShow('1')">전체</button>
+							<button id="genderchoice" onclick="fnShow('2')">여자</button>
+							<button id="genderchoice" onclick="fnShow('3')">남자</button>
 					</td>
 				</tr>
 			</table>
@@ -88,21 +61,56 @@
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
 <figure class="highcharts-figure">
-    <div id="chartcontainer-1"></div>
-    <div id="chartcontainer-2"></div>
-    <div id="chartcontainer-3"></div>
+<c:forEach var="i" begin="1" end="3" step="1">
+<c:choose>
+<c:when test="${i == 1}">
+<c:set value="show_graph" var="className"/>
+<c:set value= "${statMap['0'].allMap}" var="mapName" />
+</c:when>
+<c:when test="${i == 2}">
+<c:set value="hidden_graph" var="className"/>
+<c:set value= "${statMap['0'].femaleMap}" var="mapName" />
+</c:when>
+<c:otherwise>
+<c:set value="hidden_graph" var="className"/>
+<c:set value= "${statMap['0'].maleMap}" var="mapName" />
+</c:otherwise>
+</c:choose>
+<form method='post' action='insertAward.do'>
+<input type="hidden" name="genderType" value="${i}" />
+<input type="hidden" name="userAge" value="${search.userAge}" />
+<c:set value="${search.userAge}" var="userAge"/>
+<input type="hidden" name="storeNoList" value="${mapName.storeNoList}" />
+<c:if test="${userAge != ''}">
+<c:if test="${userAge ne null}">
+		<button type='submit' class="${className}">award 등록</button>
+		</c:if>
+		</c:if>
+</form>
+ <span class="button"><a href="${pageContext.request.contextPath}/front/award/awardlist.do" target="_blank" class="${className}">award 목록</a></span>
+    <div id="chartcontainer-${i}" class="${className}"></div>	
+							</c:forEach>
+
 </figure>
+
 <script>
-function fnMove(seq){
-    var offset = $("#chartcontainer-" + seq).offset();
-    $('html, body').animate({scrollTop : offset.top - 150}, 400);
+function fnShow(seq){
+	for (let i = 1; i < 4; i++) {
+		
+	let graphs = document.querySelector("#chartcontainer-" + i);
+	graphs.classList.replace("show_graph", "hidden_graph");
+		
+	}
+	
+    let graph = document.querySelector("#chartcontainer-" + seq);
+    graph.classList.replace("hidden_graph", "show_graph");
 }
 
 let statMap =  JSON.parse('${statMap}');
 let allMap = statMap["0"].allMap;
 let maleMap = statMap["0"].maleMap;
 let femaleMap = statMap["0"].femaleMap;
-console.log(statMap["0"]);
+console.log(statMap["0"].allMap.storeNoList);
 Highcharts.chart('chartcontainer-1', {
     chart: {
         type: 'bar'

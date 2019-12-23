@@ -91,7 +91,7 @@ function noticeList() {
 						content = `${notice.fromUsername}${notice.noticeContent}`;
 						break;
 					case "4": // store : 내 가게의 단골 리스트
-						addr += `${notice.storeNo}`;
+						addr = `${notice.storeNo}`;
 						content = `${notice.fromUsername}${notice.noticeContent}`;
 						break;
 					case "5": // store : 내 가게 상세페이지에 새 리뷰가 등록 되었을 때

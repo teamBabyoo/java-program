@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.nff.admin.store.service.StoreService;
+import kr.co.nff.front.notice.service.NoticeService;
 import kr.co.nff.repository.vo.Category;
+import kr.co.nff.repository.vo.Notice;
 import kr.co.nff.repository.vo.Search;
 import kr.co.nff.repository.vo.Store;
 import kr.co.nff.repository.vo.User;
@@ -22,6 +24,9 @@ public class AdminStoreController {
 	
 	@Autowired
 	private StoreService service;
+	
+	@Autowired
+	private NoticeService service1;
 	
 	//가게 목록
 	@RequestMapping("/storelist.do")
@@ -76,6 +81,13 @@ public class AdminStoreController {
 	@RequestMapping("/storestatus.do")
 	public String storeAdmin(int no) {
 		service.statusStore(no);
+		
+		Notice notice = new Notice();
+		notice.setStoreNo(no);
+		notice.setNoticeCode("3");
+		
+		service1.insertNotice(notice);
+		
 		return "redirect:storelist.do";
 	}
 

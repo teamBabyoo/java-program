@@ -9,81 +9,21 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="<c:url value="/resources/css/admin/font-awesome.min.css" />">
-    <link rel="stylesheet" href="<c:url value="/resources/css/admin/style.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/css/admin/admin_style.css" />">
     
-<style type="text/css">
-/* The Modal (background) */
-.modal {
-	display: none; /* Hidden by default */
-	position: fixed; /* Stay in place */
-	z-index: 1; /* Sit on top */
-	left: 0;
-	top: 0;
-	width: 100%; /* Full width */
-	height: 100%; /* Full height */
-	overflow: auto; /* Enable scroll if needed */
-	background-color: rgb(0, 0, 0); /* Fallback color */
-	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-}
 
-/* 모달 내용/팝업박스  */
-.modal-content {
-	background-color: #fefefe;
-	margin: 15% auto; /* 15% from the top and centered */
-	padding: 20px;
-	border: 1px solid #888;
-	width: 50%; /* Could be more or less, depending on screen size */
-}
-/* 닫기 버튼 */
-.close {
-	color: #aaa;
-	float: right;
-	font-size: 28px;
-	font-weight: bold;
-}
-
-.close:hover, .close:focus {
-	color: black;
-	text-decoration: none;
-	cursor: pointer;
-}
-
-</style>
     
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
-    <header role="banner">
-        <h1>Admin Panel</h1>
-        <ul class="utilities">
-          <li class="users"><a href="#">My Account</a></li>
-		  <li class="logout warn"><a href="${pageContext.request.contextPath}/front/main/main.do">Log Out</a></li>
-		</ul>
-	</header>
-
-	<nav role="navigation">
-		<ul class="main">
-			<li class="member"><a href="${pageContext.request.contextPath}/admin/user/userlist.do">회원관리</a></li>
-			<li class="store"><a href="${pageContext.request.contextPath}/admin/store/storelist.do">가게관리</a></li>
-				<li class="stat"><a
-				href="${pageContext.request.contextPath}/admin/stat/statlist.do">통계관리</a></li>
-			<li class="review"><a href="#">리뷰관리</a>
-				<ul>
-				<li><a class="review_all" href="${pageContext.request.contextPath}/admin/review/reviewlist.do">전체리뷰</a></li>
-                <li><a class="review_report" href="${pageContext.request.contextPath}/admin/review/reportedreviewlist.do">신고리뷰</a></li>
-            </ul>
-        </li>
-   
-        </ul>
-      </nav>
+ <c:import url="/WEB-INF/jsp/include/adminsidemenu.jsp" />
       
       <main role="main">
        
       
         <section class="panel ">
-          <h2>Table</h2>
-          <table>
+          <h2>신고 리뷰</h2>
+         
           
           <!---------- 서치 ---------->
 				<div class="form-group row justify-content-center">
@@ -129,8 +69,10 @@
 			<!---------- 서치 끝 --------->
 			
 			
- 			<div>전체 : ${pagination.listCnt}개</div>
+ 			<div class="searchcnt-review">전체 : ${pagination.listCnt}개</div>
 			
+			 <table id="review-table">
+			 
 			<li>
 				<div class="allCheck">
 				<input type="checkbox" id="allCheck" name="allCheck" />
@@ -140,7 +82,7 @@
 
 			
 			<tr>
-				<th>선택</th>
+				<th class="choice">선택</th>
 				<th>리뷰 쓴 사람 닉네임</th>
 				<th>가게 이름</th>
 				<th>리뷰</th>
@@ -224,10 +166,13 @@
         <!----------- 모달팝업 ----------------->
 		<div id="myModal" class="modal">
 			<!-- Modal content -->
-			<div class="modal-content">
+			<div class="modal-content-reportreview">
 				<span class="close">&times;</span>
 				<p></p>
-				<div></div>
+				<div class="one">
+				</div>
+				<div class="two">
+				</div>
 			<div id="paginationBox_two"></div>
 			</div>
 
@@ -275,14 +220,13 @@
 					console.log(data);
 					$("#myModal").data("reviewNo", reviewNo);
 					modal.style.display = "block";
-					$(".modal-content p:eq(0)").text(
+					$(".modal-content-reportreview p:eq(0)").text(
 							"리뷰: " +  content) 
-// 							"리뷰: " + $(a).text()) 
-					$(".modal-content div").empty()
+					$(".modal-content-reportreview div").empty()
 					for(var i=0; i< data.list.length; i++){
-						$(".modal-content div").append("<p>" + data.list[i].reason + "</p>")
-											   .append("<p>" + data.list[i].nickName + "</p>")
-					
+						$(".modal-content-reportreview div.one").append("<p>" + data.list[i].reason + "</p>")
+											    //  .append("<li>" + data.list[i].nickName + "</li>")
+						$(".modal-content-reportreview div.two").append("<p>" + data.list[i].nickName + "</p>")
 
 						console.log(data.list[i].reason);
 						console.log(data.list[i].nickName);
@@ -294,7 +238,7 @@
 					<!-- 이전 버튼 -->
 					if (data.paginationtwo.prev) {
 						
-						html += `<li class="page-item_two"><a class="page-link_two" href="#\${data.paginationtwo.startPage - 1}"
+						html += `<li class="page-item_two"><a class="page-link_two" href="#\${data.paginationtwo.startPage - 4}"
 							onClick="reportmodal(\${reviewNo}, '\${data.paginationtwo.startPage - 1}')">Previous</a>
 							</li>`;
 					}	

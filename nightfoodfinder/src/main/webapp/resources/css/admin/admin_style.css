@@ -668,3 +668,144 @@ td {
 tspan {
     font-size: 15px;
 }
+
+.show_graph {
+	display : block;
+}
+
+.hidden_graph {
+	display : none;
+}
+  /*승경 시작*/
+
+  th.choice {
+		width: 100px;
+	}
+  
+  li.review ul {
+  	display: none;
+  }
+  
+  li.review:hover ul li {
+  	display: block;
+  }
+  
+  
+  .search-form {
+  	margin-left: 63%;	
+  }
+  select#searchType {
+    height: 23px;
+}
+input#keyword {
+    height: 23px;
+    position: relative;
+    bottom: 1px;
+}
+.searchcnt-review {
+    position: relative;
+    left: 11%;
+    bottom: 63px;
+}
+
+	
+	input#allCheck {
+    position: relative;
+    left: 30px;
+    top: 15px;
+}
+
+div.allCheck label {
+    font-size: 13px;
+    position: relative;
+    bottom: 12px;
+    right: 10px;
+}
+
+
+/* The Modal (background) */
+.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* 모달 내용/팝업박스  */
+.modal-content-reportreview {
+	background-color: #fefefe;
+	margin: 15% auto; /* 15% from the top and centered */
+	padding: 20px;
+	border: 1px solid #888;
+	width: 50%; /* Could be more or less, depending on screen size */
+	height: 650px;
+}
+
+.modal-content {
+	background-color: #fefefe;
+	margin: 15% auto; /* 15% from the top and centered */
+	padding: 20px;
+	border: 1px solid #888;
+	width: 50%; /* Could be more or less, depending on screen size */
+}
+
+
+/* 닫기 버튼 */
+.close {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close:hover, .close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+/* 모달에 들어가는 사장님 답변 : 리스트에서는 안보이게 하고 모달팝업 띄웠을 때 보이게 하기 위해서 */
+.reComment {
+	display: none
+}
+
+
+
+/*신고리뷰*/
+
+/*모달 페이징*/
+	li.page-item_two {
+		display: inline-block;
+		border: #aaaaaa 1px solid;
+	}
+	ul.pagination_two {
+		text-align: center;
+	}
+
+.two {
+    float: left;
+    margin-left: 55%;
+    position: relative;
+    bottom: 320px;
+}
+
+.one {
+    margin-left: 150px;
+    position: relative;
+    top: 78px;
+}
+
+
+div#paginationBox_two {
+    position: relative;
+    top: 80px;
+    right: 230px;
+    
+    
+  /*승경 끝*/
+

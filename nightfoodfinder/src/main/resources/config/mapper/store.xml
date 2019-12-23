@@ -24,8 +24,8 @@
 		<result column="store_scope_total" property="storeScopeTotal" />
 		<result column="review_cnt_total" property="reviewCntTotal" />
 
-		<collection property="holidayList" column="store_no"
-			select="selectHolidayListByStoreNo" />
+		<collection property="holidayList" column="store_no" select="selectHolidayListByStoreNo" />
+		<collection property="fileVoList" column="store_no" select="selectFileListByStore" />
 	</resultMap>
 	
 	<!-- resultMap (리뷰에 파일리스트 조회) -->
@@ -53,6 +53,15 @@
 		on h.week_no = w.week_no
 		where store_no = #{store_no}
 	</select>
+	<!-- storelist에서 호출하는 사진file select -->
+	<select id="selectFileListByStore" parameterType="int" resultType="FileVO">
+		select *
+		  from tb_file
+		 where store_no = #{store_no}
+		 order by file_group_code desc
+		 limit 5
+	</select>
+
 
 	<!-- review collection이 호출하는 select -->
 	<select id="selectFileListByCode" parameterType="int" resultType="FileVO">
@@ -60,6 +69,9 @@
 		  from tb_file
 		 where file_group_code = #{file_group_code}
 	</select>
+	
+	
+	
 	
 	<!-- 메인에 표시할 가게 상세정보 리스트 -->
 	<select id="mainStoreList" resultMap="storeMap">
@@ -81,12 +93,12 @@
 		limit 5
 	</select>
 
-	<!-- 헤더 검색바에 줄 카테고리 리스트 가져오기 -->
+<!-- 검색 헤더 부분 시작 -->
+
 	<select id="selectCategory" resultType="Category">
 		select * from tb_category
 	</select>
 
-	<!-- 헤더 검색바에 줄 지역구 리스트 -->
 	<select id="cityList" resultType="String">
 		select distinct a.city
 		from
@@ -94,6 +106,14 @@
 		inner join tb_address a
 		on s.store_no = a.store_no
 	</select>
+	
+	<select id="selectPriceType" resultType="PriceType">
+		select * from tb_price_type
+	</select>
+	
+<!-- 검색 헤더 부분 끝 -->
+	
+	
 
 	<select id="selectOneStore" resultType="Store"
 		parameterType="int">
@@ -109,7 +129,11 @@
 				s.close_time,
 				s.status,
 				a.city,
-				a.street_load,
+			    a.street_load,
+                a.zip_no,
+                a.addr_detail,
+                a.latitude,
+                a.longitude,
 				c.category_name,
 				s.store_scope_total,
 				s.review_cnt_total,
@@ -212,9 +236,23 @@
 			city = #{city},
 		</if>
 		<if test="streetLoad != null">
-			street_load = #{streetLoad}
+			street_load = #{streetLoad},
 		</if>
+		<if test="entY != null">
+  			latitude= #{entY},
+		</if>
+		<if test="entX != null">
+ 			longitude= #{entX},
+		</if>
+		<if test="zipNo != null">
+ 			 zip_no= #{zipNo},
+		</if>
+		<if test="addrDetail != null">
+ 			 addr_detail = #{addrDetail}
+		</if>
+  		where store_no = #{storeNo}
 	</update>
+
 
 	<sql id="commonStoreList">
 		  from tb_store s
@@ -257,14 +295,12 @@
 					#{p}
 				</foreach>
 			</if>
-	
 	</sql>
 
 	<!-- 스토어 리스트 -->
 	<select id="storeList" resultType="Store" parameterType="Search">
 		select distinct s.*,
 			   a.*,
-			   m.*,
 			   p.price_type,
 			   c.category_name,
 			   ifnull(round(s.store_scope_total / s.review_cnt_total, 1), 0) scope
@@ -285,7 +321,8 @@
 		</choose>
 		limit #{startList}, #{listSize}
 	</select>
-	<!-- 스토어 리스트 -->
+	
+	<!-- 검색 조건에 맞는 스토어 리스트 갯수 -->
 	<select id="storeListCnt" resultType="int" parameterType="Search">
 		select count(*)
 		<include refid="commonStoreList" />
@@ -476,6 +513,7 @@
  	select r.store_no,
 				r.writer_no,
 				u.nick_name,
+				u.user_email,
 				r.review_content,
 				r.review_no,
 				r.reg_date,
@@ -698,5 +736,8 @@
  		from tb_frequent_store 
  		where store_no = #{storeNo}
 	</select>
+	
+	
+
 	
 </mapper>

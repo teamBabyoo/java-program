@@ -26,22 +26,27 @@
 		<!-- 헤더 -->
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 		<!-- // 헤더 -->
+		
 		<c:set var="sList" value="${result.sList}" />
 		<!-- 컨텐트  -->
 		<div class="content list_content">
+			<div class="search_conditions">
+					검색조건을 뿌려주자
+			</div>
 			<div class="leftarea">
 				<div id="map"></div>
 			</div>
 			<div class="rightarea">
 				<div class="listnotice">
 					<div>
-						<i class="far fa-moon">${sList.size()} 개의 가게가 검색 되었습니다.</i>
+						<i class="far fa-moon"></i>
+						<span>${result.pi.listCnt} 개의 가게가 검색 되었습니다.</span>
 					</div>
 				</div>
 				<div class="storelist">
       				<ul>
       				<c:if test="${empty sList}">
-						<li>검색 결과가 없습니다.</li>
+						<li class="storeLn sto_li clearboth">검색 결과가 없습니다.</li>
 					</c:if>
 					
 			<!-- store list 부분 -->
@@ -52,9 +57,14 @@
 					       		<!-- 썸네일 사진 들어갈 div -->
 					       		<div class="home__slider">
 									<div class="bxslider">  
-						    				<img src="<c:url value='/resources/images/flower.jpg' />" />
+						    				<c:forEach items="${sList.flieVoList}" var="img">
+												<div>
+		   											<img src="${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}" />
+												</div>
+											</c:forEach>
+						    				<%-- <img src="<c:url value='/resources/images/flower.jpg' />" />
 											<img src="<c:url value='/resources/images/flower2.jpg' />" />
-											<img src="<c:url value='/resources/images/flower5.jpg' />" />
+											<img src="<c:url value='/resources/images/flower5.jpg' />" /> --%>
 									</div>
 								</div>
 							</div>
@@ -78,7 +88,7 @@
 				    </ul>
 					<%-- paging 영역 --%>
 					<div id="storePageDiv">
-						<ul class="stolist_pagination modal-3">
+						<ul class="stolist_pagination">
 							<c:if test="${result.pi.prev}">
 								<li class="page-item">
 									<a class="page-link" href="#${result.pi.startPage- 1}" data-page="${result.pi.startPage- 1}"> Previous</a>

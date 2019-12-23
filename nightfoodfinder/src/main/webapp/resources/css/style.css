@@ -166,7 +166,8 @@ div#commentplace > * { width: 100%; margin: 0 auto; }
 .detail_wrap #commentplace > ul li:nth-child(2) { cursor: pointer; }
 
 .detail_wrap .user_rv .user_rv,
-.detail_wrap .leave_rv.user_rv { margin-bottom: 30px; padding: 20px; background: #fff; border: 1px solid #bfbfbf; border-radius: 5px; }
+.detail_wrap .leave_rv.user_rv { padding: 20px; background: #fff; border-bottom: 1px solid #bfbfbf;}
+.detail_wrap .leave_rv.user_rv { border-radius: 2px; }
 .detail_wrap .user_rv > ul > li { float: left; }
 .detail_wrap .user_rv > ul > li:nth-child(1) { width: 15%; }
 .detail_wrap .user_rv > ul > li:nth-child(1) * { display: block; text-align: center; }
@@ -179,7 +180,11 @@ div#commentplace > * { width: 100%; margin: 0 auto; }
 .detail_wrap .user_rv > ul > li i { font-size: 1.4rem; padding: 5px 0;}
 .detail_wrap .user_rv > ul > li:nth-child(3) > * { text-align: center; padding: 5px; }
 .detail_wrap .user_rv > ul > li:nth-child(2) > ul > li:nth-child(3) > div { margin-right: 10px; display: inline-block; width: 100px; height: 100px; background-size: cover; background-position: center center; }
-
+.detail_wrap .user_rv:hover { background: #f3f3f3; }
+/* .activewhenhover {display: none; }
+.detail_wrap .user_rv:hover .activewhenhover {
+    display: block;
+} */
 
 .detail_wrap .leave_rv textarea { margin: 10px 0; padding: 10px; width: 100%; height: 100%; background: #f3f3f3; resize: none; border: none; border-radius: 2px; }
 .detail_wrap .leave_rv li:nth-child(3) button { float: right; padding: 10px 30px; border: 1px solid #DBDBDB; background: #fff; color: #8a8a8a; transition: all .3s;}
@@ -427,12 +432,21 @@ a.modbtn.can {
 /** 승경 끝 **/
 
 /** 진실 **/
-.detail_wrap #storedetail {
+.detail_wrap #allDetail{
 	display: grid;
-	grid-template-rows: 300px 1fr;
+	grid-template-rows: 10% 1fr 10%;
+}
+
+.detail_wrap #detaillistjs {
+    z-index: 1;
+}    
+.detail_wrap #storedetail {
+
 	margin: 0 auto;
-	width: 960px;
+	width: 100%;
 	/* border: 1px solid red; */
+	height: 100%;
+    overflow: hidden;
 }
 
 .detail_wrap #storeinfo {
@@ -440,6 +454,8 @@ a.modbtn.can {
 	border: 2px solid #c1c1c1;
 	padding: 30px 20px;
 	margin: 0 auto;
+	background: white;
+    margin-top: -10px;
 }
 
 .detail_wrap #stinfo {
@@ -735,6 +751,10 @@ a.modbtn.can {
 	display: none;
 }
 
+.detail_wrap #map{
+	margin: 0 auto;
+}
+
 /* 화살표 */
 .detail_wrap .slick-arrow {
 	z-index: 2; /* prev버튼은 위치 이동시 이미지 뒤로 숨겨짐 */
@@ -753,6 +773,11 @@ a.modbtn.can {
 	right: 0;
 }
 
+.detail_wrap .gmnoprint {
+    display: none;
+}
+
+
 /** 진실 끝 **/
 
 
@@ -768,7 +793,6 @@ header div:nth-child(3) li span {
 	top: 20px;
 	right: 12px;
 }
-
 .notice_content {
 	position: absolute;
 	background: #fff;
@@ -777,17 +801,14 @@ header div:nth-child(3) li span {
 	width: 360px;
 	z-index: 100;
 }
-
 #notice_btn {
 	position: relative;
 }
-
 .newnotice {
 	position: absolute;
 	top: -10px;
 	left: 34px;
 }
-
 #rednotice {
 	background-color: #fa3e3e;
 	border-radius: 3px;
@@ -795,12 +816,10 @@ header div:nth-child(3) li span {
 	padding: 1px 3px;
 	font-size: 2px;
 }
-
 .notice_content ul li {
 	line-height: 5px;
 }
 /*--------------스토어 리스트------------------*/
-
 
 #map {
 	width: 100%;
@@ -808,27 +827,50 @@ header div:nth-child(3) li span {
 }
 .list_content {
 	display: grid;
-	grid-template-columns: 1fr 797px;
-	padding-right: 0px;
+    grid-template-rows: 48px 1fr;
+    grid-template-columns: 1fr 797px;
+    grid-template-areas:
+        "header header"
+        "leftarea rightarea";
+    padding-right: 0px;
 }
 .listnotice {
 	padding: 10px;
 	padding-left: 1px;
+	border-bottom: 1px solid rgb(235, 235, 235);
+}
+.listnotice > div {
+	margin: 13px;
+}
+.listnotice > div > i {
+	font-weight: 700;
+    font-size: 24px;
+    color: #ffe31f;
+    margin-right: 14px;
+    margin-top: 10px;
+}
+.listnotice > div > span {
+	font-weight: 700;
+    font-size: 23px;
+    color: #484848;
 }
 .storeLn {
 	height: 200px;
 	width: 808px;
 	margin: 13px;
 }
-/* .scroll-fixed {
-	position: fixed;
-	top: 60px;
-	right: 0px;
-} */
 .fas {
 	width: 50px;
 }
+.search_conditions {
+	grid-area: header;
+	border-bottom: 1px solid rgb(235, 235, 235);
+}
+.leftarea {
+	grid-area: leftarea;
+}
 .rightarea{
+	gird-area: rightarea;
 	min-width: 797px; 
 	padding: 10px;
 	overflow: scroll;
@@ -846,6 +888,13 @@ header div:nth-child(3) li span {
 .sto_li {
 	border-bottom: 1px solid rgb(235, 235, 235); 
 	width: 750px;
+	position: relative;
+}
+.sto_li > a {
+	display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
 }
 .sto_li:last-child {
     border-bottom: 0px;
@@ -870,11 +919,9 @@ header div:nth-child(3) li span {
 .sto_li_content > div:nth-child(1) {
 	margin-bottom: 2px;
 }
-
 	
 
 /* 이미지 슬라이더 */
-
 .bx-wrapper{
 	border: none !important;
 	box-shadow: none !important;
@@ -914,7 +961,7 @@ header div:nth-child(3) li span {
 
 .page-item {
 	list-style: none;
-	float: `;
+	float: left;
 	display: inline;
 	text-align: center;
 }

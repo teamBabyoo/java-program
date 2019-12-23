@@ -45,24 +45,18 @@ public class FrontStoreController {
 	@RequestMapping("/storelist.do")
 	public void storeList(Model model, Search search) {
 		model.addAttribute("result", service.storeList(search));
-		
 	}
 
 	@RequestMapping("/storelistAjax.do")
 	@ResponseBody
 	public Map<String, Object> storeListAjax(Search search) {
 		Map<String, Object> result = service.storeList(search);
-		/*
-		 * System.out.println(service.storeList(search)); System.out.println("페이지결과" +
-		 * search.getPage());
-		 */
-		/* return service.storeList(search); */
 		return result;
 	}
 	
 	
 	/* 가게 상세 */
-	
+	 
 	@RequestMapping("/storedetail.do")
 	public void storeDetail(Model model, int no, HttpServletRequest req) {
 		HttpSession session = req.getSession();
@@ -89,7 +83,6 @@ public class FrontStoreController {
 //		System.out.println("이미지 경로 확인하기 요청 성공");
 		int fileGroupCode = review.getFileGroupCode();
 //		System.out.println(service.selectFileList(fileGroupCode));
-		
 		//-----------------------------------------
 		//사용자가  요청한 파일이 어느날짜 어느 시간에 있는지 모른다.
 		String path = req.getParameter("path"); // 사용자 요청 파일이 저장된 경로 
@@ -136,6 +129,7 @@ public class FrontStoreController {
 	/* 가게 정보 수정*/
 	@RequestMapping("/storeinfoupdate.do")
 	public String storeInfoUpdate(Store store, @RequestParam(value="storeNo") int no) {
+		System.out.println("디테일주소는 ?"+ store.getAddrDetail());
 		service.updateHoliday(store);
 		
 		String [] menuNames = store.getMenuName();
@@ -404,11 +398,6 @@ public class FrontStoreController {
 		bis.close();fis.close();
 		bos.close();out.close();
 		
-		
-		
-		
-		
-	
 		
 	}
 	

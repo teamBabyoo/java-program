@@ -35,5 +35,6 @@ public class User {
 	private int fileGroupCode;
 	private int status;
 	
-	
+	// award를 위한 gender type
+	private int genderType;
 }

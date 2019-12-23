@@ -6,6 +6,7 @@ import kr.co.nff.repository.vo.Category;
 import kr.co.nff.repository.vo.FileVO;
 import kr.co.nff.repository.vo.Holiday;
 import kr.co.nff.repository.vo.Menu;
+import kr.co.nff.repository.vo.PriceType;
 import kr.co.nff.repository.vo.Review;
 import kr.co.nff.repository.vo.Search;
 import kr.co.nff.repository.vo.Store;
@@ -20,9 +21,13 @@ public interface StoreDAO {
 	List<Category> selectCategory();
 	// 지역구 리스트
 	List<String> cityList();
+	// 가격 타입 리스트
+	List<PriceType> selectPriceType();
 	// 스토어 리스트
     List<Store> storeList(Search search);
+    // 스토어 검색 결과의 전체 크기
     int storeListCnt(Search search);
+    
     Store selectOneStore(int no);
     Store selectContent(int no);
     List<Menu> storeMenuList(int storeNo);
@@ -105,4 +110,7 @@ public interface StoreDAO {
 	
 	//나의 단골가져오기
 	List<Integer> myfrequent(int no);
+	
+	//주소 업데이트하기
+	void updateStoreAddr(Store store);
 }

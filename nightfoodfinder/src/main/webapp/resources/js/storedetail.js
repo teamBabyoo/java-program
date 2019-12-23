@@ -1,4 +1,18 @@
 
+$(document).ready(function(e) {
+	// 리뷰 수정 삭제 전처리 
+	$('.user_rv > .user_rv').click((e) => {
+		alert("되는겨뭐야");
+	})
+	// 페이지 공유(현재 페이지 주소복사)
+	$('.sharePop p').html(location.href);
+	$('#copyclip').on('click', function() {
+		copyText(location.href);
+	});
+	
+	reviewListAjax();
+	
+});
 
 /*단골등록을 위한*/
 function checkFrequent(){
@@ -139,8 +153,6 @@ function makeReviewList(list){
 	console.log(reviewNoArray);
 		 */
 	
-console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
-
 		var date = new Date(r.regDate);
 		var time = date.getFullYear() + "-" 
 		         + (date.getMonth() + 1) + "-" 
@@ -194,14 +206,6 @@ console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
 							}
 							html += `</li>`;
 						}
-/*
-	<li>
-    	<div class="rv_img" style="background-image: url(&quot;https://jypfanscdn.azureedge.net/jype317/NOTICE_SK_20191204200507_up2.jpg&quot;)"></div>
-		<div class="rv_img" style="background-image: url(https://jypfanscdn.azureedge.net/jype317/NOTICE_SK_20191204200457_up1.jpg)"></div>
-    </li>
-*/
-				
-                            
 				html+= `
 					</ul>
                 </li>
@@ -216,8 +220,20 @@ console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
 
 			html += `</p>
 	                <p>${r.good}</p>
-	                </li>
-	            </ul>
+	                </li>`;
+//			if (userNo == `${r.writerNo}`) {
+			if (1 === 1) {
+				let chkmyreview = `${r.writerNo}`;
+				console.log(chkmyreview);
+				html += `<li data-chkmyreview=` + chkmyreview + `>
+						    <ul class="activewhenhover hidden">
+						        <li>수정 |</li>
+						        <li>삭제</li>
+						    </ul>
+						</li>`;
+				
+			}
+			html += `</ul>
 	        </div>`;
 			
 			// 답글 내용
@@ -288,29 +304,25 @@ console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
                     </li>
                     <li>
                         <ul>
-                            <li>${r.nickName}<span>${time}</span></li>
+                            <li>`
+                        if(`${r.nickName}` === "null"){
+                        	let userEmail = `${r.userEmail}`;
+                        	html += userEmail.substr(0,5)+"***";
+                        } else {
+                        	html += `${r.nickName}`;
+                        }
+						 html +=`<span>${time}</span></li>
                             <li>${r.reviewContent}</li>`;
 						if (r.fileGroupCode != 0) {
 							html += `<li>`;
-//							console.log("r.fileGroupCode: ", r.fileGroupCode);
 							for (let i = 0; i < r.fileVoList.length; i++) {
 								let url = r.fileVoList[i].path + "/" + r.fileVoList[i].sysName;
 								url = url.replace(/\s/gi, "");
 								let fileGroupCode = r.fileGroupCode;
-//								alert(r.fileVoList[i].sysName);
 								html += `<div class="rv_img" style="background-image: url(` + context + `/front/store/getreviewimgsrc.do?name=${r.fileVoList[i].sysName}&path=${r.fileVoList[i].path})"></div>`;
-//								console.log(url.replace(/\s/gi, ""));
 							}
 							html += `</li>`;
 						}
-/*
-	<li>
-    	<div class="rv_img" style="background-image: url(&quot;https://jypfanscdn.azureedge.net/jype317/NOTICE_SK_20191204200507_up2.jpg&quot;)"></div>
-		<div class="rv_img" style="background-image: url(https://jypfanscdn.azureedge.net/jype317/NOTICE_SK_20191204200457_up1.jpg)"></div>
-    </li>
-*/
-				
-                            
 				html+= `</ul>
                     </li>
                     <li class="clearboth">`
@@ -320,8 +332,19 @@ console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
 							html += `<img class="heartclick" data-rno="${r.reviewNo}" src="` + context + `/resources/images/icon_hrt.png" />`;
 						}
 			html += `<p>${r.good}</p>
-                    </li>
-                </ul>
+                    </li>`;
+//			if (userNo == `${r.writerNo}`) {
+			if (1 === 1) {
+				let chkmyreview = `${r.writerNo}`;
+				console.log(chkmyreview);
+				html += `<li data-chkmyreview=` + chkmyreview + `>
+						    <ul class="activewhenhover hidden">
+						        <li>수정 |</li>
+						        <li>삭제</li>
+						    </ul>
+						</li>`;
+			}
+			html += `</ul>
             </div>`;
 			
 			// 답글 내용
@@ -363,7 +386,6 @@ console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
 	
 	$("#paginationBox").html("");
 	pageEle += `<ul class="pagination">`;
-	//에러 잡아야 한다
 	if (pagination.prev === 'true') {
 		pageEle += `
 		<li class="page-item">
@@ -407,7 +429,6 @@ function reposition() {
 	let $height_header = $('header').height();
 	let $height_content = $('.content').height();
 	let $height_wrapper = $('.wrapper').height();
-	let $top_footer = $('footer').offset().top;
 	let $height_leave_rv = $('.leave_rv').height
 //	console.log('$height_content', $height_content);
 //	console.log('$height_header ->', $height_header);
@@ -514,30 +535,14 @@ $('#scopePannel > a').click(function(e) {
  * @returns
  */
 function copyText(text) {
-	var temp = document.createElement('input');
-	document.body.appendChild(temp);
-	temp.vale = text;
-	temp.select();
-	document.execCommand('Copy');
-	document.body.removeChild(temp);
-	alert('클립보드로 복사되었습니다.');
+    var temp = document.createElement('input');
+    document.body.appendChild(temp);
+    temp.value = text;
+    temp.select();
+    document.execCommand('Copy');
+    document.body.removeChild(temp);
+    alert('클립보드로 복사되었습니다. ')
 }
-$(document).ready(function() {
-	reviewListAjax();
-	// 상세페이지 (리뷰)
-//	$('.leave_rv').hide();
-/*	$('#btn_leave_rv').click((e) => {
-//		reposition();
-		$('.leave_rv').slideToggle();
-	});
-*/	
-	$('.sharePop p').html(location.href);
-	
-	$('#copyclip').on('click', function() {
-		copyText(location.href);
-	});
-	
-});
 
 
 
@@ -701,7 +706,7 @@ function makeform(a) {
 		<tr id="bossform" data-rno="${rno}">
 		<td>
 		<div>
-		<textarea id="bossContent" class="bossContent" onKeyUp="fnChkByte(this,'400')" placeholder="최대 200자(400바이트)까지 입력 가능합니다."></textarea>
+		<textarea id="bossContent" class="bossContent" onKeyUp="ChkByte(this,'400')" placeholder="최대 200자(400바이트)까지 입력 가능합니다."></textarea>
 		<br />
 		<span id="counter">0</span><span id="countertwo"> / 400bytes</span>
 		</div>
@@ -720,7 +725,7 @@ function makeform(a) {
 
 // 답글 등록 폼 글자수 제한
 
-function fnChkByte(obj, maxByte) {
+function ChkByte(obj, maxByte) {
     var content = obj.value;
     var content_len = content.length;
     var rbyte = 0;
@@ -745,7 +750,7 @@ function fnChkByte(obj, maxByte) {
   alert("메세지는 최대 " + maxByte + "byte를 초과할 수 없습니다.")
   content2 = content.substr(0,rlen);                                  //문자열 자르기
   obj.value = content2;
-  fnChkByte(obj, maxByte);
+  ChkByte(obj, maxByte);
      }
      else
      {
@@ -858,7 +863,7 @@ $("#targetContainer").on("click", "a#updatetwo", (e) => {
 });
 
 
-//수정 등록 폼 취소
+// 답글 수정 등록 폼 취소
 $("#targetContainer").on("click", "a#canceltwo", (e) => {
 	e.preventDefault();
 	let rno = $(e.target).data("rno");
@@ -927,5 +932,42 @@ function fn_next(page, range, rangeSize) {
 	
 }
 
+//지도 붙이기
+let y;
+let x;
+function mapDraw(longitude, latitude, storeName){
+	console.log("지도 넘길 것", longitude, latitude, storeName);
+	y = latitude;
+	x = longitude
+	locations = [
+		[storeName, y, x]
+	];
+	
+	map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 19,
+        center: new google.maps.LatLng(y, x),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      });
+	infowindow = new google.maps.InfoWindow();
+	
+    var i;
+
+    for (i = 0; i < locations.length; i++) {
+      var marker = new google.maps.Marker({
+        id: i,
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        animation: google.maps.Animation.DROP,
+        store_name: locations[i][0],
+        store_lati: locations[i][1],
+        store_long: locations[i][2],
+        icon: null,
+        map: map
+      });
+      infowindow.setContent(locations[i][0]);
+      infowindow.open(map, marker);
+    }
+	
+}
+mapDraw(longitude, latitude, storeName);
 
 
