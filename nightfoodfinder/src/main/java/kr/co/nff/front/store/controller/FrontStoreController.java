@@ -83,7 +83,6 @@ public class FrontStoreController {
 //		System.out.println("이미지 경로 확인하기 요청 성공");
 		int fileGroupCode = review.getFileGroupCode();
 //		System.out.println(service.selectFileList(fileGroupCode));
-		
 		//-----------------------------------------
 		//사용자가  요청한 파일이 어느날짜 어느 시간에 있는지 모른다.
 		String path = req.getParameter("path"); // 사용자 요청 파일이 저장된 경로 

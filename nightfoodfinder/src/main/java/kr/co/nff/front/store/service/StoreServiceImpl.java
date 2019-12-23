@@ -122,13 +122,13 @@ public class StoreServiceImpl implements StoreService {
 
 	// 리뷰등록
 	@Override
-//	public List<Review> reviewRegist(Review review, boolean fileFlag) throws Exception {
 	public int reviewRegist(Review review, boolean fileFlag) throws Exception {
 		int fileGroupCode = 0;
 		if (fileFlag == true) {
 //			System.out.println("파일 올바르게 넘어옴");
 //			System.out.println("파일서비스 갔다오기 전 : " + fileGroupCode);
-			fileGroupCode = fileUpService.upload(review.getAttach());
+//			fileGroupCode = fileUpService.upload(review.getAttach());
+			fileGroupCode = fileUpService.upload(review);
 			review.setFileGroupCode(fileGroupCode);
 		}
 //		System.out.println("파일서비스 갔다오기 전 (파일 올렸으면 숫자, 안 올렸으면 0): " + fileGroupCode);
@@ -151,7 +151,7 @@ public class StoreServiceImpl implements StoreService {
 		List<FileVO> fList = new ArrayList<>(); 
 		fList = fDao.selectFileList(review.getReviewNo());
 //		System.out.println("서비스 결과값 : " + fList);
-		
+		/*
 		// ---------------------------------------------
 		//사용자가  요청한 파일이 어느날짜 어느 시간에 있는지 모른다.
 		String path = req.getParameter("path"); // 사용자 요청 파일이 저장된 경로 
@@ -192,7 +192,7 @@ public class StoreServiceImpl implements StoreService {
 		bis.close();fis.close();
 		bos.close();out.close();
 		// ---------------------------------------------
-		
+		*/
 		return fList;
 	}
 	

@@ -1,4 +1,18 @@
 
+$(document).ready(function(e) {
+	// 리뷰 수정 삭제 전처리 
+	$('.user_rv > .user_rv').click((e) => {
+		alert("되는겨뭐야");
+	})
+	// 페이지 공유(현재 페이지 주소복사)
+	$('.sharePop p').html(location.href);
+	$('#copyclip').on('click', function() {
+		copyText(location.href);
+	});
+	
+	reviewListAjax();
+	
+});
 
 /*단골등록을 위한*/
 function checkFrequent(){
@@ -139,8 +153,6 @@ function makeReviewList(list){
 	console.log(reviewNoArray);
 		 */
 	
-console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
-
 		var date = new Date(r.regDate);
 		var time = date.getFullYear() + "-" 
 		         + (date.getMonth() + 1) + "-" 
@@ -194,14 +206,6 @@ console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
 							}
 							html += `</li>`;
 						}
-/*
-	<li>
-    	<div class="rv_img" style="background-image: url(&quot;https://jypfanscdn.azureedge.net/jype317/NOTICE_SK_20191204200507_up2.jpg&quot;)"></div>
-		<div class="rv_img" style="background-image: url(https://jypfanscdn.azureedge.net/jype317/NOTICE_SK_20191204200457_up1.jpg)"></div>
-    </li>
-*/
-				
-                            
 				html+= `
 					</ul>
                 </li>
@@ -216,8 +220,20 @@ console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
 
 			html += `</p>
 	                <p>${r.good}</p>
-	                </li>
-	            </ul>
+	                </li>`;
+//			if (userNo == `${r.writerNo}`) {
+			if (1 === 1) {
+				let chkmyreview = `${r.writerNo}`;
+				console.log(chkmyreview);
+				html += `<li data-chkmyreview=` + chkmyreview + `>
+						    <ul class="activewhenhover hidden">
+						        <li>수정 |</li>
+						        <li>삭제</li>
+						    </ul>
+						</li>`;
+				
+			}
+			html += `</ul>
 	        </div>`;
 			
 			// 답글 내용
@@ -299,25 +315,14 @@ console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
                             <li>${r.reviewContent}</li>`;
 						if (r.fileGroupCode != 0) {
 							html += `<li>`;
-//							console.log("r.fileGroupCode: ", r.fileGroupCode);
 							for (let i = 0; i < r.fileVoList.length; i++) {
 								let url = r.fileVoList[i].path + "/" + r.fileVoList[i].sysName;
 								url = url.replace(/\s/gi, "");
 								let fileGroupCode = r.fileGroupCode;
-//								alert(r.fileVoList[i].sysName);
 								html += `<div class="rv_img" style="background-image: url(` + context + `/front/store/getreviewimgsrc.do?name=${r.fileVoList[i].sysName}&path=${r.fileVoList[i].path})"></div>`;
-//								console.log(url.replace(/\s/gi, ""));
 							}
 							html += `</li>`;
 						}
-/*
-	<li>
-    	<div class="rv_img" style="background-image: url(&quot;https://jypfanscdn.azureedge.net/jype317/NOTICE_SK_20191204200507_up2.jpg&quot;)"></div>
-		<div class="rv_img" style="background-image: url(https://jypfanscdn.azureedge.net/jype317/NOTICE_SK_20191204200457_up1.jpg)"></div>
-    </li>
-*/
-				
-                            
 				html+= `</ul>
                     </li>
                     <li class="clearboth">`
@@ -327,8 +332,19 @@ console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
 							html += `<img class="heartclick" data-rno="${r.reviewNo}" src="` + context + `/resources/images/icon_hrt.png" />`;
 						}
 			html += `<p>${r.good}</p>
-                    </li>
-                </ul>
+                    </li>`;
+//			if (userNo == `${r.writerNo}`) {
+			if (1 === 1) {
+				let chkmyreview = `${r.writerNo}`;
+				console.log(chkmyreview);
+				html += `<li data-chkmyreview=` + chkmyreview + `>
+						    <ul class="activewhenhover hidden">
+						        <li>수정 |</li>
+						        <li>삭제</li>
+						    </ul>
+						</li>`;
+			}
+			html += `</ul>
             </div>`;
 			
 			// 답글 내용
@@ -519,30 +535,14 @@ $('#scopePannel > a').click(function(e) {
  * @returns
  */
 function copyText(text) {
-	var temp = document.createElement('input');
-	document.body.appendChild(temp);
-	temp.vale = text;
-	temp.select();
-	document.execCommand('Copy');
-	document.body.removeChild(temp);
-	alert('클립보드로 복사되었습니다.');
+    var temp = document.createElement('input');
+    document.body.appendChild(temp);
+    temp.value = text;
+    temp.select();
+    document.execCommand('Copy');
+    document.body.removeChild(temp);
+    alert('클립보드로 복사되었습니다. ')
 }
-$(document).ready(function() {
-	reviewListAjax();
-	// 상세페이지 (리뷰)
-//	$('.leave_rv').hide();
-/*	$('#btn_leave_rv').click((e) => {
-//		reposition();
-		$('.leave_rv').slideToggle();
-	});
-*/	
-	$('.sharePop p').html(location.href);
-	
-	$('#copyclip').on('click', function() {
-		copyText(location.href);
-	});
-	
-});
 
 
 
