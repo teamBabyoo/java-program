@@ -13,7 +13,8 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />">
 <style>
 #mp_container {
-	margin : 0px;
+	width: 1200px;
+    margin: 30px auto 0;
 	padding-top : 20px;
 	text-align : center;	
 }
@@ -97,8 +98,12 @@
 				</div>
 				<div id="frequent_list">
 					<c:forEach items="${freqList}" var="f" >
-						<div id="freq_box">${f.storeName}</div>
+						<div id="freq_box" onclick="location.href=`${pageContext.request.contextPath}/front/store/storedetail.do?no=${f.storeNo}`;">
+							<div id="sThumb"></div>
+							<div>${f.storeName}</div>
+						</div>
 					</c:forEach>
+					
 				</div>
 			</div>
 			<div id="mp_div02" style="display : none">
@@ -140,6 +145,8 @@ function nickUpdate() {
 	window.open("${pageContext.request.contextPath}/front/login/nicknameForm.do","닉네임 수정","width=570, height=350"); 
 	
 }
+
+
 
 
 

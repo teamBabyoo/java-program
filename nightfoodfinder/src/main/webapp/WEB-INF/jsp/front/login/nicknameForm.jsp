@@ -11,7 +11,7 @@
 	<div>
 		<h3>닉네임수정</h3>
 		<div>
-		<form action="updatename.do" method="post">
+		<form action="updatename.do" method="post" name="nuform" id="nuform">
 			<p>닉네임은 한글, 영문, 숫자만 입력가능합니다.</p>
 			<input type="hidden" name="userNo" value="" />
 			<input type="text" id="nickName" name="nickName" placeholder="변경하실 닉네임을 입력하세요"> 
@@ -21,7 +21,6 @@
 		</form>
 		</div> 
 	</div>
-	
 <script>
 
 var loginUser = `<%=session.getAttribute("loginUser") %>`;
@@ -74,11 +73,12 @@ $("#chkbtn").click(function() {
 			});
 		});
 		
-$("#nickbtn").click(() => {
+$("#nickbtn").click(function(){
 	window.onunload = refreshParent;
     function refreshParent() {
         window.opener.location.reload();
         self.close();
+    }
 });			
 </script>	
 </body>

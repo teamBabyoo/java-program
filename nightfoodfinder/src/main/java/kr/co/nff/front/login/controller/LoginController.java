@@ -88,34 +88,22 @@ public class LoginController {
     	
     	
     	if (loginservice.selectNaver(vo) > 0) { // 세션만들기
-			session.setAttribute("loginUser", loginservice.selectLoginOneUser(vo));
+    		System.out.println(vo.getUserType());
 			
-			// 로그인되는 유저 
-//			User loginUser = (User)loginservice.selectLoginOneUser(vo.getUserId());
-//			session.setAttribute("loginUser", loginUser);
+    		session.setAttribute("loginUser", loginservice.selectLoginOneUser(vo));
 			
-			// 로그인된 유저의 알림리스트, 안읽은 알림 갯수 가져와서 같이 세션에 올린다.
-//			Notice notice = new Notice();
-//			notice.setUserNo(loginUser.getUserNo());
-//			List<Notice> noticeList = noticeService.selectNotice(notice);
-//			int numOfNotice = noticeService.countNewNotice(notice);
-//			session.setAttribute("noticeList", noticeList);
-//			session.setAttribute("countNotice", numOfNotice);
-			
-//			System.out.println(noticeList.toString());
-//			System.out.println(numOfNotice + "알림 갯수");
-			
-			
-			System.out.println(loginservice.selectLoginOneUser(vo));
 		} else {
 			loginservice.insertNaverUser(vo);
 			System.out.println("첫로그인 유저"+vo);
 			session.setAttribute("loginUser", loginservice.selectLoginOneUser(vo));
+		
 		}
-    	
-    	//"front/login/ncallback"
-		//new ModelAndView("front/login/ncallback", "naverUserVO",vo)
-        return "front/login/ncallback";
+
+    	if(vo.getUserType() == 0) {return "redirect:/admin/stat/visitorcount.do"; }
+    	else {
+    		
+    		return "front/login/ncallback";
+    	}
     }
     
   // 카카오 콜백 
