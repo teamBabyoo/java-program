@@ -62,7 +62,7 @@
          	</if>
 		 </where> 
 		 order by n.reg_date desc 
-		 limit 70
+		 limit 40
 	</select>
 	
 	<!-- 알림을 사용자가 확인했을 때  안읽음(0)에서 읽음(1)으로 업데이트-->
