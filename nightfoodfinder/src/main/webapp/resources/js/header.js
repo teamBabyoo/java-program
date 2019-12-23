@@ -102,9 +102,9 @@ function noticeList() {
 						</li>
 						`;
 					
-					$(".notice_content > ul").html(html);
 				}
 			
+				$(".notice_content > ul").html(html);
 			 };
 		},
 		error: (e) => {
