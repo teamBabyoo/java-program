@@ -99,11 +99,11 @@ public class LoginController {
 		
 		}
 
-    	if(vo.getUserType() == 0) {return "redirect:/admin/stat/visitorcount.do"; }
-    	else {
+ //   	if(vo.getUserType() == 0) {return "redirect:/admin/stat/visitorcount.do"; }
+ //   	else {
     		
     		return "front/login/ncallback";
-    	}
+ //   	}
     }
     
   // 카카오 콜백 

@@ -12,7 +12,7 @@ public interface NoticeDAO {
 	List<Notice> selectNotice(Notice notice);
 	
 	// 알림 읽음 처리
-	void readNotice(Notice notice);
+	void readNotice(int noticeNo);
 	
 	// 새알림 갯수
 	int countNewNotice(Notice notice);
