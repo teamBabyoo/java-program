@@ -17,8 +17,14 @@
 				href="${pageContext.request.contextPath}/admin/user/userlist.do">회원관리</a></li>
 			<li class="store"><a
 				href="${pageContext.request.contextPath}/admin/store/storelist.do">가게관리</a></li>
-			<li class="stat"><a
-				href="${pageContext.request.contextPath}/admin/stat/statlist.do">통계관리</a></li>
+			<li class="stat"><a href="#">통계관리</a>
+				<ul>
+					<li><a class="stat_visitor"
+						href="${pageContext.request.contextPath}/admin/stat/visitorcount.do">방문자</a></li>
+					<li><a class="stat_all" href="${pageContext.request.contextPath}/admin/stat/statlist.do">전체 통계</a></li>
+				</ul>
+				</li>
+			
 			<li class="review"><a href="#">리뷰관리</a>
 				<ul>
 					<li><a class="review_all"
