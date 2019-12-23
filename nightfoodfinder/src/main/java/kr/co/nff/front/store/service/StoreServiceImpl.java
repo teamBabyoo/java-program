@@ -1,13 +1,6 @@
 package kr.co.nff.front.store.service;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -195,7 +188,12 @@ public class StoreServiceImpl implements StoreService {
 		*/
 		return fList;
 	}
-	
+
+	// 리뷰 삭제
+	public int deleteReview(int no) {
+		return dao.deleteReview(no);
+	}
+
 	//리뷰 신고제한
 	public int reviewcount(Review review) {
 		return dao.reviewcount(review);
@@ -274,7 +272,6 @@ public class StoreServiceImpl implements StoreService {
 	
 	public List<Integer> myfrequent(int no){
 		return dao.myfrequent(no);
-	};
-
+	}
 
 }

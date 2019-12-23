@@ -180,11 +180,13 @@ div#commentplace > * { width: 100%; margin: 0 auto; }
 .detail_wrap .user_rv > ul > li i { font-size: 1.4rem; padding: 5px 0;}
 .detail_wrap .user_rv > ul > li:nth-child(3) > * { text-align: center; padding: 5px; }
 .detail_wrap .user_rv > ul > li:nth-child(2) > ul > li:nth-child(3) > div { margin-right: 10px; display: inline-block; width: 100px; height: 100px; background-size: cover; background-position: center center; }
-.detail_wrap .user_rv:hover { background: #f3f3f3; }
-/* .activewhenhover {display: none; }
-.detail_wrap .user_rv:hover .activewhenhover {
+.detail_wrap .user_rv:hover { position: relative; background: #f3f3f3; }
+.detail_wrap .user_rv > ul > li:nth-child(4) { position: absolute; bottom: 10px; right: 10px;}
+.detail_wrap .user_rv > ul > li:nth-child(4) > ul li { display: inline-block }
+.ud_control {display: none; }
+.detail_wrap .user_rv > .user_rv:hover .ud_control {
     display: block;
-} */
+}
 
 .detail_wrap .leave_rv textarea { margin: 10px 0; padding: 10px; width: 100%; height: 100%; background: #f3f3f3; resize: none; border: none; border-radius: 2px; }
 .detail_wrap .leave_rv li:nth-child(3) button { float: right; padding: 10px 30px; border: 1px solid #DBDBDB; background: #fff; color: #8a8a8a; transition: all .3s;}

@@ -50,6 +50,9 @@ public interface StoreService {
 //	public List<FileVO> selectFileList(int reviewNo);
 	// 리뷰 이미지
 	public List<FileVO> selectFileList(HttpServletRequest req, HttpServletResponse res, Review review) throws UnsupportedEncodingException, FileNotFoundException, IOException;
+	
+	// 리뷰 삭제
+	public int deleteReview(int  no);
 
 	//리뷰신고
 	public List<Review> reviewReport(Review review);
