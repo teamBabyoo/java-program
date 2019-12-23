@@ -591,7 +591,7 @@
 	</update>
 
 	<!-- 댓글삭제 -->
-	<delete id="deleteComment" parameterType="int">
+	<delete id="deleteReview" parameterType="int">
 		delete
 		from tb_review
 		where review_no = #{reviewNo}

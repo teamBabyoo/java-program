@@ -216,9 +216,14 @@ public class FrontStoreController {
 		map.put("pagination", new Pagination(review.getPage(), service.getReviewCnt(review.getStoreNo())));
 		return map;
 	}
-		
-		
 
+	/* 리뷰작성폼 */
+	@RequestMapping("/storeReviewRegistForm.do")
+	public void reviewRegistForm(Review review, Model model, HttpSession session) {
+		System.out.println("여기는 댓글작성폼");
+		model.addAttribute("loginUser", session.getAttribute("loginUser"));
+	}
+	
 	/* 리뷰 작성 & 이미지 업로드 */
 	@RequestMapping("/review_regist.do")
 	public String reviewRegist(Review review) throws Exception, IOException {
@@ -248,13 +253,12 @@ public class FrontStoreController {
         return "redirect:storedetail.do?no=" + review.getStoreNo();
 	}
 	
-	/* 리뷰작성폼 */
-	@RequestMapping("/storeReviewRegistForm.do")
-	public void reviewRegistForm(Review review, Model model, HttpSession session) {
-		System.out.println("여기는 댓글작성폼");
-		model.addAttribute("loginUser", session.getAttribute("loginUser"));
+	/* 리뷰 삭제 */
+	@RequestMapping("/review_delete.do")
+	public String reviewDelete(Review review) {
+		service.deleteReview(review.getReviewNo());
+		return "redirect:storedetail.do?no=" + review.getStoreNo();
 	}
-
 	
 	/*좋아요등록*/
 	@RequestMapping("/i_like.do")

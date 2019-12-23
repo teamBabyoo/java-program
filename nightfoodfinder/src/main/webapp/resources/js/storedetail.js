@@ -1,9 +1,5 @@
 
 $(document).ready(function(e) {
-	// 리뷰 수정 삭제 전처리 
-	$('.user_rv > .user_rv').click((e) => {
-		alert("되는겨뭐야");
-	})
 	// 페이지 공유(현재 페이지 주소복사)
 	$('.sharePop p').html(location.href);
 	$('#copyclip').on('click', function() {
@@ -195,14 +191,11 @@ function makeReviewList(list){
                         <li>${r.reviewContent}</li>`;
 						if (r.fileGroupCode != 0) {
 							html += `<li>`;
-//							console.log("r.fileGroupCode: ", r.fileGroupCode);
 							for (let i = 0; i < r.fileVoList.length; i++) {
 								let url = r.fileVoList[i].path + "/" + r.fileVoList[i].sysName;
 								url = url.replace(/\s/gi, "");
 								let fileGroupCode = r.fileGroupCode;
-//								alert(r.fileVoList[i].path);
 								html += `<div class="rv_img" style="background-image: url(` + context + `/front/store/getreviewimgsrc.do?name=${r.fileVoList[i].sysName}&path=${r.fileVoList[i].path})"></div>`;
-//								console.log(url.replace(/\s/gi, ""));
 							}
 							html += `</li>`;
 						}
@@ -221,19 +214,20 @@ function makeReviewList(list){
 			html += `</p>
 	                <p>${r.good}</p>
 	                </li>`;
-//			if (userNo == `${r.writerNo}`) {
-			if (1 === 1) {
-				let chkmyreview = `${r.writerNo}`;
-				console.log(chkmyreview);
-				html += `<li data-chkmyreview=` + chkmyreview + `>
-						    <ul class="activewhenhover hidden">
-						        <li>수정 |</li>
-						        <li>삭제</li>
-						    </ul>
-						</li>`;
-				
+			console.log(userNo, 111, `${r.writerNo}`);
+			let css = "hidden";
+			if (userNo == `${r.writerNo}`) {
+				css = "";
 			}
-			html += `</ul>
+			let chkmyreview = `${r.writerNo}`;
+			console.log(chkmyreview);
+			html += `<li data-chkmyreview=` + chkmyreview + `>
+					    <ul class="ud_control ${css}">
+					        <li>수정 |</li>
+					        <li><a href="` + context + `/front/store/reviewDelete.do?reviewNo=` + chkmyreview + `">삭제</a></li>
+					    </ul>
+					</li>
+				</ul>
 	        </div>`;
 			
 			// 답글 내용
@@ -291,7 +285,7 @@ function makeReviewList(list){
 			<div class="user_rv">
 				<div class="tenten">
 					<button type="button" class="report"  value="${r.reviewNo}">신고하기</button>`
-			  	if (loginStore === storeNo && r.recomment == null){
+				  if (loginStore === storeNo && r.recomment == null){
 					html += `
 				<button type="button" class="reComment" data-no="${r.reviewNo}" onclick="makeform(this)">답장하기</button>`;
 				}
@@ -333,18 +327,20 @@ function makeReviewList(list){
 						}
 			html += `<p>${r.good}</p>
                     </li>`;
-//			if (userNo == `${r.writerNo}`) {
-			if (1 === 1) {
-				let chkmyreview = `${r.writerNo}`;
-				console.log(chkmyreview);
-				html += `<li data-chkmyreview=` + chkmyreview + `>
-						    <ul class="activewhenhover hidden">
-						        <li>수정 |</li>
-						        <li>삭제</li>
-						    </ul>
-						</li>`;
+//			console.log(userNo, 222, `${r.writerNo}`);
+			let css = "hidden";
+			if (userNo == `${r.writerNo}`) {
+				css = "";
 			}
-			html += `</ul>
+			let chkme = `${r.writerNo}`;
+			console.log(chkme);
+			html += `<li data-chkmyreview=` + chkme + `>
+					    <ul class="ud_control ${css}">
+					        <li>수정 |</li>
+					        <li><a href="` + context + `/front/store/reviewDelete.do?reviewNo=${r.reviewNo}">삭제</a></li>
+					    </ul>
+					</li>
+				</ul>
             </div>`;
 			
 			// 답글 내용
@@ -422,7 +418,6 @@ function makeReviewList(list){
 		</ul>
 	`;
 	$("#paginationBox").append(pageEle);
-	
 }
 /**
  * footer top값 재설정
@@ -433,10 +428,6 @@ function reposition() {
 	let $height_content = $('.content').height();
 	let $height_wrapper = $('.wrapper').height();
 	let $height_leave_rv = $('.leave_rv').height
-//	console.log('$height_content', $height_content);
-//	console.log('$height_header ->', $height_header);
-//	console.log('$top_footer ->', $top_footer);
-//	$('footer').css('top', $height_header + $height_content + $height_leave_rv);
 	$('footer').css('bottom', -($height_wrapper));
 }
 
@@ -972,5 +963,4 @@ function mapDraw(longitude, latitude, storeName){
 	
 }
 mapDraw(longitude, latitude, storeName);
-
 
