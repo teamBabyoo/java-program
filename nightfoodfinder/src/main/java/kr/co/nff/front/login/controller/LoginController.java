@@ -106,6 +106,8 @@ public class LoginController {
     		
     		return "front/login/ncallback";
 //    	}
+
+
     }
     
   // 카카오 콜백 

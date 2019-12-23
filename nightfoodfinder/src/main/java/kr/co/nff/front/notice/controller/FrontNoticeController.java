@@ -39,8 +39,8 @@ public class FrontNoticeController {
 	/* 알림 확인시 */
 	@RequestMapping("/read_notice.do")
 	@ResponseBody
-	public void readNoticeAjax(Notice notice) {
-		service.readNotice(notice);
+	public void readNoticeAjax(int noticeNo) {
+		service.readNotice(noticeNo);
 	}
 
 	/* 알림 갯수 */
@@ -48,7 +48,7 @@ public class FrontNoticeController {
 	@ResponseBody
 	public int countNoticeAjax(HttpSession session) {
 		User loginUser = (User)session.getAttribute("loginUser");
-		Store storeUser = (Store)session.getAttribute("storeUser");
+		Store storeUser = (Store)session.getAttribute("loginStore");
 		
 		// 로그인 상태 걸러준다.
 		if (loginUser == null && storeUser == null) return 0;
