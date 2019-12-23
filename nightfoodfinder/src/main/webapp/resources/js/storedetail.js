@@ -178,7 +178,7 @@ function makeReviewList(list){
 			html += `<div class="user_rv best_rv">
 				  <div class="tenten">
 			  	<button type="button" class="report" value="${r.reviewNo}">신고하기</button>`
-			  	if (r.recomment == null){
+			  	if (loginStore === storeNo && r.recomment == null){
 					html += `
 				<button type="button" class="reComment" data-no="${r.reviewNo}" onclick="makeform(this)">답장하기</button>`;
 				}
@@ -291,7 +291,7 @@ function makeReviewList(list){
 			<div class="user_rv">
 				<div class="tenten">
 					<button type="button" class="report"  value="${r.reviewNo}">신고하기</button>`
-			  	if (r.recomment == null){
+			  	if (loginStore === storeNo && r.recomment == null){
 					html += `
 				<button type="button" class="reComment" data-no="${r.reviewNo}" onclick="makeform(this)">답장하기</button>`;
 				}
@@ -360,13 +360,16 @@ function makeReviewList(list){
 					<li>${r.reCommentRegDate}</li>
 					</ul>
 					</td>
-					<td><li>${r.recomment}</li></td>
+					<td><li>${r.recomment}</li></td>`
+					if (loginStore === storeNo) {
+						html += `
 					<td><button type="button" data-no="${r.reviewNo}" class="delRecomment">삭제</button>	
 						<button type="button" data-no="${r.reviewNo}" class="modRecomment">수정</button>	
 					</td>
 					</tr>
 					</table>
 					</div>`;
+			}
 			}
 	        
 	        	
