@@ -66,21 +66,21 @@
       <ul>
         <li><a href="#">내주변맛집</a></li>
         <li><a href="${pageContext.request.contextPath}/front/award/awardlist.do">NFF Awards</a></li>
-     <%--    <c:if test="${loginUser && loginStore}"> --%>
+         <c:if test="${loginUser != null or loginStore != null}">
 	        <li id="notice_btn" data-user="${loginUser}" data-store="${loginStore}">
 	        	<i class="fa fa-bell-o" aria-hidden="true" ></i>
-<!-- 	        	새 알림 갯수 뿌려줄 span
-	        	<span class="newnotice"></span> -->
+<!-- 	        	새 알림 갯수 뿌려줄 span  -->
+	        	<span class="newnotice"></span>
 	        	<!-- 알림 리스트 나올 div -->
 	        	<div class="notice_list_box hidden">
 		        	<div class="topshape"></div>
 				    <!-- 알림 리스트 나올 div -->
 		        	<div class="notice_content">
-	
+						<ul></ul>
 		        	</div>
 	        	</div>
 	        </li>
-        <%-- </c:if> --%>
+         </c:if> 
         
         <li id="person_btn"><i class="fa fa-user-o" aria-hidden="true"></i>
 		<!-- 팝업 (로그인 X) -->
