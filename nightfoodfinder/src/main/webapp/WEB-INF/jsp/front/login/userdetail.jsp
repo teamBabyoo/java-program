@@ -36,7 +36,7 @@
 	float: left;
     margin-left: 5px;
 }
-#mp_profile #nick_modi {
+#mp_profile #nick_update {
 	float: right;
     margin-right: 5px;
 }
@@ -79,14 +79,14 @@
 
 	<div id="mp_container">
 		<div id="mp_profile">
-			<form name="frm" id="frm" method="post">
-			<div id="nickname">${user.nickName}</div>
-			</form>
-			<span id="nick_modi">
-			<a href="javascript:popup();">
-			<i class="fa fa-cog" aria-hidden="true"></i>닉네임수정
-			</a>
-			</span>
+			<div id="nickname">
+				<i class="fa fa-user-circle" aria-hidden="true"></i>
+				${user.nickName}
+			</div>
+			<div id="nick_update" onclick="nickUpdate();">
+				<i class="fa fa-cog" aria-hidden="true"></i>
+				수정	
+			</div>
 			
 		</div>
 		<div id="mp_content">
@@ -135,14 +135,14 @@ function show_layer(div_name){
 	}
 	
 // 닉네임 수정
-function popup() {
-	var pw = window.open("", "test", "width=570,height=420");
-	var val = $('#nickname').html();
-	$(pw.document.body).html("<input type=text value='"+val+"'>");
+function nickUpdate() {
+	console.log('update');
+	window.open("${pageContext.request.contextPath}/front/login/nicknameForm.do","닉네임 수정","width=570, height=350"); 
 	
-	$('#frm').target="test";
-	$('#frm').submit();
 }
+
+
+
 </script>	
 </body>
 </html>

@@ -291,6 +291,9 @@ $("#storePass").blur(function () {
         $('#pwChk').val('').focus();
         return false;
     }
+    
+    $('#pwChk').text('사용 가능한 비밀번호 입니다.');
+    $('#pwChk').css('color', 'black');
     return true;
 	
 });
@@ -307,6 +310,7 @@ $('#storePass2').focusout(function () {
                 //alert("비밀번호가 일치하지 않습니다. 비밀번호를 재확인해주세요.");
                 $("#alert-success").css('display', 'none');
                 $("#alert-danger").css('display', 'inline-block');
+                $("#alert-danger").css('color', 'red');
             }
         }
     });
@@ -344,7 +348,7 @@ $("#storeEmail").blur(function() {
 							$('#emailChk').css('color', 'red');
 							//$("#reg_submit").attr("disabled", true);				
 							
-						} else {
+						} else if(!idJ.test(storeEmail)){
 							
 							$('#emailChk').text("올바른 형식의 이메일을 입력해주세요.");
 							$('#emailChk').css('color', 'red');

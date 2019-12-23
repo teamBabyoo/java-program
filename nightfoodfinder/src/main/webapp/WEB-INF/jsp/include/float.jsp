@@ -35,6 +35,7 @@
 		});
 	
 	var list = sessionStorage.getItem('list');
+	console.log(list);
 	if(list.length != null) {
 		$("#viewnone").hide();
 		//console.log(typeof list); -> string

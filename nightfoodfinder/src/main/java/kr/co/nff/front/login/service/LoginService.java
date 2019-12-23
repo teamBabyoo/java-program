@@ -32,4 +32,7 @@ public interface LoginService {
 	User userDetail(int userNo);
 	List<Store> userFreqList(int userNo);
 	List<Review> userReviewList(int userNo);
+	//닉네임 수정
+	void updateNickname(User user);
+	int nicknameChk(String nickName);
 }

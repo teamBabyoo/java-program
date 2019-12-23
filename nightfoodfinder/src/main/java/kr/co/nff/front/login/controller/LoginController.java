@@ -190,9 +190,6 @@ public class LoginController {
     public void loginpage() {}
     
     
-    
-    
-    
     // 유저 마이페이지 
     @RequestMapping("/userdetail.do")
     public void userDetail (Model model, User user, int no, HttpSession session) {
@@ -204,6 +201,27 @@ public class LoginController {
 		model.addAttribute("reviewList", loginservice.userReviewList(no));
 		System.out.println("단골목록"+ loginservice.userFreqList(no));
 		System.out.println("댓글목록" + loginservice.userReviewList(no));
+    }
+    
+    // 닉네임 수정 페이지
+    @RequestMapping("/nicknameForm.do")
+    public void updateNicknameForm() {}
+    
+    //닉네임 수정하기
+    @RequestMapping("/updatename.do")
+    public void updateNickname(User user) {
+    	loginservice.updateNickname(user);
+    	System.out.println("닉네임가져와"+user.getNickName());
+    	System.out.println("유저번호는?"+ user.getUserNo());
+//    	retur	n "redirect:userdetail.do?no="+user.getUserNo();
+    }
+    
+    //닉네임 중복체크
+    @RequestMapping(value="/nicknameChk.do")
+	@ResponseBody
+    public int nicknameChk(String nickName) {
+    	System.out.println(loginservice.nicknameChk(nickName));
+    	return loginservice.nicknameChk(nickName);
     }
 //---------------------------------------------	
 	@Autowired

@@ -31,4 +31,7 @@ public interface LoginDAO {
 	User userDetail(int userNo);
 	List<Store> userFreqList(int userNo);
 	List<Review> userReviewList(int userNo);
+	
+	void updateNickname(User user);
+	int nicknameChk(String nickName);
 }

@@ -72,6 +72,17 @@ public class LoginServiceImpl implements LoginService {
 		return dao.userReviewList(userNo);
 	}
 
+	@Override
+	public void updateNickname(User user) {
+		dao.updateNickname(user);
+	}
+
+	@Override
+	public int nicknameChk(String nickname) {
+		
+		return dao.nicknameChk(nickname);
+	}
+
 	
 	
 
