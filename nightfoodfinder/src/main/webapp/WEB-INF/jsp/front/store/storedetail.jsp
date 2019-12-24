@@ -25,7 +25,8 @@
 				<c:when test="${empty imgList}">
 					<c:forEach begin="1" end="5">
 						<div>
-		   					<img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" />
+		   					<div style="background-image: url('${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}')" >
+		   					</div>
 						</div>
 					</c:forEach>
 
@@ -35,35 +36,51 @@
 				 <c:set value="${fn:length(imgList)}" var="size" />
 					<c:forEach items="${imgList}" var="img" varStatus="i" end="${size}">
 					<c:choose>
+				<c:when test="${empty imgList}">
+					<c:forEach begin="1" end="5">
+						<div>
+							<div style="background-image: url('https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg'); background-size: cover; background-position: center center; height: 263px; ">
+							</div>
+<!-- 		   					<img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" /> -->
+						</div>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+				 <c:set value="${fn:length(imgList)}" var="size" />
+					<c:forEach items="${imgList}" var="img" varStatus="i" end="${size}">
+					<c:choose>
 					<c:when test="${size < 4}">
-							<div>
-								<img src="${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}" />
+							<div style="background-image: url('${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}'); background-size: cover; background-position: center center; height: 263px; ">
 							</div>
 						<c:if test="${i.last}">
 						<c:forEach begin="1" end="${5-size}">
 							<div>
-			   					 <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" />
+								<div style="background-image: url('https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg'); background-size: cover; background-position: center center; height: 263px; ">
+								</div>
+<!-- 			   					 <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" /> -->
 							</div>							
 						</c:forEach>
 						</c:if>	
 					</c:when>
 					<c:when test="${size == 4}">
-								<div>
-									<img src="${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}" />
+								<div style="background-image: url('${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}'); background-size: cover; background-position: center center; height: 263px; ">
 								</div>
 							<c:if test="${i.last}">
 								<div>
-			   						 <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" />
+									<div style="background-image: url('https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg'); background-size: cover; background-position: center center; height: 263px; ">
+									</div>
+<!-- 			   						 <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" /> -->
 								</div>
 							</c:if>	
-												
 					</c:when>
 					<c:otherwise>
-								<div>
-									<img src="${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}" />
+								<div style="background-image: url('${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}'); background-size: cover; background-position: center center; height: 263px; ">
 								</div>
 					</c:otherwise>
 					</c:choose>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>

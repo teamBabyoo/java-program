@@ -9,14 +9,16 @@ $(() => {
     let markerImage;
 
     let eventMarker;
+    let iconcon;
+    iconcon = new google.maps.MarkerImage("https://www.pinclipart.com/picdir/big/447-4478350_png-file-svg-fa-map-marker-png-clipart.png",null, null, null, new google.maps.Size(25, 35));
 
     $(".storeLn").mouseover((e) => {
       markerEvent($(e.target).data("store"));
     });
 
     function markerEvent(storeName) {
-      markerImage = new google.maps.MarkerImage("https://www.siksinhot.com/static2/images/common/bg_ico_s_like.png",
-        null, null, null, new google.maps.Size(30, 50));
+      markerImage = new google.maps.MarkerImage("https://www.pinclipart.com/picdir/big/288-2889919_markers-clipart-coloring-page-png-download.png",
+    	        null, null, null, new google.maps.Size(25, 35));
 
       map.setCenter(new google.maps.LatLng(locations[0][1], locations[0][2]));
 
@@ -24,7 +26,7 @@ $(() => {
       for (let i = 0; i < markerArr.length; i++) {
         markerArr[i].setAnimation(null);
          $(".storeLn").mouseleave(()=>{
-           markerArr[i].setIcon(null);
+           markerArr[i].setIcon(iconcon);
           });
 
         if (markerArr[i].store_name == storeName) {
@@ -84,7 +86,7 @@ $(() => {
           store_name: locations[i][0],
           store_lati: locations[i][1],
           store_long: locations[i][2],
-          icon: null,
+          icon: iconcon,
           map: map
         });
         markerArr.push(marker);
