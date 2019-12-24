@@ -325,7 +325,7 @@
 	
 	<!-- 검색 조건에 맞는 스토어 리스트 갯수 -->
 	<select id="storeListCnt" resultType="int" parameterType="Search">
-		select count(*)
+		select count(distinct s.store_name)
 		<include refid="commonStoreList" />
 	</select>
 
