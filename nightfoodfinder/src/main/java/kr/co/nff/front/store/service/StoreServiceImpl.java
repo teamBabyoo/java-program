@@ -134,8 +134,8 @@ public class StoreServiceImpl implements StoreService {
 	
 	// 리뷰 등록시 가게테이블 총 리뷰수, 총 별점 업데이트
 	@Override
-	public int updateStoreByReview(Map<String, Object> map) {
-		return dao.updateStoreByReview(map);
+	public int updateStoreByAddReview(Map<String, Object> map) {
+		return dao.updateStoreByAddReview(map);
 	}
 
 	// 이미지 다운로드 하지 않으면서 그냥 경로로 가져오기
@@ -194,6 +194,11 @@ public class StoreServiceImpl implements StoreService {
 		return dao.deleteReview(no);
 	}
 
+	// 리뷰를 삭제하면 store테이블이 총 별점, 총 리뷰개수를 업데이트한다
+	public int updateStoreByDelReview(Map<String, Object> map) {
+		return dao.updateStoreByDelReview(map);
+	}
+	
 	//리뷰 신고제한
 	public int reviewcount(Review review) {
 		return dao.reviewcount(review);

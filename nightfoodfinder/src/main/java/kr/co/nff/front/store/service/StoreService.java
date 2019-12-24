@@ -44,7 +44,7 @@ public interface StoreService {
 	public int reviewRegist(Review review, boolean fileFlag) throws Exception;
 
 	// 리뷰 등록시 가게테이블 총 리뷰수, 총 별점 업데이트
-	int updateStoreByReview(Map<String, Object> map);
+	int updateStoreByAddReview(Map<String, Object> map);
 	
 	// 리뷰 이미지 가져오기
 //	public List<FileVO> selectFileList(int reviewNo);
@@ -53,6 +53,9 @@ public interface StoreService {
 	
 	// 리뷰 삭제
 	public int deleteReview(int  no);
+	
+	// 리뷰 삭제시 가게테이블 총 리뷰수, 총 별점 업데이트
+	public int updateStoreByDelReview(Map<String, Object> map);
 
 	//리뷰신고
 	public List<Review> reviewReport(Review review);

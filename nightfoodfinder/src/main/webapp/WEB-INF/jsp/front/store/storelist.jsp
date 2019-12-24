@@ -14,7 +14,8 @@
 	crossorigin="anonymous">
 
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>  -->
-<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSQHW_pWBrzI8-rkc4FczxQWzCSciCJS4"
+    type="text/javascript"></script>
 
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 
@@ -43,55 +44,54 @@
 					</div>
 				</div>
 				<div class="storelist">
-      				<ul>
-      				<c:if test="${empty sList}">
-						<li class="storeLn sto_li clearboth">검색 결과가 없습니다.</li>
-					</c:if>
-					
-			<!-- store list 부분 -->
-					<c:forEach var="s" items="${sList}" varStatus="status">
-						<c:set value="${s.fileVoList}" var="files" />
-				       	<li id="li_${status.count}" class="storeLn sto_li clearboth" data-store="${s.storeName}">
-					        <a href="storedetail.do?no=${s.storeNo}" ></a>
-							<div>
-					       		<!-- 썸네일 사진 들어갈 div -->
-					       		<div class="home__slider">
-									<div class="bxslider">
-										<!-- 사진이 없을때 default 이미지 보여준다. -->  
-										<c:if test="${empty files}">
-											<img src="https://i.pinimg.com/originals/33/6a/ea/336aea314c68c0bc3eb8f6b5cd799de4.jpg" />
-										</c:if>
-										
-										<!--  사진이 있을 때 이미지 슬라이더 -->
-										<c:if test="${not empty files}">
- 						    				<c:forEach items="${files}" var="img">
-		   											<img src="${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}" />
-											</c:forEach>
-										</c:if> 
-						    			<%-- 	<img src="<c:url value='/resources/images/flower.jpg' />" />
-											<img src="<c:url value='/resources/images/flower2.jpg' />" />
-											<img src="<c:url value='/resources/images/flower5.jpg' />" /> --%>
+					<div class="ajaxstolist">
+	      				<ul>
+		      				<c:if test="${empty sList}">
+								<li class="storeLn sto_li clearboth">검색 결과가 없습니다.</li>
+							</c:if>
+						
+					<!-- store list 부분 -->
+							<c:forEach var="s" items="${sList}" varStatus="status">
+								<c:set value="${s.fileVoList}" var="files" />
+					       		<li id="li_${status.count}" class="storeLn sto_li clearboth" data-store="${s.storeName}">
+						        	<a href="storedetail.do?no=${s.storeNo}" ></a>
+									<div>
+						       			<!-- 썸네일 사진 들어갈 div -->
+						       			<div class="home__slider">
+											<div class="bxslider">
+												<!-- 사진이 없을때 default 이미지 보여준다. -->  
+												<c:if test="${empty files}">
+													<img src="https://i.pinimg.com/originals/33/6a/ea/336aea314c68c0bc3eb8f6b5cd799de4.jpg" />
+												</c:if>
+											
+												<!--  사진이 있을 때 이미지 슬라이더 -->
+												<c:if test="${not empty files}">
+	 						    					<c:forEach items="${files}" var="img">
+			   											<img src="${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}" />
+													</c:forEach>
+												</c:if> 
+											</div>
+										</div>
 									</div>
-								</div>
-							</div>
-							<!-- 가게 리스트의 내용 부분 -->
-				       		<div class="sto_li_content" >
-								<div>
-									<span>${s.categoryName}</span>
-									<span class="sto_scope">
-										<span class="scope_star">★</span>${s.scope}(${s.reviewCntTotal})
-									</span>		
-								</div>
-								<div class="store_name">${s.storeName}</div>
-								<div class="store_info">
-									<div>가격대 : ${s.priceType}</div>
-									<div>영업 시간 : ${s.openTime} ~ ${s.closeTime}</div>
-									<div></div>
-								</div>		
-				       		</div>
-				       	</li>
-				    </c:forEach>
-				    </ul>
+									<!-- 가게 리스트의 내용 부분 -->
+					       			<div class="sto_li_content" >
+										<div>
+											<span>${s.categoryName}</span>
+											<span class="sto_scope">
+												<span class="scope_star">★</span>${s.scope}(${s.reviewCntTotal})
+											</span>		
+										</div>
+										<div class="store_name">${s.storeName}</div>
+										<div class="store_info">
+											<div>가격대 : ${s.priceType}</div>
+											<div>영업 시간 : ${s.openTime} ~ ${s.closeTime}</div>
+											<div></div>
+										</div>		
+					       			</div>
+					       		</li>
+					    	 </c:forEach>
+					    </ul>
+					</div>
 					<%-- paging 영역 --%>
 					<div id="storePageDiv">
 						<ul class="stolist_pagination">
@@ -138,6 +138,7 @@
 			<input name="categoryCode" type="hidden" value="${category}" />
 		</c:forEach>
 		<input name="keyword" type="hidden" value="${search.keyword}" />
+		<input name="includeClosed" type="hidden" value="${search.includeClosed}" />
 	</form>
 	
  	<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>

@@ -220,8 +220,11 @@ public class FrontStoreController {
 	/* 리뷰작성폼 */
 	@RequestMapping("/storeReviewRegistForm.do")
 	public void reviewRegistForm(Review review, Model model, HttpSession session) {
-		System.out.println("여기는 댓글작성폼");
+		int storeNo = review.getStoreNo();
+		Store store = service.storeDetail(storeNo);
+		
 		model.addAttribute("loginUser", session.getAttribute("loginUser"));
+		model.addAttribute("store", store);
 	}
 	
 	/* 리뷰 작성 & 이미지 업로드 */
@@ -248,7 +251,7 @@ public class FrontStoreController {
 		int result = service.reviewRegist(review, fileFlag);
 		if (result == 1) {	// 등록 성공하여 영향받은 행의 개수 1이 반환되었다면
 			// map이 준비되면 store테이블을 업데이트한다
-			service.updateStoreByReview(map);
+			service.updateStoreByAddReview(map);
 		}
         return "redirect:storedetail.do?no=" + review.getStoreNo();
 	}
@@ -256,8 +259,29 @@ public class FrontStoreController {
 	/* 리뷰 삭제 */
 	@RequestMapping("/review_delete.do")
 	public String reviewDelete(Review review) {
-		service.deleteReview(review.getReviewNo());
-		return "redirect:storedetail.do?no=" + review.getStoreNo();
+		System.out.println(review);
+		System.out.println("요청 성공");
+		int storeNo = review.getStoreNo();
+		Store store = service.storeDetail(storeNo);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("review", review);
+		map.put("storeno", storeNo);
+		map.put("exiscope", store.getStoreScopeTotal());
+		map.put("curtcnt", store.getReviewCntTotal());
+		
+		int result = service.deleteReview(review.getReviewNo());
+		System.out.println("result값 : " + result);
+		
+		if (result == 1) {	// 삭제 성공하여 영향받은 행의 개수 1이 반환되었다면
+			System.out.println("삭제 성공!");
+			// map이 준비되면 store테이블을 업데이트한다
+			int resultUp = service.updateStoreByDelReview(map);
+			System.out.println("가게테이블 업데이트 성공");
+		}
+		
+		System.out.println("삭제 됐으면 1주세용 : " + result + "// 몇번가게드라?" + storeNo);
+		return "redirect:storedetail.do?no=" + storeNo;
 	}
 	
 	/*좋아요등록*/

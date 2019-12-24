@@ -224,7 +224,7 @@ function makeReviewList(list){
 			html += `<li data-chkmyreview=` + chkmyreview + `>
 					    <ul class="ud_control ${css}">
 					        <li>수정 |</li>
-					        <li><a href="` + context + `/front/store/reviewDelete.do?reviewNo=` + chkmyreview + `">삭제</a></li>
+					        <li><a href="` + context + `/front/store/review_delete.do?storeNo=` + storeNo + `&reviewNo=${r.reviewNo}&storeScope=${r.storeScope}">삭제</a></li>
 					    </ul>
 					</li>
 				</ul>
@@ -337,7 +337,7 @@ function makeReviewList(list){
 			html += `<li data-chkmyreview=` + chkme + `>
 					    <ul class="ud_control ${css}">
 					        <li>수정 |</li>
-					        <li><a href="` + context + `/front/store/reviewDelete.do?reviewNo=${r.reviewNo}">삭제</a></li>
+					        <li><a href="` + context + `/front/store/review_delete.do?storeNo=` + storeNo + `&reviewNo=${r.reviewNo}">삭제</a></li>
 					    </ul>
 					</li>
 				</ul>
