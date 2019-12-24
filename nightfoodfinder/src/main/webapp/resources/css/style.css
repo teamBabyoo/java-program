@@ -13,7 +13,7 @@ body {
   background-color: #f9f9f9;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-ul, dl { list-style: none; }
+ul, dl { list-style: none !important; }
 li { color: #7f7f7f; }
 a { text-decoration: none; color: #7f7f7f; }
 i { font-style: normal; font-weight: normal; font-size: 1.4rem; }
@@ -879,7 +879,8 @@ header div:nth-child(3) li span {
 }
 .sto_li > div {
 	float: left;
-	height: 100%;
+    height: 180px;
+    overflow: hidden;
 }
 .sto_li > div:nth-child(2) {
 	width: 40%;
@@ -937,7 +938,7 @@ header div:nth-child(3) li span {
     overflow: hidden;
     border: none;
 }
-.bx-wrapper img {
+.bx-wrapper > img {
     border-radius: 4px;
     max-width: 100%;
     height: auto; 
