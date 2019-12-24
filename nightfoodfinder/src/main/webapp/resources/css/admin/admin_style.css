@@ -682,14 +682,21 @@ tspan {
 		width: 100px;
 	}
   
+  /*리뷰 메뉴*/
   li.review ul {
   	display: none;
   }
   
-  li.review:hover ul li {
+  li.review:hover ul {
   	display: block;
   }
-  
+  /*스탯 메뉴*/
+  li.stat ul {
+  	display: none;
+  }
+  li.stat:hover ul {
+  	display: block;
+  }
   
   .search-form {
   	margin-left: 63%;	
@@ -739,12 +746,13 @@ div.allCheck label {
 
 /* 모달 내용/팝업박스  */
 .modal-content-reportreview {
+	position: relative;
 	background-color: #fefefe;
 	margin: 15% auto; /* 15% from the top and centered */
 	padding: 20px;
 	border: 1px solid #888;
 	width: 50%; /* Could be more or less, depending on screen size */
-	height: 650px;
+/* 	height: 650px; */
 }
 
 .modal-content {
@@ -786,7 +794,7 @@ div.allCheck label {
 	ul.pagination_two {
 		text-align: center;
 	}
-
+/*
 .two {
     float: left;
     margin-left: 55%;
@@ -800,11 +808,15 @@ div.allCheck label {
     top: 78px;
 }
 
+*/
+
 
 div#paginationBox_two {
-    position: relative;
-    top: 80px;
-    right: 230px;
+/*    position: absolute;  */
+	position: relative;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
     
     
   /*승경 끝*/

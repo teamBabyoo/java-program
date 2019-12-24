@@ -24,8 +24,8 @@
 		<result column="store_scope_total" property="storeScopeTotal" />
 		<result column="review_cnt_total" property="reviewCntTotal" />
 
-		<collection property="holidayList" column="store_no" select="selectHolidayListByStoreNo" />
 		<collection property="fileVoList" column="store_no" select="selectFileListByStore" />
+		<collection property="holidayList" column="store_no" select="selectHolidayListByStoreNo" />
 	</resultMap>
 	
 	<!-- resultMap (리뷰에 파일리스트 조회) -->
@@ -53,6 +53,7 @@
 		on h.week_no = w.week_no
 		where store_no = #{store_no}
 	</select>
+	
 	<!-- storelist에서 호출하는 사진file select -->
 	<select id="selectFileListByStore" parameterType="int" resultType="FileVO">
 		select *
@@ -298,7 +299,7 @@
 	</sql>
 
 	<!-- 스토어 리스트 -->
-	<select id="storeList" resultType="Store" parameterType="Search">
+	<select id="storeList" resultMap="storeMap" parameterType="Search">
 		select distinct s.*,
 			   a.*,
 			   p.price_type,
@@ -591,7 +592,7 @@
 	</update>
 
 	<!-- 댓글삭제 -->
-	<delete id="deleteComment" parameterType="int">
+	<delete id="deleteReview" parameterType="int">
 		delete
 		from tb_review
 		where review_no = #{reviewNo}

@@ -62,35 +62,38 @@
          	</if>
 		 </where> 
 		 order by n.reg_date desc 
-		 limit 70
+		 limit 40
 	</select>
 	
 	<!-- 알림을 사용자가 확인했을 때  안읽음(0)에서 읽음(1)으로 업데이트-->
-	<update id="readNotice" parameterType="Notice">
+<!-- 	<update id="readNotice" parameterType="Notice"> -->
+	<update id="readNotice" parameterType="int">
 		update tb_notice
   		   set status = 1
-         <where>
+  		   
+  		where notice_no = #{noticeNo}
+ <!--         <where>
          	<if test="storeNo != 0">
          		store_no = #{storeNo}
          	</if>
          	<if test="userNo != 0">
          		user_no = #{userNo}
          	</if>
-         </where> 
+         </where> -->
 	</update>
 	
 	<!-- 안읽은 알림 몇 개인지 -->
 	<select id="countNewNotice" parameterType="Notice" resultType="int">
 		select count(*)
 		  from tb_notice
-		 where 
+		 where
 		 	<if test="storeNo != 0 and userNo == 0">
          		store_no = #{storeNo}
          	</if>
          	<if test="userNo != 0 and storeNo == 0">
          		user_no = #{userNo}
          	</if>
-           and status = 0
+			and status = 0
 	</select>
 	
 	<!-- 알림 하나 삭제 -->

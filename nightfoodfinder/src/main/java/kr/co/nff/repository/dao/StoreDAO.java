@@ -64,7 +64,7 @@ public interface StoreDAO {
 	//리뷰수정
 	void updateReview(Review review);
 	//리뷰삭제
-	void deleteReview(int no);
+	int deleteReview(int no);
 	// 리뷰 등록시 스토어테이블 업데이트
 	int updateStoreByReview(Map<String, Object> map);
 	

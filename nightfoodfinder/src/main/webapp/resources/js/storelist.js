@@ -13,7 +13,7 @@ $(() => {
      
 	/* 지도 스크롤 고정 부분*/
 	$(window).ready(() => {                   /* 헤더의 height만큼 뺀다 */
-		const contentHeight = window.innerHeight - 60;
+		const contentHeight = window.innerHeight - 108;
 		$('.rightarea').css('height', contentHeight);
 	});
 	
