@@ -45,7 +45,7 @@
 				<img src="<c:url value='/resources/images/basicfood.jpg' />" width="250px" height="180px" />
 			</c:when>
 			<c:otherwise>
-					<img src="${pageContext.request.contextPath}/front/store/getByteImage.do?name=${s.sysName}&path=${s.path}" />
+					<img src="${pageContext.request.contextPath}/front/store/getByteImage.do?name=${s.sysName}&path=${s.path}" width="250px" height="180px" />
 			</c:otherwise>
 		</c:choose>
 							
