@@ -1074,3 +1074,70 @@ header div:nth-child(3) li span {
 /* 스토어 회원가입페이지 끝*/
 
 /** 주영 끝 **/
+/** 가람 **/
+.pg-toplist { 
+	width: 100%; 
+	display: inline-block;
+    margin-top: 60px;
+}
+.pg-toplist .basic-info-list {
+ 	margin: 0 auto; 
+	position: unset; 
+	height: 234px;
+    background-color: #f7f7f7;
+}
+.pg-toplist .basic-info-list {
+    border-bottom: 1px solid #dbdbdb;
+    box-shadow: none;
+    border-bottom: none;
+    border-bottom: 1px solid #d4d4d4;
+    padding: 0;
+}
+.pg-toplist .basic-info-list>.inner {
+    margin: 0 auto;
+    padding: 48px 30px 20px 30px;
+    width: 860px;
+    float: none;
+}
+:lang(ko) {
+    word-break: keep-all;
+}
+.pg-toplist .basic-info-list .status {
+    font-size: 0.625rem;
+    color: #9b9b9b;
+    line-height: 1.2em;
+    text-align: center;
+}
+.pg-toplist .basic-info-list .status {
+    margin-top: 20px;
+    font-size: 0.875rem;
+}
+.pg-toplist .basic-info-list .title {
+    margin-top: 11px;
+    font-size: 1.625rem;
+    color: #000000;
+    line-height: 1.2em;
+    text-align: center;
+}
+.pg-toplist .basic-info-list .title {
+    margin-top: 18px;
+    font-size: 2.563rem;
+}
+.pg-toplist .basic-info-list .desc {
+    margin-top: 9px;
+    font-size: 1.063rem;
+    color: #9b9b9b;
+    line-height: 1.2em;
+    text-align: center;
+}
+.pg-toplist .basic-info-list .desc {
+    font-size: 1.2rem;
+    margin: 20px auto 30px;
+}
+.awards_store_wrap .content { position: unset; }
+.awards_store_wrap .content .storelist {    
+	margin: 0 auto;
+    width: 750px; 
+    padding-top: 20px;
+    }
+/** 가람 끝 **/

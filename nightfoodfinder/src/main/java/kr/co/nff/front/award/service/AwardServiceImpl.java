@@ -32,5 +32,16 @@ public class AwardServiceImpl implements AwardService {
 		}
 		return storeList;
 	}
+
+	@Override
+	public Award awardStore(int awardNo) {
+		Award award = dao.awardStore(awardNo);
+		String userAge = award.getUserAge();
+		String[] userAgeArr = userAge.split("0",2);
+		if(userAgeArr[0] != null) {
+			award.setUserAge(userAgeArr[0] + "0대");
+		}
+		return award;
+	}
 	
 }
