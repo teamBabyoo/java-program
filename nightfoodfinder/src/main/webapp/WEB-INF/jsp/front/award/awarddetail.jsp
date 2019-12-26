@@ -113,6 +113,10 @@
 				</table> --%>
 			</div>
 		</div>
+		    
+	    <!-- 푸터 -->
+	    <c:import url="/WEB-INF/jsp/include/footer.jsp" />
+	    <!-- // 푸터 -->
 	</div>
 </body>
 </html>
