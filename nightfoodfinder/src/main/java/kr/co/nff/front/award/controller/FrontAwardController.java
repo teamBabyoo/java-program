@@ -20,8 +20,9 @@ public class FrontAwardController {
 	}
 	
 	@RequestMapping("/awarddetail.do")
-	public void awardDetail(String storeNoList, Model model) {
+	public void awardDetail(String storeNoList, int awardNo, Model model) {
 		model.addAttribute("awardDetail", service.detailAwardStore(storeNoList));
+		model.addAttribute("award", service.awardStore(awardNo));
 	}
 	
 }

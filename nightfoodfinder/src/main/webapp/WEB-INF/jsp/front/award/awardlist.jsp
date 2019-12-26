@@ -41,7 +41,7 @@
 						<td>${b.userGender}</a></td>
 						<td>${b.userAge}</td>
 						<td>
-						<span class="button"><a href="${pageContext.request.contextPath}/front/award/awarddetail.do?storeNoList=${b.storeNoList}" target="_blank">${b.storeNoList}</a></span>
+						<span class="button"><a href="${pageContext.request.contextPath}/front/award/awarddetail.do?awardNo=${b.awardNo}&storeNoList=${b.storeNoList}" target="_blank">${b.storeNoList}</a></span>
 						</td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd" value="${b.regDate}" /></td>
 					</tr>
