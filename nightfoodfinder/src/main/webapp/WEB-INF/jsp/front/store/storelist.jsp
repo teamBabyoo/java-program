@@ -31,7 +31,11 @@
 		<!-- 컨텐트  -->
 		<div class="content list_content">
 			<div class="search_conditions">
-					검색조건을 뿌려주자
+				<span>카테고리</span>
+				<span>위치</span>
+				<span>가격대</span>
+				<span>검색어</span>
+				<span>열려있는지 유무</span>
 			</div>
 			<div class="leftarea">
 				<div id="map"></div>

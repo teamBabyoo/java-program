@@ -960,6 +960,7 @@ header div:nth-child(3) li span {
 .search_conditions {
 	grid-area: header;
 	border-bottom: 1px solid rgb(235, 235, 235);
+	padding-left: 24px;
 }
 
 .leftarea {
@@ -1100,7 +1101,16 @@ header div:nth-child(3) li span {
 
 /* -------------------- */
 
-/* .notice_content > ul > li > a { position: absolute; top: 0; left: 0; } */
+.search_conditions > span {
+	padding: 7px 21px;
+    border: 2px groove #DBDBDB;
+    border-radius: 21px;
+    background: #fff;
+    margin: 4px;
+}
+
+
+
 
 /** 유빈 끝 **/
 

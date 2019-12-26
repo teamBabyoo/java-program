@@ -133,10 +133,7 @@
     </div>
   </header>
   <script type="text/javascript">
-  /* if (window.sessionStorage) {
-      console.dir(sessionStorage);
-  } */
 	let context = '${pageContext.request.contextPath}';
-</script>
+  </script>
   <script src='${pageContext.request.contextPath}/resources/js/header.js' ></script>
   
