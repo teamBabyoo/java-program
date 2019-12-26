@@ -10,7 +10,7 @@
 </c:import>
 <meta charset="UTF-8">
 <script type="text/javascript"
-        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2e2c217701074a631a1029878ed30d6f&libraries=services"></script>
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2e2c217701074a631a1029878ed30d6f&libraries=services"></script>
 
 <title>Store Join Page</title>
 </head>
@@ -19,7 +19,7 @@
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 		<div class="content">
 			<div id="storeupdateForm">
-				<form name="form" action="storeinfoupdate.do" method="post" onsubmit="return validate();" >
+				<form id="updateForm" name="form" action="storeinfoupdate.do" method="post">
 					<table>
 						<tr>
 							<th>가게 이름</th>
@@ -40,31 +40,36 @@
 						<tr>
 							<th>비밀번호</th>
 							<td><input type="password" id="storePass" name="storePass" />
-								<div id="pwChk"> <span id="alert-success" style="display: none;">비밀번호가 일치합니다.</span></div></td>
+								<div id="pwChk">
+									<span id="alert-success" style="display: none;">비밀번호가
+										일치합니다.</span>
+								</div></td>
 						</tr>
 						<tr>
 							<th>비밀번호 확인</th>
 							<td><input type="password" id="storePass2" name="storePass2" />
 								<div id="pwChk2">
-									 <span id="alert-success" style="display: none;">비밀번호가 일치합니다.</span>
-									 <span id="alert-danger" style="display: none; color: red ">비밀번호가 일치하지 않습니다.</span>
+									<span id="alert-success" style="display: none;">비밀번호가
+										일치합니다.</span> <span id="alert-danger"
+										style="display: none; color: red">비밀번호가 일치하지 않습니다.</span>
 								</div></td>
-						</tr> 
+						</tr>
 						<tr>
 							<th>가게 전화번호</th>
-							<td><input type="text" name="storeTell"	value="${store.storeTell}" /></td>
+							<td><input type="text" name="storeTell"
+								value="${store.storeTell}" /></td>
 						</tr>
 						<tr>
 							<th rowspan="4">주소</th>
 						</tr>
 						<tr>
 							<td><input type="text" id="zipNo" name="zipNo" value="${store.zipNo}" /> 
-							<input type="hidden" id="sggNm" name="city" /> 
-							<input type="button" onClick="goPopup();" value="주소찾기" /></td>
+							<input type="hidden" id="sggNm"	name="city" value="${store.city}" /> 
+							<input type="button" id="findAddr" onClick="goPopup();"	value="주소찾기" /></td>
 						</tr>
 						<tr>
 							<td><input type="text" style="width: 300px;"
-								id="roadFullAddr" name="streetLoad"  value="${store.streetLoad}"/></td>
+								id="roadFullAddr" name="streetLoad" value="${store.streetLoad}" /></td>
 						</tr>
 						<tr>
 							<td><input type="text" style="width: 300px;" id="addrDetail"
@@ -79,7 +84,7 @@
 									</c:forEach>
 							</select>시 <select name="openM">
 									<c:forEach begin="0" end="59" var="i">
-										<option id="openM${i}"  value="${i}">${i}</option>
+										<option id="openM${i}" value="${i}">${i}</option>
 									</c:forEach>
 							</select>분 - <select name="closeH">
 									<c:forEach begin="0" end="24" var="i">
@@ -93,37 +98,32 @@
 						</tr>
 						<tr>
 							<th>휴무일</th>
-							<td>
-							<input type="checkbox" name="day" value="1" />월 
-							<input type="checkbox" name="day" value="2" />화 
-							<input type="checkbox" name="day" value="3" />수
-							<input type="checkbox" name="day" value="4" />목 
-							<input type="checkbox" name="day" value="5" />금
-							<input type="checkbox" name="day" value="6" />토 
-							<input type="checkbox" name="day" value="7" />일
-							</td>
+							<td><input type="checkbox" name="day" value="1" />월 <input
+								type="checkbox" name="day" value="2" />화 <input type="checkbox"
+								name="day" value="3" />수 <input type="checkbox" name="day"
+								value="4" />목 <input type="checkbox" name="day" value="5" />금
+								<input type="checkbox" name="day" value="6" />토 <input
+								type="checkbox" name="day" value="7" />일</td>
 						</tr>
 						<c:forEach items="${menulist}" var="m" varStatus="status">
-						<tr name="trMenu">
-							<c:choose>
-							<c:when test="${status.index == 0}">
-								<th>대표 메뉴 / 가격</th>
-								<td>
-									<input type="text" name="menuName" value="${m.menu}">
-									<input type="number" name="menuPrice" value="${m.price}">
-									<i class="fa fa-plus-square-o" aria-hidden="true" id="plus_btn"></i>
-									<i class="fa fa-minus-square-o" aria-hidden="true" id="minus_btn"></i>
-								</td>
-							</c:when>
-							<c:otherwise>
-								<th></th>
-							<td>
-								<input type="text" name="menuName" value="${m.menu}">
-								<input type="number" name="menuPrice" value="${m.price}">
-							</td>
-							</c:otherwise>
-							</c:choose>
-						</tr>
+							<tr name="trMenu">
+								<c:choose>
+									<c:when test="${status.index == 0}">
+										<th>대표 메뉴 / 가격</th>
+										<td><input type="text" name="menuName" value="${m.menu}">
+											<input type="number" name="menuPrice" value="${m.price}">
+											<i class="fa fa-plus-square-o" aria-hidden="true"
+											id="plus_btn"></i> <i class="fa fa-minus-square-o"
+											aria-hidden="true" id="minus_btn"></i></td>
+									</c:when>
+									<c:otherwise>
+										<th></th>
+										<td><input type="text" name="menuName" value="${m.menu}">
+											<input type="number" name="menuPrice" value="${m.price}">
+										</td>
+									</c:otherwise>
+								</c:choose>
+							</tr>
 						</c:forEach>
 						<tr>
 							<th>가게 분류</th>
@@ -138,33 +138,35 @@
 						</tr>
 						<tr>
 							<th>소개글</th>
-							<td>
-								<textarea rows="10" cols="40" name="storeContent">
+							<td><textarea rows="10" cols="40" name="storeContent">
 								 ${storeContent.storeContent}
-								</textarea>
-							
-							</td>
+								</textarea></td>
 						</tr>
 						<tr>
 							<th>대표자 이름</th>
-							<td><input type="text" name="storeOwner" value="${store.storeOwner}"/></td>
+							<td><input type="text" name="storeOwner"
+								value="${store.storeOwner}" /></td>
 						</tr>
 						<tr>
 							<th>대표자 휴대폰 번호</th>
-							<td><input type="text" name="storeOwnerPh" value="${store.storeOwnerPh}" /></td>
+							<td><input type="text" name="storeOwnerPh"
+								value="${store.storeOwnerPh}" /></td>
 						</tr>
 					</table>
-					<input type="hidden" name="openTime"/>
-					<input type="hidden" name="closeTime"/>
-					<input type= "hidden" name="storeNo" value="${store.storeNo}"/>
-					<input type="hidden" id="entX" name="entX"/>
-					<input type="hidden" id="entY" name="entY"/>
-					
-					<div>
-						<button type='submit' id="updateBtn">수정하기</button>
+					<input type="hidden" name="openTime" /> 
+					<input type="hidden" name="closeTime" /> 
+					<input type="hidden" name="storeNo"	value="${store.storeNo}" /> 
+					<input type="hidden" id="entX" name="entX" value="${store.longitude}"/> 
+					<input type="hidden" id="entY" name="entY" value="${store.latitude}"/>
+
+					<div id="updateBtn">
+						<button type='button' id="updateBtn" >수정하기</button>
 					</div>
 				</form>
 			</div>
+		</div>
+		<div id="footerEle">
+			<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 		</div>
 	</div>
 	<script>
@@ -222,6 +224,7 @@
 		document.form.zipNo.value = zipNo;
 		document.form.addrDetail.value = rrr[1];
 		document.form.city.value = sggNm;
+		
 		
 		var geocoder = new kakao.maps.services.Geocoder();
 		var callback = function (result, status) {
@@ -440,8 +443,51 @@
 	}
 				
 	
-
-		function validate() {
+	$("#updateBtn").click(() => {
+	      let nameFlag = true;
+		  $('input[name="menuName"]').each(function() {
+			  console.log("메뉴",$(this).val());
+			  if($(this).val() == "") { 
+				  nameFlag = false;
+			  }
+		    });
+		   let priceFlag = true;
+		  $('input[name="menuPrice"]').each(function() {
+			  if($(this).val() == "") {
+				  
+				  priceFlag = false;
+			  } });
+		  
+		     if (nameFlag == false) {
+		    	 alert("메뉴를 입력하세요");
+		     } else if (priceFlag == false){
+		    	 alert("가격을 입력해주세요");
+		     }else if (document.form.storeName.value == "") {
+			        alert("가게이름을 입력하세요");
+			        document.form.storeName.focus();
+			      } else if (document.form.storeTell.value == "") {
+			        alert("전화번호를 입력하세요");
+			        document.form.storeTell.focus();
+			      } else if (document.form.addrDetail.value == "") {
+			        alert("상세주소를 입력하세요");
+			        document.form.addrDetail.focus();
+			      } else if (document.form.streetLoad.value == "") {
+			        alert("주소를 입력하세요");
+			        document.form.streetLoad.focus();
+			      } else if(document.form.storeOwner.value == "") {
+			    	  alert("대표자 이름을 입력하세요");
+			        document.form.storeOwner.focus();
+			      } else if(document.form.storeOwnerPh.value == "") {
+			    	  alert("대표자 휴대전화 번호를 입력하세요");
+			        document.form.storeOwnerPh.focus();
+			      } else if(document.form.storePass.value == ""){
+			    	  alert("비밀번호를 입력하세요");
+			    	  document.form.storePass.focus();
+			      } else if(document.form.storePass2.value == ""){
+			    	  alert("비밀번호 확인칸을 입력하세요");
+			    	  document.form.storePass.focus();
+			      } else { 
+			    	  
 			let openH = $("select[name='openH']").val();
 			let openM = $("select[name='openM']").val();
 			if (openH < 10) {
@@ -468,9 +514,13 @@
 
 			$('input[name="openTime"]').val(openTime);
 			$('input[name="closeTime"]').val(closeTime);
+			$("#updateForm").submit();  
+			}
+		     
+	});	
+		
 
-// 			return false;
-		}
+		
 		
 	</script>
 </body>

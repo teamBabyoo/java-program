@@ -21,7 +21,7 @@
 	        <div class="commentwrap">
 	          <ul class="clearboth">
 	            <li class="float_l">
-	              <span>수저가</span>에 대한 솔직한 리뷰를 써주세요.
+	              <span>${store.storeName}</span>에 대한 솔직한 리뷰를 써주세요.
 	            </li>
 	            <!--
 	              <li id="btn_leave_rv" class="float_r">
@@ -61,7 +61,13 @@
 	                      <img id="foo" class="hidden" src="#" />
 	                    </li>
 	                    <!-- <li class="float_r"><button type="submit">등록</button></li> -->
-	                    <li class="float_r"><input type="submit" />등록</li>
+	                    <li class="float_r">
+	                    	<a href="${pageContext.request.contextPath}/front/store/storedetail.do?no=${review.storeNo}">취소</a>
+	                    	<p>
+		                    	<input id="submit" type="submit" />
+		                    	<label for="submit">등록</label>
+	                    	</p>
+	                    </li>
 	                  </ul>
 	                </li>
 	              </ul>
@@ -111,38 +117,6 @@ function registReview() {
 	});
 	return false;
 };
-
-
-/*
-		// Get form
-        var form = $('#fileUploadForm')[0];
- 
-        // Create an FormData object 
-        var data = new FormData(form);
- 
-       // disabled the submit button
-        $("#btnSubmit").prop("disabled", true);
- 
-        $.ajax({
-            type: "POST",
-            enctype: 'multipart/form-data',
-            url: "/document/upload",
-            data: data,
-            processData: false,
-            contentType: false,
-            cache: false,
-            timeout: 600000,
-            success: function (data) {
-                alert("complete");
-                $("#btnSubmit").prop("disabled", false);
-            },
-            error: function (e) {
-                console.log("ERROR : ", e);
-                $("#btnSubmit").prop("disabled", false);
-                alert("fail");
-            }
-        });
-*/
 
 /**
  * 리뷰 별점 전처리

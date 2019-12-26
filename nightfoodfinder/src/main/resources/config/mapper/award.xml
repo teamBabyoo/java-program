@@ -9,6 +9,12 @@ from tb_award
 order by reg_date desc
 </select>
 
+<select id="awardStore" parameterType="int" resultType="Award">
+select * 
+from tb_award
+where award_no = #{awardNo};
+</select>
+
 <select id="detailAwardStore" parameterType="int" resultType="Store">
   select s.store_no,
 				s.store_name,

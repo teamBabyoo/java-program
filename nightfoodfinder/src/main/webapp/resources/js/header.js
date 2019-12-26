@@ -31,10 +31,6 @@ $(() => {
 	$("#notice_btn").click((e) => {
 		e.preventDefault();
 		
-//		console.log($(e.target));
-//		console.log($("#notice_btn").data("user"));
-//		console.log($("#notice_btn").data("store"));
-		
 		// 로그인 된 유저, 스토어 없다면 그냥 리턴
 		if ( $("#notice_btn").data("user") == "" && $("#notice_btn").data("store") == "") {
 			let html = '<div>로그인 후 이용 가능합니다.</div>';
@@ -44,7 +40,6 @@ $(() => {
 		
 		// 리스트 호출
 		noticeList();
-		
 		
 		
 		
@@ -62,9 +57,7 @@ function noticeList() {
 		url: "/nightfoodfinder/front/main/notice_list.do",
 		type: "POST",
 		success: (list) => {
-			// attr이용해 속성값 바꾸는 방법으로 바꾸어서 진행해보자ㅠ
 			let html = "";
-			
 			// 만약 알림이 없다면
 			if(list.length == 0) {
 				$(".notice_content > ul").html(`<li>알림이 없습니다.</li>`);

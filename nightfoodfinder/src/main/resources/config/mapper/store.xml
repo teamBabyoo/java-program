@@ -87,6 +87,7 @@
 		on s.store_no = m.store_no
 		inner join tb_address a
 		on s.store_no = a.store_no
+		where status = 1
 		<!-- <where> <if test="includeClosed == 1"> <![CDATA[ and str_to_date(s.open_time, 
 			'%h:%i %p') < now() and str_to_date(s.close_time, '%h:%i %p') > now() ]]> 
 			</if> </where> -->
@@ -325,7 +326,7 @@
 	
 	<!-- 검색 조건에 맞는 스토어 리스트 갯수 -->
 	<select id="storeListCnt" resultType="int" parameterType="Search">
-		select count(*)
+		select count(distinct s.store_name)
 		<include refid="commonStoreList" />
 	</select>
 
@@ -557,7 +558,7 @@
 		)
 	</insert>
 	
-	<update id="updateStoreByReview" parameterType="hashMap">
+	<update id="updateStoreByAddReview" parameterType="hashMap">
 		update tb_store
 		   set store_scope_total = store_scope_total + #{review.storeScope},
 		       review_cnt_total = review_cnt_total + 1
@@ -566,22 +567,21 @@
            and store_no = #{review.storeNo};
 	</update>
 
-	<!-- 댓글 등록 -->
-	<!-- 파일등록 아직X -->
-	<insert id="registCommet" parameterType="Review">
-		INSERT INTO tb_review (store_no,
-		user_no,
-		review_content,
-		store_scope,
-		file_group_code,
-		) VALUES (
-		#{storeNo},
-		#{userNo},
-		#{reviewContent},
-		#{storeScope},
-		#{fileGroupCode}
-		)
-	</insert>
+	<!-- 댓글삭제 -->
+	<delete id="deleteReview" parameterType="int">
+		delete
+		from tb_review
+		where review_no = #{reviewNo}
+	</delete>
+	
+	<update id="updateStoreByDelReview" parameterType="hashMap">
+		update tb_store
+		   set store_scope_total = store_scope_total - #{review.storeScope},
+		       review_cnt_total = review_cnt_total - 1
+		 where store_scope_total = #{exiscope}
+		   and review_cnt_total = #{curtcnt}
+           and store_no = #{review.storeNo};
+	</update>
 
 	<!-- 댓글 수정 -->
 	<update id="updateComment" parameterType="Review">
@@ -590,13 +590,6 @@
 		store_scope = #{storeScope}
 		where review_no = #{reviewNo}
 	</update>
-
-	<!-- 댓글삭제 -->
-	<delete id="deleteReview" parameterType="int">
-		delete
-		from tb_review
-		where review_no = #{reviewNo}
-	</delete>
 	<!-- 스토어 선택 강제탈퇴 했을 때 스토어테이블의 상태를 바꿔주기 -->
 	<update id="withdrawStore" parameterType="Store">
 		update tb_store

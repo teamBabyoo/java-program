@@ -17,68 +17,71 @@
 <body>
 	<div class="wrapper detail_wrap">
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
-	  <div id="allDetail">
-	  	<c:if test="${store.status == 1}">
-		<div id="storedetail" class="content clearboth">
-			<div class="slick" style="width: 100%">
-			<c:choose>
-				<c:when test="${empty imgList}">
-					<c:forEach begin="1" end="5">
-						<div>
-		   					<img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" />
-						</div>
-					</c:forEach>
-
-				</c:when>
-				<c:otherwise>
-
-				 <c:set value="${fn:length(imgList)}" var="size" />
-					<c:forEach items="${imgList}" var="img" varStatus="i" end="${size}">
+			<div class="content clearboth">
+			  <div id="allDetail">
+			  	<c:if test="${store.status == 1}">
+				<div id="storedetail">
+					<div class="slick" style="width: 100%">
 					<c:choose>
-					<c:when test="${size < 4}">
-							<div>
-								<img src="${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}" />
-							</div>
-						<c:if test="${i.last}">
-						<c:forEach begin="1" end="${5-size}">
-							<div>
-			   					 <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" />
-							</div>							
-						</c:forEach>
-						</c:if>	
-					</c:when>
-					<c:when test="${size == 4}">
+						<c:when test="${empty imgList}">
+							<c:forEach begin="1" end="5">
 								<div>
-									<img src="${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}" />
+				   					<div style="background-image: url('https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg'); background-size: cover; background-position: center center; height: 360px; ">
+				   				</div>
 								</div>
-							<c:if test="${i.last}">
-								<div>
-			   						 <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" />
-								</div>
-							</c:if>	
-												
-					</c:when>
-					<c:otherwise>
-								<div>
-									<img src="${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}" />
-								</div>
-					</c:otherwise>
+							</c:forEach>
+		
+						</c:when>
+						
+						<c:otherwise>
+						 <c:set value="${fn:length(imgList)}" var="size" />
+							<c:forEach items="${imgList}" var="img" varStatus="i" end="${size}">
+							<c:choose>
+							<c:when test="${size < 4}">
+									<div style="background-image: url('${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}'); background-size: cover; background-position: center center; height: 360px; ">
+									</div>
+								<c:if test="${i.last}">
+								<c:forEach begin="1" end="${5-size}">
+									<div>
+										<div style="background-image: url('https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg'); background-size: cover; background-position: center center; height: 360px;">
+										</div>
+		<!-- 			   					 <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" /> -->
+									</div>							
+								</c:forEach>
+								</c:if>	
+							</c:when>
+							<c:when test="${size == 4}">
+										<div style="background-image: url('${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}'); background-size: cover; background-position: center center; height: 360px; ">
+										</div>
+									<c:if test="${i.last}">
+										<div>
+											<div style="background-image: url('https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg'); background-size: cover; background-position: center center; height: 360px; ">
+											</div>
+		<!-- 			   						 <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" /> -->
+										</div>
+									</c:if>	
+							</c:when>
+							<c:otherwise>
+										<div style="background-image: url('${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}'); background-size: cover; background-position: center center; height: 360px; ">
+										</div>
+							</c:otherwise>
+							</c:choose>
+							</c:forEach>
+						</c:otherwise>
 					</c:choose>
-					</c:forEach>
-				</c:otherwise>
-			</c:choose>
-			</div>
+					</div>
+							
+					</div>	
 					
-			</div>	
-			
+		
+					<div id="detaillistjs">
+						<div id="storeinfo">
+							<div id="stinfo">
+								<div id="star">
+									<div>
+										<img src="${pageContext.request.contextPath}/resources/images/star.png"	alt="별" />
+									</div>
 
-			<div id="detaillistjs">
-				<div id="storeinfo">
-					<div id="stinfo">
-						<div id="star">
-							<div>
-								<img src="${pageContext.request.contextPath}/resources/images/star.png"	alt="별" />
-							</div>
 							<div id="scopescore"></div>
 						</div>
 						<div id="stTitle">
@@ -88,8 +91,9 @@
 										class="fa fa-bookmark-o" aria-hidden="true"></i>단골</a></li>
 								<li class="tab_share"><a href="#"><i
 										class="fa fa-share-square-o" aria-hidden="true"></i>공유</a> <!-- 공유 팝업 -->
-									<div class="sharePop hidden">
+<!--  									<div class="sharePop hidden">
 										<ul class="clearboth">
+											<li id="closesnspop"><i class="fa fa-times" aria-hidden="true"></i></li>
 											<li><a
 												href="https://twitter.com/intent/tweet?text=심야식당 서울 강동구 강동대로 205 (출처 : 심야식당)&url=http://www.naver.com"
 												target="_blank"><img
@@ -105,7 +109,7 @@
 											<p class="ellipsis">https://app.slack.com/client/TPPHA763F/CPPH24F16/files/FPJQPCU4R</p>
 											<a href="#" id="copyclip">복사</a>
 										</div>
-									</div></li>
+									</div> --></li>
 								<!-- 맨 아래 지도로 보내는 a링크 -->
 								<li id="goMap"><a href="#"><i class="fa fa-map-o" aria-hidden="true"></i>지도</a></li>
 							</ul>
@@ -190,8 +194,8 @@
 						<div class="commentwrap">
 							<ul class="clearboth">
 								<li class="float_l">Review</li>
-								<li id="btn_leave_rv" class="float_r"><a
-									href="${pageContext.request.contextPath}/front/store/storeReviewRegistForm.do?storeNo=${store.storeNo}">
+								<li id="btn_leave_rv" class="float_r">
+									<a id="reviewRegist" href="${pageContext.request.contextPath}/front/store/storeReviewRegistForm.do?storeNo=${store.storeNo}">
 										<i class="fa fa-plus-circle" aria-hidden="true"></i>리뷰남기기
 								</a></li>
 							</ul>
@@ -199,18 +203,14 @@
 						
 							<!-- 페이징 -->
 							<div id="paginationBox"></div>
-
+						</div>		
 						</div>
-					</div>
-					<!-- // 댓글 끝 -->
-
+						<!-- 댓글 끝 -->
 				</div>
 			</div>
 		<div id="map" style="width: 50%; height: 400px;"></div>
 		</c:if>
 		</div>
-		</div>
-
 		<!-- 푸터 -->
 		<c:import url="/WEB-INF/jsp/include/footer.jsp" /> 
 
@@ -218,6 +218,25 @@
 		<div class="bgbox"></div>
 		<!-- 신고팝업 -->
 		<div id="rmyModal" class="rmodal" style="display: none"></div>
+		<!-- 공유 팝업 -->
+ 		<div class="sharePop hidden">
+			<ul class="clearboth">
+				<li id="closesnspop"><i class="fa fa-times" aria-hidden="true"></i></li>
+				<li><a
+					href="https://twitter.com/intent/tweet?text=심야식당 서울 강동구 강동대로 205 (출처 : 심야식당)&url=http://www.naver.com"
+					target="_blank"></a></li>
+				<li><a
+					href="http://www.facebook.com/sharer/sharer.php?u=http://naver.com"
+					target="_blank"></a></li>
+				<li><a href="#" id="kakao-link-btn" href="javascript:;"></a></li>
+			</ul>
+			<div class="clearboth">
+				<p class="ellipsis">https://app.slack.com/client/TPPHA763F/CPPH24F16/files/FPJQPCU4R</p>
+				<a href="#" id="copyclip">복사</a>
+			</div>
+		</div>
+		</div>
+		</div>
 	<script src="${pageContext.request.contextPath}/resources/js/slick.min.js"></script>
 	<script type="text/javascript">
 		let imglist = `${imgList}`;
@@ -236,7 +255,7 @@
 		if(userNo === ""){
 			userNo = 0;
 		}
-		let loginStore = "";
+		let loginStore = '${loginStore.storeNo}';
 		if('${loginStore.storeNo}' === ""){
 			loginStore = 0;
 		} else {
@@ -256,6 +275,7 @@
 			$("#introduce").append(content);
 			
 		}
+		console.log("로그인한가게번호는 ? ", ${loginStore.storeNo});
 // 		console.dir(`${imgList}`);
 /*slick*/
 
