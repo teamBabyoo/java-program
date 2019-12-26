@@ -5,7 +5,7 @@
 
 <header class="clearboth">
     <div class="logo" onclick="location.href='${pageContext.request.contextPath}/front/main/main.do'">
-        <img src="${pageContext.request.contextPath}/resources/images/mangoplate-logo-horizontal.svg" alt="anff 로고" />
+        <img src="${pageContext.request.contextPath}/resources/images/logo.png" alt="nff 로고" />
     </div>
     <div class="search">
     <form id="sto_search" action="${pageContext.request.contextPath}/front/store/storelist.do" method="post">
