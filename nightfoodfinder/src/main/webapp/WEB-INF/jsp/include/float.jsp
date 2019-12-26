@@ -9,19 +9,22 @@
 <style>
 #sidebox { 
 	background-color:#F0F0F0; 
-	position:absolute; 
+	position:fixed; 
 	height: 100px;
 	width:120px; 
-	top:433px;
-	right:420px; 
+	top:50%;
+	right:30px;
+	transform: translateY(-50%);
 	padding: 3px 10px;
-    overflow: auto;
+	z-index: 999999;
+	overflow:scroll; 
 	}
 
 </style>
 </head>
 <body>
 	<div id="sidebox">
+		<div>최근 본 맛집</div>
 		<div id="viewlist"></div>
 		<div id="viewnone">최근 본 페이지가 없습니다</div>
 	</div>
@@ -31,10 +34,11 @@
 	var currentPosition = parseInt($("#sidebox").css("top")); 
 	$(window).scroll(function() { 
 		var position = $(window).scrollTop(); 
-		$("#sidebox").stop().animate({"top":position+currentPosition+"px"},1000); 
+// 		$("#sidebox").stop().animate({"top":position+currentPosition+"px"},1000); 
 		});
 	
 	var list = sessionStorage.getItem('list');
+	console.log(list);
 	if(list.length != null) {
 		$("#viewnone").hide();
 		//console.log(typeof list); -> string

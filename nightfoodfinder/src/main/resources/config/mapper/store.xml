@@ -24,8 +24,8 @@
 		<result column="store_scope_total" property="storeScopeTotal" />
 		<result column="review_cnt_total" property="reviewCntTotal" />
 
-		<collection property="holidayList" column="store_no"
-			select="selectHolidayListByStoreNo" />
+		<collection property="fileVoList" column="store_no" select="selectFileListByStore" />
+		<collection property="holidayList" column="store_no" select="selectHolidayListByStoreNo" />
 	</resultMap>
 	
 	<!-- resultMap (리뷰에 파일리스트 조회) -->
@@ -53,6 +53,16 @@
 		on h.week_no = w.week_no
 		where store_no = #{store_no}
 	</select>
+	
+	<!-- storelist에서 호출하는 사진file select -->
+	<select id="selectFileListByStore" parameterType="int" resultType="FileVO">
+		select *
+		  from tb_file
+		 where store_no = #{store_no}
+		 order by file_group_code desc
+		 limit 5
+	</select>
+
 
 	<!-- review collection이 호출하는 select -->
 	<select id="selectFileListByCode" parameterType="int" resultType="FileVO">
@@ -60,6 +70,8 @@
 		  from tb_file
 		 where file_group_code = #{file_group_code}
 	</select>
+	
+	
 	
 	
 	<!-- 메인에 표시할 가게 상세정보 리스트 -->
@@ -75,6 +87,7 @@
 		on s.store_no = m.store_no
 		inner join tb_address a
 		on s.store_no = a.store_no
+		where status = 1
 		<!-- <where> <if test="includeClosed == 1"> <![CDATA[ and str_to_date(s.open_time, 
 			'%h:%i %p') < now() and str_to_date(s.close_time, '%h:%i %p') > now() ]]> 
 			</if> </where> -->
@@ -82,12 +95,12 @@
 		limit 5
 	</select>
 
-	<!-- 헤더 검색바에 줄 카테고리 리스트 가져오기 -->
+<!-- 검색 헤더 부분 시작 -->
+
 	<select id="selectCategory" resultType="Category">
 		select * from tb_category
 	</select>
 
-	<!-- 헤더 검색바에 줄 지역구 리스트 -->
 	<select id="cityList" resultType="String">
 		select distinct a.city
 		from
@@ -95,6 +108,14 @@
 		inner join tb_address a
 		on s.store_no = a.store_no
 	</select>
+	
+	<select id="selectPriceType" resultType="PriceType">
+		select * from tb_price_type
+	</select>
+	
+<!-- 검색 헤더 부분 끝 -->
+	
+	
 
 	<select id="selectOneStore" resultType="Store"
 		parameterType="int">
@@ -234,6 +255,7 @@
   		where store_no = #{storeNo}
 	</update>
 
+
 	<sql id="commonStoreList">
 		  from tb_store s
 		 inner join tb_category c
@@ -275,11 +297,10 @@
 					#{p}
 				</foreach>
 			</if>
-	
 	</sql>
 
 	<!-- 스토어 리스트 -->
-	<select id="storeList" resultType="Store" parameterType="Search">
+	<select id="storeList" resultMap="storeMap" parameterType="Search">
 		select distinct s.*,
 			   a.*,
 			   p.price_type,
@@ -302,9 +323,10 @@
 		</choose>
 		limit #{startList}, #{listSize}
 	</select>
-	<!-- 스토어 리스트 -->
+	
+	<!-- 검색 조건에 맞는 스토어 리스트 갯수 -->
 	<select id="storeListCnt" resultType="int" parameterType="Search">
-		select count(*)
+		select count(distinct s.store_name)
 		<include refid="commonStoreList" />
 	</select>
 
@@ -536,7 +558,7 @@
 		)
 	</insert>
 	
-	<update id="updateStoreByReview" parameterType="hashMap">
+	<update id="updateStoreByAddReview" parameterType="hashMap">
 		update tb_store
 		   set store_scope_total = store_scope_total + #{review.storeScope},
 		       review_cnt_total = review_cnt_total + 1
@@ -545,22 +567,21 @@
            and store_no = #{review.storeNo};
 	</update>
 
-	<!-- 댓글 등록 -->
-	<!-- 파일등록 아직X -->
-	<insert id="registCommet" parameterType="Review">
-		INSERT INTO tb_review (store_no,
-		user_no,
-		review_content,
-		store_scope,
-		file_group_code,
-		) VALUES (
-		#{storeNo},
-		#{userNo},
-		#{reviewContent},
-		#{storeScope},
-		#{fileGroupCode}
-		)
-	</insert>
+	<!-- 댓글삭제 -->
+	<delete id="deleteReview" parameterType="int">
+		delete
+		from tb_review
+		where review_no = #{reviewNo}
+	</delete>
+	
+	<update id="updateStoreByDelReview" parameterType="hashMap">
+		update tb_store
+		   set store_scope_total = store_scope_total - #{review.storeScope},
+		       review_cnt_total = review_cnt_total - 1
+		 where store_scope_total = #{exiscope}
+		   and review_cnt_total = #{curtcnt}
+           and store_no = #{review.storeNo};
+	</update>
 
 	<!-- 댓글 수정 -->
 	<update id="updateComment" parameterType="Review">
@@ -569,13 +590,6 @@
 		store_scope = #{storeScope}
 		where review_no = #{reviewNo}
 	</update>
-
-	<!-- 댓글삭제 -->
-	<delete id="deleteComment" parameterType="int">
-		delete
-		from tb_review
-		where review_no = #{reviewNo}
-	</delete>
 	<!-- 스토어 선택 강제탈퇴 했을 때 스토어테이블의 상태를 바꿔주기 -->
 	<update id="withdrawStore" parameterType="Store">
 		update tb_store

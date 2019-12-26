@@ -94,11 +94,11 @@ function show_layer(div_name){
 function fn_login() {
 	if($("#storeEmail").val().length < 1) {
 		alert("이메일을 입력해주세요.");
-		form.storeEmail.focus();
+		slForm.storeEmail.focus();
 		return false;
 	} else if ($("#storePass").val().length < 1) {
 		alert("비밀번호를 입력해주세요.");
-		form.storePass.focus();
+		slForm.storePass.focus();
 		return false;
 	} 
 	return true;

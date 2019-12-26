@@ -13,7 +13,8 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />">
 <style>
 #mp_container {
-	margin : 0px;
+	width: 1200px;
+    margin: 30px auto 0;
 	padding-top : 20px;
 	text-align : center;	
 }
@@ -36,7 +37,7 @@
 	float: left;
     margin-left: 5px;
 }
-#mp_profile #nick_modi {
+#mp_profile #nick_update {
 	float: right;
     margin-right: 5px;
 }
@@ -79,14 +80,14 @@
 
 	<div id="mp_container">
 		<div id="mp_profile">
-			<form name="frm" id="frm" method="post">
-			<div id="nickname">${user.nickName}</div>
-			</form>
-			<span id="nick_modi">
-			<a href="javascript:popup();">
-			<i class="fa fa-cog" aria-hidden="true"></i>닉네임수정
-			</a>
-			</span>
+			<div id="nickname">
+				<i class="fa fa-user-circle" aria-hidden="true"></i>
+				${user.nickName}
+			</div>
+			<div id="nick_update" onclick="nickUpdate();">
+				<i class="fa fa-cog" aria-hidden="true"></i>
+				수정	
+			</div>
 			
 		</div>
 		<div id="mp_content">
@@ -97,8 +98,12 @@
 				</div>
 				<div id="frequent_list">
 					<c:forEach items="${freqList}" var="f" >
-						<div id="freq_box">${f.storeName}</div>
+						<div id="freq_box" onclick="location.href=`${pageContext.request.contextPath}/front/store/storedetail.do?no=${f.storeNo}`;">
+							<div id="sThumb"></div>
+							<div>${f.storeName}</div>
+						</div>
 					</c:forEach>
+					
 				</div>
 			</div>
 			<div id="mp_div02" style="display : none">
@@ -135,14 +140,16 @@ function show_layer(div_name){
 	}
 	
 // 닉네임 수정
-function popup() {
-	var pw = window.open("", "test", "width=570,height=420");
-	var val = $('#nickname').html();
-	$(pw.document.body).html("<input type=text value='"+val+"'>");
+function nickUpdate() {
+	console.log('update');
+	window.open("${pageContext.request.contextPath}/front/login/nicknameForm.do","닉네임 수정","width=570, height=350"); 
 	
-	$('#frm').target="test";
-	$('#frm').submit();
 }
+
+
+
+
+
 </script>	
 </body>
 </html>

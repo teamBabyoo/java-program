@@ -45,26 +45,12 @@
           
           	<div class="select clearboth tab_3 hidden">
           		<!-- 가격별 검색 -->
-            	<div>
-              		<label for="price_1" class="types">1만원 미만</label>
-              		<input id="price_1" type="checkbox" name="priceTypeNo" value="1" class="hidden" />
-            	</div>
-
-            	<div>
-              		<label for="price_2" class="types">1만원대</label>
-              		<input id="price_2" type="checkbox" name="priceTypeNo" value="2" class="hidden" />
-              		
-            	</div>
-
-	            <div>
-	              <label for="price_3" class="types">2만원대</label>
-	              <input id="price_3" type="checkbox" name="priceTypeNo" value="3" class="hidden" />
-	            </div>
-	
-	            <div>
-	              <label for="price_4" class="types">3만원 이상</label>
-	              <input id="price_4" type="checkbox" name="priceTypeNo" value="4" class="hidden"  />
-	            </div>
+          		<c:forEach items="${priceList}" var="price" varStatus="status">
+	            	<div>
+	              		<label for="price_${status.count}" class="types">${price.priceType}</label>
+	              		<input id="price_${status.count}" type="checkbox" name="priceTypeNo" value="${price.priceTypeNo}" class="hidden" />
+	            	</div>
+          		</c:forEach>
           	</div>
           <!-- tab_3 -->
 
@@ -80,21 +66,21 @@
       <ul>
         <li><a href="#">내주변맛집</a></li>
         <li><a href="${pageContext.request.contextPath}/front/award/awardlist.do">NFF Awards</a></li>
-     <%--    <c:if test="${loginUser && loginStore}"> --%>
+         <c:if test="${loginUser != null or loginStore != null}">
 	        <li id="notice_btn" data-user="${loginUser}" data-store="${loginStore}">
 	        	<i class="fa fa-bell-o" aria-hidden="true" ></i>
-<!-- 	        	새 알림 갯수 뿌려줄 span
-	        	<span class="newnotice"></span> -->
+<!-- 	        	새 알림 갯수 뿌려줄 span  -->
+	        	<span class="newnotice"></span>
 	        	<!-- 알림 리스트 나올 div -->
 	        	<div class="notice_list_box hidden">
 		        	<div class="topshape"></div>
 				    <!-- 알림 리스트 나올 div -->
 		        	<div class="notice_content">
-	
+						<ul></ul>
 		        	</div>
 	        	</div>
 	        </li>
-        <%-- </c:if> --%>
+         </c:if> 
         
         <li id="person_btn"><i class="fa fa-user-o" aria-hidden="true"></i>
 		<!-- 팝업 (로그인 X) -->

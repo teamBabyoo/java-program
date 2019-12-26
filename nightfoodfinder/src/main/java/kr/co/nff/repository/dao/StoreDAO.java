@@ -6,6 +6,7 @@ import kr.co.nff.repository.vo.Category;
 import kr.co.nff.repository.vo.FileVO;
 import kr.co.nff.repository.vo.Holiday;
 import kr.co.nff.repository.vo.Menu;
+import kr.co.nff.repository.vo.PriceType;
 import kr.co.nff.repository.vo.Review;
 import kr.co.nff.repository.vo.Search;
 import kr.co.nff.repository.vo.Store;
@@ -20,6 +21,8 @@ public interface StoreDAO {
 	List<Category> selectCategory();
 	// 지역구 리스트
 	List<String> cityList();
+	// 가격 타입 리스트
+	List<PriceType> selectPriceType();
 	// 스토어 리스트
     List<Store> storeList(Search search);
     // 스토어 검색 결과의 전체 크기
@@ -61,10 +64,11 @@ public interface StoreDAO {
 	//리뷰수정
 	void updateReview(Review review);
 	//리뷰삭제
-	void deleteReview(int no);
+	int deleteReview(int no);
 	// 리뷰 등록시 스토어테이블 업데이트
-	int updateStoreByReview(Map<String, Object> map);
-	
+	int updateStoreByAddReview(Map<String, Object> map);
+	// 리뷰 삭제시 스토어테이블 업데이트
+	int updateStoreByDelReview(Map<String, Object> map);
 	
 	//리뷰신고
 	void reportReview(Review review);

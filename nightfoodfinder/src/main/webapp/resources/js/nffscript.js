@@ -8,11 +8,14 @@ $(document).ready(function() {
     let $height_wrapper = $('.wrapper').height();
 //    console.log("$height_wrapperㅋ", $height_wrapper);
 
+    $('footer').css('bottom', -($height_wrapper));
+    
     // footer 위치
     // ↙ 문서가 로딩된 후에 변경된 내용은 반영이 안 될수도 있음
     $(document).on('change', function() {
-    	$('footer').css('bottom', -($height_wrapper));    	
-    })
+        $('footer').css('bottom', -($height_wrapper));   
+        
+     })
 
 
 

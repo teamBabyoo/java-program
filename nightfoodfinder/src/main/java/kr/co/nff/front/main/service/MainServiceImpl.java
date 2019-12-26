@@ -5,11 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.co.nff.repository.dao.NoticeDAO;
 import kr.co.nff.repository.dao.StoreDAO;
 import kr.co.nff.repository.dao.UserDAO;
 import kr.co.nff.repository.vo.Category;
-import kr.co.nff.repository.vo.Notice;
+import kr.co.nff.repository.vo.PriceType;
 import kr.co.nff.repository.vo.Store;
 
 @Service("kr.co.nff.front.main.service.MainServiceImpl")
@@ -19,6 +18,7 @@ public class MainServiceImpl implements MainService{
 	
 	@Autowired
 	private StoreDAO sDao;
+	
 	
 	
 	
@@ -33,6 +33,13 @@ public class MainServiceImpl implements MainService{
 	public List<String> cityList() {
 		return sDao.cityList();
 	}
+	
+	@Override
+	public List<PriceType> selectPriceType() {
+		return sDao.selectPriceType();
+	}
+	
+	
 
 	
 	@Override

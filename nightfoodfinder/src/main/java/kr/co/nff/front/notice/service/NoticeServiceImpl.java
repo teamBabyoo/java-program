@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import kr.co.nff.repository.dao.NoticeDAO;
 import kr.co.nff.repository.vo.Notice;
 
-@Service("kr.co.nff.front.main.service.NoticeServiceImpl")
+@Service("kr.co.nff.front.notice.service.NoticeServiceImpl")
 public class NoticeServiceImpl implements NoticeService {
 	
 	@Autowired
@@ -24,16 +24,20 @@ public class NoticeServiceImpl implements NoticeService {
 		return dao.selectNotice(notice);
 	}
 	
+//	@Override
+//	public void readNotice(Notice notice) {
+//		dao.readNotice(notice);
+//	}
 	@Override
-	public void readNotice(Notice notice) {
-		dao.readNotice(notice);
+	public void readNotice(int noticeNo) {
+		dao.readNotice(noticeNo);
 	}
 	
 	@Override
 	public int countNewNotice(Notice notice) {
 		return dao.countNewNotice(notice);
 	}
-	
+
 	@Override
 	public void deleteNotice(int noticeNo) {
 		dao.deleteNotice(noticeNo);

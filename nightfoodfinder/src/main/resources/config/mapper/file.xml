@@ -15,9 +15,9 @@
 	
 	<insert id="insertFile" parameterType="FileVO">
 		insert into tb_file (
-			file_group_code, org_name, sys_name, path, extension
+			file_group_code, org_name, sys_name, path, extension, store_no
 		) values (
-			#{fileGroupCode}, #{orgName}, #{sysName}, #{path}, #{extension}
+			#{fileGroupCode}, #{orgName}, #{sysName}, #{path}, #{extension}, #{storeNo}
 		)
 	</insert>
 </mapper>   

@@ -1,13 +1,6 @@
 package kr.co.nff.front.store.service;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -122,13 +115,13 @@ public class StoreServiceImpl implements StoreService {
 
 	// 리뷰등록
 	@Override
-//	public List<Review> reviewRegist(Review review, boolean fileFlag) throws Exception {
 	public int reviewRegist(Review review, boolean fileFlag) throws Exception {
 		int fileGroupCode = 0;
 		if (fileFlag == true) {
 //			System.out.println("파일 올바르게 넘어옴");
 //			System.out.println("파일서비스 갔다오기 전 : " + fileGroupCode);
-			fileGroupCode = fileUpService.upload(review.getAttach());
+//			fileGroupCode = fileUpService.upload(review.getAttach());
+			fileGroupCode = fileUpService.upload(review);
 			review.setFileGroupCode(fileGroupCode);
 		}
 //		System.out.println("파일서비스 갔다오기 전 (파일 올렸으면 숫자, 안 올렸으면 0): " + fileGroupCode);
@@ -141,8 +134,8 @@ public class StoreServiceImpl implements StoreService {
 	
 	// 리뷰 등록시 가게테이블 총 리뷰수, 총 별점 업데이트
 	@Override
-	public int updateStoreByReview(Map<String, Object> map) {
-		return dao.updateStoreByReview(map);
+	public int updateStoreByAddReview(Map<String, Object> map) {
+		return dao.updateStoreByAddReview(map);
 	}
 
 	// 이미지 다운로드 하지 않으면서 그냥 경로로 가져오기
@@ -151,7 +144,7 @@ public class StoreServiceImpl implements StoreService {
 		List<FileVO> fList = new ArrayList<>(); 
 		fList = fDao.selectFileList(review.getReviewNo());
 //		System.out.println("서비스 결과값 : " + fList);
-		
+		/*
 		// ---------------------------------------------
 		//사용자가  요청한 파일이 어느날짜 어느 시간에 있는지 모른다.
 		String path = req.getParameter("path"); // 사용자 요청 파일이 저장된 경로 
@@ -192,8 +185,18 @@ public class StoreServiceImpl implements StoreService {
 		bis.close();fis.close();
 		bos.close();out.close();
 		// ---------------------------------------------
-		
+		*/
 		return fList;
+	}
+
+	// 리뷰 삭제
+	public int deleteReview(int no) {
+		return dao.deleteReview(no);
+	}
+
+	// 리뷰를 삭제하면 store테이블이 총 별점, 총 리뷰개수를 업데이트한다
+	public int updateStoreByDelReview(Map<String, Object> map) {
+		return dao.updateStoreByDelReview(map);
 	}
 	
 	//리뷰 신고제한
@@ -274,7 +277,6 @@ public class StoreServiceImpl implements StoreService {
 	
 	public List<Integer> myfrequent(int no){
 		return dao.myfrequent(no);
-	};
-
+	}
 
 }

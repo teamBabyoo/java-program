@@ -169,10 +169,21 @@
 			<div class="modal-content-reportreview">
 				<span class="close">&times;</span>
 				<p></p>
-				<div class="one">
+				<table>
+					<thead>
+						<tr>
+							<th>사유</th>
+							<th>닉네임</th>
+						</tr>
+					</thead>
+					<tbody class="data">
+					
+					</tbody>
+				</table>
+<!-- 				<div class="one">
 				</div>
 				<div class="two">
-				</div>
+				</div> -->
 			<div id="paginationBox_two"></div>
 			</div>
 
@@ -222,11 +233,21 @@
 					modal.style.display = "block";
 					$(".modal-content-reportreview p:eq(0)").text(
 							"리뷰: " +  content) 
-					$(".modal-content-reportreview div").empty()
+					$(".modal-content-reportreview .data").empty()
 					for(var i=0; i< data.list.length; i++){
-						$(".modal-content-reportreview div.one").append("<p>" + data.list[i].reason + "</p>")
-											    //  .append("<li>" + data.list[i].nickName + "</li>")
-						$(".modal-content-reportreview div.two").append("<p>" + data.list[i].nickName + "</p>")
+						let html = "";
+						html += `
+							<tr>
+								<td>` + data.list[i].reason + `</td>
+								<td>` + data.list[i].nickName + `</td>
+							</tr>
+						`;
+						
+						$('.data').append(html);
+// 						$(".data").append("<td>" + data.list[i].reason + "</td>")
+// 						$(".data").append("<td>" + data.list[i].nickName + "</td>")
+//						$(".modal-content-reportreview div.one").append("<p>" + data.list[i].reason + "</p>")								
+// 						$(".modal-content-reportreview div.two").append("<p>" + data.list[i].nickName + "</p>")
 
 						console.log(data.list[i].reason);
 						console.log(data.list[i].nickName);

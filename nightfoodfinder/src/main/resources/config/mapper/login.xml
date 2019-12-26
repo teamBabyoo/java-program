@@ -121,6 +121,17 @@
 				where u.user_no = #{userNo}
 	</select>
 	
+	<!-- 닉네임 수정 -->
+	<update id="updateNickname" parameterType="User" >
+		update tb_user
+			set nick_name = #{nickName}
+			where (user_no = #{userNo})
+	</update>
+	<!-- 닉네임 중복체크 -->
+	<select id="nicknameChk" parameterType="String" resultType="int">
+		select count(*) from tb_user where nick_name = #{nickName}
+	</select>
+	
 	<!-- 가게 이메일 중복체크 -->
 	<select id="storeEmailChk" parameterType="String" resultType="int" flushCache="true" useCache="true">
 		select count(*) from tb_store where store_email = #{storeEmail}
@@ -181,14 +192,4 @@
 	  where store_email = #{storeEmail} 
 	  and store_pass = #{storePass}
 	</select>
-	
-
-	<!-- 가게 조회수 올리기 -->
-	<update id="updateStoreSeeCnt" parameterType="int">
-	update tb_store
-   		set see_cnt = see_cnt+1 
-  	 where store_no = #{storeNo};
-	</update>
-	
-	
 </mapper>  

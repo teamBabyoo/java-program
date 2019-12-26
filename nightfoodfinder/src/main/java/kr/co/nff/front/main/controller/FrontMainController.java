@@ -25,16 +25,13 @@ public class FrontMainController {
 	@RequestMapping("/main.do")
 	public void main(HttpSession session, Model model) {
 		
-		// 검색 헤더에서 쓸 카테고리 리스트 세션에 올린다.
-		List<Category> cateList = service.selectCategory();
-		session.setAttribute("cateList", cateList); 
-		// 현재 DB에 있는 스토어들의 지역구도 세션에 올린다.
-		List<String> cityList = service.cityList();
-		session.setAttribute("cityList", cityList);
+		/* 검색 헤더 부분 */
+		session.setAttribute("cateList", service.selectCategory()); 
+		session.setAttribute("cityList", service.cityList());
+		session.setAttribute("priceList" ,service.selectPriceType());
 		
 		model.addAttribute("sList", service.mainStoreList());
 		List<Store> mList = service.mainStoreList();
-//		System.out.println(mList.size());
 		
 	}
 }

@@ -55,6 +55,8 @@ public class Store  {
 	
 	// ↙ 콜렉션 (메인페이지 리스트에서 사용)
 	private List<Holiday> holidayList;
+	// storelist images
+	private List<FileVO> fileVoList;
 	
 	
 	//휴무일 받을 리스트 
@@ -82,6 +84,8 @@ public class Store  {
 		private String sysName;
 		private String path;
 		private String extension;
+	
+		
 		
 }
 	

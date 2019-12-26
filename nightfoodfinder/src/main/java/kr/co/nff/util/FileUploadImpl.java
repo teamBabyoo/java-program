@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.nff.repository.dao.FileDAO;
 import kr.co.nff.repository.vo.FileVO;
+import kr.co.nff.repository.vo.Review;
 
 @Service
 public class FileUploadImpl implements FileUpload {
@@ -18,9 +19,12 @@ public class FileUploadImpl implements FileUpload {
 	@Autowired
 	private  FileDAO fileDao;
 	
-	public int upload(List<MultipartFile> attach) throws Exception {
+//	public int upload(List<MultipartFile> attach) throws Exception {
+	public int upload(Review review) throws Exception {
 		
 		int fileGroupCode = fileDao.selectGroupCode();
+		
+		List<MultipartFile> attach = review.getAttach();
 		
 		for (MultipartFile file : attach) {
 			
@@ -34,6 +38,7 @@ public class FileUploadImpl implements FileUpload {
         	fileVO.setExtension(extension);
         	fileVO.setSysName(UUID.randomUUID() + "." + extension);
         	fileVO.setPath("c:/java/nffresources/upload");
+        	fileVO.setStoreNo(review.getStoreNo());
         	File f = new File("c:/java/nffresources/upload");
         	if (!f.exists()) {
         		f.mkdirs();

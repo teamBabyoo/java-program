@@ -13,7 +13,7 @@ $(() => {
      
 	/* 지도 스크롤 고정 부분*/
 	$(window).ready(() => {                   /* 헤더의 height만큼 뺀다 */
-		const contentHeight = window.innerHeight - 60;
+		const contentHeight = window.innerHeight - 108;
 		$('.rightarea').css('height', contentHeight);
 	});
 	
@@ -46,19 +46,29 @@ $(() => {
 				} else {
 					for (let s of data.sList) {
 						sHtml += `
-							<li id="li_${status.count}" class="storeLn sto_li clearboth" data-store="${s.storeName}">
+							<li class="storeLn sto_li clearboth" data-store="${s.storeName}">
 					        <a href="storedetail.do?no=${s.storeNo}" ></a>
 							<div>
-					       		<!-- 썸네일 사진 들어갈 div -->
 					       		<div class="home__slider">
-									<div class="bxslider">  
-						    				<img src="<c:url value='/resources/images/flower.jpg' />" />
-											<img src="<c:url value='/resources/images/flower2.jpg' />" />
-											<img src="<c:url value='/resources/images/flower5.jpg' />" />
-									</div>
+									<div class="bxslider">`;
+						
+						console.log("파일 있냐?", s.fileVoList);
+						// 파일 리스트가 없다면
+						if(s.fileVoList) {
+							sHtml += `<img src="https://i.pinimg.com/originals/33/6a/ea/336aea314c68c0bc3eb8f6b5cd799de4.jpg" />`;
+						} 
+						// 있다면
+						else {
+							for (let img of s.fileVoList) {
+								sHtml += `<img src="${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}" />`;
+							}
+						}
+											
+						sHtml +=
+									`</div>
 								</div>
 							</div>
-							<!-- 가게 리스트의 내용 부분 -->
+							
 				       		<div class="sto_li_content" >
 								<div>
 									<span>${s.categoryName}</span>
@@ -78,7 +88,7 @@ $(() => {
 					}
 				}
 				
-				$(".storelist").html(sHtml);
+				$(".ajaxstolist").html(sHtml);
 				
 				// 페이징
 				let html = "";
@@ -112,6 +122,12 @@ $(() => {
 			},
 			error: () => {
 				console.log("에러발생");
+			},
+			complete: () => {
+				$('li').css({
+					'list-style': 'none',
+					'overflow': 'hidden'
+				});
 			}
 		});
 		

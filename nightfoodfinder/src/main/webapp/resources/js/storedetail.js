@@ -1,4 +1,14 @@
 
+$(document).ready(function(e) {
+	// 페이지 공유(현재 페이지 주소복사)
+	$('.sharePop p').html(location.href);
+	$('#copyclip').on('click', function() {
+		copyText(location.href);
+	});
+	
+	reviewListAjax();
+	
+});
 
 /*단골등록을 위한*/
 function checkFrequent(){
@@ -139,8 +149,6 @@ function makeReviewList(list){
 	console.log(reviewNoArray);
 		 */
 	
-console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
-
 		var date = new Date(r.regDate);
 		var time = date.getFullYear() + "-" 
 		         + (date.getMonth() + 1) + "-" 
@@ -166,7 +174,7 @@ console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
 			html += `<div class="user_rv best_rv">
 				  <div class="tenten">
 			  	<button type="button" class="report" value="${r.reviewNo}">신고하기</button>`
-			  	if (r.recomment == null){
+			  	if (loginStore === storeNo && r.recomment == null){
 					html += `
 				<button type="button" class="reComment" data-no="${r.reviewNo}" onclick="makeform(this)">답장하기</button>`;
 				}
@@ -183,25 +191,14 @@ console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
                         <li>${r.reviewContent}</li>`;
 						if (r.fileGroupCode != 0) {
 							html += `<li>`;
-//							console.log("r.fileGroupCode: ", r.fileGroupCode);
 							for (let i = 0; i < r.fileVoList.length; i++) {
 								let url = r.fileVoList[i].path + "/" + r.fileVoList[i].sysName;
 								url = url.replace(/\s/gi, "");
 								let fileGroupCode = r.fileGroupCode;
-//								alert(r.fileVoList[i].path);
 								html += `<div class="rv_img" style="background-image: url(` + context + `/front/store/getreviewimgsrc.do?name=${r.fileVoList[i].sysName}&path=${r.fileVoList[i].path})"></div>`;
-//								console.log(url.replace(/\s/gi, ""));
 							}
 							html += `</li>`;
 						}
-/*
-	<li>
-    	<div class="rv_img" style="background-image: url(&quot;https://jypfanscdn.azureedge.net/jype317/NOTICE_SK_20191204200507_up2.jpg&quot;)"></div>
-		<div class="rv_img" style="background-image: url(https://jypfanscdn.azureedge.net/jype317/NOTICE_SK_20191204200457_up1.jpg)"></div>
-    </li>
-*/
-				
-                            
 				html+= `
 					</ul>
                 </li>
@@ -216,8 +213,21 @@ console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
 
 			html += `</p>
 	                <p>${r.good}</p>
-	                </li>
-	            </ul>
+	                </li>`;
+			console.log(userNo, 111, `${r.writerNo}`);
+			let css = "hidden";
+			if (userNo == `${r.writerNo}`) {
+				css = "";
+			}
+			let chkmyreview = `${r.writerNo}`;
+			console.log(chkmyreview);
+			html += `<li data-chkmyreview=` + chkmyreview + `>
+					    <ul class="ud_control ${css}">
+					        <li>수정 |</li>
+					        <li><a href="` + context + `/front/store/review_delete.do?storeNo=` + storeNo + `&reviewNo=${r.reviewNo}&storeScope=${r.storeScope}">삭제</a></li>
+					    </ul>
+					</li>
+				</ul>
 	        </div>`;
 			
 			// 답글 내용
@@ -275,7 +285,7 @@ console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
 			<div class="user_rv">
 				<div class="tenten">
 					<button type="button" class="report"  value="${r.reviewNo}">신고하기</button>`
-			  	if (r.recomment == null){
+				  if (loginStore === storeNo && r.recomment == null){
 					html += `
 				<button type="button" class="reComment" data-no="${r.reviewNo}" onclick="makeform(this)">답장하기</button>`;
 				}
@@ -299,25 +309,14 @@ console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
                             <li>${r.reviewContent}</li>`;
 						if (r.fileGroupCode != 0) {
 							html += `<li>`;
-//							console.log("r.fileGroupCode: ", r.fileGroupCode);
 							for (let i = 0; i < r.fileVoList.length; i++) {
 								let url = r.fileVoList[i].path + "/" + r.fileVoList[i].sysName;
 								url = url.replace(/\s/gi, "");
 								let fileGroupCode = r.fileGroupCode;
-//								alert(r.fileVoList[i].sysName);
 								html += `<div class="rv_img" style="background-image: url(` + context + `/front/store/getreviewimgsrc.do?name=${r.fileVoList[i].sysName}&path=${r.fileVoList[i].path})"></div>`;
-//								console.log(url.replace(/\s/gi, ""));
 							}
 							html += `</li>`;
 						}
-/*
-	<li>
-    	<div class="rv_img" style="background-image: url(&quot;https://jypfanscdn.azureedge.net/jype317/NOTICE_SK_20191204200507_up2.jpg&quot;)"></div>
-		<div class="rv_img" style="background-image: url(https://jypfanscdn.azureedge.net/jype317/NOTICE_SK_20191204200457_up1.jpg)"></div>
-    </li>
-*/
-				
-                            
 				html+= `</ul>
                     </li>
                     <li class="clearboth">`
@@ -327,8 +326,21 @@ console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
 							html += `<img class="heartclick" data-rno="${r.reviewNo}" src="` + context + `/resources/images/icon_hrt.png" />`;
 						}
 			html += `<p>${r.good}</p>
-                    </li>
-                </ul>
+                    </li>`;
+//			console.log(userNo, 222, `${r.writerNo}`);
+			let css = "hidden";
+			if (userNo == `${r.writerNo}`) {
+				css = "";
+			}
+			let chkme = `${r.writerNo}`;
+			console.log(chkme);
+			html += `<li data-chkmyreview=` + chkme + `>
+					    <ul class="ud_control ${css}">
+					        <li>수정 |</li>
+					        <li><a href="` + context + `/front/store/review_delete.do?storeNo=` + storeNo + `&reviewNo=${r.reviewNo}">삭제</a></li>
+					    </ul>
+					</li>
+				</ul>
             </div>`;
 			
 			// 답글 내용
@@ -344,13 +356,16 @@ console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
 					<li>${r.reCommentRegDate}</li>
 					</ul>
 					</td>
-					<td><li>${r.recomment}</li></td>
+					<td><li>${r.recomment}</li></td>`
+					if (loginStore === storeNo) {
+						html += `
 					<td><button type="button" data-no="${r.reviewNo}" class="delRecomment">삭제</button>	
 						<button type="button" data-no="${r.reviewNo}" class="modRecomment">수정</button>	
 					</td>
 					</tr>
 					</table>
 					</div>`;
+			}
 			}
 	        
 	        	
@@ -403,7 +418,6 @@ console.log(r.reviewNo, "번 리뷰는 파일 몇개?", r.fileVoList.length);
 		</ul>
 	`;
 	$("#paginationBox").append(pageEle);
-	
 }
 /**
  * footer top값 재설정
@@ -414,10 +428,6 @@ function reposition() {
 	let $height_content = $('.content').height();
 	let $height_wrapper = $('.wrapper').height();
 	let $height_leave_rv = $('.leave_rv').height
-//	console.log('$height_content', $height_content);
-//	console.log('$height_header ->', $height_header);
-//	console.log('$top_footer ->', $top_footer);
-//	$('footer').css('top', $height_header + $height_content + $height_leave_rv);
 	$('footer').css('bottom', -($height_wrapper));
 }
 
@@ -519,30 +529,14 @@ $('#scopePannel > a').click(function(e) {
  * @returns
  */
 function copyText(text) {
-	var temp = document.createElement('input');
-	document.body.appendChild(temp);
-	temp.vale = text;
-	temp.select();
-	document.execCommand('Copy');
-	document.body.removeChild(temp);
-	alert('클립보드로 복사되었습니다.');
+    var temp = document.createElement('input');
+    document.body.appendChild(temp);
+    temp.value = text;
+    temp.select();
+    document.execCommand('Copy');
+    document.body.removeChild(temp);
+    alert('클립보드로 복사되었습니다. ')
 }
-$(document).ready(function() {
-	reviewListAjax();
-	// 상세페이지 (리뷰)
-//	$('.leave_rv').hide();
-/*	$('#btn_leave_rv').click((e) => {
-//		reposition();
-		$('.leave_rv').slideToggle();
-	});
-*/	
-	$('.sharePop p').html(location.href);
-	
-	$('#copyclip').on('click', function() {
-		copyText(location.href);
-	});
-	
-});
 
 
 
@@ -969,5 +963,4 @@ function mapDraw(longitude, latitude, storeName){
 	
 }
 mapDraw(longitude, latitude, storeName);
-
 
