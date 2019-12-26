@@ -12,6 +12,8 @@
 	<c:param name="msg" value="회원가입" />
 </c:import>
 <style>
+
+
 </style>
 <meta charset="UTF-8">
 <title>Store Join Page</title>
@@ -26,6 +28,7 @@
     <!-- // 헤더 -->
 		<div class="content clearboth" >
 		<div class="sjoin_content">
+		<div class="sjoin_title"><i class="fa fa-sign-in" aria-hidden="true" style="color: #ffa500"></i><strong>회원가입</strong></div>
 				<form name="sjform" id="sjform" method="post" action="storejoin.do" onsubmit="return validate();">
 					<table>
 						<tr>
@@ -234,10 +237,12 @@ function goPopup(){
 }
 
 function jusoCallBack(roadFullAddr,zipNo,addrDetail,sggNm,roadAddrPart1){
-		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-		document.sjform.roadFullAddr.value = roadFullAddr;
+		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.\
+		let arr = roadFullAddr.split(",");
+		
+		document.sjform.roadFullAddr.value = arr[0];
 		document.sjform.zipNo.value = zipNo;
-		document.sjform.addrDetail.value = addrDetail;
+		document.sjform.addrDetail.value = arr[1];
 		document.sjform.sggNm.value = sggNm;
 		document.sjform.roadAddrPart1.value = roadAddrPart1;
 		/* document.form.entX.value = entX;
@@ -246,14 +251,14 @@ function jusoCallBack(roadFullAddr,zipNo,addrDetail,sggNm,roadAddrPart1){
 		var geocoder = new kakao.maps.services.Geocoder();
 		var callback = function (result, status) {
 		    if (status === kakao.maps.services.Status.OK) {
-		        document.form.entX.value = result[0].y;
-		        document.form.entY.value = result[0].x;
+		        document.sjform.entX.value = result[0].y;
+		        document.sjform.entY.value = result[0].x;
 		        
 		    }
 		};
 		geocoder.addressSearch(roadFullAddr, callback);  
-
-	
+		
+		
 }
 
 

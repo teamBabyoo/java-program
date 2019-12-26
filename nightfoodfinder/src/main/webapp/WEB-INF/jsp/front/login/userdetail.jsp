@@ -11,9 +11,10 @@
 <meta charset="UTF-8">
 <title>My Page</title>
 <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <style>
 #mp_container {
-	width: 1200px;
+	width: 900px;
     margin: 30px auto 0;
 	padding-top : 20px;
 	text-align : center;	
@@ -69,6 +70,66 @@
 #mp_tab a {
 	display: block;
 }
+#sImage, #sProfile{
+	float:left;
+	margin: 3px 5px;
+}
+#sName, #sAddress {
+	text-align: left;
+}
+#sName {
+	font-size: 1.3em;
+}
+#frequent_list, #myreview_list {
+	float: left;
+	width:100%;
+	display: inline-block;	
+	margin-top: 10px;
+	padding: 0 10px 0 10px;
+}
+#freq_box {
+	float:left;
+	margin: 10px 5px;
+	border: 1px solid #d7d7d7;
+	width: 48%;
+    display: inline-block;
+}
+#myreview_box {
+	float:left;
+	padding: 10px 5px;
+	margin: 5px 5px;
+	text-align : left;
+	border: 1px solid #d7d7d7;
+	width: 48%;
+    display: inline-block;
+}
+.rev_date {
+    font-size: 0.8em;
+    color: #9e9e9e;
+}
+#myreview_box p {
+	font-size: 0.9em;
+}
+#sImage img {
+	width:120px;
+	height: 120px;
+	overflow : hidden;
+}
+div#freq_box:nth-child(2n+1) {
+    float: left;
+    
+}
+#myreview_box span{
+    font-size: 1.3em;
+    width: 170px;
+    height: 21px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    letter-spacing: -.50px;
+}
+}
+    
 </style>
 </head>
 <body>
@@ -96,11 +157,27 @@
 					<div id="mp_tab01" class="on">단골</div>
 					<div id="mp_tab02" ><a href="javascript:show_layer('2');">리뷰</a></div>
 				</div>
-				<div id="frequent_list">
+				<div id="frequent_list" class="clearboth">
 					<c:forEach items="${freqList}" var="f" >
-						<div id="freq_box" onclick="location.href=`${pageContext.request.contextPath}/front/store/storedetail.do?no=${f.storeNo}`;">
-							<div id="sThumb"></div>
-							<div>${f.storeName}</div>
+						<div id="freq_box" onclick="location.href=`${pageContext.request.contextPath}/front/store/storedetail.do?no=${f.storeNo}`">
+							<div id="sImage">
+									<!-- 사진이있을때 -->
+									<c:if test="${f.fileNo != 0}">
+										<img src="${pageContext.request.contextPath}/front/store/getByteImage.do?name=${f.sysName}&path=${f.path}" />
+									</c:if>
+
+									<!--  사진이 없을 때 이미지  -->
+									<c:if test="${f.fileNo == 0}">
+										<img
+											src="https://i.pinimg.com/originals/33/6a/ea/336aea314c68c0bc3eb8f6b5cd799de4.jpg" />
+									</c:if>
+							</div>
+							<div id="sProfile">
+								<div class="sScope">${f.scope}</div>
+								<div id="sName">${f.storeName}</div>
+								<div id="sAddress">${f.streetLoad}</div>
+							
+							</div>
 						</div>
 					</c:forEach>
 					
@@ -113,7 +190,14 @@
 				</div>
 				<div id="myreview_list">
 					<c:forEach items="${reviewList}" var="r">
-						<div id="review_box">${r.reviewContent}</div>
+						<div id="myreview_box" >
+							<span>
+								<strong class="sScope">${r.storeScope}</strong>
+								<a id="review_sname" href="${pageContext.request.contextPath}/front/store/storedetail.do?no=${r.storeNo}">${r.storeName}</a>
+							</span>
+							<div class="rev_date">${r.regDate}</div>
+							<p>${r.reviewContent}</p>
+						</div>
 					</c:forEach>
 				</div>
 			</div>
@@ -121,6 +205,11 @@
 	</div>
 </div>
 <script>
+let scp = $('.sScope');
+for(i in scp) {
+	let scope = (scp[i].innerHTML*1).toFixed(2);
+	scp[i].innerText = scope;
+}
 
 function show_layer(div_name){
 
@@ -141,13 +230,9 @@ function show_layer(div_name){
 	
 // 닉네임 수정
 function nickUpdate() {
-	console.log('update');
 	window.open("${pageContext.request.contextPath}/front/login/nicknameForm.do","닉네임 수정","width=570, height=350"); 
 	
 }
-
-
-
 
 
 </script>	

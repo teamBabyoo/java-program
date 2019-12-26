@@ -8,23 +8,36 @@
 
 <style>
 #sidebox { 
-	background-color:#F0F0F0; 
+	background-color:#ffffff;
 	position:fixed; 
 	height: 100px;
-	width:120px; 
-	top:50%;
-	right:30px;
+	width: 150px; 
+	top: 50%;
+	right: 30px;
 	transform: translateY(-50%);
 	padding: 3px 10px;
 	z-index: 999999;
-	overflow:scroll; 
+	overflow: auto; 
 	}
-
+	
+.recent_box {
+	border-bottom: solid 3px lightsteelblue;
+    font-size: 1.2em;
+    text-align: center;
+    height: 25px;
+    position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;	
+}	
+#viewlist, #viewnone {
+	padding-top: 25px;
+}
 </style>
 </head>
 <body>
 	<div id="sidebox">
-		<div>최근 본 맛집</div>
+		<div class="recent_box">최근 본 맛집</div>
 		<div id="viewlist"></div>
 		<div id="viewnone">최근 본 페이지가 없습니다</div>
 	</div>
@@ -48,13 +61,13 @@
 				var array = list.substring(1, list.length-1).split(",");
 					//array =  "2|김밥천국","3|거구장","4|맛있는집","1|수저가" :배열
 			for (i in array){
-				console.log("array",array[i]);
+				//console.log("array",array[i]);
 				var strArray = array[i].substring(1, array[i].length-1).split('|');
-				console.log("strArray",strArray[0],strArray[1]);
-				var tag = '<div>'+strArray[0] + strArray[1] +'</div>';
+				//console.log("strArray",strArray[0],strArray[1]);
+				var tag = '<div class="viewDetail"><a class="vsName" href="${pageContext.request.contextPath}/front/store/storedetail.do?no='+strArray[0]+'">' + strArray[1] +'</a></div>';
 				viewList += tag;
+				
 			}
-			
 			$('#viewlist').html(viewList);
 
 	}
