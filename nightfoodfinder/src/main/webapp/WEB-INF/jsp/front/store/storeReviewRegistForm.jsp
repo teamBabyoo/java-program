@@ -63,8 +63,10 @@
 	                    <!-- <li class="float_r"><button type="submit">등록</button></li> -->
 	                    <li class="float_r">
 	                    	<a href="${pageContext.request.contextPath}/front/store/storedetail.do?no=${review.storeNo}">취소</a>
-	                    	<input id="submit" type="submit" />
-	                    	<label for="submit">등록</label>
+	                    	<p>
+		                    	<input id="submit" type="submit" />
+		                    	<label for="submit">등록</label>
+	                    	</p>
 	                    </li>
 	                  </ul>
 	                </li>
