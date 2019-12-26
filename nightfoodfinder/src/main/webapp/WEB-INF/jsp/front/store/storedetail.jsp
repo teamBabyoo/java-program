@@ -105,8 +105,9 @@
 										class="fa fa-bookmark-o" aria-hidden="true"></i>단골</a></li>
 								<li class="tab_share"><a href="#"><i
 										class="fa fa-share-square-o" aria-hidden="true"></i>공유</a> <!-- 공유 팝업 -->
-									<div class="sharePop hidden">
+<!--  									<div class="sharePop hidden">
 										<ul class="clearboth">
+											<li id="closesnspop"><i class="fa fa-times" aria-hidden="true"></i></li>
 											<li><a
 												href="https://twitter.com/intent/tweet?text=심야식당 서울 강동구 강동대로 205 (출처 : 심야식당)&url=http://www.naver.com"
 												target="_blank"><img
@@ -122,7 +123,7 @@
 											<p class="ellipsis">https://app.slack.com/client/TPPHA763F/CPPH24F16/files/FPJQPCU4R</p>
 											<a href="#" id="copyclip">복사</a>
 										</div>
-									</div></li>
+									</div> --></li>
 								<!-- 맨 아래 지도로 보내는 a링크 -->
 								<li id="goMap"><a href="#"><i class="fa fa-map-o" aria-hidden="true"></i>지도</a></li>
 							</ul>
@@ -226,8 +227,6 @@
 		<div id="map" style="width: 50%; height: 400px;"></div>
 		</c:if>
 		</div>
-		</div>
-
 		<!-- 푸터 -->
 		<c:import url="/WEB-INF/jsp/include/footer.jsp" /> 
 
@@ -235,6 +234,24 @@
 		<div class="bgbox"></div>
 		<!-- 신고팝업 -->
 		<div id="rmyModal" class="rmodal" style="display: none"></div>
+		<!-- 공유 팝업 -->
+ 		<div class="sharePop hidden">
+			<ul class="clearboth">
+				<li id="closesnspop"><i class="fa fa-times" aria-hidden="true"></i></li>
+				<li><a
+					href="https://twitter.com/intent/tweet?text=심야식당 서울 강동구 강동대로 205 (출처 : 심야식당)&url=http://www.naver.com"
+					target="_blank"></a></li>
+				<li><a
+					href="http://www.facebook.com/sharer/sharer.php?u=http://naver.com"
+					target="_blank"></a></li>
+				<li><a href="#" id="kakao-link-btn" href="javascript:;"></a></li>
+			</ul>
+			<div class="clearboth">
+				<p class="ellipsis">https://app.slack.com/client/TPPHA763F/CPPH24F16/files/FPJQPCU4R</p>
+				<a href="#" id="copyclip">복사</a>
+			</div>
+		</div>
+		</div>
 	<script src="${pageContext.request.contextPath}/resources/js/slick.min.js"></script>
 	<script type="text/javascript">
 		let imglist = `${imgList}`;
