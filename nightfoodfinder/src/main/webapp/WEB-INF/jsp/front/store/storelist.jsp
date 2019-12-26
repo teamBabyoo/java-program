@@ -31,10 +31,18 @@
 		<!-- 컨텐트  -->
 		<div class="content list_content">
 			<div class="search_conditions">
-				<span>카테고리</span>
-				<span>위치</span>
+				<span>
+					<c:forEach items="${search.categoryCode}" var="cate">
+						카테고리 ${cate}
+					</c:forEach>
+				</span>
+				<span>
+					<c:forEach items="${search.cities}" var="city">
+						지역 ${city}
+					</c:forEach>
+				</span>
 				<span>가격대</span>
-				<span>검색어</span>
+				<span>${search.keyword}란 단어로 검색</span>
 				<span>열려있는지 유무</span>
 			</div>
 			<div class="leftarea">
