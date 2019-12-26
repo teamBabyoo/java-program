@@ -17,215 +17,215 @@
 <body>
 	<div class="wrapper detail_wrap">
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
-	  <div id="allDetail">
-	  	<c:if test="${store.status == 1}">
-		<div id="storedetail" class="content clearboth">
-			<div class="slick" style="width: 100%">
-			<c:choose>
-				<c:when test="${empty imgList}">
-					<c:forEach begin="1" end="5">
-						<div>
-		   					<div style="background-image: url('${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}')" >
-		   					</div>
-						</div>
-					</c:forEach>
-
-				</c:when>
-				<c:otherwise>
-
-				 <c:set value="${fn:length(imgList)}" var="size" />
-					<c:forEach items="${imgList}" var="img" varStatus="i" end="${size}">
+			<div class="content clearboth">
+			  <div id="allDetail">
+			  	<c:if test="${store.status == 1}">
+				<div id="storedetail">
+					<div class="slick" style="width: 100%">
 					<c:choose>
-				<c:when test="${empty imgList}">
-					<c:forEach begin="1" end="5">
-						<div>
-							<div style="background-image: url('https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg'); background-size: cover; background-position: center center; height: 263px; ">
-							</div>
-<!-- 		   					<img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" /> -->
-						</div>
-					</c:forEach>
-				</c:when>
-				<c:otherwise>
-				 <c:set value="${fn:length(imgList)}" var="size" />
-					<c:forEach items="${imgList}" var="img" varStatus="i" end="${size}">
-					<c:choose>
-					<c:when test="${size < 4}">
-							<div style="background-image: url('${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}'); background-size: cover; background-position: center center; height: 263px; ">
-							</div>
-						<c:if test="${i.last}">
-						<c:forEach begin="1" end="${5-size}">
-							<div>
-								<div style="background-image: url('https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg'); background-size: cover; background-position: center center; height: 263px; ">
-								</div>
-<!-- 			   					 <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" /> -->
-							</div>							
-						</c:forEach>
-						</c:if>	
-					</c:when>
-					<c:when test="${size == 4}">
-								<div style="background-image: url('${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}'); background-size: cover; background-position: center center; height: 263px; ">
-								</div>
-							<c:if test="${i.last}">
+						<c:when test="${empty imgList}">
+							<c:forEach begin="1" end="5">
 								<div>
-									<div style="background-image: url('https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg'); background-size: cover; background-position: center center; height: 263px; ">
-									</div>
-<!-- 			   						 <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" /> -->
+				   					<div style="background-image: url('https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg'); background-size: cover; background-position: center center; height: 360px; ">
+				   				</div>
 								</div>
-							</c:if>	
-					</c:when>
-					<c:otherwise>
-								<div style="background-image: url('${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}'); background-size: cover; background-position: center center; height: 263px; ">
-								</div>
-					</c:otherwise>
-					</c:choose>
-					</c:forEach>
-				</c:otherwise>
-			</c:choose>
-					</c:forEach>
-				</c:otherwise>
-			</c:choose>
-			</div>
-					
-			</div>	
-			
-
-			<div id="detaillistjs">
-				<div id="storeinfo">
-					<div id="stinfo">
-						<div id="star">
-							<div>
-								<img src="${pageContext.request.contextPath}/resources/images/star.png"	alt="별" />
-							</div>
-							<div id="scopescore"></div>
-						</div>
-						<div id="stTitle">
-							<h2>${store.storeName}</h2>
-							<ul>
-								<li><a href="#" class="frequent"><i
-										class="fa fa-bookmark-o" aria-hidden="true"></i>단골</a></li>
-								<li class="tab_share"><a href="#"><i
-										class="fa fa-share-square-o" aria-hidden="true"></i>공유</a> <!-- 공유 팝업 -->
-									<div class="sharePop hidden">
-										<ul class="clearboth">
-											<li><a
-												href="https://twitter.com/intent/tweet?text=심야식당 서울 강동구 강동대로 205 (출처 : 심야식당)&url=http://www.naver.com"
-												target="_blank"><img
-													src="${pageContext.request.contextPath }/resources/images/f_twitter.png" /></a></li>
-											<li><a
-												href="http://www.facebook.com/sharer/sharer.php?u=http://naver.com"
-												target="_blank"><img
-													src="${pageContext.request.contextPath }/resources/images/icon_facebookS.png" /></a></li>
-											<li><a href="#" id="kakao-link-btn" href="javascript:;"><img
-													src="${pageContext.request.contextPath }/resources/images/icon_kakao.png" />카카오톡</a></li>
-										</ul>
-										<div class="clearboth">
-											<p class="ellipsis">https://app.slack.com/client/TPPHA763F/CPPH24F16/files/FPJQPCU4R</p>
-											<a href="#" id="copyclip">복사</a>
-										</div>
-									</div></li>
-								<!-- 맨 아래 지도로 보내는 a링크 -->
-								<li id="goMap"><a href="#"><i class="fa fa-map-o" aria-hidden="true"></i>지도</a></li>
-							</ul>
-						</div>
-						<table>
-							<tbody>
-								<tr>
-									<th rowspan="2"><i class="fa fa-phone iicon"
-										aria-hidden="true"></i></th>
-									<td class="tabletitlefont">Tel</td>
-								</tr>
-								<tr>
-									<td class="tabletdfont">${store.storeTell}</td>
-								</tr>
-							</tbody>
-						</table>
-						<table>
-							<tbody>
-								<tr>
-									<th rowspan="2"><i class="fa fa-map-marker iicon"
-										aria-hidden="true"></i></th>
-									<td class="tabletitlefont">Location</td>
-								</tr>
-								<tr>
-									<td class="tabletdfont">${store.streetLoad} ${store.addrDetail}</td>
-								</tr>
-							</tbody>
-						</table>
-						<table>
-							<tbody>
-								<tr>
-									<th rowspan="4" id="clock"><i class="fa fa-clock-o iicon"
-										aria-hidden="true"></i></th>
-									<td class="tabletitlefont">Time</td>
-								</tr>
-								<tr>
-									<td class="tabletdfont" id="operatingtime">${store.openTime} ~ ${store.closeTime}</td>
-
-								</tr>
-								<tr>
-									<td class="tabletitlefont">Holiday</td>
-								</tr>
-								<tr>
-									<td class="tabletdfont"><c:forEach items="${holidaylist}"
-											var="h" varStatus="comma">
-											${h.weekName}
-										<c:if test="${not comma.last}">,</c:if>
-										</c:forEach></td>
-								</tr>
-							</tbody>
-						</table>
-						<table>
-							<tbody>
-								<tr>
-									<th><i class="fa fa-file-text-o iicon" aria-hidden="true"></i></th>
-									<td class="tabletitlefont">Menu</td>
-								</tr>
-							</tbody>
-						</table>
-						<div class="menulist" class="tabletdfont">
-							<c:forEach items="${menu}" var="m">
-								${m.menu} : ${m.price} <br>
 							</c:forEach>
-						</div>
-						<table>
-							<tbody>
-								<tr>
-									<th><i class="fa fa-cutlery iicon" aria-hidden="true"></i></th>
-									<td class="tabletitlefont">Introduce</td>
-								</tr>
-						</table>
-						<div class="menulist" id="introduce"></div>
-						<div id="btdiv">
-						</div>
-
-
-					</div> 
-
-					<!-- 댓글  -->
-
-					<div id="commentplace">
-						<div class="commentwrap">
-							<ul class="clearboth">
-								<li class="float_l">Review</li>
-								<li id="btn_leave_rv" class="float_r"><a
-									href="${pageContext.request.contextPath}/front/store/storeReviewRegistForm.do?storeNo=${store.storeNo}">
-										<i class="fa fa-plus-circle" aria-hidden="true"></i>리뷰남기기
-								</a></li>
-							</ul>
-							<div id="targetContainer"></div>
+		
+						</c:when>
 						
-							<!-- 페이징 -->
-							<div id="paginationBox"></div>
-
+						<c:otherwise>
+						 <c:set value="${fn:length(imgList)}" var="size" />
+							<c:forEach items="${imgList}" var="img" varStatus="i" end="${size}">
+							<c:choose>
+							<c:when test="${size < 4}">
+									<div style="background-image: url('${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}'); background-size: cover; background-position: center center; height: 360px; ">
+									</div>
+								<c:if test="${i.last}">
+								<c:forEach begin="1" end="${5-size}">
+									<div>
+										<div style="background-image: url('https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg'); background-size: cover; background-position: center center; height: 360px;">
+										</div>
+		<!-- 			   					 <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" /> -->
+									</div>							
+								</c:forEach>
+								</c:if>	
+							</c:when>
+							<c:when test="${size == 4}">
+										<div style="background-image: url('${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}'); background-size: cover; background-position: center center; height: 360px; ">
+										</div>
+									<c:if test="${i.last}">
+										<div>
+											<div style="background-image: url('https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg'); background-size: cover; background-position: center center; height: 360px; ">
+											</div>
+		<!-- 			   						 <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" /> -->
+										</div>
+									</c:if>	
+							</c:when>
+							<c:otherwise>
+										<div style="background-image: url('${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}'); background-size: cover; background-position: center center; height: 360px; ">
+										</div>
+							</c:otherwise>
+							</c:choose>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
+					</div>
+							
+					</div>	
+					
+		
+					<div id="detaillistjs">
+						<div id="storeinfo">
+							<div id="stinfo">
+								<div id="star">
+									<div>
+										<img src="${pageContext.request.contextPath}/resources/images/star.png"	alt="별" />
+									</div>
+									<div id="scopescore"></div>
+								</div>
+								<div id="stTitle">
+									<h2>${store.storeName}</h2>
+									<ul>
+										<li><a href="#" class="frequent"><i
+												class="fa fa-bookmark-o" aria-hidden="true"></i>단골</a></li>
+										<li class="tab_share"><a href="#"><i
+												class="fa fa-share-square-o" aria-hidden="true"></i>공유</a> <!-- 공유 팝업 -->
+											<div class="sharePop hidden">
+												<ul class="clearboth">
+													<li><a
+														href="https://twitter.com/intent/tweet?text=심야식당 서울 강동구 강동대로 205 (출처 : 심야식당)&url=http://www.naver.com"
+														target="_blank"><img
+															src="${pageContext.request.contextPath }/resources/images/f_twitter.png" /></a></li>
+													<li><a
+														href="http://www.facebook.com/sharer/sharer.php?u=http://naver.com"
+														target="_blank"><img
+															src="${pageContext.request.contextPath }/resources/images/icon_facebookS.png" /></a></li>
+													<li><a href="#" id="kakao-link-btn" href="javascript:;"><img
+															src="${pageContext.request.contextPath }/resources/images/icon_kakao.png" />카카오톡</a></li>
+												</ul>
+												<div class="clearboth">
+													<p class="ellipsis">https://app.slack.com/client/TPPHA763F/CPPH24F16/files/FPJQPCU4R</p>
+													<a href="#" id="copyclip">복사</a>
+												</div>
+											</div></li>
+										<!-- 맨 아래 지도로 보내는 a링크 -->
+										<li id="goMap"><a href="#"><i class="fa fa-map-o" aria-hidden="true"></i>지도</a></li>
+									</ul>
+								</div>
+								<table>
+									<tbody>
+										<tr>
+											<th rowspan="2"><i class="fa fa-phone iicon"
+												aria-hidden="true"></i></th>
+											<td class="tabletitlefont">Tel</td>
+										</tr>
+										<tr>
+											<td class="tabletdfont">${store.storeTell}</td>
+										</tr>
+									</tbody>
+								</table>
+								<table>
+									<tbody>
+										<tr>
+											<th rowspan="2"><i class="fa fa-map-marker iicon" aria-hidden="true"></i></th>
+											<td class="tabletitlefont">Location</td>
+										</tr>
+										<tr>
+											<td class="tabletdfont">${store.streetLoad} ${store.addrDetail}</td>
+										</tr>
+									</tbody>
+								</table>
+								<table>
+									<tbody>
+										<tr>
+											<th rowspan="4" id="clock"><i class="fa fa-clock-o iicon"
+												aria-hidden="true"></i></th>
+											<td class="tabletitlefont">Time</td>
+										</tr>
+										<tr>
+											<td class="tabletdfont" id="operatingtime">${store.openTime} ~ ${store.closeTime}</td>
+		
+										</tr>
+										<tr>
+											<td class="tabletitlefont">Holiday</td>
+										</tr>
+										<tr>
+											<td class="tabletdfont">
+											<c:choose>
+												 <c:when test="${empty holidaylist}">
+												 	연중무휴
+												 </c:when>
+												 <c:otherwise>
+														<c:forEach items="${holidaylist}" var="h" varStatus="comma">
+																${h.weekName}
+														<c:if test="${not comma.last}">,</c:if>
+														</c:forEach>
+												 </c:otherwise>
+											</c:choose>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<table>
+									<tbody>
+										<tr>
+											<th><i class="fa fa-file-text-o iicon" aria-hidden="true"></i></th>
+											<td class="tabletitlefont">Menu</td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="menulist" class="tabletdfont">
+									<c:choose>
+										<c:when test="${empty menu}">
+											<p>등록된 메뉴가 없습니다<p>
+										</c:when>
+										<c:otherwise>
+											<c:forEach items="${menu}" var="m">
+												${m.menu} : ${m.price} <br>
+											</c:forEach>
+										</c:otherwise>
+									</c:choose>
+								</div>
+								<table>
+									<tbody>
+										<tr>
+											<th><i class="fa fa-cutlery iicon" aria-hidden="true"></i></th>
+											<td class="tabletitlefont">Introduce</td>
+										</tr>
+								</table>
+								<div class="menulist" id="introduce"></div>
+								<div id="btdiv">
+								</div>
+		
+		
+							</div> 
+		
+							<!-- 댓글  -->
+		
+							<div id="commentplace">
+								<div class="commentwrap">
+									<ul class="clearboth">
+										<li class="float_l">Review</li>
+										<li id="btn_leave_rv" class="float_r"><a
+											href="${pageContext.request.contextPath}/front/store/storeReviewRegistForm.do?storeNo=${store.storeNo}">
+												<i class="fa fa-plus-circle" aria-hidden="true"></i>리뷰남기기
+										</a></li>
+									</ul>
+									<div id="targetContainer"></div>
+								
+									<!-- 페이징 -->
+									<div id="paginationBox"></div>
+		
+								</div>
+							</div>
+							<!-- // 댓글 끝 -->
+		
 						</div>
 					</div>
-					<!-- // 댓글 끝 -->
-
+				<div id="map" style="width: 50%; height: 400px;"></div>
+				</c:if>
 				</div>
 			</div>
-		<div id="map" style="width: 50%; height: 400px;"></div>
-		</c:if>
-		</div>
 		</div>
 
 		<!-- 푸터 -->

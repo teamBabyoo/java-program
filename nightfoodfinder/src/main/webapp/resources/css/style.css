@@ -976,9 +976,14 @@ a.modbtn.can {
 /** 승경 끝 **/
 
 /** 진실 **/
+.content {
+	margin-top: 60px;
+	display: inline !important; /* 헤더때문에 잘리는 컨텐트영역 */
+}
+
 .detail_wrap #allDetail {
 	display: grid;
-	grid-template-rows: 9% 1fr 10%;
+	grid-template-rows: 340px 1fr 10%;
 }
 
 .detail_wrap #detaillistjs {
@@ -999,7 +1004,7 @@ a.modbtn.can {
 	padding: 30px 20px;
 	margin: 0 auto;
 	background: white;
-	margin-top: -10px;
+	margin-top: -35px;
 }
 
 .detail_wrap #stinfo {
@@ -1331,6 +1336,10 @@ a.modbtn.can {
 	display: inline-grid;
 }
 
+.menulist>p {
+ color: #8b8a8a
+}
+
 /* 가게정보수정 */
 .sInfoUpdate_wrap #updateBtn {
 	text-align: center;
@@ -1343,6 +1352,34 @@ a.modbtn.can {
 	bottom: 0;
 	left: 0;
 }
+
+/*좋아요*/
+.detail_wrap .heart {
+  width: 100px;
+  height: 100px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-21%, -7%);
+  background: url(https://cssanimation.rocks/images/posts/steps/heart.png) no-repeat;
+  background-position: 0 0;
+  cursor: pointer;
+  animation: fave-heart 1s steps(28);
+}
+.detail_wrap .heart[data-class="heartActive"] {
+  background-position: -2800px 0;
+  transition: background 1s steps(28);
+}
+.detail_wrap @keyframes fave-heart {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -2800px 0;
+  }
+}
+
+
+
 
 /** 진실 끝 **/
 
