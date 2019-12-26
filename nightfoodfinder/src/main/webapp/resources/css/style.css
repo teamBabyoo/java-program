@@ -74,7 +74,7 @@ header .search.focusIn .optionBox.active i { padding: 0; font-size: 1rem; color:
 header .search.focusIn .optionBox.active .userselect { float: none;}
 
 /* 컨텐트영역 */
-.content { width: 100%; display: inline-block; margin-top: 60px; background: #fff; }
+.content { width: 100%; display: inline-block !important; margin-top: 60px; background: #fff; }
 /* 푸터영역 */
 footer { position: absolute; bottom: 0; width: 100%; line-height: 40px; text-align: center; background: #251e4a; color: yellow; /*border-top: 1px solid #d4d4d4; box-shadow: 0px -2px 5px #e8e8e8;*/ }
 /* 팝업 */
@@ -207,6 +207,8 @@ div#commentplace > * { width: 100%; margin: 0 auto; }
 .reviewRegist_wrap .commentwrap > ul:first-child { padding: 30px 0; }
 .reviewRegist_wrap .commentwrap ul:first-child > li > span { font-size: 2rem; color: #ff7100; }
 .reviewRegist_wrap #commentplace { border-top: none; }
+.reviewRegist_wrap .leave_rv.user_rv { border-bottom: none; }
+.detail_wrap.reviewRegist_wrap .user_rv:hover { background: #fff; }
 .reviewRegist_wrap .user_rv .user_rv, .reviewRegist_wrap .leave_rv.user_rv { border-radius: 2px; }
 .reviewRegist_wrap .leave_rv.user_rv > form > ul > li:nth-child(2) > textarea { background: #f7f7f7; height: 150px;}
 .reviewRegist_wrap .leave_rv.user_rv > form > ul > li:nth-child(3) > ul > li:nth-child(1)
@@ -215,6 +217,8 @@ div#commentplace > * { width: 100%; margin: 0 auto; }
 .reviewRegist_wrap .leave_rv.user_rv > form > ul > li:nth-child(3) > ul > li input[type="file"] { opacity: .6; } 
 .reviewRegist_wrap .leave_rv.user_rv > form > ul > li:nth-child(3) > ul > li label { text-align: center; line-height: 90px; font-size: 100px; font-weight: lighter; }
 .reviewRegist_wrap .leave_rv.user_rv > form > ul > li:nth-child(3) > ul > li #foo { left: 100px; object-fit: cover; }
+.reviewRegist_wrap .leave_rv form ul li:last-child { position: relative; }
+
 /*  */
 
 /* 탑버튼 */
