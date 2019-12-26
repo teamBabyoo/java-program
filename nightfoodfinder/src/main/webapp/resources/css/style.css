@@ -1204,8 +1204,7 @@ header div:nth-child(3) li span {
 	margin: 3px;
 }
 .sjoin_content .reg_submit {
-	margin-left: 130px;
-    margin-top: 5px;
+	margin: 5px 0 5px 130px;
     background: white;
     border: 2px solid #d7d7d7;
     width: 130px;

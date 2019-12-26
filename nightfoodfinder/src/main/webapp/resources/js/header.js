@@ -133,7 +133,7 @@ function noticeCounter() {
 
 
 function chkclick(no) {
-	alert(no)
+	//alert(no)
 	$.ajax({
 		url: "/nightfoodfinder/front/main/read_notice.do",
 		data: "noticeNo=" + no,
