@@ -61,7 +61,11 @@
 	                      <img id="foo" class="hidden" src="#" />
 	                    </li>
 	                    <!-- <li class="float_r"><button type="submit">등록</button></li> -->
-	                    <li class="float_r"><input type="submit" />등록</li>
+	                    <li class="float_r">
+	                    	<a href="${pageContext.request.contextPath}/front/store/storedetail.do?no=${review.storeNo}">취소</a>
+	                    	<input id="submit" type="submit" />
+	                    	<label for="submit">등록</label>
+	                    </li>
 	                  </ul>
 	                </li>
 	              </ul>

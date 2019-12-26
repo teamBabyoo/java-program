@@ -63,10 +63,9 @@
 							<th rowspan="4">주소</th>
 						</tr>
 						<tr>
-							<td><input type="text" id="zipNo" name="zipNo"
-								value="${store.zipNo}" /> <input type="hidden" id="sggNm"
-								name="city" /> <input type="button" onClick="goPopup();"
-								value="주소찾기" /></td>
+							<td><input type="text" id="zipNo" name="zipNo" value="${store.zipNo}" /> 
+							<input type="hidden" id="sggNm"	name="city" value="${store.city}" /> 
+							<input type="button" id="findAddr" onClick="goPopup();"	value="주소찾기" /></td>
 						</tr>
 						<tr>
 							<td><input type="text" style="width: 300px;"
@@ -154,10 +153,11 @@
 								value="${store.storeOwnerPh}" /></td>
 						</tr>
 					</table>
-					<input type="hidden" name="openTime" /> <input type="hidden"
-						name="closeTime" /> <input type="hidden" name="storeNo"
-						value="${store.storeNo}" /> <input type="hidden" id="entX"
-						name="entX" /> <input type="hidden" id="entY" name="entY" />
+					<input type="hidden" name="openTime" /> 
+					<input type="hidden" name="closeTime" /> 
+					<input type="hidden" name="storeNo"	value="${store.storeNo}" /> 
+					<input type="hidden" id="entX" name="entX" value="${store.longitude}"/> 
+					<input type="hidden" id="entY" name="entY" value="${store.latitude}"/>
 
 					<div id="updateBtn">
 						<button type='button' id="updateBtn" >수정하기</button>
@@ -224,6 +224,7 @@
 		document.form.zipNo.value = zipNo;
 		document.form.addrDetail.value = rrr[1];
 		document.form.city.value = sggNm;
+		
 		
 		var geocoder = new kakao.maps.services.Geocoder();
 		var callback = function (result, status) {
@@ -463,18 +464,29 @@
 		    	 alert("가격을 입력해주세요");
 		     }else if (document.form.storeName.value == "") {
 			        alert("가게이름을 입력하세요");
+			        document.form.storeName.focus();
 			      } else if (document.form.storeTell.value == "") {
 			        alert("전화번호를 입력하세요");
+			        document.form.storeTell.focus();
 			      } else if (document.form.addrDetail.value == "") {
 			        alert("상세주소를 입력하세요");
+			        document.form.addrDetail.focus();
 			      } else if (document.form.streetLoad.value == "") {
 			        alert("주소를 입력하세요");
+			        document.form.streetLoad.focus();
 			      } else if(document.form.storeOwner.value == "") {
 			    	  alert("대표자 이름을 입력하세요");
+			        document.form.storeOwner.focus();
 			      } else if(document.form.storeOwnerPh.value == "") {
 			    	  alert("대표자 휴대전화 번호를 입력하세요");
-			      } 
-			      else { 
+			        document.form.storeOwnerPh.focus();
+			      } else if(document.form.storePass.value == ""){
+			    	  alert("비밀번호를 입력하세요");
+			    	  document.form.storePass.focus();
+			      } else if(document.form.storePass2.value == ""){
+			    	  alert("비밀번호 확인칸을 입력하세요");
+			    	  document.form.storePass.focus();
+			      } else { 
 			    	  
 			let openH = $("select[name='openH']").val();
 			let openM = $("select[name='openM']").val();
@@ -504,6 +516,7 @@
 			$('input[name="closeTime"]').val(closeTime);
 			$("#updateForm").submit();  
 			}
+		     
 	});	
 		
 

@@ -17,85 +17,71 @@
 <body>
 	<div class="wrapper detail_wrap">
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
-	  <div id="allDetail">
-	  	<c:if test="${store.status == 1}">
-		<div id="storedetail" class="content clearboth">
-			<div class="slick" style="width: 100%">
-			<c:choose>
-				<c:when test="${empty imgList}">
-					<c:forEach begin="1" end="5">
-						<div>
-		   					<div style="background-image: url('${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}')" >
-		   					</div>
-						</div>
-					</c:forEach>
-
-				</c:when>
-				<c:otherwise>
-
-				 <c:set value="${fn:length(imgList)}" var="size" />
-					<c:forEach items="${imgList}" var="img" varStatus="i" end="${size}">
+			<div class="content clearboth">
+			  <div id="allDetail">
+			  	<c:if test="${store.status == 1}">
+				<div id="storedetail">
+					<div class="slick" style="width: 100%">
 					<c:choose>
-				<c:when test="${empty imgList}">
-					<c:forEach begin="1" end="5">
-						<div>
-							<div style="background-image: url('https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg'); background-size: cover; background-position: center center; height: 263px; ">
-							</div>
-<!-- 		   					<img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" /> -->
-						</div>
-					</c:forEach>
-				</c:when>
-				<c:otherwise>
-				 <c:set value="${fn:length(imgList)}" var="size" />
-					<c:forEach items="${imgList}" var="img" varStatus="i" end="${size}">
-					<c:choose>
-					<c:when test="${size < 4}">
-							<div style="background-image: url('${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}'); background-size: cover; background-position: center center; height: 263px; ">
-							</div>
-						<c:if test="${i.last}">
-						<c:forEach begin="1" end="${5-size}">
-							<div>
-								<div style="background-image: url('https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg'); background-size: cover; background-position: center center; height: 263px; ">
-								</div>
-<!-- 			   					 <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" /> -->
-							</div>							
-						</c:forEach>
-						</c:if>	
-					</c:when>
-					<c:when test="${size == 4}">
-								<div style="background-image: url('${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}'); background-size: cover; background-position: center center; height: 263px; ">
-								</div>
-							<c:if test="${i.last}">
+						<c:when test="${empty imgList}">
+							<c:forEach begin="1" end="5">
 								<div>
-									<div style="background-image: url('https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg'); background-size: cover; background-position: center center; height: 263px; ">
+				   					<div style="background-image: url('https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg'); background-size: cover; background-position: center center; height: 360px; ">
+				   				</div>
+								</div>
+							</c:forEach>
+		
+						</c:when>
+						
+						<c:otherwise>
+						 <c:set value="${fn:length(imgList)}" var="size" />
+							<c:forEach items="${imgList}" var="img" varStatus="i" end="${size}">
+							<c:choose>
+							<c:when test="${size < 4}">
+									<div style="background-image: url('${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}'); background-size: cover; background-position: center center; height: 360px; ">
 									</div>
-<!-- 			   						 <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" /> -->
-								</div>
-							</c:if>	
-					</c:when>
-					<c:otherwise>
-								<div style="background-image: url('${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}'); background-size: cover; background-position: center center; height: 263px; ">
-								</div>
-					</c:otherwise>
+								<c:if test="${i.last}">
+								<c:forEach begin="1" end="${5-size}">
+									<div>
+										<div style="background-image: url('https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg'); background-size: cover; background-position: center center; height: 360px;">
+										</div>
+		<!-- 			   					 <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" /> -->
+									</div>							
+								</c:forEach>
+								</c:if>	
+							</c:when>
+							<c:when test="${size == 4}">
+										<div style="background-image: url('${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}'); background-size: cover; background-position: center center; height: 360px; ">
+										</div>
+									<c:if test="${i.last}">
+										<div>
+											<div style="background-image: url('https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg'); background-size: cover; background-position: center center; height: 360px; ">
+											</div>
+		<!-- 			   						 <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" /> -->
+										</div>
+									</c:if>	
+							</c:when>
+							<c:otherwise>
+										<div style="background-image: url('${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}'); background-size: cover; background-position: center center; height: 360px; ">
+										</div>
+							</c:otherwise>
+							</c:choose>
+							</c:forEach>
+						</c:otherwise>
 					</c:choose>
-					</c:forEach>
-				</c:otherwise>
-			</c:choose>
-					</c:forEach>
-				</c:otherwise>
-			</c:choose>
-			</div>
+					</div>
+							
+					</div>	
 					
-			</div>	
-			
+		
+					<div id="detaillistjs">
+						<div id="storeinfo">
+							<div id="stinfo">
+								<div id="star">
+									<div>
+										<img src="${pageContext.request.contextPath}/resources/images/star.png"	alt="별" />
+									</div>
 
-			<div id="detaillistjs">
-				<div id="storeinfo">
-					<div id="stinfo">
-						<div id="star">
-							<div>
-								<img src="${pageContext.request.contextPath}/resources/images/star.png"	alt="별" />
-							</div>
 							<div id="scopescore"></div>
 						</div>
 						<div id="stTitle">
@@ -208,8 +194,8 @@
 						<div class="commentwrap">
 							<ul class="clearboth">
 								<li class="float_l">Review</li>
-								<li id="btn_leave_rv" class="float_r"><a
-									href="${pageContext.request.contextPath}/front/store/storeReviewRegistForm.do?storeNo=${store.storeNo}">
+								<li id="btn_leave_rv" class="float_r">
+									<a id="reviewRegist" href="${pageContext.request.contextPath}/front/store/storeReviewRegistForm.do?storeNo=${store.storeNo}">
 										<i class="fa fa-plus-circle" aria-hidden="true"></i>리뷰남기기
 								</a></li>
 							</ul>
@@ -217,11 +203,9 @@
 						
 							<!-- 페이징 -->
 							<div id="paginationBox"></div>
-
+						</div>		
 						</div>
-					</div>
-					<!-- // 댓글 끝 -->
-
+						<!-- 댓글 끝 -->
 				</div>
 			</div>
 		<div id="map" style="width: 50%; height: 400px;"></div>
@@ -252,6 +236,7 @@
 			</div>
 		</div>
 		</div>
+		</div>
 	<script src="${pageContext.request.contextPath}/resources/js/slick.min.js"></script>
 	<script type="text/javascript">
 		let imglist = `${imgList}`;
@@ -270,7 +255,7 @@
 		if(userNo === ""){
 			userNo = 0;
 		}
-		let loginStore = "";
+		let loginStore = '${loginStore.storeNo}';
 		if('${loginStore.storeNo}' === ""){
 			loginStore = 0;
 		} else {
@@ -290,6 +275,7 @@
 			$("#introduce").append(content);
 			
 		}
+		console.log("로그인한가게번호는 ? ", ${loginStore.storeNo});
 // 		console.dir(`${imgList}`);
 /*slick*/
 
