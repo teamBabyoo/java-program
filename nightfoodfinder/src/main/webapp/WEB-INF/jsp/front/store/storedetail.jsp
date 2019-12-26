@@ -194,8 +194,8 @@
 						<div class="commentwrap">
 							<ul class="clearboth">
 								<li class="float_l">Review</li>
-								<li id="btn_leave_rv" class="float_r"><a
-									href="${pageContext.request.contextPath}/front/store/storeReviewRegistForm.do?storeNo=${store.storeNo}">
+								<li id="btn_leave_rv" class="float_r">
+									<a id="reviewRegist" href="${pageContext.request.contextPath}/front/store/storeReviewRegistForm.do?storeNo=${store.storeNo}">
 										<i class="fa fa-plus-circle" aria-hidden="true"></i>리뷰남기기
 								</a></li>
 							</ul>
@@ -255,7 +255,7 @@
 		if(userNo === ""){
 			userNo = 0;
 		}
-		let loginStore = "";
+		let loginStore = '${loginStore.storeNo}';
 		if('${loginStore.storeNo}' === ""){
 			loginStore = 0;
 		} else {
@@ -275,6 +275,7 @@
 			$("#introduce").append(content);
 			
 		}
+		console.log("로그인한가게번호는 ? ", ${loginStore.storeNo});
 // 		console.dir(`${imgList}`);
 /*slick*/
 

@@ -457,10 +457,6 @@ a.modbtn.can {
 /** 승경 끝 **/
 
 /** 진실 **/
-.content {
-	margin-top: 60px;
-	display: inline !important; /* 헤더때문에 잘리는 컨텐트영역 */
-}
 
 .detail_wrap #allDetail {
 	display: grid;

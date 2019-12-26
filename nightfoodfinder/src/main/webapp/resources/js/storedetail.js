@@ -977,3 +977,10 @@ function mapDraw(longitude, latitude, storeName){
 }
 mapDraw(longitude, latitude, storeName);
 
+//리뷰 제한
+$("#reviewRegist").click(()=>{
+	if(loginStore != storeNo && userNo == 0){
+		Swal.fire("유저만 이용가능합니다");
+		return false;
+	} 
+});
