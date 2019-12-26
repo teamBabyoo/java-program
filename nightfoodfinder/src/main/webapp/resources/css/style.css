@@ -1211,69 +1211,142 @@ header div:nth-child(3) li span {
 /** 주영 끝 **/
 
 /** 가람 시작 **/
-.pg-toplist { 
+.awards_store_wrap .pg-toplist { 
 	width: 100%; 
 	display: inline-block;
     margin-top: 60px;
 }
-.pg-toplist .basic-info-list {
+.awards_store_wrap .pg-toplist .basic-info-list {
  	margin: 0 auto; 
 	position: unset; 
 	height: 234px;
     background-color: #f7f7f7;
 }
-.pg-toplist .basic-info-list {
+.awards_store_wrap .pg-toplist .basic-info-list {
     border-bottom: 1px solid #dbdbdb;
     box-shadow: none;
     border-bottom: none;
     border-bottom: 1px solid #d4d4d4;
     padding: 0;
 }
-.pg-toplist .basic-info-list>.inner {
+.awards_store_wrap .pg-toplist .basic-info-list>.inner {
     margin: 0 auto;
     padding: 48px 30px 20px 30px;
     width: 860px;
     float: none;
 }
-:lang(ko) {
-    word-break: keep-all;
-}
-.pg-toplist .basic-info-list .status {
+
+.awards_store_wrap .pg-toplist .basic-info-list .status {
     font-size: 0.625rem;
     color: #9b9b9b;
     line-height: 1.2em;
     text-align: center;
 }
-.pg-toplist .basic-info-list .status {
+.awards_store_wrap .pg-toplist .basic-info-list .status {
     margin-top: 20px;
     font-size: 0.875rem;
 }
-.pg-toplist .basic-info-list .title {
+.awards_store_wrap .pg-toplist .basic-info-list .title {
     margin-top: 11px;
     font-size: 1.625rem;
     color: #000000;
     line-height: 1.2em;
     text-align: center;
 }
-.pg-toplist .basic-info-list .title {
+.awards_store_wrap .pg-toplist .basic-info-list .title {
     margin-top: 18px;
     font-size: 2.563rem;
 }
-.pg-toplist .basic-info-list .desc {
+.awards_store_wrap .pg-toplist .basic-info-list .desc {
     margin-top: 9px;
     font-size: 1.063rem;
     color: #9b9b9b;
     line-height: 1.2em;
     text-align: center;
 }
-.pg-toplist .basic-info-list .desc {
+.awards_store_wrap .pg-toplist .basic-info-list .desc {
     font-size: 1.2rem;
     margin: 20px auto 30px;
 }
-.awards_store_wrap .content { position: unset; }
+.awards_store_wrap .content { position: unset; 
+}
 .awards_store_wrap .content .storelist {    
 	margin: 0 auto;
     width: 750px; 
     padding-top: 20px;
     }
+
+.awards_wrap .list-type-ls.type-column02-picks>li {
+    display: inline-block;
+    width: 50%;
+    margin: -4px;
+    box-sizing: border-box;
+}
+.awards_wrap .list-type-ls.type-column02-picks>li:nth-child(odd) {
+    padding-right: 15px;
+}
+.awards_wrap .list-type-ls>li {
+    padding-top: 32px;
+}
+.awards_wrap ol, ul, ul li {
+    list-style: none;
+}
+body .awards_wrap{
+    position: relative;
+    min-width: 320px;
+    margin: 0 auto;
+    font-size: 100%;
+    line-height: 100%;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    word-break: keep-all;
+    background-color: #fff;
+}
+.ls-item .info .title {
+    font-size: 1.500rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+    text-align: center;
+}
+.type-column02-picks .ls-item .info .title {
+    font-size: 2rem;
+}
+.ls-item .info .title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+    display: block;
+    font-size: 1.375rem;
+    color: #ffffff;
+    line-height: 1.2em;
+    word-break: break-all;
+}
+.ls-item .thumb {
+    overflow: hidden;
+    position: relative;
+    background-size: cover;
+    background-position: 50% 50%;
+}
+img.center-crop.portrait.lazy {
+    width: 600px;
+    height: 300px;
+}
+.ls-item .info .info_inner_wrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 85%;
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+}
+
+.awards_wrap .content {
+	position: unset !important;
+	width: 1200px;
+	margin: 0 auto;
+}
+
 /** 가람 끝 **/

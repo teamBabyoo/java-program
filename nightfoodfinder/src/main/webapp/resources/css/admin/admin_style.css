@@ -676,6 +676,32 @@ tspan {
 .hidden_graph {
 	display : none;
 }
+
+.btncss {
+	margin-left: 20px; 
+}
+.btncss > li{
+	float: left;
+    font-size: 14px;
+    margin-right: 10px;
+    background-color: #e1e1e1;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #d4d4d4;
+    transition: all .3s;
+}
+
+.btncss > li > button { 
+	background: #e1e1e1;
+    border: none;
+    transition: all .3s;
+}
+
+.btncss > li:hover,
+.btncss > li:hover button {
+	background: #595959;
+    color: #d5d5d5;
+}
   /*승경 시작*/
 
   th.choice {
