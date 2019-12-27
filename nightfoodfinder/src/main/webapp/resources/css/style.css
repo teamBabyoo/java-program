@@ -38,6 +38,7 @@ i { font-style: normal; font-weight: normal; font-size: 1.4rem; }
 /* header */
 body { width: 100%; }
 header { position: relative; width: 100%; min-width: 960px; padding: 0 0 0 20px; height: 60px; border-bottom: 1px solid #d4d4d4; background-color: #fff; z-index: 999; }
+.main_wrap header { position: fixed; }
 header > * { float: left;  }
 header > div > * > * { display: inline-block; }
 header .logo { height: 59px; overflow: hidden; }
@@ -1243,10 +1244,11 @@ header div:nth-child(3) li span {
 
 .search_conditions > span {
 	padding: 7px 21px;
-    border: 1px double #ff9999;
+    border: 1px double #ffe899f2;
     border-radius: 21px;
     background: #fff;
     margin: 4px;
+    background: #fff9e4f2;
 }
 
 
