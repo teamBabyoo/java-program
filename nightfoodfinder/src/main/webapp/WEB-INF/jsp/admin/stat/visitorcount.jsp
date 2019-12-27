@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>admin</title>
     <link rel="stylesheet" href="<c:url value="/resources/css/admin/font-awesome.min.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/css/admin/style.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/css/admin/admin_style.css" />">
@@ -21,34 +21,13 @@
 
 </head>
 <body>
-    <header role="banner">
-        <h1>Admin Panel</h1>
-        <ul class="utilities">
-          <li class="users"><a href="#">My Account</a></li>
-          <li class="logout warn"><a href="">Log Out</a></li>
-        </ul>
-      </header>
-      
-      <nav role="navigation">
-        <ul class="main">
-          <li class="member"><a href="${pageContext.request.contextPath}/admin/user/userlist.do">회원관리</a></li>
-			<li class="store"><a href="${pageContext.request.contextPath}/admin/store/storelist.do">가게관리</a></li>
-          <li class="stat"><a
-				href="${pageContext.request.contextPath}/admin/stat/statlist.do">통계관리</a></li>
-			<li class="review"><a href="#">리뷰관리</a>
-				<ul>
-					<li><a class="review_all" href="${pageContext.request.contextPath}/admin/review/reviewlist.do">전체리뷰</a></li>
-					<li><a class="review_report" href="${pageContext.request.contextPath}/admin/review/reportedreviewlist.do">신고리뷰</a></li>
-				</ul></li>
-
-        </ul>
-      </nav>
+    <c:import url="/WEB-INF/jsp/include/adminsidemenu.jsp" />
       
       <main role="main">
        
       
         <section class="panel ">
-          <h2>Table</h2>
+          <h2>방문자</h2>
           <table>
             <tr>
               <th>총 방문자 수</th>

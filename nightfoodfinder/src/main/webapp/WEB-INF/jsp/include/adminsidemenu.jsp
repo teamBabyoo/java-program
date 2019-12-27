@@ -7,7 +7,7 @@
 		<h1>Admin Panel</h1>
 		<ul class="utilities">
 			<li class="logout warn"><a
-				href="${pageContext.request.contextPath}/front/main/main.do">Log
+				href="${pageContext.request.contextPath}/front/login/logout.do">Log
 					Out</a></li>
 		</ul>
 	</header>
