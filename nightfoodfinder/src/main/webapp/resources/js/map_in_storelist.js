@@ -11,7 +11,7 @@
     let sizey;
     concon =  new google.maps.MarkerImage("https://www.pinclipart.com/picdir/big/447-4478350_png-file-svg-fa-map-marker-png-clipart.png",null, null, null, new google.maps.Size(25, 35));
 
-	
+
 
     $(".storeLn.sto_li.clearboth").mouseover((e) => {
     	//alert($(e.target).parent($('li')).attr("data-store"));
@@ -23,7 +23,7 @@
       markerImage = new google.maps.MarkerImage("https://www.pinclipart.com/picdir/big/288-2889919_markers-clipart-coloring-page-png-download.png",
         null, null, null, new google.maps.Size(25, 35));
 
-      map.setCenter(new google.maps.LatLng(locations[0][1], locations[0][2]));
+      map.setCenter(new google.maps.LatLng(locations[0].latitude*1, locations[0].longitude*1));
 
       /*마커 애니메이션 효과 주기*/
       for (let i = 0; i < markerArr.length; i++) {
@@ -160,6 +160,8 @@
       }
     };
 
+    	
+
     drawMap();
     /*지도상 누른 좌표값 받기*/
  function codeLatLng(lat, lng) {
@@ -197,4 +199,6 @@
           
     });
    }
+
+
  

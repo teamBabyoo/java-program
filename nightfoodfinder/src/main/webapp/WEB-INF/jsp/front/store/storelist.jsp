@@ -169,7 +169,7 @@ function abs(value1, value2, value3) {
 	
  	<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 	<script src="<c:url value='/resources/js/storelist.js' />"></script>
-	<script src="<c:url value='/resources/js/map_in_storelist.js' />"></script>
+<%-- 	<script src="<c:url value='/resources/js/map_in_storelist.js' />"></script> --%>
 </body>
 </html>
 

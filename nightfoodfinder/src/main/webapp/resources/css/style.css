@@ -983,7 +983,9 @@ a.modbtn.can {
   }
 }
 
-
+.detail_wrap p.goodCount {
+    margin-top: -45px;
+}
 
 
 /** 진실 끝 **/
