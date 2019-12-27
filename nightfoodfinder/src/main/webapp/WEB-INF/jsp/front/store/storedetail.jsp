@@ -276,7 +276,6 @@
 			$("#introduce").append(content);
 			
 		}
-		console.log("로그인한가게번호는 ? ", ${loginStore.storeNo});
 // 		console.dir(`${imgList}`);
 /*slick*/
 

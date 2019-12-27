@@ -139,7 +139,7 @@
 				c.category_name,
 				s.store_scope_total,
 				s.review_cnt_total,
-				ifnull(truncate(sum(r.store_scope) / count(r.writer_no), 1), 0) as scope
+				ifnull(truncate(sum(r.store_scope) / count(r.review_no), 1), 0) as scope
 		from tb_store as s
 		inner join tb_address as a
 		   on s.store_no = a.store_no
@@ -174,7 +174,7 @@
 	<!-- 별점 평균 -->
 	<select id="storeScope" resultType="Store" parameterType="int">
 		select
-		ifnull(truncate(sum(store_scope) / count(user_no), 1), 0) as scope
+		ifnull(truncate(sum(store_scope) / count(review_no), 1), 0) as scope
 		from tb_review
 		where store_no = #{storeNo}
 	</select>

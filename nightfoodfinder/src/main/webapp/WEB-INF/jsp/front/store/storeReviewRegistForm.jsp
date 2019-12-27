@@ -33,7 +33,7 @@
 	          <div class="leave_rv user_rv">
 	            <!-- <form name="reviewForm" id="reviewForm" onsubmit="return registReview()" method="POST" enctype="multipart/form-data"> -->
 	            <form name="reviewForm" id="reviewForm" method="POST" enctype="multipart/form-data"
-	              action="review_regist.do" onsubmit="return validate();">
+	              action="review_regist.do">
 	              <ul class="clearboth">
 	                <li>
 	                  <ul class="clearboth">
@@ -92,8 +92,7 @@
  * 유효성검사
  */
 function validate() {
-	alert('돌아가');
-	return false;
+	return true;
 }
 /**
  * 리뷰 별점 전처리
@@ -108,7 +107,7 @@ $('#scopePannel > a').click(function(e) {
 	e.preventDefault();
 	// storeScope --> n점 (n번째 별)
 	storeScope = parseInt($(e.target).attr('data-rscope'));
-//	$('input[name="storeScope"]').val(storeScope); 
+	$('input[name="storeScope"]').val(storeScope); 
 	console.log("현재별점: ", storeScope);
 	// 현재 클릭한 별의 형제 요소의 길이만큼 반복문 돌리며 rscope값이 작을 경우 색상변경(e.target 포함)
 	for (let i = 0; i < $(e.target).siblings().length; i++) {

@@ -5,10 +5,10 @@ $(document).ready(function() {
     // content영역 높이
     let $height_content = $('.content').height();
     // wrapper 영역 높이
-    let $height_wrapper = $('.wrapper').height();
+    let $height_wrapper = $('.wrapper').width();
 //    console.log("$height_wrapperㅋ", $height_wrapper);
 
-    $('footer').css('bottom', -($height_wrapper));
+    $('footer').css('bottom', $height_content);
     
     // footer 위치
     // ↙ 문서가 로딩된 후에 변경된 내용은 반영이 안 될수도 있음
