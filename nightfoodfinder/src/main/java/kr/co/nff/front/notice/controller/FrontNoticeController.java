@@ -1,7 +1,6 @@
 package kr.co.nff.front.notice.controller;
 
 import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,16 +24,17 @@ public class FrontNoticeController {
 	/* 알림 리스트 */
 	@RequestMapping("/notice_list.do")
 	@ResponseBody
-	public List<Notice> noticeListAjax(HttpSession session) {
+	public List<Notice> noticeListAjax(HttpSession session, Notice notice) {
 		User loginUser = (User)session.getAttribute("loginUser");
 		Store loginStore = (Store)session.getAttribute("loginStore");
-		
-		Notice notice = new Notice();
+
+	//	Notice notice = new Notice();
 		if (loginUser != null) notice.setUserNo(loginUser.getUserNo());
 		if (loginStore != null) notice.setStoreNo(loginStore.getStoreNo());
-		
+
 		return service.selectNotice(notice);
 	}
+
 	
 	/* 알림 확인시 */
 	@RequestMapping("/read_notice.do")
@@ -75,9 +75,20 @@ public class FrontNoticeController {
 	/* 알림 전부 삭제 */
 	@RequestMapping("/deleteall_notice.do")
 	@ResponseBody
-	public void deleteAllNoticeAjax(Notice notice) {
+	public void deleteAllNoticeAjax(HttpSession session) {
+		User loginUser = (User)session.getAttribute("loginUser");
+		Store loginStore = (Store)session.getAttribute("loginStore");
+	
+		Notice notice = new Notice();
+		if (loginUser != null) {
+			notice.setUserNo(loginUser.getUserNo());
+			
+		}
+		if (loginStore != null) {
+			notice.setStoreNo(loginStore.getStoreNo());
+		
+		}
 		service.deleteAllNotice(notice);
 	}
-	
-	
+	 
 }

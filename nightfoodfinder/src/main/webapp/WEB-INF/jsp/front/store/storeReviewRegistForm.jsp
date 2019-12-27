@@ -33,7 +33,7 @@
 	          <div class="leave_rv user_rv">
 	            <!-- <form name="reviewForm" id="reviewForm" onsubmit="return registReview()" method="POST" enctype="multipart/form-data"> -->
 	            <form name="reviewForm" id="reviewForm" method="POST" enctype="multipart/form-data"
-	              action="review_regist.do">
+	              action="review_regist.do" onsubmit="return validate();">
 	              <ul class="clearboth">
 	                <li>
 	                  <ul class="clearboth">
@@ -62,9 +62,11 @@
 	                    </li>
 	                    <!-- <li class="float_r"><button type="submit">등록</button></li> -->
 	                    <li class="float_r">
-	                    	<a href="${pageContext.request.contextPath}/front/store/storedetail.do?no=${review.storeNo}">취소</a>
-	                    	<input id="submit" type="submit" />
-	                    	<label for="submit">등록</label>
+	                    	<p><a href="${pageContext.request.contextPath}/front/store/storedetail.do?no=${review.storeNo}">취소</a></p>
+	                    	<p class="clearboth">
+		                    	<input id="submit" type="submit" />
+		                    	<label for="submit">등록</label>
+	                    	</p>
 	                    </li>
 	                  </ul>
 	                </li>
@@ -86,36 +88,13 @@
 		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 	</div>
 <script>
-//let writerNo = ${loginuser.userNo};
-/**
- * 댓글 등록
- * @returns
+/***
+ * 유효성검사
  */
-function registReview() {
-	let reviewContent = $('textarea[name="reviewContent"]').val();
-	let form = $('#reviewForm')[0];
-	let data = new FormData(form);
-	console.log("나", data);
-	$.ajax({
-		type: "POST",
-		enctype: "multipart/form-data",
-		url: "review_regist.do",
-		data: data,
-		dataType: "json",
-		cache: false,
-        processData: false,
-        contentType: false,
-        success: function(data) {
-        	alert('성공');
-        },
-        error: function(e) {
-        	console.log("ERROR : ", e);
-            alert("fail");
-        }
-	});
+function validate() {
+	alert('돌아가');
 	return false;
-};
-
+}
 /**
  * 리뷰 별점 전처리
  * @returns
@@ -129,19 +108,20 @@ $('#scopePannel > a').click(function(e) {
 	e.preventDefault();
 	// storeScope --> n점 (n번째 별)
 	storeScope = parseInt($(e.target).attr('data-rscope'));
-	$('input[name="storeScope"]').val(storeScope); 
+//	$('input[name="storeScope"]').val(storeScope); 
 	console.log("현재별점: ", storeScope);
 	// 현재 클릭한 별의 형제 요소의 길이만큼 반복문 돌리며 rscope값이 작을 경우 색상변경(e.target 포함)
 	for (let i = 0; i < $(e.target).siblings().length; i++) {
 		let $sibling = $(e.target).siblings().eq(i);
 		console.log(i, "번째 siblings : ", $sibling.attr('data-rscope'));
 		if (parseInt($sibling.attr('data-rscope')) <= storeScope){
-			if ($sibling.attr('data-rscope') == '1') {
-				$sibling.css('color', 'yellow');
+			if ($sibling.attr('data-rscope') == 1) {
+				$(e.target).css('color', '#ff7100');
+				console.log("이거이거이거");
 			}
 			console.log(i, "번째 적용됨 : ", $sibling.attr('data-rscope'));
-			$(e.target).css('color', 'red');
-			$sibling.css('color', 'red');
+			$(e.target).css('color', '#ff7100');
+			$sibling.css('color', '#ff7100');
 		}
 	}
 });

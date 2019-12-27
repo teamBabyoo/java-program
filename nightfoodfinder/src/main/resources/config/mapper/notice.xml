@@ -53,33 +53,44 @@
    			on n.from_user_no = u.user_no
  	left outer join tb_store s
    			on n.from_store_no = s.store_no
-		 <where>
+		 where
 		 	<if test="storeNo != 0">
          		n.store_no = #{storeNo}
          	</if>
          	<if test="userNo != 0">
          		n.user_no = #{userNo}
          	</if>
-		 </where> 
-		 order by n.reg_date desc 
-		 limit 40
+
+			<if test="lastNo != 0">
+			and n.notice_no &lt; #{lastNo}
+			</if>
+			order by n.notice_no desc 
+
+			limit 0, 10
+
 	</select>
+
+	<select id="countAll" parameterType="int" resultType="int">
+		select count(*)
+			from tb_notice
+		where 
+			<if test="storeNo != 0">
+	         	n.store_no = #{storeNo}
+	         </if>
+	         <if test="userNo != 0">
+	         	n.user_no = #{userNo}
+         </if>
+     
+	</select>
+
 	
 	<!-- 알림을 사용자가 확인했을 때  안읽음(0)에서 읽음(1)으로 업데이트-->
-<!-- 	<update id="readNotice" parameterType="Notice"> -->
 	<update id="readNotice" parameterType="int">
 		update tb_notice
   		   set status = 1
   		   
   		where notice_no = #{noticeNo}
- <!--         <where>
-         	<if test="storeNo != 0">
-         		store_no = #{storeNo}
-         	</if>
-         	<if test="userNo != 0">
-         		user_no = #{userNo}
-         	</if>
-         </where> -->
+
 	</update>
 	
 	<!-- 안읽은 알림 몇 개인지 -->

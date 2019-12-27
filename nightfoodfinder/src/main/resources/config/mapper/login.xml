@@ -23,8 +23,8 @@
 		<result column="store_scope_total" property="storeScopeTotal" />
 		<result column="review_cnt_total" property="reviewCntTotal" />
 
-		<collection property="holidayList" column="store_no"
-			select="selectHolidayListByStoreNo" />
+		<collection property="holidayList" column="store_no" select="selectHolidayListByStoreNo" />
+		<collection property="fileVoList" column="store_no" select="userFreqList" />
 	</resultMap>
 	<resultMap type="User" id="userMap">
 		<result column="user_no" property="userNo"/>
@@ -97,13 +97,21 @@
 	</select>
 	<!-- 회원 단골목록 가져오기 -->
 	<select id="userFreqList" resultType="Store" parameterType="int">
-		select 	f.user_no,
-				f.store_no,
-				s.store_name
+		select	f.user_no, f.store_no,
+				s.store_name, (s.store_scope_total/s.review_cnt_total) as scope,
+				a.street_load,
+				l.* 
 			from tb_frequent_store as f
-			left outer join tb_store as s
-	          on f.store_no = s.store_no
+				left outer join tb_store as s
+		          	on f.store_no = s.store_no
+		        left outer join tb_address as a
+		        	on f.store_no = a.store_no 
+		        left outer join ( 
+							select max(file_no), f.* from tb_file as f group by store_no 
+							) as l 
+		        	on f.store_no = l.store_no 
 			where f.user_no= #{userNo}
+			
 	</select>
 	
 	<!-- 회원 리뷰목록 가져오기 -->
@@ -114,10 +122,13 @@
 			   r.reg_date,
 			   r.store_scope,
 			   r.file_group_code,
-			   r.status
+			   r.status,
+			   s.store_name
 			from tb_user as u
 			left outer join tb_review as r
 				on u.user_no = r.writer_no
+			left outer join tb_store as s
+				on r.store_no = s.store_no
 				where u.user_no = #{userNo}
 	</select>
 	
@@ -148,7 +159,7 @@
 			) values (
 			#{storeName}, #{businessNum}, #{storeEmail}, 
 			#{storePass}, #{storeTell}, #{storeCategory},
-			#{openTime},#{closeTime}, #{storeOwner},#{storeOwnerPh},#{priceTypeNo0}
+			#{openTime},#{closeTime}, #{storeOwner},#{storeOwnerPh},#{priceTypeNo}
 			)
 	</insert>
 	

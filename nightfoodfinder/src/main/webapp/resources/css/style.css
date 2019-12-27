@@ -37,14 +37,16 @@ i { font-style: normal; font-weight: normal; font-size: 1.4rem; }
 /* 헤더 컨텐트 푸터 공통 */
 /* header */
 body { width: 100%; }
-header { position: fixed; width: 100%; min-width: 960px; padding: 0 0 0 20px; height: 60px; border-bottom: 1px solid #d4d4d4; box-shadow: 0px 5px 5px #e8e8e8; background-color: #fff; z-index: 999;}
+header { position: fixed; width: 100%; min-width: 960px; padding: 0 0 0 20px; height: 60px; border-bottom: 1px solid #d4d4d4; background-color: #fff; z-index: 999; }
 header > * { float: left;  }
 header > div > * > * { display: inline-block; }
-header .logo { margin: 10px; }
+header .logo { height: 59px; overflow: hidden; }
+header .logo img { margin-top: -50px; margin-left: -13px;}
 header .search { border-top: none; }
 header .search { border: 1px solid #DBDBDB; line-height: 58px; box-sizing: border-box; }
 header .search input,
 header .search i { padding: 10px 20px; font-size: 1.6rem; color: #5a5a5a; border: none; background: inherit; }
+header .search > form > .icon_w > button { border: none; background-color: #fff; }
 header .search div { border-left: 1px solid #d4d4d4; }
 
 header div:nth-child(3) li { padding: 0 20px;  border-left: 1px solid #d4d4d4; line-height: 60px; }
@@ -74,14 +76,16 @@ header .search.focusIn .optionBox.active i { padding: 0; font-size: 1rem; color:
 header .search.focusIn .optionBox.active .userselect { float: none;}
 
 /* 컨텐트영역 */
-.content { width: 100%; display: inline-block !important; margin-top: 60px; background: #fff; }
+.content { width: 100%; display: inline-block; margin-top: 60px; background: #fff; }
 /* 푸터영역 */
 footer { position: absolute; bottom: 0; width: 100%; line-height: 40px; text-align: center; background: #251e4a; color: yellow; /*border-top: 1px solid #d4d4d4; box-shadow: 0px -2px 5px #e8e8e8;*/ }
 /* 팝업 */
 .bgbox.active { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; opacity: .9;}
 
 
-
+/* 메인 비주얼 컨텐트 */
+.main_wrap .v_content { width: 100%; height: 600px; }
+.main_wrap .dot_bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url(../images/dot_bg.png) repeat; opacity: 1; }
 /* 메인 */
 .main_wrap .content .store { position: relative; float: left; width: 25%; background-repeat: no-repeat !important; background-size: cover !important; background-position: center center !important; border-right: 1px solid #d4d4d4; background-image: url("../images/imgReady.png"); }
 .main_wrap .content .store:nth-child(2), 
@@ -214,12 +218,128 @@ div#commentplace > * { width: 100%; margin: 0 auto; }
 .reviewRegist_wrap .leave_rv.user_rv > form > ul > li:nth-child(3) > ul > li:nth-child(1)
 { position: relative; width: 100px; height: 100px; border: 1px dashed; }
 .reviewRegist_wrap .leave_rv.user_rv > form > ul > li:nth-child(3) > ul > li:first-child * { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-.reviewRegist_wrap .leave_rv.user_rv > form > ul > li:nth-child(3) > ul > li input[type="file"] { opacity: .6; } 
-.reviewRegist_wrap .leave_rv.user_rv > form > ul > li:nth-child(3) > ul > li label { text-align: center; line-height: 90px; font-size: 100px; font-weight: lighter; }
+.reviewRegist_wrap .leave_rv.user_rv > form > ul > li:nth-child(3) > ul > li input[type="file"] { opacity: 0; } 
+.reviewRegist_wrap .leave_rv.user_rv > form > ul > li:nth-child(3) > ul > li > label { text-align: center; line-height: 90px; font-size: 100px; font-weight: lighter; }
 .reviewRegist_wrap .leave_rv.user_rv > form > ul > li:nth-child(3) > ul > li #foo { left: 100px; object-fit: cover; }
-.reviewRegist_wrap .leave_rv form ul li:last-child { position: relative; }
-
-/*  */
+.reviewRegist_wrap .leave_rv.user_rv > form > ul > li:nth-child(3) > ul > li:last-child > * { display: inline-block; border: 1px solid #d4d4d4; border-radius: 25px; padding: 10px 20px; cursor: pointer; }
+.reviewRegist_wrap .leave_rv.user_rv > form > ul > li:nth-child(3) > ul > li:last-child p { position: relative; }
+.reviewRegist_wrap .leave_rv.user_rv > form > ul > li:nth-child(3) > ul > li:last-child p * { float: left; }
+.reviewRegist_wrap .leave_rv.user_rv > form > ul > li:nth-child(3) > ul > li:last-child p > input { position: absolute; opacity: 0; }
+.reviewRegist_wrap .leave_rv.user_rv > form > ul > li:nth-child(3) > ul > li:last-child p > label { font-size: 14px; }
+/* 메인  */
+.module.main_popular_restaurant_wrap {
+    padding-bottom: 0;
+}
+.pg-main .module {
+    padding: 38px 0 36px 0;
+}
+.pg-main .module {
+    position: relative;
+    border-top: 1px solid #dbdbdb;
+}
+.pg-main .module>.title {
+    display: block;
+    padding-right: 15px;
+    padding-left: 15px;
+    font-size: 1.125rem;
+    color: #ff792a;
+    line-height: 1.2em;
+    text-align: left;
+}
+.pg-main .module>.title {
+    padding-right: 90px;
+    padding-left: 90px;
+    font-size: 1.438rem;
+}
+.pg-main .slider-container {
+    position: relative;
+}
+.pg-main .slider-container {
+    margin-top: 27px;
+}
+.list-restaurants {
+    overflow: hidden;
+}
+.list-restaurants.type-main {
+    margin-top: 0px;
+}
+.pg-main .list-restaurants {
+    margin-left: 90px;
+    margin-right: 90px;
+}
+.list-restaurants>li {
+    width: 50%;
+    float: left;
+    box-sizing: border-box;
+}
+.list-restaurants>li {
+    padding-bottom: 35px;
+}
+.list-restaurants>li:nth-child(odd) {
+    padding-right: 17px;
+}
+.list-restaurants.type-main>li {
+    float: left;
+    padding-right: 17px;
+    padding-left: 17px;
+    width: 25%;
+}
+.list-restaurants.type-main li {
+    position: relative;
+}
+.list-restaurants.type-main>li {
+    width: 25%;
+}
+.pg-main .module_title_wrap {
+    margin-left: 90px;
+    margin-right: 90px;
+}
+.pg-main .module .module_title_wrap {
+    clear: both;
+    overflow: hidden;
+}
+.pg-main .module .module_title_wrap .title {
+    float: left;
+    display: block;
+    padding-right: 15px;
+    padding-left: 15px;
+    font-size: 1.125rem;
+    color: #ff792a;
+    line-height: 1.35em;
+    text-align: left;
+}
+.pg-main .module .module_title_wrap .title {
+    font-size: 1.438rem;
+}
+.pg-main .slider-container.toplist-slider {
+    margin: 30px 90px auto;
+}
+.btn-nav {
+    display: block;
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    margin-top: -35px;
+    padding: 0;
+    height: 70px;
+    width: 62px;
+    text-align: center;
+    cursor: pointer;
+    opacity: .4;
+}
+.slick-disabled {
+    display: none;
+}
+.btn-nav.prev {
+    left: 0;
+    border-radius: 0px 70px 70px 0px;
+}
+.pg-main .slider-container.toplist-slider .prev {
+    left: -45px;
+}
+/* 메인  끝*/
+/* 리스트페이지 (죄송합니다) */
+.list_content { margin-top: 0; }
 
 /* 탑버튼 */
 #btnTop {
@@ -880,6 +1000,7 @@ header div:nth-child(3) li span {
 	background: #fff;
 	right: -3px;
 	padding: 8px;
+	height: 676px;
 	width: 360px;
 	z-index: 100;
 }
@@ -956,6 +1077,7 @@ header div:nth-child(3) li span {
 .search_conditions {
 	grid-area: header;
 	border-bottom: 1px solid rgb(235, 235, 235);
+	padding-left: 24px;
 }
 
 .leftarea {
@@ -1096,7 +1218,16 @@ header div:nth-child(3) li span {
 
 /* -------------------- */
 
-/* .notice_content > ul > li > a { position: absolute; top: 0; left: 0; } */
+.search_conditions > span {
+	padding: 7px 21px;
+    border: 2px groove #DBDBDB;
+    border-radius: 21px;
+    background: #fff;
+    margin: 4px;
+}
+
+
+
 
 /** 유빈 끝 **/
 
@@ -1188,23 +1319,40 @@ header div:nth-child(3) li span {
 
 /* 스토어 회원가입페이지 시작*/
 .sjoin_content {
-	padding-top: 20px;
+	width: 700px;
+    border: 1px solid #d7d7d7;
+    margin: 20px auto;
 }
 
 .sjoin_content table th {
 	width: 125px;
 }
-
+.sjoin_content table tr {
+	margin: 3px;
+}
 .sjoin_content .reg_submit {
-	margin-left: 130px;
-	margin-top: 5px;
-	background: white;
-	border: 1px solid #d7d7d7;
+	margin: 5px 0 5px 130px;
+    background: white;
+    border: 2px solid #d7d7d7;
+    width: 130px;
+    height: 30px;
+    border-radius: 50px;
+    font-size: 16px;
+    color: #2d2d2d;
 }
 
 .sjoin_content .loc_btn {
 	background: white;
-	border: 1px solid #d7d7d7;
+    border: 1px solid #d7d7d7;
+    
+}
+.sjoin_title {
+    font-size: 1.8em;
+    padding: 10px;
+}
+#sjform {
+    text-align: left;
+    padding-left: 20px;
 }
 /* 스토어 회원가입페이지 끝*/
 
@@ -1347,6 +1495,10 @@ img.center-crop.portrait.lazy {
 	position: unset !important;
 	width: 1200px;
 	margin: 0 auto;
+	display: block !important;
 }
-
+.imgggcls {
+	 width: 250px; 
+	 height: 180px; 
+}
 /** 가람 끝 **/
