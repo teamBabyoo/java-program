@@ -108,6 +108,7 @@ function fnShow(seq){
 	let graphs = document.querySelector("#chartcontainer-" + i);
 	graphs.classList.replace("show_graph", "hidden_graph");
 	let grapha = document.querySelector("#awardcontainer-" + i);
+	if (grapha != null)
 	grapha.classList.replace("show_graph", "hidden_graph");
 	let graphb = document.querySelector("#awardcontainers-" + i);
 	graphb.classList.replace("show_graph", "hidden_graph");
