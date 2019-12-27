@@ -85,7 +85,7 @@
 	    </div>
 		
 		<!-- 푸터 -->
-		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
+<%-- 		<c:import url="/WEB-INF/jsp/include/footer.jsp" /> --%>
 	</div>
 <script>
 /***
