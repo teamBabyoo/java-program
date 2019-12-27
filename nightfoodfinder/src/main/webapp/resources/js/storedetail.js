@@ -26,7 +26,7 @@ checkFrequent();
 function makeFrequent(list) {
 	// list 가 1이면 등록된 가게
 	// 0이면 등록되지 않은 가게
-	console.log("프리퀀트", list);
+//	console.log("프리퀀트", list);
 	$(".frequent").off();
    if(list) {
 	   $(".frequent i").attr("class", "fa fa-bookmark").css("color", "red");
@@ -35,7 +35,6 @@ function makeFrequent(list) {
 			   Swal.fire('로그인 후 이용이 가능합니다')
 			   return false;
 		   } else {
-			   alert("단골취소을 취소되었습니다");
 			   frequentRegist("frequent_delete.do");
 			   $(".frequent i").attr("class", "fa fa-bookmark-o").css("color", "#77747d");
 		   }
@@ -49,7 +48,6 @@ function makeFrequent(list) {
 			   Swal.fire('로그인 후 이용이 가능합니다')
 			   return false;
 		   } else {
-			   alert("단골등록");
 			   frequentRegist("frequent_regist.do");
 			   $(".frequent i").attr("class", "fa fa-bookmark").css("color", "red");
 		   }
@@ -117,8 +115,8 @@ function toPad(val) {
 //#commentplace 안에 넣어주기 
 //리뷰 리스트 뿌려주기	
 function makeReviewList(list){
-	console.dir(list);
-	console.log(list.pagination);
+	/*console.dir(list);
+	console.log(list.pagination);*/
 	let html = "";
 	let pagination = list.pagination;
 	let $tbl = $("<div class='user_rv'></div>");
@@ -133,7 +131,7 @@ function makeReviewList(list){
 		console.log("str", str);
 	}*/
 	let reviewList = list.list;
-	console.log("reviewLsit", reviewList.length);
+	//console.log("reviewLsit", reviewList.length);
 	if(reviewList.length == 0){
 		html += `<div class='user_rv'> 작성된 리뷰가 없습니다.</div>`;
 		$tbl.append(html);
@@ -216,13 +214,13 @@ function makeReviewList(list){
 			html += `</p>
 	                <p class="goodCount">${r.good}</p>
 	                </li>`;
-			console.log(userNo, 111, `${r.writerNo}`);
+//			console.log(userNo, 111, `${r.writerNo}`);
 			let css = "hidden";
 			if (userNo == `${r.writerNo}`) {
 				css = "";
 			}
 			let chkmyreview = `${r.writerNo}`;
-			console.log(chkmyreview);
+//			console.log(chkmyreview);
 			html += `<li data-chkmyreview=` + chkmyreview + `>
 					    <ul class="ud_control ${css}">
 					        <li>수정 |</li>
@@ -337,7 +335,7 @@ function makeReviewList(list){
 				css = "";
 			}
 			let chkme = `${r.writerNo}`;
-			console.log(chkme);
+//			console.log(chkme);
 			html += `<li data-chkmyreview=` + chkme + `>
 					    <ul class="ud_control ${css}">
 					        <li>수정 |</li>
@@ -445,7 +443,7 @@ function registReview() {
 	let reviewContent = $('textarea[name="reviewContent"]').val();
 	let form = $('#reviewForm')[0];
 	let data = new FormData(form);
-	console.log("나", data);
+//	console.log("나", data);
 	$.ajax({
 		type: "POST",
 		enctype: "multipart/form-data",
@@ -456,11 +454,11 @@ function registReview() {
         processData: false,
         contentType: false,
         success: function(data) {
-        	alert('성공');
+//        	alert('성공');
         },
         error: function(e) {
-        	console.log("ERROR : ", e);
-            alert("fail");
+//        	console.log("ERROR : ", e);
+//            alert("fail");
         }
 	});
 	return false;
@@ -512,16 +510,16 @@ $('#scopePannel > a').click(function(e) {
 	// storeScope --> n점 (n번째 별)
 	storeScope = parseInt($(e.target).attr('data-rscope'));
 	$('input[name="storeScope"]').val(storeScope); 
-	console.log("현재별점: ", storeScope);
+//	console.log("현재별점: ", storeScope);
 	// 현재 클릭한 별의 형제 요소의 길이만큼 반복문 돌리며 rscope값이 작을 경우 색상변경(e.target 포함)
 	for (let i = 0; i < $(e.target).siblings().length; i++) {
 		let $sibling = $(e.target).siblings().eq(i);
-		console.log(i, "번째 siblings : ", $sibling.attr('data-rscope'));
+//		console.log(i, "번째 siblings : ", $sibling.attr('data-rscope'));
 		if (parseInt($sibling.attr('data-rscope')) <= storeScope){
 			if ($sibling.attr('data-rscope') == '1') {
 				$sibling.css('color', 'yellow');
 			}
-			console.log(i, "번째 적용됨 : ", $sibling.attr('data-rscope'));
+//			console.log(i, "번째 적용됨 : ", $sibling.attr('data-rscope'));
 			$(e.target).css('color', 'red');
 			$sibling.css('color', 'red');
 		}
@@ -539,7 +537,7 @@ function copyText(text) {
     temp.select();
     document.execCommand('Copy');
     document.body.removeChild(temp);
-    alert('클립보드로 복사되었습니다. ')
+//    alert('클립보드로 복사되었습니다. ')
 }
 
 
@@ -552,12 +550,12 @@ $(document).on('click', '.report', function(e){
 		   return false;
 	} else {
 	//유저번호 들어오는지
-	console.log("유저번호", userNo);
+//	console.log("유저번호", userNo);
 	let page = $(".page-item.active a").attr("data-page");
 
 	//review_no를 받기위해	
 	let rNo = e.target;
-	console.log(rNo);	
+//	console.log(rNo);	
 	$.post({
 		url: "review_report_check.do",
 		data: {userNo, reviewNo: rNo.value},
@@ -571,7 +569,7 @@ $(document).on('click', '.report', function(e){
 });
 
 function reviewReport(count, rNo, page) {
-	console.log("카운트", count, "글번호", rNo);
+//	console.log("카운트", count, "글번호", rNo);
 	if(count == 0) {
 		//신고사유 모달창
 		let rpop = $("#rmyModal");
@@ -604,8 +602,8 @@ function reviewReport(count, rNo, page) {
 		//밸류 값 들어오는지 확인용
 		/*console.log($("#reviewNo").val());
 		console.log($("#reportWhy").val());
-		console.log($("#storeNo").val());*/
-		console.log($("#userNo").val());
+		console.log($("#storeNo").val());
+		console.log($("#userNo").val());*/
 
 		//모달창 닫기
 		$(".rclose").click(()=>{
@@ -647,9 +645,9 @@ $(document).on('click', '.heart', function(e){
 		 return false;
 	 }
 //	console.log(rno);
-	console.log("리뷰번호", $(e.target).attr('data-rno'));
+/*	console.log("리뷰번호", $(e.target).attr('data-rno'));
 	console.log("리뷰글쓴이", $(e.target).attr('data-writer'));
-	console.log("src : ", $(e.target).attr('src'));
+	console.log("src : ", $(e.target).attr('src'));*/
 	let page = $(".page-item.active a").attr("data-page");
 	let heart = "/nightfoodfinder/resources/images/icon_hrt.png";
 	//좋아요가 되어있으면 취소
@@ -770,7 +768,7 @@ function ChkByte(obj, maxByte) {
 function recommentSubmit(a) {
 	var rno = $(a).attr("data-rno");
 	let page = $(".page-item.active a").attr("data-page");
-	console.log(page);
+//	console.log(page);
 	
 		$.post({
 			url: "recomment_regist.do",
@@ -943,7 +941,7 @@ function fn_next(page, range, rangeSize) {
 let y;
 let x;
 function mapDraw(longitude, latitude, storeName){
-	console.log("지도 넘길 것", longitude, latitude, storeName);
+//	console.log("지도 넘길 것", longitude, latitude, storeName);
 	y = latitude;
 	x = longitude
 	locations = [

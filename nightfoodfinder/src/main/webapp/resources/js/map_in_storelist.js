@@ -11,6 +11,8 @@
     let sizey;
     concon =  new google.maps.MarkerImage("https://www.pinclipart.com/picdir/big/447-4478350_png-file-svg-fa-map-marker-png-clipart.png",null, null, null, new google.maps.Size(25, 35));
 
+	
+
     $(".storeLn.sto_li.clearboth").mouseover((e) => {
     	//alert($(e.target).parent($('li')).attr("data-store"));
       markerEvent($(e.target).parent($('li')).attr("data-store"));
@@ -61,7 +63,6 @@
         
       */
     
-    	  console.log("로로", locations)
     	  
       let y = 0;
       let x = 0;
@@ -158,6 +159,7 @@
         }
       }
     };
+
     drawMap();
     /*지도상 누른 좌표값 받기*/
  function codeLatLng(lat, lng) {
@@ -195,3 +197,4 @@
           
     });
    }
+ 
