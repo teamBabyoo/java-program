@@ -706,6 +706,8 @@
    		inner join tb_review r
    		  on f.file_group_code = r.file_group_code
     	where r.store_no = #{storeNo}
+        order by f.file_no
+        limit 20
 	</select>
 	
 	<!-- 이미지 갯수 -->
