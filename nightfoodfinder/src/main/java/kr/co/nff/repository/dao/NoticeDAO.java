@@ -23,5 +23,5 @@ public interface NoticeDAO {
 	// 알림 모두 삭제
 	void deleteAllNotice(Notice notice);
 	
-//	int countAll(int no);
+	int countAll(Notice notice);
 }

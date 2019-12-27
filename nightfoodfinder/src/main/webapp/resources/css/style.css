@@ -14,6 +14,7 @@ body {
 * { box-sizing: border-box; margin: 0; padding: 0; }
 ul, dl { list-style: none !important; }
 li { color: #7f7f7f; }
+a#morebtn {margin-left: 20px;}
 a { text-decoration: none; color: #7f7f7f; }
 i { font-style: normal; font-weight: normal; font-size: 1.4rem; }
 

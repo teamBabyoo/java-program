@@ -1,6 +1,7 @@
 package kr.co.nff.front.notice.controller;
 
-import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,18 @@ public class FrontNoticeController {
 	/* 알림 리스트 */
 	@RequestMapping("/notice_list.do")
 	@ResponseBody
+	public Map <String, Object> noticeListAjax(Notice notice, HttpSession session) {
+		Map <String, Object> map = service.noticeList(notice, session);
+
+		return service.noticeList(notice, session);
+	}
+	
+	
+	
+	
+	
+/*	@RequestMapping("/notice_list.do")
+	@ResponseBody
 	public List<Notice> noticeListAjax(HttpSession session, Notice notice) {
 		User loginUser = (User)session.getAttribute("loginUser");
 		Store loginStore = (Store)session.getAttribute("loginStore");
@@ -35,7 +48,7 @@ public class FrontNoticeController {
 		return service.selectNotice(notice);
 	}
 
-	
+*/	
 	/* 알림 확인시 */
 	@RequestMapping("/read_notice.do")
 	@ResponseBody
