@@ -91,7 +91,7 @@ $(() => {
 				       	</li>
 							`;
 						
-						abs(`${s.latitude}`, `${s.longitude}`, `${s.storeName}`);
+						abs(`${s.latitude}`, `${s.longitude}`, `${s.storeName}`, `${s.storeNo}`);
 					}
 				}
 				
@@ -138,6 +138,10 @@ $(() => {
 				});
 				
 				drawMap();
+				$(".storeLn.sto_li.clearboth").mouseover((e) => {
+					//alert($(e.target).parent($('li')).attr("data-store"));
+				  markerEvent($(e.target).parent($('li')).attr("data-store"));
+				});
 			},
 			error: () => {
 				console.log("에러발생");
@@ -165,10 +169,9 @@ let markerImage;
 let geocoder;
 let food;
 let eventMarker;
-let concon;
+let concon =  new google.maps.MarkerImage("https://www.pinclipart.com/picdir/big/447-4478350_png-file-svg-fa-map-marker-png-clipart.png",null, null, null, new google.maps.Size(25, 35));
 let sizex;
 let sizey;
-concon =  new google.maps.MarkerImage("https://www.pinclipart.com/picdir/big/447-4478350_png-file-svg-fa-map-marker-png-clipart.png",null, null, null, new google.maps.Size(25, 35));
 
 
 
@@ -193,7 +196,8 @@ function markerEvent(storeName) {
 
     if (markerArr[i].store_name == storeName) {
       /*가게이름 나오기*/
-       infowindow.setContent(markerArr[i].store_name);
+    	let con = `<a href="storedetail.do?no=`+markerArr[i].store_no+`">`+markerArr[i].store_name+`</a>`
+       infowindow.setContent(con);
         infowindow.open(map, markerArr[i]);
         
         /*애니메이션 주기*/
@@ -292,6 +296,7 @@ function drawMap() {
       store_name: locations[i].storeName,
       store_lati: locations[i].latitude*1,
       store_long: locations[i].longitude*1,
+      store_no: locations[i].storeNo*1,
       icon: concon,
       size: sizex,
       map: map
