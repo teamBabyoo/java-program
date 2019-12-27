@@ -19,11 +19,12 @@
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <script type="text/javascript">
 let arr = new Array();
-function abs(value1, value2, value3) {
+function abs(value1, value2, value3, value4) {
 	let store = {
 		storeName : value3,
 		latitude : value1,
-		longitude : value2
+		longitude : value2,
+		storeNo : value4
 	}
 	arr.push(store);
 }
@@ -112,7 +113,7 @@ function abs(value1, value2, value3) {
 									<input name="longitude" type="hidden" value="${s.longitude}" />
 					       		</li>
 					       		<script>
-					       				abs("${s.latitude}", "${s.longitude}", "${s.storeName}")
+					       				abs("${s.latitude}", "${s.longitude}", "${s.storeName}", "${s.storeNo}")
 					       		</script>
 					    	 </c:forEach>
 					    </ul>
@@ -145,7 +146,7 @@ function abs(value1, value2, value3) {
 		<!-- // 컨텐트  -->
 
 		<!-- 푸터 -->
-		<%-- <c:import url="/WEB-INF/jsp/include/footer.jsp" /> --%>
+<%-- 		<c:import url="/WEB-INF/jsp/include/footer.jsp" /> --%>
 		<!-- // 푸터 -->
 
 		<!-- 팝업 백그라운드  -->
@@ -169,7 +170,7 @@ function abs(value1, value2, value3) {
 	
  	<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 	<script src="<c:url value='/resources/js/storelist.js' />"></script>
-	<script src="<c:url value='/resources/js/map_in_storelist.js' />"></script>
+<%-- 	<script src="<c:url value='/resources/js/map_in_storelist.js' />"></script> --%>
 </body>
 </html>
 

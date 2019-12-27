@@ -164,7 +164,7 @@
 			</div>
 		</div>
 		</div>
-	
+
 <script>
 
 // 시간 변환, 유효성검사
@@ -186,7 +186,7 @@
  }	
  
 	function validate() {
-			let f = document.form;
+			let f = document.sjform;
 
 			let openH = $("select[name='openH']").val();
 			let openM = $("select[name='openM']").val();
@@ -226,6 +226,7 @@
 			if(isEmpty(f.storeOwner, "대표자 이름을 입력해주세요")) return false;
 			if(isEmpty(f.storeOwnerPh, "대표자 휴대폰번호를 입력해주세요")) return false;
 			
+			alert("관리자의 승인 이후 서비스 이용이 가능합니다. 승인을 기다려주세요."); 		
 			return true;
 	
 	

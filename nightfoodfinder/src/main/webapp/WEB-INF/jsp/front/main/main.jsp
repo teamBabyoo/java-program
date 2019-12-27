@@ -18,12 +18,24 @@
     <!-- // 헤더 -->
     <!-- 비주얼 컨텐트 -->
     <div class="v_content">
-    	<div class="dot_bg"></div>
+    	<div class="dot_bg">
+	    	<div class="textbox">
+	    		<p class="title">솔직한 리뷰, 내 주변 맛집!</p>
+	    		<br />
+	    		<h1 class="title">심야식당</h1>
+	    	</div>
+    	</div>
     	<img src="${pageContext.request.contextPath}/resources/images/0776fea76b4a824ff583128cb51dd45c.jpg">
     </div>
     <!-- // 비주얼 컨텐트 -->
     <!-- 컨텐트  -->
 	<div class="content clearboth">
+	
+	<section class="sc sc1">
+	
+	<h2 class="title">실시간 맛집 Rank 5</h2>
+	<div>
+	
 	<c:forEach var="s" items="${sList}" varStatus="status">
 <!-- <h2>${s.storeName }</h2>
 	<h2>사이즈 : ${sList.size()}</h2> -->
@@ -45,6 +57,22 @@
 	                        <th>영업시간</th>
 	                        <td>${s.openTime} ~ ${s.closeTime}</td>
 	                    </tr>
+	                    <c:choose>
+	                    <c:when test="${!empty s.holidayList}">
+	                    <tr>
+	                    	<th rowspan="s.holidayList.size()">휴무일</th>
+	                    	<c:forEach var="sh" items="${s.holidayList}">
+	                    	<td>${sh.weekName}</td>
+	                    	</c:forEach>
+	                    </tr>
+	                    </c:when>	
+	                    <c:otherwise>
+	                    	<tr>
+	                    	<td>연중무휴</td>
+	                    	</tr>
+	                    </c:otherwise>                    
+	                    </c:choose>
+	                    <!-- 
 	                   	<c:if test="${!empty s.holidayList.size()}">
 	                    <tr>
 	                    	<th rowspan="s.holidayList.size()">휴무일</th>
@@ -53,22 +81,23 @@
 	                    	</c:forEach>
 	                    </tr>
                     	</c:if>
+                    	 -->
 	                </table>
 	            </div>
 	            <p><a href="${pageContext.request.contextPath}/front/store/storedetail.do?no=${s.storeNo}">자세히 보기</a></p>
 	        </div>
 	    </div>
 	</c:forEach> 
-
-
+</div>
+	</section>
 	<!-- 하드코딩 -->
-	<section class="module main_popular_restaurant_wrap">
-	  <h2 class="title">EAT딜을 판매중인 식당</h2>
+	<section class="sc sc2 module main_popular_restaurant_wrap">
+	  <h2 class="title">20대 여성의 맛집 리스트 TOP 10</h2>
 	  <div class="slider-container popular_restaurant_container">
 	    <ul class="list-restaurants main_popular_restaurant_list type-main">
 	        <li class="restaurant-item">
 	          <div class="popular_restaurant_inner_wrap">
-	            <a href="/restaurants/qd5xOa1fKTwL" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:2,&quot;section_title&quot;:&quot;EAT딜을 판매중인 식당&quot;,&quot;position&quot;:0,&quot;restaurant_key&quot;:&quot;qd5xOa1fKTwL&quot;})">
+	            <a href="/restaurants/qd5xOa1fKTwL" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:2,&quot;section_title&quot;:&quot; &quot;,&quot;position&quot;:0,&quot;restaurant_key&quot;:&quot;qd5xOa1fKTwL&quot;})">
 	              <figure class="restaurant-item">
 	                <div class="thumb">
 	                    <i class="featured_badge" style="background-image: url('https://mp-seoul-image-production-s3.mangoplate.com/badge_pictures/r-i0n1w_hdfo4vlf.png')"></i>
@@ -90,7 +119,7 @@
 	        </li>
 	        <li class="restaurant-item">
 	          <div class="popular_restaurant_inner_wrap">
-	            <a href="/restaurants/W2QDCNQSg04W" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:2,&quot;section_title&quot;:&quot;EAT딜을 판매중인 식당&quot;,&quot;position&quot;:1,&quot;restaurant_key&quot;:&quot;W2QDCNQSg04W&quot;})">
+	            <a href="/restaurants/W2QDCNQSg04W" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:2,&quot;section_title&quot;:&quot; &quot;,&quot;position&quot;:1,&quot;restaurant_key&quot;:&quot;W2QDCNQSg04W&quot;})">
 	              <figure class="restaurant-item">
 	                <div class="thumb">
 	                    <i class="featured_badge" style="background-image: url('https://mp-seoul-image-production-s3.mangoplate.com/badge_pictures/r-i0n1w_hdfo4vlf.png')"></i>
@@ -112,7 +141,7 @@
 	        </li>
 	        <li class="restaurant-item">
 	          <div class="popular_restaurant_inner_wrap">
-	            <a href="/restaurants/bM06me2vkilL" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:2,&quot;section_title&quot;:&quot;EAT딜을 판매중인 식당&quot;,&quot;position&quot;:2,&quot;restaurant_key&quot;:&quot;bM06me2vkilL&quot;})">
+	            <a href="/restaurants/bM06me2vkilL" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:2,&quot;section_title&quot;:&quot; &quot;,&quot;position&quot;:2,&quot;restaurant_key&quot;:&quot;bM06me2vkilL&quot;})">
 	              <figure class="restaurant-item">
 	                <div class="thumb">
 	                    <i class="featured_badge" style="background-image: url('https://mp-seoul-image-production-s3.mangoplate.com/badge_pictures/r-i0n1w_hdfo4vlf.png')"></i>
@@ -134,7 +163,7 @@
 	        </li>
 	        <li class="restaurant-item">
 	          <div class="popular_restaurant_inner_wrap">
-	            <a href="/restaurants/yhlhPzPw8P" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:2,&quot;section_title&quot;:&quot;EAT딜을 판매중인 식당&quot;,&quot;position&quot;:3,&quot;restaurant_key&quot;:&quot;yhlhPzPw8P&quot;})">
+	            <a href="/restaurants/yhlhPzPw8P" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:2,&quot;section_title&quot;:&quot; &quot;,&quot;position&quot;:3,&quot;restaurant_key&quot;:&quot;yhlhPzPw8P&quot;})">
 	              <figure class="restaurant-item">
 	                <div class="thumb">
 	                    <i class="featured_badge" style="background-image: url('https://mp-seoul-image-production-s3.mangoplate.com/badge_pictures/r-i0n1w_hdfo4vlf.png')"></i>
@@ -156,7 +185,7 @@
 	        </li>
 	        <li class="restaurant-item">
 	          <div class="popular_restaurant_inner_wrap">
-	            <a href="/restaurants/FNkJuxSe93" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:2,&quot;section_title&quot;:&quot;EAT딜을 판매중인 식당&quot;,&quot;position&quot;:4,&quot;restaurant_key&quot;:&quot;FNkJuxSe93&quot;})">
+	            <a href="/restaurants/FNkJuxSe93" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:2,&quot;section_title&quot;:&quot; &quot;,&quot;position&quot;:4,&quot;restaurant_key&quot;:&quot;FNkJuxSe93&quot;})">
 	              <figure class="restaurant-item">
 	                <div class="thumb">
 	                    <i class="featured_badge" style="background-image: url('https://mp-seoul-image-production-s3.mangoplate.com/badge_pictures/r-i0n1w_hdfo4vlf.png')"></i>
@@ -178,7 +207,7 @@
 	        </li>
 	        <li class="restaurant-item">
 	          <div class="popular_restaurant_inner_wrap">
-	            <a href="/restaurants/5rrztiq1lFC6" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:2,&quot;section_title&quot;:&quot;EAT딜을 판매중인 식당&quot;,&quot;position&quot;:5,&quot;restaurant_key&quot;:&quot;5rrztiq1lFC6&quot;})">
+	            <a href="/restaurants/5rrztiq1lFC6" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:2,&quot;section_title&quot;:&quot; &quot;,&quot;position&quot;:5,&quot;restaurant_key&quot;:&quot;5rrztiq1lFC6&quot;})">
 	              <figure class="restaurant-item">
 	                <div class="thumb">
 	                    <i class="featured_badge" style="background-image: url('https://mp-seoul-image-production-s3.mangoplate.com/badge_pictures/r-i0n1w_hdfo4vlf.png')"></i>
@@ -200,7 +229,7 @@
 	        </li>
 	        <li class="restaurant-item">
 	          <div class="popular_restaurant_inner_wrap">
-	            <a href="/restaurants/JzzGPCu8j9AV" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:2,&quot;section_title&quot;:&quot;EAT딜을 판매중인 식당&quot;,&quot;position&quot;:6,&quot;restaurant_key&quot;:&quot;JzzGPCu8j9AV&quot;})">
+	            <a href="/restaurants/JzzGPCu8j9AV" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:2,&quot;section_title&quot;:&quot; &quot;,&quot;position&quot;:6,&quot;restaurant_key&quot;:&quot;JzzGPCu8j9AV&quot;})">
 	              <figure class="restaurant-item">
 	                <div class="thumb">
 	                    <i class="featured_badge" style="background-image: url('https://mp-seoul-image-production-s3.mangoplate.com/badge_pictures/r-i0n1w_hdfo4vlf.png')"></i>
@@ -222,7 +251,7 @@
 	        </li>
 	        <li class="restaurant-item">
 	          <div class="popular_restaurant_inner_wrap">
-	            <a href="/restaurants/klODPVRK3D" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:2,&quot;section_title&quot;:&quot;EAT딜을 판매중인 식당&quot;,&quot;position&quot;:7,&quot;restaurant_key&quot;:&quot;klODPVRK3D&quot;})">
+	            <a href="/restaurants/klODPVRK3D" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:2,&quot;section_title&quot;:&quot; &quot;,&quot;position&quot;:7,&quot;restaurant_key&quot;:&quot;klODPVRK3D&quot;})">
 	              <figure class="restaurant-item">
 	                <div class="thumb">
 	                    <i class="featured_badge" style="background-image: url('https://mp-seoul-image-production-s3.mangoplate.com/badge_pictures/r-i0n1w_hdfo4vlf.png')"></i>
