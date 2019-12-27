@@ -40,7 +40,7 @@ i { font-style: normal; font-weight: normal; font-size: 1.4rem; }
 /* 헤더 컨텐트 푸터 공통 */
 /* header */
 body { width: 100%; }
-header { position: fixed; width: 100%; min-width: 960px; padding: 0 0 0 20px; height: 60px; border-bottom: 1px solid #d4d4d4; background-color: #fff; z-index: 999; }
+header { position: relative; width: 100%; min-width: 960px; padding: 0 0 0 20px; height: 60px; border-bottom: 1px solid #d4d4d4; background-color: #fff; z-index: 999; }
 header > * { float: left;  }
 header > div > * > * { display: inline-block; }
 header .logo { height: 59px; overflow: hidden; }
@@ -74,7 +74,7 @@ header .search.focusIn .optionBox.active .optionTab .on { border-bottom: 2px sol
 header .search.focusIn .optionBox.active .select { border-bottom: 1px solid #d4d4d4; }
 header .search.focusIn .optionBox.active .select div,
 header .search.focusIn .optionBox.active .userselect div { float: left; width: calc(100% / 3); }
-header .search.focusIn .optionBox.active label { padding: 2px 20px; border: 1px solid #DBDBDB; border-radius: 12px; background:#fff; }
+header .search.focusIn .optionBox.active label { padding: 5px 20px; border: 1px solid #DBDBDB; border-radius: 19px; background: #fff; }
 header .search.focusIn .optionBox.active i { padding: 0; font-size: 1rem; color: #8a8a8a; }
 header .search.focusIn .optionBox.active .userselect { float: none;}
 
