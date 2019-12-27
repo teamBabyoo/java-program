@@ -89,7 +89,7 @@ let cnt = 0;
 							addr = context + `/front/store/storedetail.do?no=${notice.fromStoreNo}`;
 							content = `${notice.fromUserName}${notice.noticeContent}`;
 							break;
-						case "4": // store : 내 가게의 단골 리스트 =>>> 단골리스트 주소로 고쳐야한다.
+						case "4": // store : 내 가게의 단골 리스트 
 							addr = context + `/front/store/storedetail.do?no=${notice.storeNo}`;
 							content = `${notice.fromUserName}${notice.noticeContent}`;
 							break;
@@ -98,7 +98,7 @@ let cnt = 0;
 							content = `${notice.noticeContent}`;
 							break;
 						default: // 코드3 store : 가입승인 => 내 상세페이지
-							addr = context + `/front/store/storedetail.do?no={notice.storeNo}`;
+							addr = context + `/front/store/storedetail.do?no=${notice.storeNo}`;
 							content = `${notice.noticeContent}`;
 							break;
 						}
