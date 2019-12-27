@@ -5,6 +5,7 @@
 @import url('http://fonts.googleapis.com/css?family=Roboto');
 @import url('http://fonts.googleapis.com/earlyaccess/notosanskr.css');
 
+.u_login_wrap .content { display: inline-block; margin-top:60px !important; }
 /* reset */
 body {
   font : 14px/1.6em 'Noto Sans KR', sans-serif;
@@ -37,8 +38,8 @@ i { font-style: normal; font-weight: normal; font-size: 1.4rem; }
 /* 헤더 컨텐트 푸터 공통 */
 /* header */
 body { width: 100%; }
-header { position: relative; width: 100%; min-width: 960px; padding: 0 0 0 20px; height: 60px; border-bottom: 1px solid #d4d4d4; background-color: #fff; z-index: 999; }
-.main_wrap header { position: fixed; }
+header { position: fixed; width: 100%; min-width: 960px; padding: 0 0 0 20px; height: 60px; border-bottom: 1px solid #d4d4d4; background-color: #fff; z-index: 999; }
+.list_wrap header { position: relative; }
 header > * { float: left;  }
 header > div > * > * { display: inline-block; }
 header .logo { height: 59px; overflow: hidden; }
