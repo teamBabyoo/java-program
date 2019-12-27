@@ -37,11 +37,11 @@ i { font-style: normal; font-weight: normal; font-size: 1.4rem; }
 /* 헤더 컨텐트 푸터 공통 */
 /* header */
 body { width: 100%; }
-header { position: fixed; width: 100%; min-width: 960px; padding: 0 0 0 20px; height: 60px; border-bottom: 1px solid #d4d4d4; background-color: #fff; z-index: 999; overflow: hidden; }
+header { position: fixed; width: 100%; min-width: 960px; padding: 0 0 0 20px; height: 60px; border-bottom: 1px solid #d4d4d4; background-color: #fff; z-index: 999; }
 header > * { float: left;  }
 header > div > * > * { display: inline-block; }
-header .logo { margin: 10px; }
-header .logo img { margin-top: -55px; margin-left: -20px;}
+header .logo { height: 59px; overflow: hidden; }
+header .logo img { margin-top: -50px; margin-left: -13px;}
 header .search { border-top: none; }
 header .search { border: 1px solid #DBDBDB; line-height: 58px; box-sizing: border-box; }
 header .search input,
