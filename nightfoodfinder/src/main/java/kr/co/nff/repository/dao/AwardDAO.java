@@ -9,5 +9,6 @@ public interface AwardDAO {
 
 	List<Award> listAwardStore();	
 	Store detailAwardStore(int storeNo);
+	Award awardStore(int awardNo);
 	
 }

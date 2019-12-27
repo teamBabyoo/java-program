@@ -60,7 +60,7 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
-<figure class="highcharts-figure">
+<figure class="highcharts-figure clearboth">
 <c:forEach var="i" begin="1" end="3" step="1">
 <c:choose>
 <c:when test="${i == 1}">
@@ -76,34 +76,49 @@
 <c:set value= "${statMap['0'].maleMap}" var="mapName" />
 </c:otherwise>
 </c:choose>
-<form method='post' action='insertAward.do'>
+<form method='post' action='insertAward.do' class="clearboth">
 <input type="hidden" name="genderType" value="${i}" />
 <input type="hidden" name="userAge" value="${search.userAge}" />
 <c:set value="${search.userAge}" var="userAge"/>
 <input type="hidden" name="storeNoList" value="${mapName.storeNoList}" />
+<ul class="btncss">
 <c:if test="${userAge != ''}">
 <c:if test="${userAge ne null}">
-		<button type='submit' class="${className}">award 등록</button>
-		</c:if>
-		</c:if>
+<li id="awardcontainer-${i}" class="${className}">
+<%-- 		<button type='submit' id="awardcontainer-${i}" class="${className}">award 등록</button> --%>
+		<button type='submit'>award 등록</button>
+</li>
+</c:if>
+</c:if>
+<li id="awardcontainers-${i}" class="${className}">
+<%-- <span class="button"><a href="${pageContext.request.contextPath}/front/award/awardlist.do" target="_blank" id="awardcontainers-${i}" class="${className}">award 목록</a></span> --%>
+<span class="button"><a href="${pageContext.request.contextPath}/front/award/awardlist.do" target="_blank">award 목록</a></span>
+</li>		
+</ul>
 </form>
- <span class="button"><a href="${pageContext.request.contextPath}/front/award/awardlist.do" target="_blank" class="${className}">award 목록</a></span>
+   
     <div id="chartcontainer-${i}" class="${className}"></div>	
-							</c:forEach>
+</c:forEach>
 
 </figure>
 
 <script>
 function fnShow(seq){
 	for (let i = 1; i < 4; i++) {
-		
 	let graphs = document.querySelector("#chartcontainer-" + i);
 	graphs.classList.replace("show_graph", "hidden_graph");
+	let grapha = document.querySelector("#awardcontainer-" + i);
+	grapha.classList.replace("show_graph", "hidden_graph");
+	let graphb = document.querySelector("#awardcontainers-" + i);
+	graphb.classList.replace("show_graph", "hidden_graph");
 		
 	}
-	
     let graph = document.querySelector("#chartcontainer-" + seq);
     graph.classList.replace("hidden_graph", "show_graph");
+    let graphc = document.querySelector("#awardcontainer-" + seq);
+    graphc.classList.replace("hidden_graph", "show_graph");
+    let graphd = document.querySelector("#awardcontainers-" + seq);
+    graphd.classList.replace("hidden_graph", "show_graph");
 }
 
 let statMap =  JSON.parse('${statMap}');

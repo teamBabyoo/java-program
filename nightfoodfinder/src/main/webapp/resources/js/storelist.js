@@ -1,6 +1,6 @@
 $(() => {
 	/* 스토어 리스트의 이미지 슬라이더 */
-	var main = $('.bxslider').bxSlider({
+	let main = $('.bxslider').bxSlider({
 		mode: 'fade',
 		controls : true,
 	    captions: true,
@@ -54,13 +54,13 @@ $(() => {
 						
 						console.log("파일 있냐?", s.fileVoList);
 						// 파일 리스트가 없다면
-						if(s.fileVoList) {
+							if(!s.fileVoList) {
 							sHtml += `<img src="https://i.pinimg.com/originals/33/6a/ea/336aea314c68c0bc3eb8f6b5cd799de4.jpg" />`;
 						} 
 						// 있다면
 						else {
 							for (let img of s.fileVoList) {
-								sHtml += `<img src="${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}" />`;
+								sHtml += `<img src="${context}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}" />`;
 							}
 						}
 											
@@ -88,7 +88,7 @@ $(() => {
 					}
 				}
 				
-				$(".ajaxstolist").html(sHtml);
+				$(".ajaxstolist").html(sHtml).trigger("create");
 				
 				// 페이징
 				let html = "";
@@ -118,7 +118,9 @@ $(() => {
 						`;
 				}
 				html += `</ul>`;
-				$("#storePageDiv").html(html);
+				$("#storePageDiv").html(html).trigger("create");
+				
+				
 			},
 			error: () => {
 				console.log("에러발생");

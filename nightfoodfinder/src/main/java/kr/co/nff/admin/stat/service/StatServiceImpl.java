@@ -107,6 +107,7 @@ public class StatServiceImpl implements StatService{
 	
 	@Override
 	public void insertAward(Search search) {
+		System.out.println("젠더타입" + search.getGenderType());
 		switch(search.getGenderType()) {
 		case 1: search.setUserGender("전체");
 		break;
@@ -117,6 +118,7 @@ public class StatServiceImpl implements StatService{
 		}
 		String storeNoList = search.getStoreNoList();
 		search.setStoreNoList(storeNoList.substring(1, storeNoList.length()-1));
+		System.out.println(search.getUserGender());
 		dao.deleteAward(search);
 		dao.insertAward(search);
 	}

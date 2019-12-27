@@ -8,6 +8,8 @@ import kr.co.nff.repository.vo.Store;
 public interface AwardService {
 
 	List<Award> listAwardStore();
+	
+	List<Store> detailAwardStore(String storeNoList);
 
-	List<Store> detailAwardStore(String storeNoList);	
+	Award awardStore(int awardNo);	
 }

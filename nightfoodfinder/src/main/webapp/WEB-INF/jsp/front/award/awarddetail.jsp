@@ -14,10 +14,64 @@
 		<!-- 헤더 -->
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 		<!-- // 헤더 -->
-		<!-- 컨텐트  -->
-		<div class="content container">
-			<h2>자유게시판</h2>
+		<div class="pg-toplist">
+			<!-- 컨텐트  -->
+			<header class="basic-info-list">
+		      <div class="inner">
+		        <p class="status">
+		          <time datetime="${award.regDate}">
+		            ${award.regDate}
+		          </time>
+		        </p>
+		
+		        <h1 class="title">${award.userAge} ${award.userGender}의 맛집 리스트 TOP 10 </h1>
+		      </div>
+		    </header>
+	    </div>
+		<div class="content container contents">
+			 
 			<div>
+			
+				<div class="storelist">
+      				<ul>
+			<!-- store list 부분 -->
+					<c:forEach var="s" items="${awardDetail}" varStatus="status">
+				       	<li id="li_${status.count}" class="storeLn sto_li clearboth" data-store="${s.storeName}">
+				        <a href="${pageContext.request.contextPath}/front/store/storedetail.do?no=${s.storeNo}" ></a> 
+				<div>
+					       		<div>
+					       		<c:choose>
+			<c:when test="${empty s.sysName}">
+				<img src="<c:url value='/resources/images/basicfood.jpg' />" width="250px" height="180px" />
+			</c:when>
+			<c:otherwise>
+					<img class="imgggcls" src="${pageContext.request.contextPath}/front/store/getByteImage.do?name=${s.sysName}&path=${s.path}"/>
+			</c:otherwise>
+		</c:choose>
+							
+							</div>
+							</div> 
+							<!-- 가게 리스트의 내용 부분 -->
+				       		<div class="sto_li_content" >
+								<div>
+									<span>${s.category}</span>
+									<span class="sto_scope">
+										<span class="scope_star">★</span>${s.scope}
+									</span>		
+								</div>
+								<div class="store_name">${s.storeName}</div>
+								<div class="store_info">
+									<div>전화번호 : ${s.storeTell}</div>
+									<div>영업 시간 : ${s.openTime} ~ ${s.closeTime}</div>
+									<div>주소 : ${s.streetLoad} ${s.addrDetail}</div>
+								</div>		
+				       		</div>
+				       	</li>
+				    </c:forEach>
+				    </ul>
+				</div>
+			
+	<%-- 		
 				<div>전체 : ${awardDetail.size()}개</div>
 				<table class="table table-bordered">
 					<thead>
@@ -56,9 +110,13 @@
 					</tr>
 					</c:forEach>
 					</tbody>
-				</table>
+				</table> --%>
 			</div>
 		</div>
+		    
+	    <!-- 푸터 -->
+	    <c:import url="/WEB-INF/jsp/include/footer.jsp" />
+	    <!-- // 푸터 -->
 	</div>
 </body>
 </html>

@@ -206,13 +206,15 @@ function makeReviewList(list){
                     <p>`;
 			
 			if(`${r.mylikecheck}` === '0' ) {
-				html += `<img class="heartclick" data-rno="${r.reviewNo}" data-writer="${r.writerNo}" src="` + context + `/resources/images/empty_hrt.png" />`;
+				//html += `<img class="heartclick" data-rno="${r.reviewNo}" data-writer="${r.writerNo}" src="` + context + `/resources/images/empty_hrt.png" />`;
+				html += `<div class="heart" data-rno="${r.reviewNo}" data-writer="${r.writerNo}" data-class="" ></div>`;
 			} else {
-				html += `<img class="heartclick" data-rno="${r.reviewNo}" src="` + context + `/resources/images/icon_hrt.png" />`;
+				//html += `<img class="heartclick" data-rno="${r.reviewNo}" src="` + context + `/resources/images/icon_hrt.png" />`;
+				html += `<div class="heart" data-rno="${r.reviewNo}" data-writer="${r.writerNo}" data-class="heartActive" ></div>`;
 			}
 
 			html += `</p>
-	                <p>${r.good}</p>
+	                <p class="goodCount">${r.good}</p>
 	                </li>`;
 			console.log(userNo, 111, `${r.writerNo}`);
 			let css = "hidden";
@@ -321,11 +323,13 @@ function makeReviewList(list){
                     </li>
                     <li class="clearboth">`
                         if(`${r.mylikecheck}` === '0' ) {
-							html += `<img class="heartclick" data-rno="${r.reviewNo}" data-writer="${r.writerNo}" src="` + context + `/resources/images/empty_hrt.png" />`;
+							//html += `<img class="heartclick" data-rno="${r.reviewNo}" data-writer="${r.writerNo}" src="` + context + `/resources/images/empty_hrt.png" />`;
+                        	html += `<div class="heart" data-rno="${r.reviewNo}" data-writer="${r.writerNo}" data-class="" ></div>`;
 						} else {
-							html += `<img class="heartclick" data-rno="${r.reviewNo}" src="` + context + `/resources/images/icon_hrt.png" />`;
+							//html += `<img class="heartclick" data-rno="${r.reviewNo}" src="` + context + `/resources/images/icon_hrt.png" />`;
+							html += `<div class="heart" data-rno="${r.reviewNo}" data-writer="${r.writerNo}" data-class="heartActive" ></div>`;
 						}
-			html += `<p>${r.good}</p>
+			html += `<p class="goodCount">${r.good}</p>
                     </li>`;
 //			console.log(userNo, 222, `${r.writerNo}`);
 			let css = "hidden";
@@ -637,7 +641,7 @@ function reviewReport(count, rNo, page) {
 	}
 };
 	
-$(document).on('click', '.heartclick', function(e){	
+$(document).on('click', '.heart', function(e){	
 	 if(userNo === 0){
 		 alert("로그인 후 이용가능합니다");
 		 return false;
@@ -649,7 +653,10 @@ $(document).on('click', '.heartclick', function(e){
 	let page = $(".page-item.active a").attr("data-page");
 	let heart = "/nightfoodfinder/resources/images/icon_hrt.png";
 	//좋아요가 되어있으면 취소
-	if($(e.target).attr('src') === heart){
+	if($(e.target).attr('data-class') === "heartActive"){
+//		$(e.target).attr('data-class', "");
+		let likeObj = $(e.target).attr('data-class', "").parent().find(":last-child");
+		likeObj.text(parseInt(likeObj.text())-1);
 		$.post({
 			url: "i_like_cancel.do",
 			data: {userNo,
@@ -663,17 +670,23 @@ $(document).on('click', '.heartclick', function(e){
 		return false;
 	} //좋아요 누르기 
 	else {
-		$.post({
-			url: "i_like.do",
-			data: {userNo,
-				storeNo,
-				page,
-				writerNo: $(e.target).attr('data-writer'),
-				reviewNo: $(e.target).attr('data-rno')
+		let likeObj = $(e.target).attr('data-class', "heartActive").parent().find(":last-child");
+		likeObj.text(parseInt(likeObj.text())+1);
+		
+		setTimeout(() => {
+			$.post({
+				url: "i_like.do",
+				data: {userNo,
+					storeNo,
+					page,
+					writerNo: $(e.target).attr('data-writer'),
+					reviewNo: $(e.target).attr('data-rno')
 				},
 				dataType: "json",
 				success: (list) => makeReviewList(list)
-		});
+			});
+			
+		}, 1000);
 		return false;
 		
 	};
@@ -964,3 +977,10 @@ function mapDraw(longitude, latitude, storeName){
 }
 mapDraw(longitude, latitude, storeName);
 
+//리뷰 제한
+$("#reviewRegist").click(()=>{
+	if(loginStore != storeNo && userNo == 0){
+		Swal.fire("유저만 이용가능합니다");
+		return false;
+	} 
+});

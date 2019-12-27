@@ -155,7 +155,7 @@ function noticeCounter() {
 
 // 클릭해서 확인한 알림 status 1로 바꿔주기
 function chkclick(no) {
-
+	//alert(no)
 	$.ajax({
 		url: "/nightfoodfinder/front/main/read_notice.do",
 	//	data: "noticeNo=" + no,

@@ -31,7 +31,19 @@
 		<!-- 컨텐트  -->
 		<div class="content list_content">
 			<div class="search_conditions">
-					검색조건을 뿌려주자
+				<span>
+					<c:forEach items="${search.categoryCode}" var="cate">
+						카테고리 ${cate}
+					</c:forEach>
+				</span>
+				<span>
+					<c:forEach items="${search.cities}" var="city">
+						지역 ${city}
+					</c:forEach>
+				</span>
+				<span>가격대</span>
+				<span>${search.keyword}란 단어로 검색</span>
+				<span>열려있는지 유무</span>
 			</div>
 			<div class="leftarea">
 				<div id="map"></div>
