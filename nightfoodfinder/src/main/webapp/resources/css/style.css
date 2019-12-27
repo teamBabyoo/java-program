@@ -1,5 +1,7 @@
 /* https://fontawesome.com/v4.7.0/icons/ */
 
+/* 헤더에 묻히는 컨텐트 */
+.u_login_wrap .content { display: inline-block; margin-top: 60px !important; } 
 /** 지인 **/
 @charset "utf-8";
 @import url('http://fonts.googleapis.com/css?family=Roboto');

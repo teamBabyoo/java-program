@@ -15,7 +15,7 @@
 
 </head>
 <body>
- <div class="wrapper main_wrap">
+ <div class="wrapper main_wrap u_login_wrap">
   	<!-- 헤더 -->
     <c:import url="/WEB-INF/jsp/include/header.jsp" />
     <!-- // 헤더 -->
