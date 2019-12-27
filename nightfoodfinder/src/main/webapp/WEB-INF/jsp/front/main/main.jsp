@@ -18,7 +18,13 @@
     <!-- // 헤더 -->
     <!-- 비주얼 컨텐트 -->
     <div class="v_content">
-    	<div class="dot_bg"></div>
+    	<div class="dot_bg">
+	    	<div class="textbox">
+	    		<p class="title">솔직한 리뷰, 내 주변 맛집!</p>
+	    		<br />
+	    		<h1 class="title">심야식당</h1>
+	    	</div>
+    	</div>
     	<img src="${pageContext.request.contextPath}/resources/images/0776fea76b4a824ff583128cb51dd45c.jpg">
     </div>
     <!-- // 비주얼 컨텐트 -->
