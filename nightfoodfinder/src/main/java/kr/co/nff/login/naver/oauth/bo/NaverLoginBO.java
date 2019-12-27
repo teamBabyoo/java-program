@@ -19,7 +19,7 @@ import kr.co.nff.login.naver.oauth.model.NaverLoginApi;
 public class NaverLoginBO {
 	private final static String CLIENT_ID =  "VudeSYc56HfJGEFd5VnK";
 	private final static String CLIENT_SECRET = "fFcCF6v80v";
-	private final static String REDIRECT_URI = "http://localhost:8000/nightfoodfinder/front/login/ncallback.do";
+	private final static String REDIRECT_URI = "http://192.168.0.9:8000/nightfoodfinder/front/login/ncallback.do";
 	private final static String SESSION_STATE = "oauth_state";
 	
 	/* 네아로 인증  URL 생성  Method */
