@@ -430,8 +430,7 @@ function makeReviewList(list){
 function reposition() {
 	let $height_header = $('header').height();
 	let $height_content = $('.content').height();
-	let $height_wrapper = $('.wrapper').height();
-	let $height_leave_rv = $('.leave_rv').height
+	let $height_wrapper = $('.wrapper').width();
 	$('footer').css('bottom', -($height_wrapper));
 }
 
