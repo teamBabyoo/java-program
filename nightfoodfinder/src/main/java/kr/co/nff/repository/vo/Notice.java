@@ -23,4 +23,6 @@ public class Notice {
 	/*단골 유저들*/
 	private List<Integer> people;
 	
+	private int lastNo;
+	private int countAll;
 }

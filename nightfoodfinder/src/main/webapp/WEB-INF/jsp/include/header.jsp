@@ -64,7 +64,7 @@
     </div>
     <div class="float_r">
       <ul>
-        <li><a href="#">내주변맛집</a></li>
+        <li><a href="#">내주변맛집 </a></li>
         <li><a href="${pageContext.request.contextPath}/front/award/awardlist.do">NFF Awards</a></li>
          <c:if test="${loginUser != null or loginStore != null}">
 	        <li id="notice_btn" data-user="${loginUser}" data-store="${loginStore}">
@@ -75,7 +75,7 @@
 	        	<div class="notice_list_box hidden">
 		        	<div class="topshape"></div>
 				    <!-- 알림 리스트 나올 div -->
-		        	<div class="notice_content">
+		        	<div class="notice_content" id="notice"  style="overflow: auto">
 						<ul></ul>
 		        	</div>
 	        	</div>
@@ -137,6 +137,8 @@
       console.dir(sessionStorage);
   } */
 	let context = '${pageContext.request.contextPath}';
+//	let countAll = countAll;
+//	console.log(countAll);
 </script>
   <script src='${pageContext.request.contextPath}/resources/js/header.js' ></script>
   

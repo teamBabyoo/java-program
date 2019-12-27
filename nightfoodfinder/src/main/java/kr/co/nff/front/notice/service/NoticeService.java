@@ -8,7 +8,7 @@ public interface NoticeService {
 	
 	void insertNotice(Notice notice);
 	List<Notice> selectNotice(Notice notice);
-//	void readNotice(Notice notice);
+//	int countAll(int no);
 	void readNotice(int noticeNo);
 	int countNewNotice(Notice notice);
 	void deleteNotice(int noticeNo);

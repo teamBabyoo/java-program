@@ -2,11 +2,13 @@ package kr.co.nff.front.notice.service;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.nff.repository.dao.NoticeDAO;
 import kr.co.nff.repository.vo.Notice;
+
 
 @Service("kr.co.nff.front.notice.service.NoticeServiceImpl")
 public class NoticeServiceImpl implements NoticeService {
@@ -19,15 +21,12 @@ public class NoticeServiceImpl implements NoticeService {
 		dao.insertNotice(notice);
 	}
 	
-	@Override
+	
 	public List<Notice> selectNotice(Notice notice) {
 		return dao.selectNotice(notice);
+		
 	}
 	
-//	@Override
-//	public void readNotice(Notice notice) {
-//		dao.readNotice(notice);
-//	}
 	@Override
 	public void readNotice(int noticeNo) {
 		dao.readNotice(noticeNo);
@@ -47,4 +46,6 @@ public class NoticeServiceImpl implements NoticeService {
 	public void deleteAllNotice(Notice notice) {
 		dao.deleteAllNotice(notice);
 	}
+
+
 }
