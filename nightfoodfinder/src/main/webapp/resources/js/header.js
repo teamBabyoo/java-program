@@ -40,6 +40,8 @@ $(() => {
 		} */
 		// 리스트 호출
 		
+//		$('#notice').toggle();
+		
 		
 		if (cnt == 0 ) {
 			html = "";
@@ -53,8 +55,9 @@ $(() => {
 /**
  * 알림 리스트 가져오는 함수
  */
- let html = "";
+let html = "";
 let cnt = 0;
+
  function noticeList(no) {
 	 console.log(no);
 	 // 위의 알림버튼으로 다시 가지 않게 stopPropagation() 사용함.
@@ -118,13 +121,15 @@ let cnt = 0;
 						}
 					
 					allDel = `<a href="#" onclick="alldel()" >전체삭제</a>`;
-					// close = `<a href="#" class="close">닫기</a>`;
+//					close = `<a href="#" id="close">닫기</a>`;
 					moreButton = `<a href="#${lno}" onclick="noticeList(${lno})" id="morebtn">더보기</a>`;
 					
-					
+					 
 					$(".notice_content > ul").html(html);	
 					$(".notice_content > ul").append(allDel);
-				//	$(".notice_content > ul").append(close);
+//					$(".notice_content > ul").append(close);
+					
+					
 					
 					console.log(data.countAll);
 					let li_length = $(".notice_content > ul > li").length;
@@ -133,9 +138,9 @@ let cnt = 0;
 						$(".notice_content > ul").append(moreButton);
 					}
 					
-					
-					
+
 				 };
+		
 			},
 			error: (e) => {
 				console.log("error:", e);
@@ -189,4 +194,13 @@ function alldel() {
 		success: noticeList
 	})
 }
+
+/*
+ $('#notice').on("click", "#close", function() {
+	 	
+	 	con.style.display = "none";
+	 })
+
+*/
+ 
 
