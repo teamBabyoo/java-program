@@ -132,7 +132,7 @@
 		<!-- // 컨텐트  -->
 
 		<!-- 푸터 -->
-		<%-- <c:import url="/WEB-INF/jsp/include/footer.jsp" /> --%>
+		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 		<!-- // 푸터 -->
 
 		<!-- 팝업 백그라운드  -->
