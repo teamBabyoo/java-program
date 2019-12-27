@@ -15,21 +15,21 @@
 					    http://www.springframework.org/schema/context
 					    http://www.springframework.org/schema/context/spring-context.xsd">
     
-	<!-- mybatis °´Ã¼ ÁØºñ -->
+	<!-- mybatis ï¿½ï¿½Ã¼ ï¿½Øºï¿½ -->
 	<context:property-placeholder 
 		location="classpath:config/mybatis/db.properties"/>
 
 	<!-- 
-	     DBCP ´Â 1.4¹öÁ¯ ±îÁö À¯Áö ÀÌÈÄ ¹öÀüºÎÅÍ 2·Î
-	     DBCP2 »ç¿ë
+	     DBCP ï¿½ï¿½ 1.4ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 2ï¿½ï¿½
+	     DBCP2 ï¿½ï¿½ï¿½
 		 https://commons.apache.org/proper/commons-dbcp/configuration.html
 	 -->	                     
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
 		destroy-method="close"
       	p:driverClassName="${driver}"
         p:url="${url}"
-        p:username="night" 
-        p:password="1111" />
+        p:username="testuser" 
+        p:password="lovefelix915" />
 	                                                                                           
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
@@ -43,7 +43,7 @@
 		<property name="basePackage" value="kr.co.nff.repository.dao" />
 	</bean> 
 	
-	<!-- Æ®·£Àè¼Ç Ã³¸® -->
+	<!-- Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ -->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />

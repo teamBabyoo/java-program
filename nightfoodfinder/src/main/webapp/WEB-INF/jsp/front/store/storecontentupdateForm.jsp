@@ -168,6 +168,8 @@
 		<div id="footerEle">
 			<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 		</div>
+	    <!-- 팝업 백그라운드  -->
+	    <div class="bgbox"></div>
 	</div>
 	<script>
 	//이메일 중복체크

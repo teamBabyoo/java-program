@@ -26,144 +26,150 @@
   	<!-- 헤더 -->
     <c:import url="/WEB-INF/jsp/include/header.jsp" />
     <!-- // 헤더 -->
-		<div class="content clearboth" >
-		<div class="sjoin_content">
-		<div class="sjoin_title"><i class="fa fa-sign-in" aria-hidden="true" style="color: #ffa500"></i><strong>회원가입</strong></div>
-				<form name="sjform" id="sjform" method="post" action="storejoin.do" onsubmit="return validate();">
-					<table>
-						<tr>
-							<th>가게 이름</th>
-							<td><input type="text" name="storeName" /></td>
-						</tr>
-						<tr>
-							<th>사업자 번호</th>
-							<td><input type="text" name="businessNum" /></td>
-						</tr>
-						<tr>
-							<th>이메일</th>
-							<td><input type="text" id="storeEmail" name="storeEmail" />
-								<div id="emailChk"></div></td>
-						</tr>
+	<div class="content clearboth" >
+	<div class="sjoin_content">
+	<div class="sjoin_title"><i class="fa fa-sign-in" aria-hidden="true" style="color: #ffa500"></i><strong>회원가입</strong></div>
+			<form name="sjform" id="sjform" method="post" action="storejoin.do" onsubmit="return validate();">
+				<table>
+					<tr>
+						<th>가게 이름</th>
+						<td><input type="text" name="storeName" /></td>
+					</tr>
+					<tr>
+						<th>사업자 번호</th>
+						<td><input type="text" name="businessNum" /></td>
+					</tr>
+					<tr>
+						<th>이메일</th>
+						<td><input type="text" id="storeEmail" name="storeEmail" />
+							<div id="emailChk"></div></td>
+					</tr>
 
-						<tr>
-							<th>비밀번호</th>
-							<td><input type="password" id="storePass" name="storePass" />
-								<div id="pwChk"> <span id="alert-success" style="display: none;">비밀번호가 일치합니다.</span></div></td>
-						</tr>
-						<tr>
-							<th>비밀번호 확인</th>
-							<td><input type="password" id="storePass2" name="storePass2" />
-								<div id="pwChk2">
-									 <span id="alert-success" style="display: none;">비밀번호가 일치합니다.</span>
-									 <span id="alert-danger" style="display: none;  ">비밀번호가 일치하지 않습니다.</span>
-								</div></td>
-						</tr>
-						<tr>
-							<th>가게 전화번호</th>
-							<td><input type="text" name="storeTell" /></td>
-						</tr>
-						<tr>
-							<th rowspan="4">주소</th>
-						</tr>
-						<tr>
-							<td><input type="text" id="zipNo" name="zipNo"  /> 
-							<input type="hidden" id="sggNm" name="sggNm" /> 
-							<input type="button" class="loc_btn" onClick="goPopup();" value="주소찾기" /></td>
-						</tr>
-						<tr>
-							<td><input type="text" style="width: 300px;"
-								id="roadFullAddr" name="roadFullAddr"  /></td>
-						</tr>
-						<tr>
-							<td><input type="text" style="width: 300px;" id="addrDetail"
-								name="addrDetail"  /></td>
-						</tr>
+					<tr>
+						<th>비밀번호</th>
+						<td><input type="password" id="storePass" name="storePass" />
+							<div id="pwChk"> <span id="alert-success" style="display: none;">비밀번호가 일치합니다.</span></div></td>
+					</tr>
+					<tr>
+						<th>비밀번호 확인</th>
+						<td><input type="password" id="storePass2" name="storePass2" />
+							<div id="pwChk2">
+								 <span id="alert-success" style="display: none;">비밀번호가 일치합니다.</span>
+								 <span id="alert-danger" style="display: none;  ">비밀번호가 일치하지 않습니다.</span>
+							</div></td>
+					</tr>
+					<tr>
+						<th>가게 전화번호</th>
+						<td><input type="text" name="storeTell" /></td>
+					</tr>
+					<tr>
+						<th rowspan="4">주소</th>
+					</tr>
+					<tr>
+						<td><input type="text" id="zipNo" name="zipNo"  /> 
+						<input type="hidden" id="sggNm" name="sggNm" /> 
+						<input type="button" class="loc_btn" onClick="goPopup();" value="주소찾기" /></td>
+					</tr>
+					<tr>
+						<td><input type="text" style="width: 300px;"
+							id="roadFullAddr" name="roadFullAddr"  /></td>
+					</tr>
+					<tr>
+						<td><input type="text" style="width: 300px;" id="addrDetail"
+							name="addrDetail"  /></td>
+					</tr>
 
-						<tr>
-							<th>영업 시간</th>
-							<td>
-								<select name="openH">
-										<c:forEach begin="0" end="24" var="i">
-											<option id="openH${i}" value="${i}">${i}</option>
-										</c:forEach>
-								</select>시 
-								<select name="openM">
-										<c:forEach begin="0" end="59" var="i">
-											<option id="openM${i}" value="${i}">${i}</option>
-										</c:forEach>
-								</select>분 - 
-								<select name="closeH">
-										<c:forEach begin="0" end="24" var="i">
-											<option id="closeH${i}" value="${i}">${i}</option>
-										</c:forEach>
-								</select>시 
-								<select name="closeM">
-										<c:forEach begin="0" end="59" var="i">
-											<option id="closeM${i}" value="${i}">${i}</option>
-										</c:forEach>
-								</select>분
-							</td>
-						</tr>
-						<tr>
-							<th>휴무일</th>
-							<td><input type="checkbox" name="day" value="1" />월 
-							<input type="checkbox" name="day" value="2" />화 
-							<input type="checkbox" name="day" value="3" />수 
-							<input type="checkbox" name="day" value="4" />목 
-							<input type="checkbox" name="day" value="5" />금 
-							<input type="checkbox" name="day" value="6" />토 
-							<input type="checkbox" name="day" value="7" />일</td>
-						</tr>
-						<tr name="trMenu">
-							<th>대표 메뉴 / 가격</th>
-							<td>
-								<input type="text" name="menuName">
-								<input type="number" name="menuPrice">
-								<i class="fa fa-plus-square-o" aria-hidden="true" id="plus_btn"></i>
-								<i class="fa fa-minus-square-o" aria-hidden="true" id="minus_btn"></i>
-							</td>
-						</tr>
-						<tr>
-							<th>가격대</th>
-							<td>
-								<select name="priceTypeNo">
-									<option value="1">1만원대</option>
-									<option value="2">2만원대</option>
-									<option value="3">3만원대</option>
-									<option value="4">4만원대 이상</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<th>가게 분류</th>
-							<td><select name="storeCategory">
-									<option value="1">한식</option>
-									<option value="2">양식</option>
-									<option value="3">중식</option>
-									<option value="4">세계음식</option>
-									<option value="5">카페</option>
-									<option value="6">주점</option>
-							</select></td>
-						</tr>
-						<tr>
-							<th>대표자 이름</th>
-							<td><input type="text" name="storeOwner" /></td>
-						</tr>
-						<tr>
-							<th>대표자 휴대폰 번호</th>
-							<td><input type="text" name="storeOwnerPh" /></td>
-						</tr>
-					</table>
-					<input type="hidden" name="openTime"/>
-					<input type="hidden" name="closeTime"/>
-					<input type="hidden" id="entX" name="entX"/>
-					<input type="hidden" id="entY" name="entY"/>
-					<input type="hidden" id="roadAddrPart1" name="roadAddrPart1"/>
-					<button type="submit" id="reg_submit" class="reg_submit">가입하기</button>
-				</form>
-			</div>
+					<tr>
+						<th>영업 시간</th>
+						<td>
+							<select name="openH">
+									<c:forEach begin="0" end="24" var="i">
+										<option id="openH${i}" value="${i}">${i}</option>
+									</c:forEach>
+							</select>시 
+							<select name="openM">
+									<c:forEach begin="0" end="59" var="i">
+										<option id="openM${i}" value="${i}">${i}</option>
+									</c:forEach>
+							</select>분 - 
+							<select name="closeH">
+									<c:forEach begin="0" end="24" var="i">
+										<option id="closeH${i}" value="${i}">${i}</option>
+									</c:forEach>
+							</select>시 
+							<select name="closeM">
+									<c:forEach begin="0" end="59" var="i">
+										<option id="closeM${i}" value="${i}">${i}</option>
+									</c:forEach>
+							</select>분
+						</td>
+					</tr>
+					<tr>
+						<th>휴무일</th>
+						<td><input type="checkbox" name="day" value="1" />월 
+						<input type="checkbox" name="day" value="2" />화 
+						<input type="checkbox" name="day" value="3" />수 
+						<input type="checkbox" name="day" value="4" />목 
+						<input type="checkbox" name="day" value="5" />금 
+						<input type="checkbox" name="day" value="6" />토 
+						<input type="checkbox" name="day" value="7" />일</td>
+					</tr>
+					<tr name="trMenu">
+						<th>대표 메뉴 / 가격</th>
+						<td>
+							<input type="text" name="menuName">
+							<input type="number" name="menuPrice">
+							<i class="fa fa-plus-square-o" aria-hidden="true" id="plus_btn"></i>
+							<i class="fa fa-minus-square-o" aria-hidden="true" id="minus_btn"></i>
+						</td>
+					</tr>
+					<tr>
+						<th>가격대</th>
+						<td>
+							<select name="priceTypeNo">
+								<option value="1">1만원대</option>
+								<option value="2">2만원대</option>
+								<option value="3">3만원대</option>
+								<option value="4">4만원대 이상</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<th>가게 분류</th>
+						<td><select name="storeCategory">
+								<option value="1">한식</option>
+								<option value="2">양식</option>
+								<option value="3">중식</option>
+								<option value="4">세계음식</option>
+								<option value="5">카페</option>
+								<option value="6">주점</option>
+						</select></td>
+					</tr>
+					<tr>
+						<th>대표자 이름</th>
+						<td><input type="text" name="storeOwner" /></td>
+					</tr>
+					<tr>
+						<th>대표자 휴대폰 번호</th>
+						<td><input type="text" name="storeOwnerPh" /></td>
+					</tr>
+				</table>
+				<input type="hidden" name="openTime"/>
+				<input type="hidden" name="closeTime"/>
+				<input type="hidden" id="entX" name="entX"/>
+				<input type="hidden" id="entY" name="entY"/>
+				<input type="hidden" id="roadAddrPart1" name="roadAddrPart1"/>
+				<button type="submit" id="reg_submit" class="reg_submit">가입하기</button>
+			</form>
 		</div>
-		</div>
+	</div>
+    <!-- 푸터 -->
+<%--     <c:import url="/WEB-INF/jsp/include/footer.jsp" /> --%>
+    <!-- // 푸터 -->
+    
+    <!-- 팝업 백그라운드  -->
+    <div class="bgbox"></div>
+</div>
 
 <script>
 

@@ -133,76 +133,84 @@ div#freq_box:nth-child(2n+1) {
 </style>
 </head>
 <body>
+<div class="wrapper u_detail_wrap">
 	<!-- 헤더 -->
     <c:import url="/WEB-INF/jsp/include/header.jsp" />
     <!-- // 헤더 -->
     <c:import url="/WEB-INF/jsp/include/float.jsp" />
-<div class="content clearboth">
-
-	<div id="mp_container">
-		<div id="mp_profile">
-			<div id="nickname">
-				<i class="fa fa-user-circle" aria-hidden="true"></i>
-				${user.nickName}
-			</div>
-			<div id="nick_update" onclick="nickUpdate();">
-				<i class="fa fa-cog" aria-hidden="true"></i>
-				수정	
-			</div>
-			
-		</div>
-		<div id="mp_content">
-			<div id="mp_div01">
-				<div id="mp_tab">
-					<div id="mp_tab01" class="on">단골</div>
-					<div id="mp_tab02" ><a href="javascript:show_layer('2');">리뷰</a></div>
+	<div class="content clearboth">
+	
+		<div id="mp_container">
+			<div id="mp_profile">
+				<div id="nickname">
+					<i class="fa fa-user-circle" aria-hidden="true"></i>
+					${user.nickName}
 				</div>
-				<div id="frequent_list" class="clearboth">
-					<c:forEach items="${freqList}" var="f" >
-						<div id="freq_box" onclick="location.href=`${pageContext.request.contextPath}/front/store/storedetail.do?no=${f.storeNo}`">
-							<div id="sImage">
-									<!-- 사진이있을때 -->
-									<c:if test="${f.fileNo != 0}">
-										<img src="${pageContext.request.contextPath}/front/store/getByteImage.do?name=${f.sysName}&path=${f.path}" />
-									</c:if>
-
-									<!--  사진이 없을 때 이미지  -->
-									<c:if test="${f.fileNo == 0}">
-										<img
-											src="https://i.pinimg.com/originals/33/6a/ea/336aea314c68c0bc3eb8f6b5cd799de4.jpg" />
-									</c:if>
+				<div id="nick_update" onclick="nickUpdate();">
+					<i class="fa fa-cog" aria-hidden="true"></i>
+					수정	
+				</div>
+				
+			</div>
+			<div id="mp_content">
+				<div id="mp_div01">
+					<div id="mp_tab">
+						<div id="mp_tab01" class="on">단골</div>
+						<div id="mp_tab02" ><a href="javascript:show_layer('2');">리뷰</a></div>
+					</div>
+					<div id="frequent_list" class="clearboth">
+						<c:forEach items="${freqList}" var="f" >
+							<div id="freq_box" onclick="location.href=`${pageContext.request.contextPath}/front/store/storedetail.do?no=${f.storeNo}`">
+								<div id="sImage">
+										<!-- 사진이있을때 -->
+										<c:if test="${f.fileNo != 0}">
+											<img src="${pageContext.request.contextPath}/front/store/getByteImage.do?name=${f.sysName}&path=${f.path}" />
+										</c:if>
+	
+										<!--  사진이 없을 때 이미지  -->
+										<c:if test="${f.fileNo == 0}">
+											<img
+												src="https://i.pinimg.com/originals/33/6a/ea/336aea314c68c0bc3eb8f6b5cd799de4.jpg" />
+										</c:if>
+								</div>
+								<div id="sProfile">
+									<div class="sScope">${f.scope}</div>
+									<div id="sName">${f.storeName}</div>
+									<div id="sAddress">${f.streetLoad}</div>
+								
+								</div>
 							</div>
-							<div id="sProfile">
-								<div class="sScope">${f.scope}</div>
-								<div id="sName">${f.storeName}</div>
-								<div id="sAddress">${f.streetLoad}</div>
-							
+						</c:forEach>
+						
+					</div>
+				</div>
+				<div id="mp_div02" style="display : none">
+					<div id="mp_tab">
+						<div id="mp_tab01"><a href="javascript:show_layer('1');">단골</a></div>
+						<div id="mp_tab02" class="on">리뷰</div>
+					</div>
+					<div id="myreview_list">
+						<c:forEach items="${reviewList}" var="r">
+							<div id="myreview_box" >
+								<span>
+									<strong class="sScope">${r.storeScope}</strong>
+									<a id="review_sname" href="${pageContext.request.contextPath}/front/store/storedetail.do?no=${r.storeNo}">${r.storeName}</a>
+								</span>
+								<div class="rev_date">${r.regDate}</div>
+								<p>${r.reviewContent}</p>
 							</div>
-						</div>
-					</c:forEach>
-					
-				</div>
-			</div>
-			<div id="mp_div02" style="display : none">
-				<div id="mp_tab">
-					<div id="mp_tab01"><a href="javascript:show_layer('1');">단골</a></div>
-					<div id="mp_tab02" class="on">리뷰</div>
-				</div>
-				<div id="myreview_list">
-					<c:forEach items="${reviewList}" var="r">
-						<div id="myreview_box" >
-							<span>
-								<strong class="sScope">${r.storeScope}</strong>
-								<a id="review_sname" href="${pageContext.request.contextPath}/front/store/storedetail.do?no=${r.storeNo}">${r.storeName}</a>
-							</span>
-							<div class="rev_date">${r.regDate}</div>
-							<p>${r.reviewContent}</p>
-						</div>
-					</c:forEach>
+						</c:forEach>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+    <!-- 푸터 -->
+<%--     <c:import url="/WEB-INF/jsp/include/footer.jsp" /> --%>
+    <!-- // 푸터 -->
+    
+    <!-- 팝업 백그라운드  -->
+    <div class="bgbox"></div>
 </div>
 <script>
 let scp = $('.sScope');

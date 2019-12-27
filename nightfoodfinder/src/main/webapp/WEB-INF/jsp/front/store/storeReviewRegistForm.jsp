@@ -84,8 +84,12 @@
 	      </div>
 	    </div>
 		
-		<!-- 푸터 -->
-<%-- 		<c:import url="/WEB-INF/jsp/include/footer.jsp" /> --%>
+	    <!-- 푸터 -->
+	<%--     <c:import url="/WEB-INF/jsp/include/footer.jsp" /> --%>
+	    <!-- // 푸터 -->
+	    
+	    <!-- 팝업 백그라운드  -->
+	    <div class="bgbox"></div>
 	</div>
 <script>
 /***

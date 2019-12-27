@@ -5,14 +5,17 @@
 <%@ page import="java.io.InputStreamReader" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
-    <title>네이버로그인</title>
+<head>
+<c:import url="/WEB-INF/jsp/include/head.jsp">
+	<c:param name="msg" value="네이버로그인"/>
+</c:import>
     <script type="text/javascript"
   src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js"
   charset="utf-8"></script>
 <!-- <script type="text/javascript"
   src="http://code.jquery.com/jquery-1.11.3.min.js"></script> -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- ↙ include head 동일한 내용 -->  
+<!--   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
 <style type="text/css">
 html, div, body, h3 {
   margin: 0;
@@ -33,8 +36,8 @@ h3 {
     });
   //location.href = "${pageContext.request.contextPath}/";
 </script>
-  </head>
-  <body>
+</head>
+<body>
    <div
     style="background-color: #15a181; width: 100%; height: 50px; text-align: center; color: white;">
     <h3>Naver_Login Success</h3>
@@ -54,5 +57,5 @@ h3 {
     })
   </script>
 
-  </body>
+</body>
 </html>

@@ -15,34 +15,39 @@
 
 </head>
 <body>
- <div class="wrapper main_wrap">
-  	<!-- 헤더 -->
-    <c:import url="/WEB-INF/jsp/include/header.jsp" />
-    <!-- // 헤더 -->
-			<div class="content clearboth" >
-		        <div class="login_container">
-			 		
-				 	<div id="login_div02" >
-			 			
-			 			<div class="mem_cont" id="mem_cont" >
-			 				<p class="txt"></p>
-							<form id="slForm" action="userlogin.do" method="post" onsubmit="return fn_login()">
-								<div id="mem_div">
-									<ul>
-										<li><input type="text" name="userEmail" id="userEmail" placeholder="이메일을 입력해주세요"/></li>
-										<li><input type="password" name="userPass" id="userPass" placeholder="비밀번호를 입력해주세요"/></li>
-									</ul>
-									<button id="login_btn" class="login_btn" >로그인</button>
-								</div>
-							</form>
-								
-							
+<div class="wrapper main_wrap">
+	<!-- 헤더 -->
+	<c:import url="/WEB-INF/jsp/include/header.jsp" />
+	<!-- // 헤더 -->
+	<div class="content clearboth" >
+		<div class="login_container">
+		
+			<div id="login_div02" >
+				
+				<div class="mem_cont" id="mem_cont" >
+					<p class="txt"></p>
+					<form id="slForm" action="userlogin.do" method="post" onsubmit="return fn_login()">
+						<div id="mem_div">
+							<ul>
+								<li><input type="text" name="userEmail" id="userEmail" placeholder="이메일을 입력해주세요"/></li>
+								<li><input type="password" name="userPass" id="userPass" placeholder="비밀번호를 입력해주세요"/></li>
+							</ul>
+							<button id="login_btn" class="login_btn" >로그인</button>
 						</div>
-				 	</div> 	
-			 	
-	      	</div>
-	      	</div>
-	      	</div>
+					</form>
+							
+						
+				</div>
+			</div> 	
+		</div>
+	</div>
+    <!-- 푸터 -->
+<%--     <c:import url="/WEB-INF/jsp/include/footer.jsp" /> --%>
+    <!-- // 푸터 -->
+    
+    <!-- 팝업 백그라운드  -->
+    <div class="bgbox"></div>	
+</div>
      	
 <script>
 

@@ -32,6 +32,12 @@ $(document).ready(function() {
         $('.search').addClass('focusIn');
 //        $('.search.focusIn').css('height', 58);
         $('.optionBox').removeClass('hidden').addClass('active');
+        // 스크롤 막기
+        $('.wrapper').on('scroll touchmove mousewheel', function(e) {
+        	e.preventDefault();
+        	e.stopPropagation();
+        	return false;
+        });
 
         $('.bgbox.active').click((e) => {
             $('.search').removeClass('focusIn');
@@ -39,6 +45,8 @@ $(document).ready(function() {
 //            console.log("포커스 나갔음");
             $('.optionBox').addClass('hidden').removeClass('active');
             $('.bgbox').removeClass('active');
+            // 스크롤 다시 허용
+            $('.wrapper').off('scroll touchmove mousewheel');
         })
     });
 
@@ -65,15 +73,25 @@ $(document).ready(function() {
     $('#person_btn').click((e) => {
         $('.bgbox').addClass('active');
         $('#person_btn .pop_person.hidden').removeClass('hidden');
+        // 스크롤 막기
+        $('.wrapper').on('scroll touchmove mousewheel', function(e) {
+        	e.preventDefault();
+        	e.stopPropagation();
+        	return false;
+        });
+        
         $('.bgbox.active').click((e) => {
             $('.bgbox').removeClass('active');
             $('#person_btn .pop_person').addClass('hidden');
+            // 스크롤 다시 허용
+            $('.wrapper').off('scroll touchmove mousewheel');
         })
     });
     
     $('#notice_btn').click((e) => {
         $('.bgbox').addClass('active');
         $('#notice_btn .notice_list_box.hidden').removeClass('hidden');
+        
         $('.bgbox.active').click((e) => {
             $('.bgbox').removeClass('active');
             $('#notice_btn .notice_list_box').addClass('hidden');
