@@ -35,25 +35,53 @@ function abs(value1, value2, value3, value4) {
 	<div class="wrapper list_wrap">
 		<!-- 헤더 -->
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
+		<c:import url="/WEB-INF/jsp/include/float.jsp" />
 		<!-- // 헤더 -->
 		
 		<c:set var="sList" value="${result.sList}" />
 		<!-- 컨텐트  -->
 		<div class="content list_content">
 			<div class="search_conditions">
-				<span>
-					<c:forEach items="${search.categoryCode}" var="cate">
-						카테고리 ${cate}
-					</c:forEach>
-				</span>
-				<span>
-					<c:forEach items="${search.cities}" var="city">
-						지역 ${city}
-					</c:forEach>
-				</span>
-				<span>가격대</span>
-				<span>${search.keyword}란 단어로 검색</span>
-				<span>열려있는지 유무</span>
+				<c:choose>
+					<c:when test="${search.includeClosed == 1}">
+						<span>영업 종료한 곳 포함</span>
+					</c:when>
+					<c:otherwise>
+						<span>현재 영업 중!</span>
+					</c:otherwise>
+				</c:choose>
+				<c:if test="${not empty search.categoryCode}">
+					<span>
+						<c:forEach items="${search.categoryCode}" var="s">
+							<c:forEach items="${cateList}" var="t" >
+								<c:if test="${s == t.categoryNo}">
+									${t.categoryName}
+								</c:if>
+							</c:forEach> 
+						</c:forEach>
+					</span>
+				</c:if>
+				<c:if test="${not empty search.cities}">
+					<span>
+						<c:forEach items="${search.cities}" var="sc">
+							${sc}
+						</c:forEach>
+					</span>
+				</c:if>
+				<c:if test="${not empty search.priceTypeNo}">
+					<span>
+						<c:forEach items="${search.priceTypeNo}" var="sp">
+						 	<c:forEach items="${priceList}" var="p">
+						 		<c:if test="${sp == p.priceTypeNo}">
+						 			${p.priceType}
+						 		</c:if>
+						 	</c:forEach>
+						</c:forEach>
+					</span>
+				</c:if>
+				<c:if test="${search.keyword != '' }">
+					<span>'${search.keyword}'로 검색</span>
+				</c:if>
 			</div>
 			<div class="leftarea">
 				<div id="map"></div>
