@@ -24,5 +24,5 @@ public class Notice {
 	private List<Integer> people;
 	
 	private int lastNo;
-	private int countAll;
+//	private int countAll;
 }

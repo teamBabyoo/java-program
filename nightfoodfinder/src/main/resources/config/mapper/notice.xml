@@ -70,17 +70,17 @@
 
 	</select>
 
-	<select id="countAll" parameterType="int" resultType="int">
+	<select id="countAll" parameterType="Notice" resultType="int">
 		select count(*)
 			from tb_notice
-		where 
+		<where> 
 			<if test="storeNo != 0">
-	         	n.store_no = #{storeNo}
+	         	store_no = #{storeNo}
 	         </if>
 	         <if test="userNo != 0">
-	         	n.user_no = #{userNo}
+	         	user_no = #{userNo}
          </if>
-     
+     </where>
 	</select>
 
 	

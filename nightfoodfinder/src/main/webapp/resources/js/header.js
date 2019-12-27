@@ -53,8 +53,7 @@ $(() => {
 /**
  * 알림 리스트 가져오는 함수
  */
-
-let html = "";
+ let html = "";
 let cnt = 0;
  function noticeList(no) {
 	 console.log(no);
@@ -67,18 +66,18 @@ let cnt = 0;
 			url: "/nightfoodfinder/front/main/notice_list.do",
 			type: "POST",
 			data: {lastNo : no || 0},
-			success: (list) => {
+			success: (data) => {
 				// attr이용해 속성값 바꾸는 방법으로 바꾸어서 진행해보자ㅠ
 				let moreButton = "";
 
 				// 만약 알림이 없다면
-				if(list.length == 0) {
+				if(data.list.length == 0) {
 					$(".notice_content > ul").html(`<li>알림이 없습니다.</li>`);
 				} else {
 					// row 클릭시 이동할 url
 					let addr = '';
 					
-					for (let notice of list) {
+					for (let notice of data.list) {
 						// 알림 코드에 따라 내용과 이동할 url을 다르게 준다.
 						switch (notice.noticeCode) {
 						case "1": // user : 단골 store 정보 업데이트
@@ -117,17 +116,24 @@ let cnt = 0;
 							`;
 						lno = notice.noticeNo;
 						}
-
 					
-					moreButton += `<a href="#${lno}" onclick="noticeList(${lno})" id="morebtn">더보기</a>
-									<a href="#" onclick="alldel()" >전체 삭제</a>`;
+					allDel = `<a href="#" onclick="alldel()" >전체삭제</a>`;
+					// close = `<a href="#" class="close">닫기</a>`;
+					moreButton = `<a href="#${lno}" onclick="noticeList(${lno})" id="morebtn">더보기</a>`;
 					
 					
 					$(".notice_content > ul").html(html);	
+					$(".notice_content > ul").append(allDel);
+				//	$(".notice_content > ul").append(close);
+					
+					console.log(data.countAll);
+					let li_length = $(".notice_content > ul > li").length;
+					
+					if (data.countAll - li_length != 0) {
+						$(".notice_content > ul").append(moreButton);
+					}
 					
 					
-					
-					$(".notice_content > ul").append(moreButton);
 					
 				 };
 			},
@@ -136,8 +142,10 @@ let cnt = 0;
 			}
 		});
 	}
-
-
+ 
+ 
+ 
+ 
 /**
  * 안 읽은 알림 갯수 가져오기
  */
@@ -181,5 +189,4 @@ function alldel() {
 		success: noticeList
 	})
 }
-
 
