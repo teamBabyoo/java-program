@@ -78,7 +78,8 @@ header .search.focusIn .optionBox.active .userselect { float: none;}
 /* 컨텐트영역 */
 .content { width: 100%; display: inline-block; margin-top: 60px; background: #fff; }
 /* 푸터영역 */
-footer { position: absolute; bottom: 0; width: 100%; line-height: 40px; text-align: center; background: #251e4a; color: yellow; /*border-top: 1px solid #d4d4d4; box-shadow: 0px -2px 5px #e8e8e8;*/ }
+footer { position: absolute; bot
+tom: 0; width: 100%; line-height: 40px; text-align: center; background: #251e4a; color: yellow; /*border-top: 1px solid #d4d4d4; box-shadow: 0px -2px 5px #e8e8e8;*/ }
 /* 팝업 */
 .bgbox.active { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; opacity: .9;}
 
@@ -1082,6 +1083,8 @@ header div:nth-child(3) li span {
 	grid-area: header;
 	border-bottom: 1px solid rgb(235, 235, 235);
 	padding-left: 24px;
+	position: relative;
+	margin-top: 13px;
 }
 
 .leftarea {
@@ -1224,7 +1227,7 @@ header div:nth-child(3) li span {
 
 .search_conditions > span {
 	padding: 7px 21px;
-    border: 2px groove #DBDBDB;
+    border: 1px double #ff9999;
     border-radius: 21px;
     background: #fff;
     margin: 4px;
