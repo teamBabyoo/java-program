@@ -169,7 +169,7 @@ function makeReviewList(list){
 		
 		if(i == 0){
 			
-			html += `<div class="user_rv best_rv">
+			html += `<div class="user_rv">
 				  <div class="tenten">
 			  	<button type="button" class="report" value="${r.reviewNo}">신고하기</button>`
 			  	if (loginStore === storeNo && r.recomment == null){

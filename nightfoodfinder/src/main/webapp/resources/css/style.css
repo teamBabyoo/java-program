@@ -1,7 +1,5 @@
 /* https://fontawesome.com/v4.7.0/icons/ */
 
-/* 헤더에 묻히는 컨텐트 */
-.u_login_wrap .content { display: inline-block; margin-top: 60px !important; } 
 /** 지인 **/
 @charset "utf-8";
 @import url('http://fonts.googleapis.com/css?family=Roboto');
@@ -16,7 +14,6 @@ body {
 * { box-sizing: border-box; margin: 0; padding: 0; }
 ul, dl { list-style: none !important; }
 li { color: #7f7f7f; }
-a#morebtn {margin-left: 20px;}
 a { text-decoration: none; color: #7f7f7f; }
 i { font-style: normal; font-weight: normal; font-size: 1.4rem; }
 
@@ -40,7 +37,7 @@ i { font-style: normal; font-weight: normal; font-size: 1.4rem; }
 /* 헤더 컨텐트 푸터 공통 */
 /* header */
 body { width: 100%; }
-header { position: fixed; width: 100%; min-width: 960px; padding: 0 0 0 20px; height: 60px; border-bottom: 1px solid #d4d4d4; background-color: #fff; z-index: 999; }
+header { position: relative; width: 100%; min-width: 960px; padding: 0 0 0 20px; height: 60px; border-bottom: 1px solid #d4d4d4; background-color: #fff; z-index: 999; }
 header > * { float: left;  }
 header > div > * > * { display: inline-block; }
 header .logo { height: 59px; overflow: hidden; }
@@ -74,16 +71,16 @@ header .search.focusIn .optionBox.active .optionTab .on { border-bottom: 2px sol
 header .search.focusIn .optionBox.active .select { border-bottom: 1px solid #d4d4d4; }
 header .search.focusIn .optionBox.active .select div,
 header .search.focusIn .optionBox.active .userselect div { float: left; width: calc(100% / 3); }
-header .search.focusIn .optionBox.active label { padding: 2px 20px; border: 1px solid #DBDBDB; border-radius: 12px; background:#fff; }
+header .search.focusIn .optionBox.active label { padding: 5px 20px; border: 1px solid #DBDBDB; border-radius: 19px; background: #fff; }
 header .search.focusIn .optionBox.active i { padding: 0; font-size: 1rem; color: #8a8a8a; }
 header .search.focusIn .optionBox.active .userselect { float: none;}
 
 /* 컨텐트영역 */
+section { border-bottom: 1px solid #dbdbdb; }
 .content { width: 100%; display: inline-block; margin-top: 60px; background: #fff; }
 .main_wrap .content { margin-top: 0; }
 /* 푸터영역 */
-footer { position: absolute; bot
-tom: 0; width: 100%; line-height: 40px; text-align: center; background: #251e4a; color: yellow; /*border-top: 1px solid #d4d4d4; box-shadow: 0px -2px 5px #e8e8e8;*/ }
+footer { position: absolute; bottom: 0; width: 100%; line-height: 40px; text-align: center; background: #251e4a; color: yellow; /*border-top: 1px solid #d4d4d4; box-shadow: 0px -2px 5px #e8e8e8;*/ }
 /* 팝업 */
 .bgbox.active { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; opacity: .9;}
 
