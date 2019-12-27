@@ -14,11 +14,20 @@
 	crossorigin="anonymous">
 
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>  -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSQHW_pWBrzI8-rkc4FczxQWzCSciCJS4"
-    type="text/javascript"></script>
+
 
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-
+<script type="text/javascript">
+let arr = new Array();
+function abs(value1, value2, value3) {
+	let store = {
+		storeName : value3,
+		latitude : value1,
+		longitude : value2
+	}
+	arr.push(store);
+}
+</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 </head>
 <body>
@@ -49,7 +58,6 @@
 		      				<c:if test="${empty sList}">
 								<li class="storeLn sto_li clearboth">검색 결과가 없습니다.</li>
 							</c:if>
-						
 					<!-- store list 부분 -->
 							<c:forEach var="s" items="${sList}" varStatus="status">
 								<c:set value="${s.fileVoList}" var="files" />
@@ -88,7 +96,12 @@
 											<div></div>
 										</div>		
 					       			</div>
+									<input name="latitude" type="hidden" value="${s.latitude}" />
+									<input name="longitude" type="hidden" value="${s.longitude}" />
 					       		</li>
+					       		<script>
+					       				abs("${s.latitude}", "${s.longitude}", "${s.storeName}")
+					       		</script>
 					    	 </c:forEach>
 					    </ul>
 					</div>
@@ -140,6 +153,7 @@
 		<input name="keyword" type="hidden" value="${search.keyword}" />
 		<input name="includeClosed" type="hidden" value="${search.includeClosed}" />
 	</form>
+ 
 	
  	<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 	<script src="<c:url value='/resources/js/storelist.js' />"></script>

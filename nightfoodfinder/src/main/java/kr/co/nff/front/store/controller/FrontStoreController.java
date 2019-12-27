@@ -44,6 +44,7 @@ public class FrontStoreController {
 	/* 가게 목록 */
 	@RequestMapping("/storelist.do")
 	public void storeList(Model model, Search search) {
+		System.out.println(service.storeList(search));
 		model.addAttribute("result", service.storeList(search));
 	}
 
