@@ -1243,10 +1243,11 @@ header div:nth-child(3) li span {
 
 .search_conditions > span {
 	padding: 7px 21px;
-    border: 1px double #ff9999;
+    border: 1px double #ffe899f2;
     border-radius: 21px;
     background: #fff;
     margin: 4px;
+    background: #fff9e4f2;
 }
 
 
