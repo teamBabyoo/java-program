@@ -1,6 +1,6 @@
 $(() => {
 	/* 스토어 리스트의 이미지 슬라이더 */
-	let main = $('.bxslider').bxSlider({
+	var main = $('.bxslider').bxSlider({
 		mode: 'fade',
 		controls : true,
 	    captions: true,
@@ -83,8 +83,12 @@ $(() => {
 									<div></div>
 								</div>		
 				       		</div>
+							<input name="latitude" type="hidden" value="${s.latitude}" />
+							<input name="longitude" type="hidden" value="${s.longitude}" />
 				       	</li>
 							`;
+						
+						abs("${s.latitude}", "${s.longitude}", "${s.storeName}");
 					}
 				}
 				
@@ -121,6 +125,15 @@ $(() => {
 				$("#storePageDiv").html(html).trigger("create");
 				
 				
+				var main = $('.bxslider').bxSlider({
+					mode: 'fade',
+					controls : true,
+				    captions: true,
+				    slideWidth: 300,
+				    slideMargin: 0,
+					pager:true	//페이징
+				});
+				
 			},
 			error: () => {
 				console.log("에러발생");
@@ -130,8 +143,11 @@ $(() => {
 					'list-style': 'none',
 					'overflow': 'hidden'
 				});
+				
 			}
 		});
+		
+		
 		
 	});	
 });
