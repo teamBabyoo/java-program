@@ -35,6 +35,9 @@ $(() => {
 			type: "POST",
 			data: $("#searchStoreForm").serialize() + "&page=" + $(e.target).data("page"),
 			success: (data) => {
+				console.log("전", arr.length);
+				arr = [];
+				console.log("후", arr.length);
 				console.dir(data);
 				// 스토어 리스트
 				let sHtml = "";
@@ -54,7 +57,7 @@ $(() => {
 						
 						console.log("파일 있냐?", s.fileVoList);
 						// 파일 리스트가 없다면
-							if(!s.fileVoList) {
+							if(s.fileVoList.length == 0) {
 							sHtml += `<img src="https://i.pinimg.com/originals/33/6a/ea/336aea314c68c0bc3eb8f6b5cd799de4.jpg" />`;
 						} 
 						// 있다면
@@ -88,7 +91,7 @@ $(() => {
 				       	</li>
 							`;
 						
-						abs("${s.latitude}", "${s.longitude}", "${s.storeName}");
+						abs(`${s.latitude}`, `${s.longitude}`, `${s.storeName}`);
 					}
 				}
 				
@@ -134,6 +137,7 @@ $(() => {
 					pager:true	//페이징
 				});
 				
+				drawMap();
 			},
 			error: () => {
 				console.log("에러발생");
@@ -147,7 +151,6 @@ $(() => {
 			}
 		});
 		
-		drawMap();
 		
 	});	
 });
@@ -223,7 +226,7 @@ function drawMap() {
   let y = 0;
   let x = 0;
   let u = 0;
-  
+  console.log("로케 렝스", locations.length);
   for (u = 0; u < locations.length; u++) {
     y += locations[u].latitude*1;
     x += locations[u].longitude*1;
