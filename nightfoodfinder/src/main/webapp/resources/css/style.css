@@ -1173,6 +1173,14 @@ header div:nth-child(3) li span {
 	margin-bottom: 2px;
 }
 
+.frecnt {
+	float: right;
+    padding-right: 9px;
+}
+.frecnt > .fa-bookmark {
+	
+}
+
 /* 이미지 슬라이더 */
 .bx-wrapper {
 	border: none !important;

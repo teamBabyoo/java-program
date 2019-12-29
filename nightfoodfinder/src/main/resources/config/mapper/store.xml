@@ -266,6 +266,11 @@
 			on s.store_no = a.store_no
 		 inner join tb_price_type p
 		    on p.price_type_no = s.price_type_no
+		 inner join (select ifnull(count(*), 0) frequent_cnt,
+	    			   	    store_no
+   					   from tb_frequent_store
+ 					  group by store_no) f
+ 			    on s.store_no = f.store_no 	
 		 where s.status = 1 <!-- 관리자 허용 된 것만 -->
 		 	<if test="includeClosed != 1"> <!--  현재 영업중인 가게만 볼 때 (1 : 영업끝난가게 포함)  -->
          		<![CDATA[
@@ -305,7 +310,8 @@
 			   a.*,
 			   p.price_type,
 			   c.category_name,
-			   ifnull(round(s.store_scope_total / s.review_cnt_total, 1), 0) scope
+			   ifnull(round(s.store_scope_total / s.review_cnt_total, 1), 0) scope,
+			   f.frequent_cnt
 		<include refid="commonStoreList" />
 		<choose>
 			<when test="filter == 'scope'">  <!-- 평점순 -->
