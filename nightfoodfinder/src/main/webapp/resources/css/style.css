@@ -1155,31 +1155,51 @@ header div:nth-child(3) li span {
 .sto_scope {
 	float: right;
 	padding-right: 9px;
+	font-size: 14px;
 }
 
 .scope_star {
 	color: red;
+	margin-right: 2px;
+}
+
+.frecnt {
+    font-size: 15px;
+    margin-left: 6px;
+}
+
+.frecnt > .fa-bookmark {
+	font-size: 14px;
+    width: 14px;
+    color: #ff7000;
 }
 
 .store_name {
 	font-size: 20px;
+	color: black;
 }
 
 .store_info {
 	margin-top: 12px;
+	position: relative;
+}
+
+.viewcnt {
+	position: absolute;
+    right: 14px;
+    bottom: -72px;
+}
+
+.viewcnt > .fa-eye {
+	font-size: 14px;
+	margin-right: 2px;
 }
 
 .sto_li_content>div:nth-child(1) {
 	margin-bottom: 2px;
 }
 
-.frecnt {
-	float: right;
-    padding-right: 9px;
-}
-.frecnt > .fa-bookmark {
-	
-}
+
 
 /* 이미지 슬라이더 */
 .bx-wrapper {

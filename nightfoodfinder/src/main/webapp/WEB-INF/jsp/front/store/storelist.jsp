@@ -128,16 +128,18 @@ function abs(value1, value2, value3, value4) {
 											<span>${s.categoryName}</span>
 											<span class="sto_scope">
 												<span class="scope_star">★</span>${s.scope}(${s.reviewCntTotal})
+												<span class="frecnt"><i class="fas fa-bookmark"></i>${s.frequentCnt}</span>
 											</span>		
 										</div>
 										<div>
 											<span class="store_name">${s.storeName}</span>
-											<span class="views"></span>
 										</div>
 										<div class="store_info">
 											<div>가격대 : ${s.priceType}</div>
 											<div>영업 시간 : ${s.openTime} ~ ${s.closeTime}</div>
-											<div class="frecnt"><i class="fas fa-bookmark"></i>${s.frequentCnt}</div>
+											<div class="viewcnt">
+												<i class="far fa-eye"></i>${s.seeCnt}
+											</div>
 										</div>		
 					       			</div>
 									<input name="latitude" type="hidden" value="${s.latitude}" />
