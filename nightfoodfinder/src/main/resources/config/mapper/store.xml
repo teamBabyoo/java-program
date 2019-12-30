@@ -266,7 +266,7 @@
 			on s.store_no = a.store_no
 		 inner join tb_price_type p
 		    on p.price_type_no = s.price_type_no
-		 inner join (select ifnull(count(*), 0) frequent_cnt,
+		 left outer join (select ifnull(count(*), 0) frequent_cnt,
 	    			   	    store_no
    					   from tb_frequent_store
  					  group by store_no) f
@@ -334,6 +334,61 @@
 	<select id="storeListCnt" resultType="int" parameterType="Search">
 		select count(distinct s.store_name)
 		<include refid="commonStoreList" />
+	</select>
+	
+	<!-- 내 주변 맛집 찾기 기능 -->
+	<select id="surroundingStore" resultMap="storeMap" parameterType="Search">
+		select distinct s.*,
+			   a.*,
+			   p.price_type,
+			   c.category_name,
+			   ifnull(round(s.store_scope_total / s.review_cnt_total, 1), 0) scope,
+			   f.frequent_cnt
+		  from tb_store s
+		 inner join tb_category c
+		    on s.store_category = c.category_no
+	left outer join tb_store_menu m
+		    on s.store_no = m.store_no
+		 inner join tb_address a
+			on s.store_no = a.store_no
+		 inner join tb_price_type p
+		    on p.price_type_no = s.price_type_no
+		 inner join (select ifnull(count(*), 0) frequent_cnt,
+	    			   	    store_no
+   					   from tb_frequent_store
+ 					  group by store_no) f
+ 			    on s.store_no = f.store_no 	
+		 where s.status = 1 <!-- 관리자 허용 된 것과 현재 영업 중인 가게만 -->
+         		<![CDATA[
+         		and str_to_date(s.open_time, '%H:%i') < now()
+            	and str_to_date(s.close_time, '%H:%i') > now()
+         		]]>
+        order by pow(a.latitude - #{latitude}, 2) + pow(a.longitude - #{longitude}, 2)
+        limit #{startList}, #{listSize}
+	</select>
+	
+	<select id="surroundingStoreCnt" resultType="int" parameterType="Search">
+		select count(distinct s.store_name)
+		  from tb_store s
+		 inner join tb_category c
+		    on s.store_category = c.category_no
+	left outer join tb_store_menu m
+		    on s.store_no = m.store_no
+		 inner join tb_address a
+			on s.store_no = a.store_no
+		 inner join tb_price_type p
+		    on p.price_type_no = s.price_type_no
+		 inner join (select ifnull(count(*), 0) frequent_cnt,
+	    			   	    store_no
+   					   from tb_frequent_store
+ 					  group by store_no) f
+ 			    on s.store_no = f.store_no 	
+		 where s.status = 1 <!-- 관리자 허용 된 것과 현재 영업 중인 가게만 -->
+         		<![CDATA[
+         		and str_to_date(s.open_time, '%H:%i') < now()
+            	and str_to_date(s.close_time, '%H:%i') > now()
+         		]]>
+        order by pow(a.latitude - #{latitude}, 2) + pow(a.longitude - #{longitude}, 2)
 	</select>
 
 

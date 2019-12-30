@@ -27,7 +27,6 @@ $(() => {
 //		let fd = new FormData(document.querySelector("#searchStoreForm"));
 		let fd = new FormData();
 		fd.append("page", $(e.target).data("page"));
-		console.dir(fd);
 		console.log($("#searchStoreForm").serialize() + "&page=" + $(e.target).data("page"));
 		
 		$.ajax({
@@ -55,7 +54,6 @@ $(() => {
 					       		<div class="home__slider">
 									<div class="bxslider">`;
 						
-						console.log("파일 있냐?", s.fileVoList);
 						// 파일 리스트가 없다면
 							if(s.fileVoList.length == 0) {
 							sHtml += `<img src="https://i.pinimg.com/originals/33/6a/ea/336aea314c68c0bc3eb8f6b5cd799de4.jpg" />`;
@@ -88,8 +86,7 @@ $(() => {
 				       		</div>
 							<input name="latitude" type="hidden" value="${s.latitude}" />
 							<input name="longitude" type="hidden" value="${s.longitude}" />
-				       	</li>
-							`;
+				       	</li>`;
 						
 						abs(`${s.latitude}`, `${s.longitude}`, `${s.storeName}`, `${s.storeNo}`);
 					}

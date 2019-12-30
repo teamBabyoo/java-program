@@ -55,9 +55,15 @@ public class FrontStoreController {
 		return result;
 	}
 	
+	@RequestMapping("/surroundingStoreAjax.do")
+	@ResponseBody
+	public Map<String, Object> surroundingStoreAjax(Model model, Search search) {
+		Map<String, Object> result = service.surroundingStore(search);
+		return result;
+	}
+	
 	
 	/* 가게 상세 */
-	 
 	@RequestMapping("/storedetail.do")
 	public void storeDetail(Model model, int no, HttpServletRequest req) {
 		HttpSession session = req.getSession();

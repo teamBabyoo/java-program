@@ -39,20 +39,26 @@ public class StoreServiceImpl implements StoreService {
 	@Autowired FileDAO fDao;
 	@Autowired NoticeDAO noticeDAO;
 	
-	// 가게 전체 리스트
+	/* 가게 전체 리스트 */
 	@Override
 	public Map<String, Object> storeList(Search search){
 		Map<String, Object> result = new HashMap<>();
-		// 지워야함
-		System.out.println("llll : " + search.getPage());
-		System.out.println("llll : " + search.getStartList());
-		System.out.println(search.toString());
-		System.out.println("검색결과 몇개? " + dao.storeListCnt(search));
 		result.put("search", search);
 		result.put("sList", dao.storeList(search));
 		result.put("pi", new Pagination(search.getPage(), dao.storeListCnt(search), 10, 5));
 		return result;
 	}
+	
+	/* 내 주변 맛집 기능 */
+	@Override
+	public Map<String, Object> surroundingStore(Search search) {
+		Map<String, Object> result = new HashMap<>();
+		result.put("search", search);
+		result.put("sList", dao.surroundingStoreCnt(search));
+		result.put("pi", new Pagination(search.getPage(), dao.surroundingStoreCnt(search), 10, 5));
+		return result;
+	}
+	
 
 	@Override
 	public Store storeDetail(int no) {
