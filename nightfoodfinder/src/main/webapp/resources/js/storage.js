@@ -4,12 +4,15 @@
 $(document).ready(function(){
 	var out = sessionStorage.getItem('list');
 	var list = JSON.parse(out);
+	console.log('리스트리스트',list);
 	if ( list == null) list = [];
 	var index = storeNo;
 	var name = storeName;
-	var str = index + '|'+ name
-	
+
+	var str = index + '|'+ name ;
+	console.log("str", str);
 	for(let i = 0; i<list.length; i++){
+		console.log(str, list[i]);
 		  if(str == list[i] ){
 		  		list.splice(i,1);
 		 	}
@@ -18,7 +21,9 @@ $(document).ready(function(){
 		sessionStorage.removeItem("list");
 		
 		list.unshift(str);
+		alert('1');
+		
 		sessionStorage.setItem("list", JSON.stringify(list));
 	}
-	console.log(sessionStorage.getItem('list'));
+	console.log("리스트가져와",sessionStorage.getItem('list'));
 })

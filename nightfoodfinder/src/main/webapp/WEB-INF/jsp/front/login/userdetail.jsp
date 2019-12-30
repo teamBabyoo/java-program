@@ -11,7 +11,6 @@
 <meta charset="UTF-8">
 <title>My Page</title>
 <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <style>
 #mp_container {
 	width: 900px;
@@ -128,6 +127,8 @@ div#freq_box:nth-child(2n+1) {
     overflow: hidden;
     letter-spacing: -.50px;
 }
+.sScope, .scope_star {
+	float: left;
 }
     
 </style>
@@ -137,7 +138,7 @@ div#freq_box:nth-child(2n+1) {
 	<!-- 헤더 -->
     <c:import url="/WEB-INF/jsp/include/header.jsp" />
     <!-- // 헤더 -->
-    <c:import url="/WEB-INF/jsp/include/float.jsp" />
+  <%--   <c:import url="/WEB-INF/jsp/include/float.jsp" /> --%>
 	<div class="content clearboth">
 	
 		<div id="mp_container">
@@ -174,7 +175,10 @@ div#freq_box:nth-child(2n+1) {
 										</c:if>
 								</div>
 								<div id="sProfile">
-									<div class="sScope">${f.scope}</div>
+									<div id="scope_box" class="clearboth">
+										<div class="scope_star"><i class="fa fa-star" aria-hidden="true"></i></div>
+										<div class="sScope">${f.scope}</div>
+									</div>
 									<div id="sName">${f.storeName}</div>
 									<div id="sAddress">${f.streetLoad}</div>
 								
