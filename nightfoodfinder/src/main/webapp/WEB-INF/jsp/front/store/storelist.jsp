@@ -18,13 +18,18 @@
 
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <script type="text/javascript">
+let filePath;
+let fileArr = [];
 let arr = new Array();
-function abs(value1, value2, value3, value4) {
+function abs(value1, value2, value3, value4, value5, value6, value7) {
 	let store = {
 		storeName : value3,
 		latitude : value1,
 		longitude : value2,
-		storeNo : value4
+		storeNo : value4,
+		category : value5,
+		scope : value6,
+		files: value7
 	}
 	arr.push(store);
 }
@@ -116,10 +121,24 @@ function abs(value1, value2, value3, value4) {
 												<!--  사진이 있을 때 이미지 슬라이더 -->
 												<c:if test="${not empty files}">
 	 						    					<c:forEach items="${files}" var="img">
-			   											<img src="${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}" />
+			   											<img src="${pageContext.request.contextPath}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}" data-sys="" data-name=""/>
 													</c:forEach>
 												</c:if> 
+												
 											</div>
+												<!--  사진이 있을 때 이미지 슬라이더 -->
+												<c:if test="${not empty files}">
+	 						    					<c:forEach items="${files}" var="img">
+			   										<script type="text/javascript">
+												       		filePath = {
+												       				sysname: `${img.sysName}`,
+																	path: `${img.path}`
+												       		}
+												       		fileArr.push(filePath);
+										       		</script>
+													</c:forEach>
+												</c:if> 
+		
 										</div>
 									</div>
 									<!-- 가게 리스트의 내용 부분 -->
@@ -145,8 +164,13 @@ function abs(value1, value2, value3, value4) {
 									<input name="latitude" type="hidden" value="${s.latitude}" />
 									<input name="longitude" type="hidden" value="${s.longitude}" />
 					       		</li>
+	
 					       		<script>
-					       				abs("${s.latitude}", "${s.longitude}", "${s.storeName}", "${s.storeNo}")
+
+									
+					       			console.log("file", fileArr);
+					       				abs("${s.latitude}", "${s.longitude}", "${s.storeName}", "${s.storeNo}", "${s.categoryName}", "${s.scope}", fileArr);
+					       				fileArr=[];
 					       		</script>
 					    	 </c:forEach>
 					    </ul>

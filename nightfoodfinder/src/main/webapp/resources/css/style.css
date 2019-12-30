@@ -1005,6 +1005,44 @@ a.modbtn.can {
 }
 
 
+/*구글지도 css*/
+.gm-style .gm-style-iw-d > div {
+	   display: grid;
+       grid-template-rows: 1fr 100px;
+       width: 100%;
+    	height: 300px;
+}
+
+.gm-style .gm-style-iw-d > div >div {
+    	height: 70px;
+}
+
+
+
+
+.gm-style .gm-style-iw-c {
+	width: 230px;
+	height: 280px;
+}
+.boxcategoty{
+	color: gray;
+}
+
+.boxstorename {
+	font-size: 20px;
+}
+
+.boxse {
+	display: grid;
+	grid-template-rows: 1fr 1fr;
+}
+
+.boxName{
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+
 /** 진실 끝 **/
 
 /** 유빈 **/
@@ -1209,6 +1247,7 @@ header div:nth-child(3) li span {
 
 .bx-viewport {
 	height: 100% !important;
+	width: 100%
 }
 
 .bx-wrapper, .bx-viewport {
@@ -1556,3 +1595,11 @@ img.center-crop.portrait.lazy {
 	 height: 180px; 
 }
 /** 가람 끝 **/
+.gm-style-iw-d .bx-wrapper {
+	max-width: 100%;
+	height: 200px;
+}
+
+.gm-style-iw-d .bx-wrapper img{
+	height: 200px;
+}
