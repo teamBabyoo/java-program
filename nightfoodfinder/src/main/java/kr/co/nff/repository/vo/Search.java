@@ -40,6 +40,9 @@ public class Search extends Pagination {
 	
 	private String longitude;
 	private String latitude;
+	
+	// 그냥 검색인지, 내주변 맛집 기능인지 구분(1: 검색, 2: 내주변 맛집)
+	private int flag;
 
 	
 	// 리스트 정렬

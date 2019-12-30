@@ -85,7 +85,5 @@ public class Store  {
 		private String path;
 		private String extension;
 	
-		
-		
 }
 	

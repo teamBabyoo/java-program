@@ -42,6 +42,9 @@ function abs(value1, value2, value3, value4) {
 		<!-- 컨텐트  -->
 		<div class="content list_content">
 			<div class="search_conditions">
+				<c:if test="${search.flag == 2 }">
+					<span>내 주변의 맛집</span>
+				</c:if>
 				<c:choose>
 					<c:when test="${search.includeClosed == 1}">
 						<span>영업 종료한 곳 포함</span>
@@ -79,7 +82,7 @@ function abs(value1, value2, value3, value4) {
 						</c:forEach>
 					</span>
 				</c:if>
-				<c:if test="${search.keyword != '' }">
+				<c:if test="${search.keyword.length() != 0}">
 					<span>'${search.keyword}'로 검색</span>
 				</c:if>
 			</div>
@@ -179,7 +182,7 @@ function abs(value1, value2, value3, value4) {
 		<!-- // 컨텐트  -->
 
 		<!-- 푸터 -->
-<%-- 		<c:import url="/WEB-INF/jsp/include/footer.jsp" /> --%>
+		<%-- <c:import url="/WEB-INF/jsp/include/footer.jsp" /> --%>
 		<!-- // 푸터 -->
 
 		<!-- 팝업 백그라운드  -->
@@ -198,6 +201,7 @@ function abs(value1, value2, value3, value4) {
 		</c:forEach>
 		<input name="keyword" type="hidden" value="${search.keyword}" />
 		<input name="includeClosed" type="hidden" value="${search.includeClosed}" />
+		<input name="flag" type="hidden" value="${search.flag}" />
 	</form>
  
 	

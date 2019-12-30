@@ -44,20 +44,21 @@ public class StoreServiceImpl implements StoreService {
 	public Map<String, Object> storeList(Search search){
 		Map<String, Object> result = new HashMap<>();
 		result.put("search", search);
-		result.put("sList", dao.storeList(search));
-		result.put("pi", new Pagination(search.getPage(), dao.storeListCnt(search), 10, 5));
-		return result;
+		
+		if (search.getFlag() == 2) {
+			System.out.println("플래그" + search.getFlag());
+			System.out.println("리스트 길이 : " + dao.surroundingStore(search).size());
+			result.put("sList", dao.surroundingStore(search));
+			result.put("pi", new Pagination(search.getPage(), dao.surroundingStoreCnt(search), 10, 5));
+			return result;
+		} else {
+			System.out.println("플래그" + search.getFlag());
+			result.put("sList", dao.storeList(search));
+			result.put("pi", new Pagination(search.getPage(), dao.storeListCnt(search), 10, 5));
+			return result;
+		}
 	}
 	
-	/* 내 주변 맛집 기능 */
-	@Override
-	public Map<String, Object> surroundingStore(Search search) {
-		Map<String, Object> result = new HashMap<>();
-		result.put("search", search);
-		result.put("sList", dao.surroundingStoreCnt(search));
-		result.put("pi", new Pagination(search.getPage(), dao.surroundingStoreCnt(search), 10, 5));
-		return result;
-	}
 	
 
 	@Override
