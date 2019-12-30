@@ -44,7 +44,6 @@ public class FrontStoreController {
 	/* 가게 목록 */
 	@RequestMapping("/storelist.do")
 	public void storeList(Model model, Search search) {
-		System.out.println(service.storeList(search));
 		model.addAttribute("result", service.storeList(search));
 	}
 
@@ -52,13 +51,6 @@ public class FrontStoreController {
 	@ResponseBody
 	public Map<String, Object> storeListAjax(Search search) {
 		Map<String, Object> result = service.storeList(search);
-		return result;
-	}
-	
-	@RequestMapping("/surroundingStoreAjax.do")
-	@ResponseBody
-	public Map<String, Object> surroundingStoreAjax(Model model, Search search) {
-		Map<String, Object> result = service.surroundingStore(search);
 		return result;
 	}
 	
