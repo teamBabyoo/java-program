@@ -26,7 +26,6 @@ checkFrequent();
 function makeFrequent(list) {
 	// list 가 1이면 등록된 가게
 	// 0이면 등록되지 않은 가게
-// console.log("프리퀀트", list);
 	$(".frequent").off();
    if(list) {
 	   $(".frequent i").attr("class", "fa fa-bookmark").css("color", "red");
@@ -115,20 +114,12 @@ function toPad(val) {
 // #commentplace 안에 넣어주기
 // 리뷰 리스트 뿌려주기
 function makeReviewList(list){
-	/*
-	 * console.dir(list); console.log(list.pagination);
-	 */
 	let html = "";
 	let pagination = list.pagination;
 	let $tbl = $("<div class='user_rv'></div>");
 	var reviewNoArray = [];
-	/*
-	 * list = jQuery.map(list, function(n, i) { console.log(n, 0); }); var str =
-	 * ""; for(key in list) { str += key+"="+list[key]+"\n"; console.log("str",
-	 * str); }
-	 */
+	
 	let reviewList = list.list;
-	// console.log("reviewLsit", reviewList.length);
 	if(reviewList.length == 0){
 		html += `<div class='user_rv'> 작성된 리뷰가 없습니다.</div>`;
 		$tbl.append(html);
@@ -137,14 +128,6 @@ function makeReviewList(list){
 
 	
 	$.each(reviewList, (i, r) => {
-		
-		
-		/*
-		 * reviewNoArray.push(`${r.reviewNo}`);
-		 * 
-		 * console.log(reviewNoArray);
-		 */
-	
 		var date = new Date(r.regDate);
 		var time = date.getFullYear() + "-" 
 		         + (date.getMonth() + 1) + "-" 
@@ -202,26 +185,19 @@ function makeReviewList(list){
                     <p>`;
 			
 			if(`${r.mylikecheck}` === '0' ) {
-				// html += `<img class="heartclick" data-rno="${r.reviewNo}"
-				// data-writer="${r.writerNo}" src="` + context +
-				// `/resources/images/empty_hrt.png" />`;
 				html += `<div class="heart" data-rno="${r.reviewNo}" data-writer="${r.writerNo}" data-class="" ></div>`;
 			} else {
-				// html += `<img class="heartclick" data-rno="${r.reviewNo}"
-				// src="` + context + `/resources/images/icon_hrt.png" />`;
 				html += `<div class="heart" data-rno="${r.reviewNo}" data-writer="${r.writerNo}" data-class="heartActive" ></div>`;
 			}
 
 			html += `</p>
 	                <p class="goodCount">${r.good}</p>
 	                </li>`;
-// console.log(userNo, 111, `${r.writerNo}`);
 			let css = "hidden";
 			if (userNo == `${r.writerNo}`) {
 				css = "";
 			}
 			let chkmyreview = `${r.writerNo}`;
-// console.log(chkmyreview);
 			html += `<li data-chkmyreview=` + chkmyreview + `>
 					    <ul class="ud_control ${css}">
 					        <li>수정 |</li>
@@ -320,26 +296,17 @@ function makeReviewList(list){
                     </li>
                     <li class="clearboth">`
                         if(`${r.mylikecheck}` === '0' ) {
-							// html += `<img class="heartclick"
-							// data-rno="${r.reviewNo}"
-							// data-writer="${r.writerNo}" src="` + context +
-							// `/resources/images/empty_hrt.png" />`;
                         	html += `<div class="heart" data-rno="${r.reviewNo}" data-writer="${r.writerNo}" data-class="" ></div>`;
 						} else {
-							// html += `<img class="heartclick"
-							// data-rno="${r.reviewNo}" src="` + context +
-							// `/resources/images/icon_hrt.png" />`;
 							html += `<div class="heart" data-rno="${r.reviewNo}" data-writer="${r.writerNo}" data-class="heartActive" ></div>`;
 						}
 			html += `<p class="goodCount">${r.good}</p>
                     </li>`;
-// console.log(userNo, 222, `${r.writerNo}`);
 			let css = "hidden";
 			if (userNo == `${r.writerNo}`) {
 				css = "";
 			}
 			let chkme = `${r.writerNo}`;
-// console.log(chkme);
 			html += `<li data-chkmyreview=` + chkme + `>
 					    <ul class="ud_control ${css}">
 					        <li>수정 |</li>
@@ -453,7 +420,6 @@ function registReview() {
 	let reviewContent = $('textarea[name="reviewContent"]').val();
 	let form = $('#reviewForm')[0];
 	let data = new FormData(form);
-// console.log("나", data);
 	$.ajax({
 		type: "POST",
 		enctype: "multipart/form-data",
@@ -464,29 +430,14 @@ function registReview() {
         processData: false,
         contentType: false,
         success: function(data) {
-// alert('성공');
         },
         error: function(e) {
-// console.log("ERROR : ", e);
-// alert("fail");
         }
 	});
 	return false;
 };
 
 
-/*
- * // Get form var form = $('#fileUploadForm')[0];
- *  // Create an FormData object var data = new FormData(form);
- *  // disabled the submit button $("#btnSubmit").prop("disabled", true);
- * 
- * $.ajax({ type: "POST", enctype: 'multipart/form-data', url:
- * "/document/upload", data: data, processData: false, contentType: false,
- * cache: false, timeout: 600000, success: function (data) { alert("complete");
- * $("#btnSubmit").prop("disabled", false); }, error: function (e) {
- * console.log("ERROR : ", e); $("#btnSubmit").prop("disabled", false);
- * alert("fail"); } });
- */
 
 /**
  * 리뷰 별점 전처리
@@ -503,16 +454,13 @@ $('#scopePannel > a').click(function(e) {
 	// storeScope --> n점 (n번째 별)
 	storeScope = parseInt($(e.target).attr('data-rscope'));
 	$('input[name="storeScope"]').val(storeScope); 
-// console.log("현재별점: ", storeScope);
 	// 현재 클릭한 별의 형제 요소의 길이만큼 반복문 돌리며 rscope값이 작을 경우 색상변경(e.target 포함)
 	for (let i = 0; i < $(e.target).siblings().length; i++) {
 		let $sibling = $(e.target).siblings().eq(i);
-// console.log(i, "번째 siblings : ", $sibling.attr('data-rscope'));
 		if (parseInt($sibling.attr('data-rscope')) <= storeScope){
 			if ($sibling.attr('data-rscope') == '1') {
 				$sibling.css('color', 'yellow');
 			}
-// console.log(i, "번째 적용됨 : ", $sibling.attr('data-rscope'));
 			$(e.target).css('color', 'red');
 			$sibling.css('color', 'red');
 		}
@@ -531,7 +479,6 @@ function copyText(text) {
     temp.select();
     document.execCommand('Copy');
     document.body.removeChild(temp);
-// alert('클립보드로 복사되었습니다. ')
 }
 
 
@@ -543,13 +490,11 @@ $(document).on('click', '.report', function(e){
 		   Swal.fire('신고할 수 없습니다')
 		   return false;
 	} else {
-	// 유저번호 들어오는지
-// console.log("유저번호", userNo);
+	//유저번호 들어오는지
 	let page = $(".page-item.active a").attr("data-page");
 
 	// review_no를 받기위해
 	let rNo = e.target;
-// console.log(rNo);
 	$.post({
 		url: "review_report_check.do",
 		data: {userNo, reviewNo: rNo.value},
@@ -563,7 +508,6 @@ $(document).on('click', '.report', function(e){
 });
 
 function reviewReport(count, rNo, page) {
-// console.log("카운트", count, "글번호", rNo);
 	if(count == 0) {
 		// 신고사유 모달창
 		let rpop = $("#rmyModal");
@@ -593,20 +537,11 @@ function reviewReport(count, rNo, page) {
 		</form>
 		`
 		);
-		// 밸류 값 들어오는지 확인용
-		/*
-		 * console.log($("#reviewNo").val());
-		 * console.log($("#reportWhy").val()); console.log($("#storeNo").val());
-		 * console.log($("#userNo").val());
-		 */
 
 		// 모달창 닫기
 		$(".rclose").click(()=>{
 			rpop.css("display", "none");
 		});
-// $('input[name=reportWhy]').change((e) => {
-// console.log(e.target);
-// })
 		// 리뷰신고 등록
 		$("#reportsubmit").submit(() => {
 			let userNo = 3;
@@ -750,7 +685,6 @@ function ChkByte(obj, maxByte) {
 
      if(rbyte > maxByte)
      {
-  // alert("한글 "+(maxByte/2)+"자 / 영문 "+maxByte+"자를 초과 입력할 수 없습니다.");
   alert("메세지는 최대 " + maxByte + "byte를 초과할 수 없습니다.")
   content2 = content.substr(0,rlen);                                  // 문자열
 																		// 자르기
@@ -959,8 +893,7 @@ function mapDraw(longitude, latitude, storeName){
         icon: null,
         map: map
       });
-      infowindow.setContent(locations[i][0]);
-      infowindow.open(map, marker);
+
     }
 	
 }
