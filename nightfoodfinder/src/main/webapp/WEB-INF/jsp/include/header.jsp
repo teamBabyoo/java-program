@@ -10,6 +10,7 @@
     </div>
     <div class="search">
     <form id="sto_search" action="${pageContext.request.contextPath}/front/store/storelist.do" method="post">
+    	<input type="hidden" name="flag" value="1" />
     	<!-- 검색어 입력 부분 -->
 		<input type="text" name="keyword"/>
 		 <!-- 검색 버튼 부분 -->
@@ -65,18 +66,18 @@
     </div>
     <div class="float_r">
       <ul>
-        <li id="mysurrounding">내주변맛집 </li>
+        <li id="mysurrounding"><a href="${pageContext.request.contextPath}/front/store/storelist.do?flag=2&keyword=">내주변맛집</a></li>
         <li><a href="${pageContext.request.contextPath}/front/award/awardlist.do">NFF Awards</a></li>
          <c:if test="${loginUser != null or loginStore != null}">
 	        <li id="notice_btn" data-user="${loginUser}" data-store="${loginStore}">
 	        	<i class="fa fa-bell-o" aria-hidden="true" ></i>
-<!-- 	        	새 알림 갯수 뿌려줄 span  -->
+				<!--새 알림 갯수 뿌려줄 span  -->
 	        	<span class="newnotice"></span>
 	        	<!-- 알림 리스트 나올 div -->
 	        	<div class="notice_list_box hidden">
 		        	<div class="topshape"></div>
 				    <!-- 알림 리스트 나올 div -->
-		        	<div class="notice_content" id="notice"  style="overflow: auto">
+		        	<div class="notice_content" id="notice" style="overflow: auto">
 						<ul></ul>
 		        	</div>
 	        	</div>
@@ -113,7 +114,6 @@
 	        <div>
 	           <c:choose>
 				<c:when test="${loginUser != null}">
-				
 				<ul>
 					<li><a href="${pageContext.request.contextPath}/front/login/userdetail.do?no=${loginUser.userNo}">MY PAGE / </a><a href="${pageContext.request.contextPath}/front/login/logout.do">로그아웃</a></li>
 				</ul>
@@ -165,6 +165,5 @@
   <script type="text/javascript">
 	let context = '${pageContext.request.contextPath}';
 </script>
-  <script src='${pageContext.request.contextPath}/resources/js/header.js' ></script>
-  <script src='${pageContext.request.contextPath}/resources/js/surrounding.js' ></script>
+<script src='${pageContext.request.contextPath}/resources/js/header.js' ></script>
   
