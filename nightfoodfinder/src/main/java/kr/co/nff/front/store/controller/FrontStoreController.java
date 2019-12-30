@@ -234,6 +234,12 @@ public class FrontStoreController {
 		int storeNo = review.getStoreNo();
 		Store store = service.storeDetail(storeNo);
 		
+		Notice notice = new Notice();
+		notice.setNoticeCode("5");
+		notice.setFromUserNo(review.getUserNo());
+		notice.setStoreNo(storeNo);
+		service.insertNotice(notice);
+		
 		Map<String, Object> map = new HashMap<>();
 		map.put("review", review);
 		map.put("storeno", storeNo);
