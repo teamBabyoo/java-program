@@ -30,7 +30,7 @@
 	 			<p class="txt">기존 SNS 계정으로 로그인 하세요</p>
 					<ul>
 						<li>
-							 <a href="${naver_url}" target="_blank">
+							 <a href="${naver_url}" >
 								 <img width="223" 
 								 	src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/>
 							 </a>

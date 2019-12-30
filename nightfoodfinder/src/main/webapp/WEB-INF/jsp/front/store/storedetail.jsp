@@ -17,7 +17,6 @@
 <body>
 	<div class="wrapper detail_wrap">
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
-		    <c:import url="/WEB-INF/jsp/include/float.jsp" />
 			<div class="content clearboth">
 			  <div id="allDetail">
 			  	<c:if test="${store.status == 1}">
@@ -338,6 +337,5 @@ $(".slick").slick(
 		});
 		//]]>
 	</script>
-	<script src="<c:url value='/resources/js/storage.js' />"></script>
 </body>
 </html>

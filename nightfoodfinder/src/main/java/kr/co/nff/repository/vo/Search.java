@@ -35,9 +35,11 @@ public class Search extends Pagination {
 	//award에서 top10 list
 	private String storeNoList;
 	
-	
 	private String userGender;
 	private int genderType;
+	
+	private String longitude;
+	private String latitude;
 
 	
 	// 리스트 정렬

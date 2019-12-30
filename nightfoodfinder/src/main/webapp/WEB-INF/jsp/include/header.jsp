@@ -2,6 +2,7 @@
     pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ <script src="<c:url value='/resources/js/storage.js' />" charset="utf-8"></script>
 
 <header class="clearboth">
     <div class="logo" onclick="location.href='${pageContext.request.contextPath}/front/main/main.do'">
@@ -64,7 +65,7 @@
     </div>
     <div class="float_r">
       <ul>
-        <li><a href="#">내주변맛집 </a></li>
+        <li id="mysurrounding">내주변맛집 </li>
         <li><a href="${pageContext.request.contextPath}/front/award/awardlist.do">NFF Awards</a></li>
          <c:if test="${loginUser != null or loginStore != null}">
 	        <li id="notice_btn" data-user="${loginUser}" data-store="${loginStore}">
@@ -89,10 +90,11 @@
 	        <c:choose>
 	        <c:when test="${loginUser != null}">
 	        <div>
-	        	<div id="history_box"></div>
-	        	<label>
-				<a href="${pageContext.request.contextPath}/front/login/userdetail.do?no=${loginUser.userNo}">MY PAGE</a>
-	        	</label>
+	        	<div id="sidebox">
+					<div class="recent_box">최근 본 맛집</div>
+					<div id="viewlist"></div>
+					<div id="viewnone">최근 본 페이지가 없습니다</div>
+	        	</div>
 	        </div>
 	        </c:when>
 	        <c:when test="${loginStore != null}">
@@ -111,8 +113,9 @@
 	        <div>
 	           <c:choose>
 				<c:when test="${loginUser != null}">
+				
 				<ul>
-					<li><a href="${pageContext.request.contextPath}/front/login/logout.do">로그아웃</a></li>
+					<li><a href="${pageContext.request.contextPath}/front/login/userdetail.do?no=${loginUser.userNo}">MY PAGE / </a><a href="${pageContext.request.contextPath}/front/login/logout.do">로그아웃</a></li>
 				</ul>
 				</c:when>
 				<c:when test="${loginStore != null}">
@@ -132,13 +135,36 @@
       </ul>
     </div>
   </header>
-  <script type="text/javascript">
-	let context = '${pageContext.request.contextPath}';
+  <script>
+	/* var currentPosition = parseInt($("#sidebox").css("top")); 
+	$(window).scroll(function() { 
+		var position = $(window).scrollTop(); 
+ 		$("#sidebox").stop().animate({"top":position+currentPosition+"px"},1000); 
+		}); */
+	
+	var list = sessionStorage.getItem('list');
+	//console.log("최근",list);
+	if(list.length != null) {
+		$("#viewnone").hide();
+			var viewList = [];
+			var array = list.substring(1, list.length-1).split(",");
+			console.log("array", array);
+			for (i in array){
+				var strArray = array[i].substring(1, array[i].length-1).split('|');
+				var tag = '<div class="viewDetail">'
+								+'<a class="vsName" href="${pageContext.request.contextPath}/front/store/storedetail.do?no='+strArray[0]+'">' 
+								+ strArray[1] +'</a></div>';
+				viewList += tag;
+				
+			}
+			$('#viewlist').html(viewList);
 
-
+	}
 </script>
 
-  </script>
-
+  <script type="text/javascript">
+	let context = '${pageContext.request.contextPath}';
+</script>
   <script src='${pageContext.request.contextPath}/resources/js/header.js' ></script>
+  <script src='${pageContext.request.contextPath}/resources/js/surrounding.js' ></script>
   

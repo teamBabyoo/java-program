@@ -18,9 +18,12 @@ import kr.co.nff.repository.vo.Search;
 import kr.co.nff.repository.vo.Store;
 
 public interface StoreService {
-	//전체리스트
-	Map<String, Object> storeList(Search search);
-	//추후 int no 넣어주기
+	// 스토어 전체리스트
+	public Map<String, Object> storeList(Search search);
+	// 내 주변 맛집
+	public Map<String, Object> surroundingStore(Search search);
+	
+	// 스토어 상세보기
 	public Store storeDetail(int storeNo); 	
 	//메뉴 가져오기
 	public List<Menu> storeMenu(int storeNo);

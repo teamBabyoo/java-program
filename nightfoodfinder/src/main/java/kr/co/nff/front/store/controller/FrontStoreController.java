@@ -55,9 +55,15 @@ public class FrontStoreController {
 		return result;
 	}
 	
+	@RequestMapping("/surroundingStoreAjax.do")
+	@ResponseBody
+	public Map<String, Object> surroundingStoreAjax(Model model, Search search) {
+		Map<String, Object> result = service.surroundingStore(search);
+		return result;
+	}
+	
 	
 	/* 가게 상세 */
-	 
 	@RequestMapping("/storedetail.do")
 	public void storeDetail(Model model, int no, HttpServletRequest req) {
 		HttpSession session = req.getSession();
@@ -233,6 +239,12 @@ public class FrontStoreController {
 	public String reviewRegist(Review review) throws Exception, IOException {
 		int storeNo = review.getStoreNo();
 		Store store = service.storeDetail(storeNo);
+		
+		Notice notice = new Notice();
+		notice.setNoticeCode("5");
+		notice.setFromUserNo(review.getUserNo());
+		notice.setStoreNo(storeNo);
+		service.insertNotice(notice);
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("review", review);
