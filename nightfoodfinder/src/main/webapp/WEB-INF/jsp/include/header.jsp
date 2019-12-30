@@ -64,7 +64,7 @@
     </div>
     <div class="float_r">
       <ul>
-        <li><a href="#">내주변맛집 </a></li>
+        <li id="mysurrounding">내주변맛집 </li>
         <li><a href="${pageContext.request.contextPath}/front/award/awardlist.do">NFF Awards</a></li>
          <c:if test="${loginUser != null or loginStore != null}">
 	        <li id="notice_btn" data-user="${loginUser}" data-store="${loginStore}">
@@ -135,10 +135,7 @@
   <script type="text/javascript">
 	let context = '${pageContext.request.contextPath}';
 
-
-</script>
-
   </script>
-
   <script src='${pageContext.request.contextPath}/resources/js/header.js' ></script>
+  <script src='${pageContext.request.contextPath}/resources/js/surrounding.js' ></script>
   

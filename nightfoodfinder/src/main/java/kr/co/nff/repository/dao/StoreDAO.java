@@ -27,6 +27,9 @@ public interface StoreDAO {
     List<Store> storeList(Search search);
     // 스토어 검색 결과의 전체 크기
     int storeListCnt(Search search);
+    // 내 주변 맛집 기능
+    List<Store> surroundingStore(Search search);
+    int surroundingStoreCnt(Search search);
     
     Store selectOneStore(int no);
     Store selectContent(int no);

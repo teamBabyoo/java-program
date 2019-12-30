@@ -1169,9 +1169,9 @@ header div:nth-child(3) li span {
 }
 
 .frecnt > .fa-bookmark {
-	font-size: 14px;
+	font-size: 13px;
     width: 14px;
-    color: #ff7000;
+    color: #8e8e8e;
 }
 
 .store_name {
