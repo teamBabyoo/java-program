@@ -584,6 +584,7 @@
 				r.recomment,
 				r.recomment_reg_date,
 				r.file_group_code,
+				r.status,
 				ifnull(l.likeit, 0) as good,
                 ifnull(li.store_review_no,0) as mylikecheck
 		from tb_review r

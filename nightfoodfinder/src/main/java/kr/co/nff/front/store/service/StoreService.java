@@ -6,6 +6,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -48,6 +49,9 @@ public interface StoreService {
 
 	// 리뷰 등록시 가게테이블 총 리뷰수, 총 별점 업데이트
 	int updateStoreByAddReview(Map<String, Object> map);
+	
+	// 리뷰 이미지 노출
+	public void getReviewImg(HttpServletRequest req, HttpServletResponse res, Review review) throws ServletException, IOException;
 	
 	// 리뷰 이미지 가져오기
 //	public List<FileVO> selectFileList(int reviewNo);
