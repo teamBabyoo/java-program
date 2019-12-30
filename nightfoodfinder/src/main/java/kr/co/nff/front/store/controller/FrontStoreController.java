@@ -67,29 +67,22 @@ public class FrontStoreController {
 	@RequestMapping("/storedetail.do")
 	public void storeDetail(Model model, int no, HttpServletRequest req) {
 		HttpSession session = req.getSession();
-//		System.out.println("로그인한 유저: " + session.getAttribute("loginUser"));
 		model.addAttribute("store", service.storeDetail(no));
 		model.addAttribute("menu", service.storeMenu(no));
 		model.addAttribute("holidaylist", service.storeHoliday(no));
 		model.addAttribute("storeContent", service.storeContent(no));
 		model.addAttribute("user", session.getAttribute("loginUser"));
-//		System.out.println("로그인한가게 :" + session.getAttribute("loginStore"));
 		model.addAttribute("loginStore", session.getAttribute("loginStore"));
 		model.addAttribute("imageListSize", service.getImageCount(no));
 		model.addAttribute("imgList", service.getImage(no));
-//		System.out.println("이미지리스트"+service.getImage());
 			
-		/* 파일 다운로드 하지 않으면서 그냥 경로로 가져오기 */
-//		model.addAttribute("reviewImg", service.selectOneFile(1));
 			
 	}
 	
 	/* 파일 다운로드하지 안흐면서 그냥 경로 가져오는 테스트 */
 	@RequestMapping("/getreviewimgsrc.do")
 	public void getreviewimgsrc(HttpServletRequest req, HttpServletResponse res, Review review) throws ServletException, IOException {
-//		System.out.println("이미지 경로 확인하기 요청 성공");
 		int fileGroupCode = review.getFileGroupCode();
-//		System.out.println(service.selectFileList(fileGroupCode));
 		//-----------------------------------------
 		//사용자가  요청한 파일이 어느날짜 어느 시간에 있는지 모른다.
 		String path = req.getParameter("path"); // 사용자 요청 파일이 저장된 경로 
@@ -136,7 +129,6 @@ public class FrontStoreController {
 	/* 가게 정보 수정*/
 	@RequestMapping("/storeinfoupdate.do")
 	public String storeInfoUpdate(Store store, @RequestParam(value="storeNo") int no) {
-		System.out.println("디테일주소는 ?"+ store.getAddrDetail());
 		service.updateHoliday(store);
 		
 		String [] menuNames = store.getMenuName();
@@ -156,7 +148,6 @@ public class FrontStoreController {
 		
 		Notice notice = new Notice();
 		List<Integer> fList = service.myfrequent(no);
-		System.out.println("나의 단골손님 목록"+ fList);
 		notice.setPeople(fList);
 		notice.setFromStoreNo(store.getStoreNo());
 		notice.setNoticeCode("1");
@@ -189,18 +180,11 @@ public class FrontStoreController {
 	@RequestMapping("/review_list.do")
 	@ResponseBody
 	public Map<String, Object> reviewListAjax(Review review){
-		/*
-		System.out.println("리뷰 내 유저 번호 : " + review.getUserNo());
-		System.out.println("리뷰 스토어 번호 : " + review.getStoreNo());
-		*/
-
 		review.setListCnt(service.getReviewCnt(review.getStoreNo()));
 		Map<String, Object> map= new HashMap<>();
 		review.pageInfo(review.getPage(), review.getRange() , review.getListCnt());
 		map.put("list", service.reviewList(review));
 		map.put("pagination", review);
-		System.out.println("페이지넘버: " +review.getPage());
-		System.out.println("스타트 페이지" + review.getStartPage());
 		
 		return map;
 	}
@@ -259,8 +243,6 @@ public class FrontStoreController {
 				fileFlag = false;
 			};
 		}
-//		System.out.println(fileFlag);
-//		service.reviewRegist(review, fileFlag);
 		int result = service.reviewRegist(review, fileFlag);
 		if (result == 1) {	// 등록 성공하여 영향받은 행의 개수 1이 반환되었다면
 			// map이 준비되면 store테이블을 업데이트한다
@@ -272,8 +254,6 @@ public class FrontStoreController {
 	/* 리뷰 삭제 */
 	@RequestMapping("/review_delete.do")
 	public String reviewDelete(Review review) {
-		System.out.println(review);
-		System.out.println("요청 성공");
 		int storeNo = review.getStoreNo();
 		Store store = service.storeDetail(storeNo);
 		
@@ -284,16 +264,12 @@ public class FrontStoreController {
 		map.put("curtcnt", store.getReviewCntTotal());
 		
 		int result = service.deleteReview(review.getReviewNo());
-		System.out.println("result값 : " + result);
 		
 		if (result == 1) {	// 삭제 성공하여 영향받은 행의 개수 1이 반환되었다면
-			System.out.println("삭제 성공!");
 			// map이 준비되면 store테이블을 업데이트한다
 			int resultUp = service.updateStoreByDelReview(map);
-			System.out.println("가게테이블 업데이트 성공");
 		}
 		
-		System.out.println("삭제 됐으면 1주세용 : " + result + "// 몇번가게드라?" + storeNo);
 		return "redirect:storedetail.do?no=" + storeNo;
 	}
 	
@@ -301,12 +277,6 @@ public class FrontStoreController {
 	@RequestMapping("/i_like.do")
 	@ResponseBody
 	public Map<String, Object> likeInsertAjax(Review review){
-		/*
-		System.out.println("리뷰번호: " + review.getReviewNo());
-		System.out.println("유저번호: " + review.getUserNo());
-		System.out.println("신고사유: " + review.getReportWhy());
-		System.out.println("가게번호: " + review.getStoreNo());
-		 */
 		Notice notice = new Notice();
 		notice.setNoticeCode("2");
 		notice.setFromStoreNo(review.getStoreNo());
@@ -314,7 +284,6 @@ public class FrontStoreController {
 		notice.setUserNo(review.getWriterNo());
 		service.insertNotice(notice);
 		review.setListCnt(service.getReviewCnt(review.getStoreNo()));
-		System.out.println("좋아요페이지" + review.getPage());
 		Map<String, Object> map = new HashMap<>();
 		map.put("list", service.insertLike(review));
 		map.put("pagination", new Pagination(review.getPage(), service.getReviewCnt(review.getStoreNo())));
@@ -325,12 +294,6 @@ public class FrontStoreController {
 	@RequestMapping("/i_like_cancel.do")
 	@ResponseBody
 	public Map<String, Object> deleteLiketAjax(Review review){
-		System.out.println("리뷰번호: " + review.getReviewNo());
-		System.out.println("유저번호: " + review.getUserNo());
-		/*
-		System.out.println("신고사유: " + review.getReportWhy());
-		System.out.println("가게번호: " + review.getStoreNo());
-		 */
 		review.setListCnt(service.getReviewCnt(review.getStoreNo()));
 		Map<String, Object> map = new HashMap<>();
 		map.put("list", service.deleteLike(review));
@@ -343,10 +306,6 @@ public class FrontStoreController {
 	@RequestMapping("/frequent_check.do")
 	@ResponseBody
 	public int frequentCount(Store store){ 
-		/*
-		System.out.println("가게번호 : " + store.getStoreNo());
-		System.out.println("유저번호 : " + store.getUserNo());
-		*/
 		return service.frequentCount(store);
 	};
 	
@@ -365,8 +324,6 @@ public class FrontStoreController {
 	@RequestMapping("/frequent_delete.do")
 	@ResponseBody
 	public int  frequentDelete(Store store){ 
-		System.out.println("삭제가게번호 : " + store.getStoreNo());
-		System.out.println("삭제유저번호 : " + store.getUserNo());
 		return service.frequentDelete(store);
 	};
 	
