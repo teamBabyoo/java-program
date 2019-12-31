@@ -4,13 +4,11 @@
 $(document).ready(function(){
 	var out = sessionStorage.getItem('list');
 	var list = JSON.parse(out);
-	console.log('리스트리스트',list);
 	if ( list == null) list = [];
+	console.log('리스트리스트',list);
 	var index = storeNo;
 	var name = storeName;
-
 	var str = index + '|'+ name ;
-	console.log("str", str);
 	for(let i = 0; i<list.length; i++){
 		console.log(str, list[i]);
 		  if(str == list[i] ){
@@ -21,7 +19,6 @@ $(document).ready(function(){
 		sessionStorage.removeItem("list");
 		
 		list.unshift(str);
-		alert('1');
 		
 		sessionStorage.setItem("list", JSON.stringify(list));
 	}

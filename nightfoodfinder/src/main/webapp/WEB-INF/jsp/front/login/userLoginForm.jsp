@@ -61,7 +61,7 @@
 							<button id="login_btn" class="login_btn" >로그인</button>
 						</div>
 					</form>
-							<p><a id="join_btn" href="storeJoinForm.do">회원가입</a></p>
+							<p><a id="join_btn" href="storeJoinForm.do">회원가입 / 아이디·비밀번호 찾기</a></p>
 					
 				</div>
 		 	</div> 	

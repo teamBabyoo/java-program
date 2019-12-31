@@ -46,14 +46,14 @@ public class StoreServiceImpl implements StoreService {
 		Map<String, Object> result = new HashMap<>();
 		result.put("search", search);
 		
+		// 내 주변 맛집 기능으로 검색시
 		if (search.getFlag() == 2) {
-			System.out.println("플래그" + search.getFlag());
-			System.out.println("리스트 길이 : " + dao.surroundingStore(search).size());
 			result.put("sList", dao.surroundingStore(search));
 			result.put("pi", new Pagination(search.getPage(), dao.surroundingStoreCnt(search), 10, 5));
 			return result;
-		} else {
-			System.out.println("플래그" + search.getFlag());
+		} 
+		// 일반 검색
+		else { 
 			result.put("sList", dao.storeList(search));
 			result.put("pi", new Pagination(search.getPage(), dao.storeListCnt(search), 10, 5));
 			return result;
