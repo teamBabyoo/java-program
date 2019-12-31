@@ -1007,12 +1007,12 @@ a.modbtn.can {
 .detail_wrap .goodCount {
     position: absolute;
     top: 55px;
-    right: 38px;
+    right: 39px;
 }
-.detail_wrap .clearboth {
+ .detail_wrap .user_rv .clearboth {
 	position: relative;
 }
-
+ 
 
 
 /*구글지도 css*/

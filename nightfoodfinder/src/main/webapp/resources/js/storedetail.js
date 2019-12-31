@@ -147,9 +147,11 @@ function makeReviewList(list){
 		} else {
 			scopeCnt = "★★★★★";
 		}
-		if (`${r.status}` != 1) {
 		if(i == 0){
+			if (`${r.status}` == 1) {
+			  html += `<div class="user_rv" status-a="${r.status}">관리자에 의해 차단된리뷰입니다</div>`;
 			
+			} else {
 			html += `<div class="user_rv" status-b="${r.status}">
 				  <div class="tenten">
 			  	<button type="button" class="report" value="${r.reviewNo}">신고하기</button>`
@@ -251,11 +253,15 @@ function makeReviewList(list){
 					</div>	
 	        `;
 			$tbl.append(html);
-				
+			}	
 		}
 		else {
 			
 			html = "";
+			if (`${r.status}` == 1) {
+				html += `<div class="user_rv" status-a="${r.status}">관리자에 의해 차단된리뷰입니다</div>`;
+				
+			} else {	
 			html += `
 			<div class="user_rv" status-c="${r.status}">
 				<div class="tenten">
@@ -347,14 +353,11 @@ function makeReviewList(list){
 
 					</div>
             `;
+			}
 			$tbl.append(html);
 		
 		}
-	} else {
-		console.log(`${r.reviewContent}`);
-		html += `<div class="user_rv" status-a="${r.status}">관리자에 의해 차단된리뷰입니다</div>`;
-		$tbl.append(html);
-	}
+
 	});
 	}
 
