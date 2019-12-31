@@ -290,7 +290,7 @@
 		console.log("storeNo: ", storeNo);
 		if(loginStore === storeNo){
 	        $("#btdiv").append(
-	                `<span id="updatebutton" onclick="location.href='${pageContext.request.contextPath}/front/store/storecontentupdateForm.do?no=${store.storeNo}'">수정하기</span>`
+	                `<button class="report" type="button" onclick="location.href='${pageContext.request.contextPath}/front/store/storecontentupdateForm.do?no=${store.storeNo}'">가게정보수정</button>`
 	                    );
 	    }
 		

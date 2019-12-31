@@ -373,7 +373,9 @@ table.reply_content {
 }
 
 table.reply_content tr td:nth-child(1) {
-	width: 16%;
+	position: relative;
+    width: 16%;
+    left: 15px;
 }
 
 table.reply_content tr td:nth-child(2) {
@@ -407,7 +409,20 @@ table.reply_content tr td:nth-child(3) {
 
 .reply_content tr td:nth-child(3) button {
 	float: left;
-	margin-top: 50px;
+    /* margin-top: 50px; */
+    margin-top: 85%;
+    outline: none;
+    height: 25px;
+    text-align: center;
+    width: 40px;
+    border-radius: 40px;
+    background: #fff;
+    border: 2px solid #c8ddd6;
+    color: #676e6b;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    padding-bottom: 10px;
 }
 
 button.modRecomment {
@@ -420,7 +435,7 @@ button.modRecomment {
 	height: 100px;
 	position: relative;
 	left: 45px;
-	bottom: 10px;
+	top: 10px;
 	width: 85%;
 	resize: vertical;
 }
@@ -439,16 +454,32 @@ textarea.bossContent {
 }
 
 #bossform td:nth-child(2) button {
-	margin-top: 98%;
+	margin-top: 85%;
+    outline: none;
+    height: 25px;
+    text-align: center;
+    width: 40px;
+    border-radius: 40px;
+    background: #fff;
+    border: 2px solid #c8ddd6;
+    color: #676e6b;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    padding-bottom: 10px;
 }
 
 #bossform td:nth-child(1) span#counter {
 	margin-left: 30px;
 	font-size: 13px;
+	position: relative;
+	bottom: 5px;
 }
 
 #bossform td:nth-child(1) span#countertwo {
 	font-size: 13px;
+	position: relative;
+	bottom: 5px;
 }
 /*
 .modform {
@@ -461,7 +492,7 @@ textarea.bossContent {
 }
 */
 textarea.modbossContent {
-	width: 78%;
+	width: 105%;
 	height: 80px;
 	line-height: 150%;
 	resize: none;
@@ -484,6 +515,7 @@ li.mod_one {
 	font-size: 8px;
 	position: relative;
 	top: 10px;
+	left: 17px;
 }
 
 }
@@ -494,10 +526,11 @@ li.mod_two {
 li.mod_three {
 	bottom: 65px;
 	position: relative;
-	left: 397px;
+	left: 570px;
 }
 
 .mod_two span {
+	font-size: 12px;
 	position: relative;
 	left: 20px;
 	bottom: 5px;
@@ -657,7 +690,7 @@ a.modbtn.can {
 
 .detail_wrap #btdiv {
 	text-align: center;
-	margin-top: 15px;
+	margin-top: 45px;
 }
 
 .detail_wrap table {
@@ -697,6 +730,31 @@ a.modbtn.can {
 	margin: 0 auto;
 	margin-top: 30px;
 	margin-bottom: 150px;
+}
+
+.sInfoUpdate_wrap #storeinfoTitle {
+    border-bottom: 2px solid gray;
+    font-size: 25px;
+    padding-bottom: 12px;
+    margin-bottom: 11px;
+} 
+	
+
+.sInfoUpdate_wrap input[type=text], .sInfoUpdate_wrap input[type=number]{
+	height: 30px;
+	float: left;
+	margin-right: 5px;
+	padding: 5px;
+}
+
+.sInfoUpdate_wrap input[type=password] {
+	height: 30px;
+}
+
+.sInfoUpdate_wrap textarea {
+	resize: none;
+	width: 100%;
+	overflow-x: hidden;
 }
 
 .sInfoUpdate_wrap td {
@@ -915,7 +973,15 @@ a.modbtn.can {
     letter-spacing: 2px;
   }
 
-
+.detail_wrap #btdiv>.report {
+    width: 137px;
+    height: 38px;
+    font-size: 19px;
+    padding-bottom: 0px;
+    font-weight: bold;
+    color: black;
+    border-radius: 0;
+}
 
 
 /* 화살표 */
@@ -1057,6 +1123,12 @@ a.modbtn.can {
 .boxName{
 	display: grid;
 	grid-template-rows: 1fr 24px;
+}
+
+
+/*가게수정*/
+.thcolor{
+	background: #b7b7b7;
 }
 
 
@@ -1660,6 +1732,29 @@ a#listone {
     right: 10px;
     transform: translateY(-50%);
 }
+
+.reComment {
+	outline: none;
+    height: 25px;
+    text-align: center;
+    width: 67px;
+    border-radius: 40px;
+    background: #fff;
+    border: 2px solid #c8ddd6;
+    color: #676e6b;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    padding-bottom: 10px;
+}
+.reComment:hover {
+    color:white;
+    background: #1ECD97;
+  }
+.reComment:active {
+    letter-spacing: 2px;
+    letter-spacing: 2px;
+  }
 
 
 /**승경 끝**/
