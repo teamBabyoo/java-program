@@ -2,20 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.nff.repository.dao.ReviewDAO">
-<!-- 콜렉션 안써도 되어서..
-<resultMap type="Review" id="reviewMap">
-	<result column="nick_name" property="nickName" />
-	<result column="store_name" property="storeName" />
-	<result column="review_content" property="reviewContent" />
-	<result column="reg_date" property="regDate" />
-	<result column="recomment" property="recomment" />
-	<result column="review_no" property="reviewNo" />
-	<result column="store_no" property="storeNo" />
-	<result column="writer_no" property="writerNo" />
-	<result column="report_count" property="reportCount" />
-	<collection column="review_no" property="reportList" select="selectReportDetail" />
-</resultMap>
--->
 
 	<!-- 어드민  -->
 	<!-- 전체리뷰 리스트, 좋아요 횟수 불러오기 -->
@@ -86,7 +72,6 @@
 	<!-- 어드민 신고 리뷰 리스트  -->
 	
 	<!-- 신고당한 리뷰의 사람(리뷰 쓴 사람), 하나의 리뷰가 신고당한 횟수, 신고당한 리뷰의 가게, 신고당한 리뷰, 신고 당한 리뷰 작성날짜, 신고당한 리뷰 내용, 차단 상태 -->
-<!--  	<select id="selectReportReview" parameterType="Search" resultMap="reviewMap"> -->
  	<select id="selectReportReview" parameterType="Search" resultType="Review"> 
 		<!-- 같은 신고당한 리뷰 중에서도 최신으로 -->
  		select report_no, review_no, user_no, store_name,
@@ -228,14 +213,5 @@
 	
 	
 
-	
-	
-	
-	
-	
-	
-
-		
-		
 		
 </mapper>

@@ -376,7 +376,7 @@ public class FrontStoreController {
 		map.put("list", service.reviewList(review));
 		map.put("pagination", new Pagination(review.getPage(), service.getReviewCnt(review.getStoreNo())));
 		return map;
-//		return service.reviewList(review);
+
 	}
 		
 	@RequestMapping("/recomment_delete.do")
@@ -388,7 +388,7 @@ public class FrontStoreController {
 		map.put("list", service.reviewList(review));
 		map.put("pagination", new Pagination(review.getPage(), service.getReviewCnt(review.getStoreNo())));
 		return map;
-//		return service.reviewList(review);
+
 	}
 	
 	/*이미지 가져오기*/

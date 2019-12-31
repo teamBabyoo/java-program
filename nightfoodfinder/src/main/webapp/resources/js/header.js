@@ -106,27 +106,31 @@ let cnt = 0;
 						}
 						
 						if (notice.status == 0) {
-							html += `<li style="background-color:lightgray">`
+							html += `<li style="background-color:lightgray" class="liclass">`
 						}
 						else {
-							html += `<li >`
+							html += `<li class="liclass">`
 						}
 						html += 
 							`
-							<a href="${addr}" onclick="location.href='${addr}'; chkclick(${notice.noticeNo})">${content}</a>
+							<a href="${addr}" onclick="location.href='${addr}'; chkclick(${notice.noticeNo})" class="listone" id="listone">
+							${content}
+							</a>
 							<span class="del" onclick="del(${notice.noticeNo})">&times;</span>
 							</li>
-							`;
+							`	
+							;
 						lno = notice.noticeNo;
 						}
-					
-					allDel = `<a href="#" onclick="alldel()" >전체삭제</a>`;
-//					close = `<a href="#" id="close">닫기</a>`;
+	
 					moreButton = `<a href="#${lno}" onclick="noticeList(${lno})" id="morebtn">더보기</a>`;
+					allDel = `<a href="#" onclick="alldel()" id="alldel">전체삭제</a>`;
+//					close = `<a href="#" id="close">닫기</a>`;
+
 					
 					 
 					$(".notice_content > ul").html(html);	
-					$(".notice_content > ul").append(allDel);
+					
 //					$(".notice_content > ul").append(close);
 					
 					
@@ -138,7 +142,7 @@ let cnt = 0;
 						$(".notice_content > ul").append(moreButton);
 					}
 					
-
+					$(".notice_content > ul").append(allDel);
 				 };
 		
 			},
