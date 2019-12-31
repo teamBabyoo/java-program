@@ -143,8 +143,9 @@
 		}); */
 	
 	var list = sessionStorage.getItem('list');
-	//console.log("최근",list);
-	if(list.length != null) {
+	console.log("최근",list);
+	if(list) {
+		console.log(list);
 		$("#viewnone").hide();
 			var viewList = [];
 			var array = list.substring(1, list.length-1).split(",");
@@ -155,11 +156,13 @@
 								+'<a class="vsName" href="${pageContext.request.contextPath}/front/store/storedetail.do?no='+strArray[0]+'">' 
 								+ strArray[1] +'</a></div>';
 				viewList += tag;
-				
 			}
 			$('#viewlist').html(viewList);
 
-	}
+	} else if(!list){
+		console.log('리스트없음');
+		$('#viewlist').hide();
+	} 
 </script>
 
   <script type="text/javascript">

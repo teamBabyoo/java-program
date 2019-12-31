@@ -40,7 +40,6 @@ function abs(value1, value2, value3, value4, value5, value6, value7) {
 	<div class="wrapper list_wrap">
 		<!-- 헤더 -->
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
-		<c:import url="/WEB-INF/jsp/include/float.jsp" />
 		<!-- // 헤더 -->
 		
 		<c:set var="sList" value="${result.sList}" />
