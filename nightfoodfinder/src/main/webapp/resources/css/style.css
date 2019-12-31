@@ -108,7 +108,7 @@ footer { position: absolute; bottom: 0; width: 100%; line-height: 40px; text-ali
 
 /* 메인 */
 .main_wrap .content .sc { width: 100%; }
-.main_wrap .content .sc .inner { margin: 0 auto; width: 1700px; }
+.main_wrap .content .sc .inner { margin: 0 auto; width: 1280px; }
 .main_wrap .content .sc1 .inner { width: 100%; }
 .main_wrap .content .sc1 { border-bottom: none; }
 
@@ -187,7 +187,7 @@ footer { position: absolute; bottom: 0; width: 100%; line-height: 40px; text-ali
     margin-right: 90px;
 }
 .main_wrap .popular_restaurant_inner_wrap > a { display: inline-block; }
-.main_wrap .popular_restaurant_inner_wrap > a .thumb { width: 360px; height: 360px; }
+.main_wrap .popular_restaurant_inner_wrap > a .thumb { width: 300px; height: 300px; }
 .main_wrap .list-restaurants>li {
     width: 50%;
     float: left;
@@ -219,7 +219,7 @@ footer { position: absolute; bottom: 0; width: 100%; line-height: 40px; text-ali
 .main_wrap .content .store:hover .desc { display: block; } */
 
 /* 상세 */
-.detail_wrap #stTitle > ul { padding: 10px 45px; border-top: 1px solid #d4d4d4;width: 80%; margin: 0 auto; margin-top: 30px; }
+.detail_wrap #stTitle > ul { padding: 10px 45px; border-top: 1px solid #d4d4d4; width: 50%; margin: 0 auto; margin-top: 30px; }
 .detail_wrap #stTitle > ul > li { float: left; padding: 0 20px; padding-top: 10px; border-right: 1px solid #d4d4d4; }
 .detail_wrap #stTitle > ul > li * { display: block; color: #77747d; }
 .detail_wrap #stTitle > ul > li:last-child { border-right: none; }
