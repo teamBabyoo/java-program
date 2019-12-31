@@ -548,6 +548,7 @@ a.modbtn.can {
 
 .detail_wrap #detaillistjs {
 	z-index: 1;
+	background: #fafafa;
 }
 
 .detail_wrap #storedetail {
@@ -559,8 +560,8 @@ a.modbtn.can {
 }
 
 .detail_wrap #storeinfo {
-	width: 640px;
-	border: 2px solid #c1c1c1;
+	width: 860px;
+	border: 2px solid #f3f3f3;
 	padding: 30px 20px;
 	margin: 0 auto;
 	background: white;
@@ -571,7 +572,7 @@ a.modbtn.can {
 	display: grid;
 	grid-template-rows: 50px 1fr 1fr;
 	align-items: center;
-	width: 80%;
+	width: 90%;
 	margin: 0 auto;
 }
 
@@ -580,11 +581,12 @@ a.modbtn.can {
 }
 
 .detail_wrap #star {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	width: 100px;
 	text-align: right;
 	margin-left: 353px;
+	float: right;
+}
+.detail_wrap #star div{
+	display: inline-block;	
 }
 
 .detail_wrap #stTitle {
@@ -595,10 +597,20 @@ a.modbtn.can {
 	margin: 0 auto;
 }
 
+.detail_wrap #star>span {
+	position: relative;
+}
+
+.detail_wrap #star>span>img {
+    position: absolute;
+    right: 0px;
+    top: -24px;
+}
+
 .detail_wrap #scopescore {
 	margin-top: 17px;
 	margin-right: 10px;
-	font-size: 22px;
+	font-size: 33px;
 }
 
 .detail_wrap #stinfo img {
@@ -612,7 +624,7 @@ a.modbtn.can {
 .detail_wrap .menulist {
 	border: 2px solid #c1c1c1;
 	border-radius: 8px;
-	width: 350px;
+	width: 450px;
 	margin: 0 auto;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -643,6 +655,7 @@ a.modbtn.can {
 .detail_wrap table {
 	width: 80%;
 	margin: 0 auto;
+	padding: 7px 0px;
 }
 
 .detail_wrap #clockicon {
@@ -657,8 +670,9 @@ a.modbtn.can {
 	width: 68px;
 }
 
-.tabletitlefont {
+.detail_wrap .tabletitlefont {
 	font-weight: bold;
+	font-size: 17px;
 }
 
 .detail_wrap #menusizemin {
@@ -743,7 +757,6 @@ a.modbtn.can {
 
 .detail_wrap li.page-item {
 	display: inline-block;
-	border: #aaaaaa 1px solid;
 }
 
 .detail_wrap li.page-item.active {
@@ -862,9 +875,40 @@ a.modbtn.can {
 	display: none;
 }
 
-.detail_wrap #map {
-	margin: 0 auto;
+.detail_wrap #mapDiv {
+    border-top: 1px solid #e5e5e5;
+    margin-top: 49px;
+    padding: 50px 0px;
 }
+
+
+.detail_wrap .report {
+  outline:none;
+  height: 25px;
+  text-align: center;
+  width: 67px;
+  border-radius:40px;
+  background: #fff;
+  border: 2px solid #c8ddd6;
+  color: #676e6b;
+  letter-spacing:1px;
+  text-shadow:0;
+  font:size:12px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  padding-bottom: 10px
+}
+.detail_wrap .report:hover {
+    color:white;
+    background: #1ECD97;
+  }
+.detail_wrap .report:active {
+    letter-spacing: 2px;
+    letter-spacing: 2px;
+  }
+
+
+
 
 /* 화살표 */
 .detail_wrap .slick-arrow {
@@ -874,6 +918,10 @@ a.modbtn.can {
 	width: 50px;
 	height: 50px;
 	transform: translateY(-25px);
+	background: #9e9c9c5c;
+	border: #9e9c9c5c;
+	font-weight: bold;
+	font-size: 22px;
 }
 
 .detail_wrap .slick-prev.slick-arrow { /* prev 이전 */
@@ -890,7 +938,18 @@ a.modbtn.can {
 
 .detail_wrap div#paginationBox {
 	margin: 0 auto;
+	margin-top: 15px;
 }
+.detail_wrap #cntDiv {
+	margin-top: 20px;
+    margin-bottom: -17px;
+}
+.detail_wrap #cntDiv span {
+	margin: 7px;
+    color: #999999;
+}
+
+
 
 .detail_wrap div#commentplace>* {
 	display: inline-grid;
@@ -938,9 +997,15 @@ a.modbtn.can {
   }
 }
 
-.detail_wrap p.goodCount {
-    margin-top: -45px;
+.detail_wrap .goodCount {
+    position: absolute;
+    top: 55px;
+    right: 38px;
 }
+.detail_wrap .clearboth {
+	position: relative;
+}
+
 
 
 /*구글지도 css*/
@@ -968,16 +1033,22 @@ a.modbtn.can {
 
 .boxstorename {
 	font-size: 20px;
+	margin-top: -10px;
+	font-weight: bold;
+}
+.boxstorename>a {
+	text-decoration:none ; 
+	color:#000000;
 }
 
 .boxse {
 	display: grid;
-	grid-template-rows: 1fr 1fr;
+	grid-template-rows: 0.7fr 1fr;
 }
 
 .boxName{
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr 24px;
 }
 
 

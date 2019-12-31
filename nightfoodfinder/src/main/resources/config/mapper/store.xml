@@ -139,6 +139,8 @@
 				c.category_name,
 				s.store_scope_total,
 				s.review_cnt_total,
+				s.see_cnt,
+				f.frequent_cnt,
 				ifnull(truncate(sum(r.store_scope) / count(r.review_no), 1), 0) as scope
 		from tb_store as s
 		inner join tb_address as a
@@ -147,6 +149,11 @@
 	   		on s.store_category = c.category_no
 		left outer join tb_review as r
 			on s.store_no = r.store_no
+		left outer join (select ifnull(count(*), 0) frequent_cnt, 
+								store_no
+							from tb_frequent_store
+ 					 		 group by store_no) f
+		on s.store_no = f.store_no 		
 		where s.store_no = #{storeNo}
 
 	</select>

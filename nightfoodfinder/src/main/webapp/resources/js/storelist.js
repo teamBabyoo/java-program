@@ -232,8 +232,8 @@ function markerEvent(storeName) {
     				<div class="boxcategoty">`+markerArr[i].store_category+`</div> 
     			</div>
     			<div class="boxName">
-    				<div class="boxstorename">`+markerArr[i].store_name+`</div>
-    				<div class="boxstorescope">`+markerArr[i].store_scope+`</div>
+    				<div class="boxstorename"><a href="storedetail.do?no=`+markerArr[i].store_no+`">`+markerArr[i].store_name+`</a></div>
+    				<div class="boxstorescope">★`+markerArr[i].store_scope+`</div>
    				</div>
 	        </div>
 
@@ -374,14 +374,14 @@ function drawMap() {
       			</div>
       		</div>
   	        <div class="boxse">
-  	           <div clss="boxName">
-      				<div class="boxcategoty">`+marker.store_category+`</div> 
-      				<div class="boxstorescope">`+marker.store_scope+`</div>
-      			</div>
-      			<div>
-      				<div class="boxstorename">`+marker.store_name+`</div>
-     				</div>
-  	        </div>
+	           <div>
+    				<div class="boxcategoty">`+markerArr[i].store_category+`</div> 
+    			</div>
+    			<div class="boxName">
+    				<div class="boxstorename"><a href="storedetail.do?no=`+markerArr[i].store_no+`">`+markerArr[i].store_name+`</a></div>
+    				<div class="boxstorescope">★`+markerArr[i].store_scope+`</div>
+   				</div>
+	        </div>
       				
          `;
         infowindow.setContent(contentbox);

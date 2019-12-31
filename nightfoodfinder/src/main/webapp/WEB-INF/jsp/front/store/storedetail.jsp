@@ -78,14 +78,19 @@
 						<div id="storeinfo">
 							<div id="stinfo">
 								<div id="star">
-									<div>
+									<span>
 										<img src="${pageContext.request.contextPath}/resources/images/star.png"	alt="별" />
-									</div>
+									</span>
 
-							<div id="scopescore"></div>
+							<span id="scopescore"></span>
 						</div>
 						<div id="stTitle">
 							<h2>${store.storeName}</h2>
+							<div id="cntDiv">
+								<span id="freqcnt"><i class="fa fa-bookmark" aria-hidden="true"></i>&nbsp;${store.frequentCnt}</span>
+								<span id="seecnt"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp;${store.seeCnt}</span>
+								<span id="rvicnt"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;${store.reviewCntTotal}</span>
+							</div>
 							<ul>
 								<li><a href="#" class="frequent"><i
 										class="fa fa-bookmark-o" aria-hidden="true"></i>단골</a></li>
@@ -117,15 +122,35 @@
 						<table>
 							<tbody>
 								<tr>
-									<th rowspan="2"><i class="fa fa-phone iicon"
+									<th rowspan="4" id="clock"><i class="fa fa-clock-o iicon"
 										aria-hidden="true"></i></th>
-									<td class="tabletitlefont">Tel</td>
+									<td class="tabletitlefont">Time</td>
 								</tr>
 								<tr>
-									<td class="tabletdfont">${store.storeTell}</td>
+									<td class="tabletdfont" id="operatingtime">${store.openTime} ~ ${store.closeTime}</td>
+
+								</tr>
+								<tr>
+									<td class="tabletitlefont">Holiday</td>
+								</tr>
+								<tr>
+									<td class="tabletdfont">
+										<c:choose>
+										<c:when test="${empty holidaylist}">
+											연중무휴
+										</c:when>
+										<c:otherwise>
+											<c:forEach items="${holidaylist}" var="h" varStatus="comma">
+												${h.weekName}
+											<c:if test="${not comma.last}">,</c:if>
+											</c:forEach>
+										</c:otherwise>
+										</c:choose>
+									</td>
 								</tr>
 							</tbody>
 						</table>
+						
 						<table>
 							<tbody>
 								<tr>
@@ -141,26 +166,16 @@
 						<table>
 							<tbody>
 								<tr>
-									<th rowspan="4" id="clock"><i class="fa fa-clock-o iicon"
+									<th rowspan="2"><i class="fa fa-phone iicon"
 										aria-hidden="true"></i></th>
-									<td class="tabletitlefont">Time</td>
+									<td class="tabletitlefont">Tel</td>
 								</tr>
 								<tr>
-									<td class="tabletdfont" id="operatingtime">${store.openTime} ~ ${store.closeTime}</td>
-
-								</tr>
-								<tr>
-									<td class="tabletitlefont">Holiday</td>
-								</tr>
-								<tr>
-									<td class="tabletdfont"><c:forEach items="${holidaylist}"
-											var="h" varStatus="comma">
-											${h.weekName}
-										<c:if test="${not comma.last}">,</c:if>
-										</c:forEach></td>
+									<td class="tabletdfont">${store.storeTell}</td>
 								</tr>
 							</tbody>
 						</table>
+						
 						<table>
 							<tbody>
 								<tr>
@@ -170,9 +185,16 @@
 							</tbody>
 						</table>
 						<div class="menulist" class="tabletdfont">
-							<c:forEach items="${menu}" var="m">
-								${m.menu} : ${m.price} <br>
-							</c:forEach>
+							<c:choose>
+								<c:when test="${empty menu}">
+									등록된 메뉴가 없습니다
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${menu}" var="m">
+										${m.menu} : ${m.price} <br>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
 						</div>
 						<table>
 							<tbody>
@@ -206,9 +228,13 @@
 						</div>		
 						</div>
 						<!-- 댓글 끝 -->
+						<!--구글맵  -->
+						<div id="mapDiv">
+							<div id="map" style="width: 100%; height: 400px;"></div>	
+						</div>		
 				</div>
 			</div>
-		<div id="map" style="width: 50%; height: 400px;"></div>
+		
 		</c:if>
 		</div>
 		<!-- 푸터 -->
@@ -289,8 +315,8 @@ $(".slick").slick(
     speed:1000 , /* 다음이미지로 넘겨질때 걸리는 시간 */
     pauseOnHover:false, /* 마우스 호버시 슬라이드 이동 멈춤 */ 
     //vertical:true,/* 세로방향으로 슬라이드를 원하면 추가하기// 기본값 가로방향 슬라이드*/
-    prevArrow:"<button type='button' class='slick-prev pull-left'><i class='fa fa-arrow-circle-o-left' aria-hidden='true'></i></button>",
-    nextArrow:"<button type='button' class='slick-next pull-right'><i class='fa fa-arrow-circle-o-right' aria-hidden='true'></i></button>"
+    prevArrow:"<button type='button' class='slick-prev pull-left'>"+"<"+"</button>",
+    nextArrow:"<button type='button' class='slick-next pull-right'>"+">"+"</button>"
      
   }
   );

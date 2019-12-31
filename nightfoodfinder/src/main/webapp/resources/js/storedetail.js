@@ -182,7 +182,7 @@ function makeReviewList(list){
 					</ul>
                 </li>
                 <li class="clearboth">
-                    <p>`;
+                    `;
 			
 			if(`${r.mylikecheck}` === '0' ) {
 				html += `<div class="heart" data-rno="${r.reviewNo}" data-writer="${r.writerNo}" data-class="" ></div>`;
@@ -190,8 +190,8 @@ function makeReviewList(list){
 				html += `<div class="heart" data-rno="${r.reviewNo}" data-writer="${r.writerNo}" data-class="heartActive" ></div>`;
 			}
 
-			html += `</p>
-	                <p class="goodCount">${r.good}</p>
+			html += `
+	                <div class="goodCount">${r.good}</div>
 	                </li>`;
 			let css = "hidden";
 			if (userNo == `${r.writerNo}`) {
@@ -300,7 +300,7 @@ function makeReviewList(list){
 						} else {
 							html += `<div class="heart" data-rno="${r.reviewNo}" data-writer="${r.writerNo}" data-class="heartActive" ></div>`;
 						}
-			html += `<p class="goodCount">${r.good}</p>
+			html += `<div class="goodCount">${r.good}</div>
                     </li>`;
 			let css = "hidden";
 			if (userNo == `${r.writerNo}`) {
