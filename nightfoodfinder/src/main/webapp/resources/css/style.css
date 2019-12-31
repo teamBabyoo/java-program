@@ -988,6 +988,11 @@ header div:nth-child(3) li span {
 	line-height: 20px;
 	top: 10px;
 }
+
+.strong {
+	color: #f35c5c;
+}
+
 /*----------------------------------------*/
 #notice_btn .topshape {
 	top: 20px;

@@ -66,7 +66,7 @@
     </div>
     <div class="float_r">
       <ul>
-        <li id="mysurrounding"><a href="${pageContext.request.contextPath}/front/store/storelist.do?flag=2&keyword=">내주변맛집</a></li>
+        <li id="mysurrounding">내주변맛집</li>
         <li><a href="${pageContext.request.contextPath}/front/award/awardlist.do">NFF Awards</a></li>
          <c:if test="${loginUser != null or loginStore != null}">
 	        <li id="notice_btn" data-user="${loginUser}" data-store="${loginStore}">

@@ -10,6 +10,6 @@
     <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/favicon.ico">
     <script src="${pageContext.request.contextPath}/resources/js/nffscript.js"></script>
-    <!-- 구글맵 -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSQHW_pWBrzI8-rkc4FczxQWzCSciCJS4"
+    <script src="${pageContext.request.contextPath}/resources/js/surrounding.js"></script>
+  	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSQHW_pWBrzI8-rkc4FczxQWzCSciCJS4"
     type="text/javascript"></script>
