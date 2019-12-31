@@ -81,7 +81,7 @@ public class MainServiceImpl implements MainService{
 	}
 	
 	// 메인 어워즈 조회2
-	public List<Award> mainAwardList2() {
+	public void mainAwardList2() {
 		
 	}
 }
