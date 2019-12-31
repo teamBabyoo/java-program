@@ -81,7 +81,20 @@ public class MainServiceImpl implements MainService{
 	}
 	
 	// 메인 어워즈 조회2
-	public void mainAwardList2() {
+	public List<Award> mainAwardList2() {
+		List<Award> awardList = aDao.listAwardStore();
 		
+		List<Store> storeList = new ArrayList<>();
+		for (Award a : awardList)  {
+			String[] strStoreNo = a.getStoreNoList().split(",");
+			for (int i = 0; i < strStoreNo.length; i++) {
+				String storeNo = strStoreNo[i];
+				storeList.add(i, aDao.detailAwardStore(Integer.parseInt(storeNo)));
+				a.setStoreList(storeList);
+				System.out.println(a.getStoreList());
+			}
+			
+		}
+		return awardList;
 	}
 }
