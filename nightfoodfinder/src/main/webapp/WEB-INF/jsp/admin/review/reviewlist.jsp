@@ -116,7 +116,7 @@
 			<!-- 이전 버튼 -->
 				<c:if test="${pagination.prev}">
 					<li class="page-item"><a class="page-link" href="#"
-						onClick="fn_prev('${pagination.range}', '${pagination.rangeSize}')">Previous</a>
+						onClick="fn_prev('${pagination.startPage - 1}')">Previous</a>
 					</li>
 				</c:if>
 				
@@ -125,14 +125,14 @@
 					end="${pagination.endPage}" var="idx">
 					<li class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
 						<a class="page-link" href="#"
-						onClick="fn_pagination('${idx}', '${pagination.range}')">${idx}</a>
+						onClick="fn_pagination('${idx}')">${idx}</a>
 					</li>
 				</c:forEach>
 
 			<!-- 다음 버튼 -->
 				<c:if test="${pagination.next}">
 					<li class="page-item"><a class="page-link" href="#"
-						onClick="fn_next('${pagination.range}', '${pagination.rangeSize}')">Next</a>
+						onClick="fn_next('${pagination.endPage + 1}')">Next</a>
 					</li>
 				</c:if>
 			</ul>
@@ -218,34 +218,27 @@
 			/* ----------------------- 페이징 --------------------------- */
 
 			//이전 버튼 이벤트
-			function fn_prev( range, rangeSize) {
-				var page = ((range - 2) * rangeSize) + 1;
-				var range = range - 1;
+			function fn_prev( page) {
 				var url = "${pageContext.request.contextPath}/admin/review/reviewlist.do";
 				url = url + "?page=" + page;
-				url = url + "&range=" + range;
 				url = url + "&searchType=" + $('#searchType option:selected').val();
 				url = url + "&keyword=" + $('#keyword').val();
 				location.href = url;
 			}
 
 			//페이지 번호 클릭
-			function fn_pagination(page, range) {
+			function fn_pagination(page) {
 				var url = "${pageContext.request.contextPath}/admin/review/reviewlist.do";
 				url = url + "?page=" + page;
-				url = url + "&range=" + range;
 				url = url + "&searchType=" + $('#searchType option:selected').val();
 				url = url + "&keyword=" + $('#keyword').val();
 				location.href = url;
 			}
 
 			//다음 버튼 이벤트
-			function fn_next( range, rangeSize) {
-				var page = parseInt((range * rangeSize)) + 1;
-				var range = parseInt(range) + 1;
+			function fn_next( page) {
 				var url = "${pageContext.request.contextPath}/admin/review/reviewlist.do";
 				url = url + "?page=" + page;
-				url = url + "&range=" + range;
 				url = url + "&searchType=" + $('#searchType option:selected').val();
 				url = url + "&keyword=" + $('#keyword').val();
 				location.href = url;

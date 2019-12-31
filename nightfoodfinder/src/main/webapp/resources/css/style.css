@@ -55,7 +55,8 @@ header .search i { padding: 10px 20px; font-size: 1.6rem; color: #5a5a5a; border
 header .search > form > .icon_w > button { border: none; background-color: #fff; }
 header .search div { border-left: 1px solid #d4d4d4; }
 
-header div:nth-child(3) li { padding: 0 20px;  border-left: 1px solid #d4d4d4; line-height: 60px; }
+header div:nth-child(3) li { padding: 0 20px; border-left: 1px solid #d4d4d4; line-height: 60px; } 
+/*header .float_r li { padding: 0 20px; border-left: 1px solid #d4d4d4;}*/
 header div:nth-child(3) li i { font-size: 1.4rem; }
 header div:nth-child(3) ul li:nth-child(4) i { padding: 10px;  color: #fff; background: #d2d2d2; border-radius: 30px; }
 #person_btn:hover { cursor: pointer; }
@@ -108,7 +109,7 @@ footer { position: absolute; bottom: 0; width: 100%; line-height: 40px; text-ali
 
 /* 메인 */
 .main_wrap .content .sc { width: 100%; }
-.main_wrap .content .sc .inner { margin: 0 auto; width: 1700px; }
+.main_wrap .content .sc .inner { margin: 0 auto; width: 1280px; }
 .main_wrap .content .sc1 .inner { width: 100%; }
 .main_wrap .content .sc1 { border-bottom: none; }
 
@@ -187,7 +188,7 @@ footer { position: absolute; bottom: 0; width: 100%; line-height: 40px; text-ali
     margin-right: 90px;
 }
 .main_wrap .popular_restaurant_inner_wrap > a { display: inline-block; }
-.main_wrap .popular_restaurant_inner_wrap > a .thumb { width: 360px; height: 360px; }
+.main_wrap .popular_restaurant_inner_wrap > a .thumb { width: 300px; height: 300px; }
 .main_wrap .list-restaurants>li {
     width: 50%;
     float: left;
@@ -219,7 +220,7 @@ footer { position: absolute; bottom: 0; width: 100%; line-height: 40px; text-ali
 .main_wrap .content .store:hover .desc { display: block; } */
 
 /* 상세 */
-.detail_wrap #stTitle > ul { padding: 10px 45px; border-top: 1px solid #d4d4d4;width: 80%; margin: 0 auto; margin-top: 30px; }
+.detail_wrap #stTitle > ul { padding: 10px 45px; border-top: 1px solid #d4d4d4; width: 50%; margin: 0 auto; margin-top: 30px; }
 .detail_wrap #stTitle > ul > li { float: left; padding: 0 20px; padding-top: 10px; border-right: 1px solid #d4d4d4; }
 .detail_wrap #stTitle > ul > li * { display: block; color: #77747d; }
 .detail_wrap #stTitle > ul > li:last-child { border-right: none; }
@@ -1121,7 +1122,7 @@ header div:nth-child(3) li span {
 	background: #fff;
 	right: -3px;
 	padding: 8px;
-	height: 676px;
+	height: 570px;
 	width: 390px;
 	z-index: 100;
 }
@@ -1144,9 +1145,9 @@ header div:nth-child(3) li span {
 	font-size: 2px;
 }
 
-.notice_content ul li {
+/*.notice_content ul li {
 	line-height: 5px;
-}
+}*/
 /*--------------스토어 리스트------------------*/
 #map {
 	width: 100%;
@@ -1657,6 +1658,51 @@ img.center-crop.portrait.lazy {
 	 height: 180px; 
 }
 /** 가람 끝 **/
+
+
+/**승경 시작**/
+
+.notice_content ul li {
+    border-radius: 7px;
+    border: 1px solid;
+    margin: 2px;
+}
+
+div#notice li {
+	position: relative;
+    line-height: 25px;
+    padding: 10px 15px 10px;
+}
+
+
+.del {
+    position: relative;
+    bottom: 5px;
+}
+a#alldel {
+    margin-left: 5%;
+}
+a#morebtn {
+    margin-left: 10px;
+}
+
+a#listone {
+    position: relative;
+
+}
+
+#notice span.del {
+    float: right;
+    font-size: 16px;
+    position: absolute;
+    top: 50%; 
+    right: 10px;
+    transform: translateY(-50%);
+}
+
+
+/**승경 끝**/
+
 .gm-style-iw-d .bx-wrapper {
 	max-width: 100%;
 	height: 200px;
@@ -1665,3 +1711,4 @@ img.center-crop.portrait.lazy {
 .gm-style-iw-d .bx-wrapper img{
 	height: 200px;
 }
+
