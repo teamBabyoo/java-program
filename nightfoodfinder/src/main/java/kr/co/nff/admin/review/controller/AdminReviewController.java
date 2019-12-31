@@ -1,6 +1,5 @@
 package kr.co.nff.admin.review.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,25 +23,23 @@ public class AdminReviewController {
 
 	// 리뷰 목록 불러오기(검색, 페이징 같이)
 	@RequestMapping("/reviewlist.do")
-	public void reviewList(
+	public void reviewList(Search s,
 			@RequestParam(required = false, defaultValue = "1") int page,
-			@RequestParam(required = false, defaultValue = "1") int range,
-			@RequestParam(required = false, defaultValue = "nickName") String searchType,
-			@RequestParam(required = false) String keyword, Model model) {
-
-		Search search = new Search();
+			@RequestParam(required = false, defaultValue = "nickName") String searchType, 
+			Model model) {
+	
+		s.setType(searchType);
+	
+		Search search = new Search(page, service.getListCnt(s));
 		search.setType(searchType);
-		search.setKeyword(keyword);
+		search.setKeyword(s.getKeyword());
 
-		// 전체 게시글 개수
-		int listCnt = service.getListCnt(search);
-
-		search.pageInfo(page, range, listCnt);
-
+		
 		model.addAttribute("pagination", search);
 		model.addAttribute("list", service.listReview(search));
 
 	}
+
 
 	// 체크박스로 리뷰 차단하기, 차단 풀기
 	@RequestMapping("/block.do")
