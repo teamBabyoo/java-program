@@ -1,6 +1,7 @@
 package kr.co.nff.repository.vo;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -11,4 +12,6 @@ public class Award {
 	private String userAge;
 	private String StoreNoList;
 	private Date regDate;
+	
+	private List<Store> storeList;
 }

@@ -27,7 +27,7 @@
 
             <li class="top_list_item">
             <div class="imgandtitle">
-              <a href="${pageContext.request.contextPath}/front/award/awarddetail.do?awardNo=${b.awardNo}&storeNoList=${b.storeNoList}" target="_blank">
+              <a href="${pageContext.request.contextPath}/front/award/awarddetail.do?awardNo=${b.awardNo}&storeNoList=${b.storeNoList}">
                 <figure class="ls-item">
                   <div class="thumb">
                     <div class="inner">

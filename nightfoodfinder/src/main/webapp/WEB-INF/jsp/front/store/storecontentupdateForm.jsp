@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/jsp/include/taglib.jsp"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,26 +20,27 @@
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 		<div class="content">
 			<div id="storeupdateForm">
+				<div id="storeinfoTitle">가게정보 수정하기</div>
 				<form id="updateForm" name="form" action="storeinfoupdate.do" method="post">
 					<table>
 						<tr>
-							<th>가게 이름</th>
+							<th class="thcolor">가게 이름</th>
 							<td><input type="text" name="storeName"
 								value="${store.storeName}" /></td>
 						</tr>
 						<tr>
-							<th>사업자 번호</th>
+							<th class="thcolor">사업자 번호</th>
 							<td>${store.businessNum}</td>
 						</tr>
 						<tr>
-							<th>이메일</th>
+							<th class="thcolor">이메일</th>
 							<td>${store.storeEmail}</td>
 							<td><div id="emailChk"></div></td>
 						</tr>
 						<%-- 
 						--%>
 						<tr>
-							<th>비밀번호</th>
+							<th class="thcolor">비밀번호</th>
 							<td><input type="password" id="storePass" name="storePass" />
 								<div id="pwChk">
 									<span id="alert-success" style="display: none;">비밀번호가
@@ -46,7 +48,7 @@
 								</div></td>
 						</tr>
 						<tr>
-							<th>비밀번호 확인</th>
+							<th class="thcolor">비밀번호 확인</th>
 							<td><input type="password" id="storePass2" name="storePass2" />
 								<div id="pwChk2">
 									<span id="alert-success" style="display: none;">비밀번호가
@@ -55,12 +57,12 @@
 								</div></td>
 						</tr>
 						<tr>
-							<th>가게 전화번호</th>
+							<th class="thcolor">가게 전화번호</th>
 							<td><input type="text" name="storeTell"
 								value="${store.storeTell}" /></td>
 						</tr>
 						<tr>
-							<th rowspan="4">주소</th>
+							<th rowspan="4" class="thcolor">주소</th>
 						</tr>
 						<tr>
 							<td><input type="text" id="zipNo" name="zipNo" value="${store.zipNo}" /> 
@@ -77,7 +79,7 @@
 						</tr>
 
 						<tr>
-							<th>영업 시간</th>
+							<th class="thcolor">영업 시간</th>
 							<td><select name="openH">
 									<c:forEach begin="0" end="24" var="i">
 										<option id="openH${i}" value="${i}">${i}</option>
@@ -97,7 +99,7 @@
 							</select>분</td>
 						</tr>
 						<tr>
-							<th>휴무일</th>
+							<th class="thcolor">휴무일</th>
 							<td><input type="checkbox" name="day" value="1" />월 <input
 								type="checkbox" name="day" value="2" />화 <input type="checkbox"
 								name="day" value="3" />수 <input type="checkbox" name="day"
@@ -109,24 +111,23 @@
 							<tr name="trMenu">
 								<c:choose>
 									<c:when test="${status.index == 0}">
-										<th>대표 메뉴 / 가격</th>
-										<td><input type="text" name="menuName" value="${m.menu}">
-											<input type="number" name="menuPrice" value="${m.price}">
-											<i class="fa fa-plus-square-o" aria-hidden="true"
-											id="plus_btn"></i> <i class="fa fa-minus-square-o"
-											aria-hidden="true" id="minus_btn"></i></td>
+										<th class="thcolor" rowspan="${fn:length(menulist)}" id="rowTh">대표 메뉴 / 가격</th>
+										<td><input type="text" class="tdline" name="menuName" value="${m.menu}">
+											<input type="number" class="tdline" name="menuPrice" value="${m.price}">
+											<i class="fa fa-plus-square-o" aria-hidden="true" id="plus_btn"></i> 
+											<i class="fa fa-minus-square-o"	aria-hidden="true" id="minus_btn"></i></td>
 									</c:when>
 									<c:otherwise>
-										<th></th>
-										<td><input type="text" name="menuName" value="${m.menu}">
-											<input type="number" name="menuPrice" value="${m.price}">
+										<td class="clearboth">
+										    <input type="text" class="tdline" name="menuName" value="${m.menu}">
+											<input type="number" class="tdline" name="menuPrice" value="${m.price}">
 										</td>
 									</c:otherwise>
 								</c:choose>
 							</tr>
 						</c:forEach>
 						<tr>
-							<th>가게 분류</th>
+							<th class="thcolor">가게 분류</th>
 							<td><select name="storeCategory">
 									<option value="1">한식</option>
 									<option value="2">양식</option>
@@ -137,18 +138,18 @@
 							</select></td>
 						</tr>
 						<tr>
-							<th>소개글</th>
+							<th class="thcolor">소개글</th>
 							<td><textarea rows="10" cols="40" name="storeContent">
 								 ${storeContent.storeContent}
 								</textarea></td>
 						</tr>
 						<tr>
-							<th>대표자 이름</th>
+							<th class="thcolor">대표자 이름</th>
 							<td><input type="text" name="storeOwner"
 								value="${store.storeOwner}" /></td>
 						</tr>
 						<tr>
-							<th>대표자 휴대폰 번호</th>
+							<th class="thcolor">대표자 휴대폰 번호</th>
 							<td><input type="text" name="storeOwnerPh"
 								value="${store.storeOwnerPh}" /></td>
 						</tr>
@@ -160,7 +161,7 @@
 					<input type="hidden" id="entY" name="entY" value="${store.latitude}"/>
 
 					<div id="updateBtn">
-						<button type='button' id="updateBtn" >수정하기</button>
+						<button type="button" class="report" >수정하기</button>
 					</div>
 				</form>
 			</div>
@@ -172,6 +173,8 @@
 	    <div class="bgbox"></div>
 	</div>
 	<script>
+	let mlist = ${fn:length(menulist)} ;
+	console.log("리스트", mlist);
 	//이메일 중복체크
 	$("#storeEmail").blur(function() {
 			var storeEmail = $('#storeEmail').val();
@@ -426,18 +429,26 @@
 	})
 
 	function addRow () {
-		var addMenu =  '<tr name="trMenu">'+
-			'<th></th>'+
+		 let row = $("#rowTh").attr("rowspan");
+		$("#rowTh").attr("rowspan", (row*1)+1); 
+		 var addMenu =  '<tr name="trMenu">'+
 			'<td>'+
 				'<input type="text" name="menuName">'+
 				'<input type="number" name="menuPrice">'+
-		'</tr>';
+		'</tr>'; 
+		/*var addMenu =  '<tr name="trMenu">'+
+			'<td>'+
+				'<input type="text" name="menuName">'+
+				'<input type="number" name="menuPrice">'+
+		'</tr>';*/
 
 	var trHtml = $( "tr[name=trMenu]:last" ); 
 	trHtml.after(addMenu); 
 	}
 
 	function delRow () {
+		let row = $("#rowTh").attr("rowspan");
+		$("#rowTh").attr("rowspan", (row*1)-1); 
 		var trHtml =$( "tr[name=trMenu]:last" );
 	    if ($( "tr[name=trMenu]" ).length ==1) return;
 	    trHtml.remove(); //tr 테그 삭제
