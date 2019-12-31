@@ -73,10 +73,15 @@ public class MainServiceImpl implements MainService{
 			String[] storeString = a.getStoreNoList().split(",");
 			for (int i = 0; i < storeString.length; i++) {
 				String storeNo = storeString[i];
+				a.setStoreList(storeList);
 				storeList.add(i, aDao.detailAwardStore(Integer.parseInt(storeNo)));
-//				System.out.println(storeList);
 			}
 		}
 		return storeList;
+	}
+	
+	// 메인 어워즈 조회2
+	public List<Award> mainAwardList2() {
+		
 	}
 }
