@@ -14,8 +14,13 @@
 <body>
 	<div class="wrapper nicnameForm_wrap">
 		<!-- 헤더 -->
-	    <c:import url="/WEB-INF/jsp/include/header.jsp" />
+	    <%-- <c:import url="/WEB-INF/jsp/include/header.jsp" /> --%>
 	    <!-- // 헤더 -->
+<header class="clearboth">
+    <div class="logo" onclick="location.href='${pageContext.request.contextPath}/front/main/main.do'">
+        <img src="${pageContext.request.contextPath}/resources/images/logo.png" alt="nff 로고" />
+    </div>
+    </header>
 		<div class="content">
 			<h3>닉네임수정</h3>
 			<div>
@@ -29,9 +34,6 @@
 			</form>
 			</div>
 		</div> 
-	    <!-- 푸터 -->
-	    <c:import url="/WEB-INF/jsp/include/footer.jsp" />
-	    <!-- // 푸터 -->
 	    
 	    <!-- 팝업 백그라운드  -->
 	    <div class="bgbox"></div>

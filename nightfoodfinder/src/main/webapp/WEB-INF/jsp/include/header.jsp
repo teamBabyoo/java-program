@@ -10,6 +10,7 @@
     </div>
     <div class="search">
     <form id="sto_search" action="${pageContext.request.contextPath}/front/store/storelist.do" method="post">
+    	<input type="hidden" name="flag" value="1" />
     	<!-- 검색어 입력 부분 -->
 		<input type="text" name="keyword"/>
 		 <!-- 검색 버튼 부분 -->
@@ -65,18 +66,18 @@
     </div>
     <div class="float_r">
       <ul>
-        <li><a href="#">내주변맛집 </a></li>
+        <li id="mysurrounding">내주변맛집</li>
         <li><a href="${pageContext.request.contextPath}/front/award/awardlist.do">NFF Awards</a></li>
          <c:if test="${loginUser != null or loginStore != null}">
 	        <li id="notice_btn" data-user="${loginUser}" data-store="${loginStore}">
 	        	<i class="fa fa-bell-o" aria-hidden="true" ></i>
-<!-- 	        	새 알림 갯수 뿌려줄 span  -->
+				<!--새 알림 갯수 뿌려줄 span  -->
 	        	<span class="newnotice"></span>
 	        	<!-- 알림 리스트 나올 div -->
 	        	<div class="notice_list_box hidden">
 		        	<div class="topshape"></div>
 				    <!-- 알림 리스트 나올 div -->
-		        	<div class="notice_content" id="notice"  style="overflow: auto">
+		        	<div class="notice_content" id="notice" style="overflow: auto">
 						<ul></ul>
 		        	</div>
 	        	</div>
@@ -113,7 +114,6 @@
 	        <div>
 	           <c:choose>
 				<c:when test="${loginUser != null}">
-				
 				<ul>
 					<li><a href="${pageContext.request.contextPath}/front/login/userdetail.do?no=${loginUser.userNo}">MY PAGE / </a><a href="${pageContext.request.contextPath}/front/login/logout.do">로그아웃</a></li>
 				</ul>
@@ -143,8 +143,9 @@
 		}); */
 	
 	var list = sessionStorage.getItem('list');
-	//console.log("최근",list);
-	if(list.length != null) {
+	console.log("최근",list);
+	if(list) {
+		console.log(list);
 		$("#viewnone").hide();
 			var viewList = [];
 			var array = list.substring(1, list.length-1).split(",");
@@ -155,15 +156,17 @@
 								+'<a class="vsName" href="${pageContext.request.contextPath}/front/store/storedetail.do?no='+strArray[0]+'">' 
 								+ strArray[1] +'</a></div>';
 				viewList += tag;
-				
 			}
 			$('#viewlist').html(viewList);
 
-	}
+	} else if(!list){
+		console.log('리스트없음');
+		$('#viewlist').hide();
+	} 
 </script>
 
   <script type="text/javascript">
 	let context = '${pageContext.request.contextPath}';
 </script>
-  <script src='${pageContext.request.contextPath}/resources/js/header.js' ></script>
+<script src='${pageContext.request.contextPath}/resources/js/header.js' ></script>
   

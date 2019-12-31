@@ -1,5 +1,5 @@
-// let html = "";
 $(() => {
+	
 	
 	if ( $("#notice_btn").data("user") != undefined|| $("#notice_btn").data("store") != undefined) {
 		// 알림 갯수 세팅
@@ -23,7 +23,8 @@ $(() => {
 			});
 		}
 	});
-
+	
+	
 	
 	
 	/**

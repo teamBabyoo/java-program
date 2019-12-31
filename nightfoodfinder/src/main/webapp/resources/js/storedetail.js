@@ -10,7 +10,7 @@ $(document).ready(function(e) {
 	
 });
 
-/*단골등록을 위한*/
+/* 단골등록을 위한 */
 function checkFrequent(){
 	$.getJSON({
 		url: "frequent_check.do",
@@ -22,11 +22,10 @@ function checkFrequent(){
 }
 checkFrequent();
 
-/*단골 등록하기*/
+/* 단골 등록하기 */
 function makeFrequent(list) {
 	// list 가 1이면 등록된 가게
 	// 0이면 등록되지 않은 가게
-//	console.log("프리퀀트", list);
 	$(".frequent").off();
    if(list) {
 	   $(".frequent i").attr("class", "fa fa-bookmark").css("color", "red");
@@ -73,7 +72,7 @@ function frequentRegist(urlhtml) {
 	
 
 
-/*별점 애니메이션*/
+/* 별점 애니메이션 */
 function animateValue(id, start, end, duration) {
     let range = start + end;
     let current = start;
@@ -91,7 +90,7 @@ function animateValue(id, start, end, duration) {
 animateValue("scopescore", 0, scope, 100);
 
 	
-//리뷰 리스트 가져오는 에이작스 	
+// 리뷰 리스트 가져오는 에이작스
 function reviewListAjax() {
 	$.ajax({
 		url: "review_list.do",
@@ -112,26 +111,15 @@ function toPad(val) {
 	return val < 10 ? "0" + val : val;
 }	
 
-//#commentplace 안에 넣어주기 
-//리뷰 리스트 뿌려주기	
+// #commentplace 안에 넣어주기
+// 리뷰 리스트 뿌려주기
 function makeReviewList(list){
-	/*console.dir(list);
-	console.log(list.pagination);*/
 	let html = "";
 	let pagination = list.pagination;
 	let $tbl = $("<div class='user_rv'></div>");
 	var reviewNoArray = [];
-	/*
-	list = jQuery.map(list, function(n, i) {
-		  console.log(n, 0);
-		});
-	var str = "";
-	for(key in list) {
-		str += key+"="+list[key]+"\n";
-		console.log("str", str);
-	}*/
+	
 	let reviewList = list.list;
-	//console.log("reviewLsit", reviewList.length);
 	if(reviewList.length == 0){
 		html += `<div class='user_rv'> 작성된 리뷰가 없습니다.</div>`;
 		$tbl.append(html);
@@ -140,13 +128,6 @@ function makeReviewList(list){
 
 	
 	$.each(reviewList, (i, r) => {
-		
-		
-		/*reviewNoArray.push(`${r.reviewNo}`);
-	
-	console.log(reviewNoArray);
-		 */
-	
 		var date = new Date(r.regDate);
 		var time = date.getFullYear() + "-" 
 		         + (date.getMonth() + 1) + "-" 
@@ -166,10 +147,12 @@ function makeReviewList(list){
 		} else {
 			scopeCnt = "★★★★★";
 		}
-		
 		if(i == 0){
+			if (`${r.status}` == 1) {
+			  html += `<div class="user_rv" status-a="${r.status}">관리자에 의해 차단된리뷰입니다</div>`;
 			
-			html += `<div class="user_rv">
+			} else {
+			html += `<div class="user_rv" status-b="${r.status}">
 				  <div class="tenten">
 			  	<button type="button" class="report" value="${r.reviewNo}">신고하기</button>`
 			  	if (loginStore === storeNo && r.recomment == null){
@@ -201,26 +184,22 @@ function makeReviewList(list){
 					</ul>
                 </li>
                 <li class="clearboth">
-                    <p>`;
+                    `;
 			
 			if(`${r.mylikecheck}` === '0' ) {
-				//html += `<img class="heartclick" data-rno="${r.reviewNo}" data-writer="${r.writerNo}" src="` + context + `/resources/images/empty_hrt.png" />`;
 				html += `<div class="heart" data-rno="${r.reviewNo}" data-writer="${r.writerNo}" data-class="" ></div>`;
 			} else {
-				//html += `<img class="heartclick" data-rno="${r.reviewNo}" src="` + context + `/resources/images/icon_hrt.png" />`;
 				html += `<div class="heart" data-rno="${r.reviewNo}" data-writer="${r.writerNo}" data-class="heartActive" ></div>`;
 			}
 
-			html += `</p>
-	                <p class="goodCount">${r.good}</p>
+			html += `
+	                <div class="goodCount">${r.good}</div>
 	                </li>`;
-//			console.log(userNo, 111, `${r.writerNo}`);
 			let css = "hidden";
 			if (userNo == `${r.writerNo}`) {
 				css = "";
 			}
 			let chkmyreview = `${r.writerNo}`;
-//			console.log(chkmyreview);
 			html += `<li data-chkmyreview=` + chkmyreview + `>
 					    <ul class="ud_control ${css}">
 					        <li>수정 |</li>
@@ -253,23 +232,20 @@ function makeReviewList(list){
 			}
 			
 			/**
-			 * 			// 답글 내용
-			if (r.recomment != null) {
-				html += `
-				<table class="reply_content">
-					<tr id="row${r.reviewNo}">
-					<td>${r.recomment}</td>
-					<td>${r.reCommentRegDate}</td>
-					<td><button type="button" data-no="${r.reviewNo}" class="delRecomment">삭제</button>	
-						<button type="button" data-no="${r.reviewNo}" class="modRecomment">수정</button>	
-					</td>
-					</tr>
-					</table>`;
-			}
+			 * // 답글 내용 if (r.recomment != null) { html += ` <table
+			 * class="reply_content">
+			 * <tr id="row${r.reviewNo}">
+			 * <td>${r.recomment}</td>
+			 * <td>${r.reCommentRegDate}</td>
+			 * <td><button type="button" data-no="${r.reviewNo}"
+			 * class="delRecomment">삭제</button> <button type="button"
+			 * data-no="${r.reviewNo}" class="modRecomment">수정</button> </td>
+			 * </tr>
+			 * </table>`; }
 			 * 
 			 * 
 			 * 
-			 * */
+			 */
 			
 			// 답글 등록 폼
 			html += `<div id="bossComment${r.reviewNo}" class="bossComment" data-rno="${r.reviewNo}">
@@ -277,12 +253,17 @@ function makeReviewList(list){
 					</div>	
 	        `;
 			$tbl.append(html);
-				
+			}	
 		}
 		else {
+			
 			html = "";
+			if (`${r.status}` == 1) {
+				html += `<div class="user_rv" status-a="${r.status}">관리자에 의해 차단된리뷰입니다</div>`;
+				
+			} else {	
 			html += `
-			<div class="user_rv">
+			<div class="user_rv" status-c="${r.status}">
 				<div class="tenten">
 					<button type="button" class="report"  value="${r.reviewNo}">신고하기</button>`
 				  if (loginStore === storeNo && r.recomment == null){
@@ -321,21 +302,17 @@ function makeReviewList(list){
                     </li>
                     <li class="clearboth">`
                         if(`${r.mylikecheck}` === '0' ) {
-							//html += `<img class="heartclick" data-rno="${r.reviewNo}" data-writer="${r.writerNo}" src="` + context + `/resources/images/empty_hrt.png" />`;
                         	html += `<div class="heart" data-rno="${r.reviewNo}" data-writer="${r.writerNo}" data-class="" ></div>`;
 						} else {
-							//html += `<img class="heartclick" data-rno="${r.reviewNo}" src="` + context + `/resources/images/icon_hrt.png" />`;
 							html += `<div class="heart" data-rno="${r.reviewNo}" data-writer="${r.writerNo}" data-class="heartActive" ></div>`;
 						}
-			html += `<p class="goodCount">${r.good}</p>
+			html += `<div class="goodCount">${r.good}</div>
                     </li>`;
-//			console.log(userNo, 222, `${r.writerNo}`);
 			let css = "hidden";
 			if (userNo == `${r.writerNo}`) {
 				css = "";
 			}
 			let chkme = `${r.writerNo}`;
-//			console.log(chkme);
 			html += `<li data-chkmyreview=` + chkme + `>
 					    <ul class="ud_control ${css}">
 					        <li>수정 |</li>
@@ -376,9 +353,11 @@ function makeReviewList(list){
 
 					</div>
             `;
+			}
 			$tbl.append(html);
 		
 		}
+
 	});
 	}
 
@@ -423,6 +402,7 @@ function makeReviewList(list){
 }
 /**
  * footer top값 재설정
+ * 
  * @returns
  */
 function reposition() {
@@ -436,13 +416,13 @@ function reposition() {
 
 /**
  * 댓글 등록
+ * 
  * @returns
  */
 function registReview() {
 	let reviewContent = $('textarea[name="reviewContent"]').val();
 	let form = $('#reviewForm')[0];
 	let data = new FormData(form);
-//	console.log("나", data);
 	$.ajax({
 		type: "POST",
 		enctype: "multipart/form-data",
@@ -453,50 +433,18 @@ function registReview() {
         processData: false,
         contentType: false,
         success: function(data) {
-//        	alert('성공');
         },
         error: function(e) {
-//        	console.log("ERROR : ", e);
-//            alert("fail");
         }
 	});
 	return false;
 };
 
 
-/*
-		// Get form
-        var form = $('#fileUploadForm')[0];
- 
-        // Create an FormData object 
-        var data = new FormData(form);
- 
-       // disabled the submit button
-        $("#btnSubmit").prop("disabled", true);
- 
-        $.ajax({
-            type: "POST",
-            enctype: 'multipart/form-data',
-            url: "/document/upload",
-            data: data,
-            processData: false,
-            contentType: false,
-            cache: false,
-            timeout: 600000,
-            success: function (data) {
-                alert("complete");
-                $("#btnSubmit").prop("disabled", false);
-            },
-            error: function (e) {
-                console.log("ERROR : ", e);
-                $("#btnSubmit").prop("disabled", false);
-                alert("fail");
-            }
-        });
-*/
 
 /**
  * 리뷰 별점 전처리
+ * 
  * @returns
  */
 $('#scopePannel > a').click(function(e) {
@@ -509,16 +457,13 @@ $('#scopePannel > a').click(function(e) {
 	// storeScope --> n점 (n번째 별)
 	storeScope = parseInt($(e.target).attr('data-rscope'));
 	$('input[name="storeScope"]').val(storeScope); 
-//	console.log("현재별점: ", storeScope);
 	// 현재 클릭한 별의 형제 요소의 길이만큼 반복문 돌리며 rscope값이 작을 경우 색상변경(e.target 포함)
 	for (let i = 0; i < $(e.target).siblings().length; i++) {
 		let $sibling = $(e.target).siblings().eq(i);
-//		console.log(i, "번째 siblings : ", $sibling.attr('data-rscope'));
 		if (parseInt($sibling.attr('data-rscope')) <= storeScope){
 			if ($sibling.attr('data-rscope') == '1') {
 				$sibling.css('color', 'yellow');
 			}
-//			console.log(i, "번째 적용됨 : ", $sibling.attr('data-rscope'));
 			$(e.target).css('color', 'red');
 			$sibling.css('color', 'red');
 		}
@@ -527,6 +472,7 @@ $('#scopePannel > a').click(function(e) {
 
 /**
  * 공유하기
+ * 
  * @returns
  */
 function copyText(text) {
@@ -536,25 +482,22 @@ function copyText(text) {
     temp.select();
     document.execCommand('Copy');
     document.body.removeChild(temp);
-//    alert('클립보드로 복사되었습니다. ')
 }
 
 
 
-//신고하기
+// 신고하기
 $(document).on('click', '.report', function(e){
-	//신고 클릭시 했던 신고자인지
+	// 신고 클릭시 했던 신고자인지
 	if(loginStore != storeNo && userNo === 0){
 		   Swal.fire('신고할 수 없습니다')
 		   return false;
 	} else {
 	//유저번호 들어오는지
-//	console.log("유저번호", userNo);
 	let page = $(".page-item.active a").attr("data-page");
 
-	//review_no를 받기위해	
+	// review_no를 받기위해
 	let rNo = e.target;
-//	console.log(rNo);	
 	$.post({
 		url: "review_report_check.do",
 		data: {userNo, reviewNo: rNo.value},
@@ -568,11 +511,10 @@ $(document).on('click', '.report', function(e){
 });
 
 function reviewReport(count, rNo, page) {
-//	console.log("카운트", count, "글번호", rNo);
 	if(count == 0) {
-		//신고사유 모달창
+		// 신고사유 모달창
 		let rpop = $("#rmyModal");
-		//사유 모달창 띄우기
+		// 사유 모달창 띄우기
 		rpop.css("display", "block");
 		
 		$("#rmyModal *").remove();
@@ -598,19 +540,11 @@ function reviewReport(count, rNo, page) {
 		</form>
 		`
 		);
-		//밸류 값 들어오는지 확인용
-		/*console.log($("#reviewNo").val());
-		console.log($("#reportWhy").val());
-		console.log($("#storeNo").val());
-		console.log($("#userNo").val());*/
 
-		//모달창 닫기
+		// 모달창 닫기
 		$(".rclose").click(()=>{
 			rpop.css("display", "none");
 		});
-//		$('input[name=reportWhy]').change((e) => {
-//			console.log(e.target);
-//		})
 		// 리뷰신고 등록
 		$("#reportsubmit").submit(() => {
 			let userNo = 3;
@@ -643,15 +577,17 @@ $(document).on('click', '.heart', function(e){
 		 alert("로그인 후 이용가능합니다");
 		 return false;
 	 }
-//	console.log(rno);
-/*	console.log("리뷰번호", $(e.target).attr('data-rno'));
-	console.log("리뷰글쓴이", $(e.target).attr('data-writer'));
-	console.log("src : ", $(e.target).attr('src'));*/
+// console.log(rno);
+/*
+ * console.log("리뷰번호", $(e.target).attr('data-rno')); console.log("리뷰글쓴이",
+ * $(e.target).attr('data-writer')); console.log("src : ",
+ * $(e.target).attr('src'));
+ */
 	let page = $(".page-item.active a").attr("data-page");
 	let heart = "/nightfoodfinder/resources/images/icon_hrt.png";
-	//좋아요가 되어있으면 취소
+	// 좋아요가 되어있으면 취소
 	if($(e.target).attr('data-class') === "heartActive"){
-//		$(e.target).attr('data-class', "");
+// $(e.target).attr('data-class', "");
 		let likeObj = $(e.target).attr('data-class', "").parent().find(":last-child");
 		likeObj.text(parseInt(likeObj.text())-1);
 		$.post({
@@ -665,7 +601,7 @@ $(document).on('click', '.heart', function(e){
 				success: (list) => makeReviewList(list)
 		});
 		return false;
-	} //좋아요 누르기 
+	} // 좋아요 누르기
 	else {
 		let likeObj = $(e.target).attr('data-class', "heartActive").parent().find(":last-child");
 		likeObj.text(parseInt(likeObj.text())+1);
@@ -687,7 +623,7 @@ $(document).on('click', '.heart', function(e){
 		return false;
 		
 	};
-//	alert("하트 누름");
+// alert("하트 누름");
 	/*
 */
 	
@@ -695,9 +631,9 @@ $(document).on('click', '.heart', function(e){
 	
 
 
-/*사장 답글*/
+/* 사장 답글 */
 
-//답글 등록 폼 보이기
+// 답글 등록 폼 보이기
 
 function makeform(a) {
 	var rno = $(a).attr("data-no");	// 리뷰 넘버
@@ -740,19 +676,21 @@ function ChkByte(obj, maxByte) {
     for(var i=0; i<content_len; i++) {
         one_char = content.charAt(i);
         if(escape(one_char).length > 4) {
-        	rbyte += 2; }                                     //한글2Byte
+        	rbyte += 2; }                                     // 한글2Byte
         else {
-            rbyte++; }                                       //영문 등 나머지 1Byte
+            rbyte++; }                                       // 영문 등 나머지
+																// 1Byte
 
         if(rbyte <= maxByte) {
-            rlen = i+1;  }                                   //return할 문자열 갯수
+            rlen = i+1;  }                                   // return할 문자열
+																// 갯수
      }
 
      if(rbyte > maxByte)
      {
-  // alert("한글 "+(maxByte/2)+"자 / 영문 "+maxByte+"자를 초과 입력할 수 없습니다.");
   alert("메세지는 최대 " + maxByte + "byte를 초과할 수 없습니다.")
-  content2 = content.substr(0,rlen);                                  //문자열 자르기
+  content2 = content.substr(0,rlen);                                  // 문자열
+																		// 자르기
   obj.value = content2;
   ChkByte(obj, maxByte);
      }
@@ -763,11 +701,11 @@ function ChkByte(obj, maxByte) {
 }
 
 
-//답글 등록
+// 답글 등록
 function recommentSubmit(a) {
 	var rno = $(a).attr("data-rno");
 	let page = $(".page-item.active a").attr("data-page");
-//	console.log(page);
+// console.log(page);
 	
 		$.post({
 			url: "recomment_regist.do",
@@ -776,13 +714,13 @@ function recommentSubmit(a) {
 			error: () => console.log("에러")
 		});		
 }
-//답글 등록 폼 취소
+// 답글 등록 폼 취소
 function onecancel(a) {
 	let rno = $(a).attr("data-rno");
 	$("#bossComment" + rno).empty();
 }
 
-//답글 삭제
+// 답글 삭제
 $("#targetContainer").on("click", "button.delRecomment", (e) => {
 	let page = $(".page-item.active a").attr("data-page");
 	$.getJSON({
@@ -794,7 +732,7 @@ $("#targetContainer").on("click", "button.delRecomment", (e) => {
 	});
 });
 
-//답글 수정 폼 보이기
+// 답글 수정 폼 보이기
 
 $("#targetContainer").on("click", "button.modRecomment", (e) => {
 	let rno = $(e.target).data("no");
@@ -821,32 +759,23 @@ $("#targetContainer").on("click", "button.modRecomment", (e) => {
     </div>`;
 	
 	/*
+	 *  ` <table class="modform"> <tr id="modRow${rno}"> <td class="modtd_one">${modRegDate}</td>
+	 * <td class="modtd_two"> <div class="form-group"> <textarea name="content"
+	 * id="modbossContent" value="${modContent}" class="modbossContent"
+	 * onKeyUp="fnChkByte(this,'400')" placeholder="최대 200자(400바이트)까지 입력
+	 * 가능합니다."></textarea> <br /> <span id="counter">0</span><span
+	 * id="countertwo"> / 400bytes</span> </div> </td>
+	 * <td colspan="2" class="modtd_three"> <a href="#" data-rno="${rno}"
+	 * class="updatetwo" role="button">수정</a> <a href="#" data-rno="${rno}"
+	 * class="canceltwo" role="button">취소</a> </td> </tr> </table>`
 	 * 
-	 * `
-	<table class="modform">
-	<tr id="modRow${rno}">
-    	<td class="modtd_one">${modRegDate}</td>
-    	<td class="modtd_two">
-    		<div class="form-group">
-    		<textarea name="content" id="modbossContent" value="${modContent}" class="modbossContent" onKeyUp="fnChkByte(this,'400')" placeholder="최대 200자(400바이트)까지 입력 가능합니다."></textarea>
-    		<br />
-		<span id="counter">0</span><span id="countertwo"> / 400bytes</span>
-    		</div>
-    	</td>
-    	<td colspan="2" class="modtd_three"> 
-    		<a href="#" data-rno="${rno}" class="updatetwo" role="button">수정</a>
-    		<a href="#" data-rno="${rno}" class="canceltwo" role="button">취소</a>
-    	</td>
-    </tr>
-    </table>`
-	 * 
-	 * */
+	 */
 $("#row" + rno).after(html);	
 $("#row" + rno).hide();
 	
 });
 
-//답글 수정
+// 답글 수정
 $("#targetContainer").on("click", "a#updatetwo", (e) => {
 	e.preventDefault();
 	let rno = $(e.target).data("rno");
@@ -875,9 +804,9 @@ $("#targetContainer").on("click", "a#canceltwo", (e) => {
 	$("#modRow" + rno).remove();
 });
 
-//페이징
+// 페이징
 
-//이전 버튼 이벤트
+// 이전 버튼 이벤트
 function fn_prev(page, range, rangeSize) {
 	var page = ((range - 2) * rangeSize) + 1;
 	var range = range - 1;
@@ -898,7 +827,7 @@ function fn_prev(page, range, rangeSize) {
 
 }
 
-//페이지 번호 클릭
+// 페이지 번호 클릭
 function fn_pagination(page, range, rangeSize) {
 	
 	$.ajax({
@@ -915,7 +844,7 @@ function fn_pagination(page, range, rangeSize) {
 	});
 }
 
-//다음 버튼 이벤트
+// 다음 버튼 이벤트
 function fn_next(page, range, rangeSize) {
 	var page = parseInt((range * rangeSize)) + 1;
 	var range = parseInt(range) + 1;
@@ -936,11 +865,11 @@ function fn_next(page, range, rangeSize) {
 	
 }
 
-//지도 붙이기
+// 지도 붙이기
 let y;
 let x;
 function mapDraw(longitude, latitude, storeName){
-//	console.log("지도 넘길 것", longitude, latitude, storeName);
+// console.log("지도 넘길 것", longitude, latitude, storeName);
 	y = latitude;
 	x = longitude
 	locations = [
@@ -967,14 +896,13 @@ function mapDraw(longitude, latitude, storeName){
         icon: null,
         map: map
       });
-      infowindow.setContent(locations[i][0]);
-      infowindow.open(map, marker);
+
     }
 	
 }
 mapDraw(longitude, latitude, storeName);
 
-//리뷰 제한
+// 리뷰 제한
 $("#reviewRegist").click(()=>{
 	if(loginStore != storeNo && userNo == 0){
 		Swal.fire("유저만 이용가능합니다");

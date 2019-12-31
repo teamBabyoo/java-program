@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -39,20 +40,27 @@ public class StoreServiceImpl implements StoreService {
 	@Autowired FileDAO fDao;
 	@Autowired NoticeDAO noticeDAO;
 	
-	// 가게 전체 리스트
+	/* 가게 전체 리스트 */
 	@Override
 	public Map<String, Object> storeList(Search search){
 		Map<String, Object> result = new HashMap<>();
-		// 지워야함
-		System.out.println("llll : " + search.getPage());
-		System.out.println("llll : " + search.getStartList());
-		System.out.println(search.toString());
-		System.out.println("검색결과 몇개? " + dao.storeListCnt(search));
 		result.put("search", search);
-		result.put("sList", dao.storeList(search));
-		result.put("pi", new Pagination(search.getPage(), dao.storeListCnt(search), 10, 5));
-		return result;
+		
+		// 내 주변 맛집 기능으로 검색시
+		if (search.getFlag() == 2) {
+			result.put("sList", dao.surroundingStore(search));
+			result.put("pi", new Pagination(search.getPage(), dao.surroundingStoreCnt(search), 10, 5));
+			return result;
+		} 
+		// 일반 검색
+		else { 
+			result.put("sList", dao.storeList(search));
+			result.put("pi", new Pagination(search.getPage(), dao.storeListCnt(search), 10, 5));
+			return result;
+		}
 	}
+	
+	
 
 	@Override
 	public Store storeDetail(int no) {
@@ -138,55 +146,17 @@ public class StoreServiceImpl implements StoreService {
 	public int updateStoreByAddReview(Map<String, Object> map) {
 		return dao.updateStoreByAddReview(map);
 	}
+	// 리뷰 이미지 노출
+	public void getReviewImg(HttpServletRequest req, HttpServletResponse res, Review review) throws ServletException, IOException {
+		fileDnService.download(req, res, review);
+	}
 
 	// 이미지 다운로드 하지 않으면서 그냥 경로로 가져오기
 	@Override
 	public List<FileVO> selectFileList(HttpServletRequest req, HttpServletResponse res, Review review) throws IOException {
 		List<FileVO> fList = new ArrayList<>(); 
 		fList = fDao.selectFileList(review.getReviewNo());
-//		System.out.println("서비스 결과값 : " + fList);
-		/*
-		// ---------------------------------------------
-		//사용자가  요청한 파일이 어느날짜 어느 시간에 있는지 모른다.
-		String path = req.getParameter("path"); // 사용자 요청 파일이 저장된 경로 
-		String name = req.getParameter("name"); // 사용자 요청 파일명
-		String dname = req.getParameter("dname"); // 다운로드할 파일명
 		
-		//파일의 읽기 위한 파일 객체 생성
-		File f = new File(path, name);
-		
-		//전송하는 내용에 대한 설정
-		if(dname == null) {
-			res.setHeader("Content-Type", "image/jpg");
-		} //다운로드 시킬 때
-		   else {
-			 //브라우저가 타입을 모르면 다운시켜주는게 있었다..
-			res.setHeader("Content-Type", "application/octet-stream"); 
-			//한글이름일 경우 처리
-			dname = new String(dname.getBytes("utf-8"), "8859_1");
-			//다운로드할 이름을 지정
-			res.setHeader("Content-Disposition", "attachment;filename=" + dname);
-		}
-		
-		//브라우저로 전송
-		//읽어서 사용자에게 전송 reader가 아닌 InputStream. 이미지 일 수 있으니.. 텍스트를 바이트로 보내도 된다. 반대는 X
-		FileInputStream fis = new FileInputStream(f);
-		//속도향상
-		BufferedInputStream bis = new BufferedInputStream(fis);
-		//byte 단위를 파일로 보내기 위해
-		OutputStream out = res.getOutputStream();
-		BufferedOutputStream bos = new BufferedOutputStream(out);
-		
-		while(true) {
-			int ch = bis.read();
-			if(ch == -1) break;
-			//파일읽을 내용이 있으면
-			bos.write(ch);
-		}
-		bis.close();fis.close();
-		bos.close();out.close();
-		// ---------------------------------------------
-		*/
 		return fList;
 	}
 

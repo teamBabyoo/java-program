@@ -16,7 +16,7 @@ body {
 ul, dl { list-style: none !important; }
 li { color: #7f7f7f; }
 a { text-decoration: none; color: #7f7f7f; }
-i { font-style: normal; font-weight: normal; font-size: 1.4rem; }
+i, em { font-style: normal; font-weight: normal; /*font-size: 1.4rem;*/ }
 
 /* modules */
 .mt0a { margin: 0 auto; }
@@ -33,6 +33,10 @@ i { font-style: normal; font-weight: normal; font-size: 1.4rem; }
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.cover-center-center {
+	background-size: cover; 
+	background-position: center center; 	
 }
 .topshape { position: absolute; top: -40px; right: 40px; width: 25px; border-width: 20px; border-style: solid; border-color: transparent transparent #FBA4BC transparent;}
 /* 헤더 컨텐트 푸터 공통 */
@@ -62,10 +66,11 @@ header div:nth-child(3) ul li:nth-child(4) i { padding: 10px;  color: #fff; back
 #person_btn .pop_person div:nth-child(2) {}
 #person_btn .pop_person ul { border-top: 1px solid #d4d4d4; }
 #person_btn .pop_person .recent_box {border-bottom: 3px solid rosybrown; height: 52px;}
-#person_btn .pop_person #viewlist {
-	overflow: auto;
-    height: 190px;
-}
+#person_btn .pop_person #viewnone {overflow: auto; }
+#person_btn .pop_person #viewlist {overflow: auto; height: 190px;}
+
+
+
 
 
 /* 검색바 활성화 */
@@ -103,7 +108,13 @@ footer { position: absolute; bottom: 0; width: 100%; line-height: 40px; text-ali
 .main_wrap .v_content img { margin: 0; }
 
 /* 메인 */
-.main_wrap .content .sc .title { display: inline-block; margin: 20px auto; text-align: center; font-weight: normal; color: #ff7100; }
+.main_wrap .content .sc { width: 100%; }
+.main_wrap .content .sc .inner { margin: 0 auto; width: 1700px; }
+.main_wrap .content .sc1 .inner { width: 100%; }
+.main_wrap .content .sc1 { border-bottom: none; }
+
+
+.main_wrap .content .sc > .inner > .title { display: inline-block; margin: 20px auto; text-align: center; font-weight: normal; color: #ff7100; }
 
 .main_wrap .content .store { position: relative; float: left; width: 25%; background-repeat: no-repeat !important; background-size: cover !important; background-position: center center !important; border-right: 1px solid #d4d4d4; background-image: url("../images/imgReady.png"); }
 .main_wrap .content .store .square_box { display: none; transition: all .3s; }
@@ -164,6 +175,46 @@ footer { position: absolute; bottom: 0; width: 100%; line-height: 40px; text-ali
 .main_wrap .content .store_1st .desc { top: 50px; }
 .main_wrap .content .store_1st p { bottom: 50px; }
 .main_wrap .content .store_1st p a { font-size: 1.2rem; }
+
+/* 메인 어워즈 재활용 부분 */
+.main_wrap .list-restaurants {
+    overflow: hidden;
+}
+.main_wrap .list-restaurants.type-main {
+    margin-top: 0px;
+}
+.main_wrap .pg-main .list-restaurants {
+    margin-left: 90px;
+    margin-right: 90px;
+}
+.main_wrap .popular_restaurant_inner_wrap > a { display: inline-block; }
+.main_wrap .popular_restaurant_inner_wrap > a .thumb { width: 360px; height: 360px; }
+.main_wrap .list-restaurants>li {
+    width: 50%;
+    float: left;
+    box-sizing: border-box;
+}
+.main_wrap .list-restaurants>li {
+    padding-bottom: 35px;
+}
+.main_wrap .list-restaurants>li:nth-child(odd) {
+    padding-right: 17px;
+}
+.main_wrap .list-restaurants.type-main>li {
+    float: left;
+    padding-right: 17px;
+    padding-left: 17px;
+    width: 25%;
+}
+.main_wrap .list-restaurants.type-main li {
+    position: relative;
+}
+.main_wrap .list-restaurants.type-main>li {
+    width: 25%;
+}
+.main_wrap .list-restaurants .restaurant-item .thumb { border-radius: 10px; margin-bottom: 10px; }
+.main_wrap .list-restaurants .info > .title { font-size: 1.2rem; }
+.main_wrap .list-restaurants .info > .point { color: #ff7100; }
 
 /* .main_wrap .content .store:hover .square_box,
 .main_wrap .content .store:hover .desc { display: block; } */
@@ -254,118 +305,6 @@ div#commentplace > * { width: 100%; margin: 0 auto; }
 .reviewRegist_wrap .leave_rv.user_rv > form > ul > li:nth-child(3) > ul > li:last-child p * { float: left; }
 .reviewRegist_wrap .leave_rv.user_rv > form > ul > li:nth-child(3) > ul > li:last-child p > input { position: absolute; opacity: 0; }
 .reviewRegist_wrap .leave_rv.user_rv > form > ul > li:nth-child(3) > ul > li:last-child p > label { font-size: 14px; }
-/* 메인  */
-.module.main_popular_restaurant_wrap {
-    padding-bottom: 0;
-}
-.pg-main .module {
-    padding: 38px 0 36px 0;
-}
-.pg-main .module {
-    position: relative;
-    border-top: 1px solid #dbdbdb;
-}
-.pg-main .module>.title {
-    display: block;
-    padding-right: 15px;
-    padding-left: 15px;
-    font-size: 1.125rem;
-    color: #ff792a;
-    line-height: 1.2em;
-    text-align: left;
-}
-.pg-main .module>.title {
-    padding-right: 90px;
-    padding-left: 90px;
-    font-size: 1.438rem;
-}
-.pg-main .slider-container {
-    position: relative;
-}
-.pg-main .slider-container {
-    margin-top: 27px;
-}
-.list-restaurants {
-    overflow: hidden;
-}
-.list-restaurants.type-main {
-    margin-top: 0px;
-}
-.pg-main .list-restaurants {
-    margin-left: 90px;
-    margin-right: 90px;
-}
-.list-restaurants>li {
-    width: 50%;
-    float: left;
-    box-sizing: border-box;
-}
-.list-restaurants>li {
-    padding-bottom: 35px;
-}
-.list-restaurants>li:nth-child(odd) {
-    padding-right: 17px;
-}
-.list-restaurants.type-main>li {
-    float: left;
-    padding-right: 17px;
-    padding-left: 17px;
-    width: 25%;
-}
-.list-restaurants.type-main li {
-    position: relative;
-}
-.list-restaurants.type-main>li {
-    width: 25%;
-}
-.pg-main .module_title_wrap {
-    margin-left: 90px;
-    margin-right: 90px;
-}
-.pg-main .module .module_title_wrap {
-    clear: both;
-    overflow: hidden;
-}
-.pg-main .module .module_title_wrap .title {
-    float: left;
-    display: block;
-    padding-right: 15px;
-    padding-left: 15px;
-    font-size: 1.125rem;
-    color: #ff792a;
-    line-height: 1.35em;
-    text-align: left;
-}
-.pg-main .module .module_title_wrap .title {
-    font-size: 1.438rem;
-}
-.pg-main .slider-container.toplist-slider {
-    margin: 30px 90px auto;
-}
-.btn-nav {
-    display: block;
-    position: absolute;
-    top: 50%;
-    z-index: 1;
-    margin-top: -35px;
-    padding: 0;
-    height: 70px;
-    width: 62px;
-    text-align: center;
-    cursor: pointer;
-    opacity: .4;
-}
-.slick-disabled {
-    display: none;
-}
-.btn-nav.prev {
-    left: 0;
-    border-radius: 0px 70px 70px 0px;
-}
-.pg-main .slider-container.toplist-slider .prev {
-    left: -45px;
-}
-/* 메인  끝*/
 /* 리스트페이지 (죄송합니다) */
 .list_content { margin-top: 0; }
 
@@ -617,6 +556,7 @@ a.modbtn.can {
 
 .detail_wrap #detaillistjs {
 	z-index: 1;
+	background: #fafafa;
 }
 
 .detail_wrap #storedetail {
@@ -628,8 +568,8 @@ a.modbtn.can {
 }
 
 .detail_wrap #storeinfo {
-	width: 640px;
-	border: 2px solid #c1c1c1;
+	width: 860px;
+	border: 2px solid #f3f3f3;
 	padding: 30px 20px;
 	margin: 0 auto;
 	background: white;
@@ -640,7 +580,7 @@ a.modbtn.can {
 	display: grid;
 	grid-template-rows: 50px 1fr 1fr;
 	align-items: center;
-	width: 80%;
+	width: 90%;
 	margin: 0 auto;
 }
 
@@ -649,11 +589,12 @@ a.modbtn.can {
 }
 
 .detail_wrap #star {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	width: 100px;
 	text-align: right;
 	margin-left: 353px;
+	float: right;
+}
+.detail_wrap #star div{
+	display: inline-block;	
 }
 
 .detail_wrap #stTitle {
@@ -664,10 +605,20 @@ a.modbtn.can {
 	margin: 0 auto;
 }
 
+.detail_wrap #star>span {
+	position: relative;
+}
+
+.detail_wrap #star>span>img {
+    position: absolute;
+    right: 0px;
+    top: -24px;
+}
+
 .detail_wrap #scopescore {
 	margin-top: 17px;
 	margin-right: 10px;
-	font-size: 22px;
+	font-size: 33px;
 }
 
 .detail_wrap #stinfo img {
@@ -681,7 +632,7 @@ a.modbtn.can {
 .detail_wrap .menulist {
 	border: 2px solid #c1c1c1;
 	border-radius: 8px;
-	width: 350px;
+	width: 450px;
 	margin: 0 auto;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -712,6 +663,7 @@ a.modbtn.can {
 .detail_wrap table {
 	width: 80%;
 	margin: 0 auto;
+	padding: 7px 0px;
 }
 
 .detail_wrap #clockicon {
@@ -726,8 +678,9 @@ a.modbtn.can {
 	width: 68px;
 }
 
-.tabletitlefont {
+.detail_wrap .tabletitlefont {
 	font-weight: bold;
+	font-size: 17px;
 }
 
 .detail_wrap #menusizemin {
@@ -812,7 +765,6 @@ a.modbtn.can {
 
 .detail_wrap li.page-item {
 	display: inline-block;
-	border: #aaaaaa 1px solid;
 }
 
 .detail_wrap li.page-item.active {
@@ -931,9 +883,40 @@ a.modbtn.can {
 	display: none;
 }
 
-.detail_wrap #map {
-	margin: 0 auto;
+.detail_wrap #mapDiv {
+    border-top: 1px solid #e5e5e5;
+    margin-top: 49px;
+    padding: 50px 0px;
 }
+
+
+.detail_wrap .report {
+  outline:none;
+  height: 25px;
+  text-align: center;
+  width: 67px;
+  border-radius:40px;
+  background: #fff;
+  border: 2px solid #c8ddd6;
+  color: #676e6b;
+  letter-spacing:1px;
+  text-shadow:0;
+  font:size:12px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  padding-bottom: 10px
+}
+.detail_wrap .report:hover {
+    color:white;
+    background: #1ECD97;
+  }
+.detail_wrap .report:active {
+    letter-spacing: 2px;
+    letter-spacing: 2px;
+  }
+
+
+
 
 /* 화살표 */
 .detail_wrap .slick-arrow {
@@ -943,6 +926,10 @@ a.modbtn.can {
 	width: 50px;
 	height: 50px;
 	transform: translateY(-25px);
+	background: #9e9c9c5c;
+	border: #9e9c9c5c;
+	font-weight: bold;
+	font-size: 22px;
 }
 
 .detail_wrap .slick-prev.slick-arrow { /* prev 이전 */
@@ -959,7 +946,18 @@ a.modbtn.can {
 
 .detail_wrap div#paginationBox {
 	margin: 0 auto;
+	margin-top: 15px;
 }
+.detail_wrap #cntDiv {
+	margin-top: 20px;
+    margin-bottom: -17px;
+}
+.detail_wrap #cntDiv span {
+	margin: 7px;
+    color: #999999;
+}
+
+
 
 .detail_wrap div#commentplace>* {
 	display: inline-grid;
@@ -1007,8 +1005,58 @@ a.modbtn.can {
   }
 }
 
-.detail_wrap p.goodCount {
-    margin-top: -45px;
+.detail_wrap .goodCount {
+    position: absolute;
+    top: 55px;
+    right: 39px;
+}
+ .detail_wrap .user_rv .clearboth {
+	position: relative;
+}
+ 
+
+
+/*구글지도 css*/
+.gm-style .gm-style-iw-d > div {
+	   display: grid;
+       grid-template-rows: 1fr 100px;
+       width: 100%;
+    	height: 300px;
+}
+
+.gm-style .gm-style-iw-d > div >div {
+    	height: 70px;
+}
+
+
+
+
+.gm-style .gm-style-iw-c {
+	width: 230px;
+	height: 280px;
+}
+.boxcategoty{
+	color: gray;
+}
+
+.boxstorename {
+	font-size: 20px;
+	margin-top: -10px;
+	font-weight: bold;
+}
+.boxstorename>a {
+	text-decoration:none ; 
+	color:#000000;
+}
+
+.boxse {
+	display: grid;
+	grid-template-rows: 0.7fr 1fr;
+}
+
+.boxName{
+	display: grid;
+	grid-template-rows: 1fr 24px;
 }
 
 
@@ -1019,6 +1067,11 @@ header div:nth-child(3) li span {
 	line-height: 20px;
 	top: 10px;
 }
+
+.strong {
+	color: #f35c5c;
+}
+
 /*----------------------------------------*/
 #notice_btn .topshape {
 	top: 20px;
@@ -1176,9 +1229,9 @@ header div:nth-child(3) li span {
 }
 
 .frecnt > .fa-bookmark {
-	font-size: 14px;
+	font-size: 13px;
     width: 14px;
-    color: #ff7000;
+    color: #8e8e8e;
 }
 
 .store_name {
@@ -1216,6 +1269,7 @@ header div:nth-child(3) li span {
 
 .bx-viewport {
 	height: 100% !important;
+	width: 100%
 }
 
 .bx-wrapper, .bx-viewport {
@@ -1344,8 +1398,10 @@ header div:nth-child(3) li span {
 
 .mem_cont ul li input {
 	border: 1px solid #d7d7d7;
+	width: 250px;
 	height: 38px;
 	padding: 0 12px;
+	margin-right: 60px;
 	position: relative;
 	background: #fff;
 }
@@ -1607,3 +1663,13 @@ a#listone {
 
 
 /**승경 끝**/
+
+.gm-style-iw-d .bx-wrapper {
+	max-width: 100%;
+	height: 200px;
+}
+
+.gm-style-iw-d .bx-wrapper img{
+	height: 200px;
+}
+

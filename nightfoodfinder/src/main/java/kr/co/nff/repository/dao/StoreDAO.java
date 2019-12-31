@@ -17,16 +17,18 @@ public interface StoreDAO {
 	// 메인 요일 리스트 조회
 //	List<Holiday> selectHolidayListByStoreNo(int storeNo);
 	
-	// 카테고리 리스트
+	/* 헤더 검색 조건 데이터 */
 	List<Category> selectCategory();
-	// 지역구 리스트
 	List<String> cityList();
-	// 가격 타입 리스트
 	List<PriceType> selectPriceType();
-	// 스토어 리스트
+	
+	/* 스토어 리스트 */
     List<Store> storeList(Search search);
-    // 스토어 검색 결과의 전체 크기
     int storeListCnt(Search search);
+    
+    /* 내 주변 맛집 기능*/
+    List<Store> surroundingStore(Search search);
+    int surroundingStoreCnt(Search search);
     
     Store selectOneStore(int no);
     Store selectContent(int no);

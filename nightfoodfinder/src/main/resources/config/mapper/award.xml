@@ -24,6 +24,10 @@ where award_no = #{awardNo};
 				s.close_time,
 			    a.street_load,
                 a.addr_detail,
+                s.price_type_no,
+                s.store_scope_total,
+                s.review_cnt_total,
+                s.status,
 				ifnull(truncate(sum(r.store_scope) / count(r.writer_no), 1), 0) as scope,
                 f.*
 		from tb_store as s

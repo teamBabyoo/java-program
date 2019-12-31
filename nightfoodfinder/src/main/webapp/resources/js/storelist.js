@@ -9,7 +9,7 @@ $(() => {
 		pager:true	//페이징
 	});
 	
-	
+
      
 	/* 지도 스크롤 고정 부분*/
 	$(window).ready(() => {                   /* 헤더의 height만큼 뺀다 */
@@ -24,10 +24,10 @@ $(() => {
 	
 	// page 클릭
 	$("#storePageDiv").on("click", "ul > li > a", (e) => {
+		markerArr=[];
 //		let fd = new FormData(document.querySelector("#searchStoreForm"));
 		let fd = new FormData();
 		fd.append("page", $(e.target).data("page"));
-		console.dir(fd);
 		console.log($("#searchStoreForm").serialize() + "&page=" + $(e.target).data("page"));
 		
 		$.ajax({
@@ -55,7 +55,6 @@ $(() => {
 					       		<div class="home__slider">
 									<div class="bxslider">`;
 						
-						console.log("파일 있냐?", s.fileVoList);
 						// 파일 리스트가 없다면
 							if(s.fileVoList.length == 0) {
 							sHtml += `<img src="https://i.pinimg.com/originals/33/6a/ea/336aea314c68c0bc3eb8f6b5cd799de4.jpg" />`;
@@ -64,6 +63,11 @@ $(() => {
 						else {
 							for (let img of s.fileVoList) {
 								sHtml += `<img src="${context}/front/store/getByteImage.do?name=${img.sysName}&path=${img.path}" />`;
+								filePath = {
+					       				sysname: `${img.sysName}`,
+										path: `${img.path}`
+					       		}
+					       		fileArr.push(filePath);
 							}
 						}
 											
@@ -88,10 +92,10 @@ $(() => {
 				       		</div>
 							<input name="latitude" type="hidden" value="${s.latitude}" />
 							<input name="longitude" type="hidden" value="${s.longitude}" />
-				       	</li>
-							`;
+				       	</li>`;
 						
-						abs(`${s.latitude}`, `${s.longitude}`, `${s.storeName}`, `${s.storeNo}`);
+						abs(`${s.latitude}`, `${s.longitude}`, `${s.storeName}`, `${s.storeNo}`, `${s.categoryName}`, `${s.scope}`, fileArr);
+						fileArr = [];
 					}
 				}
 				
@@ -138,10 +142,12 @@ $(() => {
 				});
 				
 				drawMap();
-				$(".storeLn.sto_li.clearboth").mouseover((e) => {
-					//alert($(e.target).parent($('li')).attr("data-store"));
+				/*
+				$(".storeLn.sto_li.clearboth").mouseenter((e) => {
+					e.preventDefault();
 				  markerEvent($(e.target).parent($('li')).attr("data-store"));
 				});
+				*/
 			},
 			error: () => {
 				console.log("에러발생");
@@ -157,6 +163,10 @@ $(() => {
 		
 		
 	});	
+	$(document).on("mouseenter", ".storeLn.sto_li.clearboth", (e) => {
+		console.log("storeName", $(e.target).closest($('li')).data("store"));
+		markerEvent($(e.target).closest($('li')).data("store"));
+	})
 });
 
 
@@ -172,16 +182,19 @@ let eventMarker;
 let concon =  new google.maps.MarkerImage("https://www.pinclipart.com/picdir/big/447-4478350_png-file-svg-fa-map-marker-png-clipart.png",null, null, null, new google.maps.Size(25, 35));
 let sizex;
 let sizey;
+let contentbox;
 
 
 
-$(".storeLn.sto_li.clearboth").mouseover((e) => {
+	
+/*
+$(".storeLn.sto_li.clearboth").mouseenter((e) => {
 	//alert($(e.target).parent($('li')).attr("data-store"));
-  markerEvent($(e.target).parent($('li')).attr("data-store"));
+	markerEvent($(e.target).parent($('li')).attr("data-store"));
 });
+*/
 
 function markerEvent(storeName) {
-
   markerImage = new google.maps.MarkerImage("https://www.pinclipart.com/picdir/big/288-2889919_markers-clipart-coloring-page-png-download.png",
     null, null, null, new google.maps.Size(25, 35));
 
@@ -195,10 +208,47 @@ function markerEvent(storeName) {
       });
 
     if (markerArr[i].store_name == storeName) {
+//    	console.log("이미지는요?", parseimsg);
       /*가게이름 나오기*/
-    	let con = `<a href="storedetail.do?no=`+markerArr[i].store_no+`">`+markerArr[i].store_name+`</a>`
-       infowindow.setContent(con);
+//    	let contentbox = `<a href="storedetail.do?no=`+markerArr[i].store_no+`">`+markerArr[i].store_name+`</a>`
+    	contentbox = `
+    		<div>
+    			<div class="home__slider">
+					<div class="bxslider">`
+    		if(markerArr[i].store_img.length === 0) {
+    			contentbox +=`<img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" style="width: 200px;" />`
+    		} else {
+    			for (let img of markerArr[i].store_img) {
+    				contentbox +=`<img src="${context}/front/store/getByteImage.do?name=${img.sysname}&path=${img.path}" />`;
+				}
+    		}
+    	contentbox +=
+    		`
+    				</div>
+    			</div>
+    		</div>
+	        <div class="boxse">
+	           <div>
+    				<div class="boxcategoty">`+markerArr[i].store_category+`</div> 
+    			</div>
+    			<div class="boxName">
+    				<div class="boxstorename"><a href="storedetail.do?no=`+markerArr[i].store_no+`">`+markerArr[i].store_name+`</a></div>
+    				<div class="boxstorescope">★`+markerArr[i].store_scope+`</div>
+   				</div>
+	        </div>
+
+       `;
+       infowindow.setContent(contentbox);
         infowindow.open(map, markerArr[i]);
+        
+        var goomain = $('.bxslider').bxSlider({
+			mode: 'fade',
+			controls : true,
+		    captions: true,
+		    slideWidth: 200,
+		    slideMargin: 0,
+			pager:true	//페이징
+		});
         
         /*애니메이션 주기*/
         if (markerArr[i].getAnimation() !== null) {
@@ -215,8 +265,6 @@ function markerEvent(storeName) {
 
 function drawMap() {
   // 나온 마커로 중심좌표 찾기
-	console.log("arr은?", arr.length);
-	console.log("0?", arr[0]);
 	locations = arr;
 	  /*
     ['수저가', 37.5493313, 126.937287],
@@ -230,7 +278,6 @@ function drawMap() {
   let y = 0;
   let x = 0;
   let u = 0;
-  console.log("로케 렝스", locations.length);
   for (u = 0; u < locations.length; u++) {
     y += locations[u].latitude*1;
     x += locations[u].longitude*1;
@@ -250,7 +297,6 @@ function drawMap() {
   infowindow = new google.maps.InfoWindow();
 
   google.maps.event.addListener(map, 'click', function(event) {
-       console.log(event.latLng.toString());
        var latLng = event.latLng.toString();
        let ss = latLng.split('(', 2)[1];
        let sms = ss.split(')', 2)[0];
@@ -297,6 +343,9 @@ function drawMap() {
       store_lati: locations[i].latitude*1,
       store_long: locations[i].longitude*1,
       store_no: locations[i].storeNo*1,
+      store_category: locations[i].category,
+      store_scope: locations[i].scope,
+      store_img: locations[i].files,
       icon: concon,
       size: sizex,
       map: map
@@ -305,11 +354,37 @@ function drawMap() {
 
 
 
-
-
     google.maps.event.addListener(marker, 'click', (function (marker, i) {
       return function () {
-        infowindow.setContent(locations[i].storeName);
+    	  contentbox = `
+      		<div>
+      			<div class="home__slider">
+  					<div class="bxslider">`
+      		if(marker.store_img.length === 0) {
+      			contentbox +=`<img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg"  style="width: 100%; " />`
+      		} else {
+      			for (let img of marker.store_img) {
+      				console.log("배열이미지",img);
+      				contentbox +=`<img src="${context}/front/store/getByteImage.do?name=${img.sysname}&path=${img.path}" style="width: 100%;"/>`;
+  				}
+      		}
+      	contentbox +=
+      		`
+      				</div>
+      			</div>
+      		</div>
+  	        <div class="boxse">
+	           <div>
+    				<div class="boxcategoty">`+markerArr[i].store_category+`</div> 
+    			</div>
+    			<div class="boxName">
+    				<div class="boxstorename"><a href="storedetail.do?no=`+markerArr[i].store_no+`">`+markerArr[i].store_name+`</a></div>
+    				<div class="boxstorescope">★`+markerArr[i].store_scope+`</div>
+   				</div>
+	        </div>
+      				
+         `;
+        infowindow.setContent(contentbox);
         infowindow.open(map, marker);
       }
     })(marker, i));
@@ -329,7 +404,6 @@ function drawMap() {
 drawMap();
 /*지도상 누른 좌표값 받기*/
 function codeLatLng(lat, lng) {
-console.log("코드", lat, lng);
 geocode =
 "https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&key=AIzaSyCSQHW_pWBrzI8-rkc4FczxQWzCSciCJS4";
 jQuery.ajax({
@@ -361,26 +435,9 @@ jQuery.ajax({
                 }
         }
       
-});
+	});
 }
 
-/* 내 위치값 받기*/
-
-$(function() { 
-    // Geolocation API에 액세스할 수 있는지를 확인
-    if (navigator.geolocation) {
-        //위치 정보를 얻기
-        navigator.geolocation.getCurrentPosition (function(pos) {
-            y = (pos.coords.latitude);// 위도
-            x = (pos.coords.longitude);// 경도
-            console.log("내위치: ", y, x);
-        });
-    } else {
-        alert("이 브라우저에서는 Geolocation이 지원되지 않습니다.")
-    }
-
-}); /*   
-*/
 
 
 

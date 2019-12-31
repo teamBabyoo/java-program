@@ -6,6 +6,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,9 +19,10 @@ import kr.co.nff.repository.vo.Search;
 import kr.co.nff.repository.vo.Store;
 
 public interface StoreService {
-	//전체리스트
-	Map<String, Object> storeList(Search search);
-	//추후 int no 넣어주기
+	// 스토어 전체리스트
+	public Map<String, Object> storeList(Search search);
+	
+	// 스토어 상세보기
 	public Store storeDetail(int storeNo); 	
 	//메뉴 가져오기
 	public List<Menu> storeMenu(int storeNo);
@@ -45,6 +47,9 @@ public interface StoreService {
 
 	// 리뷰 등록시 가게테이블 총 리뷰수, 총 별점 업데이트
 	int updateStoreByAddReview(Map<String, Object> map);
+	
+	// 리뷰 이미지 노출
+	public void getReviewImg(HttpServletRequest req, HttpServletResponse res, Review review) throws ServletException, IOException;
 	
 	// 리뷰 이미지 가져오기
 //	public List<FileVO> selectFileList(int reviewNo);
