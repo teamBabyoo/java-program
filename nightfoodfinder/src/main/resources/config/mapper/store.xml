@@ -103,10 +103,9 @@
 
 	<select id="cityList" resultType="String">
 		select distinct a.city
-		from
-		tb_store s
-		inner join tb_address a
-		on s.store_no = a.store_no
+		  from tb_store s
+		 inner join tb_address a
+		    on s.store_no = a.store_no
 	</select>
 	
 	<select id="selectPriceType" resultType="PriceType">
@@ -155,7 +154,6 @@
  					 		 group by store_no) f
 		on s.store_no = f.store_no 		
 		where s.store_no = #{storeNo}
-
 	</select>
 
 	<!--가게 소개글 가져오기 -->
@@ -174,7 +172,6 @@
 		tb_store_content (store_no, store_content)
 		VALUES (#{storeNo},
 		#{storeContent});
-
 	</insert>
 
 
@@ -263,6 +260,7 @@
 	</update>
 
 
+	<!-- 스토어 리스트 -->
 	<sql id="commonStoreList">
 		  from tb_store s
 		 inner join tb_category c
@@ -311,7 +309,6 @@
 			</if>
 	</sql>
 
-	<!-- 스토어 리스트 -->
 	<select id="storeList" resultMap="storeMap" parameterType="Search">
 		select distinct s.*,
 			   a.*,
