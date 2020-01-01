@@ -24,7 +24,7 @@
 				<form id="updateForm" name="form" action="storeinfoupdate.do" method="post">
 					<table>
 						<tr>
-							<th class="thcolor">가게 이름</th>
+							<th class="thcolor"><a class="necessaryInfo">*</a> 가게 이름</th>
 							<td><input type="text" name="storeName"
 								value="${store.storeName}" /></td>
 						</tr>
@@ -40,7 +40,7 @@
 						<%-- 
 						--%>
 						<tr>
-							<th class="thcolor">비밀번호</th>
+							<th class="thcolor"><a class="necessaryInfo">*</a> 비밀번호</th>
 							<td><input type="password" id="storePass" name="storePass" />
 								<div id="pwChk">
 									<span id="alert-success" style="display: none;">비밀번호가
@@ -48,7 +48,7 @@
 								</div></td>
 						</tr>
 						<tr>
-							<th class="thcolor">비밀번호 확인</th>
+							<th class="thcolor"><a class="necessaryInfo">*</a> 비밀번호 확인</th>
 							<td><input type="password" id="storePass2" name="storePass2" />
 								<div id="pwChk2">
 									<span id="alert-success" style="display: none;">비밀번호가
@@ -57,12 +57,12 @@
 								</div></td>
 						</tr>
 						<tr>
-							<th class="thcolor">가게 전화번호</th>
+							<th class="thcolor"><a class="necessaryInfo">*</a> 가게 전화번호</th>
 							<td><input type="text" name="storeTell"
 								value="${store.storeTell}" /></td>
 						</tr>
 						<tr>
-							<th rowspan="4" class="thcolor">주소</th>
+							<th rowspan="4" class="thcolor"><a class="necessaryInfo">*</a> 주소</th>
 						</tr>
 						<tr>
 							<td><input type="text" id="zipNo" name="zipNo" value="${store.zipNo}" /> 
@@ -79,7 +79,7 @@
 						</tr>
 
 						<tr>
-							<th class="thcolor">영업 시간</th>
+							<th class="thcolor"><a class="necessaryInfo">*</a> 영업 시간</th>
 							<td><select name="openH">
 									<c:forEach begin="0" end="24" var="i">
 										<option id="openH${i}" value="${i}">${i}</option>
@@ -111,7 +111,7 @@
 							<tr name="trMenu">
 								<c:choose>
 									<c:when test="${status.index == 0}">
-										<th class="thcolor" rowspan="${fn:length(menulist)}" id="rowTh">대표 메뉴 / 가격</th>
+										<th class="thcolor" rowspan="${fn:length(menulist)}" id="rowTh"><a class="necessaryInfo">*</a> 대표 메뉴 / 가격</th>
 										<td><input type="text" class="tdline" name="menuName" value="${m.menu}">
 											<input type="number" class="tdline" name="menuPrice" value="${m.price}">
 											<i class="fa fa-plus-square-o" aria-hidden="true" id="plus_btn"></i> 
@@ -127,8 +127,8 @@
 							</tr>
 						</c:forEach>
 						<tr>
-							<th class="thcolor">가게 분류</th>
-							<td><select name="storeCategory">
+							<th class="thcolor"><a class="necessaryInfo">*</a> 가게 분류</th>
+							<td><select name="storeCategory" id="categorybox">
 									<option value="1">한식</option>
 									<option value="2">양식</option>
 									<option value="3">중식</option>
@@ -144,12 +144,12 @@
 								</textarea></td>
 						</tr>
 						<tr>
-							<th class="thcolor">대표자 이름</th>
+							<th class="thcolor"><a class="necessaryInfo">*</a> 대표자 이름</th>
 							<td><input type="text" name="storeOwner"
 								value="${store.storeOwner}" /></td>
 						</tr>
 						<tr>
-							<th class="thcolor">대표자 휴대폰 번호</th>
+							<th class="thcolor"><a class="necessaryInfo">*</a> 대표자 휴대폰 번호</th>
 							<td><input type="text" name="storeOwnerPh"
 								value="${store.storeOwnerPh}" /></td>
 						</tr>
