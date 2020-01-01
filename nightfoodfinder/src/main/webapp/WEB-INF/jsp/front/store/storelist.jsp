@@ -13,9 +13,6 @@
 	integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
 	crossorigin="anonymous">
 
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>  -->
-
-
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <script type="text/javascript">
 let filePath;
@@ -222,10 +219,6 @@ function abs(value1, value2, value3, value4, value5, value6, value7) {
 		</div>
 		<!-- // 컨텐트  -->
 
-		<!-- 푸터 -->
-		<%-- <c:import url="/WEB-INF/jsp/include/footer.jsp" /> --%>
-		<!-- // 푸터 -->
-
 		<!-- 팝업 백그라운드  -->
 		<div class="bgbox"></div>
 	</div>
@@ -248,7 +241,6 @@ function abs(value1, value2, value3, value4, value5, value6, value7) {
 	
  	<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 	<script src="<c:url value='/resources/js/storelist.js' />"></script>
-<%-- 	<script src="<c:url value='/resources/js/map_in_storelist.js' />"></script> --%>
 </body>
 </html>
 

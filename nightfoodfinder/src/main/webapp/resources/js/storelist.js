@@ -22,23 +22,21 @@ $(() => {
 	
 	
 	
-	// page 클릭
+	/* 페이지 번호 클릭 시 */
 	$("#storePageDiv").on("click", "ul > li > a", (e) => {
 		markerArr=[];
+		// FormData를 이용해 파라미터 넘긴다.
 //		let fd = new FormData(document.querySelector("#searchStoreForm"));
 		let fd = new FormData();
 		fd.append("page", $(e.target).data("page"));
-		console.log($("#searchStoreForm").serialize() + "&page=" + $(e.target).data("page"));
 		
 		$.ajax({
 			url: "storelistAjax.do",
 			type: "POST",
+					// 폼 안에 있는 파라미터와 클릭되는 페이지 넘버를 Search에 같이 담는다.
 			data: $("#searchStoreForm").serialize() + "&page=" + $(e.target).data("page"),
 			success: (data) => {
-				console.log("전", arr.length);
 				arr = [];
-				console.log("후", arr.length);
-				console.dir(data);
 				// 스토어 리스트
 				let sHtml = "";
 				
