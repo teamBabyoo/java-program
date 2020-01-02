@@ -497,10 +497,6 @@ NFF(이하'회사')는 관계법령이 정하는 바에 따라 '회원'의 개�
 			</form>
 		</div>
 	</div>
-    <!-- 푸터 -->
-<%--     <c:import url="/WEB-INF/jsp/include/footer.jsp" /> --%>
-    <!-- // 푸터 -->
-    
     <!-- 팝업 백그라운드  -->
     <div class="bgbox"></div>
 </div>
@@ -561,7 +557,6 @@ NFF(이하'회사')는 관계법령이 정하는 바에 따라 '회원'의 개�
 			if(isEmpty(f.storeEmail, "이메일을 입력해주세요")) return false;
 			if(isEmpty(f.storeTell, "전화번호를 입력해주세요")) return false;
 			if(isEmpty(f.roadFullAddr, "주소를 입력해주세요")) return false;
-			//if(isEmpty(f.menuName, "대표메뉴를 입력해주세요")) return false;
 			if(isEmpty(f.storeCategory, "가게분류를 선택해주세요")) return false;
 			if(isEmpty(f.storeOwner, "대표자 이름을 입력해주세요")) return false;
 			if(isEmpty(f.storeOwnerPh, "대표자 휴대폰번호를 입력해주세요")) return false;
@@ -578,7 +573,6 @@ function goPopup(){
 }
 
 function jusoCallBack(roadFullAddr,zipNo,addrDetail,sggNm,roadAddrPart1){
-		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.\
 		let arr = roadFullAddr.split(",");
 		
 		document.sjform.roadFullAddr.value = arr[0];
@@ -586,8 +580,6 @@ function jusoCallBack(roadFullAddr,zipNo,addrDetail,sggNm,roadAddrPart1){
 		document.sjform.addrDetail.value = arr[1];
 		document.sjform.sggNm.value = sggNm;
 		document.sjform.roadAddrPart1.value = roadAddrPart1;
-		/* document.form.entX.value = entX;
-		document.form.entY.value = entY; */
 		
 		var geocoder = new kakao.maps.services.Geocoder();
 		var callback = function (result, status) {
@@ -612,15 +604,12 @@ $("#storePass").blur(function () {
         //alert('숫자+영문자+특수문자 조합으로 8자리 이상 사용해야 합니다.');
         $('#pwChk').text('숫자+영문자+특수문자 조합으로 8자리 이상 사용해야 합니다.');
 		$('#pwChk').css('color', 'red');
-		//$("#reg_submit").attr("disabled", true);
-        
         $('#pwChk').val('').focus();
         return false;
     }    
     var checkNumber = storePass.search(/[0-9]/g);
     var checkEnglish = storePass.search(/[a-z]/ig);
     if(checkNumber <0 || checkEnglish <0){
-       // alert("숫자와 영문자를 혼용하여야 합니다.");
         $('#pwChk').text("숫자와 영문자를 혼용하여야 합니다.");
 		$('#pwChk').css('color', 'red');
 		//$("#reg_submit").attr("disabled", true);
