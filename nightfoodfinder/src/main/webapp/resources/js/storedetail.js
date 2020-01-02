@@ -76,13 +76,19 @@ function frequentRegist(urlhtml) {
 function animateValue(id, start, end, duration) {
     let range = start + end;
     let current = start;
-    let increment = start > end? 0 : 0.1;
+    let increment;
+    if(end === 0) {
+    	increment = 0;
+    } else {
+    	increment = 0.1;
+    }
+    	
     let stepTime = Math.floor(duration / range);
     let obj = document.getElementById(id);
     let timer = setInterval(function() {
         current += increment;
         obj.innerHTML = current.toFixed(1);
-        if (current > end) {
+        if (current >= end) {
             clearInterval(timer);
         }
     }, stepTime);
@@ -567,7 +573,12 @@ function reviewReport(count, rNo, page) {
 			return false;
 		});
 	} else {
-		alert("이미 신고한 리뷰입니다");
+		Swal.fire({
+			  text: '이미 신고한 리뷰입니다',
+			  icon: 'warning',
+			  confirmButtonText: '확인'
+			})
+//		alert("이미 신고한 리뷰입니다");
 		return false;
 	}
 };

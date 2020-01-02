@@ -25,7 +25,7 @@
 						<c:when test="${empty imgList}">
 							<c:forEach begin="1" end="5">
 								<div>
-				   					<div style="background-image: url('https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg'); background-size: cover; background-position: center center; height: 360px; ">
+				   					<div style="background-image: url('https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80'); background-size: cover; background-position: center center; height: 360px; ">
 				   				</div>
 								</div>
 							</c:forEach>
@@ -42,7 +42,7 @@
 								<c:if test="${i.last}">
 								<c:forEach begin="1" end="${5-size}">
 									<div>
-										<div style="background-image: url('https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg'); background-size: cover; background-position: center center; height: 360px;">
+										<div style="background-image: url('https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80'); background-size: cover; background-position: center center; height: 360px;">
 										</div>
 		<!-- 			   					 <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" /> -->
 									</div>							
@@ -54,7 +54,7 @@
 										</div>
 									<c:if test="${i.last}">
 										<div>
-											<div style="background-image: url('https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg'); background-size: cover; background-position: center center; height: 360px; ">
+											<div style="background-image: url('https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80'); background-size: cover; background-position: center center; height: 360px; ">
 											</div>
 		<!-- 			   						 <img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" /> -->
 										</div>

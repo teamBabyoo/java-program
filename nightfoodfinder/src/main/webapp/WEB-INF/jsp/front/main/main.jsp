@@ -80,6 +80,13 @@
 	</div>
 	</div>
 	</section>
+	
+	<section class="sc sc_yt">
+		<div class="inner">
+			<iframe src="https://www.youtube.com/embed/0T9_T5gq5GI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		</div>
+	</section>
+	<%-- 
 	<!-- 하드코딩 -->
 	<section class="sc sc2 module main_popular_restaurant_wrap">
 	<div class="inner">
@@ -313,6 +320,7 @@
 	</section>
 	
 	<!-- // 하드코딩 -->
+	 --%>
 	</div>
     <!-- // 컨텐트  -->
     
