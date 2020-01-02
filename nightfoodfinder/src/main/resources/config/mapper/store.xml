@@ -87,12 +87,13 @@
 		on s.store_no = m.store_no
 		inner join tb_address a
 		on s.store_no = a.store_no
-		where status = 1
-		<!-- <where> <if test="includeClosed == 1"> <![CDATA[ and str_to_date(s.open_time, 
-			'%h:%i %p') < now() and str_to_date(s.close_time, '%h:%i %p') > now() ]]> 
-			</if> </where> -->
+		left outer join ( 
+						select max(file_no), f.* from tb_file as f group by store_no 
+							) as l 
+		        	on l.store_no = s.store_no 
+        where status = 1
 		order by (store_scope_total/review_cnt_total) desc
-		limit 5
+		limit 5;
 	</select>
 
 <!-- 검색 헤더 부분 시작 -->
