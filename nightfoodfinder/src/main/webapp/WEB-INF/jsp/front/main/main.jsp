@@ -38,7 +38,7 @@
 		<div>
 		
 		<c:forEach var="s" items="${sList}" varStatus="status">
-			<div class="cover-center-center store store_${status.count}" style="background-image: url('${pageContext.request.contextPath}/front/store/getByteImage.do??name=${s.sysName}&path=${s.path}')">
+			<div class="cover-center-center store store_${status.count}" style="background-image: url('${pageContext.request.contextPath}/front/store/getByteImage.do?name=${s.sysName}&path=${s.path}')">
 <%-- 		<div class="cover-center-center store store_${status.count}"> --%>
 		        <div class="square_box">
 		            <div class="desc">
