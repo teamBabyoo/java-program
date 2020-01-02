@@ -20,13 +20,13 @@
     <c:import url="/WEB-INF/jsp/include/header.jsp" />
     <!-- // 헤더 -->
 	<div class="content clearboth" >
-        <div class="login_container">
+        <div class="login_container" style="margin: 220px auto 360px; ">
 	 		<div id="login_div01">
 	 			<div id="login_tab" >
 			 		<div id="login_tab01" class="on">일반회원 로그인</div>
 			 		<div id="login_tab02" ><a href="javascript:show_layer('2');">스토어 로그인</a></div>
 		 		</div>
-	 			<div class="sns_cont" id="sns_cont">
+	 			<div class="sns_cont" id="sns_cont" style="padding: 60px 50px;">
 	 			<p class="txt">기존 SNS 계정으로 로그인 하세요</p>
 					<ul>
 						<li>
