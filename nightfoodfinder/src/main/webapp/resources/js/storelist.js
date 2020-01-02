@@ -55,7 +55,7 @@ $(() => {
 						
 						// 파일 리스트가 없다면
 							if(s.fileVoList.length == 0) {
-							sHtml += `<img src="https://i.pinimg.com/originals/33/6a/ea/336aea314c68c0bc3eb8f6b5cd799de4.jpg" />`;
+							sHtml += `<img src="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="https://mp-seoul-image-production-s3.mangoplate.com/added_restaurants/47875_1470120449446390.jpg?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" />`;
 						} 
 						// 있다면
 						else {
@@ -181,7 +181,12 @@ let concon =  new google.maps.MarkerImage("https://www.pinclipart.com/picdir/big
 let sizex;
 let sizey;
 let contentbox;
-
+let zoomType;
+if(searchFlag === 1){
+	zoomType = 12;
+} else {
+	zoomType = 15;
+}
 
 
 	
@@ -287,7 +292,7 @@ function drawMap() {
 
 
   map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 12,
+    zoom: zoomType,
     center: new google.maps.LatLng(y, x),
     mapTypeId: google.maps.MapTypeId.ROADMAP
   });

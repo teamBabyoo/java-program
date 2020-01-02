@@ -15,6 +15,8 @@
 
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <script type="text/javascript">
+/*searchFlag : 1 검색, 2 내주변맛집*/
+let searchFlag = ${search.flag};
 let filePath;
 let fileArr = [];
 let arr = new Array();
@@ -131,7 +133,7 @@ function abs(value1, value2, value3, value4, value5, value6, value7) {
 												<div class="bxslider">
 													<!-- 사진이 없을때 default 이미지 보여준다. -->  
 													<c:if test="${empty files}">
-														<img src="https://i.pinimg.com/originals/33/6a/ea/336aea314c68c0bc3eb8f6b5cd799de4.jpg" />
+														<img src="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="https://mp-seoul-image-production-s3.mangoplate.com/added_restaurants/47875_1470120449446390.jpg?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" />
 													</c:if>
 												
 													<!--  사진이 있을 때 이미지 슬라이더 -->

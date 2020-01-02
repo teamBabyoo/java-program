@@ -13,3 +13,4 @@
     <script src="${pageContext.request.contextPath}/resources/js/surrounding.js"></script>
   	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSQHW_pWBrzI8-rkc4FczxQWzCSciCJS4"
     type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>

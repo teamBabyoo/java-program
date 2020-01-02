@@ -20,7 +20,7 @@
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 		<div class="content">
 			<div id="storeupdateForm">
-				<div id="storeinfoTitle">가게정보 수정하기</div>
+				<div class="clearboth" id="storeinfoTitle"><h4>가게정보 수정하기</h4> <div id="necessaryDiv"><a class="float_r">항목들은 필수입력 사항입니다. 빠짐없이 입력해주세요.</a><a class="necessaryInfo float_r">*</a></div></div>
 				<form id="updateForm" name="form" action="storeinfoupdate.do" method="post">
 					<table>
 						<tr>
