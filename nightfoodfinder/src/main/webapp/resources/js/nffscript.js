@@ -133,4 +133,27 @@ $(document).ready(function() {
       $('html, body').animate({scrollTop:0}, '300');
     });
     // --------- btnTop 끝
+    
+    // award가게 단골등록
+    $(".addFreq").click((e) => {
+    	let $i = $(e.target)
+    	let userNo = $i.data("userno");
+    	let storeNo = $i.data("storeno");
+    	alert(userNo + ":" + storeNo);
+    	e.preventDefault();
+    	let isReg = confirm("단골 가게로 등록하시겠습니까?");
+    	if (isReg) {
+//    			$.getJSON({
+//    				url: "/nightfoodfinder/front/store/frequent_regist.do",
+//    				data: {storeNo, userNo},
+//    				success: (list) => {
+//    					makeFrequent(list)
+//    				},
+//    				error: function(e) {
+//    				} 
+//    			});
+//    			return false;
+    	} 
+    	
+    })
 });

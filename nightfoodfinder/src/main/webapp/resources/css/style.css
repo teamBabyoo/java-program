@@ -167,8 +167,11 @@ footer { position: absolute; bottom: 0; width: 100%; line-height: 40px; text-ali
   content: "";
   display: block;
   padding-top: 80%;
-  background: #fff; opacity: .6; 
+  background: #fff; opacity: .7; 
 } 
+.main_wrap .content .store_1 .square_box:before {
+	opacity: .6;
+}
 .main_wrap .content .store .desc{ position: absolute; top: 30px; left: 50%; transform: translateX(-50%); transition: all 3s; }
 .main_wrap .content .store_1 .desc table { font-size: 1.8rem; line-height: 40px; }
 .main_wrap .content .store .desc dl * { display: inline; }
@@ -350,6 +353,11 @@ div#commentplace > * { width: 100%; margin: 0 auto; }
   opacity: 1;
   visibility: visible;
 }
+
+.sc2 .inner iframe { border-radius: 15px; }
+.sc2 .inner a { position: relative; }
+.sc2 .inner .info i { position: absolute; right: 10px; bottom: 20px; font-size: 1.4rem; color: #9c4c4c; }
+
 /** 지인  끝 **/
 
 /** 승경 **/
