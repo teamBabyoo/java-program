@@ -87,59 +87,71 @@
 			<iframe src="https://www.youtube.com/embed/0T9_T5gq5GI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 		</div>
 	</section>
-	<%-- 
-	<!-- 하드코딩 -->
-	<section class="sc sc2 module main_popular_restaurant_wrap">
-	<div class="inner">
-		<h2 class="title">20대 여성의 맛집 리스트 TOP 10</h2>
-		<div class="popular_restaurant_container">
-	    <ul class="list-restaurants main_popular_restaurant_list type-main">
-	    <c:forEach var="awd" items="${aList}">
-	    <c:if test="${awd.status == 1}">
-			<li class="restaurant-item">
-				<div class="popular_restaurant_inner_wrap">
-					<a href="${pageContext.request.contextPath}/front/store/storedetail.do?no=${awd.storeNo}">
-					<c:choose>
-						<c:when test="${awd.sysName == null}">
-						<div class="thumb cover-center-center" style="background-image: url('https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80')">
-		                </div>
-						</c:when>
-						<c:otherwise>
-						<div class="thumb cover-center-center" style="background-image: url('${pageContext.request.contextPath}/front/store/getByteImage.do?name=${awd.sysName}&path=${awd.path}')">
-	                	</div>
-						</c:otherwise>
-					</c:choose>
-					<div class="info">
-						<em class="category">${awd.category}</em><br />
-	                    <span class="title">${awd.storeName}</span>
-	                    <strong class="point search_point expected"><fmt:formatNumber value="${awd.storeScopeTotal / awd.reviewCntTotal}" pattern="0.0" /></strong>
-	                    <p class="etc">
-	                    	<c:choose>
-	                    	<c:when test="${Integer.parseInt(awd.priceTypeNo) == 1}">
-	                    	1만원 미만
-	                    	</c:when>
-	                    	<c:when test="${Integer.parseInt(awd.priceTypeNo) == 2}">
-	                    	1만원대
-	                    	</c:when>
-	                    	<c:when test="${Integer.parseInt(awd.priceTypeNo) == 3}">
-	                    	2만원대
-	                    	</c:when>
-	                    	<c:otherwise>
-	                    	3만원 이상
-	                    	</c:otherwise>
-	                    	</c:choose>
-	                    </p>
-					</div>
-					</a>
-	          </div>
-	        </li>
-        </c:if>
-	    </c:forEach>
-	    </ul>
-		</div>
-	</div>
-	</section>
+
+    <c:forEach var="amap" items="${result}">
+		<section class="sc sc2 module main_popular_restaurant_wrap">
+		<div class="inner">
+			<h2 class="title">${amap.age}대 ${amap.gender}의 맛집 리스트 TOP 10</h2>
+			<div class="popular_restaurant_container">
+		    <ul class="list-restaurants main_popular_restaurant_list type-main">
+			<c:forEach var="awd" items="${amap.list}">
+		    	<c:if test="${awd.status == 1}">
+				<li class="restaurant-item">
+					<div class="popular_restaurant_inner_wrap">
+						<a href="${pageContext.request.contextPath}/front/store/storedetail.do?no=${awd.storeNo}">
+						<c:choose>
+							<c:when test="${awd.sysName == null}">
+							<div class="thumb cover-center-center" style="background-image: url('https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80')">
+	<!-- 						<div class="thumb cover-center-center"> -->
+	<!-- 							<iframe src="https://www.youtube.com/embed/0T9_T5gq5GI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+			                </div>
+							</c:when>
+							<c:otherwise>
+	<!-- 						<div class="thumb cover-center-center"> -->
+	<!-- 							<iframe src="https://www.youtube.com/embed/0T9_T5gq5GI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="height: 100%"></iframe> -->
+	<!-- 		                </div> -->
+							<div class="thumb cover-center-center" style="background-image: url('${pageContext.request.contextPath}/front/store/getByteImage.do?name=${awd.sysName}&path=${awd.path}')">
 	
+		                	</div>
+							</c:otherwise>
+						</c:choose>
+						<div class="info">
+							<em class="category">${awd.category}</em><br />
+		                    <span class="title">${awd.storeName}</span>
+		                    <strong class="point search_point expected"><fmt:formatNumber value="${awd.storeScopeTotal / awd.reviewCntTotal}" pattern="0.0" /></strong>
+		                    <p class="etc">
+		                    	<c:choose>
+		                    	<c:when test="${Integer.parseInt(awd.priceTypeNo) == 1}">
+		                    	1만원 미만
+		                    	</c:when>
+		                    	<c:when test="${Integer.parseInt(awd.priceTypeNo) == 2}">
+		                    	1만원대
+		                    	</c:when>
+		                    	<c:when test="${Integer.parseInt(awd.priceTypeNo) == 3}">
+		                    	2만원대
+		                    	</c:when>
+		                    	<c:otherwise>
+		                    	3만원 이상
+		                    	</c:otherwise>
+		                    	</c:choose>
+		                    </p>
+		                    <c:if test="${not empty loginUser }">
+			                    <i class="fa fa-bookmark addFreq" aria-hidden="true" data-storeno="${awd.storeNo}" data-userno="${loginUser.userNo}"></i>
+		                    </c:if>
+						</div>
+						</a>
+		          </div>
+		        </li>
+	        	</c:if>
+	        </c:forEach>
+		    </ul>
+			</div>
+		</div>
+		</section>
+    	
+    </c:forEach>
+    
+	<%-- 
 	<section class="sc sc3 module main_popular_restaurant_wrap">
 	<div class="inner">
 	  <h2 class="title">20대 남성의 맛집 리스트 TOP 10</h2>
@@ -319,9 +331,8 @@
 	  </div>
 	</div>
 	</section>
-	
-	<!-- // 하드코딩 -->
 	 --%>
+	
 	</div>
     <!-- // 컨텐트  -->
     

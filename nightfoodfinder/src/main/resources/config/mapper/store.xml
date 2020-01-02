@@ -142,7 +142,7 @@
 				s.review_cnt_total,
 				s.see_cnt,
 				f.frequent_cnt,
-				ifnull(truncate(sum(r.store_scope) / count(r.review_no), 1), 0) as scope
+				ifnull(round(s.store_scope_total / s.review_cnt_total, 1), 0) as scope
 		from tb_store as s
 		inner join tb_address as a
 		   on s.store_no = a.store_no
@@ -155,7 +155,8 @@
 							from tb_frequent_store
  					 		 group by store_no) f
 		on s.store_no = f.store_no 		
-		where s.store_no = #{storeNo}
+		group by s.store_no
+		having s.store_no = #{storeNo}
 	</select>
 
 	<!--가게 소개글 가져오기 -->
@@ -181,8 +182,8 @@
 	
 	<select id="storeScope" resultType="Store" parameterType="int">
 		select
-		ifnull(truncate(sum(store_scope) / count(review_no), 1), 0) as scope
-		from tb_review
+		ifnull(round(store_scope_total / review_cnt_total, 1), 0) as scope
+		from tb_store
 		where store_no = #{storeNo}
 	</select>
 
@@ -766,7 +767,7 @@
    		inner join tb_review r
    		  on f.file_group_code = r.file_group_code
     	where r.store_no = #{storeNo}
-        order by f.file_no
+        order by f.file_no desc
         limit 20
 	</select>
 	

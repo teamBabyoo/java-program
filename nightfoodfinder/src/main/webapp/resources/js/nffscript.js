@@ -133,4 +133,40 @@ $(document).ready(function() {
       $('html, body').animate({scrollTop:0}, '300');
     });
     // --------- btnTop 끝
+    
+    // award가게 단골등록
+    $(".addFreq").click((e) => {
+    	let $i = $(e.target)
+    	let userNo = $i.data("userno");
+    	let storeNo = $i.data("storeno");
+    	e.preventDefault();
+    	let isReg = confirm("단골 가게로 등록하시겠습니까?");
+    	if (isReg) {
+    		$.getJSON({
+    			url: "/nightfoodfinder/front/store/frequent_check.do",
+    			data: {storeNo, userNo},
+    			success: (result) => {
+    				alert(result);
+    				let url = "/nightfoodfinder/front/store/frequent_regist.do";
+    				let msg = "단골가게로 등록되었습니다"
+    				if(result === 1){
+    					url = "/nightfoodfinder/front/store/frequent_delete.do"
+    						msg = "단골이 취소되었습니다"
+    					
+    				}
+    				$.getJSON({
+    					url: url,
+    					data: {storeNo, userNo},
+    					success: (list) => {
+    						alert(msg);
+    					},
+    					error: function(e) {
+    					} 
+    				});
+    					
+    			}
+    		});
+    	} 
+    	
+    })
 });

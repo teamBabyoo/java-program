@@ -35,7 +35,7 @@ public class FrontMainController {
 		model.addAttribute("sList", service.mainStoreList());
 		List<Store> mList = service.mainStoreList();
 		
-//		model.addAttribute("aList", service.mainAwardList2());
-		model.addAttribute("aList", service.mainAwardList());
+		model.addAttribute("result", service.mainAwardList2());
+//		model.addAttribute("aList", service.mainAwardList());
 	}
 }

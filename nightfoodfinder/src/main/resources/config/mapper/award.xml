@@ -6,7 +6,7 @@
 <select id="listAwardStore" resultType="Award">
 select * 
 from tb_award
-order by reg_date desc
+order by user_age
 </select>
 
 <select id="awardStore" parameterType="int" resultType="Award">
