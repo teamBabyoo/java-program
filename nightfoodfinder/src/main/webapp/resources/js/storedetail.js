@@ -91,6 +91,7 @@ function animateValue(id, start, end, duration) {
         	current -= increment;
         	clearInterval(timer);
         } else if(current > end) {
+        	current -= increment;
             clearInterval(timer);
         }
         obj.innerHTML = current.toFixed(1);
@@ -173,7 +174,7 @@ function makeReviewList(list){
             <ul class="clearboth">
                 <li>
                     <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-                    <p>★★★★</p>
+                    <p>`+scopeCnt+`</p>
                 </li>
                 <li>
                     <ul>
