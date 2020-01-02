@@ -15,6 +15,8 @@
 
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <script type="text/javascript">
+/*searchFlag : 1 검색, 2 내주변맛집*/
+let searchFlag = ${search.flag};
 let filePath;
 let fileArr = [];
 let arr = new Array();
