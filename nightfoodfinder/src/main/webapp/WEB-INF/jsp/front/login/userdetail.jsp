@@ -109,7 +109,7 @@
 #myreview_box p {
 	font-size: 0.9em;
 }
-#sImage img {
+#sImage {
 	width:120px;
 	height: 120px;
 	overflow : hidden;
@@ -162,10 +162,10 @@ div#freq_box:nth-child(2n+1) {
 					<div id="frequent_list" class="clearboth">
 						<c:forEach items="${freqList}" var="f" >
 							<div id="freq_box" onclick="location.href=`${pageContext.request.contextPath}/front/store/storedetail.do?no=${f.storeNo}`">
-								<div id="sImage">
+								<div id="sImage" class="cover-center-center" style="background-image: url('${pageContext.request.contextPath}/front/store/getByteImage.do?name=${f.sysName}&path=${f.path}')">
 										<!-- 사진이있을때 -->
 										<c:if test="${f.fileNo != 0}">
-											<img src="${pageContext.request.contextPath}/front/store/getByteImage.do?name=${f.sysName}&path=${f.path}" />
+<%-- 											<img src="${pageContext.request.contextPath}/front/store/getByteImage.do?name=${f.sysName}&path=${f.path}" /> --%>
 										</c:if>
 	
 										<!--  사진이 없을 때 이미지  -->
