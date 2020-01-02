@@ -86,11 +86,14 @@ function animateValue(id, start, end, duration) {
     let stepTime = Math.floor(duration / range);
     let obj = document.getElementById(id);
     let timer = setInterval(function() {
-        current += increment;
-        obj.innerHTML = current.toFixed(1);
-        if (current >= end) {
+    	current += increment;
+        if(current >= 5) {
+        	current -= increment;
+        	clearInterval(timer);
+        } else if(current > end) {
             clearInterval(timer);
         }
+        obj.innerHTML = current.toFixed(1);
     }, stepTime);
 }
 animateValue("scopescore", 0, scope, 100);

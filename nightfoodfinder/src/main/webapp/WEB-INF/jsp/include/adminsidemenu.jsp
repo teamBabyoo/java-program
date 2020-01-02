@@ -21,7 +21,7 @@
 				<ul>
 					<li><a class="stat_visitor"
 						href="${pageContext.request.contextPath}/admin/stat/visitorcount.do">방문자</a></li>
-					<li><a class="stat_all" href="${pageContext.request.contextPath}/admin/stat/statlist.do">전체 통계</a></li>
+					<li><a class="stat_all" href="${pageContext.request.contextPath}/admin/stat/statlist.do">단골 통계</a></li>
 				</ul>
 				</li>
 			
