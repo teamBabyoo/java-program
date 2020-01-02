@@ -39,11 +39,8 @@ $(() => {
 			$(".notice_content").html(html);
 			return;
 		} */
-		// 리스트 호출
 		
-//		$('#notice').toggle();
-		
-		
+		// 리스트 호출	
 		if (cnt == 0 ) {
 			html = "";
 		noticeList();
@@ -71,9 +68,7 @@ let cnt = 0;
 			type: "POST",
 			data: {lastNo : no || 0},
 			success: (data) => {
-				// attr이용해 속성값 바꾸는 방법으로 바꾸어서 진행해보자ㅠ
 				let moreButton = "";
-
 				// 만약 알림이 없다면
 				if(data.list.length == 0) {
 					$(".notice_content > ul").html(`<li>알림이 없습니다.</li>`);
@@ -126,19 +121,13 @@ let cnt = 0;
 	
 					moreButton = `<a href="#${lno}" onclick="noticeList(${lno})" id="morebtn">더보기</a>`;
 					allDel = `<a href="#" onclick="alldel()" id="alldel">전체삭제</a>`;
-//					close = `<a href="#" id="close">닫기</a>`;
 
-					
 					 
 					$(".notice_content > ul").html(html);	
 					
-//					$(".notice_content > ul").append(close);
-					
-					
-					
-					console.log(data.countAll);
 					let li_length = $(".notice_content > ul > li").length;
 					
+					// 갯수 비교해서 더보기 버튼을 보여줄 것인지 확인
 					if (data.countAll - li_length != 0) {
 						$(".notice_content > ul").append(moreButton);
 					}
@@ -173,16 +162,15 @@ function noticeCounter() {
 
 // 클릭해서 확인한 알림 status 1로 바꿔주기
 function chkclick(no) {
-	//alert(no)
 	$.ajax({
 		url: "/nightfoodfinder/front/main/read_notice.do",
 	//	data: "noticeNo=" + no,
 		data: {noticeNo : no},
-		success: noticeList
 	});
 };
 
 
+// 한개씩 삭제
 function del(noticeNo) {
 	html = "";
 	$.ajax({
@@ -192,6 +180,7 @@ function del(noticeNo) {
 	})
 };
 
+// 전체 삭제
 function alldel() {
 	html = "";
 	$.ajax({
@@ -200,12 +189,5 @@ function alldel() {
 	})
 }
 
-/*
- $('#notice').on("click", "#close", function() {
-	 	
-	 	con.style.display = "none";
-	 })
-
-*/
  
 
