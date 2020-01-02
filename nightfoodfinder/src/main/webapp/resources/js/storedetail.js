@@ -76,13 +76,19 @@ function frequentRegist(urlhtml) {
 function animateValue(id, start, end, duration) {
     let range = start + end;
     let current = start;
-    let increment = start > end? 0 : 0.1;
+    let increment;
+    if(end === 0) {
+    	increment = 0;
+    } else {
+    	increment = 0.1;
+    }
+    	
     let stepTime = Math.floor(duration / range);
     let obj = document.getElementById(id);
     let timer = setInterval(function() {
         current += increment;
         obj.innerHTML = current.toFixed(1);
-        if (current > end) {
+        if (current >= end) {
             clearInterval(timer);
         }
     }, stepTime);
