@@ -481,16 +481,7 @@ textarea.bossContent {
 	position: relative;
 	bottom: 5px;
 }
-/*
-.modform {
-	border-radius: 10px;
-    height: 100px;
-    width: 96%;
-    margin-left: 15px;
-    margin-bottom: 20px;
-    resize: none;
-}
-*/
+
 textarea.modbossContent {
 	width: 105%;
 	height: 80px;
@@ -524,7 +515,7 @@ li.mod_two {
 }
 
 li.mod_three {
-	bottom: 65px;
+	bottom: 35px;
 	position: relative;
 	left: 570px;
 }
@@ -536,46 +527,42 @@ li.mod_three {
 	bottom: 5px;
 }
 
-.mod_three a.modbtn {
-	padding: 3px 5px 3px 3px;
-	margin: 20px;
-	display: inline-block;
-	border-radius: 10px;
-	transition: all 0.1s;
-	/* text-shadow: 0px -2px rgba(0, 0, 0, 0.44); */
-	font-family: 'Lobster', cursive;
-}
-
-.modbtn:active {
-	transform: translateY(3px);
-}
-
-.modbtn.mod {
-	background-color: lightgrey;
-	border-bottom: 5px solid darkgray;
-}
-
-.modbtn.mod:active {
-	border-bottom: 2px solid darkgray;
-}
-
-.modbtn.can {
-	background-color: lightgrey;
-	border-bottom: 5px solid darkgray;
-}
-
-.modbtn.can:active {
-	border-bottom: 2px solid darkgray;
-}
-
 a.modbtn.mod {
 	position: relative;
-	right: 5px;
+	right: 25px;
+}
+a#updatetwo {
+    float: left;
+    /* margin-top: 50px; */
+    /* margin-top: 85%; */
+    outline: none;
+    height: 25px;
+    text-align: center;
+    width: 40px;
+    border-radius: 40px;
+    background: #fff;
+    border: 2px solid #c8ddd6;
+    color: #676e6b;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    padding-bottom: 10px;
 }
 
-a.modbtn.can {
-	position: relative;
-	right: 45px;
+a#canceltwo {
+    float: left;
+    outline: none;
+    height: 25px;
+    text-align: center;
+    width: 40px;
+    border-radius: 40px;
+    background: #fff;
+    border: 2px solid #c8ddd6;
+    color: #676e6b;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    padding-bottom: 10px;
 }
 
 /** 승경 끝 **/

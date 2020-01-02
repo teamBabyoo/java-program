@@ -746,7 +746,7 @@ $("#targetContainer").on("click", "button.modRecomment", (e) => {
     	<li class="mod_one">${modRegDate}</li>
     	<li class="mod_two">
     		<div class="form-group">
-    		<textarea name="content" id="modbossContent" value="${modContent}" class="modbossContent" onKeyUp="fnChkByte(this,'400')" placeholder="최대 200자(400바이트)까지 입력 가능합니다."></textarea>
+    		<textarea name="content" id="modbossContent" value="${modContent}" class="modbossContent" onKeyUp="ChkByte(this,'400')" placeholder="최대 200자(400바이트)까지 입력 가능합니다."></textarea>
     		<br />
 		<span id="counter">0</span><span id="countertwo"> / 400bytes</span>
     		</div>
@@ -758,18 +758,6 @@ $("#targetContainer").on("click", "button.modRecomment", (e) => {
     	</ul>
     </div>`;
 	
-	/*
-	 *  ` <table class="modform"> <tr id="modRow${rno}"> <td class="modtd_one">${modRegDate}</td>
-	 * <td class="modtd_two"> <div class="form-group"> <textarea name="content"
-	 * id="modbossContent" value="${modContent}" class="modbossContent"
-	 * onKeyUp="fnChkByte(this,'400')" placeholder="최대 200자(400바이트)까지 입력
-	 * 가능합니다."></textarea> <br /> <span id="counter">0</span><span
-	 * id="countertwo"> / 400bytes</span> </div> </td>
-	 * <td colspan="2" class="modtd_three"> <a href="#" data-rno="${rno}"
-	 * class="updatetwo" role="button">수정</a> <a href="#" data-rno="${rno}"
-	 * class="canceltwo" role="button">취소</a> </td> </tr> </table>`
-	 * 
-	 */
 $("#row" + rno).after(html);	
 $("#row" + rno).hide();
 	
