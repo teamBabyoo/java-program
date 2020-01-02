@@ -181,7 +181,12 @@ let concon =  new google.maps.MarkerImage("https://www.pinclipart.com/picdir/big
 let sizex;
 let sizey;
 let contentbox;
-
+let zoomType;
+if(searchFlag === 1){
+	zoomType = 12;
+} else {
+	zoomType = 15;
+}
 
 
 	
@@ -287,7 +292,7 @@ function drawMap() {
 
 
   map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 12,
+    zoom: zoomType,
     center: new google.maps.LatLng(y, x),
     mapTypeId: google.maps.MapTypeId.ROADMAP
   });
