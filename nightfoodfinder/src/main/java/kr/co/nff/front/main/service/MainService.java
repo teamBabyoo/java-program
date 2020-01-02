@@ -1,6 +1,7 @@
 package kr.co.nff.front.main.service;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.co.nff.repository.vo.Award;
 import kr.co.nff.repository.vo.Category;
@@ -25,5 +26,5 @@ public interface MainService {
 	List<Store> mainAwardList();
 	
 	// 메인 어워즈 조회2
-	List<Award> mainAwardList2();
+	List<Map<String, Object>> mainAwardList2();
 }

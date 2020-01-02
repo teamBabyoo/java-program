@@ -35,6 +35,11 @@ function makeFrequent(list) {
 			   return false;
 		   } else {
 			   frequentRegist("frequent_delete.do");
+			   Swal.fire({
+					  text: '단골등록을 취소하였습니다',
+					  icon: 'success',
+					  confirmButtonText: '확인'
+					})
 			   $(".frequent i").attr("class", "fa fa-bookmark-o").css("color", "#77747d");
 		   }
 		   
@@ -48,6 +53,11 @@ function makeFrequent(list) {
 			   return false;
 		   } else {
 			   frequentRegist("frequent_regist.do");
+			   Swal.fire({
+					  text: '단골로 등록하였습니다',
+					  icon: 'success',
+					  confirmButtonText: '확인'
+					})
 			   $(".frequent i").attr("class", "fa fa-bookmark").css("color", "red");
 		   }
 	   });
@@ -573,7 +583,11 @@ function reviewReport(count, rNo, page) {
 			});
 			$('input[name=reportWhy]:checked').val("");
 			$("#rmyModal *").remove();
-			alert("신고되었습니다");
+			Swal.fire({
+				  text: '리뷰가 신고되었습니다',
+				  icon: 'success',
+				  confirmButtonText: '확인'
+				})
 			return false;
 		});
 	} else {

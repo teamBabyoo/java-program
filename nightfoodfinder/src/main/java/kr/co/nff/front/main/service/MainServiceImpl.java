@@ -1,8 +1,10 @@
 package kr.co.nff.front.main.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +15,6 @@ import kr.co.nff.repository.dao.StoreDAO;
 import kr.co.nff.repository.dao.UserDAO;
 import kr.co.nff.repository.vo.Award;
 import kr.co.nff.repository.vo.Category;
-import kr.co.nff.repository.vo.FileVO;
 import kr.co.nff.repository.vo.PriceType;
 import kr.co.nff.repository.vo.Store;
 
@@ -81,20 +82,23 @@ public class MainServiceImpl implements MainService{
 	}
 	
 	// 메인 어워즈 조회2
-	public List<Award> mainAwardList2() {
+	public List<Map<String, Object>> mainAwardList2() {
+		List<Map<String, Object>> result = new ArrayList<>();
 		List<Award> awardList = aDao.listAwardStore();
-		
-		List<Store> storeList = new ArrayList<>();
 		for (Award a : awardList)  {
+			List<Store> storeList = new ArrayList<>();
 			String[] strStoreNo = a.getStoreNoList().split(",");
 			for (int i = 0; i < strStoreNo.length; i++) {
 				String storeNo = strStoreNo[i];
-				storeList.add(i, aDao.detailAwardStore(Integer.parseInt(storeNo)));
-				a.setStoreList(storeList);
-				System.out.println(a.getStoreList());
+				Store store = aDao.detailAwardStore(Integer.parseInt(storeNo));
+				storeList.add(i, store);
 			}
-			
+			Map<String, Object> map = new HashMap<>();
+			map.put("gender", a.getUserGender());
+			map.put("age", a.getUserAge().substring(0,  2));
+			map.put("list", storeList);
+			result.add(map);
 		}
-		return awardList;
+		return result;
 	}
 }
