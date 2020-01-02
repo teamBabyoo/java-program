@@ -738,16 +738,19 @@ a.modbtn.can {
     margin-bottom: 11px;
 } 
 
-.sInfoUpdate_wrap #storeinfoTitle>div {
+.sInfoUpdate_wrap #storeinfoTitle>div,
+.sjoin_wrap .sjoin_title>div {
 	position: relative;
 }
-.sInfoUpdate_wrap #storeinfoTitle>div>a {
+.sInfoUpdate_wrap #storeinfoTitle>div>a,
+.sjoin_wrap .sjoin_title>div>a {
 /* 	position: absolute; */
 	right: 1px;
 	font-size: 12px;
 	bottom: -7px;
 }
-#storeinfoTitle h4{
+#storeinfoTitle h4,
+.sjoin_wrap h4{
     line-height: 1px;
 }
 	
@@ -1570,6 +1573,18 @@ header div:nth-child(3) li span {
 #sjform {
     text-align: left;
     padding-left: 20px;
+}
+.sjoin_wrap .sjoin_title {
+	padding: 20px;
+    border-bottom: 2px solid gray;
+    font-size: 25px;
+    margin-bottom: 11px;
+}
+.sjoin_wrap #sjform {
+	width: 600px;
+	margin: 0 auto;
+	margin-bottom: 150px;
+	margin-top: 15px;
 }
 /* 스토어 회원가입페이지 끝*/
 

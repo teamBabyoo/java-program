@@ -36,7 +36,7 @@ padding: 17px;
     <!-- // 헤더 -->
 	<div class="content clearboth" >
 	<div class="sjoin_content">
-	<div class="sjoin_title"><i class="fa fa-sign-in" aria-hidden="true" style="color: #ffa500"></i><strong>회원가입</strong></div>
+	<div class="sjoin_title"><h4>회원가입</h4> <div id="necessaryDiv"><a class="float_r">항목들은 필수입력 사항입니다. 빠짐없이 입력해주세요.</a><a class="necessaryInfo float_r">*</a></div></div>
 			<form name="sjform" id="sjform" method="post" action="storejoin.do" onsubmit="return validate();">
 				<table>
 					<tr>
