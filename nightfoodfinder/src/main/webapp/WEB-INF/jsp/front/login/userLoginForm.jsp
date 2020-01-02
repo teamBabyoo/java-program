@@ -36,7 +36,7 @@
 							 </a>
 						</li>
 						<li>
-						 <a href="${kakao_url}" target="_blank">
+						 <a href="${kakao_url}" >
 							 <img id="kakao-login-btn" width="223" 
 							 	src="${pageContext.request.contextPath}/resources/images/kakao_account_login_btn.png"/>
 						</a>						

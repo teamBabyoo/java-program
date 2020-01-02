@@ -176,6 +176,7 @@
 
 
 	<!-- 별점 평균 -->
+	
 	<select id="storeScope" resultType="Store" parameterType="int">
 		select
 		ifnull(truncate(sum(store_scope) / count(review_no), 1), 0) as scope

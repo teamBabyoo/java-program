@@ -13,20 +13,11 @@
     <script type="text/javascript"
   src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js"
   charset="utf-8"></script>
-<!-- <script type="text/javascript"
-  src="http://code.jquery.com/jquery-1.11.3.min.js"></script> -->
-<!-- ↙ include head 동일한 내용 -->  
-<!--   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
-
 </head>
 <body>
-
   <script>
     $(function () {
-     
       setTimeout(function(){location.href= "${pageContext.request.contextPath}/front/main/main.do"},500);
-// 2초 뒤에 메인 화면 으로 가자  
-    
     })
   </script>
 

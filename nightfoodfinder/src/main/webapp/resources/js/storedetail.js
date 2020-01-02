@@ -76,13 +76,19 @@ function frequentRegist(urlhtml) {
 function animateValue(id, start, end, duration) {
     let range = start + end;
     let current = start;
-    let increment = start > end? 0 : 0.1;
+    let increment;
+    if(end === 0) {
+    	increment = 0;
+    } else {
+    	increment = 0.1;
+    }
+    	
     let stepTime = Math.floor(duration / range);
     let obj = document.getElementById(id);
     let timer = setInterval(function() {
         current += increment;
         obj.innerHTML = current.toFixed(1);
-        if (current > end) {
+        if (current >= end) {
             clearInterval(timer);
         }
     }, stepTime);
@@ -567,7 +573,12 @@ function reviewReport(count, rNo, page) {
 			return false;
 		});
 	} else {
-		alert("이미 신고한 리뷰입니다");
+		Swal.fire({
+			  text: '이미 신고한 리뷰입니다',
+			  icon: 'warning',
+			  confirmButtonText: '확인'
+			})
+//		alert("이미 신고한 리뷰입니다");
 		return false;
 	}
 };
@@ -746,7 +757,7 @@ $("#targetContainer").on("click", "button.modRecomment", (e) => {
     	<li class="mod_one">${modRegDate}</li>
     	<li class="mod_two">
     		<div class="form-group">
-    		<textarea name="content" id="modbossContent" value="${modContent}" class="modbossContent" onKeyUp="fnChkByte(this,'400')" placeholder="최대 200자(400바이트)까지 입력 가능합니다."></textarea>
+    		<textarea name="content" id="modbossContent" value="${modContent}" class="modbossContent" onKeyUp="ChkByte(this,'400')" placeholder="최대 200자(400바이트)까지 입력 가능합니다."></textarea>
     		<br />
 		<span id="counter">0</span><span id="countertwo"> / 400bytes</span>
     		</div>
@@ -758,18 +769,6 @@ $("#targetContainer").on("click", "button.modRecomment", (e) => {
     	</ul>
     </div>`;
 	
-	/*
-	 *  ` <table class="modform"> <tr id="modRow${rno}"> <td class="modtd_one">${modRegDate}</td>
-	 * <td class="modtd_two"> <div class="form-group"> <textarea name="content"
-	 * id="modbossContent" value="${modContent}" class="modbossContent"
-	 * onKeyUp="fnChkByte(this,'400')" placeholder="최대 200자(400바이트)까지 입력
-	 * 가능합니다."></textarea> <br /> <span id="counter">0</span><span
-	 * id="countertwo"> / 400bytes</span> </div> </td>
-	 * <td colspan="2" class="modtd_three"> <a href="#" data-rno="${rno}"
-	 * class="updatetwo" role="button">수정</a> <a href="#" data-rno="${rno}"
-	 * class="canceltwo" role="button">취소</a> </td> </tr> </table>`
-	 * 
-	 */
 $("#row" + rno).after(html);	
 $("#row" + rno).hide();
 	
