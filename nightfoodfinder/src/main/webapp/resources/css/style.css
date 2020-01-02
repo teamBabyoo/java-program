@@ -745,14 +745,16 @@ a#canceltwo {
 }
 	
 
-.sInfoUpdate_wrap input[type=text], .sInfoUpdate_wrap input[type=number]{
+.sInfoUpdate_wrap input[type=text], .sInfoUpdate_wrap input[type=number],
+.sjoin_content input[type=text], .sjoin_content input[type=number]{
 	height: 30px;
 	float: left;
 	margin-right: 5px;
 	padding: 5px;
 }
 
-.sInfoUpdate_wrap input[type=password] {
+.sInfoUpdate_wrap input[type=password],
+.sjoin_content input[type=password] {
 	height: 30px;
 }
 
@@ -762,7 +764,8 @@ a#canceltwo {
 	overflow-x: hidden;
 }
 
-.sInfoUpdate_wrap td {
+.sInfoUpdate_wrap td,
+.sjoin_content td {
 	padding: 8px 5px;
 }
 
@@ -776,7 +779,8 @@ a#canceltwo {
 
 
 /*가게수정*/
-.sInfoUpdate_wrap .thcolor{
+.sInfoUpdate_wrap .thcolor,
+.sjoin_content .thcolor {
 	background: #e0e0e0;
 	width: 150px;
 }
@@ -1541,7 +1545,7 @@ header div:nth-child(3) li span {
 	margin: 3px;
 }
 .sjoin_content .reg_submit {
-	margin: 5px 0 5px 130px;
+	margin: 5px 0 5px 220px;
     background: white;
     border: 2px solid #d7d7d7;
     width: 130px;
@@ -1576,6 +1580,12 @@ header div:nth-child(3) li span {
 	margin-bottom: 150px;
 	margin-top: 15px;
 }
+.sjoin_content .thcolor {
+	background: #e0e0e0;
+	width: 150px;
+	text-align: center;
+}
+
 /* 스토어 회원가입페이지 끝*/
 
 /** 주영 끝 **/
