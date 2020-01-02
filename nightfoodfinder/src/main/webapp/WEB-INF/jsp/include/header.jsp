@@ -143,13 +143,11 @@
 		}); */
 	
 	var list = sessionStorage.getItem('list');
-	console.log("최근",list);
 	if(list) {
 		console.log(list);
 		$("#viewnone").hide();
 			var viewList = [];
 			var array = list.substring(1, list.length-1).split(",");
-			console.log("array", array);
 			for (i in array){
 				var strArray = array[i].substring(1, array[i].length-1).split('|');
 				var tag = '<div class="viewDetail">'
@@ -160,7 +158,6 @@
 			$('#viewlist').html(viewList);
 
 	} else if(!list){
-		console.log('리스트없음');
 		$('#viewlist').hide();
 	} 
 </script>
