@@ -102,6 +102,9 @@ public class FrontStoreController {
 		
 		Notice notice = new Notice();
 		List<Integer> fList = service.myfrequent(no);
+		if(fList.isEmpty()) {
+			fList.add(0);
+		} 
 		notice.setPeople(fList);
 		notice.setFromStoreNo(store.getStoreNo());
 		notice.setNoticeCode("1");
