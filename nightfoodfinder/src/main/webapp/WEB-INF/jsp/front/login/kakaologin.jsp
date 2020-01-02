@@ -36,13 +36,10 @@ h3 {
 
  $(function () {
       setTimeout(function(){
-    	  console.log(kInfo);
     	  if(kInfo == "y"){
-    		  //console.log("기존"+kInfo.value());
-    		  location.href= "${pageContext.request.contextPath}/front/main/main.do"};    		  
-    	  } else {
-    		  //console.log("최초"+kInfo.value());
-    		  alert('최초 카카오 로그인 추가정보입력 페이지 이동');
+    		  location.href= "${pageContext.request.contextPath}/front/main/main.do"
+    		 } else {
+    		  alert('최초 카카오 로그인시 추가정보입력이 필요합니다. 추가정보입력 페이지로 이동합니다.');
     		  location.href= "${pageContext.request.contextPath}/front/login/kakaoinfo.do" 
     	  }
     	  },500);
