@@ -52,7 +52,7 @@ public class KakaoLogin {
 	            StringBuilder sb = new StringBuilder();
 	            sb.append("grant_type=authorization_code");
 	            sb.append("&client_id=2e2c217701074a631a1029878ed30d6f");
-	            sb.append("&redirect_uri=http://localhost:8000/nightfoodfinder/front/login/kakaologin.do");
+	            sb.append("&redirect_uri=http://192.168.0.15:8000/nightfoodfinder/front/login/kakaologin.do");
 	            sb.append("&code=" + authorize_code);
 	            bw.write(sb.toString());
 	            bw.flush();
