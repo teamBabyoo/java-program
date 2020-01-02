@@ -603,7 +603,7 @@ function reviewReport(count, rNo, page) {
 	
 $(document).on('click', '.heart', function(e){	
 	 if(userNo === 0){
-		 alert("로그인 후 이용가능합니다");
+		 Swal.fire('로그인 후 이용가능합니다');
 		 return false;
 	 }
 // console.log(rno);

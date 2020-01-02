@@ -436,11 +436,6 @@
 				'<input type="text" name="menuName">'+
 				'<input type="number" name="menuPrice">'+
 		'</tr>'; 
-		/*var addMenu =  '<tr name="trMenu">'+
-			'<td>'+
-				'<input type="text" name="menuName">'+
-				'<input type="number" name="menuPrice">'+
-		'</tr>';*/
 
 	var trHtml = $( "tr[name=trMenu]:last" ); 
 	trHtml.after(addMenu); 

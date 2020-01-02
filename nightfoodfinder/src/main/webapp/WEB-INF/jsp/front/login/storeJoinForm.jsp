@@ -123,7 +123,7 @@ padding: 17px;
 						<input type="checkbox" name="day" value="7" />일</td>
 					</tr>
 					<tr name="trMenu">
-						<th class="thcolor">대표 메뉴 / 가격</th>
+						<th class="thcolor" rowspan="1" id="rowTh">대표 메뉴 / 가격</th>
 						<td>
 							<input type="text" name="menuName">
 							<input type="number" name="menuPrice">
@@ -561,7 +561,11 @@ NFF(이하'회사')는 관계법령이 정하는 바에 따라 '회원'의 개�
 			if(isEmpty(f.storeOwner, "대표자 이름을 입력해주세요")) return false;
 			if(isEmpty(f.storeOwnerPh, "대표자 휴대폰번호를 입력해주세요")) return false;
 			
-			alert("관리자의 승인 이후 서비스 이용이 가능합니다. 승인을 기다려주세요."); 		
+			Swal.fire({
+				  text: '관리자 승인 이후 서비스 이용이 가능합니다',
+				  icon: 'info',
+				  confirmButtonText: '확인'
+				})		
 			return true;
 	
 	
@@ -698,7 +702,7 @@ $("#storeEmail").blur(function() {
 			});
 		});
 
-// 메뉴 입력 추가,삭제
+//메뉴 입력 추가,삭제
 $("#plus_btn").click(() => {
 	addRow();
 })
@@ -707,24 +711,27 @@ $("#minus_btn").click(() => {
 })
 
 function addRow () {
-	var addMenu =  '<tr name="trMenu">'+
-		'<th></th>'+
+	 let row = $("#rowTh").attr("rowspan");
+	$("#rowTh").attr("rowspan", (row*1)+1); 
+	 var addMenu =  '<tr name="trMenu">'+
 		'<td>'+
 			'<input type="text" name="menuName">'+
 			'<input type="number" name="menuPrice">'+
-	'</tr>';
+	'</tr>'; 
 
 var trHtml = $( "tr[name=trMenu]:last" ); 
 trHtml.after(addMenu); 
 }
 
 function delRow () {
+	let row = $("#rowTh").attr("rowspan");
+	$("#rowTh").attr("rowspan", (row*1)-1); 
 	var trHtml =$( "tr[name=trMenu]:last" );
     if ($( "tr[name=trMenu]" ).length ==1) return;
     trHtml.remove(); //tr 테그 삭제
 	
 }
-
+	
 
 </script>
 
