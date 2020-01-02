@@ -25,7 +25,7 @@ import com.google.gson.JsonParser;
 
 public class KakaoLogin {
 	   private final static String K_CLIENT_ID = "2e2c217701074a631a1029878ed30d6f";
-	    private final static String K_REDIRECT_URI = "http://localhost:8000/nightfoodfinder/front/login/kakaologin.do";
+	    private final static String K_REDIRECT_URI = "http://192.168.0.15:8000/nightfoodfinder/front/login/kakaologin.do";
 
 	    public String getAuthorizationUrl(HttpSession session) {
 	      String kakaoUrl = "https://kauth.kakao.com/oauth/authorize?"
