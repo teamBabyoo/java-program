@@ -27,7 +27,7 @@
 
 
 	<section class="panel ">
-		<h2>단골 통계 관리</h2>
+		<h2>단골 통계</h2>
 
 		<!-- search -->
 		<div class="storesearchbar">
