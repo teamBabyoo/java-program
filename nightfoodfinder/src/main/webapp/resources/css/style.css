@@ -728,16 +728,28 @@ a.modbtn.can {
 .sInfoUpdate_wrap #storeupdateForm {
 	width: 600px;
 	margin: 0 auto;
-	margin-top: 30px;
+	margin-top: 80px;
 	margin-bottom: 150px;
 }
 
 .sInfoUpdate_wrap #storeinfoTitle {
     border-bottom: 2px solid gray;
     font-size: 25px;
-    padding-bottom: 12px;
     margin-bottom: 11px;
 } 
+
+.sInfoUpdate_wrap #storeinfoTitle>div {
+	position: relative;
+}
+.sInfoUpdate_wrap #storeinfoTitle>div>a {
+/* 	position: absolute; */
+	right: 1px;
+	font-size: 12px;
+	bottom: -7px;
+}
+#storeinfoTitle h4{
+    line-height: 1px;
+}
 	
 
 .sInfoUpdate_wrap input[type=text], .sInfoUpdate_wrap input[type=number]{
@@ -766,6 +778,7 @@ a.modbtn.can {
     padding: .8em .5em; /* 여백으로 높이 설정 */
     border: 1px solid #999;
     border-radius: 0px; /* iOS 둥근모서리 제거 */
+    height: 44px;
 }
 
 
@@ -966,7 +979,7 @@ a.modbtn.can {
 }
 
 
-.detail_wrap .report {
+.detail_wrap .report, .sInfoUpdate_wrap .report {
   outline:none;
   height: 25px;
   text-align: center;
@@ -982,11 +995,11 @@ a.modbtn.can {
   transition: all 0.25s ease;
   padding-bottom: 10px
 }
-.detail_wrap .report:hover {
+.detail_wrap .report:hover, .sInfoUpdate_wrap .report:hover {
     color:white;
     background: #1ECD97;
   }
-.detail_wrap .report:active {
+.detail_wrap .report:active, .sInfoUpdate_wrap .report:active{
     letter-spacing: 2px;
     letter-spacing: 2px;
   }
