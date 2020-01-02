@@ -1176,7 +1176,7 @@ header div:nth-child(3) li span {
 	background: #fff;
 	right: -3px;
 	padding: 8px;
-	height: 570px;
+	max-height: 570px;
 	width: 390px;
 	z-index: 100;
 }
