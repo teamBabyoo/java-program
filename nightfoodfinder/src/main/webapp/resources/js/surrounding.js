@@ -13,6 +13,12 @@ $(() => {
 
 	    // 내주변 맛집 버튼 클릭시 파라미터에 현재 위치 정보 같이 넘긴다.
 	  $("#mysurrounding").click((e) => {
+		  console.log("x", x);
+		  console.log("y", y);
+	  	  
+		  if(!x || !y) {
+			  Swal.fire('이 브라우저에서는 위치 정보 지원이 되지 않습니다.');
+		  }
 		  location.href = `${context}/front/store/storelist.do?flag=2&keyword=&latitude=${y}&longitude=${x}`;
 	  });  
 	    
