@@ -568,10 +568,9 @@ function reviewReport(count, rNo, page) {
 		});
 	} else {
 		Swal.fire({
-			  title: 'Error!',
 			  text: '이미 신고한 리뷰입니다',
-			  icon: 'error',
-			  confirmButtonText: 'Cool'
+			  icon: 'warning',
+			  confirmButtonText: '확인'
 			})
 //		alert("이미 신고한 리뷰입니다");
 		return false;

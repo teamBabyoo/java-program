@@ -8,10 +8,6 @@
 <c:import url="/WEB-INF/jsp/include/head.jsp">
 	<c:param name="msg" value="store list" />
 </c:import>
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
-	integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
-	crossorigin="anonymous">
 
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <script type="text/javascript">
@@ -165,7 +161,7 @@ function abs(value1, value2, value3, value4, value5, value6, value7) {
 												<span>${s.categoryName}</span>
 												<span class="sto_scope">
 													<span class="scope_star">★</span>${s.scope}(${s.reviewCntTotal})
-													<span class="frecnt"><i class="fas fa-bookmark"></i>${s.frequentCnt}</span>
+													<span class="frecnt"><i class="fa fa-bookmark" aria-hidden="true"></i>${s.frequentCnt}</span>
 												</span>		
 											</div>
 											<div>

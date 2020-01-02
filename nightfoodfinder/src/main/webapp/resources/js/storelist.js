@@ -219,7 +219,7 @@ function markerEvent(storeName) {
     			<div class="home__slider">
 					<div class="bxslider">`
     		if(markerArr[i].store_img.length === 0) {
-    			contentbox +=`<img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg" style="width: 200px;" />`
+    			contentbox +=`<img src="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" style="width: 200px;" />`
     		} else {
     			for (let img of markerArr[i].store_img) {
     				contentbox +=`<img src="${context}/front/store/getByteImage.do?name=${img.sysname}&path=${img.path}" />`;
@@ -364,7 +364,7 @@ function drawMap() {
       			<div class="home__slider">
   					<div class="bxslider">`
       		if(marker.store_img.length === 0) {
-      			contentbox +=`<img src="https://365psd.com/images/istock/previews/1005/100574873-dish-fork-and-knife-icons-cutlery-sign.jpg"  style="width: 100%; " />`
+      			contentbox +=`<img src="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80"  style="width: 100%; " />`
       		} else {
       			for (let img of marker.store_img) {
       				console.log("배열이미지",img);
