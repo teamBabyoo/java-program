@@ -36,30 +36,30 @@ padding: 17px;
     <!-- // 헤더 -->
 	<div class="content clearboth" >
 	<div class="sjoin_content">
-	<div class="sjoin_title"><h4>회원가입</h4> <div id="necessaryDiv"><a class="float_r">항목들은 필수입력 사항입니다. 빠짐없이 입력해주세요.</a><a class="necessaryInfo float_r">*</a></div></div>
+	<div class="sjoin_title"><h4>회원가입</h4> </div>
 			<form name="sjform" id="sjform" method="post" action="storejoin.do" onsubmit="return validate();">
 				<table>
 					<tr>
-						<th>가게 이름</th>
+						<th class="thcolor">가게 이름</th>
 						<td><input type="text" name="storeName" /></td>
 					</tr>
 					<tr>
-						<th>사업자 번호</th>
+						<th class="thcolor">사업자 번호</th>
 						<td><input type="text" name="businessNum" /></td>
 					</tr>
 					<tr>
-						<th>이메일</th>
+						<th class="thcolor">이메일</th>
 						<td><input type="text" id="storeEmail" name="storeEmail" />
 							<div id="emailChk"></div></td>
 					</tr>
 
 					<tr>
-						<th>비밀번호</th>
+						<th class="thcolor">비밀번호</th>
 						<td><input type="password" id="storePass" name="storePass" />
 							<div id="pwChk"> <span id="alert-success" style="display: none;">비밀번호가 일치합니다.</span></div></td>
 					</tr>
 					<tr>
-						<th>비밀번호 확인</th>
+						<th class="thcolor">비밀번호 확인</th>
 						<td><input type="password" id="storePass2" name="storePass2" />
 							<div id="pwChk2">
 								 <span id="alert-success" style="display: none;">비밀번호가 일치합니다.</span>
@@ -67,11 +67,11 @@ padding: 17px;
 							</div></td>
 					</tr>
 					<tr>
-						<th>가게 전화번호</th>
+						<th class="thcolor">가게 전화번호</th>
 						<td><input type="text" name="storeTell" /></td>
 					</tr>
 					<tr>
-						<th rowspan="4">주소</th>
+						<th  class="thcolor" rowspan="4">주소</th>
 					</tr>
 					<tr>
 						<td><input type="text" id="zipNo" name="zipNo"  /> 
@@ -88,7 +88,7 @@ padding: 17px;
 					</tr>
 
 					<tr>
-						<th>영업 시간</th>
+						<th class="thcolor">영업 시간</th>
 						<td>
 							<select name="openH">
 									<c:forEach begin="0" end="24" var="i">
@@ -113,7 +113,7 @@ padding: 17px;
 						</td>
 					</tr>
 					<tr>
-						<th>휴무일</th>
+						<th class="thcolor">휴무일</th>
 						<td><input type="checkbox" name="day" value="1" />월 
 						<input type="checkbox" name="day" value="2" />화 
 						<input type="checkbox" name="day" value="3" />수 
@@ -123,7 +123,7 @@ padding: 17px;
 						<input type="checkbox" name="day" value="7" />일</td>
 					</tr>
 					<tr name="trMenu">
-						<th>대표 메뉴 / 가격</th>
+						<th class="thcolor">대표 메뉴 / 가격</th>
 						<td>
 							<input type="text" name="menuName">
 							<input type="number" name="menuPrice">
@@ -132,7 +132,7 @@ padding: 17px;
 						</td>
 					</tr>
 					<tr>
-						<th>가격대</th>
+						<th class="thcolor">가격대</th>
 						<td>
 							<select name="priceTypeNo">
 								<option value="1">1만원대</option>
@@ -143,7 +143,7 @@ padding: 17px;
 						</td>
 					</tr>
 					<tr>
-						<th>가게 분류</th>
+						<th class="thcolor">가게 분류</th>
 						<td><select name="storeCategory">
 								<option value="1">한식</option>
 								<option value="2">양식</option>
@@ -154,11 +154,11 @@ padding: 17px;
 						</select></td>
 					</tr>
 					<tr>
-						<th>대표자 이름</th>
+						<th class="thcolor">대표자 이름</th>
 						<td><input type="text" name="storeOwner" /></td>
 					</tr>
 					<tr>
-						<th>대표자 휴대폰 번호</th>
+						<th class="thcolor">대표자 휴대폰 번호</th>
 						<td><input type="text" name="storeOwnerPh" /></td>
 					</tr>
 				</table>

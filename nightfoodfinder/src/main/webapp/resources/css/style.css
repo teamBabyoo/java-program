@@ -123,7 +123,7 @@ footer { position: absolute; bottom: 0; width: 100%; line-height: 40px; text-ali
 .main_wrap .content .store .square_box { display: none; transition: all .3s; }
 .main_wrap .content .store:hover .square_box { display: block !important; }
 .main_wrap .content .store .desc { width: 200px; height: 200px; padding: 20px; }
-.main_wrap .content .store_1 .desc { margin-top: 200px ;width: 400px; height: 200px; padding: 20px; }
+.main_wrap .content .store_1 .desc { margin-top: 100px ;width: 400px; height: 200px; padding: 20px; }
 .main_wrap .content .store .desc > dl > dt { font-size: 24px; }
 .main_wrap .content .store .desc > dl > dd { color: #ff7100; font-size: 18px; }
 .main_wrap .content .store_1 .desc > dl > dt { font-size: 48px; }
@@ -170,9 +170,11 @@ footer { position: absolute; bottom: 0; width: 100%; line-height: 40px; text-ali
   background: #fff; opacity: .6; 
 } 
 .main_wrap .content .store .desc{ position: absolute; top: 30px; left: 50%; transform: translateX(-50%); transition: all 3s; }
+.main_wrap .content .store_1 .desc table { font-size: 1.8rem; line-height: 40px; }
 .main_wrap .content .store .desc dl * { display: inline; }
 .main_wrap .content .store p { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); }
-.main_wrap .content .store p a { display: block; padding: 10px 40px; color: #9c9c9c; font-size: 0.8rem; background: #ffe378; }
+.main_wrap .content .store p a { display: block; padding: 10px 40px; color: #fff; background: rgba(0, 0, 0, 0.8); font-size: 0.8rem; }
+.main_wrap .content .store_1 p a { font-size: 1.8rem; }
 .main_wrap .content .store_1 p a { padding: 10px 60px; }
 
 .main_wrap .content .store_1st .desc { top: 50px; }
@@ -745,14 +747,16 @@ a#canceltwo {
 }
 	
 
-.sInfoUpdate_wrap input[type=text], .sInfoUpdate_wrap input[type=number]{
+.sInfoUpdate_wrap input[type=text], .sInfoUpdate_wrap input[type=number],
+.sjoin_content input[type=text], .sjoin_content input[type=number]{
 	height: 30px;
 	float: left;
 	margin-right: 5px;
 	padding: 5px;
 }
 
-.sInfoUpdate_wrap input[type=password] {
+.sInfoUpdate_wrap input[type=password],
+.sjoin_content input[type=password] {
 	height: 30px;
 }
 
@@ -762,7 +766,8 @@ a#canceltwo {
 	overflow-x: hidden;
 }
 
-.sInfoUpdate_wrap td {
+.sInfoUpdate_wrap td,
+.sjoin_content td {
 	padding: 8px 5px;
 }
 
@@ -776,7 +781,8 @@ a#canceltwo {
 
 
 /*가게수정*/
-.sInfoUpdate_wrap .thcolor{
+.sInfoUpdate_wrap .thcolor,
+.sjoin_content .thcolor {
 	background: #e0e0e0;
 	width: 150px;
 }
@@ -1541,7 +1547,7 @@ header div:nth-child(3) li span {
 	margin: 3px;
 }
 .sjoin_content .reg_submit {
-	margin: 5px 0 5px 130px;
+	margin: 5px 0 5px 220px;
     background: white;
     border: 2px solid #d7d7d7;
     width: 130px;
@@ -1576,6 +1582,12 @@ header div:nth-child(3) li span {
 	margin-bottom: 150px;
 	margin-top: 15px;
 }
+.sjoin_content .thcolor {
+	background: #e0e0e0;
+	width: 150px;
+	text-align: center;
+}
+
 /* 스토어 회원가입페이지 끝*/
 
 /** 주영 끝 **/
