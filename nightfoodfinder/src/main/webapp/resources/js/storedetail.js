@@ -536,7 +536,6 @@ function reviewReport(count, rNo, page) {
 		let rpop = $("#rmyModal");
 		// 사유 모달창 띄우기
 		rpop.css("display", "block");
-		
 		$("#rmyModal *").remove();
 		let rcon = $("#rmyModal");
 		
@@ -555,7 +554,7 @@ function reviewReport(count, rNo, page) {
 			<input type="hidden" id="reportWhy" value="$('input[name=reportWhy]:checked').val()" />
 	    	<input type="hidden" id="storeNo" value="`+storeNo+`" />
 	    	<input type="hidden" id="userNo" value="`+userNo+`" />
-			<button class="report">제출하기</button>
+			<button>제출하기</button>
 	    </div>
 		</form>
 		`
@@ -567,6 +566,7 @@ function reviewReport(count, rNo, page) {
 		});
 		// 리뷰신고 등록
 		$("#reportsubmit").submit(() => {
+			console.log(typeof $("#reviewNo").val());
 			let userNo = 3;
 			$.post({
 				url: "review_report.do",

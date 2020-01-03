@@ -993,7 +993,7 @@ a#canceltwo {
 }
 
 
-.detail_wrap .report, .sInfoUpdate_wrap .report {
+.detail_wrap .report, .sInfoUpdate_wrap .report, .rmodal-content button {
   outline:none;
   height: 25px;
   text-align: center;
@@ -1009,11 +1009,11 @@ a#canceltwo {
   transition: all 0.25s ease;
   padding-bottom: 10px
 }
-.detail_wrap .report:hover, .sInfoUpdate_wrap .report:hover {
+.detail_wrap .report:hover, .sInfoUpdate_wrap .report:hover, .rmodal-content button:hover {
     color:white;
     background: #1ECD97;
   }
-.detail_wrap .report:active, .sInfoUpdate_wrap .report:active{
+.detail_wrap .report:active, .sInfoUpdate_wrap .report:active, .rmodal-content button:active{
     letter-spacing: 2px;
     letter-spacing: 2px;
   }
