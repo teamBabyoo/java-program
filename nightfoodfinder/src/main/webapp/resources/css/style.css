@@ -818,16 +818,16 @@ a#canceltwo {
 .detail_wrap .rmodal-content {
 	margin: 0 auto;
 	padding: 10px;
-	width: 100%;
+	width: 65%;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
 		rgba(0, 0, 0, 0.19);
 	-webkit-animation-name: animatetop;
 	-webkit-animation-duration: 0.4s;
 	animation-name: animatetop;
 	animation-duration: 0.4s;
-	background-color: #fff8d6;
+	background-color: #ffffff;
 	display: grid;
-	grid-template-rows: 40px 1fr;
+	grid-template-rows: 20px 1fr;
 }
 
 .detail_wrap .rmodal-body {
@@ -837,7 +837,7 @@ a#canceltwo {
 
 .detail_wrap .rclose {
 	text-align: right;
-	font-size: 5em;
+	font-size: 2em;
 	font-weight: bold;
 	opacity: 1;
 }
@@ -852,10 +852,18 @@ a#canceltwo {
 	padding: 11px;
 	font-size: 20px;
 }
+.detail_wrap .rmodal-content li:hover {
+	background: #5a576352;
+	
+}
+
 
 .detail_wrap .rmodal-content button {
 	width: 100px;
 	height: 30px;
+	display: block;
+    margin: 0 auto;
+    margin-top: 7px;
 }
 
 .detail_wrap li.page-item {

@@ -555,7 +555,7 @@ function reviewReport(count, rNo, page) {
 			<input type="hidden" id="reportWhy" value="$('input[name=reportWhy]:checked').val()" />
 	    	<input type="hidden" id="storeNo" value="`+storeNo+`" />
 	    	<input type="hidden" id="userNo" value="`+userNo+`" />
-			<button>제출하기</button>
+			<button class="report">제출하기</button>
 	    </div>
 		</form>
 		`
