@@ -730,6 +730,10 @@ tspan {
   select#searchType {
     height: 23px;
 }
+select#totalSearchType {
+    height: 23px;
+}
+
 input#keyword {
     height: 23px;
     position: relative;
