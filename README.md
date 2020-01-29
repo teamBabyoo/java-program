@@ -34,4 +34,4 @@
 - 좋아요   
 ![](images/좋아요.gif)
 - 신고   
-![](images/좋아요.gif)
+![](images/신고하기.gif)
