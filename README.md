@@ -14,3 +14,20 @@
 
 ## 메인
 ![](images/메인.gif)
+
+## 로그인
+![](images/네이버로그인.gif)
+![](images/스토어유저로그인.gif)
+
+## 검색(리스트)
+![](images/검색.gif)
+
+## 상세 페이지
+![](images/지도,가게상세.gif)
+
+## 댓글
+![](images/댓글.gif)
+
+## 좋아요/신고
+![](images/좋아요.gif)
+![](images/좋아요.gif)
